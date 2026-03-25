@@ -114,11 +114,13 @@
         .nav-link:hover {
             color: var(--accent-blue);
             border-bottom-color: var(--accent-blue);
+            cursor: pointer;
         }
 
         .nav-link.active {
             color: var(--accent-blue);
             border-bottom-color: var(--accent-blue);
+            font-weight: 700;
         }
 
         .auth-buttons {
@@ -135,12 +137,16 @@
             font-size: 14px;
             font-weight: 500;
             color: var(--text-secondary);
-            cursor: default;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .btn-outline:hover {
-            background: var(--hover-bg);
+            background: var(--accent-light);
             border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 108, 247, 0.15);
         }
 
         .btn-primary {
@@ -151,7 +157,14 @@
             font-size: 14px;
             font-weight: 600;
             color: white;
-            cursor: default;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: #3a5ce8;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(74, 108, 247, 0.35);
         }
 
         /* Hero Search */
@@ -196,13 +209,20 @@
             color: white;
             font-size: 15px;
             font-weight: 500;
-            cursor: default;
+            cursor: pointer;
             backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
         }
 
         .tab.active {
             background: white;
             color: var(--text-primary);
+            font-weight: 700;
         }
 
         .hero-search {
@@ -235,7 +255,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            cursor: default;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .hero-search button:hover {
+            background: #3a5ce8;
+            box-shadow: 0 8px 20px rgba(74, 108, 247, 0.4);
+            transform: translateY(-1px);
         }
 
         /* Filter Bar */
@@ -664,7 +691,17 @@
             font-size: 14px;
             font-weight: 500;
             color: var(--accent-blue);
-            cursor: default;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .agent-contact:hover {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 12px rgba(74, 108, 247, 0.3);
+            transform: translateY(-1px);
         }
 
         /* Mortgage Calculator */
@@ -765,13 +802,21 @@
             font-weight: 600;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+        }
+
+        .discover-tab:hover {
+            background: var(--accent-light);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            transform: translateY(-1px);
         }
 
         .discover-tab.active {
-            background: var(--text-primary);
+            background: var(--accent-blue);
             color: white;
-            border-color: var(--text-primary);
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 12px rgba(74, 108, 247, 0.3);
         }
 
         .discover-grid {
@@ -790,6 +835,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .discover-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 24px rgba(74, 108, 247, 0.12);
+            transform: translateY(-4px);
         }
 
         .discover-icon {
@@ -926,15 +979,20 @@
         }
 
         .footer-links-col a, .footer-bottom-links a {
-            color: #cbd5e1;
+            color: #94a3b8;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.2s;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .footer-links-col a:hover, .footer-bottom-links a:hover {
-            color: white;
+            color: #60a5fa;
+            padding-left: 6px;
+            letter-spacing: 0.01em;
         }
 
         .highlight-link {
@@ -965,13 +1023,24 @@
 
         .footer-socials a {
             color: white;
-            font-size: 24px;
-            transition: opacity 0.2s;
-            opacity: 0.8;
+            font-size: 22px;
+            transition: all 0.25s ease;
+            opacity: 0.75;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
         }
 
         .footer-socials a:hover {
             opacity: 1;
+            background: rgba(96, 165, 250, 0.25);
+            color: #60a5fa;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(96, 165, 250, 0.2);
         }
 
         .footer-disclaimer {
@@ -1839,6 +1908,146 @@
             </div>
         </div>
     </div>
+    <!-- === PREMIUM DIVIDER 1: Home Loan === -->
+    <div style="position: relative; min-height: 480px; overflow: hidden; display: flex; align-items: stretch;">
+        <!-- Full-bleed Background Image -->
+        <div style="position: absolute; inset: 0; z-index: 0;">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1800&q=90&auto=format&fit=crop" alt="Modern home" style="width: 100%; height: 100%; object-fit: cover;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(110deg, rgba(7,15,35,0.92) 0%, rgba(18,40,90,0.82) 50%, rgba(74,108,247,0.45) 100%);"></div>
+        </div>
+
+        <!-- Content Layer -->
+        <div style="position: relative; z-index: 2; width: 100%; max-width: 1280px; margin: 0 auto; padding: 80px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+            
+            <!-- Left: Copy -->
+            <div>
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(74,108,247,0.2); border: 1px solid rgba(74,108,247,0.4); border-radius: 40px; padding: 6px 16px; margin-bottom: 24px; backdrop-filter: blur(10px);">
+                    <div style="width: 8px; height: 8px; border-radius: 50%; background: #60a5fa; animation: pulse 2s infinite;"></div>
+                    <span style="color: #93c5fd; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Home Filla Finance</span>
+                </div>
+                <h2 style="font-size: 46px; font-weight: 800; color: white; margin: 0 0 20px; line-height: 1.1; letter-spacing: -0.5px;">Need a home loan?<br><span style="background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Get pre-approved.</span></h2>
+                <p style="color: rgba(255,255,255,0.75); font-size: 17px; line-height: 1.7; margin: 0 0 36px; max-width: 480px;">Find a lender who offers competitive mortgage rates. Lock in your rate and move fast the moment your dream home hits the market.</p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                    <button style="background: linear-gradient(135deg, #4a6cf7, #7c3aed); color: white; border: none; padding: 16px 32px; border-radius: 40px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; box-shadow: 0 8px 24px rgba(74,108,247,0.5); transition: all 0.25s ease; letter-spacing: 0.2px;"
+                        onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.boxShadow='0 16px 36px rgba(74,108,247,0.6)';"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 24px rgba(74,108,247,0.5)';">
+                        <i class="fas fa-bolt" style="margin-right: 8px;"></i>Get Pre-Approved Now
+                    </button>
+                    <a href="#" style="color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 500; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s;"
+                        onmouseover="this.style.color='white';" onmouseout="this.style.color='rgba(255,255,255,0.7)';">
+                        View mortgage rates <i class="fas fa-arrow-right" style="font-size: 12px;"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Floating Glass Stats -->
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 24px 28px; display: flex; align-items: center; gap: 20px; transition: transform 0.3s ease;"
+                    onmouseover="this.style.transform='translateX(6px)';" onmouseout="this.style.transform='translateX(0)';">
+                    <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #4a6cf7, #7c3aed); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fas fa-percentage" style="color: white; font-size: 20px;"></i>
+                    </div>
+                    <div>
+                        <div style="font-size: 28px; font-weight: 800; color: white;">6.54%</div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 2px;">Today's avg 30-year fixed rate</div>
+                    </div>
+                </div>
+                <div style="background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 24px 28px; display: flex; align-items: center; gap: 20px; transition: transform 0.3s ease;"
+                    onmouseover="this.style.transform='translateX(6px)';" onmouseout="this.style.transform='translateX(0)';">
+                    <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fas fa-clock" style="color: white; font-size: 20px;"></i>
+                    </div>
+                    <div>
+                        <div style="font-size: 28px; font-weight: 800; color: white;">3 mins</div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 2px;">Average pre-approval time</div>
+                    </div>
+                </div>
+                <div style="background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 24px 28px; display: flex; align-items: center; gap: 20px; transition: transform 0.3s ease;"
+                    onmouseover="this.style.transform='translateX(6px)';" onmouseout="this.style.transform='translateX(0)';">
+                    <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fas fa-shield-alt" style="color: white; font-size: 20px;"></i>
+                    </div>
+                    <div>
+                        <div style="font-size: 28px; font-weight: 800; color: white;">No impact</div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 2px;">On your credit score to check</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PREMIUM DIVIDER 2: Get Local Info === -->
+    <div style="position: relative; min-height: 460px; overflow: hidden; background: #0d1b2a;">
+        <!-- Background image with overlay -->
+        <div style="position: absolute; inset: 0; z-index: 0;">
+            <img src="https://images.unsplash.com/photo-1549921296-3b0f9a35af35?w=1800&q=90&auto=format&fit=crop" alt="Neighborhood aerial" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.35;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(13,27,42,1) 0%, rgba(13,27,42,0.85) 50%, rgba(13,27,42,0.5) 100%);"></div>
+        </div>
+
+        <!-- Content Layer -->
+        <div style="position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 80px 48px; display: grid; grid-template-columns: 55% 45%; gap: 60px; align-items: center;">
+            
+            <!-- Left: Main Content -->
+            <div>
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.3); border-radius: 40px; padding: 6px 16px; margin-bottom: 24px; backdrop-filter: blur(10px);">
+                    <i class="fas fa-map-marker-alt" style="color: #60a5fa; font-size: 12px;"></i>
+                    <span style="color: #93c5fd; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Neighborhood Intelligence</span>
+                </div>
+                <h2 style="font-size: 46px; font-weight: 800; color: white; margin: 0 0 20px; line-height: 1.1; letter-spacing: -0.5px;">Know your<br><span style="background: linear-gradient(90deg, #34d399, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">neighborhood.</span></h2>
+                <p style="color: rgba(255,255,255,0.65); font-size: 17px; line-height: 1.7; margin: 0 0 36px; max-width: 520px;">Schools, commute times, pet-friendly spots, walkability scores — get every detail that matters before you make your move.</p>
+
+                <div style="display: flex; gap: 10px; align-items: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 40px; padding: 10px 10px 10px 24px; max-width: 440px; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+                    <i class="fas fa-search" style="color: #60a5fa; font-size: 15px;"></i>
+                    <input type="text" placeholder="Address, City, ZIP or Neighborhood…" style="flex: 1; border: none; background: transparent; font-size: 14px; outline: none; color: white; font-family: 'Inter', sans-serif;" onfocus="this.parentElement.style.borderColor='rgba(96,165,250,0.5)'; this.parentElement.style.boxShadow='0 8px 32px rgba(96,165,250,0.2)';" onblur="this.parentElement.style.borderColor='rgba(255,255,255,0.15)'; this.parentElement.style.boxShadow='0 8px 32px rgba(0,0,0,0.3)';">
+                    <button style="background: linear-gradient(135deg, #10b981, #0d9488); color: white; border: none; padding: 12px 22px; border-radius: 30px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s ease; white-space: nowrap;"
+                        onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 6px 18px rgba(16,185,129,0.5)';"
+                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                        Explore <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Stat Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;"
+                    onmouseover="this.style.background='rgba(96,165,250,0.12)'; this.style.borderColor='rgba(96,165,250,0.3)';"
+                    onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                    <i class="fas fa-graduation-cap" style="color: #60a5fa; font-size: 22px; margin-bottom: 12px; display: block;"></i>
+                    <div style="font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px;">Schools</div>
+                    <div style="color: rgba(255,255,255,0.5); font-size: 12px;">Ratings & districts</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;"
+                    onmouseover="this.style.background='rgba(52,211,153,0.12)'; this.style.borderColor='rgba(52,211,153,0.3)';"
+                    onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                    <i class="fas fa-walking" style="color: #34d399; font-size: 22px; margin-bottom: 12px; display: block;"></i>
+                    <div style="font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px;">Walkability</div>
+                    <div style="color: rgba(255,255,255,0.5); font-size: 12px;">Transit & foot traffic</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;"
+                    onmouseover="this.style.background='rgba(251,191,36,0.12)'; this.style.borderColor='rgba(251,191,36,0.3)';"
+                    onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                    <i class="fas fa-car" style="color: #fbbf24; font-size: 22px; margin-bottom: 12px; display: block;"></i>
+                    <div style="font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px;">Commute</div>
+                    <div style="color: rgba(255,255,255,0.5); font-size: 12px;">Drive & transit times</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;"
+                    onmouseover="this.style.background='rgba(236,72,153,0.12)'; this.style.borderColor='rgba(236,72,153,0.3)';"
+                    onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                    <i class="fas fa-paw" style="color: #f472b6; font-size: 22px; margin-bottom: 12px; display: block;"></i>
+                    <div style="font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px;">Pet Friendly</div>
+                    <div style="color: rgba(255,255,255,0.5); font-size: 12px;">Parks & rentals nearby</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
+        }
+    </style>
+
     <!-- Footer -->
     <footer class="realtor-footer">
         <div class="footer-container">
