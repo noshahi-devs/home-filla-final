@@ -51,8 +51,7 @@
             background: var(--bg-primary);
             border-bottom: 1px solid var(--border-light);
             padding: 16px 0;
-            position: sticky;
-            top: 0;
+            position: relative;
             z-index: 100;
             box-shadow: var(--shadow-sm);
         }
@@ -169,12 +168,35 @@
 
         /* Hero Search */
         .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             background:
                 linear-gradient(135deg, rgba(30, 42, 58, 0.82) 0%, rgba(45, 58, 79, 0.78) 100%),
                 url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&q=85&auto=format&fit=crop') center/cover no-repeat;
-            padding: 80px 24px;
+            padding: 80px 24px 180px;
             text-align: center;
             color: white;
+        }
+
+        /* White fade at the bottom of the hero */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
         }
 
         .hero-content {
@@ -237,8 +259,8 @@
         .hero-search input {
             flex: 1;
             border: none;
-            padding: 16px 24px;
-            font-size: 16px;
+            padding: 11px 18px;
+            font-size: 14px;
             outline: none;
             border-radius: 60px;
             background: transparent;
@@ -247,16 +269,86 @@
         .hero-search button {
             background: var(--accent-blue);
             border: none;
-            padding: 16px 40px;
+            padding: 11px 28px;
             border-radius: 60px;
             color: white;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
+        }
+
+        /* Sticky floating search bar */
+        #sticky-search {
+            position: fixed;
+            top: -80px;
+            left: 0; right: 0;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            transition: top 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        #sticky-search.visible {
+            top: 0;
+        }
+
+        #sticky-search .s-inner {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: white;
+            border: 1.5px solid var(--border-light);
+            border-radius: 60px;
+            padding: 6px 6px 6px 20px;
+            max-width: 640px;
+            width: 100%;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        #sticky-search .s-inner:focus-within {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(74,108,247,0.12);
+        }
+
+        #sticky-search input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+        }
+
+        #sticky-search button {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        #sticky-search button:hover {
+            background: #3a5ce8;
+            box-shadow: 0 4px 12px rgba(74,108,247,0.35);
         }
 
         .hero-search button:hover {
@@ -275,6 +367,8 @@
             justify-content: space-between;
             max-width: 1280px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         .filter-group {
@@ -1080,6 +1174,15 @@
 </head>
 
 <body>
+    <!-- STICKY SEARCH BAR (appears when hero scrolls past) -->
+    <div id="sticky-search">
+        <div class="s-inner">
+            <i class="fas fa-search" style="color: var(--text-secondary); font-size: 14px; flex-shrink: 0;"></i>
+            <input type="text" placeholder="Enter address, city, or ZIP">
+            <button><i class="fas fa-search"></i> Search</button>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="realtor-header">
         <div class="header-container">
@@ -2394,6 +2497,22 @@
                 el.style.display = 'block';
             });
             document.getElementById('load-more-container').style.display = 'none';
+        }
+
+        // Sticky search bar: show when hero search scrolls out of view
+        const heroSearch = document.querySelector('.hero-search');
+        const stickySearch = document.getElementById('sticky-search');
+        if (heroSearch && stickySearch) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        stickySearch.classList.add('visible');
+                    } else {
+                        stickySearch.classList.remove('visible');
+                    }
+                });
+            }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+            observer.observe(heroSearch);
         }
     </script>
 </html>
