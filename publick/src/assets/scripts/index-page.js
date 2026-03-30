@@ -67,8 +67,10 @@ const searchPlaceholderPhrases = [
 let placeholderAnimationTimer = null;
 
 function startSearchPlaceholderAnimation() {
-  const input = document.querySelector('.hero-search input');
-  if (!input) {
+  const inputs = Array.from(
+    document.querySelectorAll('.hero-search input, #sticky-search input')
+  );
+  if (!inputs.length) {
     return;
   }
 
@@ -76,18 +78,27 @@ function startSearchPlaceholderAnimation() {
   let charIndex = 0;
   let deleting = false;
 
+  function updateInputs(text) {
+    inputs.forEach((input) => {
+      if (!input.value) {
+        input.placeholder = text;
+      }
+    });
+  }
+
   function step() {
     const currentPhrase = searchPlaceholderPhrases[phraseIndex];
+
     if (!deleting) {
       charIndex = Math.min(charIndex + 1, currentPhrase.length);
-      input.placeholder = currentPhrase.slice(0, charIndex);
+      updateInputs(currentPhrase.slice(0, charIndex));
       placeholderAnimationTimer = setTimeout(step, charIndex === currentPhrase.length ? 1200 : 80);
       if (charIndex === currentPhrase.length) {
         deleting = true;
       }
     } else {
       charIndex = Math.max(charIndex - 1, 0);
-      input.placeholder = currentPhrase.slice(0, charIndex);
+      updateInputs(currentPhrase.slice(0, charIndex));
       if (charIndex === 0) {
         deleting = false;
         phraseIndex = (phraseIndex + 1) % searchPlaceholderPhrases.length;
@@ -244,11 +255,42 @@ function applyFilter(btn) {
   }
 }
 
-function loadMoreProperties() {
-  document.querySelectorAll('.extra-property').forEach((el) => {
-    el.style.display = 'block';
+function loadMoreProperties(event) {
+  const button = event?.currentTarget;
+  const hiddenCards = Array.from(document.querySelectorAll('.extra-property'));
+  if (!hiddenCards.length) {
+    return;
+  }
+
+  addClass(button, 'loading');
+  if (button) {
+    button.disabled = true;
+  }
+
+  hiddenCards.forEach((card, index) => {
+    card.style.display = 'block';
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    const delay = index * 120;
+    setTimeout(() => {
+      card.style.animation = 'fadeIn 0.55s ease forwards';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, delay);
   });
-  document.getElementById('load-more-container').style.display = 'none';
+
+  const container = document.getElementById('load-more-container');
+  setTimeout(() => {
+    if (container) {
+      container.style.display = 'none';
+    }
+  }, hiddenCards.length * 120 + 500);
+}
+
+function addClass(element, className) {
+  if (element && className) {
+    element.classList.add(className);
+  }
 }
 
 const globalScope = window;

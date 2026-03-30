@@ -512,8 +512,9 @@
         </div>
 
         <div style="text-align: center; margin-top: 40px;" id="load-more-container">
-            <button onclick="loadMoreProperties()" onmouseover="this.style.background='var(--bg-secondary)';" onmouseout="this.style.background='white';" style="background: white; border: 1px solid var(--border-light); padding: 14px 32px; border-radius: 40px; font-weight: 600; font-size: 15px; color: var(--text-primary); cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;">
-                Load more properties
+            <button class="load-more-btn" onclick="loadMoreProperties(event)">
+                <span>Load more properties</span>
+                <span aria-hidden="true" class="btn-icon">↻</span>
             </button>
         </div>
     </div>
