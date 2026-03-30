@@ -255,41 +255,68 @@ function applyFilter(btn) {
   }
 }
 
+const LOAD_BATCH = 4;
+
 function loadMoreProperties(event) {
   const button = event?.currentTarget;
-  const hiddenCards = Array.from(document.querySelectorAll('.extra-property'));
+  const hiddenCards = Array.from(document.querySelectorAll('.extra-property')).filter(
+    (card) => card.dataset.visible !== 'true'
+  );
   if (!hiddenCards.length) {
+    updateLoadMoreLabel(button, 0);
     return;
   }
 
   addClass(button, 'loading');
-  if (button) {
-    button.disabled = true;
-  }
+  button && (button.disabled = true);
 
-  hiddenCards.forEach((card, index) => {
-    card.style.display = 'block';
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
+  const cardsToShow = hiddenCards.slice(0, LOAD_BATCH);
+  cardsToShow.forEach((card, index) => {
     const delay = index * 120;
     setTimeout(() => {
+      card.style.display = 'block';
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
       card.style.animation = 'fadeIn 0.55s ease forwards';
       card.style.opacity = '1';
       card.style.transform = 'translateY(0)';
+      card.dataset.visible = 'true';
     }, delay);
   });
 
-  const container = document.getElementById('load-more-container');
+  const remaining = hiddenCards.length - cardsToShow.length;
+  const finishDelay = cardsToShow.length * 120 + 400;
   setTimeout(() => {
-    if (container) {
-      container.style.display = 'none';
+    removeClass(button, 'loading');
+    updateLoadMoreLabel(button, remaining);
+    if (button) {
+      button.disabled = remaining <= 0;
+      if (remaining <= 0) {
+        addClass(button, 'done');
+      }
     }
-  }, hiddenCards.length * 120 + 500);
+  }, finishDelay);
 }
 
 function addClass(element, className) {
   if (element && className) {
     element.classList.add(className);
+  }
+}
+
+function removeClass(element, className) {
+  if (element && className) {
+    element.classList.remove(className);
+  }
+}
+
+function updateLoadMoreLabel(button, remaining) {
+  const textSpan = button?.querySelector('[data-role="text"]');
+  if (!textSpan) return;
+  if (remaining <= 0) {
+    textSpan.textContent = 'All properties displayed';
+  } else {
+    textSpan.textContent = `Load more properties (${remaining} left)`;
   }
 }
 
@@ -306,6 +333,10 @@ function initHomeFillaPage() {
   calculateRentVsBuy();
 
   startSearchPlaceholderAnimation();
+
+  const initialHidden = document.querySelectorAll('.extra-property').length;
+  updateLoadMoreLabel(document.querySelector('.load-more-btn'), initialHidden);
+ 
 
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.filter-wrapper')) {

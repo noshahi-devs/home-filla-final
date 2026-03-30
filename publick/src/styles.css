@@ -1202,3 +1202,15 @@
         transform: rotate(360deg);
     }
 }
+
+.load-more-btn.done {
+    background: #eef2ff;
+    color: #4a6cf7;
+    box-shadow: 0 4px 12px rgba(74, 108, 247, 0.2);
+    cursor: default;
+}
+
+.load-more-btn.done .btn-icon {
+    animation: none;
+    transform: rotate(0deg);
+}
