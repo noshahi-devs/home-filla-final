@@ -59,6 +59,51 @@ const formatCurrency = (num) => {
   return '$' + Math.round(num).toLocaleString('en-US');
 };
 
+const searchPlaceholderPhrases = [
+  'Enter address, city, or ZIP',
+  "Search by neighborhood or school",
+  'Try "San Francisco, CA"'
+];
+let placeholderAnimationTimer = null;
+
+function startSearchPlaceholderAnimation() {
+  const input = document.querySelector('.hero-search input');
+  if (!input) {
+    return;
+  }
+
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  function step() {
+    const currentPhrase = searchPlaceholderPhrases[phraseIndex];
+    if (!deleting) {
+      charIndex = Math.min(charIndex + 1, currentPhrase.length);
+      input.placeholder = currentPhrase.slice(0, charIndex);
+      placeholderAnimationTimer = setTimeout(step, charIndex === currentPhrase.length ? 1200 : 80);
+      if (charIndex === currentPhrase.length) {
+        deleting = true;
+      }
+    } else {
+      charIndex = Math.max(charIndex - 1, 0);
+      input.placeholder = currentPhrase.slice(0, charIndex);
+      if (charIndex === 0) {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % searchPlaceholderPhrases.length;
+        placeholderAnimationTimer = setTimeout(step, 300);
+      } else {
+        placeholderAnimationTimer = setTimeout(step, 40);
+      }
+    }
+  }
+
+  clearTimeout(placeholderAnimationTimer);
+  charIndex = 0;
+  deleting = false;
+  step();
+}
+
 function calculateMortgage() {
   const price = parseFloat(document.getElementById('mort-price').value) || 0;
   const down = parseFloat(document.getElementById('mort-down').value) || 0;
@@ -206,10 +251,19 @@ function loadMoreProperties() {
   document.getElementById('load-more-container').style.display = 'none';
 }
 
+const globalScope = window;
+
 function initHomeFillaPage() {
+  if (globalScope.__homeFillaInit) {
+    return;
+  }
+  globalScope.__homeFillaInit = true;
+
   calculateMortgage();
   calculateAffordability();
   calculateRentVsBuy();
+
+  startSearchPlaceholderAnimation();
 
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.filter-wrapper')) {
@@ -256,5 +310,14 @@ function initHomeFillaPage() {
     switchCalc(activeType);
   });
 }
+
+globalScope.toggleFilter = toggleFilter;
+globalScope.applyFilter = applyFilter;
+globalScope.loadMoreProperties = loadMoreProperties;
+globalScope.switchDiscoverTab = switchDiscoverTab;
+globalScope.switchCalc = switchCalc;
+globalScope.openCalculator = openCalculator;
+globalScope.scrollToSearch = scrollToSearch;
+globalScope.initHomeFillaPage = initHomeFillaPage;
 
 window.addEventListener('load', initHomeFillaPage);
