@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
 
 /* ─── Root tokens ─── */
-:root {
+:host {
   --accent: #4a6cf7;
   --accent-light: #f0f3fd;
   --accent-border: #e0e6fa;
@@ -26,121 +26,124 @@
 }
 
 /* ─── HEADER ─── */
-.lst-header {
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
+.realtor-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    position: relative;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
 }
-.lst-header-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-.lst-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-.lst-logo-icon {
-  background: var(--accent);
-  color: white;
-  width: 38px; height: 38px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 700;
-}
-.lst-logo-icon.small {
-  width: 28px; height: 28px;
-  border-radius: 7px;
-  font-size: 13px;
-}
-.lst-logo-text {
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-.lst-nav {
-  display: flex;
-  gap: 24px;
-  flex: 1;
-}
-.lst-nav-link {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: color .2s;
-}
-.lst-nav-link:hover { color: var(--accent); }
 
-.lst-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
+.header-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.lst-back-btn {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  background: var(--accent-light);
-  border: 1px solid var(--accent-border);
-  padding: 8px 16px;
-  border-radius: 40px;
-  transition: all .2s;
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
-.lst-back-btn:hover {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
+
+.realtor-logo {
+    background: var(--accent);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
 }
-.lst-btn-outline {
-  padding: 8px 18px;
-  border: 1px solid var(--border);
-  border-radius: 40px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all .2s;
+
+.logo-text {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
 }
-.lst-btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-light);
+
+.logo-text span {
+    color: var(--accent);
+    font-weight: 700;
 }
-.lst-btn-primary {
-  padding: 8px 18px;
-  background: var(--accent);
-  border-radius: 40px;
-  font-size: 13px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-  transition: all .2s;
-  text-decoration: none;
-  display: inline-block;
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
 }
-.lst-btn-primary:hover {
-  background: #3a5ce8;
-  box-shadow: 0 6px 16px rgba(74,108,247,.35);
+
+.nav-link {
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+.nav-link.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 700;
+}
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 108, 247, 0.15);
+}
+
+.btn-primary {
+    background: var(--accent);
+    border: none;
+    padding: 10px 24px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: #3a5ce8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(74, 108, 247, 0.35);
 }
 
 /* ─── HERO BANNER ─── */

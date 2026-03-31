@@ -2,25 +2,27 @@
 <div class="listings-page" *ngIf="category">
 
   <!-- ─── HEADER ─── -->
-  <header class="lst-header">
-    <div class="lst-header-inner">
-      <a routerLink="/" class="lst-logo">
-        <div class="lst-logo-icon">HF</div>
-        <span class="lst-logo-text">Home Filla</span>
+  <header class="realtor-header">
+    <div class="header-container">
+      <a routerLink="/" class="logo-area" style="text-decoration: none;">
+        <div class="realtor-logo">HF</div>
+        <div class="logo-text">Home Filla</div>
       </a>
-      <nav class="lst-nav">
-        <span class="lst-nav-link">Buy</span>
-        <span class="lst-nav-link">Rent</span>
-        <span class="lst-nav-link">Sell</span>
-        <span class="lst-nav-link">Mortgages</span>
-        <span class="lst-nav-link">Find an Agent</span>
-      </nav>
-      <div class="lst-header-actions">
-        <a routerLink="/" class="lst-back-btn">
+
+      <div class="nav-links">
+        <span class="nav-link active">Buy</span>
+        <span class="nav-link">Rent</span>
+        <span class="nav-link">Sell</span>
+        <span class="nav-link">Mortgages</span>
+        <span class="nav-link">Find an Agent</span>
+      </div>
+
+      <div class="auth-buttons">
+        <a routerLink="/" class="btn-outline" style="text-decoration: none; display: flex; align-items: center; gap: 7px; border: none; padding-left: 0;">
           <i class="fas fa-arrow-left"></i> Back to Search
         </a>
-        <span class="lst-btn-outline">Log in</span>
-        <span class="lst-btn-primary">Sign up</span>
+        <span class="btn-outline">Log in</span>
+        <span class="btn-primary">Sign up</span>
       </div>
     </div>
   </header>
