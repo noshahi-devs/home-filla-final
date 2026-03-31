@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { getCategoryData, CategoryInfo, Property } from '../../data/listings.data';
 
@@ -16,7 +16,7 @@ declare global {
   selector: 'app-listings',
   templateUrl: './listings.component.html',
   styleUrl: './listings.component.css',
-  imports: [CommonModule, RouterLink]
+  imports: [CommonModule, RouterLink, RouterLinkActive]
 })
 export class ListingsComponent implements OnInit, AfterViewInit {
   category: CategoryInfo | null = null;

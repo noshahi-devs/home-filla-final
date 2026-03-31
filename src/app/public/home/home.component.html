@@ -16,8 +16,8 @@
             </div>
 
             <div class="nav-links">
-                <span class="nav-link active">Buy</span>
-                <span class="nav-link">Rent</span>
+                <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
+                <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="nav-link">Rent</a>
                 <span class="nav-link">Sell</span>
                 <span class="nav-link">Mortgages</span>
                 <span class="nav-link">Find an Agent</span>
@@ -37,9 +37,9 @@
             <p class="hero-subtitle">Search millions of homes for sale and rent</p>
 
             <div class="search-tabs">
-                <span class="tab active">Buy</span>
-                <span class="tab">Rent</span>
-                <span class="tab">Sold</span>
+                <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="tab">Buy</a>
+                <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="tab">Rent</a>
+                <a [routerLink]="['/listings', 'recently-sold']" routerLinkActive="active" class="tab">Sold</a>
             </div>
 
             <div class="hero-search">

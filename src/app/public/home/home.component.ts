@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 declare global {
   interface Window {
@@ -12,7 +12,7 @@ declare global {
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements AfterViewInit {

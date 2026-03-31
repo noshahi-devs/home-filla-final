@@ -12,8 +12,8 @@
       </a>
 
       <div class="nav-links">
-        <span class="nav-link active">Buy</span>
-        <span class="nav-link">Rent</span>
+        <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
+        <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="nav-link">Rent</a>
         <span class="nav-link">Sell</span>
         <span class="nav-link">Mortgages</span>
         <span class="nav-link">Find an Agent</span>

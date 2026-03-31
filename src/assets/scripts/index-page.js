@@ -116,10 +116,12 @@ function startSearchPlaceholderAnimation() {
 }
 
 function calculateMortgage() {
-  const price = parseFloat(document.getElementById('mort-price').value) || 0;
-  const down = parseFloat(document.getElementById('mort-down').value) || 0;
-  const rateStr = parseFloat(document.getElementById('mort-rate').value) || 0;
-  const years = parseInt(document.getElementById('mort-term').value) || 30;
+  const priceEl = document.getElementById('mort-price');
+  if (!priceEl) return;
+  const price = parseFloat(priceEl.value) || 0;
+  const down = parseFloat(document.getElementById('mort-down')?.value) || 0;
+  const rateStr = parseFloat(document.getElementById('mort-rate')?.value) || 0;
+  const years = parseInt(document.getElementById('mort-term')?.value) || 30;
 
   const principal = Math.max(0, price - down);
   let monthlyPI = 0;
@@ -136,18 +138,25 @@ function calculateMortgage() {
   const monthlyIns = (price * 0.0035) / 12;
   const total = monthlyPI + monthlyTax + monthlyIns;
 
-  document.getElementById('mort-result').textContent = formatCurrency(monthlyPI);
-  document.getElementById('mort-pi').textContent = formatCurrency(monthlyPI);
-  document.getElementById('mort-tax').textContent = formatCurrency(monthlyTax);
-  document.getElementById('mort-ins').textContent = formatCurrency(monthlyIns);
-  document.getElementById('mort-total').textContent = formatCurrency(total);
+  const updateText = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+
+  updateText('mort-result', formatCurrency(monthlyPI));
+  updateText('mort-pi', formatCurrency(monthlyPI));
+  updateText('mort-tax', formatCurrency(monthlyTax));
+  updateText('mort-ins', formatCurrency(monthlyIns));
+  updateText('mort-total', formatCurrency(total));
 }
 
 function calculateAffordability() {
-  const income = parseFloat(document.getElementById('aff-income').value) || 0;
-  const debts = parseFloat(document.getElementById('aff-debts').value) || 0;
-  const down = parseFloat(document.getElementById('aff-down').value) || 0;
-  const rateStr = parseFloat(document.getElementById('aff-rate').value) || 0;
+  const incomeEl = document.getElementById('aff-income');
+  if (!incomeEl) return;
+  const income = parseFloat(incomeEl.value) || 0;
+  const debts = parseFloat(document.getElementById('aff-debts')?.value) || 0;
+  const down = parseFloat(document.getElementById('aff-down')?.value) || 0;
+  const rateStr = parseFloat(document.getElementById('aff-rate')?.value) || 0;
 
   const maxTotalDebtPayment = (income / 12) * 0.36;
   let maxHousingPayment = maxTotalDebtPayment - debts;
@@ -166,17 +175,24 @@ function calculateAffordability() {
   let estPrice = maxLoan + down;
   if (estPrice < 0 || !isFinite(estPrice)) estPrice = down;
 
-  document.getElementById('aff-result-price').textContent = formatCurrency(estPrice);
-  document.getElementById('aff-loan').textContent = formatCurrency(maxLoan);
-  document.getElementById('aff-down-disp').textContent = formatCurrency(down);
-  document.getElementById('aff-max-monthly').textContent = formatCurrency(maxHousingPayment);
+  const updateText = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+
+  updateText('aff-result-price', formatCurrency(estPrice));
+  updateText('aff-loan', formatCurrency(maxLoan));
+  updateText('aff-down-disp', formatCurrency(down));
+  updateText('aff-max-monthly', formatCurrency(maxHousingPayment));
 }
 
 function calculateRentVsBuy() {
-  const rent = parseFloat(document.getElementById('rb-rent').value) || 0;
-  const price = parseFloat(document.getElementById('rb-price').value) || 0;
-  const down = parseFloat(document.getElementById('rb-down').value) || 0;
-  const years = parseInt(document.getElementById('rb-years').value) || 1;
+  const rentEl = document.getElementById('rb-rent');
+  if (!rentEl) return;
+  const rent = parseFloat(rentEl.value) || 0;
+  const price = parseFloat(document.getElementById('rb-price')?.value) || 0;
+  const down = parseFloat(document.getElementById('rb-down')?.value) || 0;
+  const years = parseInt(document.getElementById('rb-years')?.value) || 1;
 
   const rateStr = 6.5;
   const principal = Math.max(0, price - down);
@@ -213,6 +229,8 @@ function calculateRentVsBuy() {
   const rbTotalBuy = document.getElementById('rb-total-buy-cost');
   const rbVerdictTitle = document.getElementById('rb-verdict-title');
   const rbSavings = document.getElementById('rb-savings');
+
+  if (!rbTotalRent || !rbTotalBuy || !rbVerdictTitle || !rbSavings) return;
 
   rbTotalRent.textContent = formatCurrency(totalRentPaid);
   rbTotalBuy.textContent = formatCurrency(totalUnrecoverableBuying);

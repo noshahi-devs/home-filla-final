@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
 import { getCategoryData, getProperty, Property } from '../../data/listings.data';
 
 @Component({
   selector: 'app-property-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './property-detail.component.html',
   styleUrl: './property-detail.component.css'
 })
