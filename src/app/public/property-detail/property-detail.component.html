@@ -9,12 +9,12 @@
         </button>
       </div>
       <div class="bar-right">
-        <button class="contact-agent-btn"><i class="fas fa-envelope"></i> Contact agent</button>
+        <button class="contact-agent-btn" (click)="openContactModal()"><i class="fas fa-envelope"></i> Contact agent</button>
         <button class="action-btn" [class.active]="isSaved" (click)="toggleSave()">
           <i [ngClass]="isSaved ? 'fas fa-heart text-red' : 'far fa-heart'"></i>
           {{ isSaved ? 'Saved' : 'Save' }}
         </button>
-        <button class="action-btn"><i class="fas fa-share-alt"></i> Share</button>
+        <button class="action-btn" (click)="openShareModal()"><i class="fas fa-share-alt"></i> Share</button>
         <button class="action-btn"><i class="fas fa-eye-slash"></i> Hide</button>
       </div>
     </div>
@@ -60,8 +60,10 @@
                       </span>
                   </div>
                   <div class="header-actions-inline">
-                      <button class="inline-action"><i class="far fa-heart"></i></button>
-                      <button class="inline-action"><i class="fas fa-share-alt"></i></button>
+                      <button class="inline-action" (click)="toggleSave()" [class.active]="isSaved">
+                          <i [ngClass]="isSaved ? 'fas fa-heart text-red' : 'far fa-heart'"></i>
+                      </button>
+                      <button class="inline-action" (click)="openShareModal()"><i class="fas fa-share-alt"></i></button>
                   </div>
               </div>
               <div class="address-row">
@@ -278,6 +280,96 @@
           </div>
       </div>
   </footer>
+
+
+  <!-- ─── MODALS ─── -->
+
+  <!-- Contact Agent Modal -->
+  <div class="modal-overlay" *ngIf="showContactModal" (click)="closeContactModal()">
+    <div class="modal-content contact-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>More about this property</h2>
+        <button class="close-modal" (click)="closeContactModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-property-preview">
+          <img [src]="property.image" [alt]="property.address">
+        </div>
+        <form class="modal-form">
+          <div class="form-group">
+            <input type="text" placeholder="Full name *" class="modal-input" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email *" class="modal-input" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" placeholder="Phone *" class="modal-input">
+          </div>
+          <div class="form-group">
+            <textarea placeholder="How can an agent help?" class="modal-textarea">I'm interested in {{ property.address }}.</textarea>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="military">
+            <label for="military">I've served in the U.S. military <i class="fas fa-info-circle"></i></label>
+          </div>
+          <button type="submit" class="modal-submit-btn">Email agent</button>
+          <p class="modal-disclaimer">By proceeding, you consent to receive calls and texts at the number you provided according to our Terms of Use and Privacy Policy.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share Modal -->
+  <div class="modal-overlay" *ngIf="showShareModal" (click)="closeShareModal()">
+    <div class="modal-content share-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Email to your friends</h2>
+        <button class="close-modal" (click)="closeShareModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="share-property-info">
+          <div class="share-thumb-wrap">
+            <img [src]="property.image" [alt]="property.address" class="share-thumb">
+          </div>
+          <div class="share-details">
+            <div class="share-price">{{ property.price }}</div>
+            <div class="share-stats">
+              <span>{{ property.beds }} bed</span>
+              <span class="sep">•</span>
+              <span>{{ property.baths }} bath</span>
+              <span class="sep">•</span>
+              <span>{{ property.sqft }} sqft</span>
+            </div>
+            <div class="share-address">{{ property.address }}</div>
+            <div class="share-city">{{ property.city }}</div>
+            <a href="javascript:void(0)" class="share-link-btn"><i class="fas fa-link"></i> Get shareable link</a>
+          </div>
+        </div>
+        <form class="modal-form">
+          <div class="form-group">
+            <label class="modal-label">Recipient email <span class="req">required</span></label>
+            <input type="email" placeholder="Separate emails with a comma" class="modal-input" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="modal-label">Your email <span class="req">required</span></label>
+              <input type="email" placeholder="Enter your email" class="modal-input" required>
+            </div>
+            <div class="form-group">
+              <label class="modal-label">Your name <span class="req">required</span></label>
+              <input type="text" placeholder="Enter your full name" class="modal-input" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="modal-label">Message</label>
+            <textarea class="modal-textarea">Hi. Check out the property I found on Home Filla: {{ property.address }}, {{ property.city }}.</textarea>
+          </div>
+          <button type="submit" class="modal-submit-btn">Send</button>
+          <p class="modal-disclaimer">By creating an account you agree to Home Filla's Terms of Use and Privacy Policy.</p>
+        </form>
+      </div>
+    </div>
+  </div>
 
 </div>
 

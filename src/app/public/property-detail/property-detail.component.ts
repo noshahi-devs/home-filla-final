@@ -15,6 +15,8 @@ export class PropertyDetailComponent implements OnInit {
   similarHomes: Property[] = [];
   categorySlug: string = '';
   isSaved: boolean = false;
+  showContactModal: boolean = false;
+  showShareModal: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +46,26 @@ export class PropertyDetailComponent implements OnInit {
 
   toggleSave() {
     this.isSaved = !this.isSaved;
+  }
+
+  openContactModal() {
+    this.showContactModal = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeContactModal() {
+    this.showContactModal = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  openShareModal() {
+    this.showShareModal = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeShareModal() {
+    this.showShareModal = false;
+    document.body.style.overflow = 'auto';
   }
 
   formatCount(n: number): string {
