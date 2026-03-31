@@ -22,6 +22,11 @@ export class ListingsComponent implements OnInit, AfterViewInit {
   category: CategoryInfo | null = null;
   visibleProperties: Property[] = [];
   pageSize = 12;
+  
+  // Map and Favorite State
+  isMapOpen = false;
+  activeMapFilter = 'Layers';
+  savedPropertyIds: Set<number> = new Set();
 
   constructor(private route: ActivatedRoute) {}
 
@@ -60,5 +65,31 @@ export class ListingsComponent implements OnInit, AfterViewInit {
 
   isLandCategory(): boolean {
     return this.category?.slug === 'land' || this.category?.slug === 'new-home-communities';
+  }
+
+  // Interactive Map Actions
+  toggleMap(): void {
+    this.isMapOpen = !this.isMapOpen;
+  }
+
+  setMapFilter(filter: string): void {
+    this.activeMapFilter = filter;
+  }
+
+  // Property Favoriting
+  toggleFavorite(id: number, event?: Event): void {
+    if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+    if (this.savedPropertyIds.has(id)) {
+      this.savedPropertyIds.delete(id);
+    } else {
+      this.savedPropertyIds.add(id);
+    }
+  }
+
+  isSaved(id: number): boolean {
+    return this.savedPropertyIds.has(id);
   }
 }

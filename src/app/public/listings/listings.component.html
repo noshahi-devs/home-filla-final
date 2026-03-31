@@ -33,7 +33,10 @@
   <div class="search-save-bar">
     <div class="search-save-container">
       <div class="search-input-group">
-        <button class="map-btn">Map</button>
+        <button class="map-btn" [class.active]="isMapOpen" (click)="toggleMap()">
+          <i class="fas" [ngClass]="isMapOpen ? 'fa-list' : 'fa-map'"></i>
+          {{ isMapOpen ? 'List' : 'Map' }}
+        </button>
         <div class="search-divider"></div>
         <input type="text" class="search-input-field" placeholder="Search by city...">
         <button class="search-blue-btn"><i class="fas fa-search"></i> Search</button>
@@ -42,8 +45,8 @@
     </div>
   </div>
 
-  <!-- ─── HERO BANNER ─── -->
-  <div class="lst-hero" [style.backgroundImage]="'url(' + category.image + ')'">
+  <!-- ─── HERO BANNER (Shown when Map is Closed) ─── -->
+  <div class="lst-hero" *ngIf="!isMapOpen" [style.backgroundImage]="'url(' + category.image + ')'">
     <div class="lst-hero-overlay"></div>
     <div class="lst-hero-content">
       <!-- Breadcrumb -->
@@ -64,6 +67,65 @@
         <div class="lst-location-pill">
           <i class="fas fa-map-marker-alt"></i> San Francisco, CA
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── INTERACTIVE 3D MAP VIEW (Shown when Map is Open) ─── -->
+  <div class="map-view-container" *ngIf="isMapOpen">
+    <div class="map-canvas" [style.backgroundImage]="'url(assets/map-bg.png)'">
+      <!-- Mock Markers -->
+      <div class="map-marker" style="top: 30%; left: 45%;" (click)="toggleFavorite(101, $event)">
+        <div class="marker-dot"></div>
+      </div>
+      <div class="map-marker" style="top: 50%; left: 60%;" (click)="toggleFavorite(102, $event)">
+        <div class="marker-dot"></div>
+      </div>
+      <div class="map-marker" style="top: 40%; left: 20%;" (click)="toggleFavorite(103, $event)">
+        <div class="marker-dot"></div>
+      </div>
+      <div class="map-marker" style="top: 65%; left: 35%;" (click)="toggleFavorite(104, $event)">
+        <div class="marker-dot"></div>
+      </div>
+    </div>
+
+    <!-- Map Overlays -->
+    <div class="map-overlay-top">
+      <div class="map-scroll-controls">
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Layers'" (click)="setMapFilter('Layers')">
+          <i class="fas fa-layer-group"></i> Layers
+        </button>
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Estimate'" (click)="setMapFilter('Estimate')">
+          <i class="fas fa-dollar-sign"></i> Estimate
+        </button>
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'sqft'" (click)="setMapFilter('sqft')">
+          <i class="fas fa-chart-line"></i> Est / sqft
+        </button>
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Lot size'" (click)="setMapFilter('Lot size')">
+          <i class="fas fa-tree"></i> Lot size
+        </button>
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Lot slope'" (click)="setMapFilter('Lot slope')">
+          <i class="fas fa-mountain"></i> Lot slope
+        </button>
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Home size'" (click)="setMapFilter('Home size')">
+          <i class="fas fa-home"></i> Home size
+        </button>
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Year built'" (click)="setMapFilter('Year built')">
+          <i class="fas fa-calendar-alt"></i> Year built
+        </button>
+      </div>
+    </div>
+
+    <div class="map-overlay-bottom">
+      <div class="map-bottom-categories">
+        <button class="map-cat-btn"><i class="fas fa-store-alt"></i> Nearby</button>
+        <button class="map-cat-btn"><i class="fas fa-graduation-cap"></i> Schools</button>
+        <button class="map-cat-btn"><i class="fas fa-users"></i> Neighborhood</button>
+      </div>
+      
+      <div class="map-side-controls">
+        <button class="map-side-btn"><i class="fas fa-times"></i> Clear Boundary</button>
+        <button class="map-side-btn satellite"><i class="fas fa-globe"></i> Satellite</button>
       </div>
     </div>
   </div>
@@ -157,8 +219,8 @@
           <span *ngIf="p.badge" class="lst-badge" [ngClass]="p.badgeClass || 'badge-blue'">
             {{ p.badge }}
           </span>
-          <button class="lst-heart-btn" title="Save">
-            <i class="far fa-heart"></i>
+          <button class="lst-heart-btn" [class.saved]="isSaved(p.id)" (click)="toggleFavorite(p.id, $event)" title="Save">
+            <i [ngClass]="isSaved(p.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
           </button>
         </div>
 
