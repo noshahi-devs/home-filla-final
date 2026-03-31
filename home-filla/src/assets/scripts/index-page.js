@@ -359,7 +359,7 @@ function initHomeFillaPage() {
     });
   });
 
-  const heroSearch = document.querySelector('.hero-search');
+  const heroSearch = document.querySelector('.hero-search') || document.querySelector('.lst-hero');
   const stickySearch = document.getElementById('sticky-search');
   if (heroSearch && stickySearch) {
     const observer = new IntersectionObserver(

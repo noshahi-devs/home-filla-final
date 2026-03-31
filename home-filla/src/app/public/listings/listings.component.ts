@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { getCategoryData, CategoryInfo, Property } from '../../data/listings.data';
+
+declare global {
+  interface Window {
+    initHomeFillaPage?: () => void;
+    __homeFillaInit?: boolean;
+    toggleFilter?: (event: Event, id: string) => void;
+    applyFilter?: (btn: HTMLElement) => void;
+  }
+}
 
 @Component({
   selector: 'app-listings',
@@ -9,7 +18,7 @@ import { getCategoryData, CategoryInfo, Property } from '../../data/listings.dat
   styleUrl: './listings.component.css',
   imports: [CommonModule, RouterLink]
 })
-export class ListingsComponent implements OnInit {
+export class ListingsComponent implements OnInit, AfterViewInit {
   category: CategoryInfo | null = null;
   visibleProperties: Property[] = [];
   pageSize = 12;
@@ -22,6 +31,13 @@ export class ListingsComponent implements OnInit {
       this.category = getCategoryData(slug);
       this.visibleProperties = this.category?.properties.slice(0, this.pageSize) || [];
     });
+  }
+
+  ngAfterViewInit() {
+    delete window.__homeFillaInit;
+    setTimeout(() => {
+      window.initHomeFillaPage?.();
+    }, 0);
   }
 
   get hasMore(): boolean {

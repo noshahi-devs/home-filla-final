@@ -146,6 +146,231 @@
     box-shadow: 0 6px 16px rgba(74, 108, 247, 0.35);
 }
 
+/* Sticky floating search bar */
+#sticky-search {
+    position: fixed;
+    top: -80px;
+    left: 0; right: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    padding: 12px 24px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    transition: top 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+#sticky-search.visible {
+    top: 0;
+}
+
+#sticky-search .s-inner {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 60px;
+    padding: 6px 6px 6px 20px;
+    max-width: 640px;
+    width: 100%;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#sticky-search .s-inner:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(74,108,247,0.12);
+}
+
+#sticky-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+}
+
+#sticky-search button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 40px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+#sticky-search button:hover {
+    background: #3a5ce8;
+    box-shadow: 0 4px 12px rgba(74,108,247,0.35);
+}
+
+/* Dynamic Filters */
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: default;
+}
+
+.filter-chip:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+}
+
+.filter-chip.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.filter-wrapper {
+    position: relative;
+}
+
+.filter-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 20px;
+    z-index: 100;
+    width: max-content;
+    min-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.dropdown-input:focus {
+    border-color: var(--accent);
+}
+
+.btn-group {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tgl-btn {
+    flex: 1;
+    padding: 10px 0;
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.tgl-btn.active {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.check-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.check-label input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+}
+
+.dropdown-apply {
+    width: 100%;
+    padding: 12px;
+    background: var(--text-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sort-option {
+    padding: 12px 16px;
+    margin: -20px;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.sort-option:first-child {
+    margin-top: -20px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.sort-option:last-child {
+    margin-bottom: -20px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.sort-option:hover {
+    background: var(--bg);
+    color: var(--accent);
+}
+
+.filter-chip {
+    cursor: pointer;
+}
 /* ─── HERO BANNER ─── */
 .lst-hero {
   position: relative;
