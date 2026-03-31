@@ -228,3 +228,10 @@ export function getCategoryData(slug: string): CategoryInfo | null {
 export function getAllCategories(): CategoryInfo[] {
   return Object.values(LISTINGS_DATA);
 }
+
+export function getProperty(categorySlug: string, id: number): Property | null {
+  const cat = LISTINGS_DATA[categorySlug];
+  if (!cat) return null;
+  return cat.properties.find(p => p.id === id) || null;
+}
+

@@ -1,0 +1,265 @@
+<div class="property-detail-page" *ngIf="property">
+  
+  <!-- ─── DETAIL ACTION BAR (Sticky) ─── -->
+  <div class="detail-action-bar">
+    <div class="bar-inner">
+      <div class="bar-left">
+        <button class="back-link" (click)="goBack()">
+          <i class="fas fa-chevron-left"></i> Back
+        </button>
+      </div>
+      <div class="bar-right">
+        <button class="contact-agent-btn">Contact agent</button>
+        <button class="action-btn" [class.active]="isSaved" (click)="toggleSave()">
+          <i [ngClass]="isSaved ? 'fas fa-heart text-red' : 'far fa-heart'"></i>
+          {{ isSaved ? 'Saved' : 'Save' }}
+        </button>
+        <button class="action-btn"><i class="fas fa-share-alt"></i> Share</button>
+        <button class="action-btn"><i class="fas fa-eye-slash"></i> Hide</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── BREADCRUMB ─── -->
+  <div class="breadcrumb-container">
+      <div class="breadcrumb">
+        <a routerLink="/">Home</a>
+        <i class="fas fa-chevron-right sep"></i>
+        <a [routerLink]="['/listings', categorySlug]">Listings</a>
+        <i class="fas fa-chevron-right sep"></i>
+        <span>{{ property.address }}</span>
+      </div>
+  </div>
+
+  <!-- ─── IMAGE GALLERY ─── -->
+  <div class="image-gallery">
+      <div class="gallery-main">
+          <img [src]="property.image" [alt]="property.address">
+      </div>
+      <div class="gallery-grid">
+          <div class="gallery-item"><img src="https://picsum.photos/id/1011/400/300" alt="Interior"></div>
+          <div class="gallery-item"><img src="https://picsum.photos/id/1015/400/300" alt="Kitchen"></div>
+          <div class="gallery-item"><img src="https://picsum.photos/id/1016/400/300" alt="Bedroom"></div>
+          <div class="gallery-item more-overlay">
+              <img src="https://picsum.photos/id/1018/400/300" alt="Backyard">
+              <div class="overlay"><span>+12 photos</span></div>
+          </div>
+      </div>
+  </div>
+
+  <main class="detail-content">
+      <div class="content-left">
+          
+          <!-- Key Stats -->
+          <div class="property-header">
+              <div class="price-row">
+                  <h1 class="price">{{ property.price }}</h1>
+                  <div class="header-badges">
+                      <span *ngIf="property.badge" class="badge" [ngClass]="property.badgeClass || 'badge-blue'">
+                          {{ property.badge }}
+                      </span>
+                  </div>
+              </div>
+              <div class="address-row">
+                  <h2 class="address">{{ property.address }}</h2>
+                  <p class="city">{{ property.city }}</p>
+              </div>
+              
+              <div class="stats-row">
+                  <div class="stat-item">
+                      <span class="val">{{ property.beds }}</span>
+                      <span class="lbl">beds</span>
+                  </div>
+                  <div class="stat-item">
+                      <span class="val">{{ property.baths }}</span>
+                      <span class="lbl">baths</span>
+                  </div>
+                  <div class="stat-item">
+                      <span class="val">{{ property.sqft }}</span>
+                      <span class="lbl">sqft</span>
+                  </div>
+                  <div class="stat-item dot-sep"></div>
+                  <div class="stat-item">
+                      <span class="val">8,200</span>
+                      <span class="lbl">sqft lot</span>
+                  </div>
+              </div>
+          </div>
+
+          <hr class="divider">
+
+          <!-- Description -->
+          <div class="desc-section">
+              <h3>Description</h3>
+              <p>Welcome to this stunning modern masterpiece located in the heart of the city. This meticulously designed home offers the perfect blend of luxury and comfort, featuring high ceilings, premium finishes, and an abundance of natural light throughout.</p>
+              <p>The open-concept living area flows seamlessly into a gourmet chef's kitchen, equipped with state-of-the-art appliances and a large island. Retreat to the spacious master suite which includes a spa-like ensuite bathroom and wide walk-in closets.</p>
+              <button class="read-more">Read more</button>
+          </div>
+
+          <hr class="divider">
+
+          <!-- Highlights -->
+          <div class="highlights-section">
+              <h3>Property Highlights</h3>
+              <div class="highlights-grid">
+                  <div class="h-item">
+                      <i class="fas fa-parking"></i>
+                      <span>Attached Garage</span>
+                  </div>
+                  <div class="h-item">
+                      <i class="fas fa-thermometer-half"></i>
+                      <span>Central Heating</span>
+                  </div>
+                  <div class="h-item">
+                      <i class="fas fa-snowflake"></i>
+                      <span>Air Conditioning</span>
+                  </div>
+                  <div class="h-item">
+                      <i class="fas fa-swimmer"></i>
+                      <span>Private Pool</span>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+      <div class="content-right">
+          <!-- Contact Widget -->
+          <div class="contact-agent-card">
+              <div class="agent-profile">
+                  <img [src]="property.agentAvatar" [alt]="property.agentName">
+                  <div class="agent-name-wrap">
+                      <div class="agent-name">{{ property.agentName }}</div>
+                      <div class="agent-title">{{ property.agentTitle }}</div>
+                  </div>
+              </div>
+              <form class="contact-form">
+                  <input type="text" placeholder="Full Name" class="form-input">
+                  <input type="email" placeholder="Email Address" class="form-input">
+                  <input type="tel" placeholder="Phone Number" class="form-input">
+                  <textarea placeholder="I'm interested in this property..." class="form-textarea"></textarea>
+                  <button type="submit" class="contact-submit">Email Agent</button>
+                  <p class="form-note">By clicking "Email Agent", you agree to our Terms of Use and Privacy Policy.</p>
+              </form>
+          </div>
+      </div>
+  </main>
+
+  <!-- ─── SIMILAR HOMES ─── -->
+  <section class="similar-homes" *ngIf="similarHomes.length > 0">
+    <div class="section-container">
+        <h3>Similar Homes You May Like</h3>
+        <div class="homes-grid">
+            <div class="lst-card" *ngFor="let p of similarHomes" [routerLink]="['/property', categorySlug, p.id]">
+                <div class="lst-card-img-wrap">
+                    <img [src]="p.image" [alt]="p.address" class="lst-card-img">
+                    <span *ngIf="p.badge" class="lst-badge" [ngClass]="p.badgeClass || 'badge-blue'">
+                        {{ p.badge }}
+                    </span>
+                    <button class="lst-heart-btn" title="Save">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="lst-card-info">
+                    <div class="lst-card-price">{{ p.price }}</div>
+                    <div class="lst-card-address">{{ p.address }}</div>
+                    <div class="lst-card-city"><i class="fas fa-map-marker-alt"></i> {{ p.city }}</div>
+                    <div class="lst-card-stats">
+                        <span class="lst-stat"><i class="fas fa-bed"></i> {{ p.beds }} beds</span>
+                        <span class="lst-stat"><i class="fas fa-bath"></i> {{ p.baths }} baths</span>
+                        <span class="lst-stat"><i class="fas fa-ruler-combined"></i> {{ p.sqft }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="view-all-similar">
+            <a [routerLink]="['/listings', categorySlug]" class="view-all-link">View all listings in this category →</a>
+        </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="realtor-footer">
+      <div class="footer-container">
+          <div class="footer-top">
+              <div class="footer-section">
+                  <h4>Home Filla</h4>
+                  <div class="footer-links-col">
+                      <a href="#">About us</a>
+                      <a href="#">Careers</a>
+                      <a href="#">Accessibility</a>
+                      <a href="#">Feedback</a>
+                      <a href="#">Media room</a>
+                  </div>
+              </div>
+
+              <div class="footer-section">
+                  <h4>Support & Legal</h4>
+                  <div class="footer-links-col">
+                      <a href="#">Agent support</a>
+                      <a href="#">Ad Choices</a>
+                      <a href="#">Advertise with us</a>
+                      <a href="#">Privacy</a>
+                      <a href="#">Terms</a>
+                  </div>
+              </div>
+
+              <div class="footer-section">
+                  <h4>Products & Services</h4>
+                  <div class="footer-links-col">
+                      <a href="#">Leads & Branding</a>
+                      <a href="#">ListHub</a>
+                      <a href="#">Moving.com</a>
+                      <a href="#">International Properties</a>
+                      <a href="#">Builder Solutions</a>
+                  </div>
+              </div>
+
+              <div class="footer-section">
+                  <h4>News Corp</h4>
+                  <div class="footer-links-col">
+                      <a href="#">Wall Street Journal</a>
+                      <a href="#">MarketWatch</a>
+                      <a href="#">Mansion Global</a>
+                      <a href="#">financial News</a>
+                      <a href="#">New York Post</a>
+                  </div>
+              </div>
+          </div>
+
+          <div class="footer-bottom">
+              <div class="footer-bottom-links">
+                  <a href="#">Home Made</a>
+                  <a href="#">Tech Blog</a>
+                  <a href="#">Agent Blog</a>
+                  <a href="#">Sitemap</a>
+                  <a href="#" class="highlight-link">Do Not Sell or Share My Personal Information</a>
+              </div>
+
+              <div class="footer-socials">
+                  <a href="#"><i class="fab fa-facebook"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-youtube"></i></a>
+                  <a href="#"><i class="fab fa-linkedin"></i></a>
+              </div>
+
+              <div class="footer-disclaimer">
+                  <p>Any mortgage lead generation activity in the state of Connecticut is performed by Home Filla, LLC (NMLS #2121192), a subsidiary of Home Filla, Inc.</p>
+                  <p>*Based on average new for sale and rental listings Feb 2024 - Jan 2025.</p>
+                  <p>© 1995-2026 <a href="#">Home Filla</a> and <a href="#">Home Filla, Inc.</a> All rights reserved.</p>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+</div>
+
+<div class="property-not-found" *ngIf="!property">
+    <div class="not-found-inner">
+        <i class="fas fa-home"></i>
+        <h2>Property not found</h2>
+        <p>This property may have been removed or the link is incorrect.</p>
+        <a routerLink="/" class="back-home-btn">← Back to Search</a>
+    </div>
+</div>

@@ -229,7 +229,7 @@
 
         <div class="property-grid">
             <!-- Property 1 -->
-            <div class="property-card">
+            <div class="property-card" [routerLink]="['/property', 'new-listings', 1]">
                 <div class="property-image">
                     <img src="https://picsum.photos/id/1/300/200" alt="Property">
                     <span class="property-badge">Just listed</span>
@@ -253,7 +253,7 @@
             </div>
 
             <!-- Property 2 -->
-            <div class="property-card">
+            <div class="property-card" [routerLink]="['/property', 'new-listings', 2]">
                 <div class="property-image">
                     <img src="https://picsum.photos/id/20/300/200" alt="Property">
                     <span class="property-badge price-drop">Price drop</span>
@@ -277,7 +277,7 @@
             </div>
 
             <!-- Property 3 -->
-            <div class="property-card">
+            <div class="property-card" [routerLink]="['/property', 'new-listings', 3]">
                 <div class="property-image">
                     <img src="https://picsum.photos/id/26/300/200" alt="Property">
                 </div>
@@ -300,7 +300,7 @@
             </div>
 
             <!-- Property 4 -->
-            <div class="property-card">
+            <div class="property-card" [routerLink]="['/property', 'new-listings', 4]">
                 <div class="property-image">
                     <img src="https://picsum.photos/id/30/300/200" alt="Property">
                     <span class="property-badge new">New</span>
@@ -323,7 +323,7 @@
                 </div>
             </div>
             <!-- Property 5 -->
-            <div class="property-card">
+            <div class="property-card" [routerLink]="['/property', 'new-listings', 5]">
                 <div class="property-image">
                     <img src="https://picsum.photos/id/42/300/200" alt="Property">
                 </div>
@@ -346,7 +346,7 @@
             </div>
 
             <!-- Property 6 -->
-            <div class="property-card">
+            <div class="property-card" [routerLink]="['/property', 'new-listings', 6]">
                 <div class="property-image">
                     <img src="https://picsum.photos/id/57/300/200" alt="Property">
                     <span class="property-badge">Open House</span>
@@ -370,7 +370,7 @@
             </div>
 
             <!-- Property 7 -->
-            <div class="property-card">
+            <div class="property-card" [routerLink]="['/property', 'new-listings', 7]">
                 <div class="property-image">
                     <img src="https://picsum.photos/id/65/300/200" alt="Property">
                 </div>
@@ -393,7 +393,7 @@
             </div>
 
             <!-- Property 8 -->
-            <div class="property-card">
+            <div class="property-card" [routerLink]="['/property', 'new-listings', 8]">
                 <div class="property-image">
                     <img src="https://picsum.photos/id/73/300/200" alt="Property">
                 </div>
@@ -853,7 +853,7 @@
                     <div style="width: 8px; height: 8px; border-radius: 50%; background: #60a5fa; animation: pulse 2s infinite;"></div>
                     <span style="color: #93c5fd; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Home Filla Finance</span>
                 </div>
-                <h2 style="font-size: 46px; font-weight: 800; color: white; margin: 0 0 20px; line-height: 1.1; letter-spacing: -0.5px;">Need a home loan?<br><span style="background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Get pre-approved.</span></h2>
+                <h2 style="font-size: 46px; font-weight: 800; color: white; margin: 0 0 20px; line-height: 1.1; letter-spacing: -0.5px;">Need a home loan?<br><span style="background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Get pre-approved.</span></h2>
                 <p style="color: rgba(255,255,255,0.75); font-size: 17px; line-height: 1.7; margin: 0 0 36px; max-width: 480px;">Find a lender who offers competitive mortgage rates. Lock in your rate and move fast the moment your dream home hits the market.</p>
                 <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
                     <button style="background: linear-gradient(135deg, #4a6cf7, #7c3aed); color: white; border: none; padding: 16px 32px; border-radius: 40px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; box-shadow: 0 8px 24px rgba(74,108,247,0.5); transition: all 0.25s ease; letter-spacing: 0.2px;"
@@ -921,7 +921,7 @@
                     <i class="fas fa-map-marker-alt" style="color: #60a5fa; font-size: 12px;"></i>
                     <span style="color: #93c5fd; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Neighborhood Intelligence</span>
                 </div>
-                <h2 style="font-size: 46px; font-weight: 800; color: white; margin: 0 0 20px; line-height: 1.1; letter-spacing: -0.5px;">Know your<br><span style="background: linear-gradient(90deg, #34d399, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">neighborhood.</span></h2>
+                <h2 style="font-size: 46px; font-weight: 800; color: white; margin: 0 0 20px; line-height: 1.1; letter-spacing: -0.5px;">Know your<br><span style="background: linear-gradient(90deg, #34d399, #60a5fa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">neighborhood.</span></h2>
                 <p style="color: rgba(255,255,255,0.65); font-size: 17px; line-height: 1.7; margin: 0 0 36px; max-width: 520px;">Schools, commute times, pet-friendly spots, walkability scores — get every detail that matters before you make your move.</p>
 
                 <div style="display: flex; gap: 10px; align-items: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 40px; padding: 10px 10px 10px 24px; max-width: 440px; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0,0,0,0.3);">

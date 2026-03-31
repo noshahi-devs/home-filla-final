@@ -211,7 +211,8 @@
   <!-- ─── PROPERTY GRID ─── -->
   <main class="lst-main">
     <div class="lst-grid">
-      <div class="lst-card" *ngFor="let p of visibleProperties">
+      <div class="lst-card" *ngFor="let p of visibleProperties" [routerLink]="['/property', category?.slug, p.id]">
+
 
         <!-- Image + Badge -->
         <div class="lst-card-img-wrap">
@@ -219,7 +220,7 @@
           <span *ngIf="p.badge" class="lst-badge" [ngClass]="p.badgeClass || 'badge-blue'">
             {{ p.badge }}
           </span>
-          <button class="lst-heart-btn" [class.saved]="isSaved(p.id)" (click)="toggleFavorite(p.id, $event)" title="Save">
+          <button class="lst-heart-btn" [class.saved]="isSaved(p.id)" (click)="toggleFavorite(p.id, $event); $event.stopPropagation()" title="Save">
             <i [ngClass]="isSaved(p.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
           </button>
         </div>
