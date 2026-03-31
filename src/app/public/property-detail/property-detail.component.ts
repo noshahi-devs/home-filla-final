@@ -30,7 +30,7 @@ export class PropertyDetailComponent implements OnInit {
       
       if (this.categorySlug) {
         const cat = getCategoryData(this.categorySlug);
-        this.similarHomes = cat?.properties.filter(p => p.id !== id).slice(0, 4) || [];
+        this.similarHomes = cat?.properties.filter(p => p.id !== id).slice(0, 8) || [];
       }
       
       // Reset scroll to top on navigation

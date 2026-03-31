@@ -126,6 +126,14 @@
                       <i class="fas fa-swimmer"></i>
                       <span>Private Pool</span>
                   </div>
+                  <div class="h-item">
+                      <i class="fas fa-solar-panel"></i>
+                      <span>Solar Panels</span>
+                  </div>
+                  <div class="h-item">
+                      <i class="fas fa-microchip"></i>
+                      <span>Smart Home Hub</span>
+                  </div>
               </div>
           </div>
 
@@ -165,7 +173,7 @@
                     <span *ngIf="p.badge" class="lst-badge" [ngClass]="p.badgeClass || 'badge-blue'">
                         {{ p.badge }}
                     </span>
-                    <button class="lst-heart-btn" title="Save">
+                    <button class="lst-heart-btn" title="Save" (click)="$event.stopPropagation()">
                         <i class="far fa-heart"></i>
                     </button>
                 </div>
@@ -177,6 +185,15 @@
                         <span class="lst-stat"><i class="fas fa-bed"></i> {{ p.beds }} beds</span>
                         <span class="lst-stat"><i class="fas fa-bath"></i> {{ p.baths }} baths</span>
                         <span class="lst-stat"><i class="fas fa-ruler-combined"></i> {{ p.sqft }}</span>
+                    </div>
+
+                    <!-- Agent Info (Matches Listings Page) -->
+                    <div class="lst-card-agent">
+                        <img [src]="p.agentAvatar" [alt]="p.agentName" class="lst-agent-avatar">
+                        <div class="lst-agent-info">
+                            <span class="lst-agent-name">{{ p.agentName }}</span>
+                            <span class="lst-agent-title">• {{ p.agentTitle }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
