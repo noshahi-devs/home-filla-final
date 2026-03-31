@@ -68,7 +68,7 @@ let placeholderAnimationTimer = null;
 
 function startSearchPlaceholderAnimation() {
   const inputs = Array.from(
-    document.querySelectorAll('.hero-search input, #sticky-search input')
+    document.querySelectorAll('.hero-search input, #sticky-search input, .search-input-field')
   );
   if (!inputs.length) {
     return;

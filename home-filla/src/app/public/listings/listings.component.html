@@ -1,14 +1,7 @@
 <!-- Full-page listings view for a category -->
 <div class="listings-page" *ngIf="category">
 
-  <!-- STICKY SEARCH BAR (appears when hero scrolls past) -->
-  <div id="sticky-search">
-      <div class="s-inner">
-          <i class="fas fa-search" style="color: var(--text-secondary); font-size: 14px; flex-shrink: 0;"></i>
-          <input type="text" placeholder="Enter address, city, or ZIP">
-          <button><i class="fas fa-search"></i> Search</button>
-      </div>
-  </div>
+
 
   <!-- ─── HEADER ─── -->
   <header class="realtor-header">
@@ -35,6 +28,19 @@
       </div>
     </div>
   </header>
+
+  <!-- ─── FINDER SEARCH BAR ─── -->
+  <div class="search-save-bar">
+    <div class="search-save-container">
+      <div class="search-input-group">
+        <button class="map-btn">Map</button>
+        <div class="search-divider"></div>
+        <input type="text" class="search-input-field" placeholder="Search by city...">
+        <button class="search-blue-btn"><i class="fas fa-search"></i> Search</button>
+      </div>
+      <button class="save-search-btn"><i class="far fa-heart"></i> Save search</button>
+    </div>
+  </div>
 
   <!-- ─── HERO BANNER ─── -->
   <div class="lst-hero" [style.backgroundImage]="'url(' + category.image + ')'">
