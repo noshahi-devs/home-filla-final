@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="bar-right">
-        <button class="contact-agent-btn">Contact agent</button>
+        <button class="contact-agent-btn"><i class="fas fa-envelope"></i> Contact agent</button>
         <button class="action-btn" [class.active]="isSaved" (click)="toggleSave()">
           <i [ngClass]="isSaved ? 'fas fa-heart text-red' : 'far fa-heart'"></i>
           {{ isSaved ? 'Saved' : 'Save' }}
@@ -53,11 +53,15 @@
           <!-- Key Stats -->
           <div class="property-header">
               <div class="price-row">
-                  <h1 class="price">{{ property.price }}</h1>
-                  <div class="header-badges">
+                  <div class="price-wrap">
+                      <h1 class="price">{{ property.price }}</h1>
                       <span *ngIf="property.badge" class="badge" [ngClass]="property.badgeClass || 'badge-blue'">
                           {{ property.badge }}
                       </span>
+                  </div>
+                  <div class="header-actions-inline">
+                      <button class="inline-action"><i class="far fa-heart"></i></button>
+                      <button class="inline-action"><i class="fas fa-share-alt"></i></button>
                   </div>
               </div>
               <div class="address-row">
@@ -67,19 +71,23 @@
               
               <div class="stats-row">
                   <div class="stat-item">
+                      <i class="fas fa-bed"></i>
                       <span class="val">{{ property.beds }}</span>
                       <span class="lbl">beds</span>
                   </div>
                   <div class="stat-item">
+                      <i class="fas fa-bath"></i>
                       <span class="val">{{ property.baths }}</span>
                       <span class="lbl">baths</span>
                   </div>
                   <div class="stat-item">
+                      <i class="fas fa-ruler-combined"></i>
                       <span class="val">{{ property.sqft }}</span>
                       <span class="lbl">sqft</span>
                   </div>
                   <div class="stat-item dot-sep"></div>
                   <div class="stat-item">
+                      <i class="fas fa-vector-square"></i>
                       <span class="val">8,200</span>
                       <span class="lbl">sqft lot</span>
                   </div>
@@ -133,6 +141,7 @@
                       <div class="agent-title">{{ property.agentTitle }}</div>
                   </div>
               </div>
+              <h4 class="form-title">Request more information</h4>
               <form class="contact-form">
                   <input type="text" placeholder="Full Name" class="form-input">
                   <input type="email" placeholder="Email Address" class="form-input">
