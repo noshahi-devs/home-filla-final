@@ -1,0 +1,162 @@
+<!-- Full-page listings view for a category -->
+<div class="listings-page" *ngIf="category">
+
+  <!-- ─── HEADER ─── -->
+  <header class="lst-header">
+    <div class="lst-header-inner">
+      <a routerLink="/" class="lst-logo">
+        <div class="lst-logo-icon">HF</div>
+        <span class="lst-logo-text">Home Filla</span>
+      </a>
+      <nav class="lst-nav">
+        <span class="lst-nav-link">Buy</span>
+        <span class="lst-nav-link">Rent</span>
+        <span class="lst-nav-link">Sell</span>
+        <span class="lst-nav-link">Mortgages</span>
+        <span class="lst-nav-link">Find an Agent</span>
+      </nav>
+      <div class="lst-header-actions">
+        <a routerLink="/" class="lst-back-btn">
+          <i class="fas fa-arrow-left"></i> Back to Search
+        </a>
+        <span class="lst-btn-outline">Log in</span>
+        <span class="lst-btn-primary">Sign up</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── HERO BANNER ─── -->
+  <div class="lst-hero" [style.backgroundImage]="'url(' + category.image + ')'">
+    <div class="lst-hero-overlay"></div>
+    <div class="lst-hero-content">
+      <!-- Breadcrumb -->
+      <div class="lst-breadcrumb">
+        <a routerLink="/" class="lst-bc-link"><i class="fas fa-home"></i> Home</a>
+        <i class="fas fa-chevron-right lst-bc-sep"></i>
+        <span class="lst-bc-current">{{ category.label }}</span>
+      </div>
+
+      <h1 class="lst-hero-title">{{ category.label }}</h1>
+      <p class="lst-hero-desc">{{ category.description }}</p>
+
+      <div class="lst-hero-meta">
+        <div class="lst-count-pill">
+          <i class="fas fa-home"></i>
+          <strong>{{ formatCount(category.count) }}</strong> properties
+        </div>
+        <div class="lst-location-pill">
+          <i class="fas fa-map-marker-alt"></i> San Francisco, CA
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── RESULTS BAR ─── -->
+  <div class="lst-results-bar">
+    <div class="lst-results-bar-inner">
+      <div class="lst-results-info">
+        <span class="lst-results-count">{{ formatCount(category.count) }} results</span>
+        <span class="lst-results-label">in <strong>San Francisco, CA</strong></span>
+      </div>
+      <div class="lst-filter-chips">
+        <div class="lst-filter-wrap">
+          <span class="lst-chip">Price <i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="lst-filter-wrap">
+          <span class="lst-chip">Beds / Baths <i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="lst-filter-wrap">
+          <span class="lst-chip">Home type <i class="fas fa-chevron-down"></i></span>
+        </div>
+        <span class="lst-chip">More filters <i class="fas fa-sliders-h"></i></span>
+      </div>
+      <div class="lst-sort-wrap">
+        <span class="lst-chip"><i class="fas fa-sort"></i> Sort: Newest</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PROPERTY GRID ─── -->
+  <main class="lst-main">
+    <div class="lst-grid">
+      <div class="lst-card" *ngFor="let p of visibleProperties">
+
+        <!-- Image + Badge -->
+        <div class="lst-card-img-wrap">
+          <img [src]="p.image" [alt]="p.address" class="lst-card-img" loading="lazy">
+          <span *ngIf="p.badge" class="lst-badge" [ngClass]="p.badgeClass || 'badge-blue'">
+            {{ p.badge }}
+          </span>
+          <button class="lst-heart-btn" title="Save">
+            <i class="far fa-heart"></i>
+          </button>
+        </div>
+
+        <!-- Info -->
+        <div class="lst-card-info">
+          <div class="lst-card-price">{{ p.price }}</div>
+          <div class="lst-card-address">{{ p.address }}</div>
+          <div class="lst-card-city">
+            <i class="fas fa-map-marker-alt"></i> {{ p.city }}
+          </div>
+
+          <!-- Stats (hide beds/baths for land) -->
+          <div class="lst-card-stats" *ngIf="!isLandCategory()">
+            <span class="lst-stat"><i class="fas fa-bed"></i> {{ p.beds }} beds</span>
+            <span class="lst-stat"><i class="fas fa-bath"></i> {{ p.baths }} baths</span>
+            <span class="lst-stat"><i class="fas fa-ruler-combined"></i> {{ p.sqft }}</span>
+          </div>
+          <div class="lst-card-stats" *ngIf="isLandCategory()">
+            <span class="lst-stat land-stat"><i class="fas fa-expand-arrows-alt"></i> {{ p.sqft }}</span>
+          </div>
+
+          <!-- Agent -->
+          <div class="lst-card-agent">
+            <img [src]="p.agentAvatar" [alt]="p.agentName" class="lst-agent-avatar">
+            <div class="lst-agent-info">
+              <span class="lst-agent-name">{{ p.agentName }}</span>
+              <span class="lst-agent-title">• {{ p.agentTitle }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load More -->
+    <div class="lst-load-more-wrap" *ngIf="hasMore">
+      <button class="lst-load-more-btn" (click)="loadMore()">
+        <span>Load more <strong>({{ remaining }} left)</strong></span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+
+    <div class="lst-all-done" *ngIf="!hasMore && visibleProperties.length > 0">
+      <i class="fas fa-check-circle"></i>
+      <span>All {{ formatCount(category.count) }} properties shown</span>
+    </div>
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="lst-footer">
+    <div class="lst-footer-inner">
+      <div class="lst-footer-logo">
+        <div class="lst-logo-icon small">HF</div>
+        <span>Home Filla</span>
+      </div>
+      <p class="lst-footer-copy">© 1995-2026 Home Filla and Home Filla, Inc. All rights reserved.</p>
+      <div class="lst-footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Not found state -->
+<div class="lst-not-found" *ngIf="!category">
+  <i class="fas fa-home"></i>
+  <h2>Category not found</h2>
+  <a routerLink="/" class="lst-btn-primary">← Back to Home</a>
+</div>

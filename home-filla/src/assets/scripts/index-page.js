@@ -393,4 +393,6 @@ globalScope.openCalculator = openCalculator;
 globalScope.scrollToSearch = scrollToSearch;
 globalScope.initHomeFillaPage = initHomeFillaPage;
 
-window.addEventListener('load', initHomeFillaPage);
+// NOTE: Initialization is triggered by HomeComponent.ngAfterViewInit()
+// to ensure the Angular DOM is fully rendered before any DOM queries run.
+
