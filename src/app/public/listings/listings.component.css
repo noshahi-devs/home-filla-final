@@ -1470,11 +1470,12 @@
         scrollbar-width: none !important;
         width: 100% !important;
         -webkit-overflow-scrolling: touch;
+        align-items: center !important;
     }
     .filters-scroll-container::-webkit-scrollbar { display: none !important; }
 
     .filter-group { 
-        display: flex !important;
+        display: inline-flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important; 
         gap: 8px !important; 
@@ -1482,9 +1483,28 @@
         padding: 0 !important;
         overflow: visible !important;
         flex-shrink: 0 !important;
+        align-items: center !important;
     }
-    .lst-sort-wrap { flex-shrink: 0 !important; margin: 0 !important; }
-    .filter-chip { white-space: nowrap !important; flex-shrink: 0 !important; padding: 8px 16px !important; font-size: 13px !important; }
+    .lst-sort-wrap { 
+        display: inline-flex !important;
+        flex-shrink: 0 !important; 
+        margin: 0 !important; 
+        align-items: center !important;
+    }
+    .filter-chip { 
+        white-space: nowrap !important; 
+        flex-shrink: 0 !important; 
+        padding: 8px 16px !important; 
+        font-size: 13px !important; 
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .filter-wrapper {
+        display: inline-flex !important;
+        flex-shrink: 0 !important;
+        align-items: center !important;
+    }
 
     /* Modal-style dropdowns for mobile to prevent clipping */
     .filter-dropdown {

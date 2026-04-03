@@ -1108,12 +1108,12 @@
 
 @media (max-width: 1024px) {
     .image-gallery {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         height: auto;
     }
 
     .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
+        display: none; /* Hide minor images on smaller screens, rely on single main image or carousel */
     }
 
     .detail-content {
@@ -1124,6 +1124,7 @@
     .contact-agent-card {
         position: relative;
         top: 0;
+        width: 100%;
     }
 
     .similar-homes .homes-grid {
@@ -1132,41 +1133,96 @@
 }
 
 @media (max-width: 768px) {
-    .image-gallery {
-        grid-template-columns: 1fr;
-        height: auto;
+    .bar-inner {
+        padding: 0 16px;
+    }
+    
+    .bar-right .action-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    
+    .bar-right .action-btn i {
+        margin: 0;
+    }
+    
+    .bar-right .action-btn:last-child {
+        display: none; /* Hide 'Hide' button on mobile to save space */
+    }
+
+    .contact-agent-btn {
+        padding: 8px 16px;
+        font-size: 13px;
     }
 
     .gallery-main {
-        height: 320px;
+        border-radius: 0;
+        margin: 0 -24px; /* bleed to edge */
+        height: 350px;
+        position: relative;
     }
 
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 140px;
+    .mobile-only-overlay {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        background: rgba(0,0,0,0.6);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        backdrop-filter: blur(4px);
     }
 
     .detail-content {
         padding: 0 16px;
         gap: 32px;
+        margin-bottom: 40px;
+    }
+
+    .price-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .header-actions-inline {
+        width: 100%;
+        justify-content: flex-end;
     }
 
     .stats-row {
-        flex-direction: column;
-        gap: 12px;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 16px;
+        gap: 16px;
     }
 
-    .contact-agent-card {
-        position: relative;
+    .stat-item {
+        padding: 0;
+        border: none;
+    }
+
+    .highlights-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
     }
 
     .similar-homes {
         padding: 40px 16px;
     }
 
-    .homes-grid {
+    .similar-homes .homes-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
     }
 
     .view-all-link {
@@ -1176,19 +1232,29 @@
 }
 
 @media (max-width: 576px) {
+    .detail-action-bar {
+        padding: 8px 0;
+    }
+
+    .bar-right {
+        gap: 8px;
+    }
+
+    .contact-agent-btn span {
+        display: none; /* Hide text, show only icon on very small screens */
+    }
+    .contact-agent-btn {
+        padding: 10px;
+        border-radius: 50%;
+    }
+    .contact-agent-btn i { margin: 0; font-size: 16px; }
+
     .gallery-main {
-        height: 260px;
+        height: 250px;
     }
 
-    .gallery-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 180px;
-    }
-
-    .price-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+    .price {
+        font-size: 32px;
     }
 
     .address {
@@ -1200,11 +1266,20 @@
     }
 
     .contact-agent-card {
-        padding: 20px;
+        padding: 24px 20px;
     }
 
     .similar-homes h3 {
         font-size: 22px;
+        margin-bottom: 24px;
+    }
+
+    .similar-homes .homes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr;
     }
 
     .modal-content {
