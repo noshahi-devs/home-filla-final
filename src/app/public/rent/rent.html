@@ -15,8 +15,8 @@
       <a class="mobile-nav-link"><i class="fas fa-user-tie"></i> Find an Agent</a>
     </div>
     <div class="mobile-nav-auth">
-      <button class="btn-outline" style="width:100%;">Log in</button>
-      <button class="btn-primary" style="width:100%;">Sign up</button>
+      <a routerLink="/login" class="btn-outline" style="width:100%; text-decoration: none; display: flex; align-items: center; justify-content: center; height: 44px; margin-bottom: 12px; font-weight: 600;" (click)="closeMobileMenu()">Log in</a>
+      <a routerLink="/signup" class="btn-primary" style="width:100%; text-decoration: none; display: flex; align-items: center; justify-content: center; height: 44px; font-weight: 600;" (click)="closeMobileMenu()">Sign up</a>
     </div>
   </nav>
 
@@ -40,8 +40,8 @@
         <a routerLink="/" class="btn-outline" style="text-decoration: none; display: flex; align-items: center; gap: 7px; border: none; padding-left: 0;">
           <i class="fas fa-arrow-left"></i> Back to Search
         </a>
-        <span class="btn-outline">Log in</span>
-        <span class="btn-primary">Sign up</span>
+        <a routerLink="/login" class="btn-outline" style="text-decoration: none; cursor: pointer;">Log in</a>
+        <a routerLink="/signup" class="btn-primary" style="text-decoration: none; cursor: pointer;">Sign up</a>
       </div>
 
       <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">

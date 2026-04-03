@@ -1,0 +1,76 @@
+<div class="auth-wrapper">
+    <!-- Background Image with Overlay -->
+    <div class="auth-bg">
+        <img src="assets/luxury_real_estate_login_bg.png" alt="Luxury Real Estate">
+        <div class="auth-overlay"></div>
+    </div>
+
+    <div class="auth-container">
+        <!-- Back Button -->
+        <a routerLink="/" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo-area">
+                    <div class="realtor-logo">HF</div>
+                    <div class="logo-text">Home Filla</div>
+                </div>
+                <h2>Welcome Back</h2>
+                <p>Enter your details to access your account</p>
+            </div>
+
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="far fa-envelope"></i>
+                        <input type="email" id="email" placeholder="name@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="far fa-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                        <button type="button" class="password-toggle">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="auth-btn btn-primary">Log In</button>
+
+                <div class="auth-divider">
+                    <span>Or continue with</span>
+                </div>
+
+                <div class="social-auth">
+                    <button type="button" class="social-btn">
+                        <img src="https://www.gstatic.com/images/branding/product/1x/google_64dp.png" alt="Google">
+                        Google
+                    </button>
+                    <button type="button" class="social-btn">
+                        <i class="fab fa-apple"></i>
+                        Apple
+                    </button>
+                </div>
+            </form>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <a routerLink="/signup">Sign up for free</a></p>
+            </div>
+        </div>
+    </div>
+</div>

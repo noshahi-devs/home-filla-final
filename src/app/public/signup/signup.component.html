@@ -1,0 +1,89 @@
+<div class="auth-wrapper">
+    <!-- Background Image with Overlay -->
+    <div class="auth-bg">
+        <img src="assets/luxury_real_estate_login_bg.png" alt="Luxury Real Estate">
+        <div class="auth-overlay"></div>
+    </div>
+
+    <div class="auth-container">
+        <!-- Back Button -->
+        <a routerLink="/" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo-area">
+                    <div class="realtor-logo">HF</div>
+                    <div class="logo-text">Home Filla</div>
+                </div>
+                <h2>Create Account</h2>
+                <p>Join our premium real estate community</p>
+            </div>
+
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <div class="input-wrapper">
+                        <i class="far fa-user"></i>
+                        <input type="text" id="name" placeholder="John Doe" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="far fa-envelope"></i>
+                        <input type="email" id="email" placeholder="name@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="far fa-lock"></i>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm</label>
+                        <div class="input-wrapper">
+                            <i class="far fa-lock"></i>
+                            <input type="password" id="confirm-password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" required>
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#" class="inline-link">Terms & Privacy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="auth-btn btn-primary">Create Account</button>
+
+                <div class="auth-divider">
+                    <span>Or sign up with</span>
+                </div>
+
+                <div class="social-auth">
+                    <button type="button" class="social-btn">
+                        <img src="https://www.gstatic.com/images/branding/product/1x/google_64dp.png" alt="Google">
+                        Google
+                    </button>
+                    <button type="button" class="social-btn">
+                        <i class="fab fa-apple"></i>
+                        Apple
+                    </button>
+                </div>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a routerLink="/login">Log in here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
