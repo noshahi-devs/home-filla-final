@@ -1,4 +1,53 @@
-<!-- STICKY SEARCH BAR (appears when hero scrolls past) -->
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+<nav class="mobile-nav" [class.open]="isMobileMenuOpen">
+    <div class="mobile-nav-header">
+        <div class="logo-area">
+            <div class="realtor-logo">HF</div>
+            <div class="logo-text">Home Filla</div>
+        </div>
+        <button class="mobile-nav-close" (click)="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-nav-links">
+        <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Buy</a>
+        <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-key"></i> Rent</a>
+        <a class="mobile-nav-link"><i class="fas fa-sign"></i> Sell</a>
+        <a class="mobile-nav-link"><i class="fas fa-hand-holding-usd"></i> Mortgages</a>
+        <a class="mobile-nav-link"><i class="fas fa-user-tie"></i> Find an Agent</a>
+    </div>
+    <div class="mobile-nav-auth">
+        <button class="btn-outline" style="width:100%;">Log in</button>
+        <button class="btn-primary" style="width:100%;">Sign up</button>
+    </div>
+</nav>
+
+<!-- Header -->
+<header class="realtor-header">
+    <div class="header-container">
+        <div class="logo-area">
+            <div class="realtor-logo">HF</div>
+            <div class="logo-text">Home Filla</div>
+        </div>
+
+        <div class="nav-links">
+            <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
+            <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="nav-link">Rent</a>
+            <span class="nav-link">Sell</span>
+            <span class="nav-link">Mortgages</span>
+            <span class="nav-link">Find an Agent</span>
+        </div>
+
+        <div class="auth-buttons">
+            <span class="btn-outline">Log in</span>
+            <span class="btn-primary">Sign up</span>
+        </div>
+
+        <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
     <div id="sticky-search">
         <div class="s-inner">
             <i class="fas fa-search" style="color: var(--text-secondary); font-size: 14px; flex-shrink: 0;"></i>
@@ -7,28 +56,7 @@
         </div>
     </div>
 
-    <!-- Header -->
-    <header class="realtor-header">
-        <div class="header-container">
-            <div class="logo-area">
-                <div class="realtor-logo">HF</div>
-                <div class="logo-text">Home Filla</div>
-            </div>
 
-            <div class="nav-links">
-                <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
-                <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="nav-link">Rent</a>
-                <span class="nav-link">Sell</span>
-                <span class="nav-link">Mortgages</span>
-                <span class="nav-link">Find an Agent</span>
-            </div>
-
-            <div class="auth-buttons">
-                <span class="btn-outline">Log in</span>
-                <span class="btn-primary">Sign up</span>
-            </div>
-        </div>
-    </header>
 
     <!-- Hero Search Section -->
     <div class="hero-section">
@@ -680,26 +708,26 @@
         </div>
         
         <!-- Mortgage Calculator -->
-        <div class="calculator-card" id="calc-mortgage" style="background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); border: 1px solid var(--border-light); padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; border-radius: 30px; border-top-left-radius: 0;">
+        <div class="calculator-card" id="calc-mortgage" style="border-top-left-radius: 0;">
             <div>
-                <h2 class="calculator-title" style="font-size: 28px; font-weight: 600; margin-bottom: 16px;">Mortgage calculator</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 24px;">Estimate your monthly payment</p>
+                <h2 class="calculator-title">Mortgage calculator</h2>
+                <p class="calculator-subtitle">Estimate your monthly payment</p>
                 
-                <div class="calculator-form" style="display: flex; flex-direction: column; gap: 16px;">
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Home price ($)</label>
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label>Home price ($)</label>
                         <input type="number" id="mort-price" value="450000" oninput="calculateMortgage()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Down payment ($)</label>
+                    <div class="form-group">
+                        <label>Down payment ($)</label>
                         <input type="number" id="mort-down" value="90000" oninput="calculateMortgage()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Interest rate (%)</label>
+                    <div class="form-group">
+                        <label>Interest rate (%)</label>
                         <input type="number" id="mort-rate" value="6.5" step="0.1" oninput="calculateMortgage()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Loan term (years)</label>
+                    <div class="form-group">
+                        <label>Loan term (years)</label>
                         <select id="mort-term" onchange="calculateMortgage()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none; background: white;">
                             <option value="30">30 years</option>
                             <option value="20">20 years</option>
@@ -710,12 +738,12 @@
                 </div>
             </div>
             
-            <div class="calculator-result" style="background: var(--accent-light); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: center;">
+            <div class="calculator-result">
                 <span style="color: var(--text-secondary);">Estimated monthly payment</span>
                 <div class="monthly-payment" id="mort-result" style="font-size: 48px; font-weight: 700; color: var(--accent-blue); margin-bottom: 8px;">$2,845</div>
                 <span style="color: var(--text-secondary); font-size: 14px;">Principal & interest</span>
                 
-                <div style="margin-top: 24px; background: white; border-radius: 12px; padding: 16px;">
+                    <div class="calc-inner-card">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Principal & interest</span>
                         <span style="font-weight: 600;" id="mort-pi">$2,845</span>
@@ -738,36 +766,36 @@
         </div>
 
         <!-- Affordability Calculator -->
-        <div class="calculator-card" id="calc-affordability" style="display: none; background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); border: 1px solid var(--border-light); padding: 40px; grid-template-columns: 1fr 1fr; gap: 40px; border-radius: 30px;">
+        <div class="calculator-card" id="calc-affordability" style="display: none;">
             <div>
                 <h2 class="calculator-title" style="font-size: 28px; font-weight: 600; margin-bottom: 16px;">Affordability calculator</h2>
                 <p style="color: var(--text-secondary); margin-bottom: 24px;">Find out how much home you can afford</p>
                 
-                <div class="calculator-form" style="display: flex; flex-direction: column; gap: 16px;">
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Annual income ($)</label>
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label>Annual income ($)</label>
                         <input type="number" id="aff-income" value="100000" oninput="calculateAffordability()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Monthly debts ($) (car, student loans...)</label>
+                    <div class="form-group">
+                        <label>Monthly debts ($) (car, student loans...)</label>
                         <input type="number" id="aff-debts" value="500" oninput="calculateAffordability()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Down payment ($)</label>
+                    <div class="form-group">
+                        <label>Down payment ($)</label>
                         <input type="number" id="aff-down" value="40000" oninput="calculateAffordability()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Interest rate (%)</label>
+                    <div class="form-group">
+                        <label>Interest rate (%)</label>
                         <input type="number" id="aff-rate" value="6.5" step="0.1" oninput="calculateAffordability()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
                 </div>
             </div>
             
-            <div class="calculator-result" style="background: var(--accent-light); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: center;">
+            <div class="calculator-result">
                 <span style="color: var(--text-secondary);">Estimated home price</span>
                 <div class="monthly-payment" id="aff-result-price" style="font-size: 48px; font-weight: 700; color: var(--accent-blue); margin-bottom: 8px;">$380,000</div>
                 
-                <div style="margin-top: 24px; background: white; border-radius: 12px; padding: 16px;">
+                    <div class="calc-inner-card">
                     <h4 style="font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Estimated Budget Breakdown</h4>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Loan amount</span>
@@ -790,36 +818,36 @@
         </div>
 
         <!-- Rent vs Buy Calculator -->
-        <div class="calculator-card" id="calc-rent-buy" style="display: none; background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); border: 1px solid var(--border-light); padding: 40px; grid-template-columns: 1fr 1fr; gap: 40px; border-radius: 30px;">
+        <div class="calculator-card" id="calc-rent-buy" style="display: none;">
             <div>
                 <h2 class="calculator-title" style="font-size: 28px; font-weight: 600; margin-bottom: 16px;">Rent or buy calculator</h2>
                 <p style="color: var(--text-secondary); margin-bottom: 24px;">Determine if buying makes more financial sense over time.</p>
                 
-                <div class="calculator-form" style="display: flex; flex-direction: column; gap: 16px;">
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Current monthly rent ($)</label>
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label>Current monthly rent ($)</label>
                         <input type="number" id="rb-rent" value="2500" oninput="calculateRentVsBuy()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Target home price ($)</label>
+                    <div class="form-group">
+                        <label>Target home price ($)</label>
                         <input type="number" id="rb-price" value="450000" oninput="calculateRentVsBuy()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Down payment ($)</label>
+                    <div class="form-group">
+                        <label>Down payment ($)</label>
                         <input type="number" id="rb-down" value="90000" oninput="calculateRentVsBuy()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
-                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                        <label style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">Years you plan to stay</label>
+                    <div class="form-group">
+                        <label>Years you plan to stay</label>
                         <input type="number" id="rb-years" value="7" oninput="calculateRentVsBuy()" style="padding: 14px 16px; border: 1px solid var(--border-light); border-radius: 12px; font-size: 15px; outline: none;">
                     </div>
                 </div>
             </div>
             
-            <div class="calculator-result" style="background: var(--accent-light); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: center;">
+            <div class="calculator-result">
                 <span style="color: var(--text-secondary); font-size: 18px; font-weight: 600;" id="rb-verdict-title">Buying is cheaper</span>
                 <div class="monthly-payment" id="rb-savings" style="font-size: 32px; font-weight: 700; color: var(--accent-blue); margin-top: 8px; margin-bottom: 8px;">by $42,500 over 7 years</div>
                 
-                <div style="margin-top: 24px; background: white; border-radius: 12px; padding: 16px;">
+                    <div class="calc-inner-card">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Total cost of renting</span>
                         <span style="font-weight: 600; color: #ef4444;" id="rb-total-rent">$210,000</span>
@@ -837,7 +865,7 @@
         </div>
     </div>
     <!-- === PREMIUM DIVIDER 1: Home Loan === -->
-    <div style="position: relative; min-height: 480px; overflow: hidden; display: flex; align-items: stretch;">
+    <div class="promo-section promo-loan" style="position: relative; min-height: 480px; overflow: hidden; display: flex; align-items: stretch;">
         <!-- Full-bleed Background Image -->
         <div style="position: absolute; inset: 0; z-index: 0;">
             <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1800&q=90&auto=format&fit=crop" alt="Modern home" style="width: 100%; height: 100%; object-fit: cover;">
@@ -845,7 +873,7 @@
         </div>
 
         <!-- Content Layer -->
-        <div style="position: relative; z-index: 2; width: 100%; max-width: 1280px; margin: 0 auto; padding: 80px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+        <div class="promo-content-grid" style="position: relative; z-index: 2; width: 100%; max-width: 1280px; margin: 0 auto; padding: 80px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
             
             <!-- Left: Copy -->
             <div>
@@ -905,7 +933,7 @@
     </div>
 
     <!-- === PREMIUM DIVIDER 2: Get Local Info === -->
-    <div style="position: relative; min-height: 460px; overflow: hidden; background: #0d1b2a;">
+    <div class="promo-section promo-neighborhood" style="position: relative; min-height: 460px; overflow: hidden; background: #0d1b2a;">
         <!-- Background image with overlay -->
         <div style="position: absolute; inset: 0; z-index: 0;">
             <img src="https://images.unsplash.com/photo-1549921296-3b0f9a35af35?w=1800&q=90&auto=format&fit=crop" alt="Neighborhood aerial" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.35;">
@@ -913,7 +941,7 @@
         </div>
 
         <!-- Content Layer -->
-        <div style="position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 80px 48px; display: grid; grid-template-columns: 55% 45%; gap: 60px; align-items: center;">
+        <div class="promo-content-grid" style="position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 80px 48px; display: grid; grid-template-columns: 55% 45%; gap: 60px; align-items: center;">
             
             <!-- Left: Main Content -->
             <div>

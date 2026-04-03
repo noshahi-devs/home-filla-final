@@ -1,4 +1,25 @@
 <div class="rent-page">
+  <!-- Mobile Nav -->
+  <div class="mobile-menu-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+  <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
+    <div class="mobile-nav-header">
+      <div class="logo-area"><div class="realtor-logo">HF</div><div class="logo-text">Home Filla</div></div>
+      <button class="mobile-nav-close" (click)="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-nav-links">
+      <a routerLink="/" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Home</a>
+      <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Buy</a>
+      <a routerLink="/listings/rent" routerLinkActive="active" class="mobile-nav-link active" (click)="closeMobileMenu()"><i class="fas fa-key"></i> Rent</a>
+      <a class="mobile-nav-link"><i class="fas fa-sign"></i> Sell</a>
+      <a class="mobile-nav-link"><i class="fas fa-hand-holding-usd"></i> Mortgages</a>
+      <a class="mobile-nav-link"><i class="fas fa-user-tie"></i> Find an Agent</a>
+    </div>
+    <div class="mobile-nav-auth">
+      <button class="btn-outline" style="width:100%;">Log in</button>
+      <button class="btn-primary" style="width:100%;">Sign up</button>
+    </div>
+  </nav>
+
   <!-- ─── HEADER ─── -->
   <header class="realtor-header">
     <div class="header-container">
@@ -22,6 +43,10 @@
         <span class="btn-outline">Log in</span>
         <span class="btn-primary">Sign up</span>
       </div>
+
+      <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 

@@ -1133,23 +1133,181 @@
             text-decoration: underline;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
+        /* Responsive helpers */
+        @media (max-width: 1200px) {
+            .property-grid,
+            .discover-grid,
+            .homes-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
 
-            .footer-top {
+            .agents-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-@media (max-width: 768px) {
+        @media (max-width: 992px) {
+            .property-grid,
+            .discover-grid,
+            .homes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .calculator-card {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .nav-links {
+                flex: 1 1 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-section {
+                padding: 60px 16px 120px;
+                min-height: auto;
+                text-align: left;
+            }
+
+            .hero-content {
+                text-align: left;
+            }
+
+            .hero-title {
+                font-size: 34px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .search-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-search {
+                flex-direction: column;
+                padding: 12px;
+            }
+
+            .hero-search input,
+            .hero-search button,
+            #sticky-search .s-inner {
+                width: 100%;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .filter-bar .filter-group {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .filter-chip {
+                width: 100%;
+                justify-content: center;
+            }
 
             .property-grid,
+            .discover-grid,
+            .homes-grid,
             .agents-grid {
                 grid-template-columns: 1fr;
             }
 
+            .calculator-card {
+                grid-template-columns: 1fr;
+                padding: 24px;
+            }
+
+            .property-details {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .discover-card {
+                padding: 28px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-container {
+                padding: 0 16px;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .hero-section {
+                padding-bottom: 110px;
+            }
+
+            .hero-title {
+                font-size: 30px;
+            }
+
+            .hero-subtitle {
+                font-size: 15px;
+            }
+
+            .search-tabs .tab {
+                flex: 1 1 120px;
+                text-align: center;
+            }
+
+            .property-price {
+                font-size: 20px;
+            }
+
+            .property-location {
+                font-size: 12px;
+            }
+
+            .property-card {
+                border-radius: 16px;
+            }
+
+            .agents-section,
+            .discover-section,
+            .similar-homes {
+                padding: 40px 16px;
+            }
+
             .footer-top {
                 grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                gap: 20px;
+            }
+
+            .filter-chip {
+                padding: 10px;
             }
         }
 

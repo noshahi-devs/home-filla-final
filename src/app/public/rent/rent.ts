@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -22,6 +22,7 @@ export class RentComponent implements OnInit, AfterViewInit {
   properties: Property[] = [];
   isMapOpen = false;
   activeMapFilter = 'Layers';
+  isMobileMenuOpen = false;
   
   // Accordion states
   activeAccordion: string | null = 'popular';
@@ -45,6 +46,19 @@ export class RentComponent implements OnInit, AfterViewInit {
       window.initHomeFillaPage?.();
     }, 0);
   }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+    document.body.style.overflow = '';
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape() { this.closeMobileMenu(); }
 
   toggleMap() {
     this.isMapOpen = !this.isMapOpen;

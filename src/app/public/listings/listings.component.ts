@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { getCategoryData, CategoryInfo, Property } from '../../data/listings.data';
@@ -22,6 +22,7 @@ export class ListingsComponent implements OnInit, AfterViewInit {
   category: CategoryInfo | null = null;
   visibleProperties: Property[] = [];
   pageSize = 12;
+  isMobileMenuOpen = false;
   
   // Map and Favorite State
   isMapOpen = false;
@@ -44,6 +45,19 @@ export class ListingsComponent implements OnInit, AfterViewInit {
       window.initHomeFillaPage?.();
     }, 0);
   }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+    document.body.style.overflow = '';
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape() { this.closeMobileMenu(); }
 
   get hasMore(): boolean {
     return (this.category?.properties.length || 0) > this.visibleProperties.length;
