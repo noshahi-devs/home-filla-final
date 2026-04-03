@@ -86,23 +86,28 @@
 }
 
 .realtor-logo {
-    background: var(--accent);
+    background: var(--accent-blue, #4a6cf7);
     color: white;
     width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 900;
-    border-radius: 10px;
-    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+    font-size: 24px;
 }
 
 .logo-text {
-    font-weight: 800;
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 22px;
     color: #fff;
     letter-spacing: -0.5px;
+}
+
+.logo-text span {
+    color: var(--accent-blue, #4a6cf7);
+    font-weight: 700;
 }
 
 .auth-header h2 {
@@ -145,7 +150,7 @@
 
 .input-wrapper i {
     position: absolute;
-    left: 16px;
+    left: 8px;
     color: rgba(255, 255, 255, 0.4);
     font-size: 16px;
 }
@@ -155,7 +160,7 @@
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    padding: 14px 16px 14px 44px;
+    padding: 14px 54px 14px 44px; /* Increased right padding */
     color: #fff;
     font-size: 15px;
     transition: all 0.3s ease;
@@ -163,20 +168,36 @@
 
 .input-wrapper input:focus {
     outline: none;
-    border-color: var(--accent);
+    border-color: var(--accent-blue, #4a6cf7);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.15);
 }
 
 .password-toggle {
     position: absolute;
-    right: 12px;
+    right: 16px; /* Increased from 12px */
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.4);
     cursor: pointer;
-    padding: 8px;
-    transition: color 0.3s ease;
+    padding: 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.google-btn i {
+    color: #ea4335; /* Google Red */
+    font-size: 20px;
+}
+
+.password-toggle:hover {
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
 }
 
 .password-toggle:hover {
@@ -216,13 +237,13 @@
 }
 
 .remember-me input:checked ~ .checkmark {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--accent-blue, #4a6cf7);
+    border-color: var(--accent-blue, #4a6cf7);
 }
 
 .remember-me input:checked ~ .checkmark::after {
     content: '\f00c';
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     color: white;
     font-size: 10px;
@@ -233,7 +254,7 @@
 }
 
 .forgot-password {
-    color: var(--accent);
+    color: var(--accent-blue, #4a6cf7);
     text-decoration: none;
     font-weight: 500;
     transition: opacity 0.3s ease;
@@ -256,7 +277,7 @@
 }
 
 .btn-primary {
-    background: var(--accent);
+    background: var(--accent-blue, #4a6cf7);
     color: white;
     box-shadow: 0 4px 15px rgba(74, 108, 247, 0.3);
 }
@@ -338,7 +359,7 @@
 }
 
 .auth-footer a {
-    color: var(--accent);
+    color: var(--accent-blue, #4a6cf7);
     text-decoration: none;
     font-weight: 600;
     margin-left: 4px;
