@@ -10,7 +10,7 @@
       <a routerLink="/" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Home</a>
       <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Buy</a>
       <a routerLink="/listings/rent" routerLinkActive="active" class="mobile-nav-link active" (click)="closeMobileMenu()"><i class="fas fa-key"></i> Rent</a>
-      <a class="mobile-nav-link"><i class="fas fa-sign"></i> Sell</a>
+      <a routerLink="/sell" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-sign"></i> Sell</a>
       <a class="mobile-nav-link"><i class="fas fa-hand-holding-usd"></i> Mortgages</a>
       <a class="mobile-nav-link"><i class="fas fa-user-tie"></i> Find an Agent</a>
     </div>
@@ -31,7 +31,7 @@
       <div class="nav-links">
         <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
         <a routerLink="/listings/rent" routerLinkActive="active" class="nav-link active">Rent</a>
-        <span class="nav-link">Sell</span>
+        <a routerLink="/sell" routerLinkActive="active" class="nav-link">Sell</a>
         <span class="nav-link">Mortgages</span>
         <span class="nav-link">Find an Agent</span>
       </div>

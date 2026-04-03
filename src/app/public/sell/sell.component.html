@@ -1,0 +1,354 @@
+<div class="sell-page">
+  <!-- Mobile Nav -->
+  <div class="mobile-menu-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+  <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
+    <div class="mobile-nav-header">
+      <div class="logo-area"><div class="realtor-logo">HF</div><div class="logo-text">Home Filla</div></div>
+      <button class="mobile-nav-close" (click)="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-nav-links">
+      <a routerLink="/" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Home</a>
+      <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Buy</a>
+      <a routerLink="/listings/rent" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-key"></i> Rent</a>
+      <a routerLink="/sell" routerLinkActive="active" class="mobile-nav-link active" (click)="closeMobileMenu()"><i class="fas fa-sign"></i> Sell</a>
+      <a class="mobile-nav-link"><i class="fas fa-hand-holding-usd"></i> Mortgages</a>
+      <a class="mobile-nav-link"><i class="fas fa-user-tie"></i> Find an Agent</a>
+    </div>
+    <div class="mobile-nav-auth">
+      <a routerLink="/login" class="btn-outline" style="width:100%; text-decoration: none; display: flex; align-items: center; justify-content: center; height: 44px; margin-bottom: 12px; font-weight: 600;" (click)="closeMobileMenu()">Log in</a>
+      <a routerLink="/signup" class="btn-primary" style="width:100%; text-decoration: none; display: flex; align-items: center; justify-content: center; height: 44px; font-weight: 600;" (click)="closeMobileMenu()">Sign up</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="realtor-header">
+    <div class="header-container">
+      <a routerLink="/" class="logo-area" style="text-decoration: none;">
+        <div class="realtor-logo">HF</div>
+        <div class="logo-text">Home Filla</div>
+      </a>
+
+      <div class="nav-links">
+        <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
+        <a routerLink="/listings/rent" routerLinkActive="active" class="nav-link">Rent</a>
+        <a routerLink="/sell" routerLinkActive="active" class="nav-link active">Sell</a>
+        <span class="nav-link">Mortgages</span>
+        <span class="nav-link">Find an Agent</span>
+      </div>
+
+      <div class="auth-buttons">
+        <a routerLink="/" class="btn-outline" style="text-decoration: none; display: flex; align-items: center; gap: 7px; border: none; padding-left: 0;">
+          <i class="fas fa-arrow-left"></i> Back to Search
+        </a>
+        <a routerLink="/login" class="btn-outline" style="text-decoration: none; cursor: pointer;">Log in</a>
+        <a routerLink="/signup" class="btn-primary" style="text-decoration: none; cursor: pointer;">Sign up</a>
+      </div>
+
+      <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section with Valuation Tool -->
+  <div class="sell-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Sell your home with confidence</h1>
+      <p class="hero-subtitle">Get a free home value estimate and connect with top local agents to sell your home fast.</p>
+      
+      <div class="valuation-card" *ngIf="!showValuation">
+        <h2>What's your home worth?</h2>
+        <p>Enter your address to see your free estimate instantly.</p>
+        
+        <div class="address-input-group">
+          <i class="fas fa-map-marker-alt"></i>
+          <input type="text" [(ngModel)]="address" placeholder="Enter your street address">
+          <button class="btn-primary" (click)="calculateValuation()" [disabled]="!address || isCalculating">
+            <span *ngIf="!isCalculating">Get Estimate</span>
+            <span *ngIf="isCalculating"><i class="fas fa-spinner fa-spin"></i></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Valuation Result -->
+      <div class="valuation-result-card" *ngIf="showValuation" id="valuation-result">
+        <div class="result-header">
+           <button class="back-btn" (click)="resetForm()"><i class="fas fa-arrow-left"></i> Back</button>
+           <h3>Estimated Value for</h3>
+           <p class="address-display">{{ address }}</p>
+        </div>
+        
+        <div class="value-display">
+          <div class="main-value">{{ estimatedValue | currency:'USD':'symbol':'1.0-0' }}</div>
+          <div class="value-range">
+            Est. Range: {{ lowEstimate | currency:'USD':'symbol':'1.0-0' }} - {{ highEstimate | currency:'USD':'symbol':'1.0-0' }}
+          </div>
+        </div>
+        
+        <div class="result-actions">
+          <button class="btn-primary full-width">Connect with an Agent</button>
+          <button class="btn-outline full-width mt-3">Refine Home Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skilled Local Agents -->
+  <section class="local-agents-section">
+    <div class="container container-wide">
+      <div class="section-header-flex">
+        <div>
+          <h2 class="local-agents-title">Skilled local agents</h2>
+          <p class="local-agents-subtitle">Access our network of experienced real estate professionals</p>
+        </div>
+        <button class="btn-outline-blue">Find your agent <i class="fas fa-arrow-right"></i></button>
+      </div>
+
+      <div class="agents-grid">
+        <div class="agent-card" *ngFor="let agent of agents">
+          <div class="avatar-wrapper">
+            <img [src]="agent.imageUrl" class="agent-avatar" alt="{{ agent.name }}">
+          </div>
+          <h4 class="agent-name">{{ agent.name }}</h4>
+          <p class="agent-brokerage">{{ agent.brokerage }}</p>
+          <div class="agent-stats">
+            <div class="stat-line">
+              <span class="stat-value">{{ agent.soldLastYear }}</span> <span class="stat-label">Sold in the last year</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-value">{{ agent.experience }} years</span> <span class="stat-label">Experience</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Track Your Home Value Section -->
+  <section class="track-value-section">
+    <div class="container container-wide track-value-grid">
+      <div class="track-graphics">
+        <!-- Mock Composite Graphic using pure CSS/HTML -->
+        <div class="track-building-img" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+        <div class="track-chart-card">
+          <div class="tc-logo">Real<span style="font-weight:400">Estimate</span>℠</div>
+          <div class="tc-graph-area">
+            <!-- Simulated Lines -->
+            <svg viewBox="0 0 100 50" preserveAspectRatio="none" style="width:100%; height:80px;">
+              <path d="M0,45 L25,35 L50,30 L75,15 L100,5" fill="none" stroke="#4a6cf7" stroke-width="2" stroke-dasharray="4,2"></path>
+              <path d="M0,40 L25,38 L50,25 L75,10 L100,10" fill="none" stroke="#8b5cf6" stroke-width="2"></path>
+              <path d="M0,50 L25,48 L50,40 L75,25 L100,20" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="5,3"></path>
+              <circle cx="75" cy="15" r="3" fill="#4a6cf7"></circle>
+              <circle cx="75" cy="25" r="3" fill="#10b981"></circle>
+            </svg>
+            <div class="tc-cursor-arrow"></div>
+          </div>
+          <div class="tc-years"><span>2021</span><span>2022</span><span>2023</span><span>2024</span></div>
+          <div class="tc-legend">
+            <div class="tc-leg-item"><span style="color:#4a6cf7">---</span> Collateral Analytics <b>$446K</b></div>
+            <div class="tc-leg-item"><span style="color:#8b5cf6">—</span> CoreLogic® <b>$445K</b></div>
+            <div class="tc-leg-item"><span style="color:#10b981">- -</span> Quantarium <b>$438K</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="track-content">
+        <h2>Track your home value</h2>
+        <p>Our RealEstimate℠ data is sourced from multiple valuation providers independent of Home Filla and trusted by the lending industry.</p>
+        <button class="btn-outline-wide" (click)="openTrackingModal()">Start tracking</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recently Sold Homes Section -->
+  <section class="recently-sold-section">
+    <div class="container container-wide">
+      <div class="section-header-flex">
+        <div>
+          <h2 class="section-title-left">Recently sold homes in Colorado Springs, CO</h2>
+          <p class="section-subtitle-left">Homes that have sold in the last <span class="highlight-text">6 months</span> in our top housing market for 2025.</p>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" (click)="prevSlide()" [disabled]="carouselIndex === 0" id="carousel-prev-btn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn" (click)="nextSlide()" [disabled]="carouselIndex >= recentlySoldProperties.length - 4" id="carousel-next-btn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <a href="#" class="view-all-link">Homes similar to yours <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="carousel-viewport">
+        <div class="horizontal-scroll-container" [style.transform]="'translateX(-' + (carouselIndex * 320) + 'px)'">
+          <div class="property-card" *ngFor="let prop of recentlySoldProperties; let i = index" [class.active-card]="i === carouselIndex">
+            <div class="prop-img-wrap">
+              <img [src]="prop.image" alt="Property">
+              <div class="prop-badge">Sold</div>
+            </div>
+            <div class="prop-details">
+              <div class="prop-status"><span class="status-dot"></span> {{ prop.soldDate }}</div>
+              <div class="prop-price">{{ prop.price | currency:'USD':'symbol':'1.0-0' }}</div>
+              <div class="prop-stats">
+                <span class="stat-chip"><i class="fas fa-bed"></i> {{ prop.beds }}</span>
+                <span class="stat-chip"><i class="fas fa-bath"></i> {{ prop.baths }}</span>
+                <span class="stat-chip"><i class="fas fa-ruler-combined"></i> {{ prop.sqft }}</span>
+              </div>
+              <div class="prop-address">
+                <i class="fas fa-map-marker-alt"></i>
+                {{ prop.address }}, {{ prop.city }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dot Indicators -->
+      <div class="carousel-dots">
+        <button class="carousel-dot" *ngFor="let prop of recentlySoldProperties; let i = index"
+          [class.active]="i === carouselIndex"
+          (click)="goToSlide(i)" [id]="'dot-' + i"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seller Guides Section -->
+  <section class="seller-guides-section">
+    <div class="container container-wide">
+      <div class="section-header-flex">
+        <h2 class="section-title-left">Seller guides</h2>
+        <a href="#" class="view-all-link">Complete guide <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="guides-grid">
+        <a href="#" class="guide-card">
+          <div class="guide-icon"><i class="fas fa-desktop"></i><i class="fas fa-chart-pie overlay-icon"></i></div>
+          <div class="guide-text">
+            <h4>Should I sell my home now?</h4>
+            <p>Questions to ask to help you figure out if selling makes sense for you right now.</p>
+          </div>
+          <i class="fas fa-chevron-right guide-arrow"></i>
+        </a>
+        <a href="#" class="guide-card">
+          <div class="guide-icon"><i class="fas fa-home"></i><i class="fas fa-dollar-sign overlay-icon"></i></div>
+          <div class="guide-text">
+            <h4>How much is my home worth?</h4>
+            <p>Tools and advice to help you understand your home's value.</p>
+          </div>
+          <i class="fas fa-chevron-right guide-arrow"></i>
+        </a>
+        <a href="#" class="guide-card">
+          <div class="guide-icon"><i class="fas fa-money-bill-wave"></i></div>
+          <div class="guide-text">
+            <h4>How should I sell my home?</h4>
+            <p>Rundown of your options as well as pros and cons of each method.</p>
+          </div>
+          <i class="fas fa-chevron-right guide-arrow"></i>
+        </a>
+        <a href="#" class="guide-card">
+          <div class="guide-icon"><i class="fas fa-paint-roller"></i></div>
+          <div class="guide-text">
+            <h4>How to prepare your home for sale</h4>
+            <p>Things to consider that could maximize your home's value.</p>
+          </div>
+          <i class="fas fa-chevron-right guide-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Frequently Asked Questions -->
+  <section class="faq-section">
+    <!-- 3D Interactive Background -->
+    <div class="faq-bg-shapes" id="faq-bg-shapes">
+      <div class="bg-shape shape-1"></div>
+      <div class="bg-shape shape-2"></div>
+      <div class="bg-shape shape-3"></div>
+      <div class="bg-shape shape-4"></div>
+      <div class="bg-shape shape-5"></div>
+      <div class="bg-orb orb-1"></div>
+      <div class="bg-orb orb-2"></div>
+    </div>
+    <div class="container faq-container">
+      <div class="faq-header">
+        <span class="faq-eyebrow">Got questions?</span>
+        <h2 class="faq-title-centered">Frequently asked questions</h2>
+        <p class="faq-subtitle">Everything you need to know about selling your home with Home Filla.</p>
+      </div>
+      
+      <div class="faq-list">
+        <div class="faq-item" *ngFor="let item of faqs; let i = index" [class.open]="openFaqIndex === i" [id]="'faq-item-' + i">
+          <div class="faq-question" (click)="toggleFaq(i)">
+            <div class="faq-q-left">
+              <span class="faq-number">0{{ i + 1 }}</span>
+              <h3>{{ item.question }}</h3>
+            </div>
+            <div class="faq-icon-wrap" [class.open]="openFaqIndex === i">
+              <i class="fas fa-plus faq-icon"></i>
+            </div>
+          </div>
+          <div class="faq-answer-wrapper" [style.maxHeight]="openFaqIndex === i ? '500px' : '0'">
+            <div class="faq-answer">
+              <p>{{ item.answer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tracking Modal Overlay -->
+  <div class="tracking-modal-overlay" *ngIf="isTrackingModalOpen" (click)="closeTrackingModal()">
+    <div class="tracking-modal-content" (click)="$event.stopPropagation()">
+      <div class="tm-header">
+        <h2>Start tracking</h2>
+        <button class="tm-close" (click)="closeTrackingModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="tm-body">
+        <div class="tm-search-box">
+          <input type="text" placeholder="Enter home address">
+          <button class="tm-search-btn"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Sell With Us -->
+  <section class="why-sell-section">
+    <div class="container">
+      <h2 class="section-title">Why sell with Home Filla?</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Maximum Exposure</h3>
+          <p>Your listing will be seen by millions of potential buyers searching on Home Filla every month.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+          <h3>Top Local Agents</h3>
+          <p>We match you with the best-performing agents in your local area to ensure you get top dollar.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-camera"></i></div>
+          <h3>Premium Marketing</h3>
+          <p>Professional photography, 3D tours, and targeted digital marketing come standard.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <h3>More Money</h3>
+          <p>Homes sold with our premium agent network sell for an average of 4.5% more than the market average.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Ready to make your move?</h2>
+      <p>Talk to a local expert today and get a personalized selling strategy.</p>
+      <button class="btn-primary large-btn">Find an Agent</button>
+    </div>
+  </section>
+</div>
