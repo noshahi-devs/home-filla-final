@@ -1312,10 +1312,6 @@
                 padding: 40px 16px;
             }
 
-            .footer-top {
-                grid-template-columns: 1fr;
-            }
-
             .footer-bottom {
                 gap: 20px;
             }
@@ -1559,8 +1555,7 @@
     }
     .hero-search button i { font-size: 16px !important; }
     .agents-grid { grid-template-columns: 1fr !important; }
-    .footer-top { grid-template-columns: 1fr !important; }
-    .footer-bottom-links { flex-direction: column; align-items: center; gap: 14px; }
+    .footer-bottom-links { gap: 16px; }
 
     #sticky-search .s-inner {
         padding: 5px 5px 5px 15px !important;

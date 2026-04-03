@@ -1278,10 +1278,6 @@
         grid-template-columns: 1fr;
     }
 
-    .footer-top {
-        grid-template-columns: 1fr;
-    }
-
     .modal-content {
         margin: 20px 0;
         width: calc(100% - 32px);

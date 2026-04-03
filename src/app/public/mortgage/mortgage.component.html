@@ -1,0 +1,286 @@
+<div class="mortgage-page">
+  <!-- Mobile Nav -->
+  <div class="mobile-menu-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+  <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
+    <div class="mobile-nav-header">
+      <div class="logo-area"><div class="realtor-logo">HF</div><div class="logo-text">Home Filla</div></div>
+      <button class="mobile-nav-close" (click)="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-nav-links">
+      <a routerLink="/" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Home</a>
+      <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Buy</a>
+      <a routerLink="/listings/rent" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-key"></i> Rent</a>
+      <a routerLink="/sell" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-sign"></i> Sell</a>
+      <a routerLink="/mortgages" routerLinkActive="active" class="mobile-nav-link active" (click)="closeMobileMenu()"><i class="fas fa-hand-holding-usd"></i> Mortgages</a>
+      <a routerLink="/find-agent" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-user-tie"></i> Find an Agent</a>
+    </div>
+    <div class="mobile-nav-auth">
+      <a routerLink="/login" class="btn-outline" style="width:100%; text-decoration: none; display: flex; align-items: center; justify-content: center; height: 44px; margin-bottom: 12px; font-weight: 600;" (click)="closeMobileMenu()">Log in</a>
+      <a routerLink="/signup" class="btn-primary" style="width:100%; text-decoration: none; display: flex; align-items: center; justify-content: center; height: 44px; font-weight: 600;" (click)="closeMobileMenu()">Sign up</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="realtor-header">
+    <div class="header-container">
+      <a routerLink="/" class="logo-area" style="text-decoration: none;">
+        <div class="realtor-logo">HF</div>
+        <div class="logo-text">Home Filla</div>
+      </a>
+
+      <div class="nav-links">
+        <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
+        <a routerLink="/listings/rent" routerLinkActive="active" class="nav-link">Rent</a>
+        <a routerLink="/sell" routerLinkActive="active" class="nav-link">Sell</a>
+        <a routerLink="/mortgages" routerLinkActive="active" class="nav-link active">Mortgages</a>
+        <a routerLink="/find-agent" routerLinkActive="active" class="nav-link">Find an Agent</a>
+      </div>
+
+      <div class="auth-buttons">
+        <a routerLink="/login" class="btn-outline" style="text-decoration: none; cursor: pointer;">Log in</a>
+        <a routerLink="/signup" class="btn-primary" style="text-decoration: none; cursor: pointer;">Sign up</a>
+      </div>
+
+      <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero & Calculator -->
+  <div class="mortgage-hero">
+    <div class="hero-bg-accent"></div>
+    <div class="hero-content">
+      <div class="hero-text-area">
+        <h1 class="hero-title">Finance your dream home</h1>
+        <p class="hero-subtitle">Estimate your monthly payments, explore current rates, and get pre-approved quickly perfectly with our premium tools.</p>
+        <div class="hero-badges">
+          <span class="badge"><i class="fas fa-check-circle"></i> Fast Pre-approval</span>
+          <span class="badge"><i class="fas fa-chart-line"></i> Competitive Rates</span>
+        </div>
+        <div class="hero-stats-grid">
+          <div class="hero-stat-card">
+            <span class="stat-value">45 min</span>
+            <small>Avg. lender response</small>
+          </div>
+          <div class="hero-stat-card">
+            <span class="stat-value">1.03%</span>
+            <small>Avg. rate drop this week</small>
+          </div>
+          <div class="hero-stat-card">
+            <span class="stat-value">24/7</span>
+            <small>Concierge support</small>
+          </div>
+        </div>
+      </div>
+      
+      <!-- High-End Calculator Card -->
+      <div class="mortgage-calc-wrapper">
+        <div class="mortgage-calc-card glass-panel">
+          <div class="calc-header">
+            <h2>Mortgage Calculator</h2>
+            <p>See exactly what you'll pay each month.</p>
+          </div>
+          
+          <div class="calc-body">
+            <!-- Total Output -->
+            <div class="calc-result-box">
+              <div class="result-label">Est. Monthly Payment</div>
+              <div class="result-value">${{ totalMonthlyPayment | number:'1.0-0' }}</div>
+            </div>
+
+            <!-- Inputs -->
+            <div class="calc-input-group">
+              <label>Home Price</label>
+              <div class="input-with-prefix">
+                <span class="prefix">$</span>
+                <input type="number" [(ngModel)]="homePrice">
+              </div>
+              <input type="range" class="styled-slider" [(ngModel)]="homePrice" min="50000" max="2500000" step="10000">
+            </div>
+
+            <div class="calc-row">
+              <div class="calc-input-group">
+                <label>Down Payment (%)</label>
+                <div class="input-with-suffix">
+                  <input type="number" [(ngModel)]="downPaymentPercent">
+                  <span class="suffix">%</span>
+                </div>
+              </div>
+              <div class="calc-input-group">
+                <label>Interest Rate</label>
+                <div class="input-with-suffix">
+                  <input type="number" [(ngModel)]="interestRate" step="0.1">
+                  <span class="suffix">%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-input-group">
+              <label>Loan Program</label>
+              <select [(ngModel)]="loanTerm" class="premium-select">
+                <option [ngValue]="30">30-Year Fixed</option>
+                <option [ngValue]="15">15-Year Fixed</option>
+                <option [ngValue]="5">5/1 ARM</option>
+              </select>
+            </div>
+
+            <button class="btn-primary w-100 get-approved-btn">Get Pre-Approved Now <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Breakdown Section -->
+  <div class="breakdown-section">
+    <div class="breakdown-container">
+      <div class="breakdown-info">
+        <h2>Payment Breakdown</h2>
+        <p>A detailed look at your estimated monthly payment.</p>
+        
+        <div class="breakdown-list">
+          <div class="bd-item">
+            <div class="bd-color-dot" style="background:#4a6cf7;"></div>
+            <div class="bd-details">
+              <span class="bd-label">Principal & Interest</span>
+              <span class="bd-value">${{ principalAndInterest | number:'1.0-0' }}</span>
+            </div>
+          </div>
+          <div class="bd-item">
+            <div class="bd-color-dot" style="background:#fbcd0e;"></div>
+            <div class="bd-details">
+               <span class="bd-label">Property Taxes</span>
+               <span class="bd-value">${{ monthlyPropertyTax | number:'1.0-0' }}</span>
+            </div>
+          </div>
+          <div class="bd-item">
+            <div class="bd-color-dot" style="background:#10b981;"></div>
+            <div class="bd-details">
+               <span class="bd-label">Home Insurance</span>
+               <span class="bd-value">${{ monthlyHomeInsurance | number:'1.0-0' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="breakdown-graphic">
+         <div class="donut-chart-placeholder">
+            <div class="donut-center">
+               <span>Total</span>
+               <strong>${{ totalMonthlyPayment | number:'1.0-0' }}</strong>
+            </div>
+         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Current Rates Section -->
+  <div class="rates-section">
+     <div class="rates-container">
+        <h2 class="section-title">Today's Mortgage Rates</h2>
+        <p class="section-subtitle">Averages based on recent national data. Your actual rate may vary.</p>
+        
+        <div class="rates-table-wrapper">
+           <table class="premium-rates-table">
+              <thead>
+                 <tr>
+                    <th>Loan Type</th>
+                    <th>Interest Rate</th>
+                    <th>APR</th>
+                    <th>Trend</th>
+                 </tr>
+              </thead>
+              <tbody>
+                 <tr>
+                    <td><strong>30-Year Fixed</strong></td>
+                    <td>6.540%</td>
+                    <td>6.680%</td>
+                    <td class="trend down"><i class="fas fa-arrow-down"></i> 0.05%</td>
+                 </tr>
+                 <tr>
+                    <td><strong>15-Year Fixed</strong></td>
+                    <td>5.890%</td>
+                    <td>6.010%</td>
+                    <td class="trend up"><i class="fas fa-arrow-up"></i> 0.02%</td>
+                 </tr>
+                 <tr>
+                    <td><strong>5/1 ARM</strong></td>
+                    <td>6.250%</td>
+                    <td>6.450%</td>
+                    <td class="trend flat"><i class="fas fa-minus"></i> 0.00%</td>
+                 </tr>
+              </tbody>
+           </table>
+        </div>
+     </div>
+  </div>
+
+  <!-- Standard Footer -->
+  <footer class="realtor-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-section">
+          <h4>Home Filla</h4>
+          <div class="footer-links-col">
+            <a href="#">About us</a>
+            <a href="#">Careers</a>
+            <a href="#">Accessibility</a>
+            <a href="#">Feedback</a>
+            <a href="#">Media room</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Support &amp; Legal</h4>
+          <div class="footer-links-col">
+            <a href="#">Agent support</a>
+            <a href="#">Ad Choices</a>
+            <a href="#">Advertise with us</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Products &amp; Services</h4>
+          <div class="footer-links-col">
+            <a href="#">Leads &amp; Branding</a>
+            <a href="#">ListHub</a>
+            <a href="#">Moving.com</a>
+            <a href="#">International Properties</a>
+            <a href="#">Builder Solutions</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>News Corp</h4>
+          <div class="footer-links-col">
+            <a href="#">Wall Street Journal</a>
+            <a href="#">MarketWatch</a>
+            <a href="#">Mansion Global</a>
+            <a href="#">Financial News</a>
+            <a href="#">New York Post</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-links">
+          <a href="#">Home Made</a>
+          <a href="#">Tech Blog</a>
+          <a href="#">Agent Blog</a>
+          <a href="#">Sitemap</a>
+          <a href="#" class="highlight-link">Do Not Sell or Share My Personal Information</a>
+        </div>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <div class="footer-disclaimer">
+          <p>Any mortgage lead generation activity in the state of Connecticut is performed by Home Filla, LLC (NMLS #2121192), a subsidiary of Home Filla, Inc.</p>
+          <p>*Based on average new for sale and rental listings Feb 2024 - Jan 2025.</p>
+          <p>© 1995-2026 <a href="#">Home Filla</a> and <a href="#">Home Filla, Inc.</a> All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

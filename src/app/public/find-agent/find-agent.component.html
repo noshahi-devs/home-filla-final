@@ -1,0 +1,277 @@
+<div class="find-agent-page">
+  <div class="mobile-menu-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+
+  <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
+    <div class="mobile-nav-header">
+      <div class="logo-area">
+        <div class="realtor-logo">HF</div>
+        <div class="logo-text">Home Filla</div>
+      </div>
+      <button class="mobile-nav-close" (click)="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-nav-links">
+      <a routerLink="/" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Home</a>
+      <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Buy</a>
+      <a routerLink="/listings/rent" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-key"></i> Rent</a>
+      <a routerLink="/sell" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-sign"></i> Sell</a>
+      <a routerLink="/mortgages" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-hand-holding-usd"></i> Mortgages</a>
+      <a routerLink="/find-agent" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-user-tie"></i> Find an Agent</a>
+    </div>
+    <div class="mobile-nav-auth">
+      <a routerLink="/login" class="btn-outline" (click)="closeMobileMenu()">Log in</a>
+      <a routerLink="/signup" class="btn-primary" (click)="closeMobileMenu()">Sign up</a>
+    </div>
+  </nav>
+
+  <header class="realtor-header">
+    <div class="header-container">
+      <a routerLink="/" class="logo-area">
+        <div class="realtor-logo">HF</div>
+        <div class="logo-text">Home Filla</div>
+      </a>
+
+      <div class="nav-links">
+        <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
+        <a routerLink="/listings/rent" routerLinkActive="active" class="nav-link">Rent</a>
+        <a routerLink="/sell" routerLinkActive="active" class="nav-link">Sell</a>
+        <a routerLink="/mortgages" routerLinkActive="active" class="nav-link">Mortgages</a>
+        <a routerLink="/find-agent" routerLinkActive="active" class="nav-link">Find an Agent</a>
+      </div>
+
+      <div class="auth-buttons">
+        <a routerLink="/login" class="btn-outline">Log in</a>
+        <a routerLink="/signup" class="btn-primary">Sign up</a>
+      </div>
+
+      <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero-section">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Agent matching</p>
+        <h1>Find a local agent who knows your block.</h1>
+        <p class="hero-lead">Browse pre-screened agents with verified deals, licensed coverage, and the local market knowledge you need to move with confidence.</p>
+        <div class="hero-search">
+          <input type="text" placeholder="Neighborhood, city, or ZIP" [(ngModel)]="searchLocation">
+          <button class="btn-primary" type="button" (click)="scrollToAgents()">Search agents</button>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <strong>{{ agents.length }}</strong>
+            <span>Vetted agents</span>
+          </div>
+          <div>
+            <strong>{{ totalDeals | number }}</strong>
+            <span>Deals closed</span>
+          </div>
+          <div>
+            <strong>{{ averageRating }}</strong>
+            <span>Avg. rating</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-card">
+          <span>Average response</span>
+          <strong>45 min</strong>
+          <small>to first message</small>
+        </div>
+        <div class="panel-card">
+          <span>Primary service</span>
+          <strong>Seller + Buyer</strong>
+          <small>Covered coast to coast</small>
+        </div>
+        <div class="panel-card">
+          <span>New matches</span>
+          <strong>34 this week</strong>
+          <small>Onboarded agent partners</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="filter-section">
+    <div class="filter-control">
+      <label>Specialty</label>
+      <select [(ngModel)]="selectedSpecialty">
+        <option *ngFor="let option of specialties" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+    <div class="filter-control">
+      <label>Primary language</label>
+      <select [(ngModel)]="selectedLanguage">
+        <option *ngFor="let option of languageOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+    <div class="filter-control">
+      <label>Experience</label>
+      <select [(ngModel)]="selectedExperience">
+        <option *ngFor="let option of experienceOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+    <button class="btn-outline filter-reset" type="button" (click)="resetFilters()">Reset filters</button>
+  </section>
+
+  <section class="agents-section" id="agent-hub">
+    <div class="section-heading">
+      <div>
+        <p class="sectioneyebrow">Vetted pros</p>
+        <h2>Meet agents ready for your next move.</h2>
+        <p>We pair you with licensed local experts who have the proof points to back up their promise.</p>
+      </div>
+      <div class="section-actions">
+        <span class="match-count">{{ filteredAgents.length }} matches</span>
+        <button class="btn-outline" type="button" (click)="resetFilters()">Clear filters</button>
+      </div>
+    </div>
+
+    <div class="agent-grid">
+      <article class="agent-card" *ngFor="let agent of filteredAgents">
+        <div class="agent-card-header">
+          <div class="agent-avatar">
+            <img [src]="agent.imageUrl" [alt]="agent.name">
+          </div>
+          <div class="agent-header-copy">
+            <h3>{{ agent.name }}</h3>
+            <p>{{ agent.title }}</p>
+            <span class="agent-city">{{ agent.city }}</span>
+          </div>
+          <span class="agent-pill">Top 5%</span>
+        </div>
+        <p class="agent-tagline">{{ agent.tagline }}</p>
+        <div class="agent-stats">
+          <span><strong>{{ agent.rating }}</strong><small>rating</small></span>
+          <span><strong>{{ agent.deals }}</strong><small>deals closed</small></span>
+          <span><strong>{{ agent.experience }} yrs</strong><small>experience</small></span>
+        </div>
+        <div class="agent-coverage">
+          <span>Coverage: {{ agent.coverage.join(' · ') }}</span>
+        </div>
+        <div class="agent-meta">
+          <div class="agent-tags">
+            <span *ngFor="let speciality of agent.specialties">{{ speciality }}</span>
+          </div>
+          <div class="agent-tags">
+            <span *ngFor="let language of agent.languages">{{ language }}</span>
+          </div>
+        </div>
+        <div class="agent-actions">
+          <button class="btn-outline" type="button">See availability</button>
+          <button class="btn-primary secondary" type="button">Message agent</button>
+        </div>
+        <div class="agent-contact">
+          <span>Availability: {{ agent.availability }}</span>
+          <span>Call: {{ agent.phone }}</span>
+        </div>
+      </article>
+    </div>
+
+    <div *ngIf="!filteredAgents.length" class="no-results">
+      <p>We could not find anyone matching that combination yet. Try broadening your search or clearing filters.</p>
+    </div>
+  </section>
+
+  <section class="confidence-section">
+    <div class="confidence-grid">
+      <div class="confidence-card">
+        <p>Local insights</p>
+        <strong>32</strong>
+        <span>Neighborhoods covered</span>
+      </div>
+      <div class="confidence-card">
+        <p>Response time</p>
+        <strong>45 min</strong>
+        <span>Average first reply</span>
+      </div>
+      <div class="confidence-card">
+        <p>Closed goals</p>
+        <strong>100%</strong>
+        <span>Client satisfaction</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div>
+      <p class="sectioneyebrow">Need help deciding?</p>
+      <h2>Book a free 15-minute consult with our concierge team.</h2>
+      <p>We will recommend up to three agents who match your preferences and introduce you personally.</p>
+    </div>
+    <div class="cta-actions">
+      <button class="btn-primary" type="button">Book a call</button>
+      <button class="btn-outline" type="button">Email concierge</button>
+    </div>
+  </section>
+
+  <footer class="realtor-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-section">
+          <h4>Home Filla</h4>
+          <div class="footer-links-col">
+            <a href="#">About us</a>
+            <a href="#">Careers</a>
+            <a href="#">Accessibility</a>
+            <a href="#">Feedback</a>
+            <a href="#">Media room</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Support &amp; Legal</h4>
+          <div class="footer-links-col">
+            <a href="#">Agent support</a>
+            <a href="#">Ad Choices</a>
+            <a href="#">Advertise with us</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Products &amp; Services</h4>
+          <div class="footer-links-col">
+            <a href="#">Leads &amp; Branding</a>
+            <a href="#">ListHub</a>
+            <a href="#">Moving.com</a>
+            <a href="#">International Properties</a>
+            <a href="#">Builder Solutions</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>News Corp</h4>
+          <div class="footer-links-col">
+            <a href="#">Wall Street Journal</a>
+            <a href="#">MarketWatch</a>
+            <a href="#">Mansion Global</a>
+            <a href="#">Financial News</a>
+            <a href="#">New York Post</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-links">
+          <a href="#">Home Made</a>
+          <a href="#">Tech Blog</a>
+          <a href="#">Agent Blog</a>
+          <a href="#">Sitemap</a>
+          <a href="#" class="highlight-link">Do Not Sell or Share My Personal Information</a>
+        </div>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <div class="footer-disclaimer">
+          <p>Any mortgage lead generation activity in the state of Connecticut is performed by Home Filla, LLC (NMLS #2121192), a subsidiary of Home Filla, Inc.</p>
+          <p>*Based on average new for sale and rental listings Feb 2024 - Jan 2025.</p>
+          <p>© 1995-2026 <a href="#">Home Filla</a> and <a href="#">Home Filla, Inc.</a> All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

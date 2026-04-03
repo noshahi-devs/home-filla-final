@@ -6,6 +6,8 @@ import { LoginComponent } from './public/login/login.component';
 import { SignupComponent } from './public/signup/signup.component';
 import { RentComponent } from './public/rent/rent';
 import { SellComponent } from './public/sell/sell.component';
+import { MortgageComponent } from './public/mortgage/mortgage.component';
+import { FindAgentComponent } from './public/find-agent/find-agent.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,6 +15,8 @@ export const routes: Routes = [
   { path: 'listings/:category', component: ListingsComponent },
   { path: 'property/:category/:id', component: PropertyDetailComponent },
   { path: 'sell', component: SellComponent },
+  { path: 'mortgages', component: MortgageComponent },
+  { path: 'find-agent', component: FindAgentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: '**', redirectTo: '' }

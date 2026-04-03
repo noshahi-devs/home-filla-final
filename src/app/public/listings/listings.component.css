@@ -996,11 +996,6 @@
     padding: 10px 14px;
     font-size: 12px;
   }
-
-  .footer-bottom-links {
-    flex-direction: column;
-    gap: 12px;
-  }
 }
 
 /* ─── PREMIUM FOOTER SYNC ─── */
@@ -1127,9 +1122,6 @@
 }
 
 @media (max-width: 768px) {
-    .footer-top {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* ─── INTERACTIVE 3D MAP VIEW ─── */
@@ -1540,8 +1532,7 @@
     .lst-result-bar-inner { padding: 10px 16px; }
     .lst-main { padding: 24px 16px; }
     .lst-grid { gap: 16px; }
-    .footer-top { grid-template-columns: 1fr !important; }
-    .footer-bottom-links { flex-direction: column; align-items: center; gap: 14px; }
+    .footer-bottom-links { gap: 16px; }
 }
 
 

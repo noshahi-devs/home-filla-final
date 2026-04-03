@@ -969,10 +969,6 @@
         gap: 8px;
     }
 
-    .footer-top {
-        grid-template-columns: 1fr;
-    }
-
     .footer-bottom {
         gap: 20px;
     }
@@ -1266,6 +1262,18 @@
 @media (max-width: 576px) {
     .lst-hero-title { font-size: 26px; }
     .rent-main { padding: 24px 12px; }
-    .footer-top { grid-template-columns: 1fr !important; }
-    .footer-bottom-links { flex-direction: column; align-items: center; gap: 14px; }
+    .footer-bottom-links { gap: 16px; }
+}
+
+@media (max-width: 1024px) {
+    .footer-top {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
 }
