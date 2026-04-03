@@ -1,19 +1,21 @@
 // Discover Tabs Switching
 function switchDiscoverTab(tab) {
-  document.getElementById('dgrid-buying').style.display = 'none';
-  document.getElementById('dgrid-renting').style.display = 'none';
-  document.getElementById('dgrid-selling').style.display = 'none';
-  document.getElementById('dtab-buying').classList.remove('active');
-  document.getElementById('dtab-renting').classList.remove('active');
-  document.getElementById('dtab-selling').classList.remove('active');
+  const targets = ['buying', 'renting', 'selling'];
+  targets.forEach(t => {
+    const g = document.getElementById('dgrid-' + t);
+    const tabEl = document.getElementById('dtab-' + t);
+    if (g) g.style.display = 'none';
+    if (tabEl) tabEl.classList.remove('active');
+  });
 
-  document.getElementById('dgrid-' + tab).style.display = 'grid';
-  document.getElementById('dtab-' + tab).classList.add('active');
+  const activeGrid = document.getElementById('dgrid-' + tab);
+  const activeTab = document.getElementById('dtab-' + tab);
 
-  if (window.innerWidth <= 768) {
-    document.getElementById('dgrid-' + tab).style.display = 'flex';
-    document.getElementById('dgrid-' + tab).style.flexDirection = 'column';
+  if (activeGrid) {
+    activeGrid.style.display = (window.innerWidth <= 768) ? 'flex' : 'grid';
+    if (window.innerWidth <= 768) activeGrid.style.flexDirection = 'column';
   }
+  if (activeTab) activeTab.classList.add('active');
 }
 
 // Hero Search Integration
@@ -29,20 +31,26 @@ function scrollToSearch(tab) {
 
 // Tab Switching
 function switchCalc(type) {
-  document.getElementById('calc-mortgage').style.display = 'none';
-  document.getElementById('calc-affordability').style.display = 'none';
-  document.getElementById('calc-rent-buy').style.display = 'none';
-  document.getElementById('tab-mortgage').classList.remove('active');
-  document.getElementById('tab-affordability').classList.remove('active');
-  document.getElementById('tab-rent-buy').classList.remove('active');
+  const types = ['mortgage', 'affordability', 'rent-buy'];
+  types.forEach(t => {
+    const c = document.getElementById('calc-' + t);
+    const tabEl = document.getElementById('tab-' + t);
+    if (c) c.style.display = 'none';
+    if (tabEl) tabEl.classList.remove('active');
+  });
 
-  if (window.innerWidth <= 1024) {
-    document.getElementById('calc-' + type).style.display = 'flex';
-    document.getElementById('calc-' + type).style.flexDirection = 'column';
-  } else {
-    document.getElementById('calc-' + type).style.display = 'grid';
+  const activeCalc = document.getElementById('calc-' + type);
+  const activeTab = document.getElementById('tab-' + type);
+
+  if (activeCalc) {
+    if (window.innerWidth <= 1024) {
+      activeCalc.style.display = 'flex';
+      activeCalc.style.flexDirection = 'column';
+    } else {
+      activeCalc.style.display = 'grid';
+    }
   }
-  document.getElementById('tab-' + type).classList.add('active');
+  if (activeTab) activeTab.classList.add('active');
 }
 
 // Scroll from Discover
@@ -397,7 +405,9 @@ function initHomeFillaPage() {
 
   window.addEventListener('resize', () => {
     const mortgageTab = document.getElementById('tab-mortgage');
-    const activeType = mortgageTab?.classList.contains('active') ? 'mortgage' : 'affordability';
+    if (!mortgageTab) return; 
+    const activeType = mortgageTab.classList.contains('active') ? 'mortgage' : 
+                     (document.getElementById('tab-affordability')?.classList.contains('active') ? 'affordability' : 'rent-buy');
     switchCalc(activeType);
   });
 }

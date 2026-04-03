@@ -157,76 +157,75 @@
         <span class="lst-results-count">{{ properties.length }} results</span>
         <span class="lst-results-label">in <strong>San Francisco, CA</strong></span>
       </div>
-      <div class="filter-group">
-            <div class="filter-group">
-                <div class="filter-wrapper">
-                    <span class="filter-chip" (click)="toggleFilter($event, 'price-dropdown')">Price <i class="fas fa-chevron-down"></i></span>
-                    <div class="filter-dropdown" id="price-dropdown">
-                        <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Price Range</div>
-                        <div style="display: flex; gap: 12px; align-items: center;">
-                            <input type="text" placeholder="Minimum" class="dropdown-input">
-                            <span style="color: var(--text-secondary);">-</span>
-                            <input type="text" placeholder="Maximum" class="dropdown-input">
-                        </div>
-                        <button class="dropdown-apply" style="margin-top: 20px;" (click)="applyFilter($event.target)">Apply</button>
-                    </div>
-                </div>
+      <div class="filters-scroll-container">
+        <div class="filter-group">
+              <div class="filter-wrapper">
+                  <span class="filter-chip" (click)="toggleFilter($event, 'price-dropdown')">Price <i class="fas fa-chevron-down"></i></span>
+                  <div class="filter-dropdown" id="price-dropdown">
+                      <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Price Range</div>
+                      <div style="display: flex; gap: 12px; align-items: center;">
+                          <input type="text" placeholder="Minimum" class="dropdown-input">
+                          <span style="color: var(--text-secondary);">-</span>
+                          <input type="text" placeholder="Maximum" class="dropdown-input">
+                      </div>
+                      <button class="dropdown-apply" style="margin-top: 20px;" (click)="applyFilter($event.target)">Apply</button>
+                  </div>
+              </div>
 
-                <div class="filter-wrapper">
-                    <span class="filter-chip" (click)="toggleFilter($event, 'beds-dropdown')">Beds/baths <i class="fas fa-chevron-down"></i></span>
-                    <div class="filter-dropdown" id="beds-dropdown">
-                        <div style="margin-bottom: 20px;">
-                            <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Bedrooms</div>
-                            <div class="btn-group">
-                                <button class="tgl-btn active">Any</button>
-                                <button class="tgl-btn">1+</button>
-                                <button class="tgl-btn">2+</button>
-                                <button class="tgl-btn">3+</button>
-                                <button class="tgl-btn">4+</button>
-                            </div>
-                        </div>
-                        <button class="dropdown-apply" style="margin-top: 20px;" (click)="applyFilter($event.target)">Apply</button>
-                    </div>
-                </div>
+              <div class="filter-wrapper">
+                  <span class="filter-chip" (click)="toggleFilter($event, 'beds-dropdown')">Beds/baths <i class="fas fa-chevron-down"></i></span>
+                  <div class="filter-dropdown" id="beds-dropdown">
+                      <div style="margin-bottom: 20px;">
+                          <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Bedrooms</div>
+                          <div class="btn-group">
+                              <button class="tgl-btn active">Any</button>
+                              <button class="tgl-btn">1+</button>
+                              <button class="tgl-btn">2+</button>
+                              <button class="tgl-btn">3+</button>
+                              <button class="tgl-btn">4+</button>
+                          </div>
+                      </div>
+                      <button class="dropdown-apply" style="margin-top: 20px;" (click)="applyFilter($event.target)">Apply</button>
+                  </div>
+              </div>
 
-                <div class="filter-wrapper">
-                    <span class="filter-chip" (click)="toggleFilter($event, 'type-dropdown')">House type <i class="fas fa-chevron-down"></i></span>
-                    <div class="filter-dropdown" id="type-dropdown">
-                        <div style="font-weight: 600; font-size: 14px; margin-bottom: 16px; color: var(--text-primary);">Property Type</div>
-                        <div style="display: flex; flex-direction: column; gap: 16px;">
-                            <label class="check-label" (click)="$event.stopPropagation()"><input type="checkbox" checked> Apartment</label>
-                            <label class="check-label" (click)="$event.stopPropagation()"><input type="checkbox" checked> Condo</label>
-                            <label class="check-label" (click)="$event.stopPropagation()"><input type="checkbox"> Townhouse</label>
-                        </div>
-                        <button class="dropdown-apply" style="margin-top: 24px;" (click)="applyFilter($event.target)">Apply</button>
-                    </div>
-                </div>
+              <div class="filter-wrapper">
+                  <span class="filter-chip" (click)="toggleFilter($event, 'type-dropdown')">House type <i class="fas fa-chevron-down"></i></span>
+                  <div class="filter-dropdown" id="type-dropdown">
+                      <div style="font-weight: 600; font-size: 14px; margin-bottom: 16px; color: var(--text-primary);">Property Type</div>
+                      <div style="display: flex; flex-direction: column; gap: 16px;">
+                          <label class="check-label" (click)="$event.stopPropagation()"><input type="checkbox" checked> Apartment</label>
+                          <label class="check-label" (click)="$event.stopPropagation()"><input type="checkbox" checked> Condo</label>
+                          <label class="check-label" (click)="$event.stopPropagation()"><input type="checkbox"> Townhouse</label>
+                      </div>
+                      <button class="dropdown-apply" style="margin-top: 24px;" (click)="applyFilter($event.target)">Apply</button>
+                  </div>
+              </div>
 
-                <!-- EXTRA FILTERS -->
-                <div class="filter-wrapper">
-                    <span class="filter-chip" (click)="toggleFilter($event, 'move-dropdown')">Move-in by <i class="fas fa-chevron-down"></i></span>
-                    <div class="filter-dropdown" id="move-dropdown">
-                        <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px;">Move-in Date</div>
-                        <input type="date" class="dropdown-input">
-                        <button class="dropdown-apply" style="margin-top: 20px;" (click)="applyFilter($event.target)">Apply</button>
-                    </div>
-                </div>
-                
-                <div class="filter-wrapper">
-                    <span class="filter-chip active"><i class="fas fa-paw"></i> Pet friendly</span>
-                </div>
+              <div class="filter-wrapper">
+                  <span class="filter-chip" (click)="toggleFilter($event, 'move-dropdown')">Move-in by <i class="fas fa-chevron-down"></i></span>
+                  <div class="filter-dropdown" id="move-dropdown">
+                      <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px;">Move-in Date</div>
+                      <input type="date" class="dropdown-input">
+                      <button class="dropdown-apply" style="margin-top: 20px;" (click)="applyFilter($event.target)">Apply</button>
+                  </div>
+              </div>
+              
+              <div class="filter-wrapper">
+                  <span class="filter-chip active"><i class="fas fa-paw"></i> Pet friendly</span>
+              </div>
 
-                <span class="filter-chip">More filters <i class="fas fa-sliders-h"></i></span>
+              <span class="filter-chip">More filters <i class="fas fa-sliders-h"></i></span>
+        </div>
+        <div class="lst-sort-wrap">
+          <div class="filter-wrapper">
+              <span class="filter-chip" (click)="toggleFilter($event, 'sort-dropdown')"><i class="fas fa-sort"></i> Sort: Newest</span>
+              <div class="filter-dropdown" id="sort-dropdown" style="right: 0; left: auto; width: 200px;">
+                  <div class="sort-option" (click)="applyFilter($event.target)">Newest arrivals</div>
+                  <div class="sort-option" (click)="applyFilter($event.target)">Price (High to Low)</div>
+                  <div class="sort-option" (click)="applyFilter($event.target)">Price (Low to High)</div>
+              </div>
           </div>
-      </div>
-      <div class="lst-sort-wrap">
-        <div class="filter-wrapper">
-            <span class="filter-chip" (click)="toggleFilter($event, 'sort-dropdown')"><i class="fas fa-sort"></i> Sort: Newest</span>
-            <div class="filter-dropdown" id="sort-dropdown" style="right: 0; left: auto; width: 200px;">
-                <div class="sort-option" (click)="applyFilter($event.target)">Newest arrivals</div>
-                <div class="sort-option" (click)="applyFilter($event.target)">Price (High to Low)</div>
-                <div class="sort-option" (click)="applyFilter($event.target)">Price (Low to High)</div>
-            </div>
         </div>
       </div>
     </div>

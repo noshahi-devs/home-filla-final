@@ -161,72 +161,74 @@
         <span class="lst-results-count">{{ formatCount(category.count) }} results</span>
         <span class="lst-results-label">in <strong>San Francisco, CA</strong></span>
       </div>
-      <div class="filter-group">
-            <div class="filter-wrapper">
-                <span class="filter-chip" onclick="toggleFilter(event, 'price-dropdown')">Price <i class="fas fa-chevron-down"></i></span>
-                <div class="filter-dropdown" id="price-dropdown">
-                    <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Price Range</div>
-                    <div style="display: flex; gap: 12px; align-items: center;">
-                        <input type="text" placeholder="Minimum" class="dropdown-input">
-                        <span style="color: var(--text-secondary);">-</span>
-                        <input type="text" placeholder="Maximum" class="dropdown-input">
-                    </div>
-                    <button class="dropdown-apply" style="margin-top: 20px;" onclick="applyFilter(this)">Apply</button>
-                </div>
-            </div>
+      <div class="filters-scroll-container">
+        <div class="filter-group">
+              <div class="filter-wrapper">
+                  <span class="filter-chip" onclick="toggleFilter(event, 'price-dropdown')">Price <i class="fas fa-chevron-down"></i></span>
+                  <div class="filter-dropdown" id="price-dropdown">
+                      <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Price Range</div>
+                      <div style="display: flex; gap: 12px; align-items: center;">
+                          <input type="text" placeholder="Minimum" class="dropdown-input">
+                          <span style="color: var(--text-secondary);">-</span>
+                          <input type="text" placeholder="Maximum" class="dropdown-input">
+                      </div>
+                      <button class="dropdown-apply" style="margin-top: 20px;" onclick="applyFilter(this)">Apply</button>
+                  </div>
+              </div>
 
-            <div class="filter-wrapper">
-                <span class="filter-chip" onclick="toggleFilter(event, 'beds-dropdown')">Beds/baths <i class="fas fa-chevron-down"></i></span>
-                <div class="filter-dropdown" id="beds-dropdown">
-                    <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Bedrooms</div>
-                        <div class="btn-group">
-                            <button class="tgl-btn active">Any</button>
-                            <button class="tgl-btn">1+</button>
-                            <button class="tgl-btn">2+</button>
-                            <button class="tgl-btn">3+</button>
-                            <button class="tgl-btn">4+</button>
-                        </div>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Bathrooms</div>
-                        <div class="btn-group">
-                            <button class="tgl-btn active">Any</button>
-                            <button class="tgl-btn">1+</button>
-                            <button class="tgl-btn">2+</button>
-                            <button class="tgl-btn">3+</button>
-                        </div>
-                    </div>
-                    <button class="dropdown-apply" style="margin-top: 20px;" onclick="applyFilter(this)">Apply</button>
-                </div>
-            </div>
+              <div class="filter-wrapper">
+                  <span class="filter-chip" onclick="toggleFilter(event, 'beds-dropdown')">Beds/baths <i class="fas fa-chevron-down"></i></span>
+                  <div class="filter-dropdown" id="beds-dropdown">
+                      <div style="margin-bottom: 20px;">
+                          <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Bedrooms</div>
+                          <div class="btn-group">
+                              <button class="tgl-btn active">Any</button>
+                              <button class="tgl-btn">1+</button>
+                              <button class="tgl-btn">2+</button>
+                              <button class="tgl-btn">3+</button>
+                              <button class="tgl-btn">4+</button>
+                          </div>
+                      </div>
+                      <div>
+                          <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Bathrooms</div>
+                          <div class="btn-group">
+                              <button class="tgl-btn active">Any</button>
+                              <button class="tgl-btn">1+</button>
+                              <button class="tgl-btn">2+</button>
+                              <button class="tgl-btn">3+</button>
+                          </div>
+                      </div>
+                      <button class="dropdown-apply" style="margin-top: 20px;" onclick="applyFilter(this)">Apply</button>
+                  </div>
+              </div>
 
-            <div class="filter-wrapper">
-                <span class="filter-chip" onclick="toggleFilter(event, 'type-dropdown')">House type <i class="fas fa-chevron-down"></i></span>
-                <div class="filter-dropdown" id="type-dropdown">
-                    <div style="font-weight: 600; font-size: 14px; margin-bottom: 16px; color: var(--text-primary);">Property Type</div>
-                    <div style="display: flex; flex-direction: column; gap: 16px;">
-                        <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked> Single-family home</label>
-                        <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked> Condominium</label>
-                        <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked> Townhouse</label>
-                        <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox"> Multi-family</label>
-                        <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox"> Land</label>
-                    </div>
-                    <button class="dropdown-apply" style="margin-top: 24px;" onclick="applyFilter(this)">Apply</button>
-                </div>
-            </div>
+              <div class="filter-wrapper">
+                  <span class="filter-chip" onclick="toggleFilter(event, 'type-dropdown')">House type <i class="fas fa-chevron-down"></i></span>
+                  <div class="filter-dropdown" id="type-dropdown">
+                      <div style="font-weight: 600; font-size: 14px; margin-bottom: 16px; color: var(--text-primary);">Property Type</div>
+                      <div style="display: flex; flex-direction: column; gap: 16px;">
+                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked> Single-family home</label>
+                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked> Condominium</label>
+                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked> Townhouse</label>
+                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox"> Multi-family</label>
+                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox"> Land</label>
+                      </div>
+                      <button class="dropdown-apply" style="margin-top: 24px;" onclick="applyFilter(this)">Apply</button>
+                  </div>
+              </div>
 
-            <span class="filter-chip">More filters <i class="fas fa-sliders-h"></i></span>
-      </div>
-      <div class="lst-sort-wrap">
-        <div class="filter-wrapper">
-            <span class="filter-chip" onclick="toggleFilter(event, 'sort-dropdown')"><i class="fas fa-sort"></i> Sort: Newest</span>
-            <div class="filter-dropdown" id="sort-dropdown" style="right: 0; left: auto; width: 200px; min-width: 200px;">
-                <div class="sort-option" onclick="applyFilter(this)">Newest listings</div>
-                <div class="sort-option" onclick="applyFilter(this)">Price (High to Low)</div>
-                <div class="sort-option" onclick="applyFilter(this)">Price (Low to High)</div>
-                <div class="sort-option" style="border-bottom: 1px solid var(--border);" onclick="applyFilter(this)">Square Feet</div>
-            </div>
+              <span class="filter-chip">More filters <i class="fas fa-sliders-h"></i></span>
+        </div>
+        <div class="lst-sort-wrap">
+          <div class="filter-wrapper">
+              <span class="filter-chip" onclick="toggleFilter(event, 'sort-dropdown')"><i class="fas fa-sort"></i> Sort: Newest</span>
+              <div class="filter-dropdown" id="sort-dropdown" style="right: 0; left: auto; width: 200px; min-width: 200px;">
+                  <div class="sort-option" onclick="applyFilter(this)">Newest listings</div>
+                  <div class="sort-option" onclick="applyFilter(this)">Price (High to Low)</div>
+                  <div class="sort-option" onclick="applyFilter(this)">Price (Low to High)</div>
+                  <div class="sort-option" style="border-bottom: 1px solid var(--border);" onclick="applyFilter(this)">Square Feet</div>
+              </div>
+          </div>
         </div>
       </div>
     </div>
