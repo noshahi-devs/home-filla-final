@@ -1,47 +1,61 @@
-import { Injectable } from '@angular/core';
-import { UserRole } from '../models';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap, map, of } from 'rxjs';
+import { UserRole, DashboardUser } from '../models';
+import { LoginRequest, AuthResponse } from '../dtos/auth.dto';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private currentRole: UserRole = 'admin';
-  private currentUserId = 1;
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:5000/api/auth'; // Default ASP.NET port
 
-  setRole(role: UserRole, userId: number): void {
-    this.currentRole = role;
-    this.currentUserId = userId;
+  login(credentials: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+      tap(res => {
+        if (res.token) {
+          localStorage.setItem('hf_token', res.token);
+          localStorage.setItem('hf_user', JSON.stringify(res));
+          localStorage.setItem('hf_role', res.role);
+          localStorage.setItem('hf_userId', String(res.id));
+        }
+      })
+    );
+  }
+
+  setRole(role: UserRole, userId?: number): void {
     localStorage.setItem('hf_role', role);
-    localStorage.setItem('hf_userId', String(userId));
+    if (userId) {
+      localStorage.setItem('hf_userId', String(userId));
+    }
   }
 
   getRole(): UserRole {
-    return (localStorage.getItem('hf_role') as UserRole) || this.currentRole;
+    return (localStorage.getItem('hf_role') as UserRole) || 'buyer';
   }
 
   getUserId(): number {
-    return Number(localStorage.getItem('hf_userId')) || this.currentUserId;
+    return Number(localStorage.getItem('hf_userId')) || 0;
   }
 
   getUserName(): string {
-    const names: Record<string, string> = {
-      '1': 'Admin User', '2': 'Ali Hassan', '3': 'Sara Ahmed',
-      '6': 'Ahmed Raza', '7': 'Zara Malik'
-    };
-    return names[String(this.getUserId())] || 'User';
+    const user = JSON.parse(localStorage.getItem('hf_user') || '{}');
+    return user.name || 'User';
   }
 
   getUserAvatar(): string {
-    const avatars: Record<string, string> = {
-      '1': 'https://randomuser.me/api/portraits/men/1.jpg',
-      '2': 'https://randomuser.me/api/portraits/men/32.jpg',
-      '3': 'https://randomuser.me/api/portraits/women/44.jpg',
-      '6': 'https://randomuser.me/api/portraits/men/75.jpg',
-      '7': 'https://randomuser.me/api/portraits/women/65.jpg',
-    };
-    return avatars[String(this.getUserId())] || 'https://randomuser.me/api/portraits/men/1.jpg';
+    const user = JSON.parse(localStorage.getItem('hf_user') || '{}');
+    return user.avatar || 'https://randomuser.me/api/portraits/men/1.jpg';
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('hf_token');
   }
 
   logout(): void {
-    localStorage.removeItem('hf_role');
-    localStorage.removeItem('hf_userId');
+    localStorage.clear();
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
   }
 }

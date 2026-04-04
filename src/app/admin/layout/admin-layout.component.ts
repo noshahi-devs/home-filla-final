@@ -37,21 +37,38 @@ export class AdminLayoutComponent {
     { icon: 'fa-cog', label: 'Settings', route: '/admin/settings' },
   ];
 
+  unreadCount: number = 0;
+  recentNotifications: any[] = [];
+
   constructor(
     public dataService: MockDataService,
     public authService: AuthService,
     private router: Router
-  ) {
-    this.menuItems[6].badge = this.dataService.getInquiries().filter(i => i.status === 'new').length;
-    this.menuItems[1].badge = this.dataService.getPropertiesByStatus('pending').length;
+  ) {}
+
+  ngOnInit(): void {
+    this.loadLayoutData();
   }
 
-  get unreadCount(): number {
-    return this.dataService.getUnreadNotifications().length;
-  }
+  loadLayoutData(): void {
+    // Inquiries badge
+    this.dataService.getInquiries().subscribe(inqs => {
+      this.menuItems[6].badge = inqs.filter(i => i.status === 'new').length;
+    });
 
-  get recentNotifications() {
-    return this.dataService.getNotifications().slice(0, 5);
+    // Pending properties badge
+    this.dataService.getPropertiesByStatus('pending').subscribe(props => {
+      this.menuItems[1].badge = props.length;
+    });
+
+    // Notifications
+    this.dataService.getUnreadNotifications().subscribe(notifs => {
+      this.unreadCount = notifs.length;
+    });
+
+    this.dataService.getNotifications().subscribe(notifs => {
+      this.recentNotifications = notifs.slice(0, 5);
+    });
   }
 
   toggleSidebar(): void {
@@ -74,7 +91,9 @@ export class AdminLayoutComponent {
   }
 
   markAllRead(): void {
-    this.dataService.markAllNotificationsRead();
+    this.dataService.markAllNotificationsRead().subscribe(() => {
+      this.loadLayoutData();
+    });
   }
 
   logout(): void {

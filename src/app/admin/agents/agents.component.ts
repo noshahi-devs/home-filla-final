@@ -24,8 +24,10 @@ export class AdminAgentsComponent implements OnInit {
   }
 
   loadAgents(): void {
-    this.agents = this.dataService.getAgents();
-    this.applyFilters();
+    this.dataService.getAgents().subscribe(agents => {
+      this.agents = agents;
+      this.applyFilters();
+    });
   }
 
   applyFilters(): void {
@@ -54,12 +56,14 @@ export class AdminAgentsComponent implements OnInit {
   }
 
   approveAgent(id: number): void {
-    this.dataService.updateAgentStatus(id, 'approved');
-    this.loadAgents();
+    this.dataService.updateAgentStatus(id, 'approved').subscribe(() => {
+      this.loadAgents();
+    });
   }
 
   rejectAgent(id: number): void {
-    this.dataService.updateAgentStatus(id, 'rejected');
-    this.loadAgents();
+    this.dataService.updateAgentStatus(id, 'rejected').subscribe(() => {
+      this.loadAgents();
+    });
   }
 }

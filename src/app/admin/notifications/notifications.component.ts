@@ -20,11 +20,14 @@ export class AdminNotificationsComponent implements OnInit {
   }
 
   loadNotifications() {
-    this.notifications = this.dataService.getNotifications();
+    this.dataService.getNotifications().subscribe(notifs => {
+      this.notifications = notifs;
+    });
   }
 
   markAllRead() {
-    this.dataService.markAllNotificationsRead();
-    this.loadNotifications();
+    this.dataService.markAllNotificationsRead().subscribe(() => {
+      this.loadNotifications();
+    });
   }
 }

@@ -12,7 +12,13 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrl: '../../admin/dashboard/dashboard.component.css'
 })
 export class SellerDashboardComponent implements OnInit {
-  stats: any;
+  stats: any = {
+    totalListings: 0,
+    activeListings: 0,
+    pendingListings: 0,
+    totalViews: 0,
+    inquiriesReceived: 0
+  };
   userId!: number;
 
   constructor(
@@ -22,10 +28,14 @@ export class SellerDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
-    this.stats = this.dataService.getSellerStats(this.userId);
+    this.dataService.getSellerStats(this.userId).subscribe(stats => {
+      this.stats = stats;
+    });
   }
 
   get statCards() {
+    if (!this.stats) return [];
+    
     return [
       { label: 'My Listings', value: this.stats.totalListings, icon: 'fa-building', color: '#14b8a6', bg: 'linear-gradient(135deg, rgba(20,184,166,0.15) 0%, rgba(8,145,178,0.1) 100%)', trend: '+2', trendUp: true },
       { label: 'Active', value: this.stats.activeListings, icon: 'fa-check-circle', color: '#22c55e', bg: 'linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(16,185,129,0.1) 100%)', trend: 'Stable', trendUp: true },

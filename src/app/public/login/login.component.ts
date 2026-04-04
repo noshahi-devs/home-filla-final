@@ -26,6 +26,7 @@ export class LoginComponent {
     if (this.selectedRole === 'seller') userId = 2; // Ali Hassan
     if (this.selectedRole === 'buyer') userId = 6;  // Ahmed Raza
     
+    // Using setRole to support the quick mock login for now
     this.authService.setRole(this.selectedRole, userId);
     this.router.navigate([`/${this.selectedRole}`]);
   }

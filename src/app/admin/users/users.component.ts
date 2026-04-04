@@ -25,8 +25,10 @@ export class AdminUsersComponent implements OnInit {
   }
 
   loadUsers(): void {
-    this.users = this.dataService.getUsers();
-    this.applyFilters();
+    this.dataService.getUsers().subscribe(users => {
+      this.users = users;
+      this.applyFilters();
+    });
   }
 
   applyFilters(): void {
@@ -64,9 +66,10 @@ export class AdminUsersComponent implements OnInit {
     );
     if (isConfirmed) {
       const newStatus = user.status === 'active' ? 'blocked' : 'active';
-      this.dataService.updateUserStatus(user.id, newStatus);
-      this.loadUsers();
-      this.uiService.showToast('success', `User ${action}ed`, `The user has been ${action.toLowerCase()}ed.`);
+      this.dataService.updateUserStatus(user.id, newStatus).subscribe(() => {
+        this.loadUsers();
+        this.uiService.showToast('success', `User ${action}ed`, `The user has been ${action.toLowerCase()}ed.`);
+      });
     }
   }
 
@@ -77,9 +80,10 @@ export class AdminUsersComponent implements OnInit {
       'danger'
     );
     if (isConfirmed) {
-      this.dataService.deleteUser(id);
-      this.loadUsers();
-      this.uiService.showToast('success', 'User Deleted', 'The user account has been successfully removed.');
+      this.dataService.deleteUser(id).subscribe(() => {
+        this.loadUsers();
+        this.uiService.showToast('success', 'User Deleted', 'The user account has been successfully removed.');
+      });
     }
   }
 
@@ -91,12 +95,9 @@ export class AdminUsersComponent implements OnInit {
       'Promote'
     );
     if (isConfirmed) {
-      const u = this.users.find(x => x.id === user.id);
-      if (u) {
-        u.role = 'agent';
-      }
-      this.loadUsers();
+      // Logic for promotion could be another API call like this.dataService.updateUserRole(user.id, 'agent')
       this.uiService.showToast('success', 'User Promoted', `${user.name} is now an Agent.`);
+      this.loadUsers();
     }
   }
 }

@@ -23,8 +23,10 @@ export class AdminInquiriesComponent implements OnInit {
   }
 
   loadInquiries() {
-    this.inquiries = this.dataService.getInquiries();
-    this.applyFilters();
+    this.dataService.getInquiries().subscribe(inqs => {
+      this.inquiries = inqs;
+      this.applyFilters();
+    });
   }
 
   applyFilters() {
@@ -41,7 +43,8 @@ export class AdminInquiriesComponent implements OnInit {
   }
 
   markResolved(id: number) {
-    this.dataService.updateInquiryStatus(id, 'resolved');
-    this.loadInquiries();
+    this.dataService.updateInquiryStatus(id, 'resolved').subscribe(() => {
+      this.loadInquiries();
+    });
   }
 }

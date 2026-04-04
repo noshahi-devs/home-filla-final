@@ -28,10 +28,12 @@ export class AdminLocationsComponent implements OnInit {
   }
 
   loadCities(): void {
-    this.cities = this.dataService.getCities();
-    if (this.cities.length > 0 && !this.selectedCityId) {
-      this.selectCity(this.cities[0].id);
-    }
+    this.dataService.getCities().subscribe(cities => {
+      this.cities = cities;
+      if (this.cities.length > 0 && !this.selectedCityId) {
+        this.selectCity(this.cities[0].id);
+      }
+    });
   }
 
   selectCity(cityId: number): void {
@@ -41,7 +43,9 @@ export class AdminLocationsComponent implements OnInit {
 
   loadAreas(): void {
     if (this.selectedCityId) {
-      this.areas = this.dataService.getAreas(this.selectedCityId);
+      this.dataService.getAreas(this.selectedCityId).subscribe(areas => {
+        this.areas = areas;
+      });
     } else {
       this.areas = [];
     }
@@ -49,11 +53,12 @@ export class AdminLocationsComponent implements OnInit {
 
   addCity(): void {
     if (this.newCityName.trim() && this.newCityProv.trim()) {
-      this.dataService.addCity(this.newCityName, this.newCityProv);
-      this.newCityName = '';
-      this.newCityProv = '';
-      this.loadCities();
-      this.uiService.showToast('success', 'City Added', 'The new city has been added successfully.');
+      this.dataService.addCity(this.newCityName, this.newCityProv).subscribe(() => {
+        this.uiService.showToast('success', 'City Added', 'The new city has been added successfully.');
+        this.loadCities();
+        this.newCityName = '';
+        this.newCityProv = '';
+      });
     } else {
       this.uiService.showToast('error', 'Incomplete', 'Please provide both city name and province.');
     }
@@ -66,20 +71,21 @@ export class AdminLocationsComponent implements OnInit {
       'danger'
     );
     if (isConfirmed) {
-      this.dataService.deleteCity(id);
-      if (this.selectedCityId === id) this.selectedCityId = null;
-      this.loadCities();
-      this.loadAreas();
-      this.uiService.showToast('success', 'Deleted', 'City and areas deleted successfully.');
+      this.dataService.deleteCity(id).subscribe(() => {
+        this.uiService.showToast('success', 'Deleted', 'City and areas deleted successfully.');
+        if (this.selectedCityId === id) this.selectedCityId = null;
+        this.loadCities();
+      });
     }
   }
 
   addArea(): void {
     if (this.newAreaName.trim() && this.selectedCityId) {
-      this.dataService.addArea(this.selectedCityId, this.newAreaName);
-      this.newAreaName = '';
-      this.loadAreas();
-      this.uiService.showToast('success', 'Area Added', 'The new area has been created.');
+      this.dataService.addArea(this.selectedCityId, this.newAreaName).subscribe(() => {
+        this.uiService.showToast('success', 'Area Added', 'The new area has been created.');
+        this.newAreaName = '';
+        this.loadAreas();
+      });
     } else {
       this.uiService.showToast('error', 'Incomplete', 'Please provide an area name.');
     }
@@ -92,9 +98,10 @@ export class AdminLocationsComponent implements OnInit {
       'warning'
     );
     if (isConfirmed) {
-      this.dataService.deleteArea(id);
-      this.loadAreas();
-      this.uiService.showToast('success', 'Deleted', 'Area removed successfully.');
+      this.dataService.deleteArea(id).subscribe(() => {
+        this.uiService.showToast('success', 'Deleted', 'Area removed successfully.');
+        this.loadAreas();
+      });
     }
   }
 }

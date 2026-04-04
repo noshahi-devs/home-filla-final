@@ -21,10 +21,11 @@ export class SellerInquiriesComponent implements OnInit {
 
   ngOnInit() {
     const userId = this.authService.getUserId();
-    const myProps = this.dataService.getPropertiesBySeller(userId);
-    const allInquiries = this.dataService.getInquiries();
     
-    // Filter inquiries only for my properties
-    this.inquiries = allInquiries.filter(i => myProps.some(p => p.id === i.propertyId));
+    this.dataService.getPropertiesBySeller(userId).subscribe(myProps => {
+      this.dataService.getInquiries().subscribe(allInquiries => {
+        this.inquiries = allInquiries.filter(i => myProps.some(p => p.id === i.propertyId));
+      });
+    });
   }
 }

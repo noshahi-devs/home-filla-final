@@ -21,12 +21,23 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private dataService: MockDataService) {}
 
   ngOnInit(): void {
-    this.stats = this.dataService.getAdminStats();
-    this.propertiesByCity = this.dataService.getPropertiesByCity();
-    this.monthlyGrowth = this.dataService.getMonthlyGrowth();
-    this.recentActivity = this.dataService.getRecentActivity();
-    this.maxCityCount = Math.max(...this.propertiesByCity.map(c => c.count));
-    this.maxMonthCount = Math.max(...this.monthlyGrowth.map(m => m.count));
+    this.dataService.getAdminStats().subscribe(stats => {
+      this.stats = stats;
+    });
+
+    this.dataService.getPropertiesByCity().subscribe(data => {
+      this.propertiesByCity = data;
+      this.maxCityCount = Math.max(...data.map((c: any) => c.count), 0);
+    });
+
+    this.dataService.getMonthlyGrowth().subscribe(data => {
+      this.monthlyGrowth = data;
+      this.maxMonthCount = Math.max(...data.map((m: any) => m.count), 0);
+    });
+
+    this.dataService.getRecentActivity().subscribe(data => {
+      this.recentActivity = data;
+    });
   }
 
   get statCards() {

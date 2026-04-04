@@ -21,6 +21,8 @@ export class BuyerInquiriesComponent implements OnInit {
 
   ngOnInit() {
     const userId = this.authService.getUserId();
-    this.inquiries = this.dataService.getInquiries().filter(i => i.userId === userId);
+    this.dataService.getInquiries().subscribe(inqs => {
+      this.inquiries = inqs.filter(i => i.userId === userId);
+    });
   }
 }

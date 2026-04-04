@@ -31,21 +31,39 @@ export class SellerLayoutComponent {
     { icon: 'fa-user', label: 'My Profile', route: '/seller/profile' },
   ];
 
+  unreadCount: number = 0;
+  recentNotifications: any[] = [];
+
   constructor(
     public dataService: MockDataService,
     public authService: AuthService,
     private router: Router
-  ) {
-    const myProps = this.dataService.getPropertiesBySeller(this.authService.getUserId());
-    this.menuItems[2].badge = this.dataService.getInquiries().filter(i => myProps.some(p => p.id === i.propertyId) && i.status === 'new').length;
+  ) {}
+
+  ngOnInit(): void {
+    this.loadLayoutData();
   }
 
-  get unreadCount(): number {
-    return this.dataService.getUnreadNotifications().length;
-  }
+  loadLayoutData(): void {
+    const userId = this.authService.getUserId();
+    
+    // Notifications
+    this.dataService.getUnreadNotifications().subscribe(notifs => {
+      this.unreadCount = notifs.length;
+    });
 
-  get recentNotifications() {
-    return this.dataService.getNotifications().slice(0, 5);
+    this.dataService.getNotifications().subscribe(notifs => {
+      this.recentNotifications = notifs.slice(0, 5);
+    });
+
+    // Inquiries badge for seller's properties
+    this.dataService.getPropertiesBySeller(userId).subscribe(myProps => {
+      this.dataService.getInquiries().subscribe(inqs => {
+        this.menuItems[2].badge = inqs.filter(i => 
+          myProps.some(p => p.id === i.propertyId) && i.status === 'new'
+        ).length;
+      });
+    });
   }
 
   toggleSidebar(): void {
@@ -68,7 +86,9 @@ export class SellerLayoutComponent {
   }
 
   markAllRead(): void {
-    this.dataService.markAllNotificationsRead();
+    this.dataService.markAllNotificationsRead().subscribe(() => {
+      this.loadLayoutData();
+    });
   }
 
   logout(): void {

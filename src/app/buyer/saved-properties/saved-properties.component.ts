@@ -17,8 +17,9 @@ export class BuyerSavedPropertiesComponent implements OnInit {
   constructor(private dataService: MockDataService) {}
 
   ngOnInit() {
-    // Just mock fetching the first 3 approved properties as "saved"
-    this.savedProperties = this.dataService.getPropertiesByStatus('approved').slice(0, 3);
+    this.dataService.getPropertiesByStatus('approved').subscribe(props => {
+      this.savedProperties = props.slice(0, 3);
+    });
   }
 
   removeSaved(id: number) {

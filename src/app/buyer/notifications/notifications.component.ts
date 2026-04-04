@@ -16,10 +16,18 @@ export class BuyerNotificationsComponent implements OnInit {
   constructor(private dataService: MockDataService) {}
 
   ngOnInit() {
-    this.notifications = this.dataService.getNotifications().filter(n => n.type === 'property_approved' || n.type === 'new_inquiry');
+    this.loadNotifications();
+  }
+
+  loadNotifications() {
+    this.dataService.getNotifications().subscribe(notifs => {
+      this.notifications = notifs.filter(n => n.type === 'property_approved' || n.type === 'new_inquiry');
+    });
   }
 
   markAllRead() {
-    this.notifications.forEach(n => n.isRead = true);
+    this.dataService.markAllNotificationsRead().subscribe(() => {
+      this.loadNotifications();
+    });
   }
 }

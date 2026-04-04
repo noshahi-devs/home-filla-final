@@ -16,11 +16,18 @@ export class AdminFeaturedComponent implements OnInit {
   constructor(private dataService: MockDataService) {}
 
   ngOnInit() {
-    this.properties = this.dataService.getProperties();
+    this.loadProperties();
+  }
+
+  loadProperties() {
+    this.dataService.getProperties().subscribe(props => {
+      this.properties = props;
+    });
   }
 
   toggleFeatured(id: number) {
-    this.dataService.toggleFeatured(id);
-    this.properties = this.dataService.getProperties();
+    this.dataService.toggleFeatured(id).subscribe(() => {
+      this.loadProperties();
+    });
   }
 }

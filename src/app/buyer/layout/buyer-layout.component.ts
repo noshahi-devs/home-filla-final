@@ -31,18 +31,28 @@ export class BuyerLayoutComponent {
     { icon: 'fa-user', label: 'My Profile', route: '/buyer/profile' },
   ];
 
+  unreadCount: number = 0;
+  recentNotifications: any[] = [];
+
   constructor(
     public dataService: MockDataService,
     public authService: AuthService,
     private router: Router
   ) {}
 
-  get unreadCount(): number {
-    return this.dataService.getUnreadNotifications().length;
+  ngOnInit(): void {
+    this.loadLayoutData();
   }
 
-  get recentNotifications() {
-    return this.dataService.getNotifications().slice(0, 5);
+  loadLayoutData(): void {
+    // Notifications
+    this.dataService.getUnreadNotifications().subscribe(notifs => {
+      this.unreadCount = notifs.length;
+    });
+
+    this.dataService.getNotifications().subscribe(notifs => {
+      this.recentNotifications = notifs.slice(0, 5);
+    });
   }
 
   toggleSidebar(): void {
@@ -65,7 +75,9 @@ export class BuyerLayoutComponent {
   }
 
   markAllRead(): void {
-    this.dataService.markAllNotificationsRead();
+    this.dataService.markAllNotificationsRead().subscribe(() => {
+      this.loadLayoutData();
+    });
   }
 
   logout(): void {
