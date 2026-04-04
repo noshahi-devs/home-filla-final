@@ -1,18 +1,21 @@
 <div class="admin-shell seller-theme" [class.sidebar-collapsed]="sidebarCollapsed" (click)="closeDropdowns()">
 
+  <!-- Mobile Overlay -->
+  <div class="sidebar-overlay" *ngIf="sidebarCollapsed" (click)="toggleSidebar()"></div>
+
   <!-- ── Sidebar ───────────────────────────────────── -->
   <aside class="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo">
         <div class="logo-icon">HF</div>
-        <span class="logo-label" *ngIf="!sidebarCollapsed">Home<b>Filla</b> <span class="role-badge">Seller</span></span>
+        <span class="logo-label">Home<b>Filla</b> <span class="role-badge">Seller</span></span>
       </div>
       <button class="collapse-btn" (click)="toggleSidebar(); $event.stopPropagation()">
         <i class="fas" [class.fa-chevron-left]="!sidebarCollapsed" [class.fa-chevron-right]="sidebarCollapsed"></i>
       </button>
     </div>
 
-    <div class="sidebar-label" *ngIf="!sidebarCollapsed">MAIN MENU</div>
+    <div class="sidebar-label">MAIN MENU</div>
 
     <nav class="sidebar-nav">
       <a *ngFor="let item of menuItems"
@@ -23,13 +26,13 @@
         <div class="nav-icon">
           <i class="fas" [ngClass]="item.icon"></i>
         </div>
-        <span class="nav-label" *ngIf="!sidebarCollapsed">{{ item.label }}</span>
-        <span class="nav-badge" *ngIf="item.badge && !sidebarCollapsed">{{ item.badge }}</span>
-        <span class="nav-badge mini" *ngIf="item.badge && sidebarCollapsed"></span>
+        <span class="nav-label">{{ item.label }}</span>
+        <span class="nav-badge" *ngIf="item.badge">{{ item.badge }}</span>
+        <span class="nav-badge mini" *ngIf="item.badge"></span>
       </a>
     </nav>
 
-    <div class="sidebar-footer" *ngIf="!sidebarCollapsed">
+    <div class="sidebar-footer">
       <div class="sidebar-user">
         <img [src]="authService.getUserAvatar()" alt="Seller" class="user-avatar-sm">
         <div class="user-info-sm">

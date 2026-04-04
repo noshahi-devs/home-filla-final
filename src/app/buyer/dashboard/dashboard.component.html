@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+  <div class="stats-grid">
     <div class="stat-card" *ngFor="let stat of statCards; let i = index"
          [style.animation-delay]="(i * 0.08) + 's'"
          style="border-color: rgba(59, 130, 246, 0.1);">
@@ -34,7 +34,7 @@
       <div class="chart-header">
         <h3><i class="fas fa-rocket" style="color: #3b82f6;"></i> Quick Links</h3>
       </div>
-      <div class="quick-actions" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="quick-actions">
         <a routerLink="/" class="quick-btn">
           <div class="quick-icon" style="background: linear-gradient(135deg, #f43f5e, #e11d48)">
             <i class="fas fa-heart"></i>
