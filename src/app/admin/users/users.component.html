@@ -1,0 +1,86 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>User Management</h1>
+      <p class="page-subtitle">Manage all registered buyers, sellers, and administrators.</p>
+    </div>
+    <button class="btn-primary">
+      <i class="fas fa-user-plus"></i> Add User
+    </button>
+  </div>
+
+  <div class="filters-bar">
+    <div class="tabs">
+      <button class="tab-btn" [class.active]="roleFilter === 'all'" (click)="setFilter('all')">All Users</button>
+      <button class="tab-btn" [class.active]="roleFilter === 'buyer'" (click)="setFilter('buyer')">Buyers</button>
+      <button class="tab-btn" [class.active]="roleFilter === 'seller'" (click)="setFilter('seller')">Sellers</button>
+      <button class="tab-btn" [class.active]="roleFilter === 'agent'" (click)="setFilter('agent')">Agents</button>
+    </div>
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search name or email..." (input)="onSearch($event)">
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Contact Info</th>
+          <th>Role</th>
+          <th>Joined</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of filteredUsers">
+          <td>
+            <div class="property-cell">
+              <img [src]="u.avatar || 'assets/placeholder-user.jpg'" alt="" class="prop-img">
+              <div class="prop-info">
+                <span class="prop-title">{{ u.name }}</span>
+                <span class="prop-seller">ID: {{ u.id }}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="loc-cell">
+              <span class="city">{{ u.email }}</span>
+              <span class="area">{{ u.phone }}</span>
+            </div>
+          </td>
+          <td>
+            <span class="badge type" [ngClass]="u.role">{{ u.role }}</span>
+          </td>
+          <td class="area">{{ u.createdAt | date:'mediumDate' }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="u.status === 'active' ? 'approved' : 'rejected'">{{ u.status }}</span>
+          </td>
+          <td class="actions-cell">
+            <div class="action-buttons">
+              <button class="btn-icon" [title]="u.status === 'active' ? 'Block User' : 'Unblock User'" 
+                      (click)="toggleBlock(u)" [ngClass]="{'reject': u.status === 'active', 'approve': u.status === 'blocked'}">
+                <i class="fas" [ngClass]="u.status === 'active' ? 'fa-ban' : 'fa-check'"></i>
+              </button>
+              <button class="btn-icon approve" title="Promote to Agent" *ngIf="u.role !== 'agent' && u.role !== 'admin'" (click)="promoteToAgent(u)">
+                <i class="fas fa-user-tie"></i>
+              </button>
+              <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
+              <button class="btn-icon delete" title="Delete" *ngIf="u.role !== 'admin'" (click)="deleteUser(u.id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filteredUsers.length === 0">
+          <td colspan="6" class="empty-state">
+            <i class="fas fa-users"></i>
+            <p>No users found matching your criteria.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

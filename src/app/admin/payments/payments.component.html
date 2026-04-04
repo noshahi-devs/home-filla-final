@@ -1,0 +1,49 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Payments & Subscriptions</h1>
+      <p class="page-subtitle">Manage agent plans and view recent transactions.</p>
+    </div>
+  </div>
+
+  <div class="locations-grid" style="grid-template-columns: 1fr;">
+    <div class="loc-card" style="height: auto;">
+      <div class="card-header">
+        <h3><i class="fas fa-layer-group"></i> Active Plans</h3>
+      </div>
+      <div style="display:flex; gap:20px; padding:20px;">
+        <div *ngFor="let plan of plans" style="flex:1; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:20px; text-align:center;">
+          <h4 style="font-size:18px; color:#f1f5f9; margin-bottom:8px;">{{ plan.name }}</h4>
+          <div style="font-size:24px; font-weight:700; color:#4a6cf7; margin-bottom:16px;">Rs {{ plan.price }}<span style="font-size:12px; color:#64748b;">/mo</span></div>
+          <p style="font-size:13px; color:#94a3b8;"><i class="fas fa-check" style="color:#22c55e;"></i> {{ plan.listings }} Listings</p>
+          <p style="font-size:13px; color:#94a3b8; margin-top:8px;"><i class="fas fa-check" style="color:#22c55e;"></i> {{ plan.featured }} Featured</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container" style="margin-top: 24px;">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Transaction ID</th>
+          <th>User</th>
+          <th>Plan</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of recentPayments">
+          <td class="col-id">{{ p.id }}</td>
+          <td>{{ p.user }}</td>
+          <td><span class="badge purpose">{{ p.plan }}</span></td>
+          <td class="price">Rs {{ p.amount | number }}</td>
+          <td>{{ p.date | date:'short' }}</td>
+          <td><span class="status-badge approved">{{ p.status }}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

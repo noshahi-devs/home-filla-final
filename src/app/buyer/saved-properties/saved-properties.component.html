@@ -1,0 +1,60 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Saved Properties</h1>
+      <p class="page-subtitle">Listings you have bookmarked for later review.</p>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Location</th>
+          <th>Price</th>
+          <th>Type</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of savedProperties">
+          <td>
+            <div class="property-cell">
+              <img [src]="p.images && p.images[0] ? p.images[0] : 'assets/placeholder.jpg'" alt="" class="prop-img">
+              <div class="prop-info">
+                <span class="prop-title">{{ p.title }}</span>
+                <span class="prop-seller">Added 2 days ago</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="loc-cell">
+              <span class="city">{{ p.city }}</span>
+              <span class="area">{{ p.area }}</span>
+            </div>
+          </td>
+          <td class="price" style="color: #3b82f6;">Rs {{ p.price | number }}</td>
+          <td>
+            <span class="badge type">{{ p.type }}</span>
+          </td>
+          <td class="actions-cell">
+            <div class="action-buttons">
+              <!-- Reusing typical styling -->
+              <button class="btn-primary" style="padding: 6px 12px; font-size: 11px; background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); box-shadow: none;">
+                View Details
+              </button>
+              <button class="btn-icon delete" title="Remove" (click)="removeSaved(p.id)"><i class="fas fa-heart-broken"></i></button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="savedProperties.length === 0">
+          <td colspan="5" class="empty-state">
+            <i class="fas fa-heart" style="color: #64748b;"></i>
+            <p>You haven't saved any properties yet.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

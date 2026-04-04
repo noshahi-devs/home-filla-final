@@ -1,0 +1,72 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Property Inquiries</h1>
+      <p class="page-subtitle">View leads and assign them to agents for follow-up.</p>
+    </div>
+  </div>
+
+  <div class="filters-bar">
+    <div class="tabs">
+      <button class="tab-btn" [class.active]="statusFilter === 'all'" (click)="setFilter('all')">All Inquiries</button>
+      <button class="tab-btn" [class.active]="statusFilter === 'new'" (click)="setFilter('new')">New Leads</button>
+      <button class="tab-btn" [class.active]="statusFilter === 'assigned'" (click)="setFilter('assigned')">Assigned</button>
+      <button class="tab-btn" [class.active]="statusFilter === 'resolved'" (click)="setFilter('resolved')">Resolved</button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Lead Info</th>
+          <th>Message</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of filteredInquiries">
+          <td>
+            <div class="prop-info">
+              <span class="prop-title">{{ i.propertyTitle }}</span>
+              <span class="prop-seller">ID: {{ i.propertyId }}</span>
+            </div>
+          </td>
+          <td>
+            <div class="loc-cell">
+              <span class="city">{{ i.userName }}</span>
+              <span class="area">{{ i.userEmail }} &bull; {{ i.userPhone }}</span>
+            </div>
+          </td>
+          <td style="max-width: 250px;">
+            <p style="font-size: 13px; color: #94a3b8; margin:0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              {{ i.message }}
+            </p>
+          </td>
+          <td>
+            <span class="badge" 
+                  [ngClass]="{'type': i.status === 'new', 'purpose rent': i.status === 'assigned', 'purpose': i.status === 'resolved'}">
+              {{ i.status }}
+            </span>
+          </td>
+          <td class="actions-cell">
+            <div class="action-buttons">
+              <button class="btn-icon approve" title="Mark Resolved" *ngIf="i.status !== 'resolved'" (click)="markResolved(i.id)">
+                <i class="fas fa-check"></i>
+              </button>
+              <button class="btn-icon edit" title="Assign Agent"><i class="fas fa-user-tie"></i></button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filteredInquiries.length === 0">
+          <td colspan="5" class="empty-state">
+            <i class="fas fa-envelope-open"></i>
+            <p>No inquiries found.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Featured Listings</h1>
+      <p class="page-subtitle">Toggle properties to show them on the main homepage.</p>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Location</th>
+          <th>Price</th>
+          <th>Featured Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of properties">
+          <td>
+            <div class="property-cell">
+              <img [src]="p.images && p.images[0] ? p.images[0] : 'assets/placeholder.jpg'" alt="" class="prop-img">
+              <div class="prop-info">
+                <span class="prop-title">{{ p.title }}</span>
+                <span class="prop-seller">ID: {{ p.id }}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="loc-cell">
+              <span class="city">{{ p.city }}</span>
+              <span class="area">{{ p.area }}</span>
+            </div>
+          </td>
+          <td class="price">Rs {{ p.price | number }}</td>
+          <td>
+            <button class="btn-icon" [ngClass]="p.isFeatured ? 'approve' : 'reject'" (click)="toggleFeatured(p.id)" style="width:auto; padding: 6px 16px;">
+              <i class="fas" [ngClass]="p.isFeatured ? 'fa-star' : 'fa-star-half-alt'"></i>
+              <span style="font-size:12px; font-weight:600; margin-left:6px; font-family:'Inter', sans-serif;">
+                {{ p.isFeatured ? 'Featured ON' : 'Featured OFF' }}
+              </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Platform Settings</h1>
+      <p class="page-subtitle">Configure website details, contact info, and social links.</p>
+    </div>
+    <button class="btn-primary" (click)="saveSettings()">
+      <i class="fas fa-save"></i> Save Changes
+    </button>
+  </div>
+
+  <div class="locations-grid">
+    <div class="loc-card" style="height: auto; padding: 24px;">
+      <h3 style="margin-bottom: 20px; font-size: 16px; color: #f1f5f9;"><i class="fas fa-globe" style="color: #4a6cf7;"></i> General Settings</h3>
+      
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label>Website Name</label>
+          <input type="text" [(ngModel)]="settings.websiteName">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label>Logo Upload</label>
+          <div style="border: 2px dashed rgba(255,255,255,0.1); padding: 20px; text-align: center; border-radius: 8px; cursor: pointer;">
+            <i class="fas fa-cloud-upload-alt" style="font-size: 24px; color: #64748b; margin-bottom: 10px;"></i>
+            <p style="color: #94a3b8; font-size: 13px;">Click or drag file to upload new logo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loc-card" style="height: auto; padding: 24px;">
+      <h3 style="margin-bottom: 20px; font-size: 16px; color: #f1f5f9;"><i class="fas fa-address-book" style="color: #4a6cf7;"></i> Contact & Social</h3>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Contact Email</label>
+          <input type="email" [(ngModel)]="settings.contactEmail">
+        </div>
+        <div class="form-group">
+          <label>Contact Phone</label>
+          <input type="text" [(ngModel)]="settings.contactPhone">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label>Address</label>
+          <input type="text" [(ngModel)]="settings.address">
+        </div>
+      </div>
+      
+      <div class="form-row" style="margin-top:20px;">
+        <div class="form-group full-width">
+          <label><i class="fab fa-facebook"></i> Facebook URL</label>
+          <input type="text" [(ngModel)]="settings.facebook">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label><i class="fab fa-twitter"></i> Twitter URL</label>
+          <input type="text" [(ngModel)]="settings.twitter">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

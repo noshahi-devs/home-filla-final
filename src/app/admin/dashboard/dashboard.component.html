@@ -1,0 +1,146 @@
+<div class="dashboard">
+  <!-- ── Page Header ──────────────────────────────── -->
+  <div class="page-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p class="page-subtitle">Welcome back! Here's what's happening with your properties.</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-dash btn-outline-dash">
+        <i class="fas fa-download"></i> Export
+      </button>
+      <button class="btn-dash btn-primary-dash" routerLink="/admin/properties">
+        <i class="fas fa-plus"></i> Add Property
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Stats Grid ───────────────────────────────── -->
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let stat of statCards; let i = index"
+         [style.animation-delay]="(i * 0.08) + 's'">
+      <div class="stat-icon" [style.background]="stat.bg">
+        <i class="fas" [ngClass]="stat.icon" [style.color]="stat.color"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+      <div class="stat-trend" [class.up]="stat.trendUp" [class.down]="!stat.trendUp">
+        <i class="fas" [class.fa-arrow-up]="stat.trendUp" [class.fa-arrow-down]="!stat.trendUp"></i>
+        {{ stat.trend }}
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Charts Row ───────────────────────────────── -->
+  <div class="charts-row">
+    <!-- Properties by City -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3><i class="fas fa-map-marker-alt"></i> Properties by City</h3>
+        <span class="chart-badge">{{ propertiesByCity.length }} Cities</span>
+      </div>
+      <div class="bar-chart-h">
+        <div class="bar-row" *ngFor="let item of propertiesByCity; let i = index"
+             [style.animation-delay]="(i * 0.1) + 's'">
+          <div class="bar-label">{{ item.city }}</div>
+          <div class="bar-track">
+            <div class="bar-fill" [style.width.%]="getBarWidth(item.count)">
+              <span class="bar-value">{{ item.count }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monthly Growth -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3><i class="fas fa-chart-line"></i> Monthly Listings Growth</h3>
+        <span class="chart-badge">Last 6 Months</span>
+      </div>
+      <div class="bar-chart-v">
+        <div class="bar-col" *ngFor="let item of monthlyGrowth; let i = index"
+             [style.animation-delay]="(i * 0.1) + 's'">
+          <div class="col-bar-wrapper">
+            <span class="col-value">{{ item.count }}</span>
+            <div class="col-bar" [style.height.%]="getBarHeight(item.count)"></div>
+          </div>
+          <div class="col-label">{{ item.month }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Bottom Row ───────────────────────────────── -->
+  <div class="bottom-row">
+    <!-- Recent Activity -->
+    <div class="activity-card">
+      <div class="chart-header">
+        <h3><i class="fas fa-bolt"></i> Recent Activity</h3>
+        <a routerLink="/admin/notifications" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="activity-list">
+        <div class="activity-item" *ngFor="let a of recentActivity; let i = index"
+             [style.animation-delay]="(i * 0.08) + 's'">
+          <div class="activity-avatar-wrap">
+            <img [src]="a.avatar" [alt]="a.text" class="activity-avatar">
+            <div class="activity-type-icon" [style.background]="getActivityColor(a.type)">
+              <i class="fas" [ngClass]="getActivityIcon(a.type)"></i>
+            </div>
+          </div>
+          <div class="activity-content">
+            <div class="activity-text">{{ a.text }}</div>
+            <div class="activity-time"><i class="far fa-clock"></i> {{ a.time }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-card">
+      <div class="chart-header">
+        <h3><i class="fas fa-rocket"></i> Quick Actions</h3>
+      </div>
+      <div class="quick-actions">
+        <a routerLink="/admin/properties" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #4a6cf7, #7c3aed)">
+            <i class="fas fa-plus"></i>
+          </div>
+          <span>Add Property</span>
+        </a>
+        <a routerLink="/admin/users" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a)">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <span>Add User</span>
+        </a>
+        <a routerLink="/admin/agents" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2)">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <span>Manage Agents</span>
+        </a>
+        <a routerLink="/admin/inquiries" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706)">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <span>View Inquiries</span>
+        </a>
+        <a routerLink="/admin/locations" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #f43f5e, #e11d48)">
+            <i class="fas fa-map"></i>
+          </div>
+          <span>Manage Locations</span>
+        </a>
+        <a routerLink="/admin/settings" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed)">
+            <i class="fas fa-cog"></i>
+          </div>
+          <span>Settings</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

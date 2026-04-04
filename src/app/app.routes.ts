@@ -19,5 +19,20 @@ export const routes: Routes = [
   { path: 'find-agent', component: FindAgentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  
+  // Dashboards Lazy Loading
+  { 
+    path: 'admin', 
+    loadChildren: () => import('./admin/admin.routes').then(m => m.ADMIN_ROUTES)
+  },
+  { 
+    path: 'seller', 
+    loadChildren: () => import('./seller/seller.routes').then(m => m.SELLER_ROUTES)
+  },
+  { 
+    path: 'buyer', 
+    loadChildren: () => import('./buyer/buyer.routes').then(m => m.BUYER_ROUTES)
+  },
+
   { path: '**', redirectTo: '' }
 ];

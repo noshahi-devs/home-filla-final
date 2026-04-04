@@ -1,0 +1,33 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Notifications</h1>
+      <p class="page-subtitle">All your alerts, approvals, and system messages.</p>
+    </div>
+    <button class="btn-primary" (click)="markAllRead()">
+      <i class="fas fa-check-double"></i> Mark All as Read
+    </button>
+  </div>
+
+  <div class="locations-grid" style="grid-template-columns: 1fr;">
+    <div class="loc-card" style="height: auto;">
+      <ul class="loc-list">
+        <li *ngFor="let n of notifications" [ngStyle]="{'background': n.isRead ? '' : 'rgba(74,108,247,0.05)'}">
+          <div class="loc-info" style="flex-direction:row; gap:16px; align-items:center;">
+             <div class="notif-icon" [style.background]="n.color + '20'" [style.color]="n.color" style="width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center;">
+               <i class="fas" [ngClass]="n.icon"></i>
+             </div>
+             <div>
+               <div style="font-size:14px; font-weight:600; color:#f1f5f9;">{{ n.title }}</div>
+               <div style="font-size:13px; color:#94a3b8; margin-top:2px;">{{ n.message }}</div>
+               <div style="font-size:11px; color:#64748b; margin-top:4px;"><i class="far fa-clock"></i> {{ n.createdAt | date:'medium' }}</div>
+             </div>
+          </div>
+          <div class="loc-actions" *ngIf="!n.isRead">
+            <span class="badge purpose" style="padding:2px 8px; font-size:10px;">New</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

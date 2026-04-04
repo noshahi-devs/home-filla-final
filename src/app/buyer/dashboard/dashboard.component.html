@@ -1,0 +1,59 @@
+<div class="dashboard">
+  <div class="page-header">
+    <div>
+      <h1>Buyer Dashboard</h1>
+      <p class="page-subtitle">Welcome back! Manage your saved properties and inquiries.</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-dash btn-primary-dash" routerLink="/" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+        <i class="fas fa-search"></i> Find More Properties
+      </button>
+    </div>
+  </div>
+
+  <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="stat-card" *ngFor="let stat of statCards; let i = index"
+         [style.animation-delay]="(i * 0.08) + 's'"
+         style="border-color: rgba(59, 130, 246, 0.1);">
+      <div class="stat-icon" [style.background]="stat.bg">
+        <i class="fas" [ngClass]="stat.icon" [style.color]="stat.color"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+      <div class="stat-trend" [class.up]="stat.trendUp" [class.down]="!stat.trendUp">
+        <i class="fas" [class.fa-arrow-up]="stat.trendUp" [class.fa-arrow-down]="!stat.trendUp"></i>
+        {{ stat.trend }}
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-row" style="grid-template-columns: 1fr;">
+    <div class="quick-card" style="border-color: rgba(59, 130, 246, 0.1);">
+      <div class="chart-header">
+        <h3><i class="fas fa-rocket" style="color: #3b82f6;"></i> Quick Links</h3>
+      </div>
+      <div class="quick-actions" style="grid-template-columns: repeat(3, 1fr);">
+        <a routerLink="/" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #f43f5e, #e11d48)">
+            <i class="fas fa-heart"></i>
+          </div>
+          <span>Explore Recommended</span>
+        </a>
+        <a routerLink="/buyer/saved-properties" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb)">
+            <i class="fas fa-building"></i>
+          </div>
+          <span>View Saved Properties</span>
+        </a>
+        <a routerLink="/buyer/inquiries" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706)">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <span>My Inquiries</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

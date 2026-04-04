@@ -1,0 +1,79 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Agent Management</h1>
+      <p class="page-subtitle">Manage real estate agents, agencies, and view performance.</p>
+    </div>
+    <button class="btn-primary">
+      <i class="fas fa-user-plus"></i> Add Agent
+    </button>
+  </div>
+
+  <div class="filters-bar">
+    <div class="tabs">
+      <button class="tab-btn" [class.active]="statusFilter === 'all'" (click)="setFilter('all')">All Agents</button>
+      <button class="tab-btn" [class.active]="statusFilter === 'approved'" (click)="setFilter('approved')">Approved</button>
+      <button class="tab-btn" [class.active]="statusFilter === 'pending'" (click)="setFilter('pending')">Pending Requests</button>
+      <button class="tab-btn" [class.active]="statusFilter === 'rejected'" (click)="setFilter('rejected')">Rejected</button>
+    </div>
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search name or agency..." (input)="onSearch($event)">
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Agent Details</th>
+          <th>Agency Info</th>
+          <th>Performance</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of filteredAgents">
+          <td>
+            <div class="property-cell">
+              <img [src]="a.avatar || 'assets/placeholder-user.jpg'" alt="" class="prop-img">
+              <div class="prop-info">
+                <span class="prop-title">{{ a.name }}</span>
+                <span class="prop-seller"><i class="fas fa-phone-alt" style="font-size:10px"></i> {{ a.phone }}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="loc-cell">
+              <span class="city">{{ a.agencyName }}</span>
+              <span class="area">{{ a.email }}</span>
+            </div>
+          </td>
+          <td>
+            <div class="loc-cell">
+              <span class="city" style="color:#22c55e"><i class="fas fa-home" style="color:#64748b;font-size:10px"></i> {{ a.listingsCount }} Listings</span>
+              <span class="area" style="color:#f59e0b"><i class="fas fa-star" style="font-size:10px"></i> {{ a.rating || 'N/A' }} Rating</span>
+            </div>
+          </td>
+          <td>
+            <span class="status-badge" [ngClass]="a.status">{{ a.status }}</span>
+          </td>
+          <td class="actions-cell">
+            <div class="action-buttons">
+              <button class="btn-icon approve" title="Approve" *ngIf="a.status !== 'approved'" (click)="approveAgent(a.id)"><i class="fas fa-check"></i></button>
+              <button class="btn-icon reject" title="Reject" *ngIf="a.status !== 'rejected'" (click)="rejectAgent(a.id)"><i class="fas fa-times"></i></button>
+              <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filteredAgents.length === 0">
+          <td colspan="5" class="empty-state">
+            <i class="fas fa-user-tie"></i>
+            <p>No agents found matching your criteria.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

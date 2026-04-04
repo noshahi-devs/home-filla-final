@@ -1,246 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ─── Root tokens (exact same as Sell page) ─── */
 :host {
-  --accent: #4a6cf7;
-  --text-primary: #0f1a2f;
-  --text-muted: #566177;
-  --border: #e2e8f0;
-  --surface: #ffffff;
-  --bg: #f7f9fc;
-  --shadow-sm: 0 8px 26px rgba(15, 23, 42, 0.12);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  display: block;
+    --accent: #4a6cf7;
+    --accent-light: #f0f3fd;
+    --accent-border: #e0e6fa;
+    --text-primary: #1e2a3a;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --border: #e9eef2;
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,.04);
+    --shadow-md: 0 8px 24px rgba(0,0,0,.08);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,.12);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 .find-agent-page {
-  background: var(--bg);
-  min-height: 100vh;
-  color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
 }
 
+/* ─── HEADER (exact same as Sell) ─── */
 .realtor-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding: 16px 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    position: relative;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
 }
 
 .header-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 0 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
 }
 
-.logo-area .realtor-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--accent);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
+.realtor-logo {
+    background: var(--accent);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .logo-text {
-  font-size: 22px;
-  font-weight: 600;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 .nav-links {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
 }
 
 .nav-link {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-muted);
-  text-decoration: none;
-  padding-bottom: 4px;
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
 }
 
-.nav-link.active,
-.nav-link:hover {
-  color: var(--accent);
-  border-bottom: 2px solid var(--accent);
+.nav-link:hover, .nav-link.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
 }
+
+.nav-link.active { font-weight: 700; }
 
 .auth-buttons {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
-.btn-outline,
-.btn-primary {
-  border-radius: 999px;
-  font-weight: 600;
-  border: 1px solid transparent;
-  padding: 10px 22px;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  font-size: 14px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* ─── BUTTONS (exact same as Sell) ─── */
 .btn-outline {
-  background: transparent;
-  border-color: var(--border);
-  color: var(--text-primary);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
 .btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  box-shadow: 0 10px 30px rgba(74, 108, 247, 0.2);
-  transform: translateY(-1px);
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 108, 247, 0.15);
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: white;
-  border: none;
-  box-shadow: 0 14px 30px rgba(74, 108, 247, 0.35);
+    background: var(--accent);
+    border: none;
+    padding: 10px 24px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 18px 36px rgba(74, 108, 247, 0.35);
+.btn-primary:hover:not(:disabled) {
+    background: #3a5ce8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(74, 108, 247, 0.35);
 }
 
+.w-full { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 28px; font-size: 15px; }
+
+/* ─── HAMBURGER BUTTON (exact same as Sell) ─── */
 .hamburger-btn {
-  display: none;
-  border: none;
-  background: transparent;
-  flex-direction: column;
-  gap: 6px;
-  cursor: pointer;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.hamburger-btn:hover {
+    background: var(--accent-light);
 }
 
 .hamburger-btn span {
-  width: 24px;
-  height: 2px;
-  background: var(--text-primary);
-  display: block;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
 }
 
 .hamburger-btn.active span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+    transform: translateY(7px) rotate(45deg);
 }
 
 .hamburger-btn.active span:nth-child(2) {
-  opacity: 0;
+    opacity: 0;
+    transform: scaleX(0);
 }
 
 .hamburger-btn.active span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+    transform: translateY(-7px) rotate(-45deg);
 }
 
+/* ─── MOBILE MENU OVERLAY (exact same as Sell) ─── */
 .mobile-menu-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.75);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.6); 
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .mobile-menu-overlay.open {
-  opacity: 1;
-  visibility: visible;
+    display: block;
+    opacity: 1;
 }
 
+/* ─── MOBILE NAVIGATION DRAWER (exact same as Sell) ─── */
 .mobile-nav {
-  position: fixed;
-  right: -100%;
-  top: 0;
-  width: min(320px, 80vw);
-  height: 100vh;
-  background: white;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  box-shadow: -8px 0 28px rgba(0, 0, 0, 0.2);
-  transition: right 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(320px, 85vw);
+    height: 100vh;
+    background: white;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
 }
 
 .mobile-nav.open {
-  right: 0;
+    right: 0;
 }
 
 .mobile-nav-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
 }
 
 .mobile-nav-close {
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mobile-nav-close:hover {
+    background: var(--bg);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
 }
 
 .mobile-nav-links {
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+    flex: 1;
 }
 
 .mobile-nav-link {
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-primary);
-  text-decoration: none;
-  font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-left: 4px solid transparent; 
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .mobile-nav-link i {
-  margin-right: 10px;
+    width: 20px;
+    color: var(--text-muted);
+    font-size: 16px;
+    text-align: center;
+    transition: color 0.2s ease;
 }
 
+.mobile-nav-link:hover, 
 .mobile-nav-link.active {
-  color: var(--accent);
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+    color: var(--accent);
+}
+
+.mobile-nav-link:hover i, 
+.mobile-nav-link.active i {
+    color: var(--accent);
 }
 
 .mobile-nav-auth {
-  margin-top: auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg);
+}
+
+.mobile-nav-auth .btn-outline, 
+.mobile-nav-auth .btn-primary {
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .hero-section {
@@ -627,6 +707,126 @@
   gap: 12px;
 }
 
+/* ─── FOOTER (exact same as Sell) ─── */
+.realtor-footer {
+    background: #1e3a5f;
+    padding: 80px 0 40px;
+    color: #94a3b8;
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-section h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-links-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-links-col a,
+.footer-bottom-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer-links-col a:hover,
+.footer-bottom-links a:hover {
+    color: #60a5fa;
+    padding-left: 4px;
+}
+
+.highlight-link { color: #fbcd0e !important; }
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+}
+
+.footer-bottom-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-socials a {
+    color: white;
+    font-size: 20px;
+    opacity: 0.75;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    transition: all 0.25s ease;
+}
+
+.footer-socials a:hover {
+    opacity: 1;
+    background: rgba(96, 165, 250, 0.25);
+    color: #60a5fa;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(96, 165, 250, 0.2);
+}
+
+.footer-disclaimer {
+    color: #94a3b8;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 800px;
+    line-height: 1.6;
+}
+
+.footer-disclaimer a {
+    color: white;
+    text-decoration: underline;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+    .footer-top { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+}
+
 @media (max-width: 900px) {
   .hero-inner {
     grid-template-columns: 1fr;
@@ -659,17 +859,13 @@
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
+    .hamburger-btn { display: flex; }
+    .nav-links { display: none !important; }
+    .auth-buttons { display: none !important; }
 
-  .auth-buttons {
-    display: none;
-  }
-
-  .hamburger-btn {
-    display: flex;
-  }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-bottom-links { gap: 16px; }
+    .footer-socials { gap: 16px; }
 }
 
 @media (max-width: 600px) {
@@ -711,4 +907,6 @@
     width: 100%;
     justify-content: center;
   }
+
+  .footer-top { grid-template-columns: 1fr; }
 }

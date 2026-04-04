@@ -1,0 +1,59 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Category Management</h1>
+      <p class="page-subtitle">Manage property types and purposes available for listing.</p>
+    </div>
+  </div>
+
+  <div class="locations-grid">
+    <!-- Property Types -->
+    <div class="loc-card">
+      <div class="card-header">
+        <h3><i class="fas fa-home"></i> Property Types</h3>
+      </div>
+      <div class="add-form">
+        <input type="text" placeholder="e.g. Farmhouse">
+        <button class="btn-primary-sm">Add Type</button>
+      </div>
+
+      <ul class="loc-list">
+        <li *ngFor="let t of propertyTypes" class="no-hover">
+          <div class="loc-info">
+            <span class="name">{{ t.label }}</span>
+            <span class="sub">{{ t.id }}</span>
+          </div>
+          <div class="loc-actions">
+            <!-- <span class="badge" style="background:rgba(255,255,255,0.05); color:#94a3b8;">{{ t.count }} items</span> -->
+            <button class="btn-icon edit"><i class="fas fa-pen"></i></button>
+            <button class="btn-icon delete"><i class="fas fa-trash"></i></button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Purposes -->
+    <div class="loc-card">
+      <div class="card-header">
+        <h3><i class="fas fa-tags"></i> Purposes</h3>
+      </div>
+      <div class="add-form">
+        <input type="text" placeholder="e.g. Lease">
+        <button class="btn-primary-sm">Add Purpose</button>
+      </div>
+
+      <ul class="loc-list">
+        <li *ngFor="let p of purposes" class="no-hover">
+          <div class="loc-info">
+            <span class="name">{{ p.label }}</span>
+            <span class="sub">{{ p.id }}</span>
+          </div>
+          <div class="loc-actions">
+            <button class="btn-icon edit"><i class="fas fa-pen"></i></button>
+            <button class="btn-icon delete"><i class="fas fa-trash"></i></button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

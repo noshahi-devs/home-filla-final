@@ -1,0 +1,50 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Lead Inquiries</h1>
+      <p class="page-subtitle">Potential buyers interested in your properties.</p>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Lead Info</th>
+          <th>Message</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of inquiries">
+          <td>{{ i.propertyTitle }}</td>
+          <td>
+            <div class="loc-cell">
+              <span class="city">{{ i.userName }}</span>
+              <span class="area"><i class="fas fa-phone-alt" style="font-size:10px"></i> {{ i.userPhone }}</span>
+            </div>
+          </td>
+          <td style="max-width: 250px;">
+            <p style="font-size: 13px; color: #94a3b8; margin:0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              {{ i.message }}
+            </p>
+          </td>
+          <td><span class="badge type">{{ i.status }}</span></td>
+          <td>
+            <button class="btn-primary" style="padding: 6px 12px; background: rgba(20, 184, 166, 0.15); color: #14b8a6; border: 1px solid rgba(20, 184, 166, 0.3); box-shadow: none;">
+              Contact
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="inquiries.length === 0">
+          <td colspan="5" class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <p>No inquiries yet.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

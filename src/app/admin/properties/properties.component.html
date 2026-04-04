@@ -1,0 +1,173 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Properties Management</h1>
+      <p class="page-subtitle">Manage all listings, approve pending properties, or remove invalid ones.</p>
+    </div>
+    <button class="btn-primary" (click)="openAddModal()">
+      <i class="fas fa-plus"></i> Add Property
+    </button>
+  </div>
+
+  <div class="filters-bar">
+    <div class="tabs">
+      <button class="tab-btn" [class.active]="statusFilter === 'all'" (click)="setFilter('all')">All Listings</button>
+      <button class="tab-btn" [class.active]="statusFilter === 'pending'" (click)="setFilter('pending')">Pending</button>
+      <button class="tab-btn" [class.active]="statusFilter === 'approved'" (click)="setFilter('approved')">Approved</button>
+      <button class="tab-btn" [class.active]="statusFilter === 'rejected'" (click)="setFilter('rejected')">Rejected</button>
+    </div>
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search title, city or ID..." (input)="onSearch($event)">
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Property</th>
+          <th>Location</th>
+          <th>Price</th>
+          <th>Type / Purpose</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of filteredProperties">
+          <td class="col-id">#{{ p.id }}</td>
+          <td>
+            <div class="property-cell">
+              <img [src]="p.images && p.images[0] ? p.images[0] : 'assets/placeholder.jpg'" alt="" class="prop-img">
+              <div class="prop-info">
+                <span class="prop-title">{{ p.title }}</span>
+                <span class="prop-seller">Seller ID: {{ p.sellerId }}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="loc-cell">
+              <span class="city">{{ p.city }}</span>
+              <span class="area">{{ p.area }}</span>
+            </div>
+          </td>
+          <td class="price">Rs {{ p.price | number }}</td>
+          <td>
+            <div class="type-cell">
+              <span class="badge type">{{ p.type }}</span>
+              <span class="badge purpose" [class.rent]="p.purpose === 'rent'">{{ p.purpose }}</span>
+            </div>
+          </td>
+          <td>
+            <span class="status-badge" [ngClass]="p.status">{{ p.status }}</span>
+          </td>
+          <td class="actions-cell">
+            <div class="action-buttons">
+              <button class="btn-icon approve" title="Approve" *ngIf="p.status !== 'approved'" (click)="approveProperty(p.id)"><i class="fas fa-check"></i></button>
+              <button class="btn-icon reject" title="Reject" *ngIf="p.status !== 'rejected'" (click)="rejectProperty(p.id)"><i class="fas fa-times"></i></button>
+              <button class="btn-icon edit" title="Edit" (click)="openEditModal(p)"><i class="fas fa-pen"></i></button>
+              <button class="btn-icon delete" title="Delete" (click)="deleteProperty(p.id)"><i class="fas fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filteredProperties.length === 0">
+          <td colspan="7" class="empty-state">
+            <i class="fas fa-search"></i>
+            <p>No properties found matching your criteria.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ isEditMode ? 'Edit Property' : 'Add New Property' }}</h2>
+      <button class="close-btn" (click)="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <form class="prop-form" (ngSubmit)="saveProperty()">
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>Title</label>
+            <input type="text" [(ngModel)]="editingProperty.title" name="title" required placeholder="Luxury Villa in Phase 6">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>Description</label>
+            <textarea [(ngModel)]="editingProperty.description" name="description" rows="3" placeholder="Property details..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Price (Rs)</label>
+            <input type="number" [(ngModel)]="editingProperty.price" name="price" required>
+          </div>
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" [(ngModel)]="editingProperty.city" name="city" required>
+          </div>
+          <div class="form-group">
+            <label>Area</label>
+            <input type="text" [(ngModel)]="editingProperty.area" name="area" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type</label>
+            <select [(ngModel)]="editingProperty.type" name="type">
+              <option value="house">House</option>
+              <option value="apartment">Apartment</option>
+              <option value="plot">Plot</option>
+              <option value="commercial">Commercial</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Purpose</label>
+            <select [(ngModel)]="editingProperty.purpose" name="purpose">
+              <option value="sale">For Sale</option>
+              <option value="rent">For Rent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select [(ngModel)]="editingProperty.status" name="status">
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Beds</label>
+            <input type="number" [(ngModel)]="editingProperty.beds" name="beds">
+          </div>
+          <div class="form-group">
+            <label>Baths</label>
+            <input type="number" [(ngModel)]="editingProperty.baths" name="baths">
+          </div>
+          <div class="form-group">
+            <label>SqFt</label>
+            <input type="number" [(ngModel)]="editingProperty.sqft" name="sqft">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="btn-save">Save Property</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

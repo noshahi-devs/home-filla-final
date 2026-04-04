@@ -1,0 +1,72 @@
+<div class="properties-page">
+  <div class="page-header">
+    <div>
+      <h1>Location Management</h1>
+      <p class="page-subtitle">Configure available cities and areas for properties.</p>
+    </div>
+  </div>
+
+  <div class="locations-grid">
+    <!-- Cities Column -->
+    <div class="loc-card">
+      <div class="card-header">
+        <h3><i class="fas fa-city"></i> Cities</h3>
+      </div>
+      
+      <div class="add-form">
+        <input type="text" placeholder="City Name" [(ngModel)]="newCityName">
+        <input type="text" placeholder="Province" [(ngModel)]="newCityProv">
+        <button class="btn-primary-sm" (click)="addCity()">Add City</button>
+      </div>
+
+      <ul class="loc-list">
+        <li *ngFor="let c of cities" 
+            [class.active]="c.id === selectedCityId" 
+            (click)="selectCity(c.id)">
+          <div class="loc-info">
+            <span class="name">{{ c.name }}</span>
+            <span class="sub">{{ c.province }}</span>
+          </div>
+          <div class="loc-actions">
+            <!-- <span class="count">{{ c.propertyCount }} properties</span> -->
+            <button class="btn-icon delete" (click)="deleteCity(c.id); $event.stopPropagation()">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Areas Column -->
+    <div class="loc-card">
+      <div class="card-header">
+        <h3><i class="fas fa-map-marker-alt"></i> Areas</h3>
+        <span class="badge" *ngIf="selectedCityId">For Selected City</span>
+      </div>
+      
+      <div class="add-form" *ngIf="selectedCityId">
+        <input type="text" placeholder="New Area Name" [(ngModel)]="newAreaName">
+        <button class="btn-primary-sm" (click)="addArea()">Add Area</button>
+      </div>
+      
+      <div class="empty-state" *ngIf="!selectedCityId">
+        <p>Please select a city to view its areas.</p>
+      </div>
+
+      <ul class="loc-list" *ngIf="selectedCityId">
+        <li *ngFor="let a of areas" class="no-hover">
+          <div class="loc-info">
+            <span class="name">{{ a.name }}</span>
+          </div>
+          <div class="loc-actions">
+            <button class="btn-icon edit"><i class="fas fa-pen"></i></button>
+            <button class="btn-icon delete" (click)="deleteArea(a.id)"><i class="fas fa-trash"></i></button>
+          </div>
+        </li>
+        <li *ngIf="areas.length === 0" class="empty-item">
+          No areas found for this city.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

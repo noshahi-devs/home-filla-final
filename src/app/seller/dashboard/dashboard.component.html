@@ -1,0 +1,67 @@
+<div class="dashboard">
+  <!-- ── Page Header ──────────────────────────────── -->
+  <div class="page-header">
+    <div>
+      <h1>Seller Dashboard</h1>
+      <p class="page-subtitle">Track your property views, inquiries, and listing statuses.</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-dash btn-primary-dash" routerLink="/seller/my-properties" style="background: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%);">
+        <i class="fas fa-plus"></i> Add New Property
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Stats Grid ───────────────────────────────── -->
+  <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr);">
+    <div class="stat-card" *ngFor="let stat of statCards; let i = index"
+         [style.animation-delay]="(i * 0.08) + 's'"
+         style="border-color: rgba(20, 184, 166, 0.1);">
+      <div class="stat-icon" [style.background]="stat.bg">
+        <i class="fas" [ngClass]="stat.icon" [style.color]="stat.color"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+      <div class="stat-trend" [class.up]="stat.trendUp" [class.down]="!stat.trendUp">
+        <i class="fas" [class.fa-arrow-up]="stat.trendUp" [class.fa-arrow-down]="!stat.trendUp"></i>
+        {{ stat.trend }}
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-row" style="grid-template-columns: 1fr;">
+      <div class="quick-card" style="border-color: rgba(20, 184, 166, 0.1);">
+      <div class="chart-header">
+        <h3><i class="fas fa-rocket" style="color: #14b8a6;"></i> Quick Actions</h3>
+      </div>
+      <div class="quick-actions" style="grid-template-columns: repeat(4, 1fr);">
+        <a routerLink="/seller/my-properties" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #14b8a6, #0891b2)">
+            <i class="fas fa-plus"></i>
+          </div>
+          <span>Add Property</span>
+        </a>
+        <a routerLink="/seller/my-properties" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb)">
+            <i class="fas fa-building"></i>
+          </div>
+          <span>Manage Listings</span>
+        </a>
+        <a routerLink="/seller/inquiries" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706)">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <span>View Inquiries</span>
+        </a>
+        <a routerLink="/seller/profile" class="quick-btn">
+          <div class="quick-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed)">
+            <i class="fas fa-user-edit"></i>
+          </div>
+          <span>Update Profile</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
