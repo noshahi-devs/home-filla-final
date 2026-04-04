@@ -1,5 +1,5 @@
 <div class="mortgage-page">
-  <!-- Mobile Nav -->
+  <!-- Mobile Nav (exact copy from Sell) -->
   <div class="mobile-menu-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
   <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
     <div class="mobile-nav-header">
@@ -20,7 +20,7 @@
     </div>
   </nav>
 
-  <!-- Header -->
+  <!-- Header (exact copy from Sell) -->
   <header class="realtor-header">
     <div class="header-container">
       <a routerLink="/" class="logo-area" style="text-decoration: none;">
@@ -47,175 +47,227 @@
     </div>
   </header>
 
-  <!-- Hero & Calculator -->
-  <div class="mortgage-hero">
-    <div class="hero-bg-accent"></div>
+  <!-- Hero Section -->
+  <section class="sell-hero">
+    <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-text-area">
-        <h1 class="hero-title">Finance your dream home</h1>
-        <p class="hero-subtitle">Estimate your monthly payments, explore current rates, and get pre-approved quickly perfectly with our premium tools.</p>
-        <div class="hero-badges">
-          <span class="badge"><i class="fas fa-check-circle"></i> Fast Pre-approval</span>
-          <span class="badge"><i class="fas fa-chart-line"></i> Competitive Rates</span>
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-badge-top">Mortgage Solutions</div>
+          <h1 class="hero-title">Finance your future<br>with confidence.</h1>
+          <p class="hero-subtitle">We offer more than just a calculator. Get expert guidance, competitive rates, and a seamless path to homeownership.</p>
+          
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num">4.8/5</span>
+              <span class="stat-label-text">User Satisfaction</span>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="stat-item">
+              <span class="stat-num">24h</span>
+              <span class="stat-label-text">Fast Approvals</span>
+            </div>
+          </div>
         </div>
-        <div class="hero-stats-grid">
-          <div class="hero-stat-card">
-            <span class="stat-value">45 min</span>
-            <small>Avg. lender response</small>
-          </div>
-          <div class="hero-stat-card">
-            <span class="stat-value">1.03%</span>
-            <small>Avg. rate drop this week</small>
-          </div>
-          <div class="hero-stat-card">
-            <span class="stat-value">24/7</span>
-            <small>Concierge support</small>
+
+        <div class="hero-calc">
+          <div class="valuation-card">
+            <div class="calc-header">
+              <h2>Mortgage Calculator</h2>
+              <p>Estimate your monthly payments instantly.</p>
+            </div>
+            
+            <div class="calc-main-result">
+              <div class="monthly-payment">
+                <span class="currency">$</span>
+                <span class="amount">{{ totalMonthlyPayment | number:'1.0-0' }}</span>
+                <span class="period">/mo</span>
+              </div>
+              <p class="result-detail">Estimated total payment</p>
+            </div>
+
+            <div class="calc-inputs">
+              <div class="input-group">
+                <div class="label-row">
+                  <label>Home Price</label>
+                  <span class="value-display">${{ homePrice | number }}</span>
+                </div>
+                <input type="range" [(ngModel)]="homePrice" min="100000" max="2000000" step="5000">
+              </div>
+
+              <div class="input-row">
+                <div class="input-group small">
+                  <label>Down Payment (%)</label>
+                  <input type="number" [(ngModel)]="downPaymentPercent" class="field-input">
+                </div>
+                <div class="input-group small">
+                  <label>Rate (%)</label>
+                  <input type="number" [(ngModel)]="interestRate" step="0.1" class="field-input">
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Loan Term</label>
+                <select [(ngModel)]="loanTerm" class="field-select">
+                  <option [ngValue]="30">30-Year Fixed</option>
+                  <option [ngValue]="15">15-Year Fixed</option>
+                  <option [ngValue]="5">5/1 ARM</option>
+                </select>
+              </div>
+
+              <button class="btn-primary w-full">Get Pre-Approved <i class="fas fa-chevron-right"></i></button>
+            </div>
           </div>
         </div>
       </div>
-      
-      <!-- High-End Calculator Card -->
-      <div class="mortgage-calc-wrapper">
-        <div class="mortgage-calc-card glass-panel">
-          <div class="calc-header">
-            <h2>Mortgage Calculator</h2>
-            <p>See exactly what you'll pay each month.</p>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="why-sell-section">
+    <div class="container">
+      <h2 class="section-title">Your path to homeownership</h2>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-calculator"></i></div>
+          <h3>Check Affordability</h3>
+          <p>Use our tools to see exactly how much house you can afford based on your income and debts.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+          <h3>Get Pre-Approved</h3>
+          <p>Complete a simple online application and get a pre-approval letter within minutes, not days.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-home"></i></div>
+          <h3>Find Your Home</h3>
+          <p>Shop with confidence knowing your budget and having a verified lender in your pocket.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-key"></i></div>
+          <h3>Close & Move In</h3>
+          <p>Our concierge team handles the paperwork so you can focus on the excitement of a new home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breakdown & Rates -->
+  <section class="breakdown-rates">
+    <div class="section-container">
+      <div class="dual-grid">
+        <div class="breakdown-box">
+          <div class="info-card">
+            <h3>Payment Breakdown</h3>
+            <p>Understand where your money goes every month.</p>
+            
+            <div class="breakdown-items">
+              <div class="bd-row">
+                <div class="bd-info">
+                  <div class="bd-dot principal"></div>
+                  <span>Principal & Interest</span>
+                </div>
+                <span class="bd-val">${{ principalAndInterest | number:'1.0-0' }}</span>
+              </div>
+              <div class="bd-row">
+                <div class="bd-info">
+                  <div class="bd-dot tax"></div>
+                  <span>Property Tax</span>
+                </div>
+                <span class="bd-val">${{ monthlyPropertyTax | number:'1.0-0' }}</span>
+              </div>
+              <div class="bd-row">
+                <div class="bd-info">
+                  <div class="bd-dot insurance"></div>
+                  <span>Home Insurance</span>
+                </div>
+                <span class="bd-val">${{ monthlyHomeInsurance | number:'1.0-0' }}</span>
+              </div>
+              <div class="bd-divider"></div>
+              <div class="bd-total">
+                <span>Total Est. Monthly</span>
+                <span>${{ totalMonthlyPayment | number:'1.0-0' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rates-box">
+          <h3>Today's Market Rates</h3>
+          <p>National averages as of today. Rates vary by lender and credit score.</p>
+          
+          <div class="rates-table">
+            <div class="table-row head">
+              <span>Loan Type</span>
+              <span>Rate</span>
+              <span>APR</span>
+            </div>
+            <div class="table-row">
+              <span class="loan-name">30-Year Fixed</span>
+              <span class="rate-val">6.54%</span>
+              <span class="apr-val">6.68%</span>
+            </div>
+            <div class="table-row">
+              <span class="loan-name">15-Year Fixed</span>
+              <span class="rate-val">5.89%</span>
+              <span class="apr-val">6.01%</span>
+            </div>
+            <div class="table-row last">
+              <span class="loan-name">5/1 ARM</span>
+              <span class="rate-val">6.25%</span>
+              <span class="apr-val">6.45%</span>
+            </div>
           </div>
           
-          <div class="calc-body">
-            <!-- Total Output -->
-            <div class="calc-result-box">
-              <div class="result-label">Est. Monthly Payment</div>
-              <div class="result-value">${{ totalMonthlyPayment | number:'1.0-0' }}</div>
-            </div>
-
-            <!-- Inputs -->
-            <div class="calc-input-group">
-              <label>Home Price</label>
-              <div class="input-with-prefix">
-                <span class="prefix">$</span>
-                <input type="number" [(ngModel)]="homePrice">
-              </div>
-              <input type="range" class="styled-slider" [(ngModel)]="homePrice" min="50000" max="2500000" step="10000">
-            </div>
-
-            <div class="calc-row">
-              <div class="calc-input-group">
-                <label>Down Payment (%)</label>
-                <div class="input-with-suffix">
-                  <input type="number" [(ngModel)]="downPaymentPercent">
-                  <span class="suffix">%</span>
-                </div>
-              </div>
-              <div class="calc-input-group">
-                <label>Interest Rate</label>
-                <div class="input-with-suffix">
-                  <input type="number" [(ngModel)]="interestRate" step="0.1">
-                  <span class="suffix">%</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="calc-input-group">
-              <label>Loan Program</label>
-              <select [(ngModel)]="loanTerm" class="premium-select">
-                <option [ngValue]="30">30-Year Fixed</option>
-                <option [ngValue]="15">15-Year Fixed</option>
-                <option [ngValue]="5">5/1 ARM</option>
-              </select>
-            </div>
-
-            <button class="btn-primary w-100 get-approved-btn">Get Pre-Approved Now <i class="fas fa-arrow-right"></i></button>
+          <div class="rate-disclaimer">
+            <i class="fas fa-info-circle"></i>
+            Actual interest rates and scheduled payments may vary based on your specific situation.
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Breakdown Section -->
-  <div class="breakdown-section">
-    <div class="breakdown-container">
-      <div class="breakdown-info">
-        <h2>Payment Breakdown</h2>
-        <p>A detailed look at your estimated monthly payment.</p>
-        
-        <div class="breakdown-list">
-          <div class="bd-item">
-            <div class="bd-color-dot" style="background:#4a6cf7;"></div>
-            <div class="bd-details">
-              <span class="bd-label">Principal & Interest</span>
-              <span class="bd-value">${{ principalAndInterest | number:'1.0-0' }}</span>
-            </div>
-          </div>
-          <div class="bd-item">
-            <div class="bd-color-dot" style="background:#fbcd0e;"></div>
-            <div class="bd-details">
-               <span class="bd-label">Property Taxes</span>
-               <span class="bd-value">${{ monthlyPropertyTax | number:'1.0-0' }}</span>
-            </div>
-          </div>
-          <div class="bd-item">
-            <div class="bd-color-dot" style="background:#10b981;"></div>
-            <div class="bd-details">
-               <span class="bd-label">Home Insurance</span>
-               <span class="bd-value">${{ monthlyHomeInsurance | number:'1.0-0' }}</span>
-            </div>
-          </div>
-        </div>
+  <!-- FAQ Section -->
+  <section class="faq-section-simple">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <h2>Common Questions</h2>
+        <p>Everything you need to know about home financing.</p>
       </div>
-      <div class="breakdown-graphic">
-         <div class="donut-chart-placeholder">
-            <div class="donut-center">
-               <span>Total</span>
-               <strong>${{ totalMonthlyPayment | number:'1.0-0' }}</strong>
-            </div>
-         </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>What is the minimum down payment?</h4>
+          <p>Many first-time buyer programs allow down payments as low as 3.5% or even 3% for conventional loans.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How does credit score affect my rate?</h4>
+          <p>Generally, a higher credit score qualifies you for lower interest rates, which can save you thousands over the life of the loan.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What is Private Mortgage Insurance (PMI)?</h4>
+          <p>PMI is usually required if your down payment is less than 20%. It protects the lender but helps you buy a home sooner.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Should I lock my interest rate?</h4>
+          <p>Locking your rate protects you from market increases during the loan processing period, which typically takes 30-45 days.</p>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Current Rates Section -->
-  <div class="rates-section">
-     <div class="rates-container">
-        <h2 class="section-title">Today's Mortgage Rates</h2>
-        <p class="section-subtitle">Averages based on recent national data. Your actual rate may vary.</p>
-        
-        <div class="rates-table-wrapper">
-           <table class="premium-rates-table">
-              <thead>
-                 <tr>
-                    <th>Loan Type</th>
-                    <th>Interest Rate</th>
-                    <th>APR</th>
-                    <th>Trend</th>
-                 </tr>
-              </thead>
-              <tbody>
-                 <tr>
-                    <td><strong>30-Year Fixed</strong></td>
-                    <td>6.540%</td>
-                    <td>6.680%</td>
-                    <td class="trend down"><i class="fas fa-arrow-down"></i> 0.05%</td>
-                 </tr>
-                 <tr>
-                    <td><strong>15-Year Fixed</strong></td>
-                    <td>5.890%</td>
-                    <td>6.010%</td>
-                    <td class="trend up"><i class="fas fa-arrow-up"></i> 0.02%</td>
-                 </tr>
-                 <tr>
-                    <td><strong>5/1 ARM</strong></td>
-                    <td>6.250%</td>
-                    <td>6.450%</td>
-                    <td class="trend flat"><i class="fas fa-minus"></i> 0.00%</td>
-                 </tr>
-              </tbody>
-           </table>
-        </div>
-     </div>
-  </div>
+  <!-- CTA Section (same as Sell) -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Ready to get started?</h2>
+      <p>Talk to a mortgage expert today and get a personalized financing strategy.</p>
+      <a routerLink="/find-agent" class="btn-primary large-btn" style="text-decoration:none; display:inline-flex; justify-content:center; align-items:center; gap:6px;">Find an Agent</a>
+    </div>
+  </section>
 
-  <!-- Standard Footer -->
+  <!-- Footer (exact copy from Sell) -->
   <footer class="realtor-footer">
     <div class="footer-container">
       <div class="footer-top">

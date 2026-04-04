@@ -1,36 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+/* ─── Root tokens (exact same as Sell page) ─── */
 :host {
-    --bg-primary: #1e3a5f;
-    --accent-blue: #4a6cf7;
-    --accent-light: #eff3ff;
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --text-muted: #94a3b8;
-    --border: #e2e8f0;
-    --bg-soft: #f8fafc;
-    --success: #10b981;
-    --warning: #fbcd0e;
-    --danger: #ef4444;
+    --accent: #4a6cf7;
+    --accent-light: #f0f3fd;
+    --accent-border: #e0e6fa;
+    --text-primary: #1e2a3a;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --border: #e9eef2;
+    --bg: #f6f8fa;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,.04);
+    --shadow-md: 0 8px 24px rgba(0,0,0,.08);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,.12);
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 .mortgage-page {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
     color: var(--text-primary);
-    background-color: var(--bg-soft);
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
-/* ─── HEADER ─── */
+/* ─── HEADER (exact same as Sell) ─── */
 .realtor-header {
-    background: white;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
     padding: 16px 0;
     position: relative;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+    box-shadow: var(--shadow-sm);
 }
 
 .header-container {
@@ -40,17 +44,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 28px;
 }
 
 .logo-area {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .realtor-logo {
-    background: var(--accent-blue);
+    background: var(--accent);
     color: white;
     width: 40px;
     height: 40px;
@@ -81,14 +84,16 @@
     text-decoration: none;
     padding: 6px 0;
     border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
+    transition: all 0.2s;
+    cursor: pointer;
 }
 
-.nav-link.active,
-.nav-link:hover {
-    color: var(--accent-blue);
-    border-bottom-color: var(--accent-blue);
+.nav-link:hover, .nav-link.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
 }
+
+.nav-link.active { font-weight: 700; }
 
 .auth-buttons {
     display: flex;
@@ -96,533 +101,456 @@
     gap: 16px;
 }
 
+/* ─── BUTTONS (exact same as Sell) ─── */
 .btn-outline {
     background: transparent;
-    border-color: var(--border);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
     color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .btn-outline:hover {
-    border-color: var(--accent-blue);
-    color: var(--accent-blue);
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 108, 247, 0.15);
 }
 
 .btn-primary {
-    background: var(--accent-blue);
-    box-shadow: 0 14px 30px rgba(74, 108, 247, 0.35);
+    background: var(--accent);
+    border: none;
+    padding: 10px 24px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
-.w-100 {
-    width: 100%;
+.btn-primary:hover:not(:disabled) {
+    background: #3a5ce8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(74, 108, 247, 0.35);
 }
 
-/* ─── HERO & CALCULATOR ─── */
-.mortgage-hero {
-    position: relative;
-    padding: 120px 24px 100px;
-    background-image: url('https://images.unsplash.com/photo-1474018556401-380a51e2f14a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    width: 100vw;
-    border-radius: 0;
+.btn-primary:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
     box-shadow: none;
 }
 
-.mortgage-hero::before,
-.mortgage-hero::after {
-    content: '';
+.w-full { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 28px; font-size: 15px; }
+
+/* ─── HERO (same dark overlay as Sell) ─── */
+.sell-hero {
+    position: relative;
+    padding: 100px 24px;
+    background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');
+    background-size: cover;
+    background-position: center;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-overlay {
     position: absolute;
     inset: 0;
-    z-index: 0;
-}
-
-.mortgage-hero::before {
-    background: linear-gradient(120deg, rgba(6, 10, 42, 0.35), rgba(10, 26, 61, 0.4));
-}
-
-.mortgage-hero::after {
-    background: radial-gradient(circle at top right, rgba(123, 140, 251, 0.25), transparent 45%), radial-gradient(circle at 25% 65%, rgba(255, 255, 255, 0.08), transparent 70%);
-    mix-blend-mode: screen;
+    background: linear-gradient(135deg, rgba(15,25,50,0.9) 0%, rgba(30,42,80,0.8) 50%, rgba(74,108,247,0.4) 100%);
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    gap: 64px;
-    align-items: stretch;
-}
-
-.hero-text-area {
-    padding-right: 40px;
-}
-
-.hero-title {
-    font-size: 54px;
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -1.2px;
-    color: white;
-    margin-bottom: 24px;
-}
-
-.hero-subtitle {
-    font-size: 18px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 40px;
-}
-
-.hero-badges {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-.hero-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-    margin-top: 32px;
-}
-
-.hero-stat-card {
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 20px;
-    padding: 12px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(8px);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.hero-stat-card small {
-    color: rgba(255, 255, 255, 0.65);
-    letter-spacing: 0.05em;
-}
-
-.hero-stat-card .stat-value {
-    font-size: 26px;
-    font-weight: 700;
-    color: white;
-}
-
-.hero-stat-card small {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 13px;
-}
-
-.badge {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 8px 16px;
-    border-radius: 40px;
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.badge i {
-    color: #34d399;
-    font-size: 16px;
-}
-
-/* CALCULATOR CARD */
-.mortgage-calc-wrapper {
-    margin-bottom: -200px;
-    position: relative;
-    z-index: 10;
-}
-
-.mortgage-calc-card {
-    background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(20, 39, 80, 0.9));
-    color: white;
-    border-radius: 32px;
-    padding: 34px;
-    box-shadow: 0 45px 80px rgba(10, 18, 40, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(24px);
-    max-width: 420px;
-    margin-left: auto;
-}
-
-.calc-header {
-    margin-bottom: 24px;
-}
-
-.calc-header h2 {
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: 4px;
-}
-
-.calc-header p {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.75);
-}
-
-.calc-result-box {
-    background: linear-gradient(135deg, rgba(31, 64, 161, 0.95), rgba(5, 32, 100, 0.9));
-    padding: 24px;
-    border-radius: 16px;
-    text-align: center;
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-.calc-result-box::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-    transform: translate(30%, -30%);
-}
-
-.result-label {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-    opacity: 0.9;
-}
-
-.result-value {
-    font-size: 48px;
-    font-weight: 800;
-    letter-spacing: -2px;
-}
-
-.calc-body {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.calc-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-
-.calc-input-group label {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.75);
-    margin-bottom: 8px;
-}
-
-.input-with-prefix,
-.input-with-suffix {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.2s;
-}
-
-.input-with-prefix:focus-within,
-.input-with-suffix:focus-within {
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 0 3px var(--accent-light);
-}
-
-.prefix,
-.suffix {
-    padding: 12px 16px;
-    background: var(--bg-soft);
-    color: var(--text-secondary);
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.input-with-prefix input,
-.input-with-suffix input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    padding: 12px 16px;
-    font-size: 18px;
-    font-weight: 600;
-    outline: none;
-    color: white;
-}
-
-.input-with-prefix input {
-    padding-left: 0;
-}
-
-.input-with-suffix input {
-    padding-right: 0;
-}
-
-.styled-slider {
-    width: 100%;
-    margin-top: 12px;
-    accent-color: #38bdf8;
-}
-
-.premium-select {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    background: rgba(15, 23, 42, 0.7);
-    outline: none;
-    color: white;
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    background-size: 16px;
-}
-
-.get-approved-btn {
-    padding: 14px 22px;
-    font-size: 15px;
-    margin-top: 12px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #7b8cfb, #a855f7);
-    box-shadow: 0 20px 30px rgba(123, 140, 251, 0.4);
-}
-
-.get-approved-btn:hover {
-    padding-right: 24px;
-}
-
-/* slide effect */
-
-/* ─── BREAKDOWN SECTION ─── */
-.breakdown-section {
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(11, 27, 56, 0.8) 100%);
-    padding: 200px 24px 120px;
-}
-
-.breakdown-container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
+}
+
+.hero-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
 }
 
-.breakdown-info h2 {
-    font-size: 36px;
+.hero-badge-top {
+    display: inline-block;
+    background: rgba(74, 108, 247, 0.25);
+    color: #a5b4fc;
+    border: 1px solid rgba(74, 108, 247, 0.4);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+}
+
+.hero-title {
+    font-size: 48px;
     font-weight: 800;
     margin-bottom: 16px;
-    letter-spacing: -1px;
+    letter-spacing: -0.02em;
+    color: white;
+    line-height: 1.15;
 }
 
-.breakdown-info p {
-    color: var(--text-secondary);
+.hero-subtitle {
     font-size: 18px;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
+    opacity: 0.8;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.8);
+    max-width: 480px;
 }
 
-.breakdown-list {
+.hero-stats {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.stat-num { display: block; font-size: 32px; font-weight: 800; color: white; }
+.stat-label-text { color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 2px; display: block; }
+.stat-sep { width: 1px; height: 40px; background: rgba(255,255,255,0.2); }
+
+/* ─── CALCULATOR CARD (exact same glass style as Sell's valuation-card) ─── */
+.valuation-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 40px;
+    color: var(--text-primary);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    text-align: left;
+}
+
+.valuation-card h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.valuation-card > p {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    font-size: 15px;
+}
+
+.calc-header { margin-bottom: 28px; }
+.calc-header h2 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+.calc-header p { color: var(--text-muted); font-size: 14px; }
+
+.calc-main-result {
+    background: linear-gradient(135deg, rgba(15,25,50,0.95) 0%, rgba(30,42,80,0.9) 60%, rgba(74,108,247,0.7) 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    text-align: center;
+    color: white;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 24px rgba(74, 108, 247, 0.3);
+}
+
+.monthly-payment {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 4px;
+    line-height: 1;
+}
+
+.monthly-payment .currency { font-size: 22px; font-weight: 600; }
+.monthly-payment .amount { font-size: 52px; font-weight: 800; }
+.monthly-payment .period { font-size: 17px; opacity: 0.75; }
+
+.result-detail { font-size: 13px; opacity: 0.75; margin-top: 6px; }
+
+.calc-inputs {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
 }
 
-.bd-item {
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.label-row {
     display: flex;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.value-display {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 14px;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+    height: 4px;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 16px;
 }
 
-.bd-color-dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    margin-top: 6px;
-}
-
-.bd-details {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.bd-label {
+.field-input, .field-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: white;
     font-size: 15px;
     font-weight: 600;
-    color: var(--text-secondary);
-    margin-bottom: 4px;
-}
-
-.bd-value {
-    font-size: 24px;
-    font-weight: 800;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
     color: var(--text-primary);
 }
 
-.breakdown-graphic {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.field-input:focus, .field-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.12);
 }
 
-.donut-chart-placeholder {
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: conic-gradient(#4a6cf7 0% 65%,
-            #fbcd0e 65% 85%,
-            #10b981 85% 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.donut-center {
-    width: 200px;
-    height: 200px;
+/* ─── WHY SELL / HOW IT WORKS SECTION (same as Sell) ─── */
+.why-sell-section {
+    padding: 80px 24px;
     background: white;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.donut-center span {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.donut-center strong {
-    font-size: 32px;
-    font-weight: 800;
-    color: #1e3a5f;
-    margin-top: 4px;
-}
-
-/* ─── CURRENT RATES ─── */
-.rates-section {
-    background: #0c1a3b;
-    padding: 120px 24px;
-}
-
-.rates-container {
-    max-width: 1100px;
+.container {
+    max-width: 1200px;
     margin: 0 auto;
-    text-align: center;
-    background: linear-gradient(135deg, rgba(20, 35, 94, 0.85), rgba(5, 10, 35, 0.95));
-    border-radius: 32px;
-    padding: 60px;
-    box-shadow: 0 25px 60px rgba(5, 10, 35, 0.45);
 }
 
 .section-title {
+    text-align: center;
     font-size: 36px;
     font-weight: 800;
-    letter-spacing: -1px;
+    margin-bottom: 60px;
+    color: var(--text-primary);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 24px;
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 24px;
+}
+
+.feature-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ─── BREAKDOWN & RATES ─── */
+.breakdown-rates {
+    background: linear-gradient(160deg, #f0f4ff 0%, #ffffff 60%);
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+}
+
+.section-header { margin-bottom: 60px; }
+.section-header h2 { font-size: 36px; font-weight: 800; margin-bottom: 16px; color: var(--text-primary); }
+.section-header p { color: var(--text-secondary); font-size: 18px; }
+
+.dual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.info-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1.5px solid var(--accent-border);
+    box-shadow: 0 4px 20px rgba(74, 108, 247, 0.08);
+}
+
+.info-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
+.info-card p { color: var(--text-secondary); margin-bottom: 32px; font-size: 14px; }
+
+.breakdown-items { display: flex; flex-direction: column; gap: 20px; }
+.bd-row { display: flex; justify-content: space-between; align-items: center; }
+.bd-info { display: flex; align-items: center; gap: 12px; font-weight: 500; color: var(--text-secondary); font-size: 14px; }
+.bd-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.bd-dot.principal { background: var(--accent); box-shadow: 0 0 0 3px rgba(74,108,247,0.15); }
+.bd-dot.tax { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.15); }
+.bd-dot.insurance { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
+.bd-val { font-weight: 700; font-size: 18px; color: var(--text-primary); }
+
+.bd-divider { height: 1px; background: var(--border); margin: 4px 0; }
+.bd-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 20px; color: var(--accent); }
+
+.rates-box h3 { font-size: 30px; font-weight: 800; margin-bottom: 12px; color: var(--text-primary); }
+.rates-box > p { color: var(--text-secondary); margin-bottom: 32px; font-size: 14px; line-height: 1.6; }
+
+.rates-table {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1.5px solid var(--accent-border);
+    box-shadow: 0 4px 20px rgba(74, 108, 247, 0.08);
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+}
+
+.table-row.head {
+    background: var(--accent-light);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom-color: var(--accent-border);
+}
+
+.table-row.last { border-bottom: none; }
+
+.loan-name { font-weight: 700; color: var(--text-primary); font-size: 15px; }
+.rate-val { font-weight: 800; color: var(--accent); font-size: 18px; }
+.apr-val { color: var(--text-muted); font-weight: 500; font-size: 14px; }
+
+.rate-disclaimer {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.6;
+}
+
+.rate-disclaimer i { color: var(--accent); margin-top: 2px; flex-shrink: 0; }
+
+/* ─── FAQ SECTION ─── */
+.faq-section-simple { background: var(--white); }
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 60px;
+}
+
+.faq-item {
+    padding: 32px;
+    background: var(--bg);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.faq-item:hover {
+    border-color: var(--accent-border);
+    box-shadow: var(--shadow-md);
+}
+
+.faq-item h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.faq-item p { color: var(--text-secondary); font-size: 14px; line-height: 1.7; }
+
+/* ─── CTA SECTION (same as Sell) ─── */
+.cta-section {
+    padding: 80px 24px;
+    background: var(--accent-light);
+    text-align: center;
+}
+
+.cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    font-size: 36px;
+    font-weight: 800;
     margin-bottom: 16px;
 }
 
-.section-subtitle {
+.cta-content p {
     font-size: 18px;
     color: var(--text-secondary);
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 }
 
-.rates-table-wrapper {
-    background: rgba(255, 255, 255, 0.045);
-    border-radius: 24px;
-    padding: 8px;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-    overflow-x: auto;
+.large-btn {
+    padding: 16px 40px;
+    font-size: 16px;
 }
 
-.premium-rates-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    color: white;
-}
-
-.premium-rates-table th {
-    padding: 16px 18px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--text-muted);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.premium-rates-table td {
-    padding: 18px;
-    font-size: 18px;
-    color: white;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.premium-rates-table tr:last-child td {
-    border-bottom: none;
-}
-
-.premium-rates-table td strong {
-    font-weight: 700;
-}
-
-.trend.down {
-    color: var(--success);
-    font-weight: 700;
-}
-
-.trend.up {
-    color: var(--danger);
-    font-weight: 700;
-}
-
-.trend.flat {
-    color: var(--text-secondary);
-    font-weight: 700;
-}
-
-/* ─── FOOTER (Premium Navy Theme) ─── */
+/* ─── FOOTER (exact same as Sell) ─── */
 .realtor-footer {
     background: #1e3a5f;
     padding: 80px 0 40px;
-    margin-top: auto;
-    color: #cbd5e1;
+    color: #94a3b8;
+    font-family: 'Inter', sans-serif;
 }
 
 .footer-container {
-    max-width: 1400px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 24px;
 }
@@ -646,27 +574,36 @@
 .footer-links-col {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
 }
 
-.footer-links-col a {
+.footer-links-col a,
+.footer-bottom-links a {
     color: #94a3b8;
     text-decoration: none;
     font-size: 14px;
-    transition: all 0.2s;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.footer-links-col a:hover {
+.footer-links-col a:hover,
+.footer-bottom-links a:hover {
     color: #60a5fa;
-    transform: translateX(4px);
+    padding-left: 4px;
 }
+
+.highlight-link { color: #fbcd0e !important; }
 
 .footer-bottom {
-    padding-top: 40px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: 32px;
 }
 
@@ -677,42 +614,49 @@
     gap: 24px;
 }
 
-.footer-bottom-links a {
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-.highlight-link {
-    color: #fbcd0e !important;
-    font-weight: 600;
-}
-
 .footer-socials {
     display: flex;
-    gap: 24px;
+    gap: 20px;
 }
 
 .footer-socials a {
     color: white;
     font-size: 20px;
-    opacity: 0.7;
-    transition: all 0.2s;
+    opacity: 0.75;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    transition: all 0.25s ease;
 }
 
 .footer-socials a:hover {
     opacity: 1;
+    background: rgba(96, 165, 250, 0.25);
     color: #60a5fa;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(96, 165, 250, 0.2);
 }
 
-.footer-disclaimer p {
-    font-size: 12px;
+.footer-disclaimer {
     color: #94a3b8;
-    line-height: 1.8;
-    text-align: center;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 800px;
+    line-height: 1.6;
 }
 
-/* MOBILE NAV */
+.footer-disclaimer a {
+    color: white;
+    text-decoration: underline;
+}
+
+/* ─── HAMBURGER BUTTON (exact same as Sell) ─── */
 .hamburger-btn {
     display: none;
     flex-direction: column;
@@ -726,6 +670,11 @@
     cursor: pointer;
     padding: 8px;
     border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.hamburger-btn:hover {
+    background: var(--accent-light);
 }
 
 .hamburger-btn span {
@@ -735,6 +684,7 @@
     background: var(--text-primary);
     border-radius: 2px;
     transition: all 0.3s ease;
+    transform-origin: center;
 }
 
 .hamburger-btn.active span:nth-child(1) {
@@ -743,20 +693,26 @@
 
 .hamburger-btn.active span:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
 }
 
 .hamburger-btn.active span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
 }
 
+/* ─── MOBILE MENU OVERLAY (exact same as Sell) ─── */
 .mobile-menu-overlay {
     display: none;
     position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.6); 
+    backdrop-filter: blur(4px);
+    z-index: 9998;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s ease;
 }
 
 .mobile-menu-overlay.open {
@@ -764,6 +720,7 @@
     opacity: 1;
 }
 
+/* ─── MOBILE NAVIGATION DRAWER (exact same as Sell) ─── */
 .mobile-nav {
     position: fixed;
     top: 0;
@@ -771,11 +728,11 @@
     width: min(320px, 85vw);
     height: 100vh;
     background: white;
-    z-index: 999;
+    z-index: 9999;
     display: flex;
     flex-direction: column;
     box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
-    transition: right 0.35s;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
 }
 
@@ -785,8 +742,9 @@
 
 .mobile-nav-header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 20px 24px;
+    padding: 24px;
     border-bottom: 1px solid var(--border);
 }
 
@@ -794,141 +752,114 @@
     width: 36px;
     height: 36px;
     border: 1px solid var(--border);
+    background: transparent;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
+    font-size: 14px;
+    color: var(--text-secondary);
     cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mobile-nav-close:hover {
+    background: var(--bg);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
 }
 
 .mobile-nav-links {
-    flex: 1;
     display: flex;
     flex-direction: column;
     padding: 16px 0;
+    flex: 1;
 }
 
 .mobile-nav-link {
-    padding: 16px 24px;
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 16px;
-    border-left: 3px solid transparent;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-left: 4px solid transparent; 
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .mobile-nav-link i {
     width: 20px;
-    text-align: center;
     color: var(--text-muted);
+    font-size: 16px;
+    text-align: center;
+    transition: color 0.2s ease;
 }
 
+.mobile-nav-link:hover, 
 .mobile-nav-link.active {
     background: var(--accent-light);
-    color: var(--accent-blue);
-    border-left-color: var(--accent-blue);
+    border-left-color: var(--accent);
+    color: var(--accent);
 }
 
+.mobile-nav-link:hover i, 
 .mobile-nav-link.active i {
-    color: var(--accent-blue);
+    color: var(--accent);
 }
 
 .mobile-nav-auth {
-    padding: 20px 24px;
+    padding: 24px;
     border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg);
 }
 
-/* RESPONSIVE */
+.mobile-nav-auth .btn-outline, 
+.mobile-nav-auth .btn-primary {
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* ─── RESPONSIVE (mirrors exact Sell breakpoints) ─── */
 @media (max-width: 1024px) {
-    .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 40px;
-    }
-
-    .hero-text-area {
-        padding-right: 0;
-    }
-
-    .hero-badges {
-        justify-content: center;
-    }
-
-    .breakdown-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 60px;
-    }
-
-    .breakdown-list {
-        margin: 0 auto;
-        max-width: 400px;
-        text-align: left;
-    }
-
-    .footer-top {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .footer-top { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .hero-grid { gap: 48px; }
 }
 
 @media (max-width: 768px) {
-    .hamburger-btn {
-        display: flex;
-    }
+    .hamburger-btn { display: flex; }
+    .nav-links { display: none !important; }
+    .auth-buttons { display: none !important; }
 
-    .nav-links,
-    .auth-buttons {
-        display: none;
-    }
+    .hero-title { font-size: 32px; margin-bottom: 24px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-text { text-align: center; }
+    .hero-subtitle { margin-left: auto; margin-right: auto; }
+    .hero-stats { justify-content: center; }
+    .sell-hero { padding: 80px 20px; min-height: auto; }
 
-    .hero-title {
-        font-size: 38px;
-    }
+    .features-grid { grid-template-columns: 1fr; }
+    .dual-grid { grid-template-columns: 1fr; gap: 40px; }
+    .faq-grid { grid-template-columns: 1fr; }
 
-    .mortgage-calc-card {
-        padding: 32px 24px;
-    }
-
-    .calc-row {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .footer-top {
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-    }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-bottom-links { gap: 16px; }
+    .footer-socials { gap: 16px; }
 }
 
-@media (max-width: 576px) {
-    .hero-title {
-        font-size: 32px;
-    }
-
-    .result-value {
-        font-size: 44px;
-    }
-
-    .donut-chart-placeholder {
-        width: 260px;
-        height: 260px;
-    }
-
-    .donut-center {
-        width: 180px;
-        height: 180px;
-    }
-
-    .premium-rates-table th,
-    .premium-rates-table td {
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .footer-top {
-        grid-template-columns: 1fr;
-    }
+@media (max-width: 480px) {
+    .hero-title { font-size: 28px; }
+    .section-title { font-size: 28px; }
+    .section-header h2 { font-size: 28px; }
+    .input-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .calc-main-result { padding: 20px; }
+    .monthly-payment .amount { font-size: 40px; }
+    .rates-box h3 { font-size: 24px; }
 }

@@ -1,14 +1,14 @@
-import { Component, HostListener, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-mortgage',
+  standalone: true,
   templateUrl: './mortgage.component.html',
   styleUrl: './mortgage.component.css',
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
-  encapsulation: ViewEncapsulation.None
+  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive]
 })
 export class MortgageComponent {
   isMobileMenuOpen = false;
