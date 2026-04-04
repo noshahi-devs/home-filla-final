@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MockDataService } from '../../shared/services/mock-data.service';
 import { AuthService } from '../../shared/services/auth.service';
+import { UiService } from '../../shared/services/ui.service';
 import { DashboardProperty } from '../../shared/models';
 
 @Component({
@@ -25,7 +26,8 @@ export class SellerMyPropertiesComponent implements OnInit {
 
   constructor(
     private dataService: MockDataService,
-    private authService: AuthService
+    private authService: AuthService,
+    private uiService: UiService
   ) {}
 
   ngOnInit() {
@@ -60,10 +62,19 @@ export class SellerMyPropertiesComponent implements OnInit {
     this.applyFilters();
   }
 
-  deleteProperty(id: number) {
-    if (confirm('Are you sure you want to delete your property?')) {
-      this.dataService.deleteProperty(id);
-      this.loadProperties();
+  async deleteProperty(id: number): Promise<void> {
+    const isConfirmed = await this.uiService.showConfirmation(
+      'Delete Listing',
+      'Are you sure you want to delete this property? You will lose all views and inquiries.',
+      'danger'
+    );
+    if (isConfirmed) {
+      this.uiService.showToast('processing', 'Deleting...', 'Removing your property.', 1000);
+      setTimeout(() => {
+        this.dataService.deleteProperty(id);
+        this.loadProperties();
+        this.uiService.showToast('success', 'Deleted', 'Your listing was successfully removed.');
+      }, 1000);
     }
   }
 
@@ -86,21 +97,24 @@ export class SellerMyPropertiesComponent implements OnInit {
   }
 
   saveProperty() {
-    if (this.isEditMode) {
-      // update
-    } else {
-      // Assuming mock service allows adding via mock array manipulation
-      this.dataService.getProperties().push({
-        ...this.editingProperty,
-        id: Math.floor(Math.random() * 1000) + 100,
-        images: ['https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80'],
-        views: 0,
-        isFeatured: false,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      } as DashboardProperty);
-    }
     this.closeModal();
-    this.loadProperties();
+    this.uiService.showToast('processing', 'Saving...', 'Uploading your property details.', 800);
+
+    setTimeout(() => {
+      if (!this.isEditMode) {
+        // Assuming mock service allows adding via mock array manipulation
+        this.dataService.getProperties().push({
+          ...this.editingProperty,
+          id: Math.floor(Math.random() * 1000) + 100,
+          images: ['https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80'],
+          views: 0,
+          isFeatured: false,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        } as DashboardProperty);
+      }
+      this.loadProperties();
+      this.uiService.showToast('success', 'Property Saved!', 'Your changes have been fully applied.');
+    }, 800);
   }
 }

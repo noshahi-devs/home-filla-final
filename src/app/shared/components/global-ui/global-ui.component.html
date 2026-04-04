@@ -1,0 +1,50 @@
+<!-- Toast Container -->
+<div class="toast-container" *ngIf="toasts.length > 0">
+  <div class="toast-item" *ngFor="let toast of toasts" [ngClass]="toast.type">
+    <div class="toast-icon">
+      <i class="fas" 
+         [ngClass]="{
+           'fa-check-circle': toast.type === 'success',
+           'fa-exclamation-circle': toast.type === 'error',
+           'fa-info-circle': toast.type === 'info',
+           'fa-spinner fa-spin': toast.type === 'processing'
+         }"></i>
+    </div>
+    <div class="toast-content">
+      <h4>{{ toast.title }}</h4>
+      <p>{{ toast.message }}</p>
+    </div>
+    <button class="toast-close" (click)="removeToast(toast.id)">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="confirm-backdrop" *ngIf="activeConfirmation">
+  <div class="confirm-modal">
+    <div class="confirm-header">
+      <div class="confirm-icon" [ngClass]="activeConfirmation.type">
+        <i class="fas" [ngClass]="{
+          'fa-exclamation-triangle': activeConfirmation.type === 'danger',
+          'fa-exclamation-circle': activeConfirmation.type === 'warning',
+          'fa-info-circle': activeConfirmation.type === 'info'
+        }"></i>
+      </div>
+    </div>
+    
+    <div class="confirm-body">
+      <h3>{{ activeConfirmation.title }}</h3>
+      <p>{{ activeConfirmation.message }}</p>
+    </div>
+
+    <div class="confirm-footer">
+      <button class="btn-cancel" (click)="handleConfirmation(false)">
+        {{ activeConfirmation.cancelText }}
+      </button>
+      <button class="btn-confirm" [ngClass]="activeConfirmation.type" (click)="handleConfirmation(true)">
+        {{ activeConfirmation.confirmText }}
+      </button>
+    </div>
+  </div>
+</div>

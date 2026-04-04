@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
+import { UiService } from '../../shared/services/ui.service';
 
 @Component({
   selector: 'app-seller-profile',
@@ -20,7 +21,7 @@ export class SellerProfileComponent implements OnInit {
     avatar: ''
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private uiService: UiService) {}
 
   ngOnInit() {
     this.profile.name = this.authService.getUserName();
@@ -31,6 +32,9 @@ export class SellerProfileComponent implements OnInit {
   }
 
   saveProfile() {
-    alert('Profile updated successfully!');
+    this.uiService.showToast('processing', 'Saving...', 'Updating profile settings', 800);
+    setTimeout(() => {
+      this.uiService.showToast('success', 'Profile Updated', 'Your seller profile details have been saved.');
+    }, 800);
   }
 }

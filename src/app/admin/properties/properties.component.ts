@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MockDataService } from '../../shared/services/mock-data.service';
+import { UiService } from '../../shared/services/ui.service';
 import { DashboardProperty } from '../../shared/models';
 
 @Component({
@@ -24,7 +25,10 @@ export class AdminPropertiesComponent implements OnInit {
   editingProperty: Partial<DashboardProperty> = {};
   isEditMode: boolean = false;
 
-  constructor(private dataService: MockDataService) {}
+  constructor(
+    private dataService: MockDataService,
+    private uiService: UiService
+  ) {}
 
   ngOnInit(): void {
     this.loadProperties();
@@ -65,20 +69,48 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   // Actions
-  approveProperty(id: number): void {
-    this.dataService.updatePropertyStatus(id, 'approved');
-    this.loadProperties();
-  }
-
-  rejectProperty(id: number): void {
-    this.dataService.updatePropertyStatus(id, 'rejected');
-    this.loadProperties();
-  }
-
-  deleteProperty(id: number): void {
-    if (confirm('Are you sure you want to delete this property?')) {
-      this.dataService.deleteProperty(id);
+  async approveProperty(id: number): Promise<void> {
+    const isConfirmed = await this.uiService.showConfirmation(
+      'Approve Property',
+      'This property will become visible to all buyers. Proceed?',
+      'info',
+      'Approve Now'
+    );
+    if (isConfirmed) {
+      this.dataService.updatePropertyStatus(id, 'approved');
       this.loadProperties();
+      this.uiService.showToast('success', 'Property Approved', 'The listing is now active.');
+    }
+  }
+
+  async rejectProperty(id: number): Promise<void> {
+    const isConfirmed = await this.uiService.showConfirmation(
+      'Reject Property',
+      'Are you sure you want to reject this property listing? The seller will be notified.',
+      'warning',
+      'Reject Listing'
+    );
+    if (isConfirmed) {
+      this.dataService.updatePropertyStatus(id, 'rejected');
+      this.loadProperties();
+      this.uiService.showToast('info', 'Property Rejected', 'The listing has been marked as rejected.');
+    }
+  }
+
+  async deleteProperty(id: number): Promise<void> {
+    const isConfirmed = await this.uiService.showConfirmation(
+      'Delete Property',
+      'Are you sure you want to delete this property? This action cannot be undone.',
+      'danger'
+    );
+
+    if (isConfirmed) {
+      this.uiService.showToast('processing', 'Deleting...', 'Removing property from database.', 1000);
+      setTimeout(() => {
+        this.dataService.deleteProperty(id);
+        this.loadProperties();
+        this.uiService.showToast('success', 'Deleted', 'The property has been permanently removed.');
+      }, 1000);
     }
   }
 
@@ -106,27 +138,31 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   saveProperty(): void {
-    if (this.isEditMode) {
-      // In a real app, update via service
-      const idx = this.properties.findIndex(p => p.id === this.editingProperty.id);
-      if (idx > -1) {
-        Object.assign(this.properties[idx], this.editingProperty, { updatedAt: new Date() });
-      }
-    } else {
-      // Create new property
-      const newProperty: DashboardProperty = {
-        ...this.editingProperty,
-        id: Math.max(0, ...this.properties.map(p => p.id)) + 1,
-        images: this.editingProperty.images || ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80'],
-        views: 0,
-        isFeatured: false,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      } as DashboardProperty;
-      this.properties.push(newProperty);
-    }
-    
     this.closeModal();
-    this.loadProperties();
+    this.uiService.showToast('processing', 'Saving...', 'Updating property details in system', 800);
+
+    setTimeout(() => {
+      if (this.isEditMode) {
+        // In a real app, update via service
+        const idx = this.properties.findIndex(p => p.id === this.editingProperty.id);
+        if (idx > -1) {
+          Object.assign(this.properties[idx], this.editingProperty, { updatedAt: new Date() });
+        }
+      } else {
+        // Create new property
+        const newProperty: DashboardProperty = {
+          ...this.editingProperty,
+          id: Math.max(0, ...this.properties.map(p => p.id)) + 1,
+          images: this.editingProperty.images || ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80'],
+          views: 0,
+          isFeatured: false,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        } as DashboardProperty;
+        this.properties.push(newProperty);
+      }
+      this.loadProperties();
+      this.uiService.showToast('success', 'Property Saved!', 'Your changes have been fully applied.');
+    }, 800);
   }
 }

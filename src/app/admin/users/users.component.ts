@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MockDataService } from '../../shared/services/mock-data.service';
+import { UiService } from '../../shared/services/ui.service';
 import { DashboardUser } from '../../shared/models';
 
 @Component({
@@ -17,7 +18,7 @@ export class AdminUsersComponent implements OnInit {
   roleFilter: string = 'all';
   searchTerm: string = '';
 
-  constructor(private dataService: MockDataService) {}
+  constructor(private dataService: MockDataService, private uiService: UiService) {}
 
   ngOnInit(): void {
     this.loadUsers();
@@ -53,27 +54,49 @@ export class AdminUsersComponent implements OnInit {
     this.applyFilters();
   }
 
-  toggleBlock(user: DashboardUser): void {
-    const newStatus = user.status === 'active' ? 'blocked' : 'active';
-    this.dataService.updateUserStatus(user.id, newStatus);
-    this.loadUsers();
-  }
-
-  deleteUser(id: number): void {
-    if (confirm('Are you sure you want to delete this user?')) {
-      this.dataService.deleteUser(id);
+  async toggleBlock(user: DashboardUser): Promise<void> {
+    const action = user.status === 'active' ? 'Block' : 'Unblock';
+    const isConfirmed = await this.uiService.showConfirmation(
+      `${action} User`,
+      `Are you sure you want to ${action.toLowerCase()} this user?`,
+      'warning',
+      `Yes, ${action}`
+    );
+    if (isConfirmed) {
+      const newStatus = user.status === 'active' ? 'blocked' : 'active';
+      this.dataService.updateUserStatus(user.id, newStatus);
       this.loadUsers();
+      this.uiService.showToast('success', `User ${action}ed`, `The user has been ${action.toLowerCase()}ed.`);
     }
   }
 
-  promoteToAgent(user: DashboardUser): void {
-    if (confirm(`Promote ${user.name} to Agent?`)) {
-      // In a real app, update role and maybe create agent profile
+  async deleteUser(id: number): Promise<void> {
+    const isConfirmed = await this.uiService.showConfirmation(
+      'Delete User',
+      'Are you sure you want to completely delete this user? All their data will be removed.',
+      'danger'
+    );
+    if (isConfirmed) {
+      this.dataService.deleteUser(id);
+      this.loadUsers();
+      this.uiService.showToast('success', 'User Deleted', 'The user account has been successfully removed.');
+    }
+  }
+
+  async promoteToAgent(user: DashboardUser): Promise<void> {
+    const isConfirmed = await this.uiService.showConfirmation(
+      'Promote to Agent',
+      `Are you sure you want to grant ${user.name} Agent privileges?`,
+      'info',
+      'Promote'
+    );
+    if (isConfirmed) {
       const u = this.users.find(x => x.id === user.id);
       if (u) {
         u.role = 'agent';
       }
       this.loadUsers();
+      this.uiService.showToast('success', 'User Promoted', `${user.name} is now an Agent.`);
     }
   }
 }
