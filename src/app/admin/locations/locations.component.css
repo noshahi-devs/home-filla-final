@@ -7,8 +7,8 @@
 }
 
 .loc-card {
-  background: #1e293b;
-  border: 1px solid rgba(255,255,255,0.06);
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.06);
   border-radius: 16px;
   overflow: hidden;
   height: 600px;
@@ -18,7 +18,7 @@
 
 .card-header {
   padding: 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,7 +26,7 @@
 
 .card-header h3 {
   font-size: 16px;
-  color: #f1f5f9;
+  color: #0f172a;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -36,19 +36,19 @@
 
 .add-form {
   padding: 16px 20px;
-  background: rgba(255,255,255,0.02);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.02);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
   display: flex;
   gap: 10px;
 }
 
 .add-form input {
   flex: 1;
-  background: #0f172a;
-  border: 1px solid rgba(255,255,255,0.1);
+  background: #f8fafc;
+  border: 1px solid rgba(0,0,0,0.1);
   padding: 8px 12px;
   border-radius: 8px;
-  color: white;
+  color: #0f172a;
   font-family: inherit;
 }
 
@@ -73,13 +73,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
   cursor: pointer;
   transition: background 0.2s;
 }
 
 .loc-list li:hover:not(.no-hover):not(.empty-item) {
-  background: rgba(255,255,255,0.02);
+  background: rgba(0,0,0,0.02);
 }
 
 .loc-list li.active {
@@ -95,7 +95,7 @@
 .loc-info .name {
   font-size: 14px;
   font-weight: 600;
-  color: #f1f5f9;
+  color: #0f172a;
 }
 
 .loc-info .sub {
@@ -121,3 +121,5 @@
   .locations-grid { grid-template-columns: 1fr; }
   .loc-card { height: 400px; }
 }
+
+/* reload location */

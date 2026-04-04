@@ -1631,10 +1631,6 @@
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 1024px) {
-    .footer-top {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
-    }
     .carousel-btn { width: 38px; height: 38px; }
 }
 
@@ -1697,7 +1693,7 @@
     .faq-answer { padding-left: 28px; }
 
     /* Footer responsive */
-    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-top { grid-template-columns: repeat(2, 1fr) !important; gap: 32px; }
     .footer-bottom-links { gap: 16px; }
     .footer-socials { gap: 16px; }
 }

@@ -828,7 +828,6 @@ input[type="range"] {
 
 /* ─── RESPONSIVE (mirrors exact Sell breakpoints) ─── */
 @media (max-width: 1024px) {
-    .footer-top { grid-template-columns: repeat(2, 1fr); gap: 32px; }
     .hero-grid { gap: 48px; }
 }
 
@@ -848,7 +847,7 @@ input[type="range"] {
     .dual-grid { grid-template-columns: 1fr; gap: 40px; }
     .faq-grid { grid-template-columns: 1fr; }
 
-    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-top { grid-template-columns: repeat(2, 1fr) !important; gap: 32px; }
     .footer-bottom-links { gap: 16px; }
     .footer-socials { gap: 16px; }
 }
@@ -858,7 +857,6 @@ input[type="range"] {
     .section-title { font-size: 28px; }
     .section-header h2 { font-size: 28px; }
     .input-row { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr; }
     .calc-main-result { padding: 20px; }
     .monthly-payment .amount { font-size: 40px; }
     .rates-box h3 { font-size: 24px; }

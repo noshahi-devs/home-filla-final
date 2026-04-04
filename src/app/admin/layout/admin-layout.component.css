@@ -12,19 +12,19 @@
   --sidebar-w-collapsed: 78px;
   --topbar-h: 70px;
 
-  --bg-body: #0b1120;
-  --bg-sidebar: #0f172a;
-  --bg-sidebar-hover: rgba(255,255,255,0.04);
+  --bg-body: #f1f5f9;
+  --bg-sidebar: #f8fafc;
+  --bg-sidebar-hover: rgba(0,0,0,0.04);
   --bg-sidebar-active: rgba(74,108,247,0.12);
-  --bg-topbar: rgba(15,23,42,0.85);
-  --bg-card: #1e293b;
+  --bg-topbar: rgba(255,255,255,0.85);
+  --bg-card: #ffffff;
   --bg-card-hover: #253348;
 
-  --border-color: rgba(255,255,255,0.06);
+  --border-color: rgba(0,0,0,0.06);
   --border-active: rgba(74,108,247,0.5);
 
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
   --text-muted: #64748b;
 
   --accent: #4a6cf7;
@@ -215,7 +215,7 @@
   justify-content: center;
   border-radius: 10px;
   font-size: 16px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(0,0,0,0.03);
   transition: all 0.2s;
 }
 
@@ -350,7 +350,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.04);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 10px 16px;
@@ -404,7 +404,7 @@
 }
 
 .topbar-action:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.05);
   color: var(--text-primary);
 }
 
@@ -438,7 +438,7 @@
 }
 
 .topbar-profile:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.05);
 }
 
 .profile-avatar {
@@ -516,7 +516,7 @@
 }
 
 .notif-item:hover {
-  background: rgba(255,255,255,0.02);
+  background: rgba(0,0,0,0.02);
 }
 
 .notif-item.unread {
@@ -588,7 +588,7 @@
 }
 
 .dropdown-item:hover {
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.04);
   color: var(--text-primary);
 }
 
@@ -655,3 +655,4 @@
     padding: 0 16px;
   }
 }
+/* reload */
