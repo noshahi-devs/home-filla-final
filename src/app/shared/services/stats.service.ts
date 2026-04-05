@@ -32,11 +32,7 @@ export class StatsService {
   }
 
   getMonthlyGrowth(): Observable<any> {
-    return of([
-      { month: 'Oct', count: 8 }, { month: 'Nov', count: 12 },
-      { month: 'Dec', count: 15 }, { month: 'Jan', count: 22 },
-      { month: 'Feb', count: 18 }, { month: 'Mar', count: 28 },
-    ]);
+    return this.http.get(`${this.apiUrl}/admin/monthly-growth`, { headers: this.headers });
   }
 
   getPropertiesByCity(): Observable<any> {
