@@ -344,3 +344,10 @@
     </div>
   </div>
 </div>
+
+<!-- Add User Modal -->
+<app-add-user-modal 
+  [isOpen]="isAddUserModalOpen"
+  (close)="closeAddUserModal()"
+  (submit)="onAddUser($event)">
+</app-add-user-modal>

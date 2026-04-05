@@ -13,6 +13,9 @@ namespace HomeFilla.Api.Models
         public string? Avatar { get; set; }
         [Required] public string Role { get; set; } = "buyer"; // admin, buyer, seller, agent
         [Required] public string Status { get; set; } = "active"; // active, blocked
+        public string? AgencyName { get; set; }
+        public string? Bio { get; set; }
+        public double? Rating { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 

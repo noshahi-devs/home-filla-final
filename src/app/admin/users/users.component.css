@@ -3,6 +3,11 @@
 ═══════════════════════════════════════ */
 
 /* Import base styles */
+/* ═══════════════════════════════════════
+   PREMIUM USERS MANAGEMENT PAGE STYLES
+═══════════════════════════════════════ */
+
+/* Import base styles */
 @import '../properties/properties.component.css';
 
 /* ═══════════════════════════════════════
@@ -95,15 +100,6 @@
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
-  max-width: 100vw;
-}
-
-/* Container to handle sidebar expansion */
-.users-page-container {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
 }
 
 /* ═══════════════════════════════════════

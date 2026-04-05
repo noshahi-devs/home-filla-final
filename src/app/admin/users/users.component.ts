@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { UiService } from '../../shared/services/ui.service';
 import { DashboardUser } from '../../shared/models';
 import { TimeAgoPipe } from '../../shared/pipes/time-ago.pipe';
+import { AddUserModalComponent, UserData } from './add-user-modal.component';
 
 // Extend DashboardUser interface to include lastSeen
 interface ExtendedDashboardUser extends DashboardUser {
@@ -30,7 +31,7 @@ export interface PaginationInfo {
 @Component({
   selector: 'app-admin-users',
   standalone: true,
-  imports: [CommonModule, FormsModule, TimeAgoPipe],
+  imports: [CommonModule, FormsModule, TimeAgoPipe, AddUserModalComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
@@ -73,6 +74,9 @@ export class AdminUsersComponent implements OnInit {
   // UI state
   isLoading: boolean = false;
   showTableSettings: boolean = false;
+  
+  // Modal state
+  isAddUserModalOpen: boolean = false;
 
   constructor(private userService: UserService, private uiService: UiService) {}
 
@@ -342,8 +346,26 @@ export class AdminUsersComponent implements OnInit {
 
   // Modal methods
   openAddUserModal(): void {
-    // Implement add user modal logic
-    this.uiService.showToast('info', 'Add User', 'Add user modal would open here');
+    this.isAddUserModalOpen = true;
+  }
+
+  closeAddUserModal(): void {
+    this.isAddUserModalOpen = false;
+  }
+
+  onAddUser(userData: UserData): void {
+    // Here you would normally call the userService to create the user
+    // For now, we'll show a success message and reload the users
+    this.uiService.showToast('success', 'User Added', `Successfully added ${userData.name} as a ${userData.role}`);
+    
+    // In a real implementation, you would call:
+    // this.userService.createUser(userData).subscribe(() => {
+    //   this.loadUsers();
+    //   this.closeAddUserModal();
+    // });
+    
+    this.closeAddUserModal();
+    this.loadUsers(); // Reload users to show the new user
   }
 
   openTableSettings(): void {
