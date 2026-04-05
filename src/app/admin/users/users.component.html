@@ -1,86 +1,346 @@
-<div class="properties-page">
-  <div class="page-header">
-    <div>
+<div class="users-page">
+  <!-- Premium Stats Cards -->
+  <div class="stats-grid">
+    <div class="stat-card premium">
+      <div class="stat-icon-wrapper total">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ users.length }}</div>
+        <div class="stat-label">Total Users</div>
+        <div class="stat-change positive">
+          <i class="fas fa-arrow-up"></i> +12% this month
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-icon-wrapper active">
+        <i class="fas fa-user-check"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ users.filter(u => u.status === 'active').length }}</div>
+        <div class="stat-label">Active Users</div>
+        <div class="stat-change positive">
+          <i class="fas fa-arrow-up"></i> +8% this month
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-icon-wrapper agents">
+        <i class="fas fa-user-tie"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ users.filter(u => u.role === 'agent').length }}</div>
+        <div class="stat-label">Agents</div>
+        <div class="stat-change neutral">
+          <i class="fas fa-minus"></i> No change
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-icon-wrapper blocked">
+        <i class="fas fa-user-slash"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ users.filter(u => u.status === 'blocked').length }}</div>
+        <div class="stat-label">Blocked</div>
+        <div class="stat-change negative">
+          <i class="fas fa-arrow-down"></i> -3% this month
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Page Header -->
+  <div class="page-header premium">
+    <div class="header-left">
+      <div class="breadcrumb">
+        <i class="fas fa-home"></i>
+        <span>/</span>
+        <span>Dashboard</span>
+        <span>/</span>
+        <span class="current">Users</span>
+      </div>
       <h1>User Management</h1>
-      <p class="page-subtitle">Manage all registered buyers, sellers, and administrators.</p>
+      <p class="page-subtitle">Manage all registered buyers, sellers, and administrators in your platform.</p>
     </div>
-    <button class="btn-primary">
-      <i class="fas fa-user-plus"></i> Add User
-    </button>
-  </div>
-
-  <div class="filters-bar">
-    <div class="tabs">
-      <button class="tab-btn" [class.active]="roleFilter === 'all'" (click)="setFilter('all')">All Users</button>
-      <button class="tab-btn" [class.active]="roleFilter === 'buyer'" (click)="setFilter('buyer')">Buyers</button>
-      <button class="tab-btn" [class.active]="roleFilter === 'seller'" (click)="setFilter('seller')">Sellers</button>
-      <button class="tab-btn" [class.active]="roleFilter === 'agent'" (click)="setFilter('agent')">Agents</button>
-    </div>
-    <div class="search-wrap">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search name or email..." (input)="onSearch($event)">
+    <div class="header-actions">
+      <button class="btn-export" (click)="exportUsers()">
+        <i class="fas fa-download"></i>
+        <span>Export</span>
+      </button>
+      <button class="btn-primary premium" (click)="openAddUserModal()">
+        <div class="btn-icon-wrapper">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <span>Add User</span>
+      </button>
     </div>
   </div>
 
-  <div class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Contact Info</th>
-          <th>Role</th>
-          <th>Joined</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let u of filteredUsers">
-          <td>
-            <div class="property-cell">
-              <img [src]="u.avatar || 'assets/placeholder-user.jpg'" alt="" class="prop-img">
-              <div class="prop-info">
-                <span class="prop-title">{{ u.name }}</span>
-                <span class="prop-seller">ID: {{ u.id }}</span>
+  <!-- Enhanced Filters Bar -->
+  <div class="filters-bar premium">
+    <div class="filters-left">
+      <div class="role-tabs">
+        <button class="role-tab" [class.active]="roleFilter === 'all'" (click)="setFilter('all')">
+          <i class="fas fa-users"></i>
+          <span>All Users</span>
+          <span class="tab-count">{{ users.length }}</span>
+        </button>
+        <button class="role-tab" [class.active]="roleFilter === 'buyer'" (click)="setFilter('buyer')">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Buyers</span>
+          <span class="tab-count">{{ users.filter(u => u.role === 'buyer').length }}</span>
+        </button>
+        <button class="role-tab" [class.active]="roleFilter === 'seller'" (click)="setFilter('seller')">
+          <i class="fas fa-store"></i>
+          <span>Sellers</span>
+          <span class="tab-count">{{ users.filter(u => u.role === 'seller').length }}</span>
+        </button>
+        <button class="role-tab" [class.active]="roleFilter === 'agent'" (click)="setFilter('agent')">
+          <i class="fas fa-user-tie"></i>
+          <span>Agents</span>
+          <span class="tab-count">{{ users.filter(u => u.role === 'agent').length }}</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="filters-right">
+      <div class="search-container">
+        <div class="search-icon">
+          <i class="fas fa-search"></i>
+        </div>
+        <input type="text" placeholder="Search users by name, email, or ID..." (input)="onSearch($event)" class="search-input">
+        <div class="search-shortcut">⌘K</div>
+      </div>
+      
+      <div class="view-toggle">
+        <button class="view-btn active" title="Grid View">
+          <i class="fas fa-th"></i>
+        </button>
+        <button class="view-btn" title="List View">
+          <i class="fas fa-list"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bulk Actions Bar -->
+  <div class="bulk-actions" *ngIf="selectedUsers.size > 0">
+    <div class="bulk-info">
+      <span class="bulk-count">{{ selectedUsers.size }} users selected</span>
+      <button class="clear-selection" (click)="clearSelection()">Clear selection</button>
+    </div>
+    <div class="bulk-buttons">
+      <button class="bulk-btn approve" (click)="bulkActivate()">
+        <i class="fas fa-check"></i>
+        Activate
+      </button>
+      <button class="bulk-btn reject" (click)="bulkBlock()">
+        <i class="fas fa-ban"></i>
+        Block
+      </button>
+      <button class="bulk-btn delete" (click)="bulkDelete()">
+        <i class="fas fa-trash"></i>
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <!-- Enhanced Table Container -->
+  <div class="table-container premium">
+    <div class="table-header">
+      <div class="table-title">
+        <h3>Users Directory</h3>
+        <span class="result-count">{{ filteredUsers.length }} results</span>
+      </div>
+      <div class="table-settings">
+        <button class="settings-btn" (click)="openTableSettings()">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="table-wrapper">
+      <table class="data-table premium">
+        <thead>
+          <tr>
+            <th class="checkbox-column">
+              <input type="checkbox" class="checkbox-main" (change)="toggleSelectAll($event)">
+            </th>
+            <th class="user-column">
+              <div class="th-content">
+                <span>User</span>
+                <button class="sort-btn" (click)="onSort('name')">
+                  <i class="fas fa-sort"></i>
+                </button>
               </div>
-            </div>
-          </td>
-          <td>
-            <div class="loc-cell">
-              <span class="city">{{ u.email }}</span>
-              <span class="area">{{ u.phone }}</span>
-            </div>
-          </td>
-          <td>
-            <span class="badge type" [ngClass]="u.role">{{ u.role }}</span>
-          </td>
-          <td class="area">{{ u.createdAt | date:'mediumDate' }}</td>
-          <td>
-            <span class="status-badge" [ngClass]="u.status === 'active' ? 'approved' : 'rejected'">{{ u.status }}</span>
-          </td>
-          <td class="actions-cell">
-            <div class="action-buttons">
-              <button class="btn-icon" [title]="u.status === 'active' ? 'Block User' : 'Unblock User'" 
-                      (click)="toggleBlock(u)" [ngClass]="{'reject': u.status === 'active', 'approve': u.status === 'blocked'}">
-                <i class="fas" [ngClass]="u.status === 'active' ? 'fa-ban' : 'fa-check'"></i>
-              </button>
-              <button class="btn-icon approve" title="Promote to Agent" *ngIf="u.role !== 'agent' && u.role !== 'admin'" (click)="promoteToAgent(u)">
-                <i class="fas fa-user-tie"></i>
-              </button>
-              <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
-              <button class="btn-icon delete" title="Delete" *ngIf="u.role !== 'admin'" (click)="deleteUser(u.id)">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr *ngIf="filteredUsers.length === 0">
-          <td colspan="6" class="empty-state">
-            <i class="fas fa-users"></i>
-            <p>No users found matching your criteria.</p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </th>
+            <th class="contact-column">
+              <div class="th-content">
+                <span>Contact</span>
+                <button class="sort-btn" (click)="onSort('email')">
+                  <i class="fas fa-sort"></i>
+                </button>
+              </div>
+            </th>
+            <th class="role-column">
+              <div class="th-content">
+                <span>Role</span>
+                <button class="sort-btn" (click)="onSort('role')">
+                  <i class="fas fa-sort"></i>
+                </button>
+              </div>
+            </th>
+            <th class="joined-column">
+              <div class="th-content">
+                <span>Joined</span>
+                <button class="sort-btn" (click)="onSort('createdAt')">
+                  <i class="fas fa-sort"></i>
+                </button>
+              </div>
+            </th>
+            <th class="status-column">
+              <div class="th-content">
+                <span>Status</span>
+                <button class="sort-btn" (click)="onSort('status')">
+                  <i class="fas fa-sort"></i>
+                </button>
+              </div>
+            </th>
+            <th class="actions-column">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of displayUsers" class="user-row" [class.selected]="selectedUsers.has(u.id)">
+            <td class="checkbox-cell">
+              <input type="checkbox" class="checkbox-row" 
+                     [checked]="selectedUsers.has(u.id)" 
+                     (change)="toggleUserSelection(u.id, $event)">
+            </td>
+            <td class="user-cell">
+              <div class="user-profile">
+                <div class="user-avatar-wrapper">
+                  <img [src]="u.avatar || 'assets/placeholder-user.jpg'" [alt]="u.name" class="user-avatar">
+                  <div class="status-indicator" [class.active]="u.status === 'active'"></div>
+                </div>
+                <div class="user-info">
+                  <div class="user-name">{{ u.name }}</div>
+                  <div class="user-id">ID: {{ u.id }}</div>
+                  <div class="user-meta">
+                    <span class="last-seen" *ngIf="u.lastSeen">Last seen: {{ u.lastSeen | date:'short' }}</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td class="contact-cell">
+              <div class="contact-info">
+                <div class="contact-item">
+                  <i class="fas fa-envelope"></i>
+                  <span>{{ u.email }}</span>
+                </div>
+                <div class="contact-item" *ngIf="u.phone">
+                  <i class="fas fa-phone"></i>
+                  <span>{{ u.phone }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="role-cell">
+              <span class="role-badge" [ngClass]="u.role">
+                <i class="fas" [ngClass]="getRoleIcon(u.role)"></i>
+                {{ u.role | titlecase }}
+              </span>
+            </td>
+            <td class="joined-cell">
+              <div class="date-info">
+                <div class="date-main">{{ u.createdAt | date:'MMM dd, yyyy' }}</div>
+                <div class="date-relative">{{ u.createdAt | timeAgo }}</div>
+              </div>
+            </td>
+            <td class="status-cell">
+              <span class="status-badge" [ngClass]="u.status">
+                <div class="status-dot"></div>
+                {{ u.status | titlecase }}
+              </span>
+            </td>
+            <td class="actions-cell">
+              <div class="action-buttons">
+                <button class="action-btn view" title="View Details" (click)="viewUserDetails(u)">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="action-btn edit" title="Edit User" (click)="editUser(u)">
+                  <i class="fas fa-pen"></i>
+                </button>
+                <button class="action-btn" [class]="u.status === 'active' ? 'block' : 'unblock'" 
+                        [title]="u.status === 'active' ? 'Block User' : 'Unblock User'" 
+                        (click)="toggleBlock(u)">
+                  <i class="fas" [ngClass]="u.status === 'active' ? 'fa-ban' : 'fa-check'"></i>
+                </button>
+                <button class="action-btn promote" title="Promote to Agent" 
+                        *ngIf="u.role !== 'agent' && u.role !== 'admin'" 
+                        (click)="promoteToAgent(u)">
+                  <i class="fas fa-user-tie"></i>
+                </button>
+                <button class="action-btn delete" title="Delete User" 
+                        *ngIf="u.role !== 'admin'" 
+                        (click)="deleteUser(u.id)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          
+          <!-- Empty State -->
+          <tr *ngIf="displayUsers.length === 0" class="empty-row">
+            <td colspan="7">
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <i class="fas fa-users-slash"></i>
+                </div>
+                <h3>No users found</h3>
+                <p>Try adjusting your search criteria or filters to find what you're looking for.</p>
+                <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Enhanced Pagination -->
+    <div class="pagination premium" *ngIf="filteredUsers.length > 0">
+      <div class="pagination-info">
+        <span>Showing {{ pagination.startItem }} to {{ pagination.endItem }} of {{ pagination.totalItems }} results</span>
+      </div>
+      <div class="pagination-controls">
+        <button class="page-btn" [disabled]="pagination.currentPage === 1" (click)="goToPage(pagination.currentPage - 1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="page-numbers">
+          <button 
+            *ngFor="let page of getPageNumbers()" 
+            class="page-btn" 
+            [class.active]="page === pagination.currentPage"
+            (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </div>
+        
+        <button class="page-btn" [disabled]="pagination.currentPage === pagination.totalPages" (click)="goToPage(pagination.currentPage + 1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <select class="size-select" (change)="changePageSize($event)">
+          <option [value]="10" [selected]="pagination.itemsPerPage === 10">10</option>
+          <option [value]="25" [selected]="pagination.itemsPerPage === 25">25</option>
+          <option [value]="50" [selected]="pagination.itemsPerPage === 50">50</option>
+          <option [value]="100" [selected]="pagination.itemsPerPage === 100">100</option>
+        </select>
+      </div>
+    </div>
   </div>
 </div>

@@ -14,14 +14,20 @@ namespace HomeFilla.Api.Data
         public DbSet<Inquiry> Inquiries { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<PropertyImage> PropertyImages { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<SystemSetting> Settings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             
-            // Further configuration can go here (e.g., Fluent API)
             modelBuilder.Entity<Property>()
                 .Property(p => p.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.Amount)
                 .HasPrecision(18, 2);
         }
     }

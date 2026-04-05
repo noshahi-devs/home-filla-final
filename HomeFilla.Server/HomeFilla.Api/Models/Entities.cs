@@ -90,4 +90,31 @@ namespace HomeFilla.Api.Models
         public int? AssignedAgentId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
+
+    public class Category
+    {
+        public int Id { get; set; }
+        [Required] public string Name { get; set; } = string.Empty; // e.g. House, Plot
+        public string? Icon { get; set; }
+        public int SortOrder { get; set; }
+    }
+
+    public class Payment
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string? UserName { get; set; }
+        public decimal Amount { get; set; }
+        [Required] public string Purpose { get; set; } = string.Empty; // e.g. Featured, Subscription
+        public string Status { get; set; } = "completed"; // completed, pending
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    }
+
+    public class SystemSetting
+    {
+        public int Id { get; set; }
+        [Required] public string Key { get; set; } = string.Empty;
+        public string? Value { get; set; }
+        public string? Description { get; set; }
+    }
 }
