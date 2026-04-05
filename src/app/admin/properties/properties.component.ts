@@ -41,6 +41,7 @@ export class AdminPropertiesComponent implements OnInit {
   editingProperty: Partial<DashboardProperty> = { images: [] };
   isEditMode: boolean = false;
   uploadingImage: boolean = false;
+  selectedFiles: File[] = [];
   protected readonly Math = Math;
 
   constructor(
@@ -210,6 +211,7 @@ export class AdminPropertiesComponent implements OnInit {
   closeModal(): void {
     this.isModalOpen = false;
     this.editingProperty = {};
+    this.selectedFiles = [];
   }
 
   // Image Handling
@@ -225,6 +227,8 @@ export class AdminPropertiesComponent implements OnInit {
     this.uploadingImage = true;
     
     for (let i = 0; i < files.length; i++) {
+      this.selectedFiles.push(files[i]);
+
       const reader = new FileReader();
       reader.onload = (e: any) => {
         if (!this.editingProperty.images) this.editingProperty.images = [];
@@ -237,23 +241,41 @@ export class AdminPropertiesComponent implements OnInit {
 
   removeImage(index: number): void {
     this.editingProperty.images?.splice(index, 1);
+    this.selectedFiles.splice(index, 1);
   }
 
   saveProperty(): void {
     this.uiService.showToast('processing', 'Saving...', 'Updating property details in system', 800);
     
-    // Ensure numeric fields are correctly parsed from the form
-    const propertyPayload = {
-      ...this.editingProperty,
-      price: Number(this.editingProperty.price) || 0,
-      beds: Number(this.editingProperty.beds) || 0,
-      baths: Number(this.editingProperty.baths) || 0,
-      sqft: Number(this.editingProperty.sqft) || 0,
-      sellerId: this.authService.getUserId() || 1 // Fallback just in case
-    };
+    const formData = new FormData();
+    formData.append('Title', this.editingProperty.title || '');
+    formData.append('Description', this.editingProperty.description || '');
+    formData.append('Price', (this.editingProperty.price || 0).toString());
+    formData.append('Purpose', this.editingProperty.purpose || 'sale');
+    formData.append('City', this.editingProperty.city || '');
+    formData.append('Area', this.editingProperty.area || '');
+    formData.append('Type', this.editingProperty.type || 'house');
+    formData.append('Beds', (this.editingProperty.beds || 0).toString());
+    formData.append('Baths', (this.editingProperty.baths || 0).toString());
+    formData.append('Sqft', (this.editingProperty.sqft || 0).toString());
+    formData.append('SellerId', (this.authService.getUserId() || 1).toString());
+
+    // Include any existing URL images (not base64 ones)
+    if (this.editingProperty.images) {
+      this.editingProperty.images.forEach(img => {
+        if (img.startsWith('/uploads')) {
+          formData.append('Images', img);
+        }
+      });
+    }
+
+    // Attach physical files
+    this.selectedFiles.forEach(file => {
+      formData.append('ImageFiles', file, file.name);
+    });
 
     if (this.isEditMode && this.editingProperty.id) {
-       this.propertyService.updateProperty(this.editingProperty.id, propertyPayload).subscribe({
+       this.propertyService.updateProperty(this.editingProperty.id, formData).subscribe({
          next: () => {
            this.closeModal();
            this.loadProperties();
@@ -265,7 +287,7 @@ export class AdminPropertiesComponent implements OnInit {
          }
        });
     } else {
-      this.propertyService.addProperty(propertyPayload).subscribe({
+      this.propertyService.addProperty(formData).subscribe({
         next: () => {
           this.closeModal();
           this.loadProperties();

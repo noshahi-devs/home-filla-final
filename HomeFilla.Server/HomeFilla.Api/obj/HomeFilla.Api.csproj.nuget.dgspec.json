@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "E:\\GitHub Projects\\home-filla-final\\HomeFilla.Server\\HomeFilla.Api\\HomeFilla.Api.csproj",
-        "projectName": "HomeFilla.Api",
+        "projectName": "HomeFilla.Api.V2",
         "projectPath": "E:\\GitHub Projects\\home-filla-final\\HomeFilla.Server\\HomeFilla.Api\\HomeFilla.Api.csproj",
         "packagesPath": "C:\\Users\\Noshahi Developer\\.nuget\\packages\\",
         "outputPath": "E:\\GitHub Projects\\home-filla-final\\HomeFilla.Server\\HomeFilla.Api\\obj\\",

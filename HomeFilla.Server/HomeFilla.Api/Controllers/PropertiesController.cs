@@ -32,7 +32,7 @@ namespace HomeFilla.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Property>> PostProperty([FromBody] PropertyInputModel input)
+        public async Task<ActionResult<Property>> PostProperty([FromForm] PropertyInputModel input)
         {
             var property = new Property
             {
@@ -52,7 +52,28 @@ namespace HomeFilla.Api.Controllers
                 UpdatedAt = DateTime.UtcNow
             };
 
-            if (input.Images != null)
+            if (input.ImageFiles != null && input.ImageFiles.Count > 0)
+            {
+                var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "properties");
+                if (!Directory.Exists(uploadsDir))
+                    Directory.CreateDirectory(uploadsDir);
+
+                foreach (var file in input.ImageFiles)
+                {
+                    if (file.Length > 0)
+                    {
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        var filePath = Path.Combine(uploadsDir, fileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        var url = $"/uploads/properties/{fileName}";
+                        property.Images.Add(new PropertyImage { ImageUrl = url });
+                    }
+                }
+            }
+            else if (input.Images != null) // Fallback for base64
             {
                 foreach (var imgUrl in input.Images)
                 {
@@ -67,7 +88,7 @@ namespace HomeFilla.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProperty(int id, [FromBody] PropertyInputModel input)
+        public async Task<IActionResult> PutProperty(int id, [FromForm] PropertyInputModel input)
         {
             var property = await _context.Properties.Include(p => p.Images).FirstOrDefaultAsync(p => p.Id == id);
             if (property == null) return NotFound();
@@ -84,13 +105,37 @@ namespace HomeFilla.Api.Controllers
             property.Sqft = input.Sqft;
             property.UpdatedAt = DateTime.UtcNow;
 
-            // Simple image sync: Clear and re-add
-            _context.PropertyImages.RemoveRange(property.Images);
-            if (input.Images != null)
+            // Update images if new ones are provided
+            if ((input.ImageFiles != null && input.ImageFiles.Count > 0) || (input.Images != null && input.Images.Count > 0))
             {
-                foreach (var imgUrl in input.Images)
+                _context.PropertyImages.RemoveRange(property.Images);
+                
+                if (input.ImageFiles != null && input.ImageFiles.Count > 0)
                 {
-                    property.Images.Add(new PropertyImage { ImageUrl = imgUrl });
+                    var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "properties");
+                    if (!Directory.Exists(uploadsDir)) Directory.CreateDirectory(uploadsDir);
+
+                    foreach (var file in input.ImageFiles)
+                    {
+                        if (file.Length > 0)
+                        {
+                            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                            var filePath = Path.Combine(uploadsDir, fileName);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await file.CopyToAsync(stream);
+                            }
+                            var url = $"/uploads/properties/{fileName}";
+                            property.Images.Add(new PropertyImage { ImageUrl = url });
+                        }
+                    }
+                }
+                else if (input.Images != null)
+                {
+                    foreach (var imgUrl in input.Images)
+                    {
+                        property.Images.Add(new PropertyImage { ImageUrl = imgUrl });
+                    }
                 }
             }
 
@@ -137,6 +182,7 @@ namespace HomeFilla.Api.Controllers
         public int Baths { get; set; }
         public int Sqft { get; set; }
         public int SellerId { get; set; }
-        public List<string>? Images { get; set; }
+        public List<string>? Images { get; set; } // Legacy fallback
+        public List<IFormFile>? ImageFiles { get; set; } // New physical files
     }
 }
