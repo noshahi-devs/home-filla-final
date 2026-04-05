@@ -38,6 +38,28 @@ namespace HomeFilla.Api.Models
         public int Views { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+        // Navigation
+        public ICollection<PropertyImage> Images { get; set; } = new List<PropertyImage>();
+    }
+
+    public class PropertyImage
+    {
+        public int Id { get; set; }
+        public int PropertyId { get; set; }
+        [Required] public string ImageUrl { get; set; } = string.Empty; // Supports Base64 or URL
+    }
+
+    public class Notification
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        [Required] public string Title { get; set; } = string.Empty;
+        public string? Message { get; set; }
+        public string? Icon { get; set; }
+        public string? Color { get; set; }
+        public bool IsRead { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 
     public class City

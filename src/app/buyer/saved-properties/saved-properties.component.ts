@@ -1,6 +1,6 @@
+import { PropertyService } from '../../shared/services/property.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { DashboardProperty } from '../../shared/models';
 import { RouterModule } from '@angular/router';
 
@@ -14,10 +14,10 @@ import { RouterModule } from '@angular/router';
 export class BuyerSavedPropertiesComponent implements OnInit {
   savedProperties: DashboardProperty[] = [];
 
-  constructor(private dataService: MockDataService) {}
+  constructor(private propertyService: PropertyService) {}
 
   ngOnInit() {
-    this.dataService.getPropertiesByStatus('approved').subscribe(props => {
+    this.propertyService.getPropertiesByStatus('approved').subscribe(props => {
       this.savedProperties = props.slice(0, 3);
     });
   }

@@ -1,7 +1,7 @@
+import { UserService } from '../../shared/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { UiService } from '../../shared/services/ui.service';
 import { DashboardUser } from '../../shared/models';
 
@@ -18,14 +18,14 @@ export class AdminUsersComponent implements OnInit {
   roleFilter: string = 'all';
   searchTerm: string = '';
 
-  constructor(private dataService: MockDataService, private uiService: UiService) {}
+  constructor(private userService: UserService, private uiService: UiService) {}
 
   ngOnInit(): void {
     this.loadUsers();
   }
 
   loadUsers(): void {
-    this.dataService.getUsers().subscribe(users => {
+    this.userService.getUsers().subscribe(users => {
       this.users = users;
       this.applyFilters();
     });
@@ -66,7 +66,7 @@ export class AdminUsersComponent implements OnInit {
     );
     if (isConfirmed) {
       const newStatus = user.status === 'active' ? 'blocked' : 'active';
-      this.dataService.updateUserStatus(user.id, newStatus).subscribe(() => {
+      this.userService.updateUserStatus(user.id, newStatus).subscribe(() => {
         this.loadUsers();
         this.uiService.showToast('success', `User ${action}ed`, `The user has been ${action.toLowerCase()}ed.`);
       });
@@ -80,7 +80,7 @@ export class AdminUsersComponent implements OnInit {
       'danger'
     );
     if (isConfirmed) {
-      this.dataService.deleteUser(id).subscribe(() => {
+      this.userService.deleteUser(id).subscribe(() => {
         this.loadUsers();
         this.uiService.showToast('success', 'User Deleted', 'The user account has been successfully removed.');
       });

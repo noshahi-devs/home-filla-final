@@ -20,24 +20,45 @@ namespace HomeFilla.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Property>>> GetProperties()
         {
-            return await _context.Properties.ToListAsync();
+            return await _context.Properties.Include(p => p.Images).ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Property>> GetProperty(int id)
         {
-            var property = await _context.Properties.FindAsync(id);
+            var property = await _context.Properties.Include(p => p.Images).FirstOrDefaultAsync(p => p.Id == id);
             if (property == null) return NotFound();
             return property;
         }
 
-        [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Property>> PostProperty([FromBody] Property property)
+        public async Task<ActionResult<Property>> PostProperty([FromBody] PropertyInputModel input)
         {
-            property.CreatedAt = DateTime.UtcNow;
-            property.UpdatedAt = DateTime.UtcNow;
-            property.Status = "pending";
+            var property = new Property
+            {
+                Title = input.Title,
+                Description = input.Description,
+                Price = input.Price,
+                City = input.City,
+                Area = input.Area,
+                Type = input.Type,
+                Purpose = input.Purpose,
+                Beds = input.Beds,
+                Baths = input.Baths,
+                Sqft = input.Sqft,
+                SellerId = input.SellerId,
+                Status = "pending",
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            if (input.Images != null)
+            {
+                foreach (var imgUrl in input.Images)
+                {
+                    property.Images.Add(new PropertyImage { ImageUrl = imgUrl });
+                }
+            }
             
             _context.Properties.Add(property);
             await _context.SaveChangesAsync();
@@ -45,7 +66,38 @@ namespace HomeFilla.Api.Controllers
             return CreatedAtAction(nameof(GetProperty), new { id = property.Id }, property);
         }
 
-        [Authorize(Roles = "admin")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutProperty(int id, [FromBody] PropertyInputModel input)
+        {
+            var property = await _context.Properties.Include(p => p.Images).FirstOrDefaultAsync(p => p.Id == id);
+            if (property == null) return NotFound();
+
+            property.Title = input.Title;
+            property.Description = input.Description;
+            property.Price = input.Price;
+            property.City = input.City;
+            property.Area = input.Area;
+            property.Type = input.Type;
+            property.Purpose = input.Purpose;
+            property.Beds = input.Beds;
+            property.Baths = input.Baths;
+            property.Sqft = input.Sqft;
+            property.UpdatedAt = DateTime.UtcNow;
+
+            // Simple image sync: Clear and re-add
+            _context.PropertyImages.RemoveRange(property.Images);
+            if (input.Images != null)
+            {
+                foreach (var imgUrl in input.Images)
+                {
+                    property.Images.Add(new PropertyImage { ImageUrl = imgUrl });
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         [HttpPut("{id}/status")]
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] string status)
         {
@@ -59,26 +111,32 @@ namespace HomeFilla.Api.Controllers
             return NoContent();
         }
 
-        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProperty(int id)
         {
             var property = await _context.Properties.FindAsync(id);
             if (property == null) return NotFound();
 
-            // Simple permission check (should be more robust)
-            var userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "0");
-            var role = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
-
-            if (role != "admin" && property.SellerId != userId)
-            {
-                return Forbid();
-            }
-
             _context.Properties.Remove(property);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
+    }
+
+    public class PropertyInputModel
+    {
+        public string Title { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public decimal Price { get; set; }
+        public string City { get; set; } = string.Empty;
+        public string Area { get; set; } = string.Empty;
+        public string Type { get; set; } = "house";
+        public string Purpose { get; set; } = "sale";
+        public int Beds { get; set; }
+        public int Baths { get; set; }
+        public int Sqft { get; set; }
+        public int SellerId { get; set; }
+        public List<string>? Images { get; set; }
     }
 }

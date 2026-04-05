@@ -1,7 +1,7 @@
+import { InquiryService } from '../../shared/services/inquiry.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { Inquiry } from '../../shared/models';
 
 @Component({
@@ -16,14 +16,14 @@ export class AdminInquiriesComponent implements OnInit {
   filteredInquiries: Inquiry[] = [];
   statusFilter: string = 'all';
 
-  constructor(private dataService: MockDataService) {}
+  constructor(private inquiryService: InquiryService) {}
 
   ngOnInit() {
     this.loadInquiries();
   }
 
   loadInquiries() {
-    this.dataService.getInquiries().subscribe(inqs => {
+    this.inquiryService.getInquiries().subscribe(inqs => {
       this.inquiries = inqs;
       this.applyFilters();
     });
@@ -43,7 +43,7 @@ export class AdminInquiriesComponent implements OnInit {
   }
 
   markResolved(id: number) {
-    this.dataService.updateInquiryStatus(id, 'resolved').subscribe(() => {
+    this.inquiryService.updateInquiryStatus(id, 'resolved').subscribe(() => {
       this.loadInquiries();
     });
   }

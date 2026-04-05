@@ -1,7 +1,7 @@
+import { NotificationService } from '../../shared/services/notification.service';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { AuthService } from '../../shared/services/auth.service';
 
 interface MenuItem {
@@ -35,7 +35,7 @@ export class BuyerLayoutComponent {
   recentNotifications: any[] = [];
 
   constructor(
-    public dataService: MockDataService,
+    private notificationService: NotificationService,
     public authService: AuthService,
     private router: Router
   ) {}
@@ -46,11 +46,11 @@ export class BuyerLayoutComponent {
 
   loadLayoutData(): void {
     // Notifications
-    this.dataService.getUnreadNotifications().subscribe(notifs => {
+    this.notificationService.getUnreadNotifications().subscribe(notifs => {
       this.unreadCount = notifs.length;
     });
 
-    this.dataService.getNotifications().subscribe(notifs => {
+    this.notificationService.getNotifications().subscribe(notifs => {
       this.recentNotifications = notifs.slice(0, 5);
     });
   }
@@ -75,7 +75,7 @@ export class BuyerLayoutComponent {
   }
 
   markAllRead(): void {
-    this.dataService.markAllNotificationsRead().subscribe(() => {
+    this.notificationService.markAllNotificationsRead().subscribe(() => {
       this.loadLayoutData();
     });
   }

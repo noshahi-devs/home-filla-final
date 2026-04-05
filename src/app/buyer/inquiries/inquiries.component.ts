@@ -1,6 +1,6 @@
+import { InquiryService } from '../../shared/services/inquiry.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { Inquiry } from '../../shared/models';
 
@@ -15,13 +15,13 @@ export class BuyerInquiriesComponent implements OnInit {
   inquiries: Inquiry[] = [];
 
   constructor(
-    private dataService: MockDataService,
+    private inquiryService: InquiryService,
     private authService: AuthService
   ) {}
 
   ngOnInit() {
     const userId = this.authService.getUserId();
-    this.dataService.getInquiries().subscribe(inqs => {
+    this.inquiryService.getInquiries().subscribe(inqs => {
       this.inquiries = inqs.filter(i => i.userId === userId);
     });
   }

@@ -12,6 +12,8 @@ namespace HomeFilla.Api.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Inquiry> Inquiries { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<PropertyImage> PropertyImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

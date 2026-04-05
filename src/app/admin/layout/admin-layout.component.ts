@@ -1,7 +1,9 @@
+import { PropertyService } from '../../shared/services/property.service';
+import { InquiryService } from '../../shared/services/inquiry.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { AuthService } from '../../shared/services/auth.service';
 
 interface MenuItem {
@@ -41,7 +43,7 @@ export class AdminLayoutComponent {
   recentNotifications: any[] = [];
 
   constructor(
-    public dataService: MockDataService,
+    private propertyService: PropertyService, private inquiryService: InquiryService, private notificationService: NotificationService,
     public authService: AuthService,
     private router: Router
   ) {}
@@ -52,21 +54,21 @@ export class AdminLayoutComponent {
 
   loadLayoutData(): void {
     // Inquiries badge
-    this.dataService.getInquiries().subscribe(inqs => {
+    this.inquiryService.getInquiries().subscribe(inqs => {
       this.menuItems[6].badge = inqs.filter(i => i.status === 'new').length;
     });
 
     // Pending properties badge
-    this.dataService.getPropertiesByStatus('pending').subscribe(props => {
+    this.propertyService.getPropertiesByStatus('pending').subscribe(props => {
       this.menuItems[1].badge = props.length;
     });
 
     // Notifications
-    this.dataService.getUnreadNotifications().subscribe(notifs => {
+    this.notificationService.getUnreadNotifications().subscribe(notifs => {
       this.unreadCount = notifs.length;
     });
 
-    this.dataService.getNotifications().subscribe(notifs => {
+    this.notificationService.getNotifications().subscribe(notifs => {
       this.recentNotifications = notifs.slice(0, 5);
     });
   }
@@ -91,7 +93,7 @@ export class AdminLayoutComponent {
   }
 
   markAllRead(): void {
-    this.dataService.markAllNotificationsRead().subscribe(() => {
+    this.notificationService.markAllNotificationsRead().subscribe(() => {
       this.loadLayoutData();
     });
   }

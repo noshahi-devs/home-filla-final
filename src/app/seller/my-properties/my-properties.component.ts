@@ -1,7 +1,7 @@
+import { PropertyService } from '../../shared/services/property.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { UiService } from '../../shared/services/ui.service';
 import { DashboardProperty } from '../../shared/models';
@@ -25,7 +25,7 @@ export class SellerMyPropertiesComponent implements OnInit {
   userId!: number;
 
   constructor(
-    private dataService: MockDataService,
+    private propertyService: PropertyService,
     private authService: AuthService,
     private uiService: UiService
   ) {}
@@ -36,7 +36,7 @@ export class SellerMyPropertiesComponent implements OnInit {
   }
 
   loadProperties() {
-    this.dataService.getPropertiesBySeller(this.userId).subscribe(properties => {
+    this.propertyService.getPropertiesBySeller(this.userId).subscribe(properties => {
       this.properties = properties;
       this.applyFilters();
     });
@@ -72,7 +72,7 @@ export class SellerMyPropertiesComponent implements OnInit {
     );
     if (isConfirmed) {
       this.uiService.showToast('processing', 'Deleting...', 'Removing your property.', 1000);
-      this.dataService.deleteProperty(id).subscribe(() => {
+      this.propertyService.deleteProperty(id).subscribe(() => {
         this.loadProperties();
         this.uiService.showToast('success', 'Deleted', 'Your listing was successfully removed.');
       });
@@ -100,7 +100,7 @@ export class SellerMyPropertiesComponent implements OnInit {
   saveProperty() {
     this.uiService.showToast('processing', 'Saving...', 'Uploading your property details.', 800);
     
-    // In a real app, use this.dataService.addProperty or updateProperty
+    // In a real app, use this.propertyService.addProperty or updateProperty
     // Simulating completion for now
     this.closeModal();
     this.loadProperties();

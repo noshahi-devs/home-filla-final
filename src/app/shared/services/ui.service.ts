@@ -42,19 +42,9 @@ export class UiService {
     confirmText = 'Yes, Continue',
     cancelText = 'Cancel'
   ): Promise<boolean> {
-    return new Promise((resolve) => {
-      this.confirmationSubject.next({
-        title,
-        message,
-        type,
-        confirmText,
-        cancelText,
-        resolve: (result: boolean) => {
-          this.closeConfirmation();
-          resolve(result);
-        }
-      });
-    });
+    // Fallback to native window.confirm since there's no global modal listening to this Subject
+    const result = window.confirm(`${title}\n\n${message}`);
+    return Promise.resolve(result);
   }
 
   closeConfirmation(): void {

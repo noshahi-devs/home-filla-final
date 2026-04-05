@@ -1,6 +1,6 @@
+import { NotificationService } from '../../shared/services/notification.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { AppNotification } from '../../shared/models';
 
 @Component({
@@ -13,20 +13,20 @@ import { AppNotification } from '../../shared/models';
 export class AdminNotificationsComponent implements OnInit {
   notifications: AppNotification[] = [];
 
-  constructor(private dataService: MockDataService) {}
+  constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
     this.loadNotifications();
   }
 
   loadNotifications() {
-    this.dataService.getNotifications().subscribe(notifs => {
+    this.notificationService.getNotifications().subscribe(notifs => {
       this.notifications = notifs;
     });
   }
 
   markAllRead() {
-    this.dataService.markAllNotificationsRead().subscribe(() => {
+    this.notificationService.markAllNotificationsRead().subscribe(() => {
       this.loadNotifications();
     });
   }

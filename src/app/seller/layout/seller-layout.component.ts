@@ -1,7 +1,9 @@
+import { PropertyService } from '../../shared/services/property.service';
+import { InquiryService } from '../../shared/services/inquiry.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { AuthService } from '../../shared/services/auth.service';
 
 interface MenuItem {
@@ -35,7 +37,7 @@ export class SellerLayoutComponent {
   recentNotifications: any[] = [];
 
   constructor(
-    public dataService: MockDataService,
+    private propertyService: PropertyService, private inquiryService: InquiryService, private notificationService: NotificationService,
     public authService: AuthService,
     private router: Router
   ) {}
@@ -48,17 +50,17 @@ export class SellerLayoutComponent {
     const userId = this.authService.getUserId();
     
     // Notifications
-    this.dataService.getUnreadNotifications().subscribe(notifs => {
+    this.notificationService.getUnreadNotifications().subscribe(notifs => {
       this.unreadCount = notifs.length;
     });
 
-    this.dataService.getNotifications().subscribe(notifs => {
+    this.notificationService.getNotifications().subscribe(notifs => {
       this.recentNotifications = notifs.slice(0, 5);
     });
 
     // Inquiries badge for seller's properties
-    this.dataService.getPropertiesBySeller(userId).subscribe(myProps => {
-      this.dataService.getInquiries().subscribe(inqs => {
+    this.propertyService.getPropertiesBySeller(userId).subscribe(myProps => {
+      this.inquiryService.getInquiries().subscribe(inqs => {
         this.menuItems[2].badge = inqs.filter(i => 
           myProps.some(p => p.id === i.propertyId) && i.status === 'new'
         ).length;
@@ -86,7 +88,7 @@ export class SellerLayoutComponent {
   }
 
   markAllRead(): void {
-    this.dataService.markAllNotificationsRead().subscribe(() => {
+    this.notificationService.markAllNotificationsRead().subscribe(() => {
       this.loadLayoutData();
     });
   }

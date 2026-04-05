@@ -1,7 +1,7 @@
+import { AgentService } from '../../shared/services/agent.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { DashboardAgent } from '../../shared/models';
 
 @Component({
@@ -17,14 +17,14 @@ export class AdminAgentsComponent implements OnInit {
   statusFilter: string = 'all';
   searchTerm: string = '';
 
-  constructor(private dataService: MockDataService) {}
+  constructor(private agentService: AgentService) {}
 
   ngOnInit(): void {
     this.loadAgents();
   }
 
   loadAgents(): void {
-    this.dataService.getAgents().subscribe(agents => {
+    this.agentService.getAgents().subscribe(agents => {
       this.agents = agents;
       this.applyFilters();
     });
@@ -56,13 +56,13 @@ export class AdminAgentsComponent implements OnInit {
   }
 
   approveAgent(id: number): void {
-    this.dataService.updateAgentStatus(id, 'approved').subscribe(() => {
+    this.agentService.updateAgentStatus(id, 'approved').subscribe(() => {
       this.loadAgents();
     });
   }
 
   rejectAgent(id: number): void {
-    this.dataService.updateAgentStatus(id, 'rejected').subscribe(() => {
+    this.agentService.updateAgentStatus(id, 'rejected').subscribe(() => {
       this.loadAgents();
     });
   }

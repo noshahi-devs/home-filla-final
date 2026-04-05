@@ -1,6 +1,6 @@
+import { PropertyService } from '../../shared/services/property.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { DashboardProperty } from '../../shared/models';
 
 @Component({
@@ -13,20 +13,20 @@ import { DashboardProperty } from '../../shared/models';
 export class AdminFeaturedComponent implements OnInit {
   properties: DashboardProperty[] = [];
 
-  constructor(private dataService: MockDataService) {}
+  constructor(private propertyService: PropertyService) {}
 
   ngOnInit() {
     this.loadProperties();
   }
 
   loadProperties() {
-    this.dataService.getProperties().subscribe(props => {
+    this.propertyService.getProperties().subscribe(props => {
       this.properties = props;
     });
   }
 
   toggleFeatured(id: number) {
-    this.dataService.toggleFeatured(id).subscribe(() => {
+    this.propertyService.toggleFeatured(id).subscribe(() => {
       this.loadProperties();
     });
   }

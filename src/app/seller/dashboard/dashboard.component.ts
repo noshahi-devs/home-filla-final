@@ -1,7 +1,7 @@
+import { StatsService } from '../../shared/services/stats.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
@@ -22,13 +22,13 @@ export class SellerDashboardComponent implements OnInit {
   userId!: number;
 
   constructor(
-    private dataService: MockDataService,
+    private statsService: StatsService,
     private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
-    this.dataService.getSellerStats(this.userId).subscribe(stats => {
+    this.statsService.getSellerStats(this.userId).subscribe(stats => {
       this.stats = stats;
     });
   }

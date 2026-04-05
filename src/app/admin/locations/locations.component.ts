@@ -1,7 +1,7 @@
+import { LocationService } from '../../shared/services/location.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { UiService } from '../../shared/services/ui.service';
 import { City, Area } from '../../shared/models';
 
@@ -21,14 +21,14 @@ export class AdminLocationsComponent implements OnInit {
   newCityProv = '';
   newAreaName = '';
 
-  constructor(private dataService: MockDataService, private uiService: UiService) {}
+  constructor(private locationService: LocationService, private uiService: UiService) {}
 
   ngOnInit(): void {
     this.loadCities();
   }
 
   loadCities(): void {
-    this.dataService.getCities().subscribe(cities => {
+    this.locationService.getCities().subscribe(cities => {
       this.cities = cities;
       if (this.cities.length > 0 && !this.selectedCityId) {
         this.selectCity(this.cities[0].id);
@@ -43,7 +43,7 @@ export class AdminLocationsComponent implements OnInit {
 
   loadAreas(): void {
     if (this.selectedCityId) {
-      this.dataService.getAreas(this.selectedCityId).subscribe(areas => {
+      this.locationService.getAreas(this.selectedCityId).subscribe(areas => {
         this.areas = areas;
       });
     } else {
@@ -53,7 +53,7 @@ export class AdminLocationsComponent implements OnInit {
 
   addCity(): void {
     if (this.newCityName.trim() && this.newCityProv.trim()) {
-      this.dataService.addCity(this.newCityName, this.newCityProv).subscribe(() => {
+      this.locationService.addCity(this.newCityName, this.newCityProv).subscribe(() => {
         this.uiService.showToast('success', 'City Added', 'The new city has been added successfully.');
         this.loadCities();
         this.newCityName = '';
@@ -71,7 +71,7 @@ export class AdminLocationsComponent implements OnInit {
       'danger'
     );
     if (isConfirmed) {
-      this.dataService.deleteCity(id).subscribe(() => {
+      this.locationService.deleteCity(id).subscribe(() => {
         this.uiService.showToast('success', 'Deleted', 'City and areas deleted successfully.');
         if (this.selectedCityId === id) this.selectedCityId = null;
         this.loadCities();
@@ -81,7 +81,7 @@ export class AdminLocationsComponent implements OnInit {
 
   addArea(): void {
     if (this.newAreaName.trim() && this.selectedCityId) {
-      this.dataService.addArea(this.selectedCityId, this.newAreaName).subscribe(() => {
+      this.locationService.addArea(this.selectedCityId, this.newAreaName).subscribe(() => {
         this.uiService.showToast('success', 'Area Added', 'The new area has been created.');
         this.newAreaName = '';
         this.loadAreas();
@@ -98,7 +98,7 @@ export class AdminLocationsComponent implements OnInit {
       'warning'
     );
     if (isConfirmed) {
-      this.dataService.deleteArea(id).subscribe(() => {
+      this.locationService.deleteArea(id).subscribe(() => {
         this.uiService.showToast('success', 'Deleted', 'Area removed successfully.');
         this.loadAreas();
       });
