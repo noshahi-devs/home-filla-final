@@ -3,10 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { TimeAgoPipe } from '../../shared/pipes/time-ago.pipe';
+
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TimeAgoPipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -36,7 +38,14 @@ export class AdminDashboardComponent implements OnInit {
     });
 
     this.statsService.getRecentActivity().subscribe(data => {
-      this.recentActivity = data;
+      this.recentActivity = data.map((a: any) => ({
+        ...a,
+        text: a.message || a.title, // Use message as display text
+        time: a.createdAt, // Store the raw date for the pipe
+        avatar: a.type === 'user' 
+          ? 'https://ui-avatars.com/api/?name=User&background=22c55e&color=fff' 
+          : 'https://ui-avatars.com/api/?name=Prop&background=4a6cf7&color=fff'
+      }));
     });
   }
 
