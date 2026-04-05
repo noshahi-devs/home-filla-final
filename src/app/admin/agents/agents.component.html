@@ -235,16 +235,33 @@
     <!-- Premium Pagination -->
     <div class="pagination premium" *ngIf="filteredAgents.length > 0">
       <div class="pagination-info">
-        Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ filteredAgents.length }} agents
+        <span>Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ filteredAgents.length }} agents</span>
       </div>
-      <div style="display: flex; gap: 8px;">
+      <div class="pagination-controls">
         <button class="page-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
           <i class="fas fa-chevron-left"></i>
         </button>
-        <button class="page-btn active">{{ currentPage }}</button>
+        
+        <div class="page-numbers">
+          <button 
+            *ngFor="let page of getPageNumbers()" 
+            class="page-btn" 
+            [class.active]="page === currentPage"
+            (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </div>
+        
         <button class="page-btn" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
           <i class="fas fa-chevron-right"></i>
         </button>
+        
+        <select class="size-select" [value]="itemsPerPage" (change)="changePageSize($event)">
+          <option [value]="5">5 / page</option>
+          <option [value]="10">10 / page</option>
+          <option [value]="25">25 / page</option>
+          <option [value]="50">50 / page</option>
+        </select>
       </div>
     </div>
   </div>
