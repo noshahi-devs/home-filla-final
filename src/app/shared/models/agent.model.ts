@@ -1,4 +1,4 @@
-export type AgentStatus = 'pending' | 'approved' | 'rejected';
+export type AgentStatus = 'pending' | 'approved' | 'rejected' | 'active';
 
 export interface DashboardAgent {
   id: number;

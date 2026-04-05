@@ -36,7 +36,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "http://localhost:60980", "http://localhost:3000") // Common dev ports
+        policy.WithOrigins("http://localhost:4200", "http://localhost:60980", "http://localhost:52062", "http://localhost:3000") // Common dev ports
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials(); // Added to support potential cookies/auth headers

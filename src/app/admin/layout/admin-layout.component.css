@@ -327,6 +327,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-width: 0;
 }
 
 .sidebar-collapsed .main-area {
@@ -346,6 +347,8 @@
   position: sticky;
   top: 0;
   z-index: 900;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .topbar-left {
@@ -633,6 +636,8 @@
   flex: 1;
   padding: 28px;
   overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 0;
 }
 
 /* ═══ RESPONSIVE ════════════════════════════════════ */

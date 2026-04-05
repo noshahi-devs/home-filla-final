@@ -9,16 +9,16 @@ namespace HomeFilla.Api.Data
         {
             context.Database.EnsureCreated();
 
-            if (!context.Users.Any())
+            if (!context.Users.Any(u => u.Role == "agent"))
             {
-                var users = new List<User>
+                var sampleAgents = new List<User>
                 {
-                    new User { Id = 1, Name = "Admin User", Email = "admin@homefilla.com", PasswordHash = "admin123", Role = "admin", Status = "active" },
-                    new User { Id = 2, Name = "Ali Hassan", Email = "ali.seller@gmail.com", Role = "seller", Status = "active" },
-                    new User { Id = 3, Name = "Sara Ahmed", Email = "sara.seller@gmail.com", Role = "seller", Status = "active" },
-                    new User { Id = 4, Name = "Usman Khan", Email = "usman.seller@gmail.com", Role = "seller", Status = "active" }
+                    new User { Name = "Haris Ali", Email = "haris.agent@homefilla.com", Role = "agent", Status = "approved", AgencyName = "RE/MAX Elite", Rating = 4.8, PasswordHash = "agent123" },
+                    new User { Name = "Aisha Khan", Email = "aisha.agent@homefilla.com", Role = "agent", Status = "approved", AgencyName = "Zameen Professionals", Rating = 4.5, PasswordHash = "agent123" },
+                    new User { Name = "Bilal Ahmed", Email = "bilal.agent@homefilla.com", Role = "agent", Status = "pending", AgencyName = "Independent", Rating = 0.0, PasswordHash = "agent123" },
+                    new User { Name = "Zainab Malik", Email = "zainab.agent@homefilla.com", Role = "agent", Status = "approved", AgencyName = "HomeFilla Luxury", Rating = 4.9, PasswordHash = "agent123" }
                 };
-                context.Users.AddRange(users);
+                context.Users.AddRange(sampleAgents);
                 context.SaveChanges();
             }
 
@@ -27,8 +27,8 @@ namespace HomeFilla.Api.Data
                 var properties = new List<Property>
                 {
                     new Property { Title = "Luxury Villa in DHA Phase 6", Price = 45000000, City = "Lahore", Area = "DHA Phase 6", Type = "house", Status = "approved", SellerId = 2, Beds = 5, Baths = 4, Sqft = 4500, IsFeatured = true },
-                    new Property { Title = "Modern Apartment in Bahria Town", Price = 18000000, City = "Lahore", Area = "Bahria Town", Type = "apartment", Status = "approved", SellerId = 3, Beds = 3, Baths = 2, Sqft = 1800 },
-                    new Property { Title = "Penthouse in F-7 Islamabad", Price = 85000000, City = "Islamabad", Area = "F-7", Type = "apartment", Status = "approved", SellerId = 4, Beds = 4, Baths = 3, Sqft = 3200, IsFeatured = true }
+                    new Property { Title = "Modern Apartment in Bahria Town", Price = 18000000, City = "Lahore", Area = "Bahria Town", Type = "apartment", Status = "approved", SellerId = 2, Beds = 3, Baths = 2, Sqft = 1800 },
+                    new Property { Title = "Penthouse in F-7 Islamabad", Price = 85000000, City = "Islamabad", Area = "F-7", Type = "apartment", Status = "approved", SellerId = 2, Beds = 4, Baths = 3, Sqft = 3200, IsFeatured = true }
                 };
                 context.Properties.AddRange(properties);
                 context.SaveChanges();

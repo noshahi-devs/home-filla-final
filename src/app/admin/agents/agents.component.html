@@ -1,79 +1,258 @@
-<div class="properties-page">
-  <div class="page-header">
-    <div>
+<div class="agents-page">
+  <!-- Premium Stats Cards -->
+  <div class="stats-grid">
+    <div class="stat-card premium">
+      <div class="stat-icon-wrapper total">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ agents.length }}</div>
+        <div class="stat-label">Total Agents</div>
+        <div class="stat-change positive">
+          <i class="fas fa-arrow-up"></i> +5% this month
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-icon-wrapper active">
+        <i class="fas fa-user-check"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ getStatusCount('approved') || getStatusCount('active') }}</div>
+        <div class="stat-label">Active Elite</div>
+        <div class="stat-change positive">
+          <i class="fas fa-arrow-up"></i> +2% this month
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-icon-wrapper pending">
+        <i class="fas fa-user-clock"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ getStatusCount('pending') }}</div>
+        <div class="stat-label">Pending Applicants</div>
+        <div class="stat-change neutral">
+          <i class="fas fa-minus"></i> No change
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-icon-wrapper listings">
+        <i class="fas fa-home"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ getTotalListings() }}</div>
+        <div class="stat-label">Total Listings</div>
+        <div class="stat-change positive">
+          <i class="fas fa-arrow-up"></i> +14% this month
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Page Header -->
+  <div class="page-header premium">
+    <div class="header-left">
+      <div class="breadcrumb">
+        <i class="fas fa-home"></i>
+        <span>/</span>
+        <span>Dashboard</span>
+        <span>/</span>
+        <span class="current">Agents</span>
+      </div>
       <h1>Agent Management</h1>
-      <p class="page-subtitle">Manage real estate agents, agencies, and view performance.</p>
+      <p class="page-subtitle">Manage, verify, and monitor real estate professionals in your network.</p>
     </div>
-    <button class="btn-primary">
-      <i class="fas fa-user-plus"></i> Add Agent
-    </button>
-  </div>
-
-  <div class="filters-bar">
-    <div class="tabs">
-      <button class="tab-btn" [class.active]="statusFilter === 'all'" (click)="setFilter('all')">All Agents</button>
-      <button class="tab-btn" [class.active]="statusFilter === 'approved'" (click)="setFilter('approved')">Approved</button>
-      <button class="tab-btn" [class.active]="statusFilter === 'pending'" (click)="setFilter('pending')">Pending Requests</button>
-      <button class="tab-btn" [class.active]="statusFilter === 'rejected'" (click)="setFilter('rejected')">Rejected</button>
-    </div>
-    <div class="search-wrap">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search name or agency..." (input)="onSearch($event)">
+    <div class="header-actions">
+      <button class="btn-export" (click)="exportAgents()">
+        <i class="fas fa-download"></i>
+        <span>Export</span>
+      </button>
+      <button class="btn-primary premium" (click)="openAddAgentModal()">
+        <div class="btn-icon-wrapper">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <span>Add Agent</span>
+      </button>
     </div>
   </div>
 
-  <div class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Agent Details</th>
-          <th>Agency Info</th>
-          <th>Performance</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of filteredAgents">
-          <td>
-            <div class="property-cell">
-              <img [src]="a.avatar || 'assets/placeholder-user.jpg'" alt="" class="prop-img">
-              <div class="prop-info">
-                <span class="prop-title">{{ a.name }}</span>
-                <span class="prop-seller"><i class="fas fa-phone-alt" style="font-size:10px"></i> {{ a.phone }}</span>
+  <!-- Enhanced Filters Bar -->
+  <div class="filters-bar premium">
+    <div class="filters-left">
+      <div class="role-tabs">
+        <button class="role-tab" [class.active]="statusFilter === 'all'" (click)="setFilter('all')">
+          <i class="fas fa-users"></i>
+          <span>All Agents</span>
+          <span class="tab-count">{{ agents.length }}</span>
+        </button>
+        <button class="role-tab" [class.active]="statusFilter === 'approved'" (click)="setFilter('approved')">
+          <i class="fas fa-user-check"></i>
+          <span>Verified</span>
+          <span class="tab-count">{{ getStatusCount('approved') }}</span>
+        </button>
+        <button class="role-tab" [class.active]="statusFilter === 'pending'" (click)="setFilter('pending')">
+          <i class="fas fa-user-clock"></i>
+          <span>Applicants</span>
+          <span class="tab-count">{{ getStatusCount('pending') }}</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="filters-right">
+      <div class="search-container">
+        <div class="search-icon">
+          <i class="fas fa-search"></i>
+        </div>
+        <input type="text" placeholder="Search by name, email or agency..." (input)="onSearch($event)" class="search-input">
+      </div>
+      
+      <div class="view-toggle">
+        <button class="view-btn active" title="List View" (click)="viewMode = 'table'">
+          <i class="fas fa-list"></i>
+        </button>
+        <button class="view-btn" title="Grid View" (click)="viewMode = 'cards'">
+          <i class="fas fa-th"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bulk Actions Bar -->
+  <div class="bulk-actions" *ngIf="selectedAgents.size > 0">
+    <div class="bulk-info">
+      <span class="bulk-count">{{ selectedAgents.size }} agents selected</span>
+      <button class="clear-selection" (click)="clearSelection()">Clear selection</button>
+    </div>
+    <div class="bulk-buttons">
+      <button class="bulk-btn approve" (click)="bulkApprove()">
+        <i class="fas fa-check"></i>
+        Approve
+      </button>
+      <button class="bulk-btn reject" (click)="bulkReject()">
+        <i class="fas fa-ban"></i>
+        Reject
+      </button>
+      <button class="bulk-btn delete" (click)="bulkDelete()">
+        <i class="fas fa-trash"></i>
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <!-- Enhanced Table Container -->
+  <div class="table-container premium">
+    <div class="table-header">
+      <div class="table-title">
+        <h3>Agents Directory</h3>
+        <span class="result-count">{{ filteredAgents.length }} results</span>
+      </div>
+    </div>
+    
+    <div class="table-wrapper">
+      <table class="data-table premium">
+        <thead>
+          <tr>
+            <th style="width: 50px;">
+              <input type="checkbox" (change)="toggleSelectAll($event)">
+            </th>
+            <th>Agent Details</th>
+            <th>Contact Info</th>
+            <th>Agency</th>
+            <th>Performance</th>
+            <th>Status</th>
+            <th style="width: 150px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of filteredAgents" class="user-row" [class.selected]="selectedAgents.has(a.id)">
+            <td style="text-align: center;">
+              <input type="checkbox" [checked]="selectedAgents.has(a.id)" (change)="toggleAgentSelection(a.id, $event)">
+            </td>
+            <td>
+              <div class="user-profile">
+                <img [src]="a.avatar || 'assets/placeholder-user.jpg'" alt="" class="user-avatar">
+                <div class="user-info">
+                  <div class="user-name">{{ a.name }}</div>
+                  <div class="user-id">ID: {{ a.id }}</div>
+                </div>
               </div>
-            </div>
-          </td>
-          <td>
-            <div class="loc-cell">
-              <span class="city">{{ a.agencyName }}</span>
-              <span class="area">{{ a.email }}</span>
-            </div>
-          </td>
-          <td>
-            <div class="loc-cell">
-              <span class="city" style="color:#22c55e"><i class="fas fa-home" style="color:#64748b;font-size:10px"></i> {{ a.listingsCount }} Listings</span>
-              <span class="area" style="color:#f59e0b"><i class="fas fa-star" style="font-size:10px"></i> {{ a.rating || 'N/A' }} Rating</span>
-            </div>
-          </td>
-          <td>
-            <span class="status-badge" [ngClass]="a.status">{{ a.status }}</span>
-          </td>
-          <td class="actions-cell">
-            <div class="action-buttons">
-              <button class="btn-icon approve" title="Approve" *ngIf="a.status !== 'approved'" (click)="approveAgent(a.id)"><i class="fas fa-check"></i></button>
-              <button class="btn-icon reject" title="Reject" *ngIf="a.status !== 'rejected'" (click)="rejectAgent(a.id)"><i class="fas fa-times"></i></button>
-              <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
-            </div>
-          </td>
-        </tr>
-        <tr *ngIf="filteredAgents.length === 0">
-          <td colspan="5" class="empty-state">
-            <i class="fas fa-user-tie"></i>
-            <p>No agents found matching your criteria.</p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+            <td>
+              <div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px;">
+                <div style="color: var(--text-body);"><i class="fas fa-envelope" style="width: 16px; color: var(--text-muted);"></i> {{ a.email }}</div>
+                <div style="color: var(--text-sub);"><i class="fas fa-phone" style="width: 16px; color: var(--text-muted);"></i> {{ a.phone }}</div>
+              </div>
+            </td>
+            <td>
+              <div style="font-weight: 700; color: var(--accent); font-size: 13px;">{{ a.agencyName }}</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">RE/MAX Certified</div>
+            </td>
+            <td>
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <div style="text-align: center;">
+                  <div style="font-weight: 800; color: var(--text-h);">{{ a.listingsCount }}</div>
+                  <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Listings</div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-weight: 800; color: #f59e0b;">{{ a.rating }} <i class="fas fa-star" style="font-size: 10px;"></i></div>
+                  <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Rating</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="status-badge" [ngClass]="a.status">
+                <div class="status-dot"></div>
+                {{ a.status | titlecase }}
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                <button class="action-btn edit" title="Edit Agent" (click)="editAgent(a)"><i class="fas fa-pen"></i></button>
+                <button class="action-btn delete" title="Delete Agent" (click)="deleteAgent(a.id)"><i class="fas fa-trash"></i></button>
+              </div>
+            </td>
+          </tr>
+          
+          <tr *ngIf="filteredAgents.length === 0">
+            <td colspan="7">
+              <div style="padding: 60px; text-align: center; color: var(--text-muted);">
+                <i class="fas fa-user-tie" style="font-size: 40px; margin-bottom: 16px; opacity: 0.3;"></i>
+                <h3>No agents found</h3>
+                <p>Try adjusting your search criteria or filters.</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Premium Pagination -->
+    <div class="pagination premium" *ngIf="filteredAgents.length > 0">
+      <div class="pagination-info">
+        Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ filteredAgents.length }} agents
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="page-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="page-btn active">{{ currentPage }}</button>
+        <button class="page-btn" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
   </div>
+
+  <!-- Add Agent Modal -->
+  <app-add-agent-modal 
+    [isOpen]="isAddAgentModalOpen" 
+    (close)="closeAddAgentModal()" 
+    (submit)="onAddAgent($event)">
+  </app-add-agent-modal>
 </div>

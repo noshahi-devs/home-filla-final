@@ -18,7 +18,19 @@ export class AgentService {
     return this.http.get<DashboardAgent[]>(`${this.apiUrl}/agents`, { headers: this.headers });
   }
 
+  getAgent(id: number): Observable<DashboardAgent> {
+    return this.http.get<DashboardAgent>(`${this.apiUrl}/agents/${id}`, { headers: this.headers });
+  }
+
   updateAgentStatus(id: number, status: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/agents/${id}/status`, `"${status}"`, { headers: this.headers.set('Content-Type', 'application/json') });
+  }
+
+  addAgent(agent: any): Observable<DashboardAgent> {
+    return this.http.post<DashboardAgent>(`${this.apiUrl}/agents`, agent, { headers: this.headers });
+  }
+
+  deleteAgent(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/agents/${id}`, { headers: this.headers });
   }
 }
