@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="stat-card premium">
       <div class="stat-icon-wrapper active">
         <i class="fas fa-user-check"></i>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="stat-card premium">
       <div class="stat-icon-wrapper pending">
         <i class="fas fa-user-clock"></i>
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="stat-card premium">
       <div class="stat-icon-wrapper listings">
         <i class="fas fa-home"></i>
@@ -102,15 +102,16 @@
         </button>
       </div>
     </div>
-    
+
     <div class="filters-right">
       <div class="search-container">
         <div class="search-icon">
           <i class="fas fa-search"></i>
         </div>
-        <input type="text" placeholder="Search by name, email or agency..." (input)="onSearch($event)" class="search-input">
+        <input type="text" placeholder="Search by name, email or agency..." (input)="onSearch($event)"
+          class="search-input">
       </div>
-      
+
       <div class="view-toggle">
         <button class="view-btn active" title="List View" (click)="viewMode = 'table'">
           <i class="fas fa-list"></i>
@@ -152,7 +153,7 @@
         <span class="result-count">{{ filteredAgents.length }} results</span>
       </div>
     </div>
-    
+
     <div class="table-wrapper">
       <table class="data-table premium">
         <thead>
@@ -184,8 +185,10 @@
             </td>
             <td>
               <div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px;">
-                <div style="color: var(--text-body);"><i class="fas fa-envelope" style="width: 16px; color: var(--text-muted);"></i> {{ a.email }}</div>
-                <div style="color: var(--text-sub);"><i class="fas fa-phone" style="width: 16px; color: var(--text-muted);"></i> {{ a.phone }}</div>
+                <div style="color: var(--text-body);"><i class="fas fa-envelope"
+                    style="width: 16px; color: var(--text-muted);"></i> {{ a.email }}</div>
+                <div style="color: var(--text-sub);"><i class="fas fa-phone"
+                    style="width: 16px; color: var(--text-muted);"></i> {{ a.phone }}</div>
               </div>
             </td>
             <td>
@@ -199,7 +202,8 @@
                   <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Listings</div>
                 </div>
                 <div style="text-align: center;">
-                  <div style="font-weight: 800; color: #f59e0b;">{{ a.rating }} <i class="fas fa-star" style="font-size: 10px;"></i></div>
+                  <div style="font-weight: 800; color: #f59e0b;">{{ a.rating }} <i class="fas fa-star"
+                      style="font-size: 10px;"></i></div>
                   <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Rating</div>
                 </div>
               </div>
@@ -213,12 +217,14 @@
             <td>
               <div class="action-buttons">
                 <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
-                <button class="action-btn edit" title="Edit Agent" (click)="editAgent(a)"><i class="fas fa-pen"></i></button>
-                <button class="action-btn delete" title="Delete Agent" (click)="deleteAgent(a.id)"><i class="fas fa-trash"></i></button>
+                <button class="action-btn edit" title="Edit Agent" (click)="editAgent(a)"><i
+                    class="fas fa-pen"></i></button>
+                <button class="action-btn delete" title="Delete Agent" (click)="deleteAgent(a.id)"><i
+                    class="fas fa-trash"></i></button>
               </div>
             </td>
           </tr>
-          
+
           <tr *ngIf="filteredAgents.length === 0">
             <td colspan="7">
               <div style="padding: 60px; text-align: center; color: var(--text-muted);">
@@ -231,7 +237,7 @@
         </tbody>
       </table>
     </div>
-    
+
     <!-- Premium Pagination -->
     <div class="pagination premium" *ngIf="filteredAgents.length > 0">
       <div class="pagination-info">
@@ -241,21 +247,18 @@
         <button class="page-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
           <i class="fas fa-chevron-left"></i>
         </button>
-        
+
         <div class="page-numbers">
-          <button 
-            *ngFor="let page of getPageNumbers()" 
-            class="page-btn" 
-            [class.active]="page === currentPage"
+          <button *ngFor="let page of getPageNumbers()" class="page-btn" [class.active]="page === currentPage"
             (click)="goToPage(page)">
             {{ page }}
           </button>
         </div>
-        
+
         <button class="page-btn" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
           <i class="fas fa-chevron-right"></i>
         </button>
-        
+
         <select class="size-select" [value]="itemsPerPage" (change)="changePageSize($event)">
           <option [value]="5">5 / page</option>
           <option [value]="10">10 / page</option>
@@ -267,9 +270,6 @@
   </div>
 
   <!-- Add Agent Modal -->
-  <app-add-agent-modal 
-    [isOpen]="isAddAgentModalOpen" 
-    (close)="closeAddAgentModal()" 
-    (submit)="onAddAgent($event)">
+  <app-add-agent-modal [isOpen]="isAddAgentModalOpen" (close)="closeAddAgentModal()" (submit)="onAddAgent($event)">
   </app-add-agent-modal>
 </div>
