@@ -1,23 +1,30 @@
 import { PropertyService } from '../../shared/services/property.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UiService } from '../../shared/services/ui.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { DashboardProperty } from '../../shared/models';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-admin-properties',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './properties.component.html',
-  styleUrl: './properties.component.css'
+  styleUrls: ['./properties.component.css']
 })
 export class AdminPropertiesComponent implements OnInit {
+  private propertyService = inject(PropertyService);
+  private uiService = inject(UiService);
+  private authService = inject(AuthService);
+
   properties: DashboardProperty[] = [];
   filteredProperties: DashboardProperty[] = [];
+  
   // Status States
   isLoading: boolean = true;
+  isSaving: boolean = false;
   hasError: boolean = false;
   errorMessage: string = '';
 
@@ -26,15 +33,13 @@ export class AdminPropertiesComponent implements OnInit {
   statusFilter: string = 'all';
   typeFilter: string = 'all';
   cityFilter: string = 'all';
-  minPrice: number | null = null;
-  maxPrice: number | null = null;
 
   // Pagination
   currentPage: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 6;
   totalPages: number = 1;
   paginatedProperties: DashboardProperty[] = [];
-  pageSizeOptions: number[] = [5, 10, 20, 50];
+  pageSizeOptions: number[] = [6, 12, 24, 48];
 
   // Modal State
   isModalOpen: boolean = false;
@@ -44,12 +49,6 @@ export class AdminPropertiesComponent implements OnInit {
   selectedFiles: File[] = [];
   protected readonly Math = Math;
 
-  constructor(
-    private propertyService: PropertyService,
-    private uiService: UiService,
-    private authService: AuthService
-  ) {}
-
   ngOnInit(): void {
     this.loadProperties();
   }
@@ -58,17 +57,16 @@ export class AdminPropertiesComponent implements OnInit {
     this.isLoading = true;
     this.hasError = false;
     
-    this.propertyService.getProperties().subscribe({
+    this.propertyService.getProperties().pipe(take(1)).subscribe({
       next: (properties) => {
         this.properties = properties;
         this.applyFilters();
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Error fetching properties:', err);
         this.hasError = true;
         this.isLoading = false;
-        this.errorMessage = 'Failed to load properties. Please make sure the backend server is running.';
+        this.errorMessage = 'Failed to load properties. Check backend connection.';
         this.uiService.showToast('error', 'API Error', 'Could not connect to the server.');
       }
     });
@@ -77,30 +75,18 @@ export class AdminPropertiesComponent implements OnInit {
   applyFilters(): void {
     let result = this.properties;
 
-    // Status Filter
     if (this.statusFilter !== 'all') {
       result = result.filter(p => p.status === this.statusFilter);
     }
 
-    // Type Filter
     if (this.typeFilter !== 'all') {
       result = result.filter(p => p.type.toLowerCase() === this.typeFilter.toLowerCase());
     }
 
-    // City Filter
     if (this.cityFilter !== 'all') {
       result = result.filter(p => p.city === this.cityFilter);
     }
 
-    // Price Filter
-    if (this.minPrice !== null) {
-      result = result.filter(p => p.price >= (this.minPrice as number));
-    }
-    if (this.maxPrice !== null) {
-      result = result.filter(p => p.price <= (this.maxPrice as number));
-    }
-
-    // Search Term
     if (this.searchTerm) {
       const term = this.searchTerm.toLowerCase();
       result = result.filter(p => 
@@ -138,49 +124,66 @@ export class AdminPropertiesComponent implements OnInit {
     this.applyFilters();
   }
 
-  // Actions
+  // Administrative Actions
   async approveProperty(id: number): Promise<void> {
     const isConfirmed = await this.uiService.showConfirmation(
       'Approve Property',
       'This property will become visible to all buyers. Proceed?',
       'info',
-      'Approve Now'
+      'Approve Listing'
     );
     if (isConfirmed) {
-      this.propertyService.updatePropertyStatus(id, 'approved').subscribe(() => {
-        this.loadProperties();
-        this.uiService.showToast('success', 'Property Approved', 'The listing is now active.');
-      });
+      this.executeStatusUpdate(id, 'approved', 'Property Approved');
     }
   }
 
-  async rejectProperty(id: number): Promise<void> {
+  async blockProperty(id: number): Promise<void> {
     const isConfirmed = await this.uiService.showConfirmation(
-      'Reject Property',
-      'Are you sure you want to reject this property listing? The seller will be notified.',
+      'Block Property',
+      'Are you sure you want to block this property? It will be hidden from the platform.',
       'warning',
-      'Reject Listing'
+      'Block Listing'
     );
     if (isConfirmed) {
-      this.propertyService.updatePropertyStatus(id, 'rejected').subscribe(() => {
-        this.loadProperties();
-        this.uiService.showToast('info', 'Property Rejected', 'The listing has been marked as rejected.');
-      });
+      this.executeStatusUpdate(id, 'rejected', 'Property Blocked');
     }
+  }
+
+  private executeStatusUpdate(id: number, status: string, toastTitle: string) {
+    this.isSaving = true;
+    this.propertyService.updatePropertyStatus(id, status).pipe(take(1)).subscribe({
+      next: () => {
+        this.loadProperties();
+        this.uiService.showToast('success', toastTitle, 'The listing status has been updated.');
+        this.isSaving = false;
+      },
+      error: () => {
+        this.uiService.showToast('error', 'Update Failed', 'There was an error updating the status.');
+        this.isSaving = false;
+      }
+    });
   }
 
   async deleteProperty(id: number): Promise<void> {
     const isConfirmed = await this.uiService.showConfirmation(
       'Delete Property',
-      'Are you sure you want to delete this property? This action cannot be undone.',
-      'danger'
+      'This action is permanent and cannot be undone. Confirm deletion?',
+      'danger',
+      'Delete Forever'
     );
 
     if (isConfirmed) {
-      this.uiService.showToast('processing', 'Deleting...', 'Removing property from database.', 1000);
-      this.propertyService.deleteProperty(id).subscribe(() => {
-        this.loadProperties();
-        this.uiService.showToast('success', 'Deleted', 'The property has been permanently removed.');
+      this.isSaving = true;
+      this.propertyService.deleteProperty(id).pipe(take(1)).subscribe({
+        next: () => {
+          this.loadProperties();
+          this.uiService.showToast('success', 'Property Deleted', 'The listing has been permanently removed.');
+          this.isSaving = false;
+        },
+        error: () => {
+          this.uiService.showToast('error', 'Deletion Error', 'Failed to remove the property.');
+          this.isSaving = false;
+        }
       });
     }
   }
@@ -225,10 +228,8 @@ export class AdminPropertiesComponent implements OnInit {
     if (!files || files.length === 0) return;
 
     this.uploadingImage = true;
-    
     for (let i = 0; i < files.length; i++) {
       this.selectedFiles.push(files[i]);
-
       const reader = new FileReader();
       reader.onload = (e: any) => {
         if (!this.editingProperty.images) this.editingProperty.images = [];
@@ -245,8 +246,7 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   saveProperty(): void {
-    this.uiService.showToast('processing', 'Saving...', 'Updating property details in system', 800);
-    
+    this.isSaving = true;
     const formData = new FormData();
     formData.append('Title', this.editingProperty.title || '');
     formData.append('Description', this.editingProperty.description || '');
@@ -260,54 +260,40 @@ export class AdminPropertiesComponent implements OnInit {
     formData.append('Sqft', (this.editingProperty.sqft || 0).toString());
     formData.append('SellerId', (this.authService.getUserId() || 1).toString());
 
-    // Include any existing URL images (not base64 ones)
     if (this.editingProperty.images) {
       this.editingProperty.images.forEach(img => {
-        if (img.startsWith('/uploads')) {
-          formData.append('Images', img);
-        }
+        if (img.startsWith('/uploads')) formData.append('Images', img);
       });
     }
 
-    // Attach physical files
     this.selectedFiles.forEach(file => {
       formData.append('ImageFiles', file, file.name);
     });
 
-    if (this.isEditMode && this.editingProperty.id) {
-       this.propertyService.updateProperty(this.editingProperty.id, formData).subscribe({
-         next: () => {
-           this.closeModal();
-           this.loadProperties();
-           this.uiService.showToast('success', 'Property Updated!', 'Your changes have been saved.');
-         },
-         error: (err) => {
-           console.error('Update error:', err);
-           this.uiService.showToast('error', 'Update Failed', 'There was a problem updating your property.');
-         }
-       });
-    } else {
-      this.propertyService.addProperty(formData).subscribe({
-        next: () => {
-          this.closeModal();
-          this.loadProperties();
-          this.uiService.showToast('success', 'Property Saved!', 'Your property has been listed.');
-        },
-        error: (err) => {
-          console.error('Save error:', err);
-          this.uiService.showToast('error', 'Save Failed', 'There was a problem saving your property.');
-        }
-      });
-    }
+    const action = (this.isEditMode && this.editingProperty.id) 
+      ? this.propertyService.updateProperty(this.editingProperty.id, formData)
+      : this.propertyService.addProperty(formData);
+
+    action.pipe(take(1)).subscribe({
+      next: () => {
+        this.closeModal();
+        this.loadProperties();
+        this.uiService.showToast('success', this.isEditMode ? 'Property Updated!' : 'Property Saved!', 'Platform data has been refreshed.');
+        this.isSaving = false;
+      },
+      error: () => {
+        this.uiService.showToast('error', 'Operation Failed', 'Please check your inputs and try again.');
+        this.isSaving = false;
+      }
+    });
   }
 
-  // Helpers for UI
+  // UI Helpers
   getPagesArray(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
   getCities(): string[] {
-    const cities = this.properties.map(p => p.city);
-    return [...new Set(cities)].sort();
+    return [...new Set(this.properties.map(p => p.city))].sort();
   }
 }
