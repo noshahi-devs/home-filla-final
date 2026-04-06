@@ -1,49 +1,116 @@
-<div class="properties-page">
+<div class="featured-page">
+  <!-- Page Header -->
   <div class="page-header">
-    <div>
-      <h1>Featured Listings</h1>
-      <p class="page-subtitle">Toggle properties to show them on the main homepage.</p>
+    <div class="header-content">
+      <h1><i class="fas fa-star"></i> Featured Listings</h1>
+      <p class="page-subtitle">Curate the best properties to showcase on the homepage hero and spotlight sections.</p>
     </div>
   </div>
 
-  <div class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Location</th>
-          <th>Price</th>
-          <th>Featured Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of properties">
-          <td>
-            <div class="property-cell">
-              <img [src]="p.images && p.images[0] ? p.images[0] : 'assets/placeholder.jpg'" alt="" class="prop-img">
-              <div class="prop-info">
-                <span class="prop-title">{{ p.title }}</span>
-                <span class="prop-seller">ID: {{ p.id }}</span>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="loc-cell">
-              <span class="city">{{ p.city }}</span>
-              <span class="area">{{ p.area }}</span>
-            </div>
-          </td>
-          <td class="price">Rs {{ p.price | number }}</td>
-          <td>
-            <button class="btn-icon" [ngClass]="p.isFeatured ? 'approve' : 'reject'" (click)="toggleFeatured(p.id)" style="width:auto; padding: 6px 16px;">
-              <i class="fas" [ngClass]="p.isFeatured ? 'fa-star' : 'fa-star-half-alt'"></i>
-              <span style="font-size:12px; font-weight:600; margin-left:6px; font-family:'Inter', sans-serif;">
-                {{ p.isFeatured ? 'Featured ON' : 'Featured OFF' }}
-              </span>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-icon icon-blue">
+        <i class="fas fa-building"></i>
+      </div>
+      <div class="stat-info">
+        <div>Total Properties</div>
+        <div>{{ properties.length }}</div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon icon-featured">
+        <i class="fas fa-crown"></i>
+      </div>
+      <div class="stat-info">
+        <div>Featured</div>
+        <div>{{ featuredCount }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search & Filter Controls -->
+  <div class="controls-section">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input 
+        type="text" 
+        placeholder="Search by title, city or area..." 
+        [(ngModel)]="searchQuery" 
+        (ngModelChange)="filterProperties()"
+      >
+    </div>
+
+    <div class="filter-tabs">
+      <button 
+        class="tab-btn" 
+        [class.active]="currentFilter === 'all'" 
+        (click)="setFilter('all')"
+      >
+        All Listings
+      </button>
+      <button 
+        class="tab-btn" 
+        [class.active]="currentFilter === 'featured'" 
+        (click)="setFilter('featured')"
+      >
+        Featured Only
+      </button>
+      <button 
+        class="tab-btn" 
+        [class.active]="currentFilter === 'unfeatured'" 
+        (click)="setFilter('unfeatured')"
+      >
+        Standard
+      </button>
+    </div>
+  </div>
+
+  <!-- Properties Grid -->
+  <div class="featured-grid">
+    <div class="property-card" *ngFor="let p of filteredProperties">
+      <div class="card-image-wrap">
+        <img [src]="p.images && p.images[0] ? p.images[0] : 'assets/placeholder.jpg'" alt="{{ p.title }}">
+        <div class="status-badge">{{ p.status }}</div>
+        
+        <!-- Interactive Star Toggle -->
+        <div class="featured-toggle-overlay">
+          <button 
+            class="star-btn" 
+            [class.is-featured]="p.isFeatured" 
+            (click)="toggleFeatured(p)"
+            [title]="p.isFeatured ? 'Remove from Featured' : 'Mark as Featured'"
+          >
+            <i class="fas fa-star"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-content">
+        <div class="price-tag">Rs {{ p.price | number }}</div>
+        <h3 class="prop-title">{{ p.title }}</h3>
+        
+        <div class="location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{{ p.area }}, {{ p.city }}</span>
+        </div>
+
+        <div class="card-footer">
+          <span class="prop-id">REF: #{{ p.id }}</span>
+          
+          <div class="toggle-label" [class.active]="p.isFeatured">
+            <i class="fas" [class.fa-check-circle]="p.isFeatured" [class.fa-circle]="!p.isFeatured"></i>
+            {{ p.isFeatured ? 'Featured Listing' : 'Standard' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredProperties.length === 0">
+      <i class="fas fa-search-location"></i>
+      <h3>No listings found</h3>
+      <p>Try adjusting your search query or filter to find more properties.</p>
+    </div>
   </div>
 </div>

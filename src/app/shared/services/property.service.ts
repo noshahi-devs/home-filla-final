@@ -15,7 +15,14 @@ export class PropertyService {
   }
 
   getProperties(): Observable<DashboardProperty[]> {
-    return this.http.get<DashboardProperty[]>(`${this.apiUrl}/properties`);
+    return this.http.get<any[]>(`${this.apiUrl}/properties`).pipe(
+      map(props => props.map(p => ({
+        ...p,
+        images: p.images ? p.images.map((img: any) => 
+          img.imageUrl.startsWith('http') ? img.imageUrl : `${this.apiUrl.replace('/api', '')}${img.imageUrl}`
+        ) : []
+      })))
+    );
   }
 
   getPropertyById(id: number): Observable<DashboardProperty> {

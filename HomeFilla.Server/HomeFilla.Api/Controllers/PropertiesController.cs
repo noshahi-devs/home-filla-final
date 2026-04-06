@@ -156,6 +156,19 @@ namespace HomeFilla.Api.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}/toggle-featured")]
+        public async Task<IActionResult> ToggleFeatured(int id)
+        {
+            var property = await _context.Properties.FindAsync(id);
+            if (property == null) return NotFound();
+
+            property.IsFeatured = !property.IsFeatured;
+            property.UpdatedAt = DateTime.UtcNow;
+            
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProperty(int id)
         {
