@@ -26,8 +26,8 @@ namespace HomeFilla.Api.Controllers
                 .Take(20)
                 .ToListAsync();
         }
-
-        [HttpPost("{id}/read")]
+    
+        [HttpPut("{id}/read")]
         public async Task<IActionResult> MarkAsRead(int id)
         {
             var notif = await _context.Notifications.FindAsync(id);
@@ -38,7 +38,7 @@ namespace HomeFilla.Api.Controllers
             return NoContent();
         }
 
-        [HttpPost("read-all")]
+        [HttpPut("read-all")]
         public async Task<IActionResult> MarkAllRead([FromQuery] int userId = 1)
         {
             var unread = await _context.Notifications
@@ -51,3 +51,12 @@ namespace HomeFilla.Api.Controllers
         }
     }
 }
+
+
+
+
+
+
+
+
+

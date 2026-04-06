@@ -15,7 +15,8 @@ export class NotificationService {
   }
 
   getNotifications(): Observable<AppNotification[]> {
-    return this.http.get<AppNotification[]>(`${this.apiUrl}/notifications`, { headers: this.headers });
+    const userId = this.auth.getUserId() || 1;
+    return this.http.get<AppNotification[]>(`${this.apiUrl}/notifications?userId=${userId}`, { headers: this.headers });
   }
 
   getUnreadNotifications(): Observable<AppNotification[]> {
@@ -27,6 +28,7 @@ export class NotificationService {
   }
 
   markAllNotificationsRead(): Observable<any> {
-    return this.http.put(`${this.apiUrl}/notifications/read-all`, {}, { headers: this.headers });
+    const userId = this.auth.getUserId() || 1;
+    return this.http.put(`${this.apiUrl}/notifications/read-all?userId=${userId}`, {}, { headers: this.headers });
   }
 }

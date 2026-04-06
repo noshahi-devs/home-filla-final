@@ -34,6 +34,80 @@ namespace HomeFilla.Api.Data
                 context.Properties.AddRange(properties);
                 context.SaveChanges();
             }
+
+            if (!context.Payments.Any())
+            {
+                var payments = new List<Payment>
+                {
+                    new Payment { UserId = 2, UserName = "Arslan Malik", Amount = 5000, Purpose = "Pro Agent Subscription", Status = "completed", CreatedAt = DateTime.UtcNow.AddDays(-2) },
+                    new Payment { UserId = 2, UserName = "Arslan Malik", Amount = 1500, Purpose = "Featured Listing Fee (ID: 1)", Status = "completed", CreatedAt = DateTime.UtcNow.AddDays(-5) },
+                    new Payment { UserId = 3, UserName = "Zoya Sheikh", Amount = 15000, Purpose = "Agency Prime Plan", Status = "completed", CreatedAt = DateTime.UtcNow.AddHours(-12) },
+                    new Payment { UserId = 4, UserName = "Kamran Shah", Amount = 5000, Purpose = "Pro Agent Subscription", Status = "pending", CreatedAt = DateTime.UtcNow }
+                };
+                context.Payments.AddRange(payments);
+                context.SaveChanges();
+            }
+
+            if (!context.Notifications.Any())
+            {
+                var notifications = new List<Notification>
+                {
+                    new Notification { 
+                        UserId = 1, 
+                        Title = "Welcome to Home Filla!", 
+                        Message = "Your admin account is setup. You can now manage properties and agents.", 
+                        Icon = "fas fa-shield-alt", 
+                        Color = "#4a6cf7", 
+                        IsRead = false, 
+                        CreatedAt = DateTime.UtcNow.AddDays(-1) 
+                    },
+                    new Notification { 
+                        UserId = 2, 
+                        Title = "New Inquiry Received", 
+                        Message = "A potential buyer has asked about 'Luxury Villa in DHA'. Check your inquiries.", 
+                        Icon = "fas fa-envelope", 
+                        Color = "#22c55e", 
+                        IsRead = false, 
+                        CreatedAt = DateTime.UtcNow.AddHours(-2) 
+                    },
+                    new Notification { 
+                        UserId = 2, 
+                        Title = "Payment Successful", 
+                        Message = "Your Pro Agent Subscription fee of Rs 5,000 has been received.", 
+                        Icon = "fas fa-check-circle", 
+                        Color = "#7c3aff", 
+                        IsRead = true, 
+                        CreatedAt = DateTime.UtcNow.AddDays(-2) 
+                    },
+                    new Notification { 
+                        UserId = 3, 
+                        Title = "Plan Upgraded!", 
+                        Message = "Welcome to Agency Prime. You now have unlimited listings capacity.", 
+                        Icon = "fas fa-rocket", 
+                        Color = "#f59e0b", 
+                        IsRead = false, 
+                        CreatedAt = DateTime.UtcNow.AddHours(-5) 
+                    }
+                };
+                context.Notifications.AddRange(notifications);
+                context.SaveChanges();
+            }
+
+            if (!context.Settings.Any())
+            {
+                var settings = new List<SystemSetting>
+                {
+                    new SystemSetting { Key = "WebsiteName", Value = "Home Filla", Description = "The name displayed across the platform." },
+                    new SystemSetting { Key = "ContactEmail", Value = "support@homefilla.com", Description = "Primary support email." },
+                    new SystemSetting { Key = "ContactPhone", Value = "+92 300 1234567", Description = "Primary contact number." },
+                    new SystemSetting { Key = "Address", Value = "Phase 5, DHA, Lahore, Pakistan", Description = "Company headquarters address." },
+                    new SystemSetting { Key = "FacebookUrl", Value = "https://facebook.com/homefilla", Description = "Official Facebook page." },
+                    new SystemSetting { Key = "TwitterUrl", Value = "https://twitter.com/homefilla", Description = "Official Twitter profile." },
+                    new SystemSetting { Key = "InstagramUrl", Value = "https://instagram.com/homefilla", Description = "Official Instagram profile." }
+                };
+                context.Settings.AddRange(settings);
+                context.SaveChanges();
+            }
         }
     }
 }
