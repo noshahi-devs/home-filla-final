@@ -640,19 +640,28 @@
   min-width: 0;
 }
 
-/* ═══ RESPONSIVE ════════════════════════════════════ */
+/* ═══ RESPONSIVE BREAKPOINTS ════════════════════════ */
+
 @media (max-width: 1024px) {
+  .admin-shell {
+    --sidebar-w: 280px;
+    --sidebar-w-collapsed: 0px; /* Hide on mobile by default */
+  }
+
   .sidebar {
-    transform: translateX(-100%);
-  }
-
-  .sidebar-collapsed .sidebar {
-    width: var(--sidebar-w);
+    left: -280px; /* Hidden off-screen */
     transform: translateX(0);
-    box-shadow: 20px 0 50px rgba(0,0,0,0.1);
+    box-shadow: none;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Show labels when sidebar is explicitly opened on mobile */
+  /* When sidebar is "collapsed" for desktop, it's actually OPEN for mobile toggling in this code structure */
+  .sidebar-collapsed .sidebar {
+    left: 0;
+    width: var(--sidebar-w);
+    box-shadow: 25px 0 50px rgba(0,0,0,0.2);
+  }
+
   .sidebar-collapsed .logo-label,
   .sidebar-collapsed .sidebar-label,
   .sidebar-collapsed .nav-label,
@@ -666,13 +675,9 @@
     display: flex;
   }
 
-  .sidebar-collapsed .sidebar-footer {
-    padding: 16px;
-  }
-
   .sidebar-collapsed .sidebar-user {
-    padding: 10px 12px;
     justify-content: flex-start;
+    padding: 10px 12px;
   }
 
   .sidebar-overlay {
@@ -681,9 +686,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(15, 23, 42, 0.4);
     backdrop-filter: blur(4px);
     z-index: 950;
+    display: block !important;
     animation: fadeIn 0.3s ease;
   }
 
@@ -703,19 +709,50 @@
   .profile-name {
     display: none;
   }
+
+  .page-content {
+    padding: 20px;
+  }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 16px;
+  }
+
   .search-box {
-    width: 150px;
+    display: none; /* Hide wide search on phones */
+  }
+
+  .topbar-right {
+    gap: 0;
   }
 
   .page-content {
     padding: 16px;
   }
 
-  .topbar {
-    padding: 0 16px;
+  .sidebar { width: 260px; }
+}
+
+@media (max-width: 480px) {
+  .topbar-profile {
+    padding: 4px;
+    margin-left: 0;
+  }
+  
+  .profile-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .topbar-action {
+    width: 38px;
+    height: 38px;
   }
 }
-/* reload */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
