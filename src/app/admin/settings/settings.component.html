@@ -1,67 +1,194 @@
-<div class="properties-page">
-  <div class="page-header">
-    <div>
-      <h1>Platform Settings</h1>
-      <p class="page-subtitle">Configure website details, contact info, and social links.</p>
+<div class="settings-container">
+  <!-- Sidebar Navigation -->
+  <aside class="settings-sidebar">
+    <div class="sidebar-header">
+      <h2>Platform Settings</h2>
     </div>
-    <button class="btn-primary" (click)="saveSettings()">
-      <i class="fas fa-save"></i> Save Changes
-    </button>
-  </div>
+    <ul class="nav-list">
+      <li *ngFor="let tab of tabs" 
+          class="nav-item" 
+          [class.active]="activeTab === tab.id"
+          (click)="setTab(tab.id)">
+        <i [class]="tab.icon"></i>
+        {{ tab.name }}
+      </li>
+    </ul>
+  </aside>
 
-  <div class="locations-grid">
-    <div class="loc-card" style="height: auto; padding: 24px;">
-      <h3 style="margin-bottom: 20px; font-size: 16px; color: #f1f5f9;"><i class="fas fa-globe" style="color: #4a6cf7;"></i> General Settings</h3>
+  <!-- Main Content Area -->
+  <main class="settings-content">
+    <div [ngSwitch]="activeTab">
       
-      <div class="form-row">
-        <div class="form-group full-width">
-          <label>Website Name</label>
-          <input type="text" [(ngModel)]="settings.websiteName">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group full-width">
-          <label>Logo Upload</label>
-          <div style="border: 2px dashed rgba(255,255,255,0.1); padding: 20px; text-align: center; border-radius: 8px; cursor: pointer;">
-            <i class="fas fa-cloud-upload-alt" style="font-size: 24px; color: #64748b; margin-bottom: 10px;"></i>
-            <p style="color: #94a3b8; font-size: 13px;">Click or drag file to upload new logo</p>
+      <!-- General Tab -->
+      <section *ngSwitchCase="'general'" class="settings-section">
+        <header class="tab-header">
+          <div>
+            <h1>General Information</h1>
+            <p>Define the identity and primary details of the Home Filla platform.</p>
+          </div>
+        </header>
+
+        <form class="settings-form" (ngSubmit)="saveSettings()">
+          <div class="form-group">
+            <label>Website Name</label>
+            <div class="input-wrapper">
+              <i class="fas fa-globe"></i>
+              <input type="text" class="form-control" [(ngModel)]="settings.WebsiteName" name="websiteName" placeholder="e.g. Home Filla">
+            </div>
+            <p class="helper-text">This name appears in titles and emails.</p>
+          </div>
+
+          <div class="form-group">
+            <label>Company Logo</label>
+            <div style="border: 2px dashed #e2e8f0; padding: 2.5rem; text-align: center; border-radius: 20px; background: #f8fafc; cursor: pointer;">
+              <i class="fas fa-cloud-upload-alt" style="font-size: 2.5rem; color: #4a6cf7; margin-bottom: 1rem;"></i>
+              <h4 style="color: #1e293b; margin-bottom: 0.5rem;">Update Platform Logo</h4>
+              <p style="color: #64748b; font-size: 0.9rem;">Maximum file size is 2MB. (PNG, JPG supported)</p>
+            </div>
+          </div>
+
+          <footer class="actions-footer">
+            <button type="submit" class="btn-premium" [disabled]="isLoading">
+              <i class="fas fa-save"></i> 
+              {{ isLoading ? 'Saving...' : 'Update Settings' }}
+            </button>
+          </footer>
+        </form>
+      </section>
+
+      <!-- Contact Tab -->
+      <section *ngSwitchCase="'contact'" class="settings-section">
+        <header class="tab-header">
+          <div>
+            <h1>Contact Details</h1>
+            <p>Manage how users and agents can reach out to the platform support team.</p>
+          </div>
+        </header>
+
+        <form class="settings-form" (ngSubmit)="saveSettings()">
+          <div class="form-section">
+            <div class="form-group">
+              <label>Support Email Address</label>
+              <div class="input-wrapper">
+                <i class="fas fa-envelope"></i>
+                <input type="email" class="form-control" [(ngModel)]="settings.ContactEmail" name="contactEmail" placeholder="support@homefilla.com">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Support Phone Number</label>
+              <div class="input-wrapper">
+                <i class="fas fa-phone-alt"></i>
+                <input type="text" class="form-control" [(ngModel)]="settings.ContactPhone" name="contactPhone" placeholder="+92 300 0000000">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Headquarters Address</label>
+              <div class="input-wrapper">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" class="form-control" [(ngModel)]="settings.Address" name="address" placeholder="e.g. DHA Phase 5, Lahore">
+              </div>
+            </div>
+          </div>
+
+          <footer class="actions-footer">
+            <button type="submit" class="btn-premium" [disabled]="isLoading">
+              <i class="fas fa-save"></i> 
+              {{ isLoading ? 'Saving...' : 'Update Contact Info' }}
+            </button>
+          </footer>
+        </form>
+      </section>
+
+      <!-- Social Tab -->
+      <section *ngSwitchCase="'social'" class="settings-section">
+        <header class="tab-header">
+          <div>
+            <h1>Social Media Links</h1>
+            <p>Connect your platform's social presence for site-wide integration.</p>
+          </div>
+        </header>
+
+        <form class="settings-form" (ngSubmit)="saveSettings()">
+          <div class="form-group">
+            <label>Facebook Page URL</label>
+            <div class="input-wrapper">
+              <i class="fab fa-facebook-f"></i>
+              <input type="text" class="form-control" [(ngModel)]="settings.FacebookUrl" name="fb" placeholder="https://facebook.com/homefilla">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Twitter/X Profile URL</label>
+            <div class="input-wrapper">
+              <i class="fab fa-twitter"></i>
+              <input type="text" class="form-control" [(ngModel)]="settings.TwitterUrl" name="tw" placeholder="https://twitter.com/homefilla">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Instagram Handle URL</label>
+            <div class="input-wrapper">
+              <i class="fab fa-instagram"></i>
+              <input type="text" class="form-control" [(ngModel)]="settings.InstagramUrl" name="ig" placeholder="https://instagram.com/homefilla">
+            </div>
+          </div>
+
+          <footer class="actions-footer">
+            <button type="submit" class="btn-premium" [disabled]="isLoading">
+              <i class="fas fa-save"></i> Save Social Links
+            </button>
+          </footer>
+        </form>
+      </section>
+
+      <!-- Profile Tab -->
+      <section *ngSwitchCase="'profile'" class="settings-section">
+        <header class="tab-header">
+          <div>
+            <h1>My Profile Settings</h1>
+            <p>Manage your account personal details and security preferences.</p>
+          </div>
+        </header>
+
+        <div class="profile-card">
+          <div class="profile-avatar-large">
+            {{ profile.name?.charAt(0) }}
+          </div>
+          <div class="profile-info-wrap">
+            <h3>{{ profile.name }}</h3>
+            <p>{{ profile.email }} • Administrator</p>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="loc-card" style="height: auto; padding: 24px;">
-      <h3 style="margin-bottom: 20px; font-size: 16px; color: #f1f5f9;"><i class="fas fa-address-book" style="color: #4a6cf7;"></i> Contact & Social</h3>
-      
-      <div class="form-row">
-        <div class="form-group">
-          <label>Contact Email</label>
-          <input type="email" [(ngModel)]="settings.contactEmail">
-        </div>
-        <div class="form-group">
-          <label>Contact Phone</label>
-          <input type="text" [(ngModel)]="settings.contactPhone">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group full-width">
-          <label>Address</label>
-          <input type="text" [(ngModel)]="settings.address">
-        </div>
-      </div>
-      
-      <div class="form-row" style="margin-top:20px;">
-        <div class="form-group full-width">
-          <label><i class="fab fa-facebook"></i> Facebook URL</label>
-          <input type="text" [(ngModel)]="settings.facebook">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group full-width">
-          <label><i class="fab fa-twitter"></i> Twitter URL</label>
-          <input type="text" [(ngModel)]="settings.twitter">
-        </div>
-      </div>
+        <form class="settings-form" (ngSubmit)="updateProfile()">
+          <div class="form-section">
+            <div class="form-group">
+              <label>Full Display Name</label>
+              <div class="input-wrapper">
+                <i class="fas fa-user"></i>
+                <input type="text" class="form-control" [(ngModel)]="profile.name" name="pname">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Account Password (to change details)</label>
+              <div class="input-wrapper">
+                <i class="fas fa-lock"></i>
+                <input type="password" class="form-control" [(ngModel)]="profile.currentPassword" name="currPass" placeholder="••••••••">
+              </div>
+            </div>
+          </div>
+
+          <footer class="actions-footer">
+            <button type="submit" class="btn-premium">
+              <i class="fas fa-user-edit"></i> Update Profile
+            </button>
+          </footer>
+        </form>
+      </section>
+
     </div>
-  </div>
+  </main>
 </div>

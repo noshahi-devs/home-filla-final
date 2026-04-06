@@ -58,4 +58,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
+
+  getCurrentUser(): any {
+    return JSON.parse(localStorage.getItem('hf_user') || '{}');
+  }
 }
