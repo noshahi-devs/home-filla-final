@@ -85,6 +85,16 @@ namespace HomeFilla.Api.Controllers
             return Ok(area);
         }
 
+        [HttpPut("areas/{id}")]
+        public async Task<IActionResult> PutArea(int id, [FromBody] string name)
+        {
+            var area = await _context.Areas.FindAsync(id);
+            if (area == null) return NotFound();
+            area.Name = name;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         [HttpDelete("areas/{id}")]
         public async Task<IActionResult> DeleteArea(int id)
         {

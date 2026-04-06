@@ -14,12 +14,23 @@ import { City, Area } from '../../shared/models';
 })
 export class AdminLocationsComponent implements OnInit {
   cities: City[] = [];
+  filteredCities: City[] = [];
   selectedCityId: number | null = null;
   areas: Area[] = [];
+  filteredAreas: Area[] = [];
 
-  newCityName = '';
-  newCityProv = '';
-  newAreaName = '';
+  // Search
+  citySearch = '';
+  areaSearch = '';
+
+  // Modal State
+  showCityModal = false;
+  showAreaModal = false;
+  editMode = false;
+  
+  // Current Item being added/edited
+  currentCity: Partial<City> = { name: '', province: '' };
+  currentArea: Partial<Area> = { name: '' };
 
   constructor(private locationService: LocationService, private uiService: UiService) {}
 
@@ -30,10 +41,19 @@ export class AdminLocationsComponent implements OnInit {
   loadCities(): void {
     this.locationService.getCities().subscribe(cities => {
       this.cities = cities;
+      this.filterCities();
       if (this.cities.length > 0 && !this.selectedCityId) {
         this.selectCity(this.cities[0].id);
       }
     });
+  }
+
+  filterCities(): void {
+    const query = this.citySearch.toLowerCase().trim();
+    this.filteredCities = this.cities.filter(c => 
+      c.name.toLowerCase().includes(query) || 
+      c.province?.toLowerCase().includes(query)
+    );
   }
 
   selectCity(cityId: number): void {
@@ -45,59 +65,112 @@ export class AdminLocationsComponent implements OnInit {
     if (this.selectedCityId) {
       this.locationService.getAreas(this.selectedCityId).subscribe(areas => {
         this.areas = areas;
+        this.filterAreas();
       });
     } else {
       this.areas = [];
+      this.filteredAreas = [];
     }
   }
 
-  addCity(): void {
-    if (this.newCityName.trim() && this.newCityProv.trim()) {
-      this.locationService.addCity(this.newCityName, this.newCityProv).subscribe(() => {
-        this.uiService.showToast('success', 'City Added', 'The new city has been added successfully.');
+  filterAreas(): void {
+    const query = this.areaSearch.toLowerCase().trim();
+    this.filteredAreas = this.areas.filter(a => 
+      a.name.toLowerCase().includes(query)
+    );
+  }
+
+  // --- Modal Actions ---
+  
+  openAddCity() {
+    this.editMode = false;
+    this.currentCity = { name: '', province: '' };
+    this.showCityModal = true;
+  }
+
+  openEditCity(city: City) {
+    this.editMode = true;
+    this.currentCity = { ...city };
+    this.showCityModal = true;
+  }
+
+  openAddArea() {
+    if (!this.selectedCityId) return;
+    this.editMode = false;
+    this.currentArea = { name: '', cityId: this.selectedCityId };
+    this.showAreaModal = true;
+  }
+
+  openEditArea(area: Area) {
+    this.editMode = true;
+    this.currentArea = { ...area };
+    this.showAreaModal = true;
+  }
+
+  saveCity() {
+    if (!this.currentCity.name?.trim()) {
+      this.uiService.showToast('error', 'Incomplete', 'City name is required.');
+      return;
+    }
+
+    if (this.editMode && this.currentCity.id) {
+      this.locationService.updateCity(this.currentCity.id, this.currentCity.name, this.currentCity.province || '').subscribe(() => {
+        this.uiService.showToast('success', 'City Updated', 'Changes saved successfully.');
+        this.showCityModal = false;
         this.loadCities();
-        this.newCityName = '';
-        this.newCityProv = '';
       });
     } else {
-      this.uiService.showToast('error', 'Incomplete', 'Please provide both city name and province.');
+      this.locationService.addCity(this.currentCity.name, this.currentCity.province || '').subscribe(() => {
+        this.uiService.showToast('success', 'City Added', 'The new city has been created.');
+        this.showCityModal = false;
+        this.loadCities();
+      });
     }
   }
 
-  async deleteCity(id: number): Promise<void> {
-    const isConfirmed = await this.uiService.showConfirmation(
+  saveArea() {
+    if (!this.currentArea.name?.trim()) {
+      this.uiService.showToast('error', 'Incomplete', 'Area name is required.');
+      return;
+    }
+
+    if (this.editMode && this.currentArea.id) {
+      this.locationService.updateArea(this.currentArea.id, this.currentArea.name).subscribe(() => {
+        this.uiService.showToast('success', 'Area Updated', 'Changes saved successfully.');
+        this.showAreaModal = false;
+        this.loadAreas();
+      });
+    } else if (this.selectedCityId) {
+      this.locationService.addArea(this.selectedCityId, this.currentArea.name).subscribe(() => {
+        this.uiService.showToast('success', 'Area Added', 'The new area has been created.');
+        this.showAreaModal = false;
+        this.loadAreas();
+      });
+    }
+  }
+
+  async deleteCity(id: number) {
+    const confirmed = await this.uiService.showConfirmation(
       'Delete City',
-      'Delete this city and all its affiliated areas?',
+      'Are you sure? This will remove all affiliated areas and property links.',
       'danger'
     );
-    if (isConfirmed) {
+    if (confirmed) {
       this.locationService.deleteCity(id).subscribe(() => {
-        this.uiService.showToast('success', 'Deleted', 'City and areas deleted successfully.');
+        this.uiService.showToast('success', 'Deleted', 'City removed successfully.');
         if (this.selectedCityId === id) this.selectedCityId = null;
         this.loadCities();
       });
     }
   }
 
-  addArea(): void {
-    if (this.newAreaName.trim() && this.selectedCityId) {
-      this.locationService.addArea(this.selectedCityId, this.newAreaName).subscribe(() => {
-        this.uiService.showToast('success', 'Area Added', 'The new area has been created.');
-        this.newAreaName = '';
-        this.loadAreas();
-      });
-    } else {
-      this.uiService.showToast('error', 'Incomplete', 'Please provide an area name.');
-    }
-  }
-
-  async deleteArea(id: number): Promise<void> {
-    const isConfirmed = await this.uiService.showConfirmation(
+  async deleteArea(id: number) {
+    const confirmed = await this.uiService.showConfirmation(
       'Delete Area',
       'Are you sure you want to delete this specific area?',
       'warning'
     );
-    if (isConfirmed) {
+    if (confirmed) {
       this.locationService.deleteArea(id).subscribe(() => {
         this.uiService.showToast('success', 'Deleted', 'Area removed successfully.');
         this.loadAreas();

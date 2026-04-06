@@ -1,59 +1,139 @@
-<div class="properties-page">
+<div class="categories-page">
+
+  <!-- Page Header -->
   <div class="page-header">
-    <div>
-      <h1>Category Management</h1>
-      <p class="page-subtitle">Manage property types and purposes available for listing.</p>
+    <div class="header-content">
+      <h1><i class="fas fa-tags"></i> Category Management</h1>
+      <p class="page-subtitle">Manage property types and categories available for listings.</p>
+    </div>
+    <button class="btn-premium" (click)="openAdd()">
+      <i class="fas fa-plus"></i> Add Category
+    </button>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-pill">
+      <i class="fas fa-layer-group"></i>
+      <span>{{ categories.length }} Total Categories</span>
+    </div>
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search categories..." [(ngModel)]="searchQuery" (ngModelChange)="filterCategories()">
     </div>
   </div>
 
-  <div class="locations-grid">
-    <!-- Property Types -->
-    <div class="loc-card">
-      <div class="card-header">
-        <h3><i class="fas fa-home"></i> Property Types</h3>
-      </div>
-      <div class="add-form">
-        <input type="text" placeholder="e.g. Farmhouse">
-        <button class="btn-primary-sm">Add Type</button>
-      </div>
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Loading categories...</p>
+  </div>
 
-      <ul class="loc-list">
-        <li *ngFor="let t of propertyTypes" class="no-hover">
-          <div class="loc-info">
-            <span class="name">{{ t.label }}</span>
-            <span class="sub">{{ t.id }}</span>
-          </div>
-          <div class="loc-actions">
-            <!-- <span class="badge" style="background:rgba(255,255,255,0.05); color:#94a3b8;">{{ t.count }} items</span> -->
-            <button class="btn-icon edit"><i class="fas fa-pen"></i></button>
-            <button class="btn-icon delete"><i class="fas fa-trash"></i></button>
-          </div>
-        </li>
-      </ul>
+  <!-- Category Grid -->
+  <div class="category-grid" *ngIf="!loading">
+    <div class="category-card" *ngFor="let cat of filteredCategories; let i = index"
+         [style.animation-delay]="(i * 0.06) + 's'">
+      <div class="card-glow"></div>
+      <div class="card-top">
+        <div class="cat-icon-wrap">
+          <i class="fas" [ngClass]="cat.icon || 'fa-tag'"></i>
+        </div>
+        <div class="card-actions">
+          <button class="icon-btn edit" (click)="openEdit(cat)" title="Edit">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button class="icon-btn delete" (click)="delete(cat)" title="Delete">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="cat-name">{{ cat.name }}</h3>
+        <div class="cat-meta">
+          <span class="sort-badge"><i class="fas fa-sort"></i> Order: {{ cat.sortOrder }}</span>
+          <span class="icon-label"><i class="fas fa-icons"></i> {{ cat.icon || 'fa-tag' }}</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Purposes -->
-    <div class="loc-card">
-      <div class="card-header">
-        <h3><i class="fas fa-tags"></i> Purposes</h3>
-      </div>
-      <div class="add-form">
-        <input type="text" placeholder="e.g. Lease">
-        <button class="btn-primary-sm">Add Purpose</button>
-      </div>
-
-      <ul class="loc-list">
-        <li *ngFor="let p of purposes" class="no-hover">
-          <div class="loc-info">
-            <span class="name">{{ p.label }}</span>
-            <span class="sub">{{ p.id }}</span>
-          </div>
-          <div class="loc-actions">
-            <button class="btn-icon edit"><i class="fas fa-pen"></i></button>
-            <button class="btn-icon delete"><i class="fas fa-trash"></i></button>
-          </div>
-        </li>
-      </ul>
+    <!-- Add New Card -->
+    <div class="category-card add-card" (click)="openAdd()">
+      <div class="add-icon"><i class="fas fa-plus"></i></div>
+      <p>Add New Category</p>
     </div>
   </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!loading && filteredCategories.length === 0">
+    <div class="empty-icon"><i class="fas fa-tags"></i></div>
+    <h3>No Categories Found</h3>
+    <p>{{ searchQuery ? 'No categories match your search.' : 'Start by adding your first property category.' }}</p>
+    <button class="btn-premium" *ngIf="!searchQuery" (click)="openAdd()">
+      <i class="fas fa-plus"></i> Add First Category
+    </button>
+  </div>
+
+  <!-- ======== Modal ======== -->
+  <div class="modal-backdrop" *ngIf="showModal" (click)="showIconPicker = false">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-title-icon">
+            <i class="fas" [ngClass]="currentCategory.icon || 'fa-tag'"></i>
+          </div>
+          <h2>{{ editMode ? 'Edit Category' : 'Add New Category' }}</h2>
+        </div>
+        <button class="close-btn" (click)="showModal = false"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Category Name -->
+        <div class="form-group">
+          <label>Category Name</label>
+          <div class="input-wrap">
+            <i class="fas fa-tag"></i>
+            <input type="text" placeholder="e.g. Villa, Penthouse..." [(ngModel)]="currentCategory.name">
+          </div>
+        </div>
+
+        <!-- Icon Selector -->
+        <div class="form-group">
+          <label>Category Icon</label>
+          <div class="icon-selector" (click)="showIconPicker = !showIconPicker">
+            <div class="selected-icon">
+              <i class="fas" [ngClass]="currentCategory.icon || 'fa-tag'"></i>
+              <span>{{ currentCategory.icon || 'fa-tag' }}</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="icon-picker" *ngIf="showIconPicker">
+            <div class="picker-icon" *ngFor="let ico of iconOptions"
+                 [class.selected]="currentCategory.icon === ico"
+                 (click)="selectIcon(ico)" [title]="ico">
+              <i class="fas" [ngClass]="ico"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sort Order -->
+        <div class="form-group">
+          <label>Display Order</label>
+          <div class="input-wrap">
+            <i class="fas fa-sort-numeric-down"></i>
+            <input type="number" placeholder="0" [(ngModel)]="currentCategory.sortOrder" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" (click)="showModal = false">Cancel</button>
+        <button class="btn-premium" (click)="save()">
+          <i class="fas" [ngClass]="editMode ? 'fa-save' : 'fa-plus'"></i>
+          {{ editMode ? 'Save Changes' : 'Create Category' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
 </div>
