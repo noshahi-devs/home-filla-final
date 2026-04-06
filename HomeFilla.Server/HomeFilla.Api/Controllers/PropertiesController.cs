@@ -161,12 +161,12 @@ namespace HomeFilla.Api.Controllers
         }
 
         [HttpPut("{id}/status")]
-        public async Task<IActionResult> UpdateStatus(int id, [FromBody] string status)
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] StatusUpdateDto input)
         {
             var property = await _context.Properties.FindAsync(id);
             if (property == null) return NotFound();
 
-            property.Status = status;
+            property.Status = input.Status;
             property.UpdatedAt = DateTime.UtcNow;
             
             await _context.SaveChangesAsync();
@@ -216,5 +216,9 @@ namespace HomeFilla.Api.Controllers
         public int SellerId { get; set; }
         public List<string>? Images { get; set; } // Legacy fallback
         public List<IFormFile>? ImageFiles { get; set; } // New physical files
+    }
+    public class StatusUpdateDto
+    {
+        public string Status { get; set; } = string.Empty;
     }
 }

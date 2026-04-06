@@ -42,7 +42,9 @@ export class PropertyService {
   }
 
   updatePropertyStatus(id: number, status: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/properties/${id}/status`, `"${status}"`, { headers: this.headers.set('Content-Type', 'application/json') });
+    return this.http.put(`${this.apiUrl}/properties/${id}/status`, { status }, { 
+      headers: this.headers.set('Content-Type', 'application/json') 
+    });
   }
 
   deleteProperty(id: number): Observable<any> {

@@ -45,6 +45,7 @@ export class GlobalUiComponent implements OnInit, OnDestroy {
   handleConfirmation(result: boolean) {
     if (this.activeConfirmation) {
       this.activeConfirmation.resolve(result);
+      this.activeConfirmation = null;
     }
   }
 }
