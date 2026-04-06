@@ -23,29 +23,27 @@ export class LocationService {
     return this.http.get<Area[]>(url);
   }
 
-  addCity(name: string, province: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/locations/cities`, { name, province }, { headers: this.headers });
+  addCity(name: string, province: string, lat?: number, lng?: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/locations/cities`, { name, province, lat, lng }, { headers: this.headers });
   }
 
   deleteCity(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/locations/cities/${id}`, { headers: this.headers });
   }
 
-  updateCity(id: number, name: string, province: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/locations/cities/${id}`, { name, province }, { headers: this.headers });
+  updateCity(id: number, name: string, province: string, lat?: number, lng?: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/locations/cities/${id}`, { name, province, lat, lng }, { headers: this.headers });
   }
 
-  addArea(cityId: number, name: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/locations/areas`, { name, cityId }, { headers: this.headers });
+  addArea(cityId: number, name: string, lat?: number, lng?: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/locations/areas`, { name, cityId, lat, lng }, { headers: this.headers });
   }
 
   deleteArea(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/locations/areas/${id}`, { headers: this.headers });
   }
 
-  updateArea(id: number, name: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/locations/areas/${id}`, JSON.stringify(name), { 
-      headers: this.headers.set('Content-Type', 'application/json') 
-    });
+  updateArea(id: number, cityId: number, name: string, lat?: number, lng?: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/locations/areas/${id}`, { name, cityId, lat, lng }, { headers: this.headers });
   }
 }

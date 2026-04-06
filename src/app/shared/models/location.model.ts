@@ -3,6 +3,8 @@ export interface City {
   name: string;
   province: string;
   propertyCount: number;
+  lat?: number;
+  lng?: number;
 }
 
 export interface Area {
@@ -10,4 +12,6 @@ export interface Area {
   cityId: number;
   name: string;
   propertyCount: number;
+  lat?: number;
+  lng?: number;
 }

@@ -70,6 +70,8 @@ namespace HomeFilla.Api.Models
         public int Id { get; set; }
         [Required] public string Name { get; set; } = string.Empty;
         public string? Province { get; set; }
+        public double? Lat { get; set; }
+        public double? Lng { get; set; }
     }
 
     public class Area
@@ -77,6 +79,8 @@ namespace HomeFilla.Api.Models
         public int Id { get; set; }
         public int CityId { get; set; }
         [Required] public string Name { get; set; } = string.Empty;
+        public double? Lat { get; set; }
+        public double? Lng { get; set; }
     }
 
     public class Inquiry

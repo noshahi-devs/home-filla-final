@@ -17,9 +17,16 @@ namespace HomeFilla.Api.Controllers
         }
 
         [HttpGet("cities")]
-        public async Task<ActionResult<IEnumerable<City>>> GetCities()
+        public async Task<IActionResult> GetCities()
         {
-            return await _context.Cities.OrderBy(c => c.Name).ToListAsync();
+            var cities = await _context.Cities
+                .OrderBy(c => c.Name)
+                .Select(c => new {
+                    c.Id, c.Name, c.Province, c.Lat, c.Lng,
+                    PropertyCount = _context.Properties.Count(p => p.City == c.Name)
+                })
+                .ToListAsync();
+            return Ok(cities);
         }
 
         [HttpGet("cities/{id}")]
@@ -31,9 +38,12 @@ namespace HomeFilla.Api.Controllers
         }
 
         [HttpPost("cities")]
-        public async Task<ActionResult<City>> PostCity([FromBody] CityInputModel input)
+        public async Task<IActionResult> PostCity([FromBody] CityInputModel input)
         {
-            var city = new City { Name = input.Name, Province = input.Province };
+            if (await _context.Cities.AnyAsync(c => c.Name.ToLower() == input.Name.ToLower()))
+                return BadRequest(new { message = "duplicate_city", error = "A city with this name already exists."});
+
+            var city = new City { Name = input.Name, Province = input.Province, Lat = input.Lat, Lng = input.Lng };
             _context.Cities.Add(city);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetCity), new { id = city.Id }, city);
@@ -44,8 +54,15 @@ namespace HomeFilla.Api.Controllers
         {
             var city = await _context.Cities.FindAsync(id);
             if (city == null) return NotFound();
+
+            if (city.Name.ToLower() != input.Name.ToLower() && 
+                await _context.Cities.AnyAsync(c => c.Name.ToLower() == input.Name.ToLower()))
+                return BadRequest(new { message = "duplicate_city", error = "A city with this name already exists."});
+
             city.Name = input.Name;
             city.Province = input.Province;
+            city.Lat = input.Lat;
+            city.Lng = input.Lng;
             await _context.SaveChangesAsync();
             return NoContent();
         }
@@ -61,9 +78,17 @@ namespace HomeFilla.Api.Controllers
         }
 
         [HttpGet("cities/{cityId}/areas")]
-        public async Task<ActionResult<IEnumerable<Area>>> GetAreasByCity(int cityId)
+        public async Task<IActionResult> GetAreasByCity(int cityId)
         {
-            return await _context.Areas.Where(a => a.CityId == cityId).OrderBy(a => a.Name).ToListAsync();
+            var areas = await _context.Areas
+                .Where(a => a.CityId == cityId)
+                .OrderBy(a => a.Name)
+                .Select(a => new {
+                    a.Id, a.CityId, a.Name, a.Lat, a.Lng,
+                    PropertyCount = _context.Properties.Count(p => p.Area == a.Name)
+                })
+                .ToListAsync();
+            return Ok(areas);
         }
 
         [HttpGet("areas")]
@@ -73,24 +98,33 @@ namespace HomeFilla.Api.Controllers
         }
 
         [HttpPost("areas")]
-        public async Task<ActionResult<Area>> PostArea([FromBody] AreaInputModel input)
+        public async Task<IActionResult> PostArea([FromBody] AreaInputModel input)
         {
             if (!await _context.Cities.AnyAsync(c => c.Id == input.CityId))
-            {
-                return BadRequest("City not found");
-            }
-            var area = new Area { Name = input.Name, CityId = input.CityId };
+                return BadRequest(new { message = "city_not_found", error = "Associated city not found" });
+
+            if (await _context.Areas.AnyAsync(a => a.CityId == input.CityId && a.Name.ToLower() == input.Name.ToLower()))
+                return BadRequest(new { message = "duplicate_area", error = "An area with this name already exists in this city." });
+
+            var area = new Area { Name = input.Name, CityId = input.CityId, Lat = input.Lat, Lng = input.Lng };
             _context.Areas.Add(area);
             await _context.SaveChangesAsync();
             return Ok(area);
         }
 
         [HttpPut("areas/{id}")]
-        public async Task<IActionResult> PutArea(int id, [FromBody] string name)
+        public async Task<IActionResult> PutArea(int id, [FromBody] AreaInputModel input)
         {
             var area = await _context.Areas.FindAsync(id);
             if (area == null) return NotFound();
-            area.Name = name;
+
+            if (area.Name.ToLower() != input.Name.ToLower() && 
+                await _context.Areas.AnyAsync(a => a.CityId == area.CityId && a.Name.ToLower() == input.Name.ToLower()))
+                return BadRequest(new { message = "duplicate_area", error = "An area with this name already exists in this city." });
+
+            area.Name = input.Name;
+            area.Lat = input.Lat;
+            area.Lng = input.Lng;
             await _context.SaveChangesAsync();
             return NoContent();
         }
@@ -106,6 +140,6 @@ namespace HomeFilla.Api.Controllers
         }
     }
 
-    public class CityInputModel { public string Name { get; set; } = string.Empty; public string? Province { get; set; } }
-    public class AreaInputModel { public string Name { get; set; } = string.Empty; public int CityId { get; set; } }
+    public class CityInputModel { public string Name { get; set; } = string.Empty; public string? Province { get; set; } public double? Lat { get; set; } public double? Lng { get; set; } }
+    public class AreaInputModel { public string Name { get; set; } = string.Empty; public int CityId { get; set; } public double? Lat { get; set; } public double? Lng { get; set; } }
 }

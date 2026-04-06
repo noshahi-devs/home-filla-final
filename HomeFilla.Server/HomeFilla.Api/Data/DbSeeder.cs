@@ -1,5 +1,6 @@
 using HomeFilla.Api.Models;
 using HomeFilla.Api.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeFilla.Api.Data
 {
@@ -7,7 +8,7 @@ namespace HomeFilla.Api.Data
     {
         public static void Seed(AppDbContext context)
         {
-            context.Database.EnsureCreated();
+            context.Database.Migrate();
 
             if (!context.Users.Any(u => u.Role == "agent"))
             {
