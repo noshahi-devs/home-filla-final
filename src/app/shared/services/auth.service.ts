@@ -7,7 +7,7 @@ import { LoginRequest, AuthResponse } from '../dtos/auth.dto';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5000/api/auth'; // Default ASP.NET port
+  private apiUrl = 'http://localhost:5230/api/auth'; // Matches launchSettings.json port
 
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(

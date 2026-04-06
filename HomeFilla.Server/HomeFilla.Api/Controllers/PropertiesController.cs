@@ -11,10 +11,12 @@ namespace HomeFilla.Api.Controllers
     public class PropertiesController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public PropertiesController(AppDbContext context)
+        public PropertiesController(AppDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         [HttpGet]
@@ -46,6 +48,8 @@ namespace HomeFilla.Api.Controllers
                 Beds = input.Beds,
                 Baths = input.Baths,
                 Sqft = input.Sqft,
+                Lat = input.Lat,
+                Lng = input.Lng,
                 SellerId = input.SellerId,
                 Status = "pending",
                 CreatedAt = DateTime.UtcNow,
@@ -54,7 +58,7 @@ namespace HomeFilla.Api.Controllers
 
             if (input.ImageFiles != null && input.ImageFiles.Count > 0)
             {
-                var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "properties");
+                var uploadsDir = Path.Combine(_environment.WebRootPath, "uploads", "properties");
                 if (!Directory.Exists(uploadsDir))
                     Directory.CreateDirectory(uploadsDir);
 
@@ -81,10 +85,17 @@ namespace HomeFilla.Api.Controllers
                 }
             }
             
-            _context.Properties.Add(property);
-            await _context.SaveChangesAsync();
+            try 
+            {
+                _context.Properties.Add(property);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProperty), new { id = property.Id }, property);
+                return CreatedAtAction(nameof(GetProperty), new { id = property.Id }, property);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Error saving property", details = ex.Message, inner = ex.InnerException?.Message });
+            }
         }
 
         [HttpPut("{id}")]
@@ -103,44 +114,50 @@ namespace HomeFilla.Api.Controllers
             property.Beds = input.Beds;
             property.Baths = input.Baths;
             property.Sqft = input.Sqft;
+            property.Lat = input.Lat;
+            property.Lng = input.Lng;
             property.UpdatedAt = DateTime.UtcNow;
 
             // Update images if new ones are provided
-            if ((input.ImageFiles != null && input.ImageFiles.Count > 0) || (input.Images != null && input.Images.Count > 0))
+            if (input.ImageFiles != null && input.ImageFiles.Count > 0)
             {
                 _context.PropertyImages.RemoveRange(property.Images);
-                
-                if (input.ImageFiles != null && input.ImageFiles.Count > 0)
-                {
-                    var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "properties");
-                    if (!Directory.Exists(uploadsDir)) Directory.CreateDirectory(uploadsDir);
+                var uploadsDir = Path.Combine(_environment.WebRootPath, "uploads", "properties");
+                if (!Directory.Exists(uploadsDir)) Directory.CreateDirectory(uploadsDir);
 
-                    foreach (var file in input.ImageFiles)
-                    {
-                        if (file.Length > 0)
-                        {
-                            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                            var filePath = Path.Combine(uploadsDir, fileName);
-                            using (var stream = new FileStream(filePath, FileMode.Create))
-                            {
-                                await file.CopyToAsync(stream);
-                            }
-                            var url = $"/uploads/properties/{fileName}";
-                            property.Images.Add(new PropertyImage { ImageUrl = url });
-                        }
-                    }
-                }
-                else if (input.Images != null)
+                foreach (var file in input.ImageFiles)
                 {
-                    foreach (var imgUrl in input.Images)
+                    if (file.Length > 0)
                     {
-                        property.Images.Add(new PropertyImage { ImageUrl = imgUrl });
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        var filePath = Path.Combine(uploadsDir, fileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        var url = $"/uploads/properties/{fileName}";
+                        property.Images.Add(new PropertyImage { ImageUrl = url });
                     }
                 }
             }
+            else if (input.Images != null)
+            {
+                _context.PropertyImages.RemoveRange(property.Images);
+                foreach (var imgUrl in input.Images)
+                {
+                    property.Images.Add(new PropertyImage { ImageUrl = imgUrl });
+                }
+            }
 
-            await _context.SaveChangesAsync();
-            return NoContent();
+            try
+            {
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Error updating property", details = ex.Message, inner = ex.InnerException?.Message });
+            }
         }
 
         [HttpPut("{id}/status")]
@@ -194,6 +211,8 @@ namespace HomeFilla.Api.Controllers
         public int Beds { get; set; }
         public int Baths { get; set; }
         public int Sqft { get; set; }
+        public double? Lat { get; set; }
+        public double? Lng { get; set; }
         public int SellerId { get; set; }
         public List<string>? Images { get; set; } // Legacy fallback
         public List<IFormFile>? ImageFiles { get; set; } // New physical files

@@ -139,3 +139,4 @@ E:\GitHub Projects\home-filla-final\HomeFilla.Server\HomeFilla.Api\obj\Debug\net
 E:\GitHub Projects\home-filla-final\HomeFilla.Server\HomeFilla.Api\obj\Debug\net8.0\HomeFilla.Api.V2.pdb
 E:\GitHub Projects\home-filla-final\HomeFilla.Server\HomeFilla.Api\obj\Debug\net8.0\HomeFilla.Api.genruntimeconfig.cache
 E:\GitHub Projects\home-filla-final\HomeFilla.Server\HomeFilla.Api\obj\Debug\net8.0\ref\HomeFilla.Api.V2.dll
+E:\GitHub Projects\home-filla-final\HomeFilla.Server\HomeFilla.Api\bin\Debug\net8.0\HomeFilla.Api.V2.staticwebassets.runtime.json
