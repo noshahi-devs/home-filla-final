@@ -1,72 +1,170 @@
-<div class="properties-page">
+<div class="inquiries-page">
+
+  <!-- Page Header -->
   <div class="page-header">
-    <div>
-      <h1>Property Inquiries</h1>
-      <p class="page-subtitle">View leads and assign them to agents for follow-up.</p>
+    <div class="header-content">
+      <h1><i class="fas fa-envelope-open-text"></i> Property Inquiries</h1>
+      <p class="page-subtitle">Manage leads and track follow-ups across all properties.</p>
+    </div>
+    <div class="header-stats">
+      <div class="stat-chip new">
+        <i class="fas fa-circle"></i>
+        {{ getCount('new') }} New
+      </div>
+      <div class="stat-chip assigned">
+        <i class="fas fa-circle"></i>
+        {{ getCount('assigned') }} Assigned
+      </div>
+      <div class="stat-chip resolved">
+        <i class="fas fa-circle"></i>
+        {{ getCount('resolved') }} Resolved
+      </div>
     </div>
   </div>
 
-  <div class="filters-bar">
-    <div class="tabs">
-      <button class="tab-btn" [class.active]="statusFilter === 'all'" (click)="setFilter('all')">All Inquiries</button>
-      <button class="tab-btn" [class.active]="statusFilter === 'new'" (click)="setFilter('new')">New Leads</button>
-      <button class="tab-btn" [class.active]="statusFilter === 'assigned'" (click)="setFilter('assigned')">Assigned</button>
-      <button class="tab-btn" [class.active]="statusFilter === 'resolved'" (click)="setFilter('resolved')">Resolved</button>
-    </div>
+  <!-- Filter Tabs -->
+  <div class="filter-tabs">
+    <button class="tab" [class.active]="statusFilter === 'all'" (click)="setFilter('all')">
+      <i class="fas fa-list"></i> All <span class="tab-count">{{ inquiries.length }}</span>
+    </button>
+    <button class="tab" [class.active]="statusFilter === 'new'" (click)="setFilter('new')">
+      <i class="fas fa-star"></i> New <span class="tab-count new">{{ getCount('new') }}</span>
+    </button>
+    <button class="tab" [class.active]="statusFilter === 'assigned'" (click)="setFilter('assigned')">
+      <i class="fas fa-user-tie"></i> Assigned <span class="tab-count assigned">{{ getCount('assigned') }}</span>
+    </button>
+    <button class="tab" [class.active]="statusFilter === 'resolved'" (click)="setFilter('resolved')">
+      <i class="fas fa-check-circle"></i> Resolved <span class="tab-count resolved">{{ getCount('resolved') }}</span>
+    </button>
   </div>
 
-  <div class="table-container">
-    <table class="data-table">
+  <!-- Inquiries Table -->
+  <div class="table-wrapper">
+    <!-- Loading -->
+    <div class="loading-state" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Loading inquiries...</p>
+    </div>
+
+    <table class="inquiry-table" *ngIf="!loading">
       <thead>
         <tr>
-          <th>Property</th>
           <th>Lead Info</th>
+          <th>Property</th>
           <th>Message</th>
+          <th>Date</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of filteredInquiries">
+        <tr *ngFor="let inq of filteredInquiries; let i = index"
+            [style.animation-delay]="(i * 0.04) + 's'"
+            (click)="openDetail(inq)" class="clickable-row">
           <td>
-            <div class="prop-info">
-              <span class="prop-title">{{ i.propertyTitle }}</span>
-              <span class="prop-seller">ID: {{ i.propertyId }}</span>
+            <div class="lead-cell">
+              <div class="lead-avatar">{{ inq.userName.charAt(0) | uppercase }}</div>
+              <div>
+                <span class="lead-name">{{ inq.userName }}</span>
+                <span class="lead-email">{{ inq.userEmail }}</span>
+                <span class="lead-phone" *ngIf="inq.userPhone">
+                  <i class="fas fa-phone"></i> {{ inq.userPhone }}
+                </span>
+              </div>
             </div>
           </td>
           <td>
-            <div class="loc-cell">
-              <span class="city">{{ i.userName }}</span>
-              <span class="area">{{ i.userEmail }} &bull; {{ i.userPhone }}</span>
+            <div class="prop-cell">
+              <span class="prop-name">{{ inq.propertyTitle }}</span>
+              <span class="prop-id">ID #{{ inq.propertyId }}</span>
             </div>
           </td>
-          <td style="max-width: 250px;">
-            <p style="font-size: 13px; color: #94a3b8; margin:0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-              {{ i.message }}
-            </p>
+          <td>
+            <p class="message-preview">{{ inq.message }}</p>
           </td>
           <td>
-            <span class="badge" 
-                  [ngClass]="{'type': i.status === 'new', 'purpose rent': i.status === 'assigned', 'purpose': i.status === 'resolved'}">
-              {{ i.status }}
-            </span>
+            <span class="date-cell">{{ inq.createdAt | date:'MMM d, y' }}</span>
           </td>
-          <td class="actions-cell">
-            <div class="action-buttons">
-              <button class="btn-icon approve" title="Mark Resolved" *ngIf="i.status !== 'resolved'" (click)="markResolved(i.id)">
+          <td>
+            <span class="status-badge" [ngClass]="inq.status">{{ inq.status | titlecase }}</span>
+          </td>
+          <td class="actions-cell" (click)="$event.stopPropagation()">
+            <div class="row-actions">
+              <button class="act-btn resolve" title="Mark Resolved"
+                      *ngIf="inq.status !== 'resolved'"
+                      (click)="markResolved(inq.id)">
                 <i class="fas fa-check"></i>
               </button>
-              <button class="btn-icon edit" title="Assign Agent"><i class="fas fa-user-tie"></i></button>
+              <button class="act-btn assign" title="Mark Assigned"
+                      *ngIf="inq.status === 'new'"
+                      (click)="markAssigned(inq.id)">
+                <i class="fas fa-user-tie"></i>
+              </button>
+              <button class="act-btn view" title="View Details"
+                      (click)="openDetail(inq)">
+                <i class="fas fa-eye"></i>
+              </button>
             </div>
-          </td>
-        </tr>
-        <tr *ngIf="filteredInquiries.length === 0">
-          <td colspan="5" class="empty-state">
-            <i class="fas fa-envelope-open"></i>
-            <p>No inquiries found.</p>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!loading && filteredInquiries.length === 0">
+      <div class="empty-icon"><i class="fas fa-envelope-open"></i></div>
+      <h3>No Inquiries Found</h3>
+      <p>No {{ statusFilter !== 'all' ? statusFilter : '' }} inquiries to display.</p>
+    </div>
   </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-backdrop" *ngIf="selectedInquiry" (click)="selectedInquiry = null">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-avatar">{{ selectedInquiry.userName.charAt(0) | uppercase }}</div>
+          <div>
+            <h2>{{ selectedInquiry.userName }}</h2>
+            <p>{{ selectedInquiry.userEmail }}</p>
+          </div>
+        </div>
+        <button class="close-btn" (click)="selectedInquiry = null"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-row">
+          <span class="detail-label"><i class="fas fa-home"></i> Property</span>
+          <span class="detail-value">{{ selectedInquiry.propertyTitle }} <em>(ID {{ selectedInquiry.propertyId }})</em></span>
+        </div>
+        <div class="detail-row" *ngIf="selectedInquiry.userPhone">
+          <span class="detail-label"><i class="fas fa-phone"></i> Phone</span>
+          <span class="detail-value">{{ selectedInquiry.userPhone }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="fas fa-calendar"></i> Date</span>
+          <span class="detail-value">{{ selectedInquiry.createdAt | date:'MMMM d, y, h:mm a' }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="fas fa-tag"></i> Status</span>
+          <span class="status-badge" [ngClass]="selectedInquiry.status">{{ selectedInquiry.status | titlecase }}</span>
+        </div>
+        <div class="message-block">
+          <span class="detail-label"><i class="fas fa-comment"></i> Message</span>
+          <p>{{ selectedInquiry.message }}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" (click)="selectedInquiry = null">Close</button>
+        <button class="btn-assign" *ngIf="selectedInquiry.status === 'new'"
+                (click)="markAssigned(selectedInquiry.id); selectedInquiry = null">
+          <i class="fas fa-user-tie"></i> Mark Assigned
+        </button>
+        <button class="btn-resolve" *ngIf="selectedInquiry.status !== 'resolved'"
+                (click)="markResolved(selectedInquiry.id); selectedInquiry = null">
+          <i class="fas fa-check"></i> Mark Resolved
+        </button>
+      </div>
+    </div>
+  </div>
+
 </div>

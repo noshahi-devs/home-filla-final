@@ -1,6 +1,6 @@
 import { InquiryService } from '../../shared/services/inquiry.service';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Inquiry } from '../../shared/models';
 
@@ -9,12 +9,14 @@ import { Inquiry } from '../../shared/models';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './inquiries.component.html',
-  styleUrl: '../properties/properties.component.css'
+  styleUrl: './inquiries.component.css'
 })
 export class AdminInquiriesComponent implements OnInit {
   inquiries: Inquiry[] = [];
   filteredInquiries: Inquiry[] = [];
-  statusFilter: string = 'all';
+  statusFilter = 'all';
+  loading = true;
+  selectedInquiry: Inquiry | null = null;
 
   constructor(private inquiryService: InquiryService) {}
 
@@ -23,18 +25,21 @@ export class AdminInquiriesComponent implements OnInit {
   }
 
   loadInquiries() {
-    this.inquiryService.getInquiries().subscribe(inqs => {
-      this.inquiries = inqs;
-      this.applyFilters();
+    this.loading = true;
+    this.inquiryService.getInquiries().subscribe({
+      next: (inqs) => {
+        this.inquiries = inqs;
+        this.applyFilters();
+        this.loading = false;
+      },
+      error: () => { this.loading = false; }
     });
   }
 
   applyFilters() {
-    if (this.statusFilter === 'all') {
-      this.filteredInquiries = this.inquiries;
-    } else {
-      this.filteredInquiries = this.inquiries.filter(i => i.status === this.statusFilter);
-    }
+    this.filteredInquiries = this.statusFilter === 'all'
+      ? this.inquiries
+      : this.inquiries.filter(i => i.status === this.statusFilter);
   }
 
   setFilter(status: string) {
@@ -42,8 +47,22 @@ export class AdminInquiriesComponent implements OnInit {
     this.applyFilters();
   }
 
+  getCount(status: string): number {
+    return this.inquiries.filter(i => i.status === status).length;
+  }
+
+  openDetail(inq: Inquiry) {
+    this.selectedInquiry = inq;
+  }
+
   markResolved(id: number) {
     this.inquiryService.updateInquiryStatus(id, 'resolved').subscribe(() => {
+      this.loadInquiries();
+    });
+  }
+
+  markAssigned(id: number) {
+    this.inquiryService.updateInquiryStatus(id, 'assigned').subscribe(() => {
       this.loadInquiries();
     });
   }

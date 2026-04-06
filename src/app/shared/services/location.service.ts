@@ -36,7 +36,7 @@ export class LocationService {
   }
 
   addArea(cityId: number, name: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/locations/cities/${cityId}/areas`, { name }, { headers: this.headers });
+    return this.http.post(`${this.apiUrl}/locations/areas`, { name, cityId }, { headers: this.headers });
   }
 
   deleteArea(id: number): Observable<any> {
