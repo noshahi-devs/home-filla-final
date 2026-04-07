@@ -6,6 +6,7 @@ import { UiService } from '../../shared/services/ui.service';
 import { DashboardUser } from '../../shared/models';
 import { TimeAgoPipe } from '../../shared/pipes/time-ago.pipe';
 import { AddUserModalComponent, UserData } from './add-user-modal.component';
+import { finalize } from 'rxjs/operators';
 
 // Extend DashboardUser interface to include lastSeen
 interface ExtendedDashboardUser extends DashboardUser {
@@ -39,13 +40,13 @@ export class AdminUsersComponent implements OnInit {
   users: ExtendedDashboardUser[] = [];
   filteredUsers: ExtendedDashboardUser[] = [];
   displayUsers: ExtendedDashboardUser[] = [];
-  
+
   // Filters
   roleFilter: string = 'all';
   searchTerm: string = '';
   sortBy: string = 'name';
   sortDirection: 'asc' | 'desc' = 'asc';
-  
+
   @ViewChild('searchInput') searchInput!: ElementRef;
 
   @HostListener('window:keydown', ['$event'])
@@ -55,14 +56,14 @@ export class AdminUsersComponent implements OnInit {
       this.searchInput.nativeElement.focus();
     }
   }
-  
+
   // View modes
   viewMode: string = 'table';
-  
+
   // Selection
   selectedUsers: Set<number> = new Set();
   isAllSelected: boolean = false;
-  
+
   // Pagination
   pagination: PaginationInfo = {
     currentPage: 1,
@@ -72,7 +73,7 @@ export class AdminUsersComponent implements OnInit {
     startItem: 0,
     endItem: 0
   };
-  
+
   // Stats
   stats: UserStats = {
     total: 0,
@@ -80,17 +81,18 @@ export class AdminUsersComponent implements OnInit {
     agents: 0,
     blocked: 0
   };
-  
+
   // UI state
   isLoading: boolean = false;
   showTableSettings: boolean = false;
-  
+
   // Modal state
   isAddUserModalOpen: boolean = false;
+  isProcessing: boolean = false;
   currentModalMode: 'add' | 'edit' | 'view' = 'add';
   selectedUserForModal: UserData | null = null;
 
-  constructor(private userService: UserService, private uiService: UiService) {}
+  constructor(private userService: UserService, private uiService: UiService) { }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -117,25 +119,25 @@ export class AdminUsersComponent implements OnInit {
 
   applyFilters(): void {
     let result = [...this.users];
-    
+
     // Role filter
     if (this.roleFilter !== 'all') {
       result = result.filter(u => u.role === this.roleFilter);
     }
-    
+
     // Search filter
     if (this.searchTerm) {
       const term = this.searchTerm.toLowerCase();
-      result = result.filter(u => 
-        u.name.toLowerCase().includes(term) || 
+      result = result.filter(u =>
+        u.name.toLowerCase().includes(term) ||
         u.email.toLowerCase().includes(term) ||
         u.phone?.toLowerCase().includes(term)
       );
     }
-    
+
     // Sort
     this.sortUsers(result);
-    
+
     // Update filtered and apply pagination
     this.filteredUsers = result;
     this.updatePagination();
@@ -145,13 +147,13 @@ export class AdminUsersComponent implements OnInit {
     users.sort((a, b) => {
       let aValue: any = a[this.sortBy as keyof ExtendedDashboardUser];
       let bValue: any = b[this.sortBy as keyof ExtendedDashboardUser];
-      
+
       // Handle string comparison
       if (typeof aValue === 'string') {
         aValue = aValue.toLowerCase();
         bValue = bValue.toLowerCase();
       }
-      
+
       if (aValue < bValue) return this.sortDirection === 'asc' ? -1 : 1;
       if (aValue > bValue) return this.sortDirection === 'asc' ? 1 : -1;
       return 0;
@@ -161,17 +163,17 @@ export class AdminUsersComponent implements OnInit {
   updatePagination(): void {
     this.pagination.totalItems = this.filteredUsers.length;
     this.pagination.totalPages = Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage);
-    
+
     if (this.pagination.currentPage > this.pagination.totalPages) {
       this.pagination.currentPage = 1;
     }
-    
+
     const startIndex = (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
     const endIndex = startIndex + this.pagination.itemsPerPage;
-    
+
     this.pagination.startItem = startIndex + 1;
     this.pagination.endItem = Math.min(endIndex, this.pagination.totalItems);
-    
+
     this.displayUsers = this.filteredUsers.slice(startIndex, endIndex);
   }
 
@@ -230,7 +232,7 @@ export class AdminUsersComponent implements OnInit {
     if (event) {
       this.isAllSelected = event.target.checked;
     }
-    
+
     if (this.isAllSelected) {
       this.displayUsers.forEach(user => this.selectedUsers.add(user.id));
     } else {
@@ -239,7 +241,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   updateSelectAllState(): void {
-    this.isAllSelected = this.displayUsers.length > 0 && 
+    this.isAllSelected = this.displayUsers.length > 0 &&
       this.displayUsers.every(user => this.selectedUsers.has(user.id));
   }
 
@@ -329,14 +331,28 @@ export class AdminUsersComponent implements OnInit {
     return icons[role as keyof typeof icons] || 'fa-user';
   }
 
+  getDefaultAvatar(name: string): string {
+    const letter = (name || '?').charAt(0).toUpperCase();
+    const palette = ['#4f46e5', '#0891b2', '#059669', '#d97706', '#dc2626', '#7c3aed', '#ec4899'];
+    const bg = palette[letter.charCodeAt(0) % palette.length];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="${bg}"/><text x="50" y="50" dy=".35em" text-anchor="middle" fill="white" font-size="42" font-family="Inter,Arial,sans-serif" font-weight="700">${letter}</text></svg>`;
+    return 'data:image/svg+xml;base64,' + btoa(svg);
+  }
+
+  onTableAvatarError(event: any, name: string): void {
+    event.target.src = this.getDefaultAvatar(name);
+  }
+
   viewUserDetails(user: ExtendedDashboardUser): void {
     this.currentModalMode = 'view';
     this.selectedUserForModal = {
+      id: user.id,
       name: user.name,
       email: user.email,
       phone: user.phone,
       role: user.role as any,
-      status: user.status as any
+      status: user.status as any,
+      avatar: user.avatar || ''
     };
     this.isAddUserModalOpen = true;
   }
@@ -344,11 +360,13 @@ export class AdminUsersComponent implements OnInit {
   editUser(user: ExtendedDashboardUser): void {
     this.currentModalMode = 'edit';
     this.selectedUserForModal = {
+      id: user.id,
       name: user.name,
       email: user.email,
       phone: user.phone,
       role: user.role as any,
-      status: user.status as any
+      status: user.status as any,
+      avatar: user.avatar || ''
     };
     this.isAddUserModalOpen = true;
   }
@@ -363,11 +381,11 @@ export class AdminUsersComponent implements OnInit {
     const pages: number[] = [];
     const start = Math.max(1, this.pagination.currentPage - 2);
     const end = Math.min(this.pagination.totalPages, this.pagination.currentPage + 2);
-    
+
     for (let i = start; i <= end; i++) {
       pages.push(i);
     }
-    
+
     return pages;
   }
 
@@ -391,14 +409,88 @@ export class AdminUsersComponent implements OnInit {
   }
 
   onAddUser(userData: UserData): void {
-    if (this.currentModalMode === 'add') {
-      this.uiService.showToast('success', 'User Added', `Successfully added ${userData.name} as a ${userData.role}`);
-    } else if (this.currentModalMode === 'edit') {
-      this.uiService.showToast('success', 'User Updated', `Successfully updated details for ${userData.name}`);
+    // Just hide the modal immediately to show the processing popup
+    this.isAddUserModalOpen = false;
+
+    try {
+      if (this.currentModalMode === 'add') {
+        this.isProcessing = true;
+
+        // Safety timer to auto-close processing popup after 3 seconds if it hangs
+        setTimeout(() => {
+          if (this.isProcessing) {
+            this.isProcessing = false;
+            this.closeAddUserModal();
+          }
+        }, 3000);
+
+        const payload = {
+          name: userData.name,
+          email: userData.email,
+          password: userData.password!,
+          phone: userData.phone,
+          avatar: userData.avatar,
+          role: userData.role
+        };
+
+        this.userService.createUser(payload).pipe(
+          finalize(() => {
+            this.isProcessing = false;
+            this.closeAddUserModal();
+          })
+        ).subscribe({
+          next: () => {
+            this.uiService.showToast('success', 'User Added', `Successfully added ${userData.name} as a ${userData.role}`);
+            this.loadUsers();
+          },
+          error: (err) => {
+            console.error('Error creating user:', err);
+            const msg = err.error?.message || 'Failed to create user. Please try again.';
+            this.uiService.showToast('error', 'Error', msg);
+          }
+        });
+      } else if (this.currentModalMode === 'edit' && userData.id) {
+        this.isProcessing = true;
+
+        // Safety timer to auto-close processing popup after 3 seconds if it hangs
+        setTimeout(() => {
+          if (this.isProcessing) {
+            this.isProcessing = false;
+            this.closeAddUserModal();
+          }
+        }, 3000);
+
+        const payload = {
+          name: userData.name,
+          email: userData.email,
+          phone: userData.phone,
+          avatar: userData.avatar,
+          role: userData.role
+        };
+
+        this.userService.updateUser(userData.id, payload).pipe(
+          finalize(() => {
+            this.isProcessing = false;
+            this.closeAddUserModal();
+          })
+        ).subscribe({
+          next: () => {
+            this.uiService.showToast('success', 'User Updated', `Successfully updated details for ${userData.name}`);
+            this.loadUsers();
+          },
+          error: (err) => {
+            console.error('Error updating user:', err);
+            this.uiService.showToast('error', 'Error', 'Failed to update user. Please try again.');
+          }
+        });
+      } else {
+        this.closeAddUserModal();
+      }
+    } catch (e) {
+      console.error('Sync error in onAddUser:', e);
+      this.isProcessing = false;
+      this.closeAddUserModal();
     }
-    
-    this.closeAddUserModal();
-    this.loadUsers();
   }
 
   openTableSettings(): void {

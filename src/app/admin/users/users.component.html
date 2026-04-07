@@ -157,20 +157,20 @@
   </div>
 
   <!-- Enhanced Table Container -->
-  <div class="table-container premium" *ngIf="isViewMode('table')">
+  <div class="table-container premium">
     <div class="table-header">
       <div class="table-title">
         <h3>Users Directory</h3>
         <span class="result-count">{{ filteredUsers.length }} results</span>
       </div>
-      <div class="table-settings">
+      <!-- <div class="table-settings">
         <button class="settings-btn" (click)="openTableSettings()">
           <i class="fas fa-cog"></i>
         </button>
-      </div>
+      </div> -->
     </div>
     
-    <div class="table-wrapper">
+    <div class="table-wrapper" *ngIf="isViewMode('table')">
       <table class="data-table premium">
         <thead>
           <tr>
@@ -230,7 +230,7 @@
             <td class="user-cell">
               <div class="user-profile">
                 <div class="user-avatar-wrapper">
-                  <img [src]="u.avatar || 'assets/placeholder-user.jpg'" [alt]="u.name" class="user-avatar">
+                  <img [src]="u.avatar || getDefaultAvatar(u.name)" [alt]="u.name" class="user-avatar" (error)="onTableAvatarError($event, u.name)">
                   <div class="status-indicator" [class.active]="u.status === 'active'"></div>
                 </div>
                 <div class="user-info">
@@ -317,7 +317,7 @@
     </div>
 
     <!-- Grid View -->
-    <div class="users-grid" *ngIf="viewMode === 'grid'">
+    <div class="users-grid" *ngIf="isViewMode('grid')">
       <div class="user-card" *ngFor="let u of displayUsers" [class.selected]="selectedUsers.has(u.id)">
         <div class="card-selection">
           <input type="checkbox" [checked]="selectedUsers.has(u.id)" (change)="toggleUserSelection(u.id, $event)">
@@ -325,16 +325,12 @@
         
         <div class="card-header">
           <div class="user-avatar-wrapper">
-            <img [src]="u.avatar || 'assets/placeholder-user.jpg'" [alt]="u.name" class="user-avatar">
+            <img [src]="u.avatar || getDefaultAvatar(u.name)" [alt]="u.name" class="user-avatar" (error)="onTableAvatarError($event, u.name)">
             <div class="status-indicator" [class.active]="u.status === 'active'"></div>
           </div>
           <div class="user-info">
             <h3 class="user-name">{{ u.name }}</h3>
             <span class="user-id">#{{ u.id }}</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn view" (click)="viewUserDetails(u)"><i class="fas fa-eye"></i></button>
-            <button class="action-btn edit" (click)="editUser(u)"><i class="fas fa-pen"></i></button>
           </div>
         </div>
 
@@ -367,15 +363,17 @@
             <span class="date-label">Joined</span>
             <span class="date-value">{{ u.createdAt | date:'mediumDate' }}</span>
           </div>
-          <button class="btn-delete-card" *ngIf="u.role !== 'admin'" (click)="deleteUser(u.id)">
-            <i class="fas fa-trash-alt"></i>
-          </button>
+          <div class="card-footer-actions">
+            <button class="action-btn view" title="View Details" (click)="viewUserDetails(u)"><i class="fas fa-eye"></i></button>
+            <button class="action-btn edit" title="Edit User" (click)="editUser(u)"><i class="fas fa-pen"></i></button>
+            <button class="action-btn delete" title="Delete User" *ngIf="u.role !== 'admin'" (click)="deleteUser(u.id)"><i class="fas fa-trash"></i></button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Empty State -->
-    <div class="empty-state-container" *ngIf="displayUsers.length === 0">
+    <!-- Empty State (shown when neither table nor grid has data, outside *ngIf view guards) -->
+    <div class="empty-state-container" *ngIf="displayUsers.length === 0 && !isViewMode('table')">
       <div class="empty-state">
         <div class="empty-icon">
           <i class="fas fa-users-slash"></i>
@@ -422,8 +420,18 @@
 <!-- Add/Edit/View User Modal -->
 <app-add-user-modal 
   [isOpen]="isAddUserModalOpen"
+  [isProcessing]="isProcessing"
   [mode]="currentModalMode"
   [initialData]="selectedUserForModal"
   (close)="closeAddUserModal()"
   (submit)="onAddUser($event)">
 </app-add-user-modal>
+
+<!-- Global Processing Overlay -->
+<div class="processing-overlay" *ngIf="isProcessing">
+  <div class="processing-popup">
+    <div class="spinner-ring"></div>
+    <h3>Processing Request</h3>
+    <p>Please wait while we update the user data...</p>
+  </div>
+</div>
