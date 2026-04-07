@@ -345,9 +345,11 @@
   </div>
 </div>
 
-<!-- Add User Modal -->
+<!-- Add/Edit/View User Modal -->
 <app-add-user-modal 
   [isOpen]="isAddUserModalOpen"
+  [mode]="currentModalMode"
+  [initialData]="selectedUserForModal"
   (close)="closeAddUserModal()"
   (submit)="onAddUser($event)">
 </app-add-user-modal>

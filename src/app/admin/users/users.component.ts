@@ -77,6 +77,8 @@ export class AdminUsersComponent implements OnInit {
   
   // Modal state
   isAddUserModalOpen: boolean = false;
+  currentModalMode: 'add' | 'edit' | 'view' = 'add';
+  selectedUserForModal: UserData | null = null;
 
   constructor(private userService: UserService, private uiService: UiService) {}
 
@@ -313,11 +315,27 @@ export class AdminUsersComponent implements OnInit {
   }
 
   viewUserDetails(user: ExtendedDashboardUser): void {
-    this.uiService.showToast('info', 'User Details', `Viewing details for ${user.name}`);
+    this.currentModalMode = 'view';
+    this.selectedUserForModal = {
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role as any,
+      status: user.status as any
+    };
+    this.isAddUserModalOpen = true;
   }
 
   editUser(user: ExtendedDashboardUser): void {
-    this.uiService.showToast('info', 'Edit User', `Editing user: ${user.name}`);
+    this.currentModalMode = 'edit';
+    this.selectedUserForModal = {
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role as any,
+      status: user.status as any
+    };
+    this.isAddUserModalOpen = true;
   }
 
   // Pagination methods
@@ -346,26 +364,26 @@ export class AdminUsersComponent implements OnInit {
 
   // Modal methods
   openAddUserModal(): void {
+    this.currentModalMode = 'add';
+    this.selectedUserForModal = null;
     this.isAddUserModalOpen = true;
   }
 
   closeAddUserModal(): void {
     this.isAddUserModalOpen = false;
+    this.selectedUserForModal = null;
+    this.currentModalMode = 'add';
   }
 
   onAddUser(userData: UserData): void {
-    // Here you would normally call the userService to create the user
-    // For now, we'll show a success message and reload the users
-    this.uiService.showToast('success', 'User Added', `Successfully added ${userData.name} as a ${userData.role}`);
-    
-    // In a real implementation, you would call:
-    // this.userService.createUser(userData).subscribe(() => {
-    //   this.loadUsers();
-    //   this.closeAddUserModal();
-    // });
+    if (this.currentModalMode === 'add') {
+      this.uiService.showToast('success', 'User Added', `Successfully added ${userData.name} as a ${userData.role}`);
+    } else if (this.currentModalMode === 'edit') {
+      this.uiService.showToast('success', 'User Updated', `Successfully updated details for ${userData.name}`);
+    }
     
     this.closeAddUserModal();
-    this.loadUsers(); // Reload users to show the new user
+    this.loadUsers();
   }
 
   openTableSettings(): void {

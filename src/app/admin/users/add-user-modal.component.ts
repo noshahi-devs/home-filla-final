@@ -18,7 +18,7 @@ export interface UserData {
     <div class="modal-overlay" *ngIf="isOpen" (click)="onOverlayClick($event)">
       <div class="modal-container" (click)="$event.stopPropagation()">
         <div class="modal-header">
-          <h2>Add New User</h2>
+          <h2>{{ getModalTitle() }}</h2>
           <button class="close-btn" (click)="closeModal()">
             <i class="fas fa-times"></i>
           </button>
@@ -34,6 +34,7 @@ export interface UserData {
                 name="name" 
                 [(ngModel)]="userData.name" 
                 required
+                [readonly]="mode === 'view'"
                 placeholder="Enter user's full name"
                 class="form-input"
               >
@@ -47,6 +48,7 @@ export interface UserData {
                 name="email" 
                 [(ngModel)]="userData.email" 
                 required
+                [readonly]="mode === 'view'"
                 placeholder="user@example.com"
                 class="form-input"
               >
@@ -59,6 +61,7 @@ export interface UserData {
                 id="phone" 
                 name="phone" 
                 [(ngModel)]="userData.phone" 
+                [readonly]="mode === 'view'"
                 placeholder="+1 (555) 123-4567"
                 class="form-input"
               >
@@ -71,6 +74,7 @@ export interface UserData {
                 name="role" 
                 [(ngModel)]="userData.role" 
                 required
+                [disabled]="mode === 'view'"
                 class="form-select"
               >
                 <option value="">Select a role</option>
@@ -87,6 +91,7 @@ export interface UserData {
                 id="status" 
                 name="status" 
                 [(ngModel)]="userData.status" 
+                [disabled]="mode === 'view'"
                 class="form-select"
               >
                 <option value="active">Active</option>
@@ -98,11 +103,11 @@ export interface UserData {
         
         <div class="modal-footer">
           <button type="button" class="btn-secondary" (click)="closeModal()">
-            Cancel
+            {{ mode === 'view' ? 'Close' : 'Cancel' }}
           </button>
-          <button type="button" class="btn-primary" (click)="onSubmit()" [disabled]="!isFormValid()">
-            <i class="fas fa-plus"></i>
-            Add User
+          <button type="button" class="btn-primary" (click)="onSubmit()" *ngIf="mode !== 'view'" [disabled]="!isFormValid()">
+            <i class="fas" [ngClass]="mode === 'add' ? 'fa-plus' : 'fa-save'"></i>
+            {{ mode === 'add' ? 'Add User' : 'Save Changes' }}
           </button>
         </div>
       </div>
@@ -112,6 +117,14 @@ export interface UserData {
 })
 export class AddUserModalComponent {
   @Input() isOpen: boolean = false;
+  @Input() mode: 'add' | 'edit' | 'view' = 'add';
+  @Input() set initialData(data: UserData | null) {
+    if (data) {
+      this.userData = { ...data };
+    } else {
+      this.resetForm();
+    }
+  }
   @Output() close = new EventEmitter<void>();
   @Output() submit = new EventEmitter<UserData>();
 
@@ -127,6 +140,12 @@ export class AddUserModalComponent {
     if (event.target === event.currentTarget) {
       this.closeModal();
     }
+  }
+
+  getModalTitle(): string {
+    if (this.mode === 'view') return 'User Details';
+    if (this.mode === 'edit') return 'Edit User';
+    return 'Add New User';
   }
 
   closeModal() {
