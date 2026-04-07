@@ -256,33 +256,33 @@
 }
 
 .status-static-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 16px;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: capitalize;
 }
 
 .status-static-badge.active,
 .status-static-badge.approved {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
-    border: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .status-static-badge.pending {
-    background: rgba(245, 158, 11, 0.1);
-    color: #f59e0b;
-    border: 1px solid rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
 .status-static-badge.blocked,
 .status-static-badge.rejected {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-    border: 1px solid rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 .modal-footer {
@@ -327,7 +327,7 @@
 }
 
 .fa-spin {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 
 @keyframes fadeIn {
@@ -356,8 +356,10 @@
    RESPONSIVE DESIGN (AGENTS MODAL)
 ═══════════════════════════════════════ */
 @media (max-width: 768px) {
-  .modal-overlay { padding: 0; }
-  
+  .modal-overlay {
+    padding: 0;
+  }
+
   .modal-container {
     max-width: 100%;
     height: 100%;
@@ -367,22 +369,60 @@
     flex-direction: column;
   }
 
-  .modal-header, .modal-body, .modal-footer { padding: 20px; }
-  
-  .modal-body { max-height: none; flex: 1; }
-  
-  .form-grid { grid-template-columns: 1fr; gap: 12px; }
-  .form-group.full { grid-column: span 1; }
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 20px;
+  }
 
-  .avatar-upload-section { flex-direction: column; text-align: center; gap: 16px; }
-  
-  .modal-footer { flex-direction: column; gap: 12px; padding: 20px; background: var(--bg-secondary); }
-  .btn-cancel, .btn-submit { width: 100%; justify-content: center; padding: 14px; }
+  .modal-body {
+    max-height: none;
+    flex: 1;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .form-group.full {
+    grid-column: span 1;
+  }
+
+  .avatar-upload-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    background: var(--bg-secondary);
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+  }
 }
 
 @media (max-width: 480px) {
-  .modal-header h2 { font-size: 18px; }
-  .modal-header h2 i { width: 32px; height: 32px; font-size: 14px; }
-  
-  .form-input, .form-select { padding: 10px 14px; }
+  .modal-header h2 {
+    font-size: 18px;
+  }
+
+  .modal-header h2 i {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .form-input,
+  .form-select {
+    padding: 10px 14px;
+  }
 }

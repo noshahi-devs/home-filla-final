@@ -75,28 +75,39 @@
       </div>
 
       <div class="list-wrapper" *ngIf="selectedCityId">
-        <div class="loc-item area-item" *ngFor="let a of filteredAreas">
-          <div class="loc-info">
-            <span class="name">{{ a.name }}</span>
-            <span class="area-stats" style="font-size: 0.8rem; color: #8a8d9b; display: block; margin-top: 3px;">
-              <i class="fas fa-home"></i> {{ a.propertyCount || 0 }} Properties
-            </span>
-          </div>
-          <div class="loc-actions">
-            <button class="action-btn edit" (click)="openEditArea(a)" title="Edit Area">
-              <i class="fas fa-pen"></i>
-            </button>
-            <button class="action-btn delete" (click)="deleteArea(a.id)" title="Delete Area">
-              <i class="fas fa-trash"></i>
-            </button>
+        <!-- Skeleton Loader -->
+        <div class="skeleton-wrapper" *ngIf="isAreasLoading">
+          <div class="skeleton-item" *ngFor="let i of [1,2,3,4]">
+            <div class="skeleton-bar title"></div>
+            <div class="skeleton-bar subtitle"></div>
           </div>
         </div>
 
-        <div class="empty-list" *ngIf="filteredAreas.length === 0">
-          <i class="fas fa-map-signs"></i>
-          <p>No areas found for this city.</p>
-          <button class="btn-text" (click)="openAddArea()">Add the first area</button>
-        </div>
+        <!-- Real Content -->
+        <ng-container *ngIf="!isAreasLoading">
+          <div class="loc-item area-item" *ngFor="let a of filteredAreas">
+            <div class="loc-info">
+              <span class="name">{{ a.name }}</span>
+              <span class="area-stats" style="font-size: 0.8rem; color: #8a8d9b; display: block; margin-top: 3px;">
+                <i class="fas fa-home"></i> {{ a.propertyCount || 0 }} Properties
+              </span>
+            </div>
+            <div class="loc-actions">
+              <button class="action-btn edit" (click)="openEditArea(a)" title="Edit Area">
+                <i class="fas fa-pen"></i>
+              </button>
+              <button class="action-btn delete" (click)="deleteArea(a.id)" title="Delete Area">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="empty-list" *ngIf="filteredAreas.length === 0">
+            <i class="fas fa-map-signs"></i>
+            <p>No areas found for this city.</p>
+            <button class="btn-text" (click)="openAddArea()">Add the first area</button>
+          </div>
+        </ng-container>
       </div>
 
       <!-- Selection Required Overlay -->

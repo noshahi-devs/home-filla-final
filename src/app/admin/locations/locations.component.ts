@@ -1,5 +1,5 @@
 import { LocationService } from '../../shared/services/location.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UiService } from '../../shared/services/ui.service';
@@ -20,6 +20,7 @@ export class AdminLocationsComponent implements OnInit {
   selectedCityId: number | null = null;
   areas: Area[] = [];
   filteredAreas: Area[] = [];
+  isAreasLoading = false;
 
   // Search
   citySearch = '';
@@ -37,7 +38,11 @@ export class AdminLocationsComponent implements OnInit {
   private map: L.Map | undefined;
   private marker: L.Marker | undefined;
 
-  constructor(private locationService: LocationService, private uiService: UiService) {}
+  constructor(
+    private locationService: LocationService, 
+    private uiService: UiService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadCities();
@@ -50,6 +55,7 @@ export class AdminLocationsComponent implements OnInit {
       if (this.cities.length > 0 && !this.selectedCityId) {
         this.selectCity(this.cities[0].id);
       }
+      this.cdr.detectChanges();
     });
   }
 
@@ -68,13 +74,23 @@ export class AdminLocationsComponent implements OnInit {
 
   loadAreas(): void {
     if (this.selectedCityId) {
-      this.locationService.getAreas(this.selectedCityId).subscribe(areas => {
-        this.areas = areas;
-        this.filterAreas();
+      this.isAreasLoading = true;
+      this.locationService.getAreas(this.selectedCityId).subscribe({
+        next: (areas) => {
+          this.areas = areas;
+          this.filterAreas();
+          this.isAreasLoading = false;
+          this.cdr.detectChanges();
+        },
+        error: () => {
+          this.isAreasLoading = false;
+          this.cdr.detectChanges();
+        }
       });
     } else {
       this.areas = [];
       this.filteredAreas = [];
+      this.isAreasLoading = false;
     }
   }
 

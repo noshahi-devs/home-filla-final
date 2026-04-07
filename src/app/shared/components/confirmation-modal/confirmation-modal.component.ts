@@ -117,18 +117,19 @@ import { UiService, ConfirmationRequest } from '../../services/ui.service';
     }
 
     button {
-      padding: 16px; border-radius: 16px; font-size: 14px; font-weight: 800; cursor: pointer; transition: all 0.3s; border: none; width: 100%;
+      padding: 16px; border-radius: 16px; font-size: 14px; font-weight: 800; cursor: pointer; border: none; width: 100%;
       display: flex; align-items: center; justify-content: center;
+      transition: none;
     }
 
     .btn-cancel { background: #f1f5f9; color: #475569; }
-    .btn-cancel:hover { background: #e2e8f0; transform: translateY(-2px); }
+    .btn-cancel:hover { background: #e2e8f0; }
 
-    .btn-confirm.danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3); }
-    .btn-confirm.warning { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3); }
-    .btn-confirm.info { background: linear-gradient(135deg, #4f46e5, #4338ca); color: white; box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3); }
+    .btn-confirm.danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2); }
+    .btn-confirm.warning { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2); }
+    .btn-confirm.info { background: linear-gradient(135deg, #4f46e5, #4338ca); color: white; box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2); }
 
-    .btn-confirm:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.2) !important; }
+    .btn-confirm:hover { opacity: 0.95; }
     .btn-confirm:active { transform: translateY(0); }
   `]
 })

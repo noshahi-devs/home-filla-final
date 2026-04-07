@@ -144,7 +144,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.1rem 1.2rem;
-  border-radius: 14px;
+  border-radius: 18px;
   margin-bottom: 0.6rem;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -154,7 +154,6 @@
 
 .loc-item:hover {
   background: #f8fafc;
-  transform: translateX(5px);
 }
 
 .loc-item.active {
@@ -181,16 +180,15 @@
 .loc-actions {
   display: flex;
   gap: 0.5rem;
-  opacity: 0;
-  transition: opacity 0.2s;
+  opacity: 1;
 }
 
 .loc-item:hover .loc-actions { opacity: 1; }
 
 .action-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
   border: none;
   display: flex;
   align-items: center;
@@ -267,6 +265,46 @@
   font-size: 1.1rem;
 }
 
+/* ── Skeleton Loader ─────────────────────────── */
+.skeleton-wrapper {
+  padding: 0.5rem;
+}
+
+.skeleton-item {
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-bar {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+.skeleton-bar.title {
+  width: 60%;
+  height: 18px;
+}
+
+.skeleton-bar.subtitle {
+  width: 40%;
+  height: 14px;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); background-position: -200% 0; }
+  100% { transform: translateX(100%); background-position: 200% 0; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 /* ── Buttons ─────────────────────────────────── */
 .btn-premium {
   padding: 0.8rem 1.5rem;
@@ -280,13 +318,12 @@
   align-items: center;
   gap: 0.6rem;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(74, 108, 247, 0.3);
-  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(74, 108, 247, 0.15);
+  transition: none;
 }
 
 .btn-premium:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(74, 108, 247, 0.45);
+  transform: none;
 }
 
 .btn-add-sm {
@@ -296,13 +333,13 @@
 
 .btn-secondary {
   padding: 0.8rem 1.5rem;
-  border-radius: 12px;
   border: 1.5px solid #e2e8f0;
   background: #f8fafc;
   color: #64748b;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: none;
+  border-radius: 16px;
 }
 
 .btn-secondary:hover { background: #f1f5f9; color: #1e293b; }
@@ -340,7 +377,7 @@
   background: white;
   width: 100%;
   max-width: 460px;
-  border-radius: 26px;
+  border-radius: 32px;
   box-shadow: 0 30px 60px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
@@ -370,11 +407,10 @@
 }
 
 .close-modal {
-  background: #f1f5f9;
   border: none;
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: 14px;
   color: #94a3b8;
   cursor: pointer;
   display: flex;
@@ -417,8 +453,8 @@
 .input-wrap input {
   width: 100%;
   padding: 0.9rem 1rem 0.9rem 3.2rem;
-  border-radius: 14px;
-  border: 2px solid #f1f5f9;
+  border-radius: 0;
+  border: 1px solid #f1f5f9;
   background: #f8fafc;
   font-size: 1rem;
   color: #1e293b;
@@ -430,7 +466,6 @@
   outline: none;
   border-color: #4a6cf7;
   background: white;
-  box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.08);
 }
 
 .modal-footer {
