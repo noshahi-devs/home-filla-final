@@ -1307,3 +1307,133 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE DESIGN BREAKPOINTS
+═══════════════════════════════════════ */
+
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .users-page { padding: var(--space-lg); }
+  
+  .filters-bar.premium {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-container { min-width: 0; width: 100%; }
+
+  .role-tabs {
+    overflow-x: auto;
+    padding-bottom: var(--space-xs);
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .role-tab { white-space: nowrap; }
+}
+
+@media (max-width: 768px) {
+  .page-header.premium {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .header-actions { width: 100%; gap: var(--space-sm); }
+  .btn-export, .btn-primary.premium { flex: 1; justify-content: center; }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  /* Table to Cards Transformation */
+  .data-table.premium thead {
+    display: none; /* Hide header on mobile */
+  }
+
+  .data-table.premium, .data-table.premium tbody, .data-table.premium tr, .data-table.premium td {
+    display: block;
+    width: 100%;
+  }
+
+  .data-table.premium tr.user-row {
+    margin-bottom: var(--space-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .data-table.premium td {
+    padding: var(--space-xs) 0 !important;
+    border: none !important;
+  }
+
+  .checkbox-cell { display: none !important; }
+
+  /* Card Layout Structuring */
+  .user-profile {
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-cell::before { content: 'Contact Information'; display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: var(--space-xs); }
+  .role-cell::before { content: 'Role'; display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: var(--space-xs); }
+  .status-cell::before { content: 'Status'; display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: var(--space-xs); }
+  
+  .role-cell, .status-cell, .joined-cell {
+    margin-bottom: var(--space-md);
+  }
+
+  .actions-cell {
+    border-top: 1px solid var(--border-light) !important;
+    padding-top: var(--space-md) !important;
+    margin-top: var(--space-md);
+  }
+
+  .action-buttons {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+
+  .action-btn {
+    flex: 0 0 calc(25% - 8px);
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Pagination */
+  .pagination.premium {
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+  }
+  
+  .pagination-controls {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .user-avatar { width: 40px; height: 40px; }
+  .user-name { font-size: 15px; }
+  
+  .stat-value { font-size: 26px; }
+  .stat-icon-wrapper { width: 52px; height: 52px; font-size: 20px; }
+  
+  .action-btn {
+    flex: 0 0 calc(50% - 6px); /* 2 per row on small phones */
+  }
+}

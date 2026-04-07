@@ -380,12 +380,14 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .modal-overlay {
-    padding: var(--space-md);
+    padding: 0;
   }
   
   .modal-container {
     max-width: 100%;
-    border-radius: var(--radius-xl);
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
   }
   
   .modal-header,
@@ -394,18 +396,26 @@
     padding: var(--space-lg);
   }
   
+  .modal-body {
+    max-height: none;
+    flex: 1;
+  }
+
   .modal-header h2 {
     font-size: 20px;
   }
   
   .modal-footer {
     flex-direction: column;
+    padding: var(--space-lg);
+    background: var(--bg-primary);
   }
   
   .btn-secondary,
   .btn-primary {
     width: 100%;
     justify-content: center;
+    padding: var(--space-md);
   }
 }
 
@@ -418,11 +428,6 @@
   
   .form-input,
   .form-select {
-    padding: var(--space-sm) var(--space-md);
-  }
-  
-  .btn-secondary,
-  .btn-primary {
-    padding: var(--space-sm) var(--space-lg);
+    padding: var(--space-md);
   }
 }
