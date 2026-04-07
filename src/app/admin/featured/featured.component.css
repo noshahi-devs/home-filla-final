@@ -348,8 +348,14 @@
 
 /* ── Responsive ──────────────────────────────── */
 @media (max-width: 1024px) {
-  .featured-page { padding: 1.5rem; }
-  .featured-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .featured-page {
+    padding: 1.5rem;
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -359,14 +365,16 @@
     gap: 1rem;
     margin-bottom: 2rem;
   }
-  
-  .header-content h1 { font-size: 1.75rem; }
+
+  .header-content h1 {
+    font-size: 1.75rem;
+  }
 
   .stats-bar {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .stat-item {
     padding: 1rem 1.5rem;
     width: 100%;
@@ -389,7 +397,7 @@
     overflow-x: auto;
     padding: 0.3rem;
   }
-  
+
   .tab-btn {
     flex: 1;
     white-space: nowrap;
@@ -407,8 +415,19 @@
 }
 
 @media (max-width: 480px) {
-  .featured-page { padding: 1rem; }
-  .header-content h1 { font-size: 1.5rem; }
-  .price-tag { font-size: 1.15rem; }
-  .prop-title { font-size: 1.05rem; }
+  .featured-page {
+    padding: 1rem;
+  }
+
+  .header-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .price-tag {
+    font-size: 1.15rem;
+  }
+
+  .prop-title {
+    font-size: 1.05rem;
+  }
 }

@@ -60,8 +60,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .status-tabs {
@@ -89,7 +89,7 @@
 }
 
 .tab-count {
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
   padding: 2px 8px;
   border-radius: 6px;
   font-size: 11px;
@@ -130,15 +130,15 @@
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .property-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 .card-image-wrap {
@@ -165,7 +165,7 @@
   left: 0;
   right: 0;
   padding: 1.5rem;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -182,9 +182,24 @@
   backdrop-filter: blur(8px);
 }
 
-.status-badge.pending { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
-.status-badge.approved { background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
-.status-badge.rejected, .status-badge.blocked { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+.status-badge.pending {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-badge.approved {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.status-badge.rejected,
+.status-badge.blocked {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
 
 .price-tag {
   background: white;
@@ -193,7 +208,7 @@
   border-radius: 30px;
   font-weight: 800;
   font-size: 14px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* ── Seller Header (Inside Card) ──────────── */
@@ -204,12 +219,12 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   padding: 0.4rem 0.8rem;
   border-radius: 10px;
   backdrop-filter: blur(4px);
   z-index: 2;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .seller-avatar {
@@ -282,7 +297,9 @@
   font-weight: 600;
 }
 
-.detail-item i { color: #94a3b8; }
+.detail-item i {
+  color: #94a3b8;
+}
 
 /* ── Card Actions Overlay ───────────────────── */
 .card-actions-wrap {
@@ -308,18 +325,41 @@
   color: #475569;
 }
 
-.action-btn i { font-size: 1rem; }
+.action-btn i {
+  font-size: 1rem;
+}
 
-.action-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
+.action-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
 
-.action-btn.approve { color: #22c55e; }
-.action-btn.approve:hover { background: #f0fdf4; border-color: #22c55e; }
+.action-btn.approve {
+  color: #22c55e;
+}
 
-.action-btn.block { color: #ef4444; }
-.action-btn.block:hover { background: #fef2f2; border-color: #ef4444; }
+.action-btn.approve:hover {
+  background: #f0fdf4;
+  border-color: #22c55e;
+}
 
-.action-btn.edit { color: #4a6cf7; }
-.action-btn.edit:hover { background: #eff6ff; border-color: #4a6cf7; }
+.action-btn.block {
+  color: #ef4444;
+}
+
+.action-btn.block:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+
+.action-btn.edit {
+  color: #4a6cf7;
+}
+
+.action-btn.edit:hover {
+  background: #eff6ff;
+  border-color: #4a6cf7;
+}
 
 /* ── Loading Overlay ────────────────────────── */
 .processing-overlay {
@@ -348,7 +388,11 @@
   margin-bottom: 1rem;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* ── Modal & Form styles (Updated for Premium) ────────── */
 /* Add existing modal styles but refined if needed */
@@ -378,6 +422,7 @@
   display: flex;
   flex-direction: column;
 }
+
 /* ── RESPONSIVE BREAKPOINTS ─────────────────── */
 
 @media (max-width: 1200px) {
@@ -387,25 +432,33 @@
 }
 
 @media (max-width: 1024px) {
-  :host { padding: 1.5rem; }
-  
-  .header-left h1 { font-size: 1.8rem; }
-  
+  :host {
+    padding: 1.5rem;
+  }
+
+  .header-left h1 {
+    font-size: 1.8rem;
+  }
+
   .toolbar-card {
     flex-direction: column;
     align-items: stretch;
     gap: 1.25rem;
   }
-  
-  .search-box { width: 100%; }
+
+  .search-box {
+    width: 100%;
+  }
 
   .status-tabs {
     overflow-x: auto;
     padding-bottom: 0.5rem;
     -webkit-overflow-scrolling: touch;
   }
-  
-  .tab { white-space: nowrap; }
+
+  .tab {
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 768px) {
@@ -414,8 +467,11 @@
     align-items: flex-start;
     gap: 1rem;
   }
-  
-  .btn-add { width: 100%; justify-content: center; }
+
+  .btn-add {
+    width: 100%;
+    justify-content: center;
+  }
 
   .properties-grid {
     grid-template-columns: 1fr;
@@ -427,20 +483,27 @@
     border-radius: 0;
   }
 
-  .modal-overlay { padding: 0; }
+  .modal-overlay {
+    padding: 0;
+  }
 }
 
 @media (max-width: 480px) {
-  :host { padding: 1rem; }
-  
-  .card-body { padding: 1.25rem; }
-  
+  :host {
+    padding: 1rem;
+  }
+
+  .card-body {
+    padding: 1.25rem;
+  }
+
   .card-actions-wrap {
     flex-wrap: wrap;
   }
-  
+
   .action-btn {
-    flex: 1 1 calc(50% - 0.25rem); /* 2 buttons per row */
+    flex: 1 1 calc(50% - 0.25rem);
+    /* 2 buttons per row */
     font-size: 11px;
     padding: 0.6rem;
   }
@@ -449,6 +512,8 @@
     flex-wrap: wrap;
     gap: 1rem;
   }
-  
-  .detail-item { flex: 1 1 40%; }
+
+  .detail-item {
+    flex: 1 1 40%;
+  }
 }

@@ -16,8 +16,15 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Sidebar Navigation ─────────────────────── */
@@ -256,23 +263,26 @@
 
 /* ── Responsive Design ─────────────────────── */
 @media (max-width: 1024px) {
-  :host { padding: 1.5rem; }
-  
+  :host {
+    padding: 1.5rem;
+  }
+
   .settings-container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .settings-sidebar {
     position: static;
     padding: 1rem;
     border-radius: 20px;
   }
-  
+
   .sidebar-header {
-    display: none; /* Hide header in mobile tab-strip */
+    display: none;
+    /* Hide header in mobile tab-strip */
   }
-  
+
   .nav-list {
     flex-direction: row;
     overflow-x: auto;
@@ -280,11 +290,11 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
-  
+
   .nav-list::-webkit-scrollbar {
     display: none;
   }
-  
+
   .nav-item {
     padding: 0.75rem 1.25rem;
     white-space: nowrap;
@@ -307,15 +317,17 @@
 }
 
 @media (max-width: 640px) {
-  :host { padding: 1rem; }
-  
+  :host {
+    padding: 1rem;
+  }
+
   .profile-card {
     flex-direction: column;
     text-align: center;
     gap: 1.25rem;
     padding: 1.5rem;
   }
-  
+
   .profile-avatar-large {
     width: 80px;
     height: 80px;
@@ -331,7 +343,7 @@
     padding-top: 1.5rem;
     margin-top: 2rem;
   }
-  
+
   .form-control {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
@@ -342,8 +354,9 @@
   .nav-item {
     padding: 0.6rem 1rem;
   }
-  
+
   .nav-item i {
-    display: none; /* Icon-less tabs on very small screens to save space */
+    display: none;
+    /* Icon-less tabs on very small screens to save space */
   }
 }
