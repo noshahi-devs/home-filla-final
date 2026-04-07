@@ -18,6 +18,11 @@ export class AdminFeaturedComponent implements OnInit {
 
   searchQuery = '';
   currentFilter: 'all' | 'featured' | 'unfeatured' = 'all';
+  loading = false;
+
+  // Pagination
+  propertiesPage = 1;
+  propertiesPageSize = 6;
 
   constructor(private propertyService: PropertyService, private uiService: UiService) { }
 
@@ -26,9 +31,17 @@ export class AdminFeaturedComponent implements OnInit {
   }
 
   loadProperties() {
-    this.propertyService.getProperties().subscribe(props => {
-      this.properties = props;
-      this.filterProperties();
+    this.loading = true;
+    this.propertyService.getProperties().subscribe({
+      next: (props) => {
+        this.properties = props;
+        this.filterProperties();
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+        this.uiService.showToast('error', 'Fetch Failed', 'Could not load properties.');
+      }
     });
   }
 
@@ -55,6 +68,16 @@ export class AdminFeaturedComponent implements OnInit {
     }
 
     this.filteredProperties = filtered;
+    this.propertiesPage = 1; // Reset to page 1 on filter
+  }
+
+  get pagedProperties(): DashboardProperty[] {
+    const start = (this.propertiesPage - 1) * this.propertiesPageSize;
+    return this.filteredProperties.slice(start, start + this.propertiesPageSize);
+  }
+
+  get totalPropertiesPages(): number {
+    return Math.ceil(this.filteredProperties.length / this.propertiesPageSize) || 1;
   }
 
   setFilter(filter: 'all' | 'featured' | 'unfeatured') {

@@ -2,115 +2,116 @@
   <!-- Page Header -->
   <div class="page-header">
     <div class="header-content">
-      <h1><i class="fas fa-star"></i> Featured Listings</h1>
+      <h1><i class="fas fa-crown"></i> Featured Management</h1>
       <p class="page-subtitle">Curate the best properties to showcase on the homepage hero and spotlight sections.</p>
     </div>
   </div>
 
   <!-- Stats Bar -->
   <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-icon icon-blue">
-        <i class="fas fa-building"></i>
-      </div>
-      <div class="stat-info">
-        <div>Total Properties</div>
-        <div>{{ properties.length }}</div>
-      </div>
+    <div class="stat-pill">
+      <i class="fas fa-building"></i>
+      <span>{{ properties.length }} Total Listings</span>
     </div>
-    <div class="stat-item">
-      <div class="stat-icon icon-featured">
-        <i class="fas fa-crown"></i>
-      </div>
-      <div class="stat-info">
-        <div>Featured</div>
-        <div>{{ featuredCount }}</div>
+    <div class="stat-pill">
+      <i class="fas fa-star"></i>
+      <span>{{ featuredCount }} Featured</span>
+    </div>
+
+    <!-- Search & Page Size Split -->
+    <div class="search-controls">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search by title, city or area..." [(ngModel)]="searchQuery" (ngModelChange)="filterProperties()">
+        <select class="page-size-select" [(ngModel)]="propertiesPageSize" (ngModelChange)="propertiesPage = 1">
+          <option [ngValue]="6">6</option>
+          <option [ngValue]="12">12</option>
+          <option [ngValue]="24">24</option>
+        </select>
       </div>
     </div>
   </div>
 
-  <!-- Search & Filter Controls -->
-  <div class="controls-section">
-    <div class="search-box">
-      <i class="fas fa-search"></i>
-      <input 
-        type="text" 
-        placeholder="Search by title, city or area..." 
-        [(ngModel)]="searchQuery" 
-        (ngModelChange)="filterProperties()"
-      >
-    </div>
-
+  <!-- Filter Controls -->
+  <div class="filter-bar">
     <div class="filter-tabs">
-      <button 
-        class="tab-btn" 
-        [class.active]="currentFilter === 'all'" 
-        (click)="setFilter('all')"
-      >
-        All Listings
+      <button class="tab-btn" [class.active]="currentFilter === 'all'" (click)="setFilter('all')">
+        <i class="fas fa-th-large"></i> All
       </button>
-      <button 
-        class="tab-btn" 
-        [class.active]="currentFilter === 'featured'" 
-        (click)="setFilter('featured')"
-      >
-        Featured Only
+      <button class="tab-btn" [class.active]="currentFilter === 'featured'" (click)="setFilter('featured')">
+        <i class="fas fa-crown"></i> Featured
       </button>
-      <button 
-        class="tab-btn" 
-        [class.active]="currentFilter === 'unfeatured'" 
-        (click)="setFilter('unfeatured')"
-      >
-        Standard
+      <button class="tab-btn" [class.active]="currentFilter === 'unfeatured'" (click)="setFilter('unfeatured')">
+        <i class="fas fa-minus-circle"></i> Standard
       </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="shimmer-grid">
+      <div class="shimmer-card" *ngFor="let i of [1,2,3,4,5,6]"></div>
     </div>
   </div>
 
   <!-- Properties Grid -->
-  <div class="featured-grid">
-    <div class="property-card" *ngFor="let p of filteredProperties">
+  <div class="featured-grid" *ngIf="!loading">
+    <div class="property-card" *ngFor="let p of pagedProperties">
       <div class="card-image-wrap">
-        <img [src]="p.images && p.images[0] ? p.images[0] : 'assets/placeholder.jpg'" alt="{{ p.title }}">
-        <div class="status-badge">{{ p.status }}</div>
+        <img [src]="p.images && p.images[0] ? p.images[0] : 'assets/placeholder-prop.jpg'" 
+             class="prop-img" alt="{{ p.title }}">
         
-        <!-- Interactive Star Toggle -->
-        <div class="featured-toggle-overlay">
-          <button 
-            class="star-btn" 
-            [class.is-featured]="p.isFeatured" 
-            (click)="toggleFeatured(p)"
-            [title]="p.isFeatured ? 'Remove from Featured' : 'Mark as Featured'"
-          >
-            <i class="fas fa-star"></i>
-          </button>
+        <div class="badge-set">
+          <div class="badge type">{{ p.type | titlecase }}</div>
+          <div class="badge purpose" [class.rent]="p.purpose === 'rent'">{{ p.purpose | titlecase }}</div>
+        </div>
+
+        <button class="feature-action-btn" 
+                [class.active]="p.isFeatured" 
+                (click)="toggleFeatured(p)"
+                [title]="p.isFeatured ? 'Remove from Featured' : 'Mark as Featured'">
+          <i class="fas fa-crown"></i>
+        </button>
+      </div>
+
+      <div class="card-body">
+        <div class="price">Rs {{ p.price | number }}</div>
+        <h3 class="title">{{ p.title }}</h3>
+        
+        <div class="details">
+          <span class="location"><i class="fas fa-map-marker-alt"></i> {{ p.area }}, {{ p.city }}</span>
+          <div class="specs">
+            <span><i class="fas fa-bed"></i> {{ p.beds }}</span>
+            <span><i class="fas fa-bath"></i> {{ p.baths }}</span>
+            <span><i class="fas fa-expand"></i> {{ p.sqft }} sqft</span>
+          </div>
         </div>
       </div>
 
-      <div class="card-content">
-        <div class="price-tag">Rs {{ p.price | number }}</div>
-        <h3 class="prop-title">{{ p.title }}</h3>
-        
-        <div class="location">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>{{ p.area }}, {{ p.city }}</span>
-        </div>
-
-        <div class="card-footer">
-          <span class="prop-id">REF: #{{ p.id }}</span>
-          
-          <div class="toggle-label" [class.active]="p.isFeatured">
-            <i class="fas" [class.fa-check-circle]="p.isFeatured" [class.fa-circle]="!p.isFeatured"></i>
-            {{ p.isFeatured ? 'Featured Listing' : 'Standard' }}
-          </div>
-        </div>
+      <div class="card-status-bar" [class.featured]="p.isFeatured">
+        <i class="fas" [class.fa-star]="p.isFeatured" [class.fa-circle]="!p.isFeatured"></i>
+        <span>{{ p.isFeatured ? 'Featured Listing' : 'Standard' }}</span>
       </div>
     </div>
 
     <!-- Empty State -->
     <div class="empty-state" *ngIf="filteredProperties.length === 0">
-      <i class="fas fa-search-location"></i>
+      <div class="empty-icon"><i class="fas fa-search-location"></i></div>
       <h3>No listings found</h3>
       <p>Try adjusting your search query or filter to find more properties.</p>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-section" *ngIf="filteredProperties.length > 0 && !loading">
+    <span class="page-info">Page {{ propertiesPage }} of {{ totalPropertiesPages }}</span>
+    <div class="page-btns">
+      <button class="page-btn" [disabled]="propertiesPage === 1" (click)="propertiesPage = propertiesPage - 1">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="page-btn" [disabled]="propertiesPage === totalPropertiesPages" (click)="propertiesPage = propertiesPage + 1">
+        <i class="fas fa-chevron-right"></i>
+      </button>
     </div>
   </div>
 </div>
