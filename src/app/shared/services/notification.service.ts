@@ -23,6 +23,10 @@ export class NotificationService {
     return this.getNotifications().pipe(map(notifs => notifs.filter(n => !n.isRead)));
   }
 
+  getAdminActivity(): Observable<AppNotification[]> {
+    return this.http.get<AppNotification[]>(`${this.apiUrl}/notifications?userId=0`, { headers: this.headers });
+  }
+
   markNotificationRead(id: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/notifications/${id}/read`, {}, { headers: this.headers });
   }

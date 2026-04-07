@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../shared/services/notification.service';
 import { UiService } from '../../shared/services/ui.service';
@@ -15,50 +15,55 @@ import { Observable, take } from 'rxjs';
 export class AdminNotificationsComponent implements OnInit {
   private notificationService = inject(NotificationService);
   private uiService = inject(UiService);
+  private cdr = inject(ChangeDetectorRef);
 
-  notifications$: Observable<AppNotification[]> = new Observable<AppNotification[]>();
-  filter: 'all' | 'unread' = 'all';
+  loading = false;
+  notifications: AppNotification[] = [];
 
   ngOnInit(): void {
     this.loadNotifications();
   }
 
   loadNotifications(): void {
-    if (this.filter === 'unread') {
-      this.notifications$ = this.notificationService.getUnreadNotifications();
-    } else {
-      this.notifications$ = this.notificationService.getNotifications();
-    }
-  }
-
-  setFilter(filter: 'all' | 'unread'): void {
-    this.filter = filter;
-    this.loadNotifications();
+    this.loading = true;
+    this.notificationService.getAdminActivity().pipe(take(1)).subscribe({
+      next: (notifs) => {
+        this.notifications = notifs;
+        this.loading = false;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.loading = false;
+        this.cdr.detectChanges();
+        this.uiService.showToast('error', 'Error', 'Failed to load activities');
+      }
+    });
   }
 
   markAsRead(id: number): void {
     this.notificationService.markNotificationRead(id).pipe(take(1)).subscribe({
       next: () => {
         this.loadNotifications();
-        this.uiService.showToast('success', 'Success', 'Notification marked as read');
+        this.uiService.showToast('success', 'Clear', 'Activity marked as read');
       }
     });
   }
 
   markAllAsRead(): void {
+    // For admin, we call the same read-all but with userId=0 context handled in backend
     this.notificationService.markAllNotificationsRead().pipe(take(1)).subscribe({
       next: () => {
         this.loadNotifications();
-        this.uiService.showToast('success', 'Success', 'All notifications marked as read');
+        this.uiService.showToast('success', 'All Clear', 'All platform activities cleared');
       }
     });
   }
 
   getIconClass(icon: string | undefined): string {
-    return icon || 'fas fa-bell';
+    return icon && icon.startsWith('fa-') ? `fas ${icon}` : 'fas fa-bell';
   }
 
-  getColorStyle(color: string | undefined): string {
-    return color || '#4a6cf7';
+  getTypeLabel(type: string): string {
+    return type.replace('_', ' ').toUpperCase();
   }
 }

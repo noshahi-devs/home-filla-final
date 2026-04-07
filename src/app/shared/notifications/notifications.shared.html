@@ -1,0 +1,58 @@
+<div class="notifications-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1><i class="fas fa-bell"></i> My Notifications</h1>
+      <p class="page-subtitle">Stay updated with your property inquiries, status updates, and platform alerts.</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-mark-all" (click)="markAllAsRead()">
+        <i class="fas fa-check-double"></i> Mark all as read
+      </button>
+    </div>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="filter-tabs">
+    <button class="tab-btn" [class.active]="filter === 'all'" (click)="setFilter('all')">
+      All
+    </button>
+    <button class="tab-btn" [class.active]="filter === 'unread'" (click)="setFilter('unread')">
+      Unread
+    </button>
+  </div>
+
+  <!-- Notifications List -->
+  <div class="notifications-list" *ngIf="(notifications$ | async) as notifs">
+    <div class="notification-card" *ngFor="let n of notifs; let i = index" 
+         [class.unread]="!n.isRead"
+         [style.animation-delay]="(i * 0.05) + 's'">
+      
+      <div class="icon-wrap" [style.background-color]="n.color === 'warning' ? '#fff7ed' : n.color === 'success' ? '#f0fdf4' : n.color === 'danger' ? '#fef2f2' : '#eff6ff'">
+        <i [class]="getIconClass(n.icon)" [style.color]="n.color === 'warning' ? '#f97316' : n.color === 'success' ? '#16a34a' : n.color === 'danger' ? '#dc2626' : '#2563eb'"></i>
+      </div>
+
+      <div class="content">
+        <div class="top-row">
+          <h3>{{ n.title }}</h3>
+          <span class="time"><i class="far fa-clock"></i> {{ n.createdAt | date: 'MMM d, h:mm a' }}</span>
+        </div>
+        <p class="message">{{ n.message }}</p>
+        <div class="footer-row" *ngIf="!n.isRead">
+          <button class="btn-read" (click)="markAsRead(n.id)">
+            <i class="fas fa-check"></i> Mark Read
+          </button>
+        </div>
+      </div>
+      
+      <div class="unread-dot" *ngIf="!n.isRead"></div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="notifs.length === 0">
+      <div class="empty-icon"><i class="fas fa-bell-slash"></i></div>
+      <h3>All Caught Up!</h3>
+      <p>No notifications to show right now. We'll alert you here when something important happens.</p>
+    </div>
+  </div>
+</div>

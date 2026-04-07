@@ -1,62 +1,56 @@
-<div class="notifications-container">
+<div class="activity-page">
   <!-- Page Header -->
-  <header class="page-header">
+  <div class="page-header">
     <div class="header-content">
-      <h1>🔔 Notifications</h1>
-      <p class="page-subtitle">Stay updated with the latest inquiries, payments, and system alerts.</p>
+      <h1><i class="fas fa-history"></i> Platform Activity Hub</h1>
+      <p class="page-subtitle">Real-time log of all user activities, property updates, and platform transactions.</p>
     </div>
     <div class="header-actions">
-      <button class="btn-mark-all" (click)="markAllAsRead()">
-        <i class="fas fa-check-double"></i> Mark all as read
+      <button class="btn-clear-all" (click)="markAllAsRead()" *ngIf="notifications.length > 0">
+        <i class="fas fa-check-double"></i> Clear History
       </button>
     </div>
-  </header>
-
-  <!-- Filter Tabs -->
-  <div class="filter-tabs">
-    <button class="tab-btn" [class.active]="filter === 'all'" (click)="setFilter('all')">
-      All Notifications
-    </button>
-    <button class="tab-btn" [class.active]="filter === 'unread'" (click)="setFilter('unread')">
-      Unread Only
-    </button>
   </div>
 
-  <!-- Notifications List -->
-  <div class="notifications-list" *ngIf="(notifications$ | async) as notifs">
-    <ng-container *ngIf="notifs.length > 0; else emptyState">
-      <div *ngFor="let n of notifs" class="notification-item" [class.unread]="!n.isRead">
-        <!-- Icon Section -->
-        <div class="item-icon-wrap" [style.background]="getColorStyle(n.color) + '22'" [style.color]="getColorStyle(n.color)">
-          <i [class]="getIconClass(n.icon)"></i>
-        </div>
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="shimmer-list">
+      <div class="shimmer-item" *ngFor="let i of [1,2,3,4,5]"></div>
+    </div>
+  </div>
 
-        <!-- Content Section -->
-        <div class="item-content">
-          <h3 class="item-title">{{ n.title }}</h3>
-          <p class="item-message">{{ n.message }}</p>
-          <div class="item-meta">
-            <span class="item-time"><i class="far fa-clock"></i> {{ n.createdAt | date:'medium' }}</span>
-            <span *ngIf="!n.isRead" class="unread-indicator"><i class="fas fa-circle"></i> New</span>
-          </div>
-        </div>
+  <!-- Activity Feed -->
+  <div class="activity-feed" *ngIf="!loading">
+    <div class="activity-card" *ngFor="let n of notifications; let i = index" 
+         [class.unread]="!n.isRead"
+         [style.animation-delay]="(i * 0.05) + 's'">
+      
+      <div class="activity-icon-wrap" [style.background-color]="n.color === 'warning' ? '#fff7ed' : n.color === 'success' ? '#f0fdf4' : n.color === 'danger' ? '#fef2f2' : '#eff6ff'">
+        <i [class]="getIconClass(n.icon)" [style.color]="n.color === 'warning' ? '#f97316' : n.color === 'success' ? '#16a34a' : n.color === 'danger' ? '#dc2626' : '#2563eb'"></i>
+      </div>
 
-        <!-- Action Section -->
-        <div class="item-actions" *ngIf="!n.isRead">
-          <button class="btn-action" title="Mark as read" (click)="markAsRead(n.id)">
+      <div class="activity-body">
+        <div class="activity-title">
+          <h3>{{ n.title }}</h3>
+          <span class="activity-time"><i class="far fa-clock"></i> {{ n.createdAt | date: 'MMM d, h:mm a' }}</span>
+        </div>
+        <p class="activity-msg">{{ n.message }}</p>
+        <div class="activity-footer">
+          <span class="activity-type">{{ n.type | uppercase }}</span>
+          <button class="btn-check" (click)="markAsRead(n.id)" title="Dismiss">
             <i class="fas fa-check"></i>
           </button>
         </div>
       </div>
-    </ng-container>
+      
+      <div class="status-indicator" [style.background-color]="n.color === 'warning' ? '#f97316' : n.color === 'success' ? '#16a34a' : n.color === 'danger' ? '#dc2626' : '#2563eb'"></div>
+    </div>
 
     <!-- Empty State -->
-    <ng-template #emptyState>
-      <div class="empty-state">
-        <div class="empty-icon"><i class="fas fa-bell-slash"></i></div>
-        <h3>No Notifications Found</h3>
-        <p>You're all caught up! There are no notifications to display in this category.</p>
-      </div>
-    </ng-template>
+    <div class="empty-state" *ngIf="notifications.length === 0">
+      <div class="empty-icon"><i class="fas fa-history"></i></div>
+      <h3>Nothing to report</h3>
+      <p>The activity hub is quiet. New platform events will appear here in real-time.</p>
+    </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { NotificationService } from '../../shared/services/notification.service';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppNotification } from '../../shared/models';
 import { Observable, take } from 'rxjs';
@@ -9,12 +9,13 @@ import { UiService } from '../../shared/services/ui.service';
   selector: 'app-seller-notifications',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: '../../admin/notifications/notifications.component.html',
-  styleUrl: '../../admin/notifications/notifications.component.css'
+  templateUrl: '../../shared/notifications/notifications.shared.html',
+  styleUrl: '../../shared/notifications/notifications.shared.css'
 })
 export class SellerNotificationsComponent implements OnInit {
   private notificationService = inject(NotificationService);
   private uiService = inject(UiService);
+  private cdr = inject(ChangeDetectorRef);
 
   notifications$: Observable<AppNotification[]> = new Observable<AppNotification[]>();
   filter: 'all' | 'unread' = 'all';
@@ -24,11 +25,14 @@ export class SellerNotificationsComponent implements OnInit {
   }
 
   loadNotifications() {
-    if (this.filter === 'unread') {
-      this.notifications$ = this.notificationService.getUnreadNotifications();
-    } else {
-      this.notifications$ = this.notificationService.getNotifications();
-    }
+    const obs = this.filter === 'unread' 
+      ? this.notificationService.getUnreadNotifications() 
+      : this.notificationService.getNotifications();
+    
+    obs.pipe(take(1)).subscribe(notifs => {
+      this.notifications$ = new Observable(s => s.next(notifs));
+      this.cdr.detectChanges();
+    });
   }
 
   setFilter(filter: 'all' | 'unread'): void {
