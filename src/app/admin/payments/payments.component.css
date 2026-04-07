@@ -273,21 +273,123 @@
 .status-failed::before { background: #ef4444; }
 
 /* ── Responsive ────────────────────────────── */
+
+@media (max-width: 1200px) {
+  .plans-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 1024px) {
-  .plans-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-  .plan-card:nth-child(2) { transform: none; border: 1px solid rgba(0,0,0,0.05); }
+  :host { padding: 1.5rem; }
+  
+  .plans-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .page-header h1 { font-size: 1.75rem; }
+
+  .stats-bar {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pricing-section .section-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .plans-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .plan-card {
+    padding: 2rem;
+    transform: none !important;
+  }
+
+  /* Table to Card Transition */
+  .transactions-wrapper {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  .table-header {
+    padding: 0.5rem 0.5rem 1.5rem;
+  }
+
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table, 
+  .data-table tbody, 
+  .data-table tr, 
+  .data-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .data-table tr {
+    margin-bottom: 1rem;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 1.25rem;
+    border: 1px solid #f1f5f9;
+    position: relative;
+  }
+
+  .data-table tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .data-table td {
+    padding: 0.4rem 0 !important;
+    border: none !important;
+    text-align: left;
+  }
+
+  /* Labels for Card Fields */
+  td:nth-of-type(2)::before { content: 'Type'; display: block; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px; }
+  td:nth-of-type(3)::before { content: 'Amount'; display: block; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px; }
+  td:nth-of-type(4)::before { content: 'Date'; display: block; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px; }
+
+  .user-info {
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #eef2f6;
+    padding-bottom: 0.75rem;
+  }
+
+  .status-badge {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
   :host { padding: 1rem; }
-  .page-header h1 { font-size: 1.8rem; }
-  .data-table thead { display: none; }
-  .data-table, .data-table tbody, .data-table tr, .data-table td {
-    display: block; width: 100%;
-  }
-  .data-table td { text-align: right; padding-left: 50%; position: relative; }
-  .data-table td::before {
-    content: attr(data-label); position: absolute; left: 1rem;
-    font-weight: 700; color: #64748b;
-  }
+  .page-header h1 { font-size: 1.5rem; }
+  .plan-price { font-size: 2rem; }
+  .stat-info .value { font-size: 1.4rem; }
+  
+  .data-table tr { padding: 1rem; }
+  .avatar-circle { width: 32px; height: 32px; font-size: 0.8rem; }
 }

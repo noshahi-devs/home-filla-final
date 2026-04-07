@@ -460,11 +460,120 @@
 .btn-resolve:hover { background: #22c55e; color: white; }
 
 /* ── Responsive ──────────────────────────────── */
-@media (max-width: 900px) {
-  .inquiry-table th:nth-child(3),
-  .inquiry-table td:nth-child(3),
-  .inquiry-table th:nth-child(4),
-  .inquiry-table td:nth-child(4) { display: none; }
+
+@media (max-width: 1024px) {
+  .inquiries-page { padding: 1.5rem; }
+  
+  .filter-tabs {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+  }
+  
+  .tab { white-space: nowrap; }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+  
+  .header-stats {
+    justify-content: space-between;
+  }
+  
+  .stat-chip {
+    flex: 1;
+    justify-content: center;
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  /* Table to Cards Transformation */
+  .inquiry-table thead {
+    display: none; /* Hide header on mobile */
+  }
+
+  .inquiry-table, 
+  .inquiry-table tbody, 
+  .inquiry-table tr, 
+  .inquiry-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .inquiry-table tr.clickable-row {
+    margin-bottom: 1.5rem;
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #f1f5f9;
+    position: relative;
+  }
+
+  .inquiry-table td {
+    padding: 0.5rem 0 !important;
+    border: none !important;
+  }
+
+  /* Labels for mobile fields */
+  td:nth-of-type(3)::before { content: 'Message'; display: block; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px; }
+  td:nth-of-type(4)::before { content: 'Received On'; display: block; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px; }
+
+  .lead-cell {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #f8fafc;
+    padding-bottom: 1rem;
+  }
+
+  .prop-cell {
+    margin-bottom: 1rem;
+  }
+
+  .message-preview {
+    max-width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    margin-bottom: 1rem;
+  }
+
+  .status-badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .actions-cell {
+    border-top: 1px solid #f8fafc !important;
+    padding-top: 1.25rem !important;
+    margin-top: 0.5rem;
+  }
+
+  .row-actions {
+    justify-content: space-between;
+  }
+
+  .act-btn {
+    flex: 1;
+    height: 42px;
+  }
+}
+
+@media (max-width: 480px) {
   .inquiries-page { padding: 1rem; }
-  .page-header { flex-direction: column; align-items: flex-start; }
+  
+  .header-content h1 { font-size: 1.5rem; }
+  
+  .stat-chip { padding: 0.5rem; }
+  .stat-chip i { display: none; }
+
+  .lead-avatar { width: 36px; height: 36px; font-size: 0.9rem; }
+  .lead-name { font-size: 0.9rem; }
+  
+  .modal-card { border-radius: 0; height: 100%; max-height: 100vh; }
 }

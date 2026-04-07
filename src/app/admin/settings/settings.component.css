@@ -30,6 +30,7 @@
   height: fit-content;
   position: sticky;
   top: 2rem;
+  z-index: 10;
 }
 
 .sidebar-header {
@@ -253,32 +254,96 @@
   font-size: 0.9rem;
 }
 
-/* ── Mobile View ────────────────────────────── */
-@media (max-width: 992px) {
+/* ── Responsive Design ─────────────────────── */
+@media (max-width: 1024px) {
+  :host { padding: 1.5rem; }
+  
   .settings-container {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
   .settings-sidebar {
     position: static;
-    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 20px;
+  }
+  
+  .sidebar-header {
+    display: none; /* Hide header in mobile tab-strip */
   }
   
   .nav-list {
     flex-direction: row;
     overflow-x: auto;
-    padding-bottom: 0.5rem;
+    padding: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .nav-list::-webkit-scrollbar {
+    display: none;
   }
   
   .nav-item {
-    flex-shrink: 0;
+    padding: 0.75rem 1.25rem;
     white-space: nowrap;
+    font-size: 0.85rem;
+  }
+
+  .settings-content {
+    padding: 1.5rem;
+    border-radius: 20px;
+    min-height: auto;
+  }
+
+  .tab-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .tab-header h1 {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 640px) {
   :host { padding: 1rem; }
-  .settings-content { padding: 1.5rem; }
-  .profile-card { flex-direction: column; text-align: center; }
-  .btn-premium { width: 100%; justify-content: center; }
+  
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+  
+  .profile-avatar-large {
+    width: 80px;
+    height: 80px;
+    font-size: 1.75rem;
+  }
+
+  .btn-premium {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .actions-footer {
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .form-control {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-item {
+    padding: 0.6rem 1rem;
+  }
+  
+  .nav-item i {
+    display: none; /* Icon-less tabs on very small screens to save space */
+  }
 }
