@@ -23,10 +23,20 @@
     </div>
   </div>
 
+  <!-- Processing Overlay -->
+  <div class="processing-overlay" *ngIf="isProcessing">
+    <div class="processing-popup">
+      <div class="spinner-ring"></div>
+      <h3>Processing Request</h3>
+      <p>Please wait while we update category data...</p>
+    </div>
+  </div>
+
   <!-- Loading State -->
   <div class="loading-state" *ngIf="loading">
-    <div class="spinner"></div>
-    <p>Loading categories...</p>
+    <div class="shimmer-wrapper">
+      <div class="shimmer-item" *ngFor="let i of [1,2,3,4,5]"></div>
+    </div>
   </div>
 
   <!-- Category Grid -->

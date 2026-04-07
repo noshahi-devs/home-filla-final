@@ -1,6 +1,6 @@
 import { InquiryService } from '../../shared/services/inquiry.service';
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Inquiry } from '../../shared/models';
 
@@ -18,7 +18,7 @@ export class AdminInquiriesComponent implements OnInit {
   loading = true;
   selectedInquiry: Inquiry | null = null;
 
-  constructor(private inquiryService: InquiryService) {}
+  constructor(private inquiryService: InquiryService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadInquiries();
@@ -31,8 +31,12 @@ export class AdminInquiriesComponent implements OnInit {
         this.inquiries = inqs;
         this.applyFilters();
         this.loading = false;
+        this.cdr.detectChanges();
       },
-      error: () => { this.loading = false; }
+      error: () => { 
+        this.loading = false; 
+        this.cdr.detectChanges();
+      }
     });
   }
 

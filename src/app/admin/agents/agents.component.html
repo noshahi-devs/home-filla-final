@@ -8,6 +8,13 @@
     </div>
   </div>
 
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="shimmer-wrapper">
+      <div class="shimmer-item" *ngFor="let i of [1,2,3,4,5]"></div>
+    </div>
+  </div>
+
   <!-- Premium Stats Cards -->
   <div class="stats-grid">
     <div class="stat-card premium">
@@ -163,7 +170,8 @@
   <div [ngSwitch]="viewMode" style="margin-top: 24px;">
     
     <!-- Table View -->
-    <div class="table-container premium" *ngSwitchCase="'table'">
+    <ng-container *ngSwitchCase="'table'">
+    <div class="table-container premium" *ngIf="!loading">
       <div class="table-header">
         <div class="table-title">
           <h3>Agents Directory</h3>
@@ -255,9 +263,11 @@
         </table>
       </div>
     </div>
+    </ng-container>
 
     <!-- Grid/Cards View -->
-    <div class="agents-grid" *ngSwitchCase="'cards'">
+    <ng-container *ngSwitchCase="'cards'">
+    <div class="agents-grid" *ngIf="!loading">
       <div *ngFor="let a of filteredAgents" class="agent-card" [class.selected]="selectedAgents.has(a.id)">
         <div class="card-selection">
           <input type="checkbox" [checked]="selectedAgents.has(a.id)" (change)="toggleAgentSelection(a.id, $event)">
@@ -307,6 +317,7 @@
         <h3>No agents matching your search</h3>
       </div>
     </div>
+    </ng-container>
   </div>
 
   <!-- Premium Pagination -->

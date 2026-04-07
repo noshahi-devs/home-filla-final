@@ -1,6 +1,6 @@
 import { AgentService } from '../../shared/services/agent.service';
 import { UiService } from '../../shared/services/ui.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DashboardAgent } from '../../shared/models';
@@ -19,6 +19,7 @@ export class AdminAgentsComponent implements OnInit {
   statusFilter: string = 'all';
   searchTerm: string = '';
   viewMode: 'table' | 'cards' = 'table';
+  loading: boolean = false;
   
   // Selection
   selectedAgents: Set<number> = new Set<number>();
@@ -47,7 +48,8 @@ export class AdminAgentsComponent implements OnInit {
 
   constructor(
     private agentService: AgentService,
-    private uiService: UiService
+    private uiService: UiService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -55,9 +57,18 @@ export class AdminAgentsComponent implements OnInit {
   }
 
   loadAgents(): void {
-    this.agentService.getAgents().subscribe(agents => {
-      this.agents = agents;
-      this.applyFilters();
+    this.loading = true;
+    this.agentService.getAgents().subscribe({
+      next: (agents) => {
+        this.agents = agents;
+        this.applyFilters();
+        this.loading = false;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.loading = false;
+        this.cdr.detectChanges();
+      }
     });
   }
 

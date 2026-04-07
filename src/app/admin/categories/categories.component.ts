@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoryService, Category } from '../../shared/services/category.service';
@@ -26,6 +26,7 @@ export class AdminCategoriesComponent implements OnInit {
   filteredCategories: Category[] = [];
   searchQuery = '';
   loading = true;
+  isProcessing = false;
 
   // Modal state
   showModal = false;
@@ -35,7 +36,11 @@ export class AdminCategoriesComponent implements OnInit {
   currentCategory: Partial<Category> = { name: '', icon: 'fa-home', sortOrder: 0 };
   iconOptions = ICON_OPTIONS;
 
-  constructor(private categoryService: CategoryService, private uiService: UiService) {}
+  constructor(
+    private categoryService: CategoryService, 
+    private uiService: UiService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -48,9 +53,11 @@ export class AdminCategoriesComponent implements OnInit {
         this.categories = data;
         this.filterCategories();
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
+        this.cdr.detectChanges();
         this.uiService.showToast('error', 'Failed to load', 'Could not fetch categories from the server.');
       }
     });
@@ -92,17 +99,34 @@ export class AdminCategoriesComponent implements OnInit {
       sortOrder: this.currentCategory.sortOrder ?? 0
     };
 
+    this.isProcessing = true;
+    this.cdr.detectChanges();
+
     if (this.editMode && this.currentCategory.id) {
-      this.categoryService.updateCategory(this.currentCategory.id, input).subscribe(() => {
-        this.uiService.showToast('success', 'Updated', 'Category has been updated successfully.');
-        this.showModal = false;
-        this.loadCategories();
+      this.categoryService.updateCategory(this.currentCategory.id, input).subscribe({
+        next: () => {
+          this.uiService.showToast('success', 'Updated', 'Category has been updated successfully.');
+          this.showModal = false;
+          this.isProcessing = false;
+          this.loadCategories();
+        },
+        error: () => {
+          this.isProcessing = false;
+          this.cdr.detectChanges();
+        }
       });
     } else {
-      this.categoryService.createCategory(input).subscribe(() => {
-        this.uiService.showToast('success', 'Created', 'New category added successfully.');
-        this.showModal = false;
-        this.loadCategories();
+      this.categoryService.createCategory(input).subscribe({
+        next: () => {
+          this.uiService.showToast('success', 'Created', 'New category added successfully.');
+          this.showModal = false;
+          this.isProcessing = false;
+          this.loadCategories();
+        },
+        error: () => {
+          this.isProcessing = false;
+          this.cdr.detectChanges();
+        }
       });
     }
   }
@@ -114,9 +138,19 @@ export class AdminCategoriesComponent implements OnInit {
       'danger'
     );
     if (confirmed) {
-      this.categoryService.deleteCategory(cat.id).subscribe(() => {
-        this.uiService.showToast('success', 'Deleted', `"${cat.name}" has been removed.`);
-        this.loadCategories();
+      this.isProcessing = true;
+      this.cdr.detectChanges();
+      
+      this.categoryService.deleteCategory(cat.id).subscribe({
+        next: () => {
+          this.uiService.showToast('success', 'Deleted', `"${cat.name}" has been removed.`);
+          this.isProcessing = false;
+          this.loadCategories();
+        },
+        error: () => {
+          this.isProcessing = false;
+          this.cdr.detectChanges();
+        }
       });
     }
   }

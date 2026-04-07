@@ -1,6 +1,6 @@
 import { PropertyService } from '../../shared/services/property.service';
 import { UiService } from '../../shared/services/ui.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DashboardProperty } from '../../shared/models';
@@ -24,7 +24,11 @@ export class AdminFeaturedComponent implements OnInit {
   propertiesPage = 1;
   propertiesPageSize = 6;
 
-  constructor(private propertyService: PropertyService, private uiService: UiService) { }
+  constructor(
+    private propertyService: PropertyService, 
+    private uiService: UiService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     this.loadProperties();
@@ -37,9 +41,11 @@ export class AdminFeaturedComponent implements OnInit {
         this.properties = props;
         this.filterProperties();
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
+        this.cdr.detectChanges();
         this.uiService.showToast('error', 'Fetch Failed', 'Could not load properties.');
       }
     });

@@ -40,10 +40,11 @@
 
   <!-- Inquiries Table -->
   <div class="table-wrapper">
-    <!-- Loading -->
+    <!-- Loading State -->
     <div class="loading-state" *ngIf="loading">
-      <div class="spinner"></div>
-      <p>Loading inquiries...</p>
+      <div class="shimmer-wrapper">
+        <div class="shimmer-item" *ngFor="let i of [1,2,3,4,5]"></div>
+      </div>
     </div>
 
     <table class="inquiry-table" *ngIf="!loading">

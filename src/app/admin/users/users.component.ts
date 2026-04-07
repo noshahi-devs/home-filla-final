@@ -1,5 +1,5 @@
 import { UserService } from '../../shared/services/user.service';
-import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UiService } from '../../shared/services/ui.service';
@@ -94,7 +94,11 @@ export class AdminUsersComponent implements OnInit {
   currentModalMode: 'add' | 'edit' | 'view' = 'add';
   selectedUserForModal: UserData | null = null;
 
-  constructor(private userService: UserService, private uiService: UiService) { }
+  constructor(
+    private userService: UserService, 
+    private uiService: UiService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -107,6 +111,7 @@ export class AdminUsersComponent implements OnInit {
       this.calculateStats();
       this.applyFilters();
       this.isLoading = false;
+      this.cdr.detectChanges();
     });
   }
 
