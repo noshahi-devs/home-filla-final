@@ -1,4 +1,13 @@
 <div class="agents-page">
+  <!-- Processing Overlay -->
+  <div class="processing-overlay" *ngIf="isProcessing">
+    <div class="processing-popup">
+      <div class="spinner-ring"></div>
+      <h3>Processing Request</h3>
+      <p>Please wait while we update agent data...</p>
+    </div>
+  </div>
+
   <!-- Premium Stats Cards -->
   <div class="stats-grid">
     <div class="stat-card premium">
@@ -90,15 +99,20 @@
           <span>All Agents</span>
           <span class="tab-count">{{ agents.length }}</span>
         </button>
-        <button class="role-tab" [class.active]="statusFilter === 'approved'" (click)="setFilter('approved')">
+        <button class="role-tab" [class.active]="statusFilter === 'approved' || statusFilter === 'active'" (click)="setFilter('approved')">
           <i class="fas fa-user-check"></i>
           <span>Verified</span>
-          <span class="tab-count">{{ getStatusCount('approved') }}</span>
+          <span class="tab-count">{{ getStatusCount('active') }}</span>
         </button>
         <button class="role-tab" [class.active]="statusFilter === 'pending'" (click)="setFilter('pending')">
           <i class="fas fa-user-clock"></i>
           <span>Applicants</span>
           <span class="tab-count">{{ getStatusCount('pending') }}</span>
+        </button>
+        <button class="role-tab" [class.active]="statusFilter === 'blocked'" (click)="setFilter('blocked')">
+          <i class="fas fa-ban"></i>
+          <span>Blocked</span>
+          <span class="tab-count">{{ getStatusCount('blocked') }}</span>
         </button>
       </div>
     </div>
@@ -113,11 +127,11 @@
       </div>
 
       <div class="view-toggle">
-        <button class="view-btn active" title="List View" (click)="viewMode = 'table'">
+        <button class="view-btn" [class.active]="viewMode === 'table'" title="List View" (click)="viewMode = 'table'">
           <i class="fas fa-list"></i>
         </button>
-        <button class="view-btn" title="Grid View" (click)="viewMode = 'cards'">
-          <i class="fas fa-th"></i>
+        <button class="view-btn" [class.active]="viewMode === 'cards'" title="Grid View" (click)="viewMode = 'cards'">
+          <i class="fas fa-th-large"></i>
         </button>
       </div>
     </div>
@@ -145,131 +159,193 @@
     </div>
   </div>
 
-  <!-- Enhanced Table Container -->
-  <div class="table-container premium">
-    <div class="table-header">
-      <div class="table-title">
-        <h3>Agents Directory</h3>
-        <span class="result-count">{{ filteredAgents.length }} results</span>
+  <!-- Content Section (Table or Cards) -->
+  <div [ngSwitch]="viewMode" style="margin-top: 24px;">
+    
+    <!-- Table View -->
+    <div class="table-container premium" *ngSwitchCase="'table'">
+      <div class="table-header">
+        <div class="table-title">
+          <h3>Agents Directory</h3>
+          <span class="result-count">{{ filteredAgents.length }} results</span>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table premium">
+          <thead>
+            <tr>
+              <th style="width: 50px;">
+                <input type="checkbox" (change)="toggleSelectAll($event)">
+              </th>
+              <th>Agent Details</th>
+              <th>Contact Info</th>
+              <th>Agency</th>
+              <th>Performance</th>
+              <th>Status</th>
+              <th style="width: 150px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of filteredAgents" class="user-row" [class.selected]="selectedAgents.has(a.id)">
+              <td style="text-align: center;">
+                <input type="checkbox" [checked]="selectedAgents.has(a.id)" (change)="toggleAgentSelection(a.id, $event)">
+              </td>
+              <td>
+                <div class="user-profile">
+                  <img [src]="a.avatar || getDefaultAvatar(a.name)" alt="" class="user-avatar">
+                  <div class="user-info">
+                    <div class="user-name">{{ a.name }}</div>
+                    <div class="user-id">ID: {{ a.id }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px;">
+                  <div style="color: var(--text-body);"><i class="fas fa-envelope"
+                      style="width: 16px; color: var(--text-muted);"></i> {{ a.email }}</div>
+                  <div style="color: var(--text-sub);"><i class="fas fa-phone"
+                      style="width: 16px; color: var(--text-muted);"></i> {{ a.phone }}</div>
+                </div>
+              </td>
+              <td>
+                <div style="font-weight: 700; color: var(--accent); font-size: 13px;">{{ a.agencyName }}</div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">RE/MAX Certified</div>
+              </td>
+              <td>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                  <div style="text-align: center;">
+                    <div style="font-weight: 800; color: var(--text-h);">{{ a.listingsCount }}</div>
+                    <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Listings</div>
+                  </div>
+                  <div style="text-align: center;">
+                    <div style="font-weight: 800; color: #f59e0b;">{{ a.rating }} <i class="fas fa-star"
+                        style="font-size: 10px;"></i></div>
+                    <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Rating</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="status-badge" [ngClass]="a.status">
+                  <div class="status-dot"></div>
+                  {{ a.status | titlecase }}
+                </span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn" title="View Details" (click)="viewAgent(a)"><i class="fas fa-eye"></i></button>
+                  <button class="action-btn edit" title="Edit Agent" (click)="editAgent(a)"><i
+                      class="fas fa-pen"></i></button>
+                  <button class="action-btn delete" title="Delete Agent" (click)="deleteAgent(a.id)"><i
+                      class="fas fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+
+            <tr *ngIf="filteredAgents.length === 0">
+              <td colspan="7">
+                <div style="padding: 60px; text-align: center; color: var(--text-muted);">
+                  <i class="fas fa-user-tie" style="font-size: 40px; margin-bottom: 16px; opacity: 0.3;"></i>
+                  <h3>No agents found</h3>
+                  <p>Try adjusting your search criteria or filters.</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div class="table-wrapper">
-      <table class="data-table premium">
-        <thead>
-          <tr>
-            <th style="width: 50px;">
-              <input type="checkbox" (change)="toggleSelectAll($event)">
-            </th>
-            <th>Agent Details</th>
-            <th>Contact Info</th>
-            <th>Agency</th>
-            <th>Performance</th>
-            <th>Status</th>
-            <th style="width: 150px;">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let a of filteredAgents" class="user-row" [class.selected]="selectedAgents.has(a.id)">
-            <td style="text-align: center;">
-              <input type="checkbox" [checked]="selectedAgents.has(a.id)" (change)="toggleAgentSelection(a.id, $event)">
-            </td>
-            <td>
-              <div class="user-profile">
-                <img [src]="a.avatar || 'assets/placeholder-user.jpg'" alt="" class="user-avatar">
-                <div class="user-info">
-                  <div class="user-name">{{ a.name }}</div>
-                  <div class="user-id">ID: {{ a.id }}</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px;">
-                <div style="color: var(--text-body);"><i class="fas fa-envelope"
-                    style="width: 16px; color: var(--text-muted);"></i> {{ a.email }}</div>
-                <div style="color: var(--text-sub);"><i class="fas fa-phone"
-                    style="width: 16px; color: var(--text-muted);"></i> {{ a.phone }}</div>
-              </div>
-            </td>
-            <td>
-              <div style="font-weight: 700; color: var(--accent); font-size: 13px;">{{ a.agencyName }}</div>
-              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">RE/MAX Certified</div>
-            </td>
-            <td>
-              <div style="display: flex; gap: 12px; align-items: center;">
-                <div style="text-align: center;">
-                  <div style="font-weight: 800; color: var(--text-h);">{{ a.listingsCount }}</div>
-                  <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Listings</div>
-                </div>
-                <div style="text-align: center;">
-                  <div style="font-weight: 800; color: #f59e0b;">{{ a.rating }} <i class="fas fa-star"
-                      style="font-size: 10px;"></i></div>
-                  <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Rating</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              <span class="status-badge" [ngClass]="a.status">
-                <div class="status-dot"></div>
-                {{ a.status | titlecase }}
-              </span>
-            </td>
-            <td>
-              <div class="action-buttons">
-                <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
-                <button class="action-btn edit" title="Edit Agent" (click)="editAgent(a)"><i
-                    class="fas fa-pen"></i></button>
-                <button class="action-btn delete" title="Delete Agent" (click)="deleteAgent(a.id)"><i
-                    class="fas fa-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-
-          <tr *ngIf="filteredAgents.length === 0">
-            <td colspan="7">
-              <div style="padding: 60px; text-align: center; color: var(--text-muted);">
-                <i class="fas fa-user-tie" style="font-size: 40px; margin-bottom: 16px; opacity: 0.3;"></i>
-                <h3>No agents found</h3>
-                <p>Try adjusting your search criteria or filters.</p>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Premium Pagination -->
-    <div class="pagination premium" *ngIf="filteredAgents.length > 0">
-      <div class="pagination-info">
-        <span>Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ filteredAgents.length }} agents</span>
-      </div>
-      <div class="pagination-controls">
-        <button class="page-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-
-        <div class="page-numbers">
-          <button *ngFor="let page of getPageNumbers()" class="page-btn" [class.active]="page === currentPage"
-            (click)="goToPage(page)">
-            {{ page }}
-          </button>
+    <!-- Grid/Cards View -->
+    <div class="agents-grid" *ngSwitchCase="'cards'">
+      <div *ngFor="let a of filteredAgents" class="agent-card" [class.selected]="selectedAgents.has(a.id)">
+        <div class="card-selection">
+          <input type="checkbox" [checked]="selectedAgents.has(a.id)" (change)="toggleAgentSelection(a.id, $event)">
+        </div>
+        
+        <div class="card-head">
+          <div class="avatar-wrap">
+            <img [src]="a.avatar || getDefaultAvatar(a.name)" alt="">
+            <span class="status-circle" [ngClass]="a.status"></span>
+          </div>
+          <div class="head-info">
+            <h4>{{ a.name }}</h4>
+            <span class="agency">{{ a.agencyName }}</span>
+          </div>
         </div>
 
-        <button class="page-btn" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
-          <i class="fas fa-chevron-right"></i>
-        </button>
+        <div class="card-body">
+          <div class="contact-line"><i class="fas fa-envelope"></i> {{ a.email }}</div>
+          <div class="contact-line"><i class="fas fa-phone"></i> {{ a.phone }}</div>
+          
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="val">{{ a.listingsCount }}</span>
+              <span class="lab">Listings</span>
+            </div>
+            <div class="stat-item">
+              <span class="val">{{ a.rating }} <i class="fas fa-star gold"></i></span>
+              <span class="lab">Rating</span>
+            </div>
+          </div>
+        </div>
 
-        <select class="size-select" [value]="itemsPerPage" (change)="changePageSize($event)">
-          <option [value]="5">5 / page</option>
-          <option [value]="10">10 / page</option>
-          <option [value]="25">25 / page</option>
-          <option [value]="50">50 / page</option>
-        </select>
+        <div class="card-foot">
+          <span class="status-badge" [ngClass]="a.status">
+            {{ a.status | titlecase }}
+          </span>
+          <div class="action-buttons">
+            <button class="action-btn" (click)="viewAgent(a)"><i class="fas fa-eye"></i></button>
+            <button class="action-btn edit" (click)="editAgent(a)"><i class="fas fa-pen"></i></button>
+            <button class="action-btn delete" (click)="deleteAgent(a.id)"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="filteredAgents.length === 0" class="empty-grid">
+        <i class="fas fa-search"></i>
+        <h3>No agents matching your search</h3>
       </div>
     </div>
   </div>
 
+  <!-- Premium Pagination -->
+  <div class="pagination premium" *ngIf="filteredAgents.length > 0">
+    <div class="pagination-info">
+      <span>Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ filteredAgents.length }} agents</span>
+    </div>
+    <div class="pagination-controls">
+      <button class="page-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <div class="page-numbers">
+        <button *ngFor="let page of getPageNumbers()" class="page-btn" [class.active]="page === currentPage"
+          (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </div>
+
+      <button class="page-btn" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <select class="size-select" [value]="itemsPerPage" (change)="changePageSize($event)">
+        <option [value]="5">5 / page</option>
+        <option [value]="10">10 / page</option>
+        <option [value]="25">25 / page</option>
+        <option [value]="50">50 / page</option>
+      </select>
+    </div>
+  </div>
+
   <!-- Add Agent Modal -->
-  <app-add-agent-modal [isOpen]="isAddAgentModalOpen" (close)="closeAddAgentModal()" (submit)="onAddAgent($event)">
+  <app-add-agent-modal 
+    [isOpen]="isAddAgentModalOpen" 
+    [mode]="currentModalMode"
+    [initialData]="selectedAgentForModal"
+    [isProcessing]="isProcessing"
+    (close)="closeAddAgentModal()" 
+    (submit)="onAddAgent($event)">
   </app-add-agent-modal>
 </div>

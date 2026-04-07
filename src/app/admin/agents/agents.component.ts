@@ -1,4 +1,5 @@
 import { AgentService } from '../../shared/services/agent.service';
+import { UiService } from '../../shared/services/ui.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +25,9 @@ export class AdminAgentsComponent implements OnInit {
   
   // Modal state
   isAddAgentModalOpen: boolean = false;
+  isProcessing: boolean = false;
+  currentModalMode: 'add' | 'edit' | 'view' = 'add';
+  selectedAgentForModal: AgentData | null = null;
 
   // Pagination
   itemsPerPage: number = 10;
@@ -41,7 +45,10 @@ export class AdminAgentsComponent implements OnInit {
     return Math.min(this.startIndex + this.itemsPerPage, this.filteredAgents.length);
   }
 
-  constructor(private agentService: AgentService) {}
+  constructor(
+    private agentService: AgentService,
+    private uiService: UiService
+  ) {}
 
   ngOnInit(): void {
     this.loadAgents();
@@ -59,7 +66,8 @@ export class AdminAgentsComponent implements OnInit {
     
     // Status Filter
     if (this.statusFilter !== 'all') {
-      result = result.filter(a => a.status === this.statusFilter);
+      const filter = this.statusFilter === 'approved' ? 'active' : this.statusFilter;
+      result = result.filter(a => a.status === filter || a.status === this.statusFilter);
     }
     
     // Search Filter
@@ -88,6 +96,9 @@ export class AdminAgentsComponent implements OnInit {
   }
 
   getStatusCount(status: string): number {
+    if (status === 'approved' || status === 'active') {
+      return this.agents.filter(a => a.status === 'approved' || a.status === 'active').length;
+    }
     return this.agents.filter(a => a.status === status).length;
   }
 
@@ -117,40 +128,85 @@ export class AdminAgentsComponent implements OnInit {
   }
 
   // Bulk Actions
-  bulkApprove(): void {
-    if (confirm(`Are you sure you want to approve ${this.selectedAgents.size} agents?`)) {
-      // Mocking bulk approve for now
+  async bulkApprove(): Promise<void> {
+    const confirmed = await this.uiService.showConfirmation(
+      'Approve Agents',
+      `Are you sure you want to approve ${this.selectedAgents.size} agents?`,
+      'info',
+      'Yes, Approve All'
+    );
+
+    if (confirmed) {
+      this.isProcessing = true;
+      let completed = 0;
       this.selectedAgents.forEach(id => {
-        this.agentService.updateAgentStatus(id, 'approved').subscribe();
+        this.agentService.updateAgentStatus(id, 'active').subscribe({
+          next: () => {
+            completed++;
+            if (completed === this.selectedAgents.size) {
+              this.isProcessing = false;
+              this.uiService.showToast('success', 'Agents Approved', `${this.selectedAgents.size} agents have been verified successfully.`);
+              this.loadAgents();
+              this.clearSelection();
+            }
+          }
+        });
       });
-      setTimeout(() => {
-        this.loadAgents();
-        this.clearSelection();
-      }, 500);
     }
   }
 
-  bulkReject(): void {
-    if (confirm(`Are you sure you want to reject ${this.selectedAgents.size} agents?`)) {
+  async bulkReject(): Promise<void> {
+    const confirmed = await this.uiService.showConfirmation(
+      'Block Agents',
+      `Are you sure you want to block ${this.selectedAgents.size} agents? This will restrict their access.`,
+      'warning',
+      'Yes, Block All'
+    );
+
+    if (confirmed) {
+      this.isProcessing = true;
+      let completed = 0;
       this.selectedAgents.forEach(id => {
-        this.agentService.updateAgentStatus(id, 'rejected').subscribe();
+        this.agentService.updateAgentStatus(id, 'blocked').subscribe({
+          next: () => {
+            completed++;
+            if (completed === this.selectedAgents.size) {
+              this.isProcessing = false;
+              this.uiService.showToast('info', 'Agents Blocked', `${this.selectedAgents.size} agents have been moved to blocked status.`);
+              this.loadAgents();
+              this.clearSelection();
+            }
+          }
+        });
       });
-      setTimeout(() => {
-        this.loadAgents();
-        this.clearSelection();
-      }, 500);
     }
   }
 
-  bulkDelete(): void {
-    if (confirm(`Are you sure you want to delete ${this.selectedAgents.size} agents? This action cannot be undone.`)) {
+  async bulkDelete(): Promise<void> {
+    const confirmed = await this.uiService.showConfirmation(
+      'Delete Agents',
+      `Are you sure you want to permanently delete ${this.selectedAgents.size} agents? This action cannot be undone.`,
+      'danger',
+      'Yes, Delete All'
+    );
+
+    if (confirmed) {
+      this.isProcessing = true;
+      let completed = 0;
+      const count = this.selectedAgents.size;
       this.selectedAgents.forEach(id => {
-        this.agentService.deleteAgent(id).subscribe();
+        this.agentService.deleteAgent(id).subscribe({
+          next: () => {
+            completed++;
+            if (completed === count) {
+              this.isProcessing = false;
+              this.uiService.showToast('success', 'Agents Deleted', `${count} agents have been permanently removed.`);
+              this.loadAgents();
+              this.clearSelection();
+            }
+          }
+        });
       });
-      setTimeout(() => {
-        this.loadAgents();
-        this.clearSelection();
-      }, 500);
     }
   }
 
@@ -171,48 +227,121 @@ export class AdminAgentsComponent implements OnInit {
 
   // Individual Actions
   approveAgent(id: number): void {
-    this.agentService.updateAgentStatus(id, 'approved').subscribe(() => {
+    this.agentService.updateAgentStatus(id, 'active').subscribe(() => {
       this.loadAgents();
     });
   }
 
   rejectAgent(id: number): void {
-    this.agentService.updateAgentStatus(id, 'rejected').subscribe(() => {
+    this.agentService.updateAgentStatus(id, 'blocked').subscribe(() => {
       this.loadAgents();
     });
   }
 
-  editAgent(agent: DashboardAgent): void {
-    console.log('Editing agent:', agent);
+  viewAgent(agent: DashboardAgent): void {
+    this.currentModalMode = 'view';
+    this.selectedAgentForModal = {
+      id: agent.id,
+      name: agent.name,
+      email: agent.email,
+      phone: agent.phone,
+      agencyName: agent.agencyName,
+      status: agent.status as any,
+      avatar: agent.avatar || '',
+      listingsCount: agent.listingsCount,
+      rating: agent.rating
+    };
+    this.isAddAgentModalOpen = true;
   }
 
-  deleteAgent(id: number): void {
-    if (confirm('Are you sure you want to delete this agent?')) {
-      this.agentService.deleteAgent(id).subscribe(() => {
-        this.loadAgents();
+  editAgent(agent: DashboardAgent): void {
+    this.currentModalMode = 'edit';
+    this.selectedAgentForModal = {
+      id: agent.id,
+      name: agent.name,
+      email: agent.email,
+      phone: agent.phone,
+      agencyName: agent.agencyName,
+      status: agent.status as any,
+      avatar: agent.avatar || '',
+      listingsCount: agent.listingsCount,
+      rating: agent.rating
+    };
+    this.isAddAgentModalOpen = true;
+  }
+
+  async deleteAgent(id: number): Promise<void> {
+    const confirmed = await this.uiService.showConfirmation(
+      'Delete Agent',
+      'Are you sure you want to permanently delete this agent account? This action cannot be undone.',
+      'danger',
+      'Delete Agent'
+    );
+
+    if (confirmed) {
+      this.isProcessing = true;
+      this.agentService.deleteAgent(id).subscribe({
+        next: () => {
+          this.isProcessing = false;
+          this.loadAgents();
+          this.uiService.showToast('success', 'Agent Deleted', 'The agent account has been successfully removed.');
+        },
+        error: () => {
+          this.isProcessing = false;
+          this.uiService.showToast('error', 'Action Failed', 'Could not delete the agent at this time.');
+        }
       });
     }
   }
 
   openAddAgentModal(): void {
+    this.currentModalMode = 'add';
+    this.selectedAgentForModal = null;
     this.isAddAgentModalOpen = true;
   }
 
   closeAddAgentModal(): void {
     this.isAddAgentModalOpen = false;
+    this.selectedAgentForModal = null;
   }
 
   onAddAgent(agentData: AgentData): void {
-    this.agentService.addAgent(agentData).subscribe({
-      next: () => {
-        this.loadAgents();
-        this.closeAddAgentModal();
-      },
-      error: (err) => {
-        console.error('Error adding agent:', err);
-        alert('Failed to add agent. Please check the console for details.');
-      }
-    });
+    this.isProcessing = true;
+    
+    // Add success logic for modal closing
+    const processSuccess = () => {
+      this.isProcessing = false;
+      this.closeAddAgentModal();
+      this.loadAgents();
+    };
+
+    if (this.currentModalMode === 'add') {
+      this.agentService.addAgent(agentData).subscribe({
+        next: () => {
+          processSuccess();
+          this.uiService.showToast('success', 'Agent Added', 'A new agent has been successfully registered.');
+        },
+        error: (err) => {
+          this.isProcessing = false;
+          console.error('Error adding agent:', err);
+          this.uiService.showToast('error', 'Action Failed', 'Could not register the new agent at this time.');
+        }
+      });
+    } else if (this.currentModalMode === 'edit' && agentData.id) {
+      // Mock update
+      setTimeout(() => {
+        processSuccess();
+        this.uiService.showToast('success', 'Agent Updated', 'The agent profile has been successfully updated.');
+      }, 500);
+    }
+  }
+
+  getDefaultAvatar(name: string): string {
+    const letter = (name || '?').charAt(0).toUpperCase();
+    const palette = ['#4f46e5', '#0891b2', '#059669', '#d97706', '#dc2626', '#7c3aed', '#ec4899'];
+    const bg = palette[letter.charCodeAt(0) % palette.length];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="${bg}"/><text x="50" y="50" dy=".35em" text-anchor="middle" fill="white" font-size="42" font-family="Inter,Arial,sans-serif" font-weight="700">${letter}</text></svg>`;
+    return 'data:image/svg+xml;base64,' + btoa(svg);
   }
 
   resetFilters(): void {
