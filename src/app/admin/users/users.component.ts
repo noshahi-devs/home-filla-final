@@ -18,6 +18,7 @@ export interface UserStats {
   active: number;
   agents: number;
   blocked: number;
+  pending: number;
 }
 
 export interface PaginationInfo {
@@ -79,7 +80,8 @@ export class AdminUsersComponent implements OnInit {
     total: 0,
     active: 0,
     agents: 0,
-    blocked: 0
+    blocked: 0,
+    pending: 0
   };
 
   // UI state
@@ -113,7 +115,8 @@ export class AdminUsersComponent implements OnInit {
       total: this.users.length,
       active: this.users.filter(u => u.status === 'active').length,
       agents: this.users.filter(u => u.role === 'agent').length,
-      blocked: this.users.filter(u => u.status === 'blocked').length
+      blocked: this.users.filter(u => u.status === 'blocked').length,
+      pending: this.users.filter(u => (u.status as any) === 'pending').length
     };
   }
 
@@ -541,6 +544,21 @@ export class AdminUsersComponent implements OnInit {
       this.userService.updateUserStatus(user.id, newStatus).subscribe(() => {
         this.loadUsers();
         this.uiService.showToast('success', `User ${action}ed`, `The user has been ${action.toLowerCase()}ed.`);
+      });
+    }
+  }
+
+  async approveUser(user: ExtendedDashboardUser): Promise<void> {
+    const isConfirmed = await this.uiService.showConfirmation(
+      'Approve User',
+      `Are you sure you want to approve ${user.name}? They will be able to log in immediately.`,
+      'info',
+      'Approve'
+    );
+    if (isConfirmed) {
+      this.userService.updateUserStatus(user.id, 'active').subscribe(() => {
+        this.loadUsers();
+        this.uiService.showToast('success', 'User Approved', `${user.name} has been activated.`);
       });
     }
   }

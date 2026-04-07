@@ -1,5 +1,5 @@
 export type UserRole = 'admin' | 'buyer' | 'seller' | 'agent';
-export type UserStatus = 'active' | 'blocked';
+export type UserStatus = 'active' | 'blocked' | 'pending';
 
 export interface DashboardUser {
   id: number;

@@ -2,12 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, map, of } from 'rxjs';
 import { UserRole, DashboardUser } from '../models';
-import { LoginRequest, AuthResponse } from '../dtos/auth.dto';
+import { LoginRequest, AuthResponse, RegisterRequest } from '../dtos/auth.dto';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:5230/api/auth'; // Matches launchSettings.json port
+  private tempCreds: { email: string; password: string } | null = null;
 
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
@@ -20,6 +21,10 @@ export class AuthService {
         }
       })
     );
+  }
+
+  register(data: RegisterRequest): Observable<AuthResponse> {
+    return this.http.post<any>(`${this.apiUrl}/register`, data);
   }
 
   setRole(role: UserRole, userId?: number): void {
@@ -61,5 +66,15 @@ export class AuthService {
 
   getCurrentUser(): any {
     return JSON.parse(localStorage.getItem('hf_user') || '{}');
+  }
+
+  setTempCredentials(creds: { email: string; password: string }): void {
+    this.tempCreds = creds;
+  }
+
+  getTempCredentials() {
+    const creds = this.tempCreds;
+    this.tempCreds = null; // Clear after use
+    return creds;
   }
 }

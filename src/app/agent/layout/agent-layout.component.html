@@ -1,0 +1,114 @@
+<div class="admin-shell agent-theme" [class.sidebar-collapsed]="sidebarCollapsed" (click)="closeDropdowns()">
+
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay" *ngIf="sidebarCollapsed" (click)="toggleSidebar()"></div>
+  
+    <!-- ── Sidebar ───────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <div class="logo-icon">HF</div>
+          <span class="logo-label">Home<b>Filla</b> <span class="role-badge">Agent</span></span>
+        </div>
+        <button class="collapse-btn" (click)="toggleSidebar(); $event.stopPropagation()">
+          <i class="fas" [class.fa-chevron-left]="!sidebarCollapsed" [class.fa-chevron-right]="sidebarCollapsed"></i>
+        </button>
+      </div>
+  
+      <div class="sidebar-label">AGENT PORTAL</div>
+  
+      <nav class="sidebar-nav">
+        <a *ngFor="let item of menuItems"
+           [routerLink]="item.route"
+           class="nav-item"
+           [class.active]="isActive(item.route)"
+           [title]="sidebarCollapsed ? item.label : ''">
+          <div class="nav-icon">
+            <i class="fas" [ngClass]="item.icon"></i>
+          </div>
+          <span class="nav-label">{{ item.label }}</span>
+          <span class="nav-badge" *ngIf="item.badge">{{ item.badge }}</span>
+          <span class="nav-badge mini" *ngIf="item.badge"></span>
+        </a>
+      </nav>
+  
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <img [src]="authService.getUserAvatar()" alt="Agent" class="user-avatar-sm">
+          <div class="user-info-sm">
+            <div class="user-name-sm">{{ authService.getUserName() }}</div>
+            <div class="user-role-sm">Professional Agent</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  
+    <!-- ── Main Content ──────────────────────────────── -->
+    <div class="main-area">
+  
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" (click)="toggleSidebar(); $event.stopPropagation()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search leads or listings...">
+          </div>
+        </div>
+  
+        <div class="topbar-right">
+          <!-- Notification bell -->
+          <div class="topbar-action" (click)="toggleNotifications(); $event.stopPropagation()">
+            <i class="fas fa-bell"></i>
+            <span class="action-badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+  
+            <div class="dropdown notif-dropdown" *ngIf="showNotifDropdown" (click)="$event.stopPropagation()">
+              <div class="dropdown-header">
+                <h4>Notifications</h4>
+                <button class="mark-read-btn" (click)="markAllRead()">Mark all read</button>
+              </div>
+              <div class="dropdown-list">
+                <div class="notif-item" *ngFor="let n of recentNotifications" [class.unread]="!n.isRead">
+                  <div class="notif-icon" [style.background]="n.color + '20'" [style.color]="n.color">
+                    <i class="fas" [ngClass]="n.icon"></i>
+                  </div>
+                  <div class="notif-content">
+                    <div class="notif-title">{{ n.title }}</div>
+                    <div class="notif-msg">{{ n.message }}</div>
+                  </div>
+                </div>
+                <div *ngIf="recentNotifications.length === 0" class="empty-notifs">
+                    No new notifications
+                </div>
+              </div>
+              <a routerLink="/agent/notifications" class="dropdown-footer-link">View all notifications</a>
+            </div>
+          </div>
+  
+          <!-- Profile -->
+          <div class="topbar-profile" (click)="toggleProfile(); $event.stopPropagation()">
+            <img [src]="authService.getUserAvatar()" alt="Agent" class="profile-avatar">
+            <span class="profile-name">{{ authService.getUserName() }}</span>
+            <i class="fas fa-chevron-down"></i>
+  
+            <div class="dropdown profile-dropdown" *ngIf="showProfileDropdown" (click)="$event.stopPropagation()">
+              <a routerLink="/agent/profile" class="dropdown-item"><i class="fas fa-user"></i> My Profile</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item logout" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+          </div>
+        </div>
+      </header>
+  
+      <!-- Page Content -->
+      <main class="page-content">
+        <router-outlet></router-outlet>
+  
+        <footer style="text-align: center; padding: 16px 0 8px; font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 30px;">
+          Agent Portal &copy; {{ currentYear }} <b>Home Filla</b>
+        </footer>
+      </main>
+    </div>
+  </div>

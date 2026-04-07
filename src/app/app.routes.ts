@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadChildren: () => import('./seller/seller.routes').then(m => m.SELLER_ROUTES)
   },
   { 
+    path: 'agent', 
+    loadChildren: () => import('./agent/agent.routes').then(m => m.AGENT_ROUTES)
+  },
+  { 
     path: 'buyer', 
     loadChildren: () => import('./buyer/buyer.routes').then(m => m.BUYER_ROUTES)
   },

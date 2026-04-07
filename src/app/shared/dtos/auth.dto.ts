@@ -3,6 +3,13 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+}
+
 export interface AuthResponse {
   id: number;
   name: string;
@@ -21,3 +28,6 @@ export interface PropertyDto {
   status: string;
   createdAt: string;
 }
+
+
+

@@ -348,3 +348,69 @@
         padding: 0;
     }
 }
+/* Role Selector Styles */
+.role-selector-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.role-btn {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.role-btn i {
+    font-size: 18px;
+    margin: 0 !important;
+    position: static !important;
+}
+
+.role-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+.role-btn.active {
+    background: rgba(74, 108, 247, 0.1);
+    border-color: #4a6cf7;
+    color: #4a6cf7;
+    box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.15);
+}
+
+.role-btn.active i {
+    color: #4a6cf7;
+}
+
+.role-btn.active::after {
+    content: '\f058';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #fff;
+    color: #4a6cf7;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 1;
+    box-shadow: 0 4px 10px rgba(74, 108, 247, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}

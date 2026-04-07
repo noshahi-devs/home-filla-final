@@ -23,6 +23,8 @@
   --danger-light: #f87171;
   --danger-glow: rgba(239, 68, 68, 0.15);
 
+  --warning-gold: #f59e0b;
+
   --teal: #06b6d4;
   --purple: #8b5cf6;
   --pink: #ec4899;
@@ -159,6 +161,10 @@
 
 .stat-icon-wrapper.blocked {
   background: linear-gradient(135deg, var(--danger), var(--danger-light));
+}
+
+.stat-icon-wrapper.pending {
+  background: linear-gradient(135deg, var(--warning-gold), #fbbf24);
 }
 
 .stat-content {
@@ -970,6 +976,13 @@
   background: #8b5cf6;
   border-color: #8b5cf6;
   box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
+}
+
+.action-btn.approve:hover {
+  background: #10b981 !important;
+  color: white !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3) !important;
 }
 
 .action-btn:active {
