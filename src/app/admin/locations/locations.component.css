@@ -132,11 +132,35 @@
   box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.1);
 }
 
+.page-size-select {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.page-size-select:hover {
+  border-color: #4a6cf7;
+  color: #4a6cf7;
+}
+
 /* ── List ────────────────────────────────────── */
 .list-wrapper {
   flex: 1;
   overflow-y: auto;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .loc-item {
@@ -216,6 +240,52 @@
 /* Area items — no cursor pointer */
 .area-item { cursor: default; }
 .area-item:hover { transform: none !important; }
+
+/* ── Pagination ──────────────────────────────── */
+.pagination-wrapper {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f1f5f9;
+}
+
+.page-info {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.page-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.page-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #4a6cf7;
+  border-color: #4a6cf7;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
 /* ── Empty / Overlay ─────────────────────────── */
 .empty-list {
@@ -490,3 +560,6 @@
   .locations-page { padding: 1rem; }
   .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
+
+
+

@@ -26,6 +26,12 @@ export class AdminLocationsComponent implements OnInit {
   citySearch = '';
   areaSearch = '';
 
+  // Pagination
+  citiesPage = 1;
+  citiesPageSize = 5;
+  areasPage = 1;
+  areasPageSize = 5;
+
   // Modal State
   showCityModal = false;
   showAreaModal = false;
@@ -65,6 +71,16 @@ export class AdminLocationsComponent implements OnInit {
       c.name.toLowerCase().includes(query) || 
       c.province?.toLowerCase().includes(query)
     );
+    this.citiesPage = 1; // Reset to page 1 on search
+  }
+
+  get pagedCities(): City[] {
+    const start = (this.citiesPage - 1) * this.citiesPageSize;
+    return this.filteredCities.slice(start, start + this.citiesPageSize);
+  }
+
+  get totalCitiesPages(): number {
+    return Math.ceil(this.filteredCities.length / this.citiesPageSize) || 1;
   }
 
   selectCity(cityId: number): void {
@@ -99,6 +115,16 @@ export class AdminLocationsComponent implements OnInit {
     this.filteredAreas = this.areas.filter(a => 
       a.name.toLowerCase().includes(query)
     );
+    this.areasPage = 1; // Reset to page 1 on search
+  }
+
+  get pagedAreas(): Area[] {
+    const start = (this.areasPage - 1) * this.areasPageSize;
+    return this.filteredAreas.slice(start, start + this.areasPageSize);
+  }
+
+  get totalAreasPages(): number {
+    return Math.ceil(this.filteredAreas.length / this.areasPageSize) || 1;
   }
 
   // --- Modal Actions ---

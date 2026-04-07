@@ -26,11 +26,16 @@
         <div class="search-box">
           <i class="fas fa-search"></i>
           <input type="text" placeholder="Search cities..." [(ngModel)]="citySearch" (ngModelChange)="filterCities()">
+          <select class="page-size-select" [(ngModel)]="citiesPageSize" (ngModelChange)="citiesPage = 1">
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="20">20</option>
+          </select>
         </div>
       </div>
 
       <div class="list-wrapper">
-        <div class="loc-item" *ngFor="let c of filteredCities" 
+        <div class="loc-item" *ngFor="let c of pagedCities" 
              [class.active]="c.id === selectedCityId" 
              (click)="selectCity(c.id)">
           <div class="loc-info">
@@ -52,6 +57,19 @@
           <i class="fas fa-search"></i>
           <p>No cities match your search.</p>
         </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrapper" *ngIf="filteredCities.length > 0">
+          <span class="page-info">Page {{ citiesPage }} of {{ totalCitiesPages }}</span>
+          <div class="page-btns">
+            <button class="page-btn" [disabled]="citiesPage === 1" (click)="citiesPage = citiesPage - 1">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="page-btn" [disabled]="citiesPage === totalCitiesPages" (click)="citiesPage = citiesPage + 1">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -68,6 +86,11 @@
         <div class="search-box" *ngIf="selectedCityId">
           <i class="fas fa-search"></i>
           <input type="text" placeholder="Search areas..." [(ngModel)]="areaSearch" (ngModelChange)="filterAreas()">
+          <select class="page-size-select" [(ngModel)]="areasPageSize" (ngModelChange)="areasPage = 1">
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="20">20</option>
+          </select>
         </div>
         <button class="btn-premium btn-add-sm" *ngIf="selectedCityId" (click)="openAddArea()">
           <i class="fas fa-plus"></i> Add Area
@@ -85,7 +108,7 @@
 
         <!-- Real Content -->
         <ng-container *ngIf="!isAreasLoading">
-          <div class="loc-item area-item" *ngFor="let a of filteredAreas">
+          <div class="loc-item area-item" *ngFor="let a of pagedAreas">
             <div class="loc-info">
               <span class="name">{{ a.name }}</span>
               <span class="area-stats" style="font-size: 0.8rem; color: #8a8d9b; display: block; margin-top: 3px;">
@@ -106,6 +129,19 @@
             <i class="fas fa-map-signs"></i>
             <p>No areas found for this city.</p>
             <button class="btn-text" (click)="openAddArea()">Add the first area</button>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination-wrapper" *ngIf="filteredAreas.length > 0">
+            <span class="page-info">Page {{ areasPage }} of {{ totalAreasPages }}</span>
+            <div class="page-btns">
+              <button class="page-btn" [disabled]="areasPage === 1" (click)="areasPage = areasPage - 1">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="page-btn" [disabled]="areasPage === totalAreasPages" (click)="areasPage = areasPage + 1">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
           </div>
         </ng-container>
       </div>
