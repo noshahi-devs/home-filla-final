@@ -39,6 +39,14 @@ testem.log
 /typings
 __screenshots__/
 
+# Backend / .NET
+/HomeFilla.Server/
+/bin/
+/obj/
+/publish/
+*.user
+*.suo
+
 # System files
 .DS_Store
 Thumbs.db
