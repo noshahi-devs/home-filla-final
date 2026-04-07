@@ -1,5 +1,5 @@
 import { UserService } from '../../shared/services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UiService } from '../../shared/services/ui.service';
@@ -46,8 +46,18 @@ export class AdminUsersComponent implements OnInit {
   sortBy: string = 'name';
   sortDirection: 'asc' | 'desc' = 'asc';
   
+  @ViewChild('searchInput') searchInput!: ElementRef;
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+      event.preventDefault();
+      this.searchInput.nativeElement.focus();
+    }
+  }
+  
   // View modes
-  viewMode: 'table' | 'grid' = 'table';
+  viewMode: string = 'table';
   
   // Selection
   selectedUsers: Set<number> = new Set();
@@ -88,7 +98,7 @@ export class AdminUsersComponent implements OnInit {
 
   loadUsers(): void {
     this.isLoading = true;
-    this.userService.getUsers().subscribe(users => {
+    this.userService.getUsers().subscribe((users: ExtendedDashboardUser[]) => {
       this.users = users;
       this.calculateStats();
       this.applyFilters();
@@ -293,6 +303,11 @@ export class AdminUsersComponent implements OnInit {
   // View mode toggle
   setViewMode(mode: 'table' | 'grid'): void {
     this.viewMode = mode;
+    this.uiService.showToast('info', 'View Changed', `Switched to ${mode} layout`);
+  }
+
+  isViewMode(mode: string): boolean {
+    return this.viewMode === mode;
   }
 
   // Clear filters

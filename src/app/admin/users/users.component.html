@@ -113,15 +113,21 @@
         <div class="search-icon">
           <i class="fas fa-search"></i>
         </div>
-        <input type="text" placeholder="Search users by name, email, or ID..." (input)="onSearch($event)" class="search-input">
+        <input 
+          #searchInput
+          type="text" 
+          placeholder="Search users by name, email, or ID..." 
+          (input)="onSearch($event)" 
+          class="search-input"
+        >
         <div class="search-shortcut">⌘K</div>
       </div>
       
       <div class="view-toggle">
-        <button class="view-btn active" title="Grid View">
+        <button [class.active]="isViewMode('grid')" (click)="setViewMode('grid')" class="view-btn" title="Grid View">
           <i class="fas fa-th"></i>
         </button>
-        <button class="view-btn" title="List View">
+        <button [class.active]="isViewMode('table')" (click)="setViewMode('table')" class="view-btn" title="List View">
           <i class="fas fa-list"></i>
         </button>
       </div>
@@ -151,7 +157,7 @@
   </div>
 
   <!-- Enhanced Table Container -->
-  <div class="table-container premium">
+  <div class="table-container premium" *ngIf="isViewMode('table')">
     <div class="table-header">
       <div class="table-title">
         <h3>Users Directory</h3>
@@ -309,8 +315,76 @@
         </tbody>
       </table>
     </div>
-    
-    <!-- Enhanced Pagination -->
+
+    <!-- Grid View -->
+    <div class="users-grid" *ngIf="viewMode === 'grid'">
+      <div class="user-card" *ngFor="let u of displayUsers" [class.selected]="selectedUsers.has(u.id)">
+        <div class="card-selection">
+          <input type="checkbox" [checked]="selectedUsers.has(u.id)" (change)="toggleUserSelection(u.id, $event)">
+        </div>
+        
+        <div class="card-header">
+          <div class="user-avatar-wrapper">
+            <img [src]="u.avatar || 'assets/placeholder-user.jpg'" [alt]="u.name" class="user-avatar">
+            <div class="status-indicator" [class.active]="u.status === 'active'"></div>
+          </div>
+          <div class="user-info">
+            <h3 class="user-name">{{ u.name }}</h3>
+            <span class="user-id">#{{ u.id }}</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn view" (click)="viewUserDetails(u)"><i class="fas fa-eye"></i></button>
+            <button class="action-btn edit" (click)="editUser(u)"><i class="fas fa-pen"></i></button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="contact-info">
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <span>{{ u.email }}</span>
+            </div>
+            <div class="info-item" *ngIf="u.phone">
+              <i class="fas fa-phone"></i>
+              <span>{{ u.phone }}</span>
+            </div>
+          </div>
+          
+          <div class="badge-row">
+            <div class="role-badge" [ngClass]="u.role">
+              <i class="fas" [ngClass]="getRoleIcon(u.role)"></i>
+              <span>{{ u.role }}</span>
+            </div>
+            <div class="status-badge" [ngClass]="u.status">
+              <div class="status-dot"></div>
+              <span>{{ u.status }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="date-info">
+            <span class="date-label">Joined</span>
+            <span class="date-value">{{ u.createdAt | date:'mediumDate' }}</span>
+          </div>
+          <button class="btn-delete-card" *ngIf="u.role !== 'admin'" (click)="deleteUser(u.id)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state-container" *ngIf="displayUsers.length === 0">
+      <div class="empty-state">
+        <div class="empty-icon">
+          <i class="fas fa-users-slash"></i>
+        </div>
+        <h3>No users found</h3>
+        <p>Try adjusting your search criteria or filters to find what you're looking for.</p>
+        <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+      </div>
+    </div>
     <div class="pagination premium" *ngIf="filteredUsers.length > 0">
       <div class="pagination-info">
         <span>Showing {{ pagination.startItem }} to {{ pagination.endItem }} of {{ pagination.totalItems }} results</span>
