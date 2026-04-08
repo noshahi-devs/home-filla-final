@@ -152,11 +152,175 @@
             </div>
           </div>
         </div>
-        <a routerLink="/sell" routerLinkActive="active" class="nav-link">Sell</a>
-        <a routerLink="/mortgages" routerLinkActive="active" class="nav-link">Mortgage</a>
-        <a routerLink="/find-agent" routerLinkActive="active" class="nav-link">Find an Agent</a>
+        <div class="mega-menu-trigger">
+          <a routerLink="/sell" routerLinkActive="active" class="nav-link">Sell</a>
+          <div class="mega-dropdown">
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Home selling tools</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">Compare agents &amp; pick the right one</a>
+                  <a href="#" class="mega-link">Find the right selling option for you</a>
+                  <a href="#" class="mega-link">How much can you make selling your home?</a>
+                  <a href="#" class="mega-link">See what your home is worth</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Home selling advice</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">Complete guide to selling your home</a>
+                  <a href="#" class="mega-link" style="margin-top: 12px; border-top: 1px solid var(--border-light); padding-top: 12px;">Should I sell my home now?</a>
+                  <a href="#" class="mega-link">How much is my home worth?</a>
+                  <a href="#" class="mega-link">How should I sell my home?</a>
+                  <a href="#" class="mega-link">How to select an agent?</a>
+                  <a href="#" class="mega-link">How to prepare your home for sale?</a>
+                  <a href="#" class="mega-link" style="margin-top: 12px; border-top: 1px solid var(--border-light); padding-top: 12px;">See more home selling insights</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Recently sold</h4>
+                <div class="mega-links">
+                  <a [routerLink]="['/listings', 'recently-sold']" class="mega-link">Recently sold homes in 94086</a>
+                  <a [routerLink]="['/listings', 'recently-sold']" class="mega-link">Recently sold homes in Sunnyvale</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mega-menu-trigger">
+          <a routerLink="/mortgages" routerLinkActive="active" class="nav-link">Mortgage</a>
+          <div class="mega-dropdown">
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Mortgage rates</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">Get pre-approved</a>
+                  <a href="#" class="mega-link">Sunnyvale mortgage rates</a>
+                  <a href="#" class="mega-link">Home equity financing rates</a>
+                  <a href="#" class="mega-link">Refinance rates</a>
+                  <a href="#" class="mega-link">Finance advice</a>
+                  <a href="#" class="mega-link">For veterans</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Calculators</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">Mortgage calculator</a>
+                  <a href="#" class="mega-link">Refinance calculator</a>
+                  <a href="#" class="mega-link">How much house can I afford</a>
+                  <a href="#" class="mega-link">Rent vs. buy</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Financial advice</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">6 ways home buyers mess up getting a mortgage</a>
+                  <a href="#" class="mega-link">Mortgage guide</a>
+                  <a href="#" class="mega-link">Learn about home insurance</a>
+                  <a href="#" class="mega-link">More finance insights</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mega-menu-trigger">
+          <a routerLink="/find-agent" routerLinkActive="active" class="nav-link">Find an Agent</a>
+          <div class="mega-dropdown">
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Find a real estate agent</h4>
+                <div class="mega-links">
+                  <a routerLink="/find-agent" class="mega-link">Find a local agent</a>
+                  <a href="#" class="mega-link">Top rated Sunnyvale agents</a>
+                  <a href="#" class="mega-link">Compare agent proposals</a>
+                  <a href="#" class="mega-link">Find teams and companies</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Why use a Home Filla®</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">6 reasons you should never buy or sell a home without an agent</a>
+                  <a href="#" class="mega-link">Difference between agent, broker &amp; Home Filla®</a>
+                  <a href="#" class="mega-link">Listing vs. buyer agent</a>
+                  <a href="#" class="mega-link">How to find a Home Filla®</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>News around Home FillaS®</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">Real estate agents reveal the toughest home buyers they've ever met</a>
+                  <a href="#" class="mega-link">More news around Home FillaS®</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <a routerLink="/" routerLinkActive="active" class="nav-link">My Home</a>
-        <a routerLink="/news-insights" routerLinkActive="active" class="nav-link">News &amp; Insights</a>
+        <div class="mega-menu-trigger">
+          <a routerLink="/news-insights" routerLinkActive="active" class="nav-link">News &amp; Insights</a>
+          <div class="mega-dropdown">
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>News</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">The latest news</a>
+                  <a href="#" class="mega-link">Housing trends</a>
+                  <a href="#" class="mega-link">Real estate news</a>
+                  <a href="#" class="mega-link">Celebrity real estate</a>
+                  <a href="#" class="mega-link">Unique homes</a>
+                  <a href="#" class="mega-link">For PROs</a>
+                  <a href="#" class="mega-link">Corporate blog</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Insights</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">Buying</a>
+                  <a href="#" class="mega-link">Selling</a>
+                  <a href="#" class="mega-link">Renting</a>
+                  <a href="#" class="mega-link">Financing</a>
+                  <a href="#" class="mega-link">Moving</a>
+                  <a href="#" class="mega-link">Living</a>
+                  <a href="#" class="mega-link">Home improvement</a>
+                  <a href="#" class="mega-link">Research</a>
+                  <a href="#" class="mega-link">2026 housing market predictions <span class="badge-new" style="background: var(--accent-blue); color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-left: 4px;">New</span></a>
+                  <a href="#" class="mega-link">2025 hottest zip codes</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Guides &amp; more</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">All guides</a>
+                  <a href="#" class="mega-link">Complete guide on how to sell your home</a>
+                  <a href="#" class="mega-link">First-time home buyer resource center</a>
+                  <a href="#" class="mega-link">Mortgage guide</a>
+                  <a href="#" class="mega-link">Veterans home buyer guide</a>
+                  <a href="#" class="mega-link">USDA home loan guide</a>
+                  <a href="#" class="mega-link">Home insurance guide</a>
+                  <a href="#" class="mega-link">Real estate videos</a>
+                  <a href="#" class="mega-link">Neighborhood Insights</a>
+                  <a href="#" class="mega-link">About us</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
     </div>
 
