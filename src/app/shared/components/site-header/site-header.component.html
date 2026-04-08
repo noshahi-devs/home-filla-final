@@ -106,7 +106,52 @@
             </div>
           </div>
         </div>
-        <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="nav-link">Rent</a>
+        <div class="mega-menu-trigger">
+          <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="nav-link">Rent</a>
+          <div class="mega-dropdown">
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Apartments for rent</h4>
+                <div class="mega-links">
+                  <a [routerLink]="['/listings', 'rent']" class="mega-link"><strong>All rentals</strong></a>
+                  <a href="#" class="mega-link">Apartments for rent</a>
+                  <a href="#" class="mega-link">Houses for rent</a>
+                  <a href="#" class="mega-link">All Sunnyvale rentals</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Renter tools</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">Contacted rentals</a>
+                  <a href="#" class="mega-link">Apply now online</a>
+                </div>
+              </div>
+              <div class="sub-section">
+                <h4>Landlord tools</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">Manage rentals</a>
+                  <a href="#" class="mega-link">List your rentals</a>
+                  <a href="#" class="mega-link">Screen tenants</a>
+                  <a href="#" class="mega-link">Create a lease</a>
+                  <a href="#" class="mega-link">Collect rent online</a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-column">
+              <div class="sub-section" style="margin-top: 0;">
+                <h4>Home renting tips</h4>
+                <div class="mega-links">
+                  <a href="#" class="mega-link">Renter's resource center</a>
+                  <a href="#" class="mega-link">Should I rent or buy?</a>
+                  <a href="#" class="mega-link">Debunked! 8 myths about renting you should stop believing immediately</a>
+                  <a href="#" class="mega-link">More renting insights</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <a routerLink="/sell" routerLinkActive="active" class="nav-link">Sell</a>
         <a routerLink="/mortgages" routerLinkActive="active" class="nav-link">Mortgage</a>
         <a routerLink="/find-agent" routerLinkActive="active" class="nav-link">Find an Agent</a>
