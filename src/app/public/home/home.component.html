@@ -15,6 +15,10 @@
         <a routerLink="/mortgages" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-hand-holding-usd"></i> Mortgages</a>
       <a routerLink="/find-agent" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-user-tie"></i> Find an Agent</a>
     </div>
+    <div class="mobile-nav-secondary">
+        <a routerLink="/manage-rentals" class="mobile-secondary-link" (click)="closeMobileMenu()">Manage rentals</a>
+        <a routerLink="/advertise" class="mobile-secondary-link" (click)="closeMobileMenu()">Advertise</a>
+    </div>
         <div class="mobile-nav-auth">
             <a routerLink="/login" class="btn-outline" style="width:100%; text-decoration: none; display: flex; align-items: center; justify-content: center; height: 44px; margin-bottom: 12px; font-weight: 600;" (click)="closeMobileMenu()">Log in</a>
             <a routerLink="/signup" class="btn-primary" style="width:100%; text-decoration: none; display: flex; align-items: center; justify-content: center; height: 44px; font-weight: 600;" (click)="closeMobileMenu()">Sign up</a>
@@ -28,25 +32,36 @@
                 <div class="realtor-logo">HF</div>
                 <div class="logo-text">Home Filla</div>
             </div>
-    
-            <div class="nav-links">
-                <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
-                <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="nav-link">Rent</a>
-                <a routerLink="/sell" routerLinkActive="active" class="nav-link">Sell</a>
-                <a routerLink="/mortgages" routerLinkActive="active" class="nav-link">Mortgages</a>
-                <a routerLink="/find-agent" routerLinkActive="active" class="nav-link">Find an Agent</a>
-            </div>
-    
-            <div class="auth-buttons">
-                <a routerLink="/login" class="btn-outline" style="text-decoration: none; cursor: pointer;">Log in</a>
-                <a routerLink="/signup" class="btn-primary" style="text-decoration: none; cursor: pointer;">Sign up</a>
+
+            <div class="header-center">
+                <nav class="nav-links primary-nav">
+                    <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
+                    <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="nav-link">Rent</a>
+                    <a routerLink="/sell" routerLinkActive="active" class="nav-link">Sell</a>
+                    <a routerLink="/mortgages" routerLinkActive="active" class="nav-link">Mortgage</a>
+                    <a routerLink="/find-agent" routerLinkActive="active" class="nav-link">Find an Agent</a>
+                    <a routerLink="/" routerLinkActive="active" class="nav-link">My Home</a>
+                    <a routerLink="/news-insights" class="nav-link">News &amp; Insights</a>
+                </nav>
             </div>
 
-        <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-</header>
+            <div class="header-right">
+                <div class="secondary-links">
+                    <a routerLink="/manage-rentals" class="secondary-link">Manage rentals</a>
+                    <a routerLink="/advertise" class="secondary-link">Advertise</a>
+                </div>
+
+                <div class="auth-buttons">
+                    <a routerLink="/login" class="btn-outline" style="text-decoration: none; cursor: pointer;">Log in</a>
+                    <a routerLink="/signup" class="btn-primary" style="text-decoration: none; cursor: pointer;">Sign up</a>
+                </div>
+
+                <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
 
     <div id="sticky-search">
         <div class="s-inner">
