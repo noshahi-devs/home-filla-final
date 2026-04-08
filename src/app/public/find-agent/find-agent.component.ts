@@ -1,7 +1,8 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 
 interface AgentProfile {
   name: string;
@@ -22,12 +23,11 @@ interface AgentProfile {
 @Component({
   selector: 'app-find-agent',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive, SiteHeaderComponent],
   templateUrl: './find-agent.component.html',
   styleUrls: ['./find-agent.component.css']
 })
 export class FindAgentComponent {
-  isMobileMenuOpen = false;
   searchLocation = '';
   selectedSpecialty = 'Any';
   selectedExperience = 'Any';
@@ -173,16 +173,6 @@ export class FindAgentComponent {
     return this.agents.reduce((total, agent) => total + agent.deals, 0);
   }
 
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
-  }
-
-  closeMobileMenu() {
-    this.isMobileMenuOpen = false;
-    document.body.style.overflow = '';
-  }
-
   scrollToAgents() {
     document.getElementById('agent-hub')?.scrollIntoView({ behavior: 'smooth' });
   }
@@ -194,8 +184,4 @@ export class FindAgentComponent {
     this.selectedLanguage = 'Any';
   }
 
-  @HostListener('document:keydown.escape')
-  onEscape() {
-    this.closeMobileMenu();
-  }
 }

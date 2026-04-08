@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { getCategoryData, CategoryInfo, Property } from '../../data/listings.data';
+import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 
 declare global {
   interface Window {
@@ -13,7 +14,7 @@ declare global {
 @Component({
   selector: 'app-rent',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule, SiteHeaderComponent],
   templateUrl: './rent.html',
   styleUrl: './rent.css',
 })
@@ -22,7 +23,6 @@ export class RentComponent implements OnInit, AfterViewInit {
   properties: Property[] = [];
   isMapOpen = false;
   activeMapFilter = 'Layers';
-  isMobileMenuOpen = false;
   
   // Accordion states
   activeAccordion: string | null = 'popular';
@@ -46,26 +46,6 @@ export class RentComponent implements OnInit, AfterViewInit {
       window.initHomeFillaPage?.();
     }, 0);
   }
-
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
-  }
-
-  isBuyAccordionOpen = false;
-  toggleBuyAccordion(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.isBuyAccordionOpen = !this.isBuyAccordionOpen;
-  }
-
-  closeMobileMenu() {
-    this.isMobileMenuOpen = false;
-    document.body.style.overflow = '';
-  }
-
-  @HostListener('document:keydown.escape')
-  onEscape() { this.closeMobileMenu(); }
 
   toggleMap() {
     this.isMapOpen = !this.isMapOpen;

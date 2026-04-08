@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { getCategoryData, CategoryInfo, Property } from '../../data/listings.data';
+import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 
 declare global {
   interface Window {
@@ -16,13 +17,12 @@ declare global {
   selector: 'app-listings',
   templateUrl: './listings.component.html',
   styleUrl: './listings.component.css',
-  imports: [CommonModule, RouterLink, RouterLinkActive]
+  imports: [CommonModule, RouterLink, RouterLinkActive, SiteHeaderComponent]
 })
 export class ListingsComponent implements OnInit, AfterViewInit {
   category: CategoryInfo | null = null;
   visibleProperties: Property[] = [];
   pageSize = 12;
-  isMobileMenuOpen = false;
   
   // Map and Favorite State
   isMapOpen = false;
@@ -45,26 +45,6 @@ export class ListingsComponent implements OnInit, AfterViewInit {
       window.initHomeFillaPage?.();
     }, 0);
   }
-
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
-  }
-
-  isBuyAccordionOpen = false;
-  toggleBuyAccordion(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.isBuyAccordionOpen = !this.isBuyAccordionOpen;
-  }
-
-  closeMobileMenu() {
-    this.isMobileMenuOpen = false;
-    document.body.style.overflow = '';
-  }
-
-  @HostListener('document:keydown.escape')
-  onEscape() { this.closeMobileMenu(); }
 
   get hasMore(): boolean {
     return (this.category?.properties.length || 0) > this.visibleProperties.length;

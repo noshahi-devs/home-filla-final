@@ -1,53 +1,5 @@
 <div class="find-agent-page">
-  <div class="mobile-menu-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
-
-  <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
-    <div class="mobile-nav-header">
-      <div class="logo-area">
-        <div class="realtor-logo">HF</div>
-        <div class="logo-text">Home Filla</div>
-      </div>
-      <button class="mobile-nav-close" (click)="closeMobileMenu()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="mobile-nav-links">
-      <a routerLink="/" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Home</a>
-      <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Buy</a>
-      <a routerLink="/listings/rent" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-key"></i> Rent</a>
-      <a routerLink="/sell" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-sign"></i> Sell</a>
-      <a routerLink="/mortgages" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-hand-holding-usd"></i> Mortgages</a>
-      <a routerLink="/find-agent" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-user-tie"></i> Find an Agent</a>
-    </div>
-    <div class="mobile-nav-auth">
-      <a routerLink="/login" class="btn-outline" (click)="closeMobileMenu()">Log in</a>
-      <a routerLink="/signup" class="btn-primary" (click)="closeMobileMenu()">Sign up</a>
-    </div>
-  </nav>
-
-  <header class="realtor-header">
-    <div class="header-container">
-      <a routerLink="/" class="logo-area">
-        <div class="realtor-logo">HF</div>
-        <div class="logo-text">Home Filla</div>
-      </a>
-
-      <div class="nav-links">
-        <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
-        <a routerLink="/listings/rent" routerLinkActive="active" class="nav-link">Rent</a>
-        <a routerLink="/sell" routerLinkActive="active" class="nav-link">Sell</a>
-        <a routerLink="/mortgages" routerLinkActive="active" class="nav-link">Mortgages</a>
-        <a routerLink="/find-agent" routerLinkActive="active" class="nav-link">Find an Agent</a>
-      </div>
-
-      <div class="auth-buttons">
-        <a routerLink="/login" class="btn-outline">Log in</a>
-        <a routerLink="/signup" class="btn-primary">Sign up</a>
-      </div>
-
-      <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+  <app-site-header></app-site-header>
 
   <section class="hero-section">
     <div class="hero-inner">

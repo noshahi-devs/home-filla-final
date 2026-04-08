@@ -1,18 +1,17 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 
 @Component({
   selector: 'app-mortgage',
   standalone: true,
   templateUrl: './mortgage.component.html',
   styleUrl: './mortgage.component.css',
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive]
+  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive, SiteHeaderComponent]
 })
 export class MortgageComponent {
-  isMobileMenuOpen = false;
-
   // Mortgage Calculator State
   homePrice = 500000;
   downPaymentPercent = 20;
@@ -56,23 +55,4 @@ export class MortgageComponent {
     return this.principalAndInterest + this.monthlyPropertyTax + this.monthlyHomeInsurance;
   }
 
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
-  }
-
-  isBuyAccordionOpen = false;
-  toggleBuyAccordion(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.isBuyAccordionOpen = !this.isBuyAccordionOpen;
-  }
-
-  closeMobileMenu() {
-    this.isMobileMenuOpen = false;
-    document.body.style.overflow = '';
-  }
-
-  @HostListener('document:keydown.escape')
-  onEscape() { this.closeMobileMenu(); }
 }

@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, HostListener, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 
 declare global {
   interface Window {
@@ -12,32 +13,10 @@ declare global {
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, SiteHeaderComponent],
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements AfterViewInit {
-  isMobileMenuOpen = false;
-  isBuyAccordionOpen = false;
-
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
-  }
-
-  toggleBuyAccordion(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.isBuyAccordionOpen = !this.isBuyAccordionOpen;
-  }
-
-  closeMobileMenu() {
-    this.isMobileMenuOpen = false;
-    document.body.style.overflow = '';
-  }
-
-  @HostListener('document:keydown.escape')
-  onEscape() { this.closeMobileMenu(); }
-
   ngAfterViewInit() {
     delete window.__homeFillaInit;
     setTimeout(() => {

@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 
 declare global {
   interface Window {
@@ -14,10 +15,9 @@ declare global {
   templateUrl: './sell.component.html',
   styleUrl: './sell.component.css',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule]
+  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule, SiteHeaderComponent]
 })
 export class SellComponent implements OnInit, AfterViewInit {
-  isMobileMenuOpen = false;
   carouselIndex = 0;
   
   // Valuation Form State
@@ -188,26 +188,6 @@ export class SellComponent implements OnInit, AfterViewInit {
       });
     });
   }
-
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
-  }
-
-  isBuyAccordionOpen = false;
-  toggleBuyAccordion(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.isBuyAccordionOpen = !this.isBuyAccordionOpen;
-  }
-
-  closeMobileMenu() {
-    this.isMobileMenuOpen = false;
-    document.body.style.overflow = '';
-  }
-
-  @HostListener('document:keydown.escape')
-  onEscape() { this.closeMobileMenu(); }
 
   calculateValuation() {
     if (!this.address) return;
