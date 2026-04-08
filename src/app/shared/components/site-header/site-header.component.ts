@@ -11,16 +11,27 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class SiteHeaderComponent {
   isMobileMenuOpen = false;
   isBuyAccordionOpen = false;
+  isRentAccordionOpen = false;
+  isSellAccordionOpen = false;
+  isMortgageAccordionOpen = false;
+  isAgentAccordionOpen = false;
+  isNewsAccordionOpen = false;
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
     document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
   }
 
-  toggleBuyAccordion(event: Event) {
+  toggleAccordion(menu: string, event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    this.isBuyAccordionOpen = !this.isBuyAccordionOpen;
+    
+    if (menu === 'buy') this.isBuyAccordionOpen = !this.isBuyAccordionOpen;
+    if (menu === 'rent') this.isRentAccordionOpen = !this.isRentAccordionOpen;
+    if (menu === 'sell') this.isSellAccordionOpen = !this.isSellAccordionOpen;
+    if (menu === 'mortgage') this.isMortgageAccordionOpen = !this.isMortgageAccordionOpen;
+    if (menu === 'agent') this.isAgentAccordionOpen = !this.isAgentAccordionOpen;
+    if (menu === 'news') this.isNewsAccordionOpen = !this.isNewsAccordionOpen;
   }
 
   closeMobileMenu() {

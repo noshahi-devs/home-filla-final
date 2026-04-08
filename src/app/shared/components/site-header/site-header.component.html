@@ -11,33 +11,128 @@
 
   <div class="mobile-nav-links">
     <a routerLink="/" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Home</a>
+    
     <div>
-      <a href="#" class="mobile-nav-link" [class.active]="isBuyAccordionOpen" (click)="toggleBuyAccordion($event)">
+      <a href="#" class="mobile-nav-link" [class.active]="isBuyAccordionOpen" (click)="toggleAccordion('buy', $event)">
         <i class="fas fa-home"></i> Buy <i class="fas fa-chevron-down"></i>
       </a>
       <div class="mobile-nav-submenu" [class.open]="isBuyAccordionOpen">
-        <a [routerLink]="['/listings', 'new-listings']" class="mobile-submenu-item" (click)="closeMobileMenu()">
+        <div class="mobile-submenu-group">
           <h5>Homes for sale</h5>
-          Homes for sale, Foreclosures, Open houses
-        </a>
-        <a [routerLink]="['/listings', 'new-construction']" class="mobile-submenu-item" (click)="closeMobileMenu()">
+          <a [routerLink]="['/listings', 'new-listings']" class="mobile-submenu-item" (click)="closeMobileMenu()">Homes for sale</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Foreclosure homes</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Open houses</a>
+        </div>
+        <div class="mobile-submenu-group">
           <h5>New construction</h5>
-          All new construction, Communities
-        </a>
-        <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">
+          <a [routerLink]="['/listings', 'new-construction']" class="mobile-submenu-item" (click)="closeMobileMenu()">All new construction</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">New home communities</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">New construction and plans</a>
+        </div>
+        <div class="mobile-submenu-group">
           <h5>Explore the neighborhood</h5>
-          Market trends, Records, Sold homes
-        </a>
-        <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">
-          <h5>Home buying tips</h5>
-          Checklists, Insights, Success stories
-        </a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Housing market trends</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Top Schools</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Property records</a>
+          <a [routerLink]="['/listings', 'recently-sold']" class="mobile-submenu-item" (click)="closeMobileMenu()">Recently sold homes</a>
+        </div>
       </div>
     </div>
-    <a [routerLink]="['/listings', 'rent']" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-key"></i> Rent</a>
-    <a routerLink="/sell" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-sign"></i> Sell</a>
-    <a routerLink="/mortgages" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-hand-holding-usd"></i> Mortgages</a>
-    <a routerLink="/find-agent" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-user-tie"></i> Find an Agent</a>
+
+    <div>
+      <a href="#" class="mobile-nav-link" [class.active]="isRentAccordionOpen" (click)="toggleAccordion('rent', $event)">
+        <i class="fas fa-key"></i> Rent <i class="fas fa-chevron-down"></i>
+      </a>
+      <div class="mobile-nav-submenu" [class.open]="isRentAccordionOpen">
+        <div class="mobile-submenu-group">
+          <h5>Apartments for rent</h5>
+          <a [routerLink]="['/listings', 'rent']" class="mobile-submenu-item" (click)="closeMobileMenu()">All rentals</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Apartments for rent</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Houses for rent</a>
+        </div>
+        <div class="mobile-submenu-group">
+          <h5>Renter tools</h5>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Contacted rentals</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Apply now online</a>
+        </div>
+        <div class="mobile-submenu-group">
+          <h5>Landlord tools</h5>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Manage rentals</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">List your rentals</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Screen tenants</a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <a href="#" class="mobile-nav-link" [class.active]="isSellAccordionOpen" (click)="toggleAccordion('sell', $event)">
+        <i class="fas fa-sign"></i> Sell <i class="fas fa-chevron-down"></i>
+      </a>
+      <div class="mobile-nav-submenu" [class.open]="isSellAccordionOpen">
+        <div class="mobile-submenu-group">
+          <h5>Home selling tools</h5>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Compare agents</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Find selling options</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Home value</a>
+        </div>
+        <div class="mobile-submenu-group">
+          <h5>Home selling advice</h5>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Guide to selling</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Should I sell now?</a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <a href="#" class="mobile-nav-link" [class.active]="isMortgageAccordionOpen" (click)="toggleAccordion('mortgage', $event)">
+        <i class="fas fa-hand-holding-usd"></i> Mortgages <i class="fas fa-chevron-down"></i>
+      </a>
+      <div class="mobile-nav-submenu" [class.open]="isMortgageAccordionOpen">
+        <div class="mobile-submenu-group">
+          <h5>Mortgage rates</h5>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Get pre-approved</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Mortgage rates</a>
+        </div>
+        <div class="mobile-submenu-group">
+          <h5>Calculators</h5>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Mortgage calculator</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Refinance calculator</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">How much house?</a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <a href="#" class="mobile-nav-link" [class.active]="isAgentAccordionOpen" (click)="toggleAccordion('agent', $event)">
+        <i class="fas fa-user-tie"></i> Find an Agent <i class="fas fa-chevron-down"></i>
+      </a>
+      <div class="mobile-nav-submenu" [class.open]="isAgentAccordionOpen">
+        <div class="mobile-submenu-group">
+          <h5>Find an agent</h5>
+          <a routerLink="/find-agent" class="mobile-submenu-item" (click)="closeMobileMenu()">Local agents</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Teams and companies</a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <a href="#" class="mobile-nav-link" [class.active]="isNewsAccordionOpen" (click)="toggleAccordion('news', $event)">
+        <i class="fas fa-newspaper"></i> News &amp; Insights <i class="fas fa-chevron-down"></i>
+      </a>
+      <div class="mobile-nav-submenu" [class.open]="isNewsAccordionOpen">
+        <div class="mobile-submenu-group">
+          <h5>News</h5>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Latest news</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Housing trends</a>
+        </div>
+        <div class="mobile-submenu-group">
+          <h5>Insights</h5>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Buying</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Selling</a>
+          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Renting</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="mobile-nav-secondary">
@@ -267,7 +362,7 @@
             </div>
           </div>
         </div>
-        <a routerLink="/" routerLinkActive="active" class="nav-link">My Home</a>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">My Home</a>
         <div class="mega-menu-trigger">
           <a routerLink="/news-insights" routerLinkActive="active" class="nav-link">News &amp; Insights</a>
           <div class="mega-dropdown">
