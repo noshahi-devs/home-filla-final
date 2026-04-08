@@ -51,6 +51,13 @@ export class ListingsComponent implements OnInit, AfterViewInit {
     document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
   }
 
+  isBuyAccordionOpen = false;
+  toggleBuyAccordion(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isBuyAccordionOpen = !this.isBuyAccordionOpen;
+  }
+
   closeMobileMenu() {
     this.isMobileMenuOpen = false;
     document.body.style.overflow = '';

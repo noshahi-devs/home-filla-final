@@ -17,10 +17,17 @@ declare global {
 })
 export class HomeComponent implements AfterViewInit {
   isMobileMenuOpen = false;
+  isBuyAccordionOpen = false;
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
     document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
+  }
+
+  toggleBuyAccordion(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isBuyAccordionOpen = !this.isBuyAccordionOpen;
   }
 
   closeMobileMenu() {
