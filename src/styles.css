@@ -117,7 +117,6 @@
             left: 0;
             right: 0;
             width: 100vw;
-            margin-left: calc(-1 * max(24px, calc((100vw - 1280px) / 2))); /* Offset parent's padding/alignment */
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             border-top: 1px solid var(--border-light);
