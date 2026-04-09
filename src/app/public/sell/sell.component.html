@@ -2,28 +2,76 @@
   <app-site-header></app-site-header>
 
   <!-- Hero Section with Valuation Tool -->
-  <div class="sell-hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1 class="hero-title">Sell your home with confidence</h1>
-      <p class="hero-subtitle">Get a free home value estimate and connect with top local agents to sell your home fast.</p>
-      
-      <div class="valuation-card" *ngIf="!showValuation">
-        <h2>What's your home worth?</h2>
-        <p>Enter your address to see your free estimate instantly.</p>
+  <div class="hfs-hero" *ngIf="!showValuation">
+    <div class="hfs-container">
+      <div class="hfs-left">
+        <h1>Compare agents with <span class="hfs-brand-text">Home Filla&trade;</span><br>Selling, find a trusted expert</h1>
         
-        <div class="address-input-group">
-          <i class="fas fa-map-marker-alt"></i>
-          <input type="text" [(ngModel)]="address" placeholder="Enter your street address">
-          <button class="btn-primary" (click)="calculateValuation()" [disabled]="!address || isCalculating">
-            <span *ngIf="!isCalculating">Get Estimate</span>
+        <ul class="hfs-steps">
+          <li><span class="hfs-step-num">1</span> Enter your selling address</li>
+          <li><span class="hfs-step-num">2</span> View proposals, no commitment</li>
+          <li><span class="hfs-step-num">3</span> Choose the right agent, confidently</li>
+        </ul>
+
+        <div class="hfs-search-box">
+          <input type="text" [(ngModel)]="address" placeholder="Enter home address">
+          <button class="hfs-search-btn" (click)="calculateValuation()" [disabled]="isCalculating || !address">
+            <span *ngIf="!isCalculating">Get started &rarr;</span>
             <span *ngIf="isCalculating"><i class="fas fa-spinner fa-spin"></i></span>
           </button>
         </div>
       </div>
 
+      <div class="hfs-right">
+        <!-- Floating cards visual -->
+        <div class="hfs-card hfs-card-bg1"></div>
+        <div class="hfs-card hfs-card-bg2"></div>
+        
+        <div class="hfs-card hfs-card-main">
+          <div class="hfs-card-header">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Monique Davis" class="hfs-agent-img">
+            <div class="hfs-agent-info">
+              <h4>Monique Davis</h4>
+              <p>Quinn Morgan Group</p>
+              <div class="hfs-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hfs-card-data">
+            <div class="hfs-data-row">
+              <span><i class="fas fa-tags" style="color:#718096; width:16px;"></i> Listing commission</span>
+              <strong>2.80%</strong>
+            </div>
+            <div class="hfs-data-row">
+              <span><i class="fas fa-home" style="color:#718096; width:16px;"></i> Homes sold nearby</span>
+              <strong>27</strong>
+            </div>
+            <div class="hfs-data-row hfs-pills">
+              <span><i class="fas fa-magic" style="color:#718096; width:16px;"></i> Services</span>
+              <div class="hfs-pill-list">
+                <span class="hfs-pill">Professional photography</span>
+                <span class="hfs-pill">Virtual tour</span>
+              </div>
+            </div>
+            <div class="hfs-data-row hfs-pills">
+              <span><i class="fas fa-globe" style="color:#718096; width:16px;"></i> Languages</span>
+              <div class="hfs-pill-list">
+                <span class="hfs-pill">English</span>
+                <span class="hfs-pill">Spanish</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Valuation Result Container -->
+  <div class="hfs-hero" *ngIf="showValuation" style="align-items: center; justify-content: center; min-height: 60vh;">
       <!-- Valuation Result -->
-      <div class="valuation-result-card" *ngIf="showValuation" id="valuation-result">
+      <div class="valuation-result-card" id="valuation-result" style="width: 100%; max-width: 600px; margin: 0 auto; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
         <div class="result-header">
            <button class="back-btn" (click)="resetForm()"><i class="fas fa-arrow-left"></i> Back</button>
            <h3>Estimated Value for</h3>
@@ -38,11 +86,10 @@
         </div>
         
         <div class="result-actions">
-          <button class="btn-primary full-width">Connect with an Agent</button>
+          <button class="btn-primary full-width" style="background:var(--accent-blue);">Connect with an Agent</button>
           <button class="btn-outline full-width mt-3">Refine Home Details</button>
         </div>
       </div>
-    </div>
   </div>
 
   <!-- Skilled Local Agents -->
