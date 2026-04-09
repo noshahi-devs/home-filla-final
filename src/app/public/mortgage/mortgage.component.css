@@ -1234,3 +1234,106 @@ input[type="range"] {
     .hfm-hero-tabs { gap: 16px; overflow-x: auto; width: 100%; justify-content: flex-start; padding-bottom: 0; }
     .hfm-partner-banner { flex-direction: column; text-align: center; gap: 16px; }
 }
+
+/* --- HOME FILLA TOOLS SECTION (PREMIUM CARDS) --- */
+.hfm-tools-section {
+    padding: 80px 24px;
+    background-color: #f8fafc;
+    text-align: center;
+}
+
+.hfm-tools-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hfm-tools-section h2 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 48px;
+    color: #1a202c;
+}
+
+.hfm-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.hfm-tool-card {
+    background: white;
+    padding: 32px 24px;
+    border-radius: 20px;
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #edf2f7;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+}
+
+.hfm-tool-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(74, 108, 247, 0.12);
+    border-color: rgba(74, 108, 247, 0.2);
+}
+
+.hfm-tool-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--accent-light, #f0f3fd);
+    color: var(--accent, #4a6cf7);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.hfm-tool-card:hover .hfm-tool-icon {
+    background: var(--accent, #4a6cf7);
+    color: white;
+    transform: rotate(-5deg);
+}
+
+.hfm-tool-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 12px;
+}
+
+.hfm-tool-card p {
+    font-size: 15px;
+    color: #718096;
+    line-height: 1.6;
+}
+
+.hfm-tools-toggle {
+    margin-top: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: #4a5568;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.hfm-tools-toggle:hover {
+    color: var(--accent, #4a6cf7);
+}
+
+@media (max-width: 1024px) {
+    .hfm-tools-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+
+@media (max-width: 640px) {
+    .hfm-tools-grid { grid-template-columns: 1fr; }
+}
