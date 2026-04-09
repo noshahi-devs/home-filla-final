@@ -596,7 +596,10 @@
                 <span aria-hidden="true" class="btn-icon">↻</span>
             </button>
         </div>
+    </div> <!-- ENTIRE FIX IS THIS CLOSING DIV -->
+
     <!-- Featured Agents Section -->
+    <!-- [HIDDEN PER USER REQUEST] 
     <div class="agents-section">
         <div class="section-header" style="max-width: 1280px; margin: 0 auto 32px;">
             <h2>Top-rated local agents</h2>
@@ -604,7 +607,6 @@
         </div>
 
         <div class="agents-grid">
-            <!-- Agent 1 -->
             <div class="agent-card">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe" class="agent-avatar-large" style="object-fit: cover; border: none;">
                 <h3>John Doe</h3>
@@ -616,7 +618,6 @@
                 <div class="agent-contact">Contact agent</div>
             </div>
 
-            <!-- Agent 2 -->
             <div class="agent-card">
                 <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jane Smith" class="agent-avatar-large" style="object-fit: cover; border: none;">
                 <h3>Jane Smith</h3>
@@ -628,7 +629,6 @@
                 <div class="agent-contact">Contact agent</div>
             </div>
 
-            <!-- Agent 3 -->
             <div class="agent-card">
                 <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Mike Ross" class="agent-avatar-large" style="object-fit: cover; border: none;">
                 <h3>Mike Ross</h3>
@@ -640,7 +640,6 @@
                 <div class="agent-contact">Contact agent</div>
             </div>
 
-            <!-- Agent 4 -->
             <div class="agent-card">
                 <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Lisa Garcia" class="agent-avatar-large" style="object-fit: cover; border: none;">
                 <h3>Lisa Garcia</h3>
@@ -653,6 +652,7 @@
             </div>
         </div>
     </div>
+    -->
 
     <!-- Discover how we can help -->
     <div class="discover-section">
@@ -981,18 +981,15 @@
         </div>
     </div>
 
-    <!-- === PREMIUM DIVIDER 2: Get Local Info === -->
+    <!-- [HIDDEN PER USER REQUEST] === PREMIUM DIVIDER 2: Get Local Info === 
     <div class="promo-section promo-neighborhood" style="position: relative; min-height: 460px; overflow: hidden; background: #0d1b2a;">
-        <!-- Background image with overlay -->
         <div style="position: absolute; inset: 0; z-index: 0;">
             <img src="https://images.unsplash.com/photo-1549921296-3b0f9a35af35?w=1800&q=90&auto=format&fit=crop" alt="Neighborhood aerial" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.35;">
             <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(13,27,42,1) 0%, rgba(13,27,42,0.85) 50%, rgba(13,27,42,0.5) 100%);"></div>
         </div>
 
-        <!-- Content Layer -->
         <div class="promo-content-grid" style="position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 80px 48px; display: grid; grid-template-columns: 55% 45%; gap: 60px; align-items: center;">
             
-            <!-- Left: Main Content -->
             <div>
                 <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.3); border-radius: 40px; padding: 6px 16px; margin-bottom: 24px; backdrop-filter: blur(10px);">
                     <i class="fas fa-map-marker-alt" style="color: #60a5fa; font-size: 12px;"></i>
@@ -1012,32 +1009,23 @@
                 </div>
             </div>
 
-            <!-- Right: Stat Grid -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;"
-                    onmouseover="this.style.background='rgba(96,165,250,0.12)'; this.style.borderColor='rgba(96,165,250,0.3)';"
-                    onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;">
                     <i class="fas fa-graduation-cap" style="color: #60a5fa; font-size: 22px; margin-bottom: 12px; display: block;"></i>
                     <div style="font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px;">Schools</div>
                     <div style="color: rgba(255,255,255,0.5); font-size: 12px;">Ratings & districts</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;"
-                    onmouseover="this.style.background='rgba(52,211,153,0.12)'; this.style.borderColor='rgba(52,211,153,0.3)';"
-                    onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;">
                     <i class="fas fa-walking" style="color: #34d399; font-size: 22px; margin-bottom: 12px; display: block;"></i>
                     <div style="font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px;">Walkability</div>
                     <div style="color: rgba(255,255,255,0.5); font-size: 12px;">Transit & foot traffic</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;"
-                    onmouseover="this.style.background='rgba(251,191,36,0.12)'; this.style.borderColor='rgba(251,191,36,0.3)';"
-                    onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;">
                     <i class="fas fa-car" style="color: #fbbf24; font-size: 22px; margin-bottom: 12px; display: block;"></i>
                     <div style="font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px;">Commute</div>
                     <div style="color: rgba(255,255,255,0.5); font-size: 12px;">Drive & transit times</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;"
-                    onmouseover="this.style.background='rgba(236,72,153,0.12)'; this.style.borderColor='rgba(236,72,153,0.3)';"
-                    onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 22px 20px; backdrop-filter: blur(16px); transition: all 0.25s ease;">
                     <i class="fas fa-paw" style="color: #f472b6; font-size: 22px; margin-bottom: 12px; display: block;"></i>
                     <div style="font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px;">Pet Friendly</div>
                     <div style="color: rgba(255,255,255,0.5); font-size: 12px;">Parks & rentals nearby</div>
@@ -1045,6 +1033,241 @@
             </div>
         </div>
     </div>
+    -->
+
+    <!-- ==========================================
+         NEW PREMIUM LIGHT MODE SECTIONS
+         ========================================== -->
+
+    <!-- Unique Homes Editorial Hero -->
+    <section class="editorial-hero">
+        <div class="eh-overlay"></div>
+        <div class="eh-content">
+            <span class="eh-eyebrow">Unique Homes</span>
+            <h1 class="eh-title">Iconic Jupiter Island Mansion Designed by the Architect Behind Vizcaya Museum Hits the Market for $10 Million</h1>
+            <a href="javascript:void(0)" class="eh-btn">Read Article</a>
+        </div>
+    </section>
+
+    <!-- Section 1/4: Real Estate Insights / Trends -->
+    <section class="premium-insights-section">
+        <div class="pi-container">
+            <h2 class="pi-section-title">Real Estate News & Insights</h2>
+            <div class="pi-grid">
+                <!-- Card 1 -->
+                <article class="pi-card">
+                    <div class="pi-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Housing Market">
+                        <span class="pi-badge badge-blue">Trends</span>
+                    </div>
+                    <div class="pi-content">
+                        <h3>The Housing Market Is More Fragmented Than Ever—Here's a Look at the Data</h3>
+                    </div>
+                </article>
+                <!-- Card 2 -->
+                <article class="pi-card">
+                    <div class="pi-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Finance">
+                        <span class="pi-badge badge-green">Finance</span>
+                    </div>
+                    <div class="pi-content">
+                        <h3>Mapped: Millions of People Ages 65-Plus Are Shunning Retirement...</h3>
+                    </div>
+                </article>
+                <!-- Card 3 -->
+                <article class="pi-card">
+                    <div class="pi-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=600&q=80" alt="Foreign Cash">
+                        <span class="pi-badge badge-blue">Trends</span>
+                    </div>
+                    <div class="pi-content">
+                        <h3>Foreign Cash Pours Into L.A. Luxury Real Estate as California Markets Shift</h3>
+                    </div>
+                </article>
+                <!-- Card 4 -->
+                <article class="pi-card">
+                    <div class="pi-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&q=80" alt="Nantucket to Napa">
+                        <span class="pi-badge badge-blue">Trends</span>
+                    </div>
+                    <div class="pi-content">
+                        <h3>Nantucket to Napa: Inside the Pure Luxury Enclaves Where 7-Figure Homes Move Fast</h3>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2/4: Need a Home Loan? (Pre-Approved) -->
+    <section class="premium-loan-cta">
+        <div class="plc-container">
+            <div class="plc-image">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1000&q=80" alt="Man on laptop getting pre-approved">
+            </div>
+            <div class="plc-text">
+                <h2>Need a home loan? <br>Get pre-approved</h2>
+                <p>Find a lender who can offer competitive mortgage rates and help you with pre-approval so you're ready to make an offer.</p>
+                <div class="plc-actions">
+                    <a href="#" class="plc-btn">Get pre-approved now</a>
+                    <a href="#" class="plc-disclosure">Advertising disclosure</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2.5: Get Local Info -->
+    <section class="premium-local-info">
+        <div class="pli-container">
+            <div class="pli-text">
+                <h2>Get Local Info</h2>
+                <p>Does it have pet-friendly rentals? How are the schools? Get important local information on the area you're most interested in.</p>
+                <div class="pli-search-box">
+                    <input type="text" placeholder="Address, City, ZIP or Neighborhood" value="94086, Sunnyvale, CA">
+                    <button class="pli-clear-btn"><i class="fas fa-times"></i></button>
+                    <button class="pli-search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="pli-image">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1000&q=80" alt="Family grilling outdoors">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2.75: Home Filla Information -->
+    <section class="premium-nar-section">
+        <div class="nar-container">
+            <!-- Col 1: Logo -->
+            <div class="nar-col nar-brand">
+                <div class="nar-logo">
+                    <div class="nar-icon-box">
+                        <span class="nar-r" style="font-size: 26px; letter-spacing: -1px;">HF</span>
+                    </div>
+                    <div class="nar-text">HOME<br>FILLA<br>NETWORK<sup>&reg;</sup></div>
+                </div>
+                <p>Find out how Home Filla works for<br>consumers and agents.</p>
+            </div>
+            
+            <!-- Col 2: For Homeowners -->
+            <div class="nar-col">
+                <h4>For Homeowners</h4>
+                <ul>
+                    <li><a href="#">Look for the HF icon</a></li>
+                    <li><a href="#">Real Estate Today</a></li>
+                    <li><a href="#">Reasons to work with Home Filla<sup>&reg;</sup></a></li>
+                </ul>
+            </div>
+            
+            <!-- Col 3: For Affiliates -->
+            <div class="nar-col">
+                <h4>For Home Filla Pros<sup>&reg;</sup></h4>
+                <ul>
+                    <li><a href="#">2027 Committee Applications are Now Open</a></li>
+                    <li><a href="#">Elevate your brand and attract leads with a .RealEstate website! Start free today.</a></li>
+                    <li><a href="#">Fair Housing Month: Learn. Lead. Act.</a></li>
+                    <li><a href="#">Register for Home Filla<sup>&reg;</sup> Legislative Meetings: June 13-18</a></li>
+                </ul>
+            </div>
+            
+            <!-- Col 4: Learn About Us -->
+            <div class="nar-col">
+                <h4>Learn About Home Filla</h4>
+                <ul>
+                    <li><a href="#">About Home Filla</a></li>
+                    <li><a href="#">Agent vs. Home Filla Pro<sup>&reg;</sup></a></li>
+                    <li><a href="#">Find an Appraiser</a></li>
+                    <li><a href="#">Commercial Services</a></li>
+                    <li><a href="#">Global Alliances</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3/4: Popular Markets & Links -->
+    <section class="premium-markets-links">
+        <div class="pml-container">
+            <!-- Col 1 -->
+            <div class="pml-col">
+                <h4>Popular real estate markets</h4>
+                <a href="#">Albuquerque, NM real estate</a>
+                <a href="#">Atlanta, GA real estate</a>
+                <a href="#">Austin, TX real estate</a>
+                <details>
+                    <summary class="pml-seemore">See more <i class="fas fa-chevron-down"></i></summary>
+                    <a href="#">Baltimore, MD real estate</a>
+                    <a href="#">Boston, MA real estate</a>
+                    <a href="#">Charlotte, NC real estate</a>
+                    <a href="#">Chicago, IL real estate</a>
+                </details>
+            </div>
+            <!-- Col 2 -->
+            <div class="pml-col">
+                <h4>Popular apartment cities</h4>
+                <a href="#">Apartments for rent in Manhattan, NY</a>
+                <a href="#">Apartments for rent in Los Angeles, CA</a>
+                <a href="#">Apartments for rent in Chicago, IL</a>
+                <details>
+                    <summary class="pml-seemore">See more <i class="fas fa-chevron-down"></i></summary>
+                    <a href="#">Apartments for rent in Houston, TX</a>
+                    <a href="#">Apartments for rent in Phoenix, AZ</a>
+                    <a href="#">Apartments for rent in Philadelphia, PA</a>
+                    <a href="#">Apartments for rent in San Antonio, TX</a>
+                </details>
+            </div>
+            <!-- Col 3 -->
+            <div class="pml-col">
+                <h4>Popular resources</h4>
+                <a href="#">Homes for sale near me</a>
+                <a href="#">Apartments for rent near me</a>
+                <a href="#">Houses for rent near me</a>
+                <details>
+                    <summary class="pml-seemore">See more <i class="fas fa-chevron-down"></i></summary>
+                    <a href="#">Townhomes for rent near me</a>
+                    <a href="#">Condos for rent near me</a>
+                    <a href="#">Land for sale near me</a>
+                    <a href="#">Commercial real estate</a>
+                </details>
+            </div>
+            <!-- Col 4 -->
+            <div class="pml-col">
+                <h4>New listings by state</h4>
+                <a href="#">Alabama new listings</a>
+                <a href="#">Alaska new listings</a>
+                <a href="#">Arizona new listings</a>
+                <details>
+                    <summary class="pml-seemore">See more <i class="fas fa-chevron-down"></i></summary>
+                    <a href="#">Arkansas new listings</a>
+                    <a href="#">California new listings</a>
+                    <a href="#">Colorado new listings</a>
+                    <a href="#">Connecticut new listings</a>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4/4: Market Clock Banner -->
+    <section class="premium-market-banner">
+        <div class="pmb-container">
+            <div class="pmb-inner">
+                <div class="pmb-graphic">
+                    <div class="pmb-clock">
+                        <!-- CSS recreated clock interface -->
+                        <div class="pmb-clock-dial"></div>
+                        <div class="pmb-clock-label top-left">Seller's Market</div>
+                        <div class="pmb-clock-label bottom-left">Buyer's Market</div>
+                        <div class="pmb-clock-needle"></div>
+                        <div class="pmb-clock-center"></div>
+                    </div>
+                </div>
+                <div class="pmb-text">
+                    <h2>Know exactly when<br>to make your move</h2>
+                    <p>Track your local housing market<br>with our new <strong>Market Clock</strong>.</p>
+                </div>
+                <div class="pmb-action">
+                    <a href="#" class="pmb-btn">Check the clock</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="realtor-footer">
@@ -1122,3 +1345,13 @@
 
         </div>
     </footer>
+
+
+
+
+
+
+
+
+
+    

@@ -1,4 +1,4 @@
-* {
+ï»¿* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -1793,7 +1793,7 @@
 }
 
 /* ---------------------------------------------------------------
-   HOME — Premium RealChoice™ Compare Agents Section
+   HOME ï¿½ Premium RealChoiceï¿½ Compare Agents Section
 --------------------------------------------------------------- */
 .home-compare-section {
     position: relative;
@@ -1857,3 +1857,592 @@
 @media (max-width:1024px) { .home-compare-inner { grid-template-columns:1fr; gap:60px; } .home-compare-copy h3 { font-size:40px; } }
 @media (max-width:768px) { .home-compare-section { padding:70px 24px; } .home-compare-copy h3 { font-size:32px; } }
 @media (max-width:480px) { .home-compare-copy h3 { font-size:28px; } .home-compare-btn { font-size:14px; padding:4px 4px 4px 20px; } }
+
+/* ==========================================
+   NEW PREMIUM LIGHT MODE SECTIONS
+   ========================================== */
+
+/* 1. Real Estate Insights / Trends */
+.premium-insights-section {
+    background: #f6f8fa;
+    padding: 60px 24px;
+}
+.pi-container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.pi-section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+}
+.pi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.pi-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+.pi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.pi-image-wrap {
+    position: relative;
+    height: 180px;
+}
+.pi-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.pi-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+.badge-blue { background: #4a6cf7; }
+.badge-green { background: #10b981; }
+.pi-content {
+    padding: 16px;
+}
+.pi-content h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* 2. Need a Home Loan CTA */
+.premium-loan-cta {
+    background: #f0f3fd;
+    padding: 0;
+}
+.plc-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    background: white;
+}
+.plc-image {
+    flex: 1;
+    min-height: 400px;
+}
+.plc-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.plc-text {
+    flex: 1;
+    padding: 60px 80px;
+}
+.plc-text h2 {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+.plc-text p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 440px;
+}
+.plc-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.plc-btn {
+    display: inline-block;
+    background: var(--accent-blue);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 14px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    width: fit-content;
+    transition: background 0.2s;
+}
+.plc-btn:hover { background: #3c5beb; }
+.plc-disclosure {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: underline;
+}
+
+/* 3. Popular Markets & Links */
+.premium-markets-links {
+    background: white;
+    padding: 60px 24px;
+    border-top: 1px solid var(--border-light);
+}
+.pml-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+.pml-col h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+.pml-col a {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 12px;
+}
+.pml-col a:hover { color: var(--accent-blue); text-decoration: underline; }
+.pml-seemore {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    margin-top: 4px;
+}
+.pml-seemore i { font-size: 12px; margin-left: 4px; }
+
+/* 4. Market Clock Banner */
+.premium-market-banner {
+    background: white;
+    padding: 0 24px 60px;
+}
+.pmb-container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.pmb-inner {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    gap: 40px;
+}
+.pmb-graphic {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    margin-left: -50px; /* pull left to match screenshot crop */
+}
+.pmb-clock {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 8px solid #f1f5f9;
+    position: relative;
+    background: white;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+}
+.pmb-clock-dial {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 180deg at 50% 50%, white 0deg, white 270deg, #fecaca 315deg, #bfdbfe 360deg);
+}
+.pmb-clock-label {
+    position: absolute;
+    background: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+}
+.pmb-clock-label.top-left {
+    top: 40%; right: 20%; color: #ef4444;
+}
+.pmb-clock-label.bottom-left {
+    bottom: 25%; right: 20%; color: #3b82f6;
+}
+.pmb-clock-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px; height: 24px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 2;
+}
+.pmb-clock-needle {
+    position: absolute;
+    top: 50%; left: 10%;
+    width: 40%; height: 4px;
+    background: #cbd5e1;
+    transform-origin: right center;
+    transform: translateY(-50%) rotate(0deg);
+    border-radius: 4px;
+    z-index: 1;
+}
+.pmb-text {
+    flex: 1;
+}
+.pmb-text h2 {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+}
+.pmb-text p {
+    font-size: 18px;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+.pmb-text p strong {
+    font-weight: 800;
+}
+.pmb-action {
+    padding-right: 40px;
+}
+.pmb-btn {
+    display: inline-block;
+    background: var(--accent-blue);
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.pmb-btn:hover { background: #3c5beb; }
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .pi-grid { grid-template-columns: repeat(2, 1fr); }
+    .plc-container { flex-direction: column; }
+    .plc-image, .plc-text { width: 100%; }
+    .plc-text { padding: 40px; }
+    .pml-container { grid-template-columns: repeat(2, 1fr); }
+    .pmb-inner { flex-direction: column; text-align: center; gap: 24px; }
+    .pmb-graphic { margin: 0 auto; width: 100%; display: flex; justify-content: center; }
+    .pmb-action { padding-right: 0; }
+}
+@media (max-width: 768px) {
+    .pi-grid { grid-template-columns: 1fr; }
+    .pml-container { grid-template-columns: 1fr; }
+    .pmb-text h2 { font-size: 32px; }
+}
+
+
+/* ==========================================
+   UNIQUE HOMES EDITORIAL HERO
+   ========================================== */
+.editorial-hero {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    background: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+}
+.eh-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%);
+    z-index: 1;
+}
+.eh-content {
+    position: relative;
+    z-index: 2;
+    max-width: 960px;
+    color: white;
+}
+.eh-eyebrow {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+    display: block;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+.eh-title {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 32px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.eh-btn {
+    display: inline-block;
+    background: transparent;
+    border: 1.5px solid white;
+    color: white;
+    padding: 12px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 0.2s, color 0.2s;
+}
+.eh-btn:hover {
+    background: white;
+    color: #1e2a3a;
+}
+@media (min-width: 768px) {
+    .editorial-hero { min-height: 600px; }
+    .eh-title { font-size: 40px; }
+}
+
+/* 2.5 Get Local Info */
+.premium-local-info {
+    background: white;
+    padding: 0;
+    border-bottom: 1px solid var(--border-light);
+}
+.pli-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: stretch;
+}
+.pli-text {
+    flex: 1;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pli-text h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+.pli-text p {
+    font-size: 18px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 40px;
+    max-width: 480px;
+}
+.pli-search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #94a3b8;
+    border-radius: 40px;
+    padding: 6px 6px 6px 20px;
+    width: 100%;
+    max-width: 440px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+.pli-search-box:focus-within {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 0 1px var(--text-primary);
+}
+.pli-search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: var(--text-primary);
+    font-family: inherit;
+    background: transparent;
+    width: 100%;
+}
+.pli-clear-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 16px;
+}
+.pli-search-btn {
+    background: var(--accent-blue);
+    border: none;
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.pli-search-btn:hover {
+    background: #3c5beb;
+}
+.pli-image {
+    flex: 1.2;
+    min-height: 450px;
+}
+.pli-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .pli-container { flex-direction: column-reverse; }
+    .pli-image { width: 100%; min-height: 300px; }
+    .pli-text { width: 100%; padding: 40px 24px; }
+}
+
+
+/* 2.75 NAR Section */
+.premium-nar-section {
+    background: white;
+    padding: 60px 24px;
+    border-top: 1px solid var(--border-light);
+}
+.nar-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+.nar-col {
+    flex: 1;
+}
+.nar-col.nar-brand {
+    flex: 1.2;
+}
+.nar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    color: #004b87;
+}
+.nar-icon-box {
+    width: 46px;
+    height: 46px;
+    background: #004b87;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.nar-icon-box::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid white;
+}
+.nar-r {
+    font-size: 34px;
+    font-weight: 700;
+    font-family: Georgia, serif;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+}
+.nar-text {
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.1px;
+}
+.nar-text sup {
+    font-size: 8px;
+}
+.nar-col.nar-brand p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    max-width: 240px;
+}
+.nar-col.nar-brand p sup {
+    font-size: 8px;
+}
+.nar-col h4 {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+.nar-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.nar-col ul li {
+    position: relative;
+    padding-left: 12px;
+}
+.nar-col ul li::before {
+    content: 'â€¢';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--text-primary);
+    font-weight: bold;
+}
+.nar-col ul li a {
+    color: #334155;
+    text-decoration: underline;
+    font-size: 13px;
+    line-height: 1.5;
+    transition: color 0.2s;
+}
+.nar-col ul li a sup {
+    font-size: 8px;
+}
+.nar-col ul li a:hover {
+    color: var(--accent-blue);
+}
+@media (max-width: 1024px) {
+    .nar-container { flex-direction: column; gap: 40px; }
+    .nar-col.nar-brand { max-width: 100%; border-bottom: 1px solid var(--border-light); padding-bottom: 24px; }
+}
+
+/* Hide details marker and add open state animation */
+.pml-col details summary::-webkit-details-marker {
+    display: none;
+}
+.pml-col details summary {
+    list-style: none;
+    outline: none;
+}
+.pml-col details[open] summary i {
+    transform: rotate(180deg);
+}
+.pml-seemore i {
+    transition: transform 0.2s ease;
+    margin-left: 4px;
+    font-size: 11px;
+}
