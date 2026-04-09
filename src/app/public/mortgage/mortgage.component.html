@@ -1,76 +1,110 @@
 <div class="mortgage-page">
   <app-site-header></app-site-header>
 
-<!-- Hero Section -->
-  <section class="sell-hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-grid">
-        <div class="hero-text">
-          <div class="hero-badge-top">Mortgage Solutions</div>
-          <h1 class="hero-title">Finance your future<br>with confidence.</h1>
-          <p class="hero-subtitle">We offer more than just a calculator. Get expert guidance, competitive rates, and a seamless path to homeownership.</p>
-          
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-num">4.8/5</span>
-              <span class="stat-label-text">User Satisfaction</span>
-            </div>
-            <div class="stat-sep"></div>
-            <div class="stat-item">
-              <span class="stat-num">24h</span>
-              <span class="stat-label-text">Fast Approvals</span>
-            </div>
-          </div>
+  <!-- ─── TABBED SEARCH HERO (PREMIUM CENTERED VERSION) ─── -->
+  <section class="hfm-search-hero">
+    <div class="hfm-container">
+      <div class="hfm-hero-text-center">
+        <h1>Get Pre-Approved</h1>
+        <p>Find a lender who can offer you competitive mortgage rates</p>
+
+        <!-- Custom Hero Tabs -->
+        <div class="hfm-hero-tabs">
+          <div class="hfm-tab">Buy</div>
+          <div class="hfm-tab">Rent</div>
+          <div class="hfm-tab">Sell</div>
+          <div class="hfm-tab active">Pre-Approval</div>
+          <div class="hfm-tab">Just Sold</div>
+          <div class="hfm-tab">Home Value</div>
         </div>
 
-        <div class="hero-calc">
-          <div class="valuation-card">
-            <div class="calc-header">
-              <h2>Mortgage Calculator</h2>
-              <p>Estimate your monthly payments instantly.</p>
+        <!-- Pill Search Bar -->
+        <div class="hfm-hero-search">
+          <input type="text" placeholder="ZIP code, neighborhood, city, or address" [(ngModel)]="address">
+          <div class="hfm-search-controls">
+            <i class="fas fa-times hfm-clear-btn" *ngIf="address" (click)="address=''"></i>
+            <button class="hfm-search-btn-circle" (click)="calculateValuation()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  
+  <!-- Partner Strip (Full Width) -->
+  <div class="hfm-partner-banner">
+    <div class="hfm-partner-logo">
+      <i class="fas fa-hand-holding-usd"></i>
+      <span>Home Filla Loans</span>
+    </div>
+    <div class="hfm-partner-info">
+      Check your Rates & Eligibility instantly
+    </div>
+    <a href="#" class="hfm-partner-cta">Find Your Rate</a>
+    <span class="hfm-nmls">NMLS #2121192. Not a govt agency</span>
+  </div>
+
+  <!-- ─── SECONDARY CALCULATOR SECTION ─── -->
+  <section class="hfm-hero" style="background: white; border-top: 1px solid #edf2f7; padding: 80px 24px;">
+    <div class="hfm-container">
+      <div class="hfm-left">
+        <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 20px;">Ready to calculate?</h2>
+        <p style="color: #4a5568; margin-bottom: 32px;">Use our advanced calculator to breakdown your monthly costs and find a loan that fits your budget.</p>
+        
+        <ul class="hfm-steps">
+          <li><span class="hfm-step-num">1</span> Check your affordability instantly</li>
+          <li><span class="hfm-step-num">2</span> Get pre-approved in minutes</li>
+        </ul>
+      </div>
+
+      <div class="hfm-right">
+        <div class="hfm-calc-card">
+          <div class="hfm-calc-header">
+            <h2>Mortgage Calculator</h2>
+            <p>Estimate your monthly payments instantly.</p>
+          </div>
+          
+          <div class="hfm-result-box">
+            <div class="hfm-monthly-val">
+              <span style="font-size: 24px; vertical-align: top; margin-top: 8px; display: inline-block;">$</span>{{ totalMonthlyPayment | number:'1.0-0' }}<span style="font-size: 16px; font-weight: 500; opacity: 0.8;">/mo</span>
             </div>
-            
-            <div class="calc-main-result">
-              <div class="monthly-payment">
-                <span class="currency">$</span>
-                <span class="amount">{{ totalMonthlyPayment | number:'1.0-0' }}</span>
-                <span class="period">/mo</span>
-              </div>
-              <p class="result-detail">Estimated total payment</p>
+            <div class="hfm-result-label">Estimated total monthly payment</div>
+          </div>
+
+          <div class="hfm-inputs">
+            <div class="hfm-input-group">
+              <label>
+                <span>Home Price</span>
+                <span class="hfm-val-display">${{ homePrice | number }}</span>
+              </label>
+              <input type="range" [(ngModel)]="homePrice" min="100000" max="2000000" step="5000" class="hfm-range">
             </div>
 
-            <div class="calc-inputs">
-              <div class="input-group">
-                <div class="label-row">
-                  <label>Home Price</label>
-                  <span class="value-display">${{ homePrice | number }}</span>
-                </div>
-                <input type="range" [(ngModel)]="homePrice" min="100000" max="2000000" step="5000">
+            <div class="hfm-field-row">
+              <div class="hfm-input-group">
+                <label>Down Payment (%)</label>
+                <input type="number" [(ngModel)]="downPaymentPercent" class="hfm-field">
               </div>
-
-              <div class="input-row">
-                <div class="input-group small">
-                  <label>Down Payment (%)</label>
-                  <input type="number" [(ngModel)]="downPaymentPercent" class="field-input">
-                </div>
-                <div class="input-group small">
-                  <label>Rate (%)</label>
-                  <input type="number" [(ngModel)]="interestRate" step="0.1" class="field-input">
-                </div>
+              <div class="hfm-input-group">
+                <label>Interest Rate (%)</label>
+                <input type="number" [(ngModel)]="interestRate" step="0.1" class="hfm-field">
               </div>
-
-              <div class="input-group">
-                <label>Loan Term</label>
-                <select [(ngModel)]="loanTerm" class="field-select">
-                  <option [ngValue]="30">30-Year Fixed</option>
-                  <option [ngValue]="15">15-Year Fixed</option>
-                  <option [ngValue]="5">5/1 ARM</option>
-                </select>
-              </div>
-
-              <button class="btn-primary w-full">Get Pre-Approved <i class="fas fa-chevron-right"></i></button>
             </div>
+
+            <div class="hfm-input-group">
+              <label>Loan Term</label>
+              <select [(ngModel)]="loanTerm" class="hfm-field">
+                <option [ngValue]="30">30-Year Fixed</option>
+                <option [ngValue]="15">15-Year Fixed</option>
+                <option [ngValue]="5">5/1 ARM</option>
+              </select>
+            </div>
+
+            <button class="hfm-cta-btn">
+              Explore Rates <i class="fas fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -212,7 +246,7 @@
     </div>
   </section>
 
-  <!-- CTA Section (same as Sell) -->
+  <!-- CTA Section -->
   <section class="cta-section">
     <div class="cta-content">
       <h2>Ready to get started?</h2>
@@ -221,7 +255,7 @@
     </div>
   </section>
 
-  <!-- Footer (exact copy from Sell) -->
+  <!-- Footer -->
   <footer class="realtor-footer">
     <div class="footer-container">
       <div class="footer-top">
@@ -233,6 +267,7 @@
             <a href="#">Accessibility</a>
             <a href="#">Feedback</a>
             <a href="#">Media room</a>
+            <a routerLink="/sitemap">Sitemap</a>
           </div>
         </div>
         <div class="footer-section">
@@ -271,7 +306,7 @@
           <a href="#">Home Made</a>
           <a href="#">Tech Blog</a>
           <a href="#">Agent Blog</a>
-          <a href="#">Sitemap</a>
+          <a routerLink="/sitemap">Sitemap</a>
           <a href="#" class="highlight-link">Do Not Sell or Share My Personal Information</a>
         </div>
         <div class="footer-socials">
@@ -284,7 +319,7 @@
         <div class="footer-disclaimer">
           <p>Any mortgage lead generation activity in the state of Connecticut is performed by Home Filla, LLC (NMLS #2121192), a subsidiary of Home Filla, Inc.</p>
           <p>*Based on average new for sale and rental listings Feb 2024 - Jan 2025.</p>
-          <p>© 1995-2026 <a href="#">Home Filla</a> and <a href="#">Home Filla, Inc.</a> All rights reserved.</p>
+          <p>© 1995-2026 Home Filla and Home Filla, Inc. All rights reserved.</p>
         </div>
       </div>
     </div>

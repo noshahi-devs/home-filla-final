@@ -17,6 +17,14 @@ export class MortgageComponent {
   downPaymentPercent = 20;
   loanTerm = 30;
   interestRate = 6.5;
+  address: string = '';
+
+  calculateValuation(): void {
+    const calcSection = document.querySelector('.hfm-hero');
+    if (calcSection) {
+      calcSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   // Estimated constants
   propertyTaxRate = 1.2;
