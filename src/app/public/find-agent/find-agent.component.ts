@@ -32,6 +32,18 @@ export class FindAgentComponent {
   selectedExperience = 'Any';
   selectedLanguage = 'Any';
 
+  // Wizard state
+  wizardAddress = '';
+  wizardComplete = false;
+
+  completeWizard() {
+    if (this.wizardAddress.trim()) {
+      this.wizardComplete = true;
+      this.searchLocation = this.wizardAddress;
+      setTimeout(() => this.scrollToAgents(), 100);
+    }
+  }
+
   specialties = [
     'Any',
     'Buyer Representation',
@@ -182,5 +194,4 @@ export class FindAgentComponent {
     this.selectedExperience = 'Any';
     this.selectedLanguage = 'Any';
   }
-
 }
