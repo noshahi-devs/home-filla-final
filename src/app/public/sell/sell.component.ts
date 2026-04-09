@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
@@ -15,7 +15,7 @@ declare global {
   templateUrl: './sell.component.html',
   styleUrl: './sell.component.css',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule, SiteHeaderComponent]
+  imports: [CommonModule, RouterLink, FormsModule, SiteHeaderComponent]
 })
 export class SellComponent implements OnInit, AfterViewInit {
   carouselIndex = 0;

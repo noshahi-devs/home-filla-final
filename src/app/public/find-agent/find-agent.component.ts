@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 
 interface AgentProfile {
@@ -23,7 +22,7 @@ interface AgentProfile {
 @Component({
   selector: 'app-find-agent',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive, SiteHeaderComponent],
+  imports: [CommonModule, FormsModule, SiteHeaderComponent],
   templateUrl: './find-agent.component.html',
   styleUrls: ['./find-agent.component.css']
 })

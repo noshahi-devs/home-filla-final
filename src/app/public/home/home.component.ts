@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 
 declare global {
@@ -13,7 +13,7 @@ declare global {
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  imports: [RouterLink, RouterLinkActive, SiteHeaderComponent],
+  imports: [RouterLink, SiteHeaderComponent],
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements AfterViewInit {

@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { getCategoryData, CategoryInfo, Property } from '../../data/listings.data';
@@ -14,7 +14,7 @@ declare global {
 @Component({
   selector: 'app-rent',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule, SiteHeaderComponent],
+  imports: [CommonModule, RouterLink, FormsModule, SiteHeaderComponent],
   templateUrl: './rent.html',
   styleUrl: './rent.css',
 })
