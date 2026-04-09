@@ -1,0 +1,67 @@
+.sitemap-wrapper {
+    background: white;
+    color: #1e2a3a;
+    font-family: 'Inter', sans-serif;
+    padding: 60px 24px 120px;
+    min-height: 100vh;
+}
+.sitemap-container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.sitemap-container h1 {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 48px;
+    color: #111;
+    letter-spacing: -0.5px;
+}
+.sitemap-main {
+    column-count: 4;
+    column-gap: 40px;
+}
+.sitemap-group {
+    break-inside: avoid-column;
+    page-break-inside: avoid;
+    margin-bottom: 48px;
+}
+.sitemap-group h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 20px;
+    letter-spacing: -0.2px;
+}
+.sm-item {
+    margin-bottom: 20px;
+}
+.sm-item a {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    text-decoration: none;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+.sm-item a:hover {
+    color: var(--accent-blue, #4a6cf7);
+    text-decoration: underline;
+}
+.sm-item p {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .sitemap-main { column-count: 3; }
+}
+@media (max-width: 768px) {
+    .sitemap-main { column-count: 2; }
+}
+@media (max-width: 480px) {
+    .sitemap-main { column-count: 1; }
+    .sitemap-container h1 { font-size: 28px; }
+}

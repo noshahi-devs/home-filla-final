@@ -5,6 +5,7 @@ import { PropertyDetailComponent } from './public/property-detail/property-detai
 import { LoginComponent } from './public/login/login.component';
 import { SignupComponent } from './public/signup/signup.component';
 import { RentComponent } from './public/rent/rent';
+import { SitemapComponent } from './public/sitemap/sitemap';
 import { SellComponent } from './public/sell/sell.component';
 import { MortgageComponent } from './public/mortgage/mortgage.component';
 import { FindAgentComponent } from './public/find-agent/find-agent.component';
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'find-agent', component: FindAgentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'sitemap', component: SitemapComponent },
   
   // Dashboards Lazy Loading
   { 
