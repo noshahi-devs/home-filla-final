@@ -1,5 +1,15 @@
 <div class="find-agent-page">
-  <app-site-header></app-site-header>
+
+  <!-- Minimal header: only site name, shown in wizard mode -->
+  <header class="wizard-mini-header" *ngIf="!wizardComplete">
+    <a routerLink="/" class="wizard-logo-link">
+      <span class="wizard-logo-icon"><i class="fas fa-home"></i></span>
+      <span class="wizard-logo-text">Home <strong>Filla</strong></span>
+    </a>
+  </header>
+
+  <!-- Full header: only after wizard completes -->
+  <app-site-header *ngIf="wizardComplete"></app-site-header>
 
   <!-- Wizard Hero: Address input step -->
   <section class="wizard-section" *ngIf="!wizardComplete">
@@ -233,7 +243,7 @@
 
   </div><!-- end *ngIf="wizardComplete" -->
 
-  <footer class="realtor-footer">
+  <footer class="realtor-footer" *ngIf="wizardComplete">
     <div class="footer-container">
       <div class="footer-top">
         <div class="footer-section">

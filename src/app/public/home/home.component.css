@@ -1791,3 +1791,69 @@
         padding: 12px !important;
     }
 }
+
+/* ---------------------------------------------------------------
+   HOME — Premium RealChoice™ Compare Agents Section
+--------------------------------------------------------------- */
+.home-compare-section {
+    position: relative;
+    padding: 100px 24px;
+    background: linear-gradient(135deg, #080f28 0%, #0d1b45 40%, #0a1535 70%, #060d22 100%);
+    overflow: hidden;
+}
+.home-compare-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.hca-orb { position:absolute; border-radius:50%; filter:blur(80px); opacity:.4; animation:hcaFloat 8s ease-in-out infinite; }
+.hca-orb-1 { width:500px; height:500px; background:radial-gradient(circle,rgba(74,108,247,.6) 0%,transparent 70%); top:-150px; left:-100px; }
+.hca-orb-2 { width:400px; height:400px; background:radial-gradient(circle,rgba(124,58,237,.5) 0%,transparent 70%); bottom:-100px; right:10%; animation-delay:-3s; }
+.hca-orb-3 { width:300px; height:300px; background:radial-gradient(circle,rgba(16,185,129,.3) 0%,transparent 70%); top:30%; right:30%; animation-delay:-6s; }
+@keyframes hcaFloat { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-30px) scale(1.08)} }
+.home-compare-inner { position:relative; z-index:1; max-width:1300px; margin:0 auto; display:grid; grid-template-columns:1fr 1.3fr; gap:80px; align-items:center; }
+.home-compare-copy { color:white; }
+.home-compare-eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(74,108,247,.2); border:1px solid rgba(74,108,247,.5); backdrop-filter:blur(10px); color:#8ca4f9; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:8px 18px; border-radius:50px; margin-bottom:24px; }
+.home-compare-copy h3 { font-size:52px; font-weight:800; line-height:1.1; margin-bottom:24px; background:linear-gradient(135deg,#fff 0%,#c8d5ff 50%,#a0b8ff 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.home-compare-desc { font-size:17px; color:rgba(255,255,255,.65); line-height:1.7; margin-bottom:40px; max-width:420px; }
+.home-compare-actions { display:flex; flex-direction:column; gap:16px; margin-bottom:48px; }
+.home-compare-btn { display:inline-flex; align-items:center; background:linear-gradient(135deg,#4a6cf7 0%,#7c3aed 100%); color:white; text-decoration:none; font-size:16px; font-weight:700; padding:4px 4px 4px 28px; border-radius:50px; transition:all .3s ease; box-shadow:0 8px 32px rgba(74,108,247,.45); align-self:flex-start; }
+.hca-btn-icon { background:rgba(255,255,255,.2); border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; margin-left:20px; transition:background .3s,transform .3s; }
+.home-compare-btn:hover { transform:translateY(-3px); box-shadow:0 16px 48px rgba(74,108,247,.6); }
+.home-compare-btn:hover .hca-btn-icon { background:rgba(255,255,255,.35); transform:translateX(4px); }
+.home-compare-note { display:flex; align-items:center; gap:8px; font-size:13px; color:rgba(255,255,255,.5); }
+.home-compare-note i { color:#10b981; }
+.home-trust-badges { display:flex; gap:12px; flex-wrap:wrap; }
+.home-trust-badge { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); backdrop-filter:blur(8px); padding:8px 16px; border-radius:50px; font-size:13px; color:rgba(255,255,255,.7); transition:all .2s; }
+.home-trust-badge:hover { background:rgba(255,255,255,.1); color:white; }
+.home-trust-badge i { color:#8ca4f9; font-size:13px; }
+.home-compare-cards { display:flex; flex-direction:column; gap:16px; }
+.home-ca-card { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border-radius:24px; padding:24px 28px; color:white; transition:all .35s ease; position:relative; overflow:hidden; }
+.home-ca-card:hover { background:rgba(255,255,255,.1); border-color:rgba(74,108,247,.5); transform:translateY(-4px) scale(1.01); box-shadow:0 24px 64px rgba(0,0,0,.4); }
+.home-ca-featured { background:rgba(74,108,247,.15); border-color:rgba(74,108,247,.5); box-shadow:0 16px 48px rgba(74,108,247,.25); }
+.home-ca-featured:hover { background:rgba(74,108,247,.22); border-color:rgba(74,108,247,.7); }
+.hca-featured-label { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg,#f59e0b,#f97316); color:white; font-size:11px; font-weight:700; padding:5px 12px; border-radius:50px; margin-bottom:16px; box-shadow:0 4px 12px rgba(245,158,11,.4); }
+.hca-card-top { display:flex; align-items:center; gap:16px; margin-bottom:20px; }
+.hca-avatar-wrap { position:relative; flex-shrink:0; }
+.hca-avatar-wrap img { width:60px; height:60px; border-radius:50%; object-fit:cover; border:2px solid rgba(255,255,255,.2); }
+.hca-online-dot { position:absolute; bottom:2px; right:2px; width:12px; height:12px; background:#10b981; border-radius:50%; border:2px solid #080f28; animation:hcaPulse 2s infinite; }
+@keyframes hcaPulse { 0%,100%{box-shadow:0 0 0 3px rgba(16,185,129,.25)} 50%{box-shadow:0 0 0 6px rgba(16,185,129,.1)} }
+.hca-agent-info { flex:1; }
+.hca-agent-info h4 { font-size:17px; font-weight:700; color:white; margin-bottom:3px; }
+.hca-agent-info p { font-size:13px; color:rgba(255,255,255,.55); margin-bottom:8px; }
+.hca-badge { display:inline-block; background:rgba(74,108,247,.25); border:1px solid rgba(74,108,247,.4); color:#8ca4f9; font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+.hca-rating { display:flex; align-items:center; gap:5px; flex-shrink:0; }
+.hca-rating i { color:#f59e0b; font-size:15px; }
+.hca-rating span { font-size:17px; font-weight:700; color:white; }
+.hca-stats { display:flex; align-items:center; background:rgba(0,0,0,.2); border-radius:14px; padding:14px 20px; }
+.hca-stat { flex:1; text-align:center; }
+.hca-stat strong { display:block; font-size:20px; font-weight:800; color:white; margin-bottom:4px; }
+.hca-stat span { font-size:11px; color:rgba(255,255,255,.45); text-transform:uppercase; letter-spacing:.05em; }
+.hca-stat-div { width:1px; height:36px; background:rgba(255,255,255,.1); flex-shrink:0; }
+.home-ca-more { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:36px 28px; cursor:pointer; background:rgba(255,255,255,.04); border-style:dashed; border-color:rgba(255,255,255,.2); }
+.home-ca-more:hover { background:rgba(74,108,247,.1); border-color:rgba(74,108,247,.5); border-style:solid; }
+.hca-more-circle { width:72px; height:72px; background:linear-gradient(135deg,rgba(74,108,247,.35),rgba(124,58,237,.35)); border:2px solid rgba(74,108,247,.5); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:#8ca4f9; margin-bottom:16px; transition:all .35s; }
+.home-ca-more:hover .hca-more-circle { transform:scale(1.1); box-shadow:0 12px 32px rgba(74,108,247,.4); }
+.home-ca-more h4 { font-size:18px; font-weight:700; color:white; margin-bottom:6px; }
+.home-ca-more p { font-size:14px; color:rgba(255,255,255,.45); margin-bottom:18px; }
+.hca-more-link { display:inline-flex; align-items:center; gap:8px; color:#8ca4f9; font-size:14px; font-weight:600; text-decoration:none; transition:all .2s; }
+.hca-more-link:hover { color:white; gap:12px; }
+@media (max-width:1024px) { .home-compare-inner { grid-template-columns:1fr; gap:60px; } .home-compare-copy h3 { font-size:40px; } }
+@media (max-width:768px) { .home-compare-section { padding:70px 24px; } .home-compare-copy h3 { font-size:32px; } }
+@media (max-width:480px) { .home-compare-copy h3 { font-size:28px; } .home-compare-btn { font-size:14px; padding:4px 4px 4px 20px; } }

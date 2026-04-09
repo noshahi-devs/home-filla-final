@@ -203,47 +203,100 @@
         </div>
     </div>
 
-    <!-- Compare Agents Section -->
-    <section class="compare-agents-section">
-        <div class="compare-agents-content">
-            <div class="compare-agents-copy">
-                <p class="compare-eyebrow">RealChoice™ Selling</p>
-                <h3>Looking to sell? Find a trusted expert.</h3>
-                <p class="compare-description">We matched you with six agents in San Francisco, CA. Enter your address to review and compare agents.</p>
-                <div class="compare-actions">
-                    <a routerLink="/find-agent" class="compare-btn">
-                        Compare agents
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <span class="compare-note">Compare their costs and services before you choose.</span>
-                </div>
-            </div>
-            <div class="compare-agent-cards">
-                <article class="compare-agent-card">
-                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laxmi Penupothula">
-                    <h4>Laxmi Penupothula</h4>
-                    <p>Intero Real Estate Services · Broker</p>
-                    <div class="compare-agent-stats">
-                        <span><strong>8 yrs</strong> experience</span>
-                        <span><strong>70</strong> sales</span>
-                    </div>
-                </article>
-                <article class="compare-agent-card">
-                    <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Robert Parish">
-                    <h4>Robert Parish</h4>
-                    <p>Compass</p>
-                    <div class="compare-agent-stats">
-                        <span><strong>26 yrs</strong> experience</span>
-                        <span><strong>4</strong> sales this year</span>
-                    </div>
-                </article>
-                <article class="compare-agent-card more">
-                    <div class="more-circle">+4</div>
-                    <h4>more agents</h4>
-                    <p>See the full compare list.</p>
-                </article>
-            </div>
+    <!-- Compare Agents Section — Premium -->
+    <section class="home-compare-section">
+      <div class="home-compare-bg">
+        <div class="hca-orb hca-orb-1"></div>
+        <div class="hca-orb hca-orb-2"></div>
+        <div class="hca-orb hca-orb-3"></div>
+      </div>
+
+      <div class="home-compare-inner">
+        <!-- Left copy -->
+        <div class="home-compare-copy">
+          <span class="home-compare-eyebrow">
+            <i class="fas fa-shield-alt"></i>&nbsp; RealChoice™ Selling
+          </span>
+          <h3>Looking to sell?<br>Find a trusted expert.</h3>
+          <p class="home-compare-desc">
+            We matched you with six agents in San Francisco, CA.
+            Enter your address to review and compare agents.
+          </p>
+          <div class="home-compare-actions">
+            <a routerLink="/find-agent" class="home-compare-btn" id="home-compare-agents-btn">
+              <span>Compare agents</span>
+              <span class="hca-btn-icon"><i class="fas fa-arrow-right"></i></span>
+            </a>
+            <span class="home-compare-note">
+              <i class="fas fa-check-circle"></i>
+              Compare their costs and services before you choose.
+            </span>
+          </div>
+          <div class="home-trust-badges">
+            <div class="home-trust-badge"><i class="fas fa-star"></i><span>Top-rated agents only</span></div>
+            <div class="home-trust-badge"><i class="fas fa-lock"></i><span>No obligation</span></div>
+            <div class="home-trust-badge"><i class="fas fa-bolt"></i><span>Instant matching</span></div>
+          </div>
         </div>
+
+        <!-- Right agent cards -->
+        <div class="home-compare-cards">
+          <!-- Agent 1 -->
+          <article class="home-ca-card">
+            <div class="hca-card-top">
+              <div class="hca-avatar-wrap">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laxmi Penupothula">
+                <span class="hca-online-dot"></span>
+              </div>
+              <div class="hca-agent-info">
+                <h4>Laxmi Penupothula</h4>
+                <p>Intero Real Estate Services</p>
+                <span class="hca-badge">Broker</span>
+              </div>
+              <div class="hca-rating"><i class="fas fa-star"></i><span>4.9</span></div>
+            </div>
+            <div class="hca-stats">
+              <div class="hca-stat"><strong>8</strong><span>yrs exp</span></div>
+              <div class="hca-stat-div"></div>
+              <div class="hca-stat"><strong>70</strong><span>sales</span></div>
+              <div class="hca-stat-div"></div>
+              <div class="hca-stat"><strong>$2.1M</strong><span>avg price</span></div>
+            </div>
+          </article>
+
+          <!-- Agent 2 — Featured -->
+          <article class="home-ca-card home-ca-featured">
+            <div class="hca-featured-label"><i class="fas fa-crown"></i> Top Pick</div>
+            <div class="hca-card-top">
+              <div class="hca-avatar-wrap">
+                <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Robert Parish">
+                <span class="hca-online-dot"></span>
+              </div>
+              <div class="hca-agent-info">
+                <h4>Robert Parish</h4>
+                <p>Compass</p>
+                <span class="hca-badge">Realtor®</span>
+              </div>
+              <div class="hca-rating"><i class="fas fa-star"></i><span>5.0</span></div>
+            </div>
+            <div class="hca-stats">
+              <div class="hca-stat"><strong>26</strong><span>yrs exp</span></div>
+              <div class="hca-stat-div"></div>
+              <div class="hca-stat"><strong>4</strong><span>this yr</span></div>
+              <div class="hca-stat-div"></div>
+              <div class="hca-stat"><strong>$3.8M</strong><span>avg price</span></div>
+            </div>
+          </article>
+
+          <!-- More card -->
+          <article class="home-ca-card home-ca-more">
+            <div class="hca-more-circle">+4</div>
+            <h4>More agents</h4>
+            <p>See the full compare list</p>
+            <a routerLink="/find-agent" class="hca-more-link">View all <i class="fas fa-arrow-right"></i></a>
+          </article>
+        </div>
+      </div>
     </section>
 
     <!-- Featured Properties -->
