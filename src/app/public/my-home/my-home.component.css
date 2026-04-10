@@ -360,3 +360,42 @@
 .mh-tt-stars { font-size: 10px; letter-spacing: 1px; color: #e2e8f0; } /* mockup */
 .mh-btn-gray-pill { background: #717171; color: white; border: none; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; }
 .mh-btn-gray-pill.btn-dark { background: #222222; }
+
+/* ─── Resources Section ─── */
+.mh-resources-container {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 20px;
+}
+
+.mh-resource-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.mh-resource-link {
+  color: #111;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mh-resource-link i {
+  color: #111;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.mh-resource-link:hover {
+  color: var(--accent-blue);
+}
+
+.mh-resource-link:hover i {
+  color: var(--accent-blue);
+}
