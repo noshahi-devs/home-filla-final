@@ -1,4 +1,4 @@
-﻿* {
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -1290,123 +1290,6 @@
             position: relative;
         }
 
-        /* Footer */
-        .realtor-footer {
-            background: #1e3a5f;
-            border-top: none;
-            padding: 80px 0 40px;
-            margin-top: 0;
-            color: #cbd5e1;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .footer-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .footer-section h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-links-col {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .footer-links-col a, .footer-bottom-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .footer-links-col a:hover, .footer-bottom-links a:hover {
-            color: #60a5fa;
-            padding-left: 6px;
-            letter-spacing: 0.01em;
-        }
-
-        .highlight-link {
-            color: #fbcd0e !important;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 32px;
-        }
-
-        .footer-bottom-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 24px;
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 32px;
-        }
-
-        .footer-socials a {
-            color: white;
-            font-size: 22px;
-            transition: all 0.25s ease;
-            opacity: 0.75;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-        }
-
-        .footer-socials a:hover {
-            opacity: 1;
-            background: rgba(96, 165, 250, 0.25);
-            color: #60a5fa;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(96, 165, 250, 0.2);
-        }
-
-        .footer-disclaimer {
-            color: #94a3b8;
-            font-size: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-width: 800px;
-        }
-
-        .footer-disclaimer a {
-            color: white;
-            text-decoration: underline;
-        }
-
         /* Responsive helpers */
         @media (max-width: 1200px) {
             .property-grid,
@@ -1572,9 +1455,6 @@
                 padding: 40px 16px;
             }
 
-            .footer-bottom {
-                gap: 20px;
-            }
 
             .filter-chip {
                 padding: 10px;
@@ -1712,7 +1592,6 @@
     .discover-tab { flex-shrink: 0; padding: 10px 20px !important; font-size: 14px !important; }
     .discover-section { padding: 48px 16px !important; }
     .discover-grid { grid-template-columns: 1fr !important; }
-    .footer-top { grid-template-columns: repeat(2, 1fr) !important; }
     .agents-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 @media (max-width: 900px) {
@@ -1750,7 +1629,6 @@
     }
     .hero-search button i { font-size: 16px !important; }
     .agents-grid { grid-template-columns: 1fr !important; }
-    .footer-bottom-links { gap: 16px; }
 
     #sticky-search .s-inner {
         padding: 5px 5px 5px 15px !important;

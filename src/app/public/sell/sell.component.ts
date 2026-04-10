@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
+import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
 
 declare global {
   interface Window {
@@ -15,7 +16,7 @@ declare global {
   templateUrl: './sell.component.html',
   styleUrl: './sell.component.css',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, SiteHeaderComponent]
+  imports: [CommonModule, RouterLink, FormsModule, SiteHeaderComponent, SiteFooterComponent]
 })
 export class SellComponent implements OnInit, AfterViewInit {
   carouselIndex = 0;

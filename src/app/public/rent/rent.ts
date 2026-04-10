@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { getCategoryData, CategoryInfo, Property } from '../../data/listings.data';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
+import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
 
 declare global {
   interface Window {
@@ -14,7 +15,7 @@ declare global {
 @Component({
   selector: 'app-rent',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, SiteHeaderComponent],
+  imports: [CommonModule, RouterLink, FormsModule, SiteHeaderComponent, SiteFooterComponent],
   templateUrl: './rent.html',
   styleUrl: './rent.css',
 })

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
+import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
 
 declare global {
   interface Window {
@@ -13,7 +14,8 @@ declare global {
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  imports: [RouterLink, SiteHeaderComponent],
+  standalone: true,
+  imports: [RouterLink, SiteHeaderComponent, SiteFooterComponent],
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements AfterViewInit {

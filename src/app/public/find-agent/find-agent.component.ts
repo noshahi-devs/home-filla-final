@@ -18,12 +18,13 @@ interface AgentProfile {
   tagline: string;
   phone: string;
 }
+import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-find-agent',
   standalone: true,
-  imports: [CommonModule, FormsModule, SiteHeaderComponent, RouterModule],
+  imports: [CommonModule, FormsModule, SiteHeaderComponent, SiteFooterComponent, RouterModule],
   templateUrl: './find-agent.component.html',
   styleUrls: ['./find-agent.component.css']
 })

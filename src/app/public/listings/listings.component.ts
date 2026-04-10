@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { getCategoryData, CategoryInfo, Property } from '../../data/listings.data';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
+import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
 
 declare global {
   interface Window {
@@ -17,7 +18,8 @@ declare global {
   selector: 'app-listings',
   templateUrl: './listings.component.html',
   styleUrl: './listings.component.css',
-  imports: [CommonModule, RouterLink, SiteHeaderComponent]
+  standalone: true,
+  imports: [CommonModule, RouterLink, SiteHeaderComponent, SiteFooterComponent]
 })
 export class ListingsComponent implements OnInit, AfterViewInit {
   category: CategoryInfo | null = null;

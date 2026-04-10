@@ -707,121 +707,6 @@
   gap: 12px;
 }
 
-/* ─── FOOTER (exact same as Sell) ─── */
-.realtor-footer {
-    background: #1e3a5f;
-    padding: 80px 0 40px;
-    color: #94a3b8;
-    font-family: 'Inter', sans-serif;
-}
-
-.footer-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-.footer-top {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    margin-bottom: 60px;
-}
-
-.footer-section h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 24px;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.footer-links-col {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.footer-links-col a,
-.footer-bottom-links a {
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.footer-links-col a:hover,
-.footer-bottom-links a:hover {
-    color: #60a5fa;
-    padding-left: 4px;
-}
-
-.highlight-link { color: #fbcd0e !important; }
-
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 32px;
-}
-
-.footer-bottom-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
-}
-
-.footer-socials {
-    display: flex;
-    gap: 20px;
-}
-
-.footer-socials a {
-    color: white;
-    font-size: 20px;
-    opacity: 0.75;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    transition: all 0.25s ease;
-}
-
-.footer-socials a:hover {
-    opacity: 1;
-    background: rgba(96, 165, 250, 0.25);
-    color: #60a5fa;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(96, 165, 250, 0.2);
-}
-
-.footer-disclaimer {
-    color: #94a3b8;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    max-width: 800px;
-    line-height: 1.6;
-}
-
-.footer-disclaimer a {
-    color: white;
-    text-decoration: underline;
-}
-
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
   .hero-inner {
@@ -858,10 +743,6 @@
     .hamburger-btn { display: flex; }
     .nav-links { display: none !important; }
     .auth-buttons { display: none !important; }
-
-    .footer-top { grid-template-columns: repeat(2, 1fr) !important; gap: 32px; }
-    .footer-bottom-links { gap: 16px; }
-    .footer-socials { gap: 16px; }
 }
 
 @media (max-width: 600px) {

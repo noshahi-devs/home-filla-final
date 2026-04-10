@@ -890,9 +890,6 @@
         padding: 20px;
     }
 
-    .footer-top {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 @media (max-width: 768px) {
@@ -969,110 +966,7 @@
         gap: 8px;
     }
 
-    .footer-bottom {
-        gap: 20px;
-    }
 }
-
-/* ─── FOOTER (Premium Navy Theme) ─── */
-.realtor-footer {
-    background: #1e3a5f; /* Navy Theme */
-    padding: 80px 0 40px;
-    margin-top: auto;
-    color: #cbd5e1;
-}
-
-.footer-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-.footer-top {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    margin-bottom: 60px;
-}
-
-.footer-section h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 24px;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.footer-links-col {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.footer-links-col a {
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 14px;
-    transition: all 0.2s;
-}
-
-.footer-links-col a:hover {
-    color: #60a5fa;
-    transform: translateX(4px);
-}
-
-.footer-bottom {
-    padding-top: 40px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-}
-
-.footer-bottom-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
-}
-
-.footer-bottom-links a {
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-.highlight-link {
-    color: #fbcd0e !important;
-    font-weight: 600;
-}
-
-.footer-socials {
-    display: flex;
-    gap: 24px;
-}
-
-.footer-socials a {
-    color: white;
-    font-size: 20px;
-    opacity: 0.7;
-    transition: all 0.2s;
-}
-
-.footer-socials a:hover {
-    opacity: 1;
-    color: #60a5fa;
-}
-
-.footer-disclaimer p {
-    font-size: 12px;
-    color: #94a3b8;
-    line-height: 1.8;
-    text-align: center;
-}
-
 
 /* HAMBURGER BUTTON */
 .hamburger-btn {
@@ -1262,18 +1156,9 @@
 @media (max-width: 576px) {
     .lst-hero-title { font-size: 26px; }
     .rent-main { padding: 24px 12px; }
-    .footer-bottom-links { gap: 16px; }
+
 }
 
-@media (max-width: 1024px) {
-    .footer-top {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
 @media (max-width: 768px) {
-    .footer-top {
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-    }
 }
