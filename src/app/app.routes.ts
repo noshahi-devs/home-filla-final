@@ -9,6 +9,7 @@ import { SitemapComponent } from './public/sitemap/sitemap';
 import { SellComponent } from './public/sell/sell.component';
 import { MortgageComponent } from './public/mortgage/mortgage.component';
 import { FindAgentComponent } from './public/find-agent/find-agent.component';
+import { HomeLoanComponent } from './public/home-loan/home-loan';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'sitemap', component: SitemapComponent },
+  { path: 'home-loan', component: HomeLoanComponent },
   
   // Dashboards Lazy Loading
   { 

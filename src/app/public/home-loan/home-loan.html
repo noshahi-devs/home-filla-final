@@ -1,0 +1,271 @@
+<app-site-header></app-site-header>
+
+<main class="home-loan-page">
+  <div class="wizard-container">
+    <div class="mrc-form-wrapper">
+      <!-- Progress Bar -->
+      <div class="mrc-stepped-progress-bar-wrapper">
+        <div class="mrc-stepped-progress-bar">
+          <div class="mrc-stepped-progress-bar-sections">
+            <div class="mrc-stepped-progress-bar-section" [class.active]="currentStep >= 1">
+              <div class="mrc-stepped-progress-bar-section-glyph">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <g>
+                    <circle class="mrc-stepped-progress-bar-section-glyph-circle-background" cx="16" cy="16" r="14" fill="#fff" stroke="#e8e8e8" stroke-width="4"></circle>
+                    <circle class="mrc-stepped-progress-bar-section-glyph-circle" cx="16" cy="16" r="14" fill="none" stroke="#000" stroke-width="4" transform="rotate(173 16 16)"></circle>
+                    <polyline class="mrc-stepped-progress-bar-section-glyph-checkmark" points="9 16 13 21 24 12" fill="none" stroke="#fff" stroke-width="3"></polyline>
+                  </g>
+                </svg>
+              </div>
+              <div class="mrc-stepped-progress-bar-section-label">Property</div>
+            </div>
+            <div class="mrc-stepped-progress-bar-section" [class.active]="currentStep >= 2">
+              <div class="mrc-stepped-progress-bar-section-glyph">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <g>
+                    <circle class="mrc-stepped-progress-bar-section-glyph-circle-background" cx="16" cy="16" r="14" fill="#fff" stroke="#e8e8e8" stroke-width="4"></circle>
+                    <circle class="mrc-stepped-progress-bar-section-glyph-circle" cx="16" cy="16" r="14" fill="none" stroke="#000" stroke-width="4" transform="rotate(173 16 16)"></circle>
+                    <polyline class="mrc-stepped-progress-bar-section-glyph-checkmark" points="9 16 13 21 24 12" fill="none" stroke="#fff" stroke-width="3"></polyline>
+                  </g>
+                </svg>
+              </div>
+              <div class="mrc-stepped-progress-bar-section-label">Timeline</div>
+            </div>
+            <div class="mrc-stepped-progress-bar-section" [class.active]="currentStep >= 3">
+              <div class="mrc-stepped-progress-bar-section-glyph">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <g>
+                    <circle class="mrc-stepped-progress-bar-section-glyph-circle-background" cx="16" cy="16" r="14" fill="#fff" stroke="#e8e8e8" stroke-width="4"></circle>
+                    <circle class="mrc-stepped-progress-bar-section-glyph-circle" cx="16" cy="16" r="14" fill="none" stroke="#000" stroke-width="4" transform="rotate(173 16 16)"></circle>
+                    <polyline class="mrc-stepped-progress-bar-section-glyph-checkmark" points="9 16 13 21 24 12" fill="none" stroke="#fff" stroke-width="3"></polyline>
+                  </g>
+                </svg>
+              </div>
+              <div class="mrc-stepped-progress-bar-section-label">Details</div>
+            </div>
+            <div class="mrc-stepped-progress-bar-section" [class.active]="currentStep >= 4">
+              <div class="mrc-stepped-progress-bar-section-glyph">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <g>
+                    <circle class="mrc-stepped-progress-bar-section-glyph-circle-background" cx="16" cy="16" r="14" fill="#fff" stroke="#e8e8e8" stroke-width="4"></circle>
+                    <circle class="mrc-stepped-progress-bar-section-glyph-circle" cx="16" cy="16" r="14" fill="none" stroke="#000" stroke-width="4" transform="rotate(173 16 16)"></circle>
+                    <polyline class="mrc-stepped-progress-bar-section-glyph-checkmark" points="9 16 13 21 24 12" fill="none" stroke="#fff" stroke-width="3"></polyline>
+                  </g>
+                </svg>
+              </div>
+              <div class="mrc-stepped-progress-bar-section-label">Wrap-Up</div>
+            </div>
+          </div>
+          <div class="mrc-stepped-progress-bar-connector"></div>
+          <div class="mrc-stepped-progress-bar-connector-background"></div>
+        </div>
+      </div>
+
+      <form class="fmcty-form fmcty-loaded fmcty-wizard shadow-lg">
+        <ol class="fmcty-sections">
+          
+          <!-- STEP 1: PROPERTY -->
+          <li class="fmcty-section active" *ngIf="currentStep === 1">
+            <div class="fmcty-section-content">
+              <header class="step-header">
+                <div class="fmcty-headline">Get pre-approved</div>
+                <div class="fmcty-subhead">Connect with a lender who can help you with pre-approval.</div>
+              </header>
+
+              <ol class="fmcty-fields">
+                <li class="fmcty-field fmcty-field-radio">
+                  <dl>
+                    <dt><label class="fmcty-label">What type of loan are you looking for?</label></dt>
+                    <dd>
+                      <ol class="fmcty-radio-group">
+                        <li class="fmcty-radio-option">
+                          <input type="radio" name="loan_type" value="P" id="loan_p" checked>
+                          <label for="loan_p" class="fmcty-radio-option-label"><span>Home </span>Purchase</label>
+                        </li>
+                        <li class="fmcty-radio-option">
+                          <input type="radio" name="loan_type" value="R" id="loan_r">
+                          <label for="loan_r" class="fmcty-radio-option-label">Refinance</label>
+                        </li>
+                        <li class="fmcty-radio-option">
+                          <input type="radio" name="loan_type" value="equity" id="loan_e">
+                          <label for="loan_e" class="fmcty-radio-option-label">Home Equity</label>
+                        </li>
+                      </ol>
+                    </dd>
+                  </dl>
+                </li>
+
+                <li class="fmcty-field fmcty-field-radio">
+                  <dl>
+                    <dt><label class="fmcty-label">What type of home are you looking for?</label></dt>
+                    <dd>
+                      <ol class="fmcty-radio-group mrc-radio-group-with-icons">
+                        <li class="fmcty-radio-option">
+                          <input type="radio" name="property_type" value="single" id="prop_single" checked>
+                          <label for="prop_single" class="fmcty-radio-option-label">
+                            <i class="fas fa-home"></i> Single Family
+                          </label>
+                        </li>
+                        <li class="fmcty-radio-option">
+                          <input type="radio" name="property_type" value="townhome" id="prop_town">
+                          <label for="prop_town" class="fmcty-radio-option-label">
+                            <i class="fas fa-city"></i> Town Home
+                          </label>
+                        </li>
+                        <li class="fmcty-radio-option">
+                          <input type="radio" name="property_type" value="condo" id="prop_condo">
+                          <label for="prop_condo" class="fmcty-radio-option-label">
+                            <i class="fas fa-building"></i> Condo
+                          </label>
+                        </li>
+                      </ol>
+                    </dd>
+                  </dl>
+                </li>
+
+                <li class="fmcty-field fmcty-field-text">
+                  <dl>
+                    <dt><label class="fmcty-label">Where are you looking to buy?</label> <span class="fmcty-field-description"><small>City or Zip Code</small></span></dt>
+                    <dd>
+                      <input type="text" class="fmcty-input-text" placeholder="e.g. Sunnyvale, CA 94086">
+                    </dd>
+                  </dl>
+                </li>
+
+                <li class="fmcty-field fmcty-field-next-action">
+                  <button type="button" class="fmcty-next" (click)="nextStep()">Next</button>
+                </li>
+              </ol>
+            </div>
+          </li>
+
+          <!-- STEP 2: TIMELINE -->
+          <li class="fmcty-section active" *ngIf="currentStep === 2">
+            <div class="fmcty-section-content">
+              <ol class="fmcty-fields">
+                <li class="fmcty-field fmcty-field-radio">
+                  <dl>
+                    <dt><label class="fmcty-label">How do you plan to use your new home?</label></dt>
+                    <dd>
+                      <ol class="fmcty-radio-group">
+                        <li class="fmcty-radio-option">
+                          <input type="radio" name="use" value="Primary" id="use_p" checked>
+                          <label for="use_p" class="fmcty-radio-option-label">Primary Residence</label>
+                        </li>
+                        <li class="fmcty-radio-option">
+                          <input type="radio" name="use" value="Vacation" id="use_v">
+                          <label for="use_v" class="fmcty-radio-option-label">Vacation Property</label>
+                        </li>
+                        <li class="fmcty-radio-option">
+                          <input type="radio" name="use" value="Investment" id="use_i">
+                          <label for="use_i" class="fmcty-radio-option-label">Investment Property</label>
+                        </li>
+                      </ol>
+                    </dd>
+                  </dl>
+                </li>
+
+                <li class="fmcty-field fmcty-field-radio">
+                  <dl>
+                    <dt><label class="fmcty-label">Where are you in the home buying process?</label></dt>
+                    <dd>
+                      <ol class="fmcty-radio-group">
+                        <li class="fmcty-radio-option"><input type="radio" name="status" value="1" id="st_1" checked><label for="st_1" class="fmcty-radio-option-label">Found a home</label></li>
+                        <li class="fmcty-radio-option"><input type="radio" name="status" value="2" id="st_2"><label for="st_2" class="fmcty-radio-option-label">Buying within 1 month</label></li>
+                        <li class="fmcty-radio-option"><input type="radio" name="status" value="3" id="st_3"><label for="st_3" class="fmcty-radio-option-label">Buying in 1-3 months</label></li>
+                      </ol>
+                    </dd>
+                  </dl>
+                </li>
+
+                <li class="fmcty-field fmcty-field-actions">
+                  <button type="button" class="fmcty-prev" (click)="prevStep()">Back</button>
+                  <button type="button" class="fmcty-next" (click)="nextStep()">Next</button>
+                </li>
+              </ol>
+            </div>
+          </li>
+
+          <!-- STEP 3: DETAILS -->
+          <li class="fmcty-section active" *ngIf="currentStep === 3">
+            <div class="fmcty-section-content">
+              <ol class="fmcty-fields">
+                <li class="fmcty-field fmcty-field-number_slider">
+                  <dl>
+                    <dt><label class="fmcty-label">What is your price range?</label></dt>
+                    <dd>
+                      <div class="mrc-slider-output">$350,000 - $400,000</div>
+                      <input type="range" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    </dd>
+                  </dl>
+                </li>
+
+                <li class="fmcty-field fmcty-field-radio">
+                  <dl>
+                    <dt><label class="fmcty-label">What is your credit score?</label></dt>
+                    <dd>
+                      <ol class="fmcty-radio-group">
+                        <li class="fmcty-radio-option"><input type="radio" name="credit" value="Ex" id="cr_1" checked><label for="cr_1" class="fmcty-radio-option-label">Excellent (720+)</label></li>
+                        <li class="fmcty-radio-option"><input type="radio" name="credit" value="Gd" id="cr_2"><label for="cr_2" class="fmcty-radio-option-label">Good (680-719)</label></li>
+                        <li class="fmcty-radio-option"><input type="radio" name="credit" value="Fr" id="cr_3"><label for="cr_3" class="fmcty-radio-option-label">Fair (620-679)</label></li>
+                      </ol>
+                    </dd>
+                  </dl>
+                </li>
+
+                <li class="fmcty-field fmcty-field-actions">
+                  <button type="button" class="fmcty-prev" (click)="prevStep()">Back</button>
+                  <button type="button" class="fmcty-next" (click)="nextStep()">Next</button>
+                </li>
+              </ol>
+            </div>
+          </li>
+
+          <!-- STEP 4: WRAP-UP -->
+          <li class="fmcty-section active" *ngIf="currentStep === 4">
+            <div class="fmcty-section-content">
+              <header class="step-header">
+                <div class="fmcty-headline">Almost done!</div>
+                <div class="fmcty-subhead">We just need a few more details to find your best matches.</div>
+              </header>
+
+              <ol class="fmcty-fields">
+                <li class="fmcty-field fmcty-field-text">
+                  <div class="grid grid-cols-2 gap-4">
+                    <dl>
+                      <dt><label class="fmcty-label">First Name</label></dt>
+                      <dd><input type="text" class="fmcty-input-text" placeholder="First"></dd>
+                    </dl>
+                    <dl>
+                      <dt><label class="fmcty-label">Last Name</label></dt>
+                      <dd><input type="text" class="fmcty-input-text" placeholder="Last"></dd>
+                    </dl>
+                  </div>
+                </li>
+
+                <li class="fmcty-field fmcty-field-email">
+                  <dl>
+                    <dt><label class="fmcty-label">Email Address</label></dt>
+                    <dd><input type="email" class="fmcty-input-email" placeholder="example@email.com"></dd>
+                  </dl>
+                </li>
+
+                <li class="fmcty-field fmcty-field-submit-action">
+                  <button type="button" class="fmcty-prev" (click)="prevStep()">Back</button>
+                  <button type="button" class="fmcty-submit">Show My Results</button>
+                </li>
+              </ol>
+
+              <div class="fmcty-disclosure mt-8 text-xs text-gray-500">
+                <p>By proceeding, you consent to our terms of use and privacy policy. We may share your information with our network of lenders.</p>
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </form>
+    </div>
+  </div>
+</main>
+
+<app-site-footer></app-site-footer>
