@@ -11,6 +11,7 @@ import { MortgageComponent } from './public/mortgage/mortgage.component';
 import { FindAgentComponent } from './public/find-agent/find-agent.component';
 import { HomeLoanComponent } from './public/home-loan/home-loan';
 import { MyHomeComponent } from './public/my-home/my-home.component';
+import { SaleProceedsCalculatorComponent } from './public/sale-proceeds-calculator/sale-proceeds-calculator.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: 'sitemap', component: SitemapComponent },
   { path: 'home-loan', component: HomeLoanComponent },
   { path: 'my-home', component: MyHomeComponent },
+  { path: 'my-home/sale-proceeds-calculator', component: SaleProceedsCalculatorComponent },
   
   // Dashboards Lazy Loading
   { 

@@ -1,0 +1,227 @@
+<app-site-header></app-site-header>
+
+<div class="spc-page">
+  
+  <div class="spc-header">
+    <div class="spc-container">
+      <div class="spc-breadcrumb">
+        <a routerLink="/my-home">My Home</a> <i class="fas fa-chevron-right"></i> <span>Sale proceeds calculator</span>
+      </div>
+      <h1 class="spc-title">How much can you make selling your home?</h1>
+      <p class="spc-subtitle">Use this calculator to estimate your net proceeds and see how much cash you could walk away with after selling your house.</p>
+    </div>
+  </div>
+
+  <div class="spc-container spc-main-grid">
+    
+    <!-- LEFT COLUMN: INPUTS -->
+    <div class="spc-inputs-column">
+      <div class="spc-card">
+        <h2 class="spc-card-title">Your home details</h2>
+        
+        <div class="spc-form-group">
+          <label>Estimated home value</label>
+          <div class="spc-input-wrapper with-icon">
+            <span class="spc-input-icon">$</span>
+            <input type="number" [(ngModel)]="homeValue" min="0" class="spc-input">
+          </div>
+          <p class="spc-hint">Roughly what do you expect to sell your home for?</p>
+        </div>
+
+        <div class="spc-form-group">
+          <label>Remaining mortgage balance</label>
+          <div class="spc-input-wrapper with-icon">
+            <span class="spc-input-icon">$</span>
+            <input type="number" [(ngModel)]="mortgageBalance" min="0" class="spc-input">
+          </div>
+          <p class="spc-hint">What you still owe on your current loan(s).</p>
+        </div>
+      </div>
+
+      <div class="spc-card">
+        <h2 class="spc-card-title">Estimated selling costs</h2>
+        
+        <div class="spc-form-group">
+          <label>Real estate agent commission</label>
+          <div class="spc-input-wrapper with-icon right-icon">
+            <input type="number" [(ngModel)]="agentCommissionRate" min="0" max="10" step="0.1" class="spc-input">
+            <span class="spc-input-icon">%</span>
+          </div>
+          <p class="spc-hint">Typically 5-6% of the home's sale price, split between the buyer's and seller's agents.</p>
+        </div>
+
+        <div class="spc-form-group">
+          <label>Estimated repair &amp; prep costs</label>
+          <div class="spc-input-wrapper with-icon">
+            <span class="spc-input-icon">$</span>
+            <input type="number" [(ngModel)]="repairCosts" min="0" class="spc-input">
+          </div>
+          <p class="spc-hint">Money spent staging, fixing up, or deeply cleaning the property.</p>
+        </div>
+
+        <div class="spc-form-group">
+          <label>Other seller closing costs</label>
+          <div class="spc-input-wrapper with-icon right-icon">
+            <input type="number" [(ngModel)]="closingCostsRate" min="0" max="10" step="0.1" class="spc-input">
+            <span class="spc-input-icon">%</span>
+          </div>
+          <p class="spc-hint">Title fees, escrow, transfer taxes, or buyer concessions (usually 1-3%).</p>
+        </div>
+      </div>
+
+      <!-- Things to consider -->
+      <div class="spc-card">
+        <h2 class="spc-card-title">Things to consider</h2>
+        <div class="spc-action-cards">
+          <div class="spc-action-card">
+            <div class="spc-ac-icon">
+              <i class="fas fa-home" style="color:var(--accent-blue); font-size: 24px;"></i>
+            </div>
+            <div class="spc-ac-body">
+              <h3>Track your home value</h3>
+              <p>Filter homes that are within range using estimated sale proceeds.</p>
+            </div>
+            <div class="spc-ac-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+          <div class="spc-action-card">
+            <div class="spc-ac-icon">
+              <i class="fas fa-search-dollar" style="color:var(--accent-blue); font-size: 24px;"></i>
+            </div>
+            <div class="spc-ac-body">
+              <h3>Also looking to buy?</h3>
+              <p>Filter homes that are within range using estimated sale proceeds.</p>
+            </div>
+            <div class="spc-ac-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spc-disclaimer">
+        This calculator provides an estimate only and is not intended to replace an estimate from a real estate professional. This calculator does not reflect certain additional costs of sale, such as escrow fees and title insurance.
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: RESULTS -->
+    <div class="spc-results-column">
+      <div class="spc-results-card">
+        <h2 class="spc-res-title">Estimated Net Proceeds</h2>
+        <div class="spc-res-huge" [class.negative]="netProceeds < 0">
+          {{ netProceeds | currency:'USD':'symbol':'1.0-0' }}
+        </div>
+        <p class="spc-res-desc">
+          This is an estimate of the cash you will pocket after paying off your mortgage and covering your selling costs.
+        </p>
+
+        <div class="spc-res-breakdown">
+          <h3 class="spc-res-subtitle">Breakdown</h3>
+          
+          <div class="spc-res-row">
+            <span class="spc-res-label">Home Value</span>
+            <span class="spc-res-value positive">{{ homeValue | currency:'USD':'symbol':'1.0-0' }}</span>
+          </div>
+          
+          <div class="spc-divider"></div>
+          
+          <div class="spc-res-row">
+            <span class="spc-res-label">Mortgage Payoff</span>
+            <span class="spc-res-value negative">-{{ mortgageBalance | currency:'USD':'symbol':'1.0-0' }}</span>
+          </div>
+
+          <div class="spc-res-row">
+            <span class="spc-res-label">Agent Commission ({{agentCommissionRate}}%)</span>
+            <span class="spc-res-value negative">-{{ agentCommission | currency:'USD':'symbol':'1.0-0' }}</span>
+          </div>
+
+          <div class="spc-res-row">
+            <span class="spc-res-label">Repairs &amp; Prep</span>
+            <span class="spc-res-value negative">-{{ repairCosts | currency:'USD':'symbol':'1.0-0' }}</span>
+          </div>
+
+          <div class="spc-res-row">
+            <span class="spc-res-label">Closing Costs ({{closingCostsRate}}%)</span>
+            <span class="spc-res-value negative">-{{ closingCosts | currency:'USD':'symbol':'1.0-0' }}</span>
+          </div>
+
+          <div class="spc-res-row spc-res-total">
+            <span class="spc-res-label">Total Selling Costs</span>
+            <span class="spc-res-value negative">-{{ totalSellingCosts | currency:'USD':'symbol':'1.0-0' }}</span>
+          </div>
+        </div>
+
+        <div class="spc-res-action">
+          <button class="spc-btn-primary">Connect with an Agent</button>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Maximize Proceeds & FAQ Container -->
+  <div class="spc-container spc-bottom-sections">
+    <!-- Maximize Proceeds -->
+    <div class="spc-maximize-banner">
+      <div class="spc-max-content">
+        <div class="spc-max-img">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80" alt="Maximize proceeds">
+        </div>
+        <div class="spc-max-text">
+          <h2>Maximize your proceeds</h2>
+          <p>Leverage an agent's knowledge to price, market, and negotiate your home sale for the best possible return.</p>
+          <button class="spc-btn-secondary">Get started</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="spc-faq-section">
+      <h2 class="spc-section-title">Frequently asked questions</h2>
+      
+      <div class="spc-faq-list">
+        <details class="spc-faq-item">
+          <summary>What is the average time a home stays on the market? <i class="fas fa-chevron-down spc-faq-icon"></i></summary>
+          <div class="spc-faq-content">
+            The national average time a home stays on the market, often referred to as "days on market" (DOM), can vary depending on factors like location, market conditions, and time of year. As of recent, the national average tends to be around 30 to 60 days, but this can be significantly shorter or longer depending on your local real estate market. To find out the specific DOM for your home or in your area, you can check resources like My Home dashboard, or consult a real estate agent who can provide market data specific to your neighborhood.
+          </div>
+        </details>
+
+        <details class="spc-faq-item">
+          <summary>How can I estimate my home’s value? <i class="fas fa-chevron-down spc-faq-icon"></i></summary>
+          <div class="spc-faq-content">
+            <p>To estimate your home's value, you can work with a real estate agent who can provide a comparative market analysis (CMA). A CMA involves analyzing recently sold homes in your area with similar characteristics (size, condition, location) to give you an estimate. Real estate agents also consider current market trends, property features, and neighborhood demand when estimating value.</p>
+            <p style="margin-top: 10px;">Alternatively, My Home dashboard can offer instant home value estimates. We call these "RealEstimate" and they are based on public records data. While these estimates can provide a rough idea of your home's worth, they may not account for unique factors like condition or upgrades, which is why consulting an agent for a more personalized assessment can be beneficial.</p>
+          </div>
+        </details>
+
+        <details class="spc-faq-item">
+          <summary>What are some ways to increase my home’s value? <i class="fas fa-chevron-down spc-faq-icon"></i></summary>
+          <div class="spc-faq-content">
+            <p>There are several effective ways to increase your home's value, starting with improvements that enhance both its functionality and curb appeal:</p>
+            <ol class="spc-faq-list">
+              <li>Updating the kitchen and bathrooms often provides the best return on investment.</li>
+              <li>Upgrading appliances, installing modern fixtures, and adding fresh paint.</li>
+              <li>Curb appeal is crucial; simple landscaping improvements or a new front door can boost first impressions.</li>
+              <li>Energy-efficient upgrades, such as new windows or smart home features.</li>
+              <li>Finishing a basement or attic can add valuable living space.</li>
+            </ol>
+            <p style="margin-top: 10px;">By focusing on these high-impact areas, you can increase your home's appeal and market value.</p>
+          </div>
+        </details>
+
+        <details class="spc-faq-item">
+          <summary>How can I find home values near me? <i class="fas fa-chevron-down spc-faq-icon"></i></summary>
+          <div class="spc-faq-content">
+            <ul class="spc-faq-list">
+              <li>One of the easiest ways is to use the My Home dashboard which provides estimated home values and detailed information on recently sold similar homes in your area.</li>
+              <li>For a more precise understanding, you can contact a local real estate agent who can give you a comparative market analysis (CMA).</li>
+              <li>Additionally, county assessor websites sometimes provide property tax records that include the last sale price of homes in your area.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-site-footer [simplified]="true"></app-site-footer>
