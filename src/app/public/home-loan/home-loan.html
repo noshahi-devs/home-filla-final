@@ -67,67 +67,62 @@
           <!-- STEP 1: PROPERTY -->
           <li class="fmcty-section active" *ngIf="currentStep === 1">
             <div class="fmcty-section-content">
+
+              <!-- Functional Tabs -->
+              <div class="mrc-loan-tabs">
+                <span class="mrc-loan-tab" [class.active]="selectedLoanType === 'purchase'" (click)="selectedLoanType = 'purchase'">Home Purchase</span>
+                <span class="mrc-loan-tab" [class.active]="selectedLoanType === 'refinance'" (click)="selectedLoanType = 'refinance'">Refinance</span>
+                <span class="mrc-loan-tab" [class.active]="selectedLoanType === 'equity'" (click)="selectedLoanType = 'equity'">Home Equity</span>
+              </div>
+
+              <!-- Dynamic Header per tab -->
               <header class="step-header">
-                <div class="fmcty-headline">Get pre-approved</div>
-                <div class="fmcty-subhead">Connect with a lender who can help you with pre-approval.</div>
+                <div class="fmcty-headline" *ngIf="selectedLoanType === 'purchase'">Get pre-approved</div>
+                <div class="fmcty-subhead" *ngIf="selectedLoanType === 'purchase'">Connect with a lender who can help you with pre-approval.</div>
+
+                <div class="fmcty-headline" *ngIf="selectedLoanType === 'refinance'">Find refinance options</div>
+                <div class="fmcty-subhead" *ngIf="selectedLoanType === 'refinance'">Connect with a lender who can help you refinance your home.</div>
+
+                <div class="fmcty-headline" *ngIf="selectedLoanType === 'equity'">Find home equity offers</div>
+                <div class="fmcty-subhead" *ngIf="selectedLoanType === 'equity'">Connect with a lender and check your home equity today.</div>
               </header>
 
               <ol class="fmcty-fields">
                 <li class="fmcty-field fmcty-field-radio">
                   <dl>
-                    <dt><label class="fmcty-label">What type of loan are you looking for?</label></dt>
+                    <!-- Dynamic question label per tab -->
+                    <dt>
+                      <label class="fmcty-label" *ngIf="selectedLoanType === 'purchase'">What type of home are you looking for?</label>
+                      <label class="fmcty-label" *ngIf="selectedLoanType === 'refinance'">What type of home do you own?</label>
+                      <label class="fmcty-label" *ngIf="selectedLoanType === 'equity'">What type of home do you have?</label>
+                    </dt>
                     <dd>
-                      <ol class="fmcty-radio-group">
-                        <li class="fmcty-radio-option">
-                          <input type="radio" name="loan_type" value="P" id="loan_p" checked>
-                          <label for="loan_p" class="fmcty-radio-option-label"><span>Home </span>Purchase</label>
+                      <ol class="mrc-home-type-grid">
+                        <li class="mrc-home-type-option" [class.selected]="selectedHomeType === 'single'" (click)="selectedHomeType = 'single'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                          <span>Single Family</span>
                         </li>
-                        <li class="fmcty-radio-option">
-                          <input type="radio" name="loan_type" value="R" id="loan_r">
-                          <label for="loan_r" class="fmcty-radio-option-label">Refinance</label>
+                        <li class="mrc-home-type-option" [class.selected]="selectedHomeType === 'townhome'" (click)="selectedHomeType = 'townhome'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="18"></rect><rect x="14" y="3" width="7" height="18"></rect><path d="M3 8h7M14 8h7"></path></svg>
+                          <span>Town Home</span>
                         </li>
-                        <li class="fmcty-radio-option">
-                          <input type="radio" name="loan_type" value="equity" id="loan_e">
-                          <label for="loan_e" class="fmcty-radio-option-label">Home Equity</label>
+                        <li class="mrc-home-type-option" [class.selected]="selectedHomeType === 'condo'" (click)="selectedHomeType = 'condo'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="1"></rect><line x1="8" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="16" y2="21"></line><line x1="2" y1="9" x2="22" y2="9"></line><line x1="2" y1="15" x2="22" y2="15"></line></svg>
+                          <span>Condominium</span>
+                        </li>
+                        <li class="mrc-home-type-option" [class.selected]="selectedHomeType === 'multi'" (click)="selectedHomeType = 'multi'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="18"></rect><path d="M16 8h6v13H16z"></path><line x1="1" y1="9" x2="16" y2="9"></line><line x1="1" y1="15" x2="16" y2="15"></line><line x1="7" y1="3" x2="7" y2="21"></line></svg>
+                          <span>Multi-Family</span>
+                        </li>
+                        <li class="mrc-home-type-option" [class.selected]="selectedHomeType === 'mobile'" (click)="selectedHomeType = 'mobile'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 18h22"></path><path d="M2 14V8h20v6"></path><path d="M5 8V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2"></path><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg>
+                          <span>Mobile / Manufactured</span>
+                        </li>
+                        <li class="mrc-home-type-option" [class.selected]="selectedHomeType === 'new'" (click)="selectedHomeType = 'new'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"></path><path d="M4 20v-8l8-6 8 6v8"></path><path d="M10 14h4v6h-4z"></path><circle cx="12" cy="4" r="2"></circle><line x1="12" y1="6" x2="12" y2="8"></line></svg>
+                          <span>New Construction</span>
                         </li>
                       </ol>
-                    </dd>
-                  </dl>
-                </li>
-
-                <li class="fmcty-field fmcty-field-radio">
-                  <dl>
-                    <dt><label class="fmcty-label">What type of home are you looking for?</label></dt>
-                    <dd>
-                      <ol class="fmcty-radio-group mrc-radio-group-with-icons">
-                        <li class="fmcty-radio-option">
-                          <input type="radio" name="property_type" value="single" id="prop_single" checked>
-                          <label for="prop_single" class="fmcty-radio-option-label">
-                            <i class="fas fa-home"></i> Single Family
-                          </label>
-                        </li>
-                        <li class="fmcty-radio-option">
-                          <input type="radio" name="property_type" value="townhome" id="prop_town">
-                          <label for="prop_town" class="fmcty-radio-option-label">
-                            <i class="fas fa-city"></i> Town Home
-                          </label>
-                        </li>
-                        <li class="fmcty-radio-option">
-                          <input type="radio" name="property_type" value="condo" id="prop_condo">
-                          <label for="prop_condo" class="fmcty-radio-option-label">
-                            <i class="fas fa-building"></i> Condo
-                          </label>
-                        </li>
-                      </ol>
-                    </dd>
-                  </dl>
-                </li>
-
-                <li class="fmcty-field fmcty-field-text">
-                  <dl>
-                    <dt><label class="fmcty-label">Where are you looking to buy?</label> <span class="fmcty-field-description"><small>City or Zip Code</small></span></dt>
-                    <dd>
-                      <input type="text" class="fmcty-input-text" placeholder="e.g. Sunnyvale, CA 94086">
                     </dd>
                   </dl>
                 </li>
@@ -136,6 +131,26 @@
                   <button type="button" class="fmcty-next" (click)="nextStep()">Next</button>
                 </li>
               </ol>
+
+              <!-- MRC Footer Disclosure -->
+              <div class="mrc-footer">
+                <div class="mrc-footer-left">
+                  <span class="mrc-provided-by">Provided by</span>
+                  <div class="mrc-logo">
+                    <span class="mrc-logo-text">MRC</span>
+                    <span class="mrc-logo-sub">MORTGAGE<br>RESEARCH<br>CENTER</span>
+                  </div>
+                </div>
+                <div class="mrc-footer-right">
+                  <p>
+                    Mortgage Research Center, LLC. A mortgage licensee.
+                    <a href="#" class="mrc-link">NMLS ID 1907</a>
+                    Equal Housing Opportunity. Lender advertisers are not recommended or endorsed by HomeFilla® or Mortgage Research Center, LLC, and are not the only providers of mortgage loan services of the kinds they offer.
+                  </p>
+                  <a href="#" class="mrc-disclosure-link">Advertising disclosure</a>
+                </div>
+              </div>
+
             </div>
           </li>
 

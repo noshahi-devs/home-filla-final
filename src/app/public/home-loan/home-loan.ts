@@ -14,6 +14,8 @@ import { SiteFooterComponent } from '../../shared/components/site-footer/site-fo
 export class HomeLoanComponent {
   currentStep = 1;
   totalSteps = 4; // Property, Timeline, Details, Wrap-Up
+  selectedLoanType = 'purchase';
+  selectedHomeType = 'single';
 
   nextStep() {
     if (this.currentStep < this.totalSteps) {
