@@ -19,10 +19,14 @@ export class MortgageComponent {
   interestRate = 6.5;
   address: string = '';
 
+  // Rates Section State
+  activeRateTab: string = '30y';
+  showAllLenders: boolean = false;
+
   calculateValuation(): void {
-    const calcSection = document.querySelector('.hfm-hero');
-    if (calcSection) {
-      calcSection.scrollIntoView({ behavior: 'smooth' });
+    const ratesSection = document.querySelector('.hfm-rates-section');
+    if (ratesSection) {
+      ratesSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
