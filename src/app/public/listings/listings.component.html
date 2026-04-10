@@ -189,44 +189,98 @@
     <div class="lst-grid">
       <div class="lst-card" *ngFor="let p of visibleProperties" [routerLink]="['/property', category.slug, p.id]">
 
-
-        <!-- Image + Badge -->
+        <!-- Image with overlays -->
         <div class="lst-card-img-wrap">
           <img [src]="p.image" [alt]="p.address" class="lst-card-img" loading="lazy">
-          <span *ngIf="p.badge" class="lst-badge" [ngClass]="p.badgeClass || 'badge-blue'">
+
+          <!-- Blue hover overlay -->
+          <div class="lst-img-overlay"></div>
+
+          <!-- Top-left: tags -->
+          <div class="lst-card-tags" *ngIf="p.tags && p.tags!.length > 0">
+            <span *ngFor="let tag of p.tags" class="lst-tag"
+                  [class.lst-tag-blue]="tag === 'new' || tag === 'open house 4/10' || tag === 'open house today'"
+                  [class.lst-tag-green]="tag === 'new construction' || tag === 'Builder Promotion'"
+                  [class.lst-tag-red]="tag === 'price reduced'">
+              {{ tag }}
+            </span>
+          </div>
+
+          <!-- Fallback badge if no tags -->
+          <span *ngIf="(!p.tags || p.tags!.length === 0) && p.badge" class="lst-badge" [ngClass]="p.badgeClass || 'badge-blue'">
             {{ p.badge }}
           </span>
-          <button class="lst-heart-btn" [class.saved]="isSaved(p.id)" (click)="toggleFavorite(p.id, $event); $event.stopPropagation()" title="Save">
+
+          <!-- Tour Icons (3D/Globe) Bottom-Left -->
+          <div class="lst-tour-icon" *ngIf="p.tourType === '3d'">
+            <span>3D</span>
+          </div>
+          <div class="lst-tour-icon" *ngIf="p.tourType === 'globe'">
+            <i class="fas fa-globe"></i>
+          </div>
+
+          <!-- Heart save -->
+          <button class="lst-heart-btn" [class.saved]="isSaved(p.id)"
+                  (click)="toggleFavorite(p.id, $event); $event.stopPropagation()" title="Save">
             <i [ngClass]="isSaved(p.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
           </button>
         </div>
 
-        <!-- Info -->
+        <!-- Card body -->
         <div class="lst-card-info">
+
+          <!-- Builder/broker credit -->
+          <div class="lst-broker-row" *ngIf="p.builder">
+            <svg viewBox="0 0 24 24" class="lst-verified-icon" aria-hidden="true">
+              <path d="M15.707 9.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L11 12.586l3.293-3.293a1 1 0 0 1 1.414 0"/>
+              <path fill-rule="evenodd" d="M9.52 3.368c1.19-1.75 3.77-1.75 4.96 0l.296.434.51-.187c2.027-.743 4.152.832 4.03 2.987l-.018.31.327.084c2.156.546 2.99 3.165 1.544 4.856l-.125.148.125.148c1.445 1.69.612 4.31-1.544 4.856l-.328.083.018.311c.123 2.155-2.002 3.73-4.028 2.987l-.51-.187-.297.434c-1.19 1.75-3.77 1.75-4.96 0l-.296-.434-.51.187c-2.027.743-4.151-.832-4.029-2.987l.018-.31-.328-.084c-2.156-.546-2.989-3.166-1.544-4.857L2.957 12l-.126-.148c-1.445-1.69-.612-4.31 1.544-4.856l.328-.083-.018-.311c-.122-2.155 2.002-3.73 4.028-2.987l.511.187z" clip-rule="evenodd"/>
+            </svg>
+            <span class="lst-broker-name">{{ p.builder }}</span>
+          </div>
+
+          <!-- Status dot + type -->
+          <div class="lst-status-row">
+            <span class="lst-status-dot"></span>
+            <span class="lst-status-text">{{ p.type || 'For sale' }}</span>
+          </div>
+
+          <!-- Price -->
           <div class="lst-card-price">{{ p.price }}</div>
-          <div class="lst-card-address">{{ p.address }}</div>
-          <div class="lst-card-city">
-            <i class="fas fa-map-marker-alt"></i> {{ p.city }}
-          </div>
 
-          <!-- Stats (hide beds/baths for land) -->
-          <div class="lst-card-stats" *ngIf="!isLandCategory()">
-            <span class="lst-stat"><i class="fas fa-bed"></i> {{ p.beds }} beds</span>
-            <span class="lst-stat"><i class="fas fa-bath"></i> {{ p.baths }} baths</span>
-            <span class="lst-stat"><i class="fas fa-ruler-combined"></i> {{ p.sqft }}</span>
-          </div>
-          <div class="lst-card-stats" *ngIf="isLandCategory()">
-            <span class="lst-stat land-stat"><i class="fas fa-expand-arrows-alt"></i> {{ p.sqft }}</span>
-          </div>
+          <!-- Meta: beds · baths · sqft · lot -->
+          <ul class="lst-card-meta">
+            <li class="lst-meta-item" *ngIf="!isLandCategory()">
+              <strong>{{ p.beds }}</strong>
+              <span class="lst-meta-label">bed</span>
+            </li>
+            <li class="lst-meta-sep" *ngIf="!isLandCategory()">·</li>
+            <li class="lst-meta-item" *ngIf="!isLandCategory()">
+              <strong>{{ p.baths }}</strong>
+              <span class="lst-meta-label">bath</span>
+            </li>
+            <li class="lst-meta-sep">·</li>
+            <li class="lst-meta-item">
+              <strong>{{ p.sqft }}</strong>
+              <span class="lst-meta-label">sqft</span>
+            </li>
+            <li class="lst-meta-sep" *ngIf="p.lotSqft">·</li>
+            <li class="lst-meta-item" *ngIf="p.lotSqft">
+              <strong>{{ p.lotSqft }}</strong>
+              <span class="lst-meta-label">sqft lot</span>
+            </li>
+          </ul>
 
-          <!-- Agent -->
-          <div class="lst-card-agent">
-            <img [src]="p.agentAvatar" [alt]="p.agentName" class="lst-agent-avatar">
-            <div class="lst-agent-info">
-              <span class="lst-agent-name">{{ p.agentName }}</span>
-              <span class="lst-agent-title">• {{ p.agentTitle }}</span>
+          <!-- Address + CTA -->
+          <div class="lst-address-cta-row">
+            <div class="lst-address-block">
+              <div class="lst-card-address">{{ p.address }}</div>
+              <div class="lst-card-city">{{ p.city }}</div>
             </div>
+            <button class="lst-cta-btn" (click)="$event.stopPropagation()">
+              {{ p.builder && p.builder.startsWith('Built') ? 'Contact builder' : 'Email Agent' }}
+            </button>
           </div>
+
         </div>
       </div>
     </div>

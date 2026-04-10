@@ -666,135 +666,290 @@
   margin-bottom: 48px;
 }
 
-/* ─── CARD ─── */
+/* ─── PREMIUM CARD DESIGN ─── */
 .lst-card {
-  background: var(--white);
+  background: white;
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  transition: all .25s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
-}
-.lst-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--accent-border);
-}
-.lst-card-img-wrap {
-  position: relative;
-  height: 190px;
-  overflow: hidden;
-}
-.lst-card-img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform .35s ease;
-}
-.lst-card:hover .lst-card-img {
-  transform: scale(1.07);
+  display: flex;
+  flex-direction: column;
 }
 
-/* Badges */
+.lst-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  border-color: var(--accent-border);
+}
+
+.lst-card-img-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.lst-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.lst-card:hover .lst-card-img {
+  transform: scale(1.06);
+}
+
+/* Blue overlay on image hover */
+.lst-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(74,108,247,0.55) 0%, rgba(40,70,200,0.30) 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.lst-card:hover .lst-img-overlay {
+  opacity: 1;
+}
+
+/* Tags Top-Left */
+.lst-card-tags {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  z-index: 2;
+}
+
+.lst-tag, .lst-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: white;
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
 .lst-badge {
   position: absolute;
   top: 12px; left: 12px;
-  padding: 4px 12px;
-  border-radius: 40px;
-  font-size: 11.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .4px;
 }
-.badge-blue  { background: var(--accent); color: white; }
-.badge-red   { background: #ef4444; color: white; }
-.badge-green { background: #10b981; color: white; }
-.badge-land  { background: #f59e0b; color: white; }
 
-/* Heart button */
+.lst-tag-blue, .badge-blue { background: rgba(74,108,247,0.92); color: white; backdrop-filter: blur(4px); }
+.lst-tag-red, .badge-red { background: rgba(239,68,68,0.92); color: white; backdrop-filter: blur(4px); }
+.lst-tag-green, .badge-green { background: rgba(16,185,129,0.92); color: white; backdrop-filter: blur(4px); }
+
+/* Tour Icon badge (Bottom-Left) */
+.lst-tour-icon {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.lst-tour-icon i {
+  font-size: 14px;
+}
+
+/* Heart Save Button */
 .lst-heart-btn {
   position: absolute;
-  top: 10px; right: 10px;
-  width: 34px; height: 34px;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(8px);
-  border: none;
+  bottom: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 15px;
-  color: var(--text-secondary);
-  transition: all .2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,.1);
-}
-.lst-heart-btn:hover {
-  background: white;
-  color: #ef4444;
-  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 2;
+  transition: transform 0.2s, background 0.2s;
 }
 
-/* Card info */
-.lst-card-info { padding: 16px; }
-.lst-card-price {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--accent);
-  margin-bottom: 6px;
+.lst-heart-btn i {
+  color: var(--text-muted);
+  font-size: 16px;
 }
-.lst-card-address {
-  font-size: 15px;
+
+.lst-heart-btn.saved i, .lst-heart-btn:hover i {
+  color: #ef4444;
+}
+
+.lst-heart-btn:hover {
+  transform: scale(1.08);
+}
+
+/* Card Body */
+.lst-card-info {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Broker row */
+.lst-broker-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.lst-verified-icon {
+  width: 14px;
+  height: 14px;
+  fill: #10b981;
+}
+
+.lst-broker-name {
+  font-size: 11px;
   font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 4px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Status dot row */
+.lst-status-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.lst-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981; /* Green dot for for-sale */
+}
+
+.lst-status-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Price */
+.lst-card-price {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+/* Meta Data */
+.lst-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.lst-meta-item {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.lst-meta-item strong {
+  font-weight: 700;
+}
+
+.lst-meta-label {
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-left: 2px;
+}
+
+.lst-meta-sep {
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+/* Address & CTA Block */
+.lst-address-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.lst-address-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.lst-card-address {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
 .lst-card-city {
   font-size: 13px;
   color: var(--text-muted);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.lst-card-city i { color: #94a3b8; font-size: 11px; }
 
-.lst-card-stats {
-  display: flex;
-  gap: 14px;
-  padding: 12px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 14px;
-}
-.lst-stat {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-.lst-stat i { color: var(--accent); font-size: 11px; }
-.land-stat { font-size: 13px; font-weight: 600; color: #f59e0b; }
-.land-stat i { color: #f59e0b; font-size: 12px; }
-
-.lst-card-agent {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.lst-agent-avatar {
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  object-fit: cover;
+.lst-cta-btn {
   flex-shrink: 0;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(74,108,247,0.3);
 }
-.lst-agent-info { font-size: 12.5px; color: var(--text-secondary); overflow: hidden; }
-.lst-agent-name { font-weight: 700; color: var(--text-primary); }
-.lst-agent-title { font-size: 12px; }
+
+.lst-cta-btn:hover {
+  background: #3a5ce8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(74,108,247,0.45);
+}
 
 /* ─── LOAD MORE ─── */
 .lst-load-more-wrap {

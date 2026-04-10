@@ -19,6 +19,12 @@ export interface Property {
   petFriendly?: boolean;
   bedsRange?: string;
   bathsRange?: string;
+  // Buy/sale-specific extras
+  type?: string;
+  builder?: string;
+  lotSqft?: string;
+  tourType?: '3d' | 'globe';
+  brokerLogo?: string;
 }
 
 export interface CategoryInfo {
@@ -317,6 +323,75 @@ const LISTINGS_DATA: Record<string, CategoryInfo> = {
       { id:5, image:'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80', name:'Skyline Residences', price:'$2,600 - $3,800 /mo', address:'900 Pastoria Ave', city:'Sunnyvale, CA 94086', beds:1, baths:1, sqft:'720 - 1,050', bedsRange:'1 - 2', bathsRange:'1 - 2', badge:'For Rent', badgeClass:'badge-blue', manager:'Greystar Property Mgmt', petFriendly:true, tags:['New units'], ...agent(4) },
       { id:6, image:'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=800&q=80', name:'The Commons at Murphy', price:'$1,995 - $2,750 /mo', address:'512 Murphy Ave', city:'Sunnyvale, CA 94086', beds:0, baths:1, sqft:'480 - 900', bedsRange:'Studio - 1', bathsRange:'1', badge:'For Rent', badgeClass:'badge-blue', manager:'Prometheus Real Estate', petFriendly:false, tags:[], ...agent(5) },
     ]
+  },
+  'buy': {
+    slug: 'buy', label: 'Homes for Sale', count: 87,
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=85',
+    description: 'Explore homes for sale in Sunnyvale, CA — new construction, condos, and single-family houses.',
+    properties: [
+      {
+        id: 1,
+        image: 'https://nh.rdcpix.com/75f09f0e7b39a2beb0af908db6b43067l-f1162063943rd-w960_h720.jpg',
+        price: '$899,000',
+        address: '1200 Althea Ter',
+        city: 'Sunnyvale, CA 94086',
+        beds: 1, baths: 1, sqft: '974',
+        badge: 'New Construction', badgeClass: 'badge-green',
+        agentName: 'Toll Brothers', agentAvatar: 'https://nh.rdcpix.com/9cbb628855c3de7ae0894df203051795n-f2964919910s.png', agentTitle: 'Builder',
+        name: 'Outlook at The Station',
+        tags: ['Builder Promotion', 'new construction'],
+        type: 'Condo for sale',
+        builder: 'Brokered by Toll Brothers',
+        brokerLogo: 'https://nh.rdcpix.com/9cbb628855c3de7ae0894df203051795n-f2964919910s.png',
+        tourType: '3d',
+      },
+      {
+        id: 2,
+        image: 'https://nh.rdcpix.com/46528c8e79070b9093256d9021224ffdl-f2202748624rd-w960_h720.jpg',
+        price: '$1,599,000',
+        address: '1102 Althea Ter Unit 2',
+        city: 'Sunnyvale, CA 94086',
+        beds: 2, baths: 2.5, sqft: '1,658',
+        badge: 'New', badgeClass: 'badge-blue',
+        agentName: 'Toll Brothers', agentAvatar: 'https://nh.rdcpix.com/23b463030d3c8e5dea4d9868e5bc0319n-f2964919910s.png', agentTitle: 'Builder',
+        name: 'Terraces at The Station',
+        tags: ['new', 'Builder promotion', 'new construction'],
+        type: 'Condo for sale',
+        builder: 'Brokered by Toll Brothers',
+        brokerLogo: 'https://nh.rdcpix.com/23b463030d3c8e5dea4d9868e5bc0319n-f2964919910s.png',
+      },
+      {
+        id: 3,
+        image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
+        price: '$2,850,000',
+        address: '873 Cedar Ave',
+        city: 'Sunnyvale, CA 94086',
+        beds: 4, baths: 3, sqft: '2,030',
+        badge: 'Open House', badgeClass: 'badge-blue',
+        agentName: 'Jane Smith', agentAvatar: 'https://randomuser.me/api/portraits/women/44.jpg', agentTitle: 'Keller Williams Realty - Cupertino',
+        tags: ['new', 'open house 4/10'],
+        type: 'House for sale',
+        builder: 'Brokered by Keller Williams Realty - Cupertino',
+        lotSqft: '5,000',
+        tourType: 'globe',
+      },
+      {
+        id: 4,
+        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80',
+        price: '$1,598,888',
+        address: '951 S Wolfe Rd',
+        city: 'Sunnyvale, CA 94086',
+        beds: 4, baths: 2.5, sqft: '1,967',
+        badge: 'Open House', badgeClass: 'badge-blue',
+        agentName: 'Mike Ross', agentAvatar: 'https://randomuser.me/api/portraits/men/46.jpg', agentTitle: 'Real Estate Professors',
+        tags: ['new', 'open house today'],
+        type: 'Townhouse for sale',
+        builder: 'Brokered by Real Estate Professors',
+        tourType: '3d',
+      },
+      { id:5, image:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80', price:'$1,199,000', address:'345 Evelyn Ave', city:'Sunnyvale, CA 94086', beds:3, baths:2, sqft:'1,450', badge:'Price Drop', badgeClass:'badge-red', agentName:'Lisa Garcia', agentAvatar:'https://randomuser.me/api/portraits/women/68.jpg', agentTitle:'Compass Real Estate', tags:['price reduced'], type:'House for sale', builder:'Brokered by Compass' },
+      { id:6, image:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', price:'$3,250,000', address:'720 Morse Ave', city:'Sunnyvale, CA 94085', beds:5, baths:4, sqft:'3,100', badge:'New', badgeClass:'badge-green', agentName:'David Kim', agentAvatar:'https://randomuser.me/api/portraits/men/75.jpg', agentTitle:'Intero Real Estate', tags:['new'], type:'House for sale', builder:'Brokered by Intero Real Estate' },
+    ],
   },
 };
 
