@@ -4,14 +4,21 @@ export interface Property {
   price: string;
   address: string;
   city: string;
-  beds: number;
-  baths: number;
+  beds: number | string;
+  baths: number | string;
   sqft: string;
   badge?: string;
   badgeClass?: string;
   agentName: string;
   agentAvatar: string;
   agentTitle: string;
+  // Rental-specific extras
+  name?: string;
+  manager?: string;
+  tags?: string[];
+  petFriendly?: boolean;
+  bedsRange?: string;
+  bathsRange?: string;
 }
 
 export interface CategoryInfo {
@@ -247,18 +254,68 @@ const LISTINGS_DATA: Record<string, CategoryInfo> = {
     image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1800&q=85',
     description: 'Find your perfect rental home — apartments, condos, and single-family houses.',
     properties: [
-      { id:1, image:'https://picsum.photos/id/143/600/400', price:'$2,800 /mo', address:'101 Skyview Dr Unit 402', city:'Austin, TX 78701', beds:2, baths:2, sqft:'1,100', badge:'For Rent', badgeClass:'badge-blue', ...agent(0) },
-      { id:2, image:'https://picsum.photos/id/144/600/400', price:'$1,950 /mo', address:'44 Garden Terrace', city:'Atlanta, GA 30303', beds:1, baths:1, sqft:'850', badge:'For Rent', badgeClass:'badge-blue', ...agent(1) },
-      { id:3, image:'https://picsum.photos/id/145/600/400', price:'$3,400 /mo', address:'99 Bridge St Apt 12B', city:'Brooklyn, NY 11201', beds:2, baths:2, sqft:'1,050', badge:'For Rent', badgeClass:'badge-blue', ...agent(2) },
-      { id:4, image:'https://picsum.photos/id/146/600/400', price:'$2,100 /mo', address:'802 Sunshine Way', city:'Miami, FL 33130', beds:1, baths:1, sqft:'920', badge:'For Rent', badgeClass:'badge-blue', ...agent(3) },
-      { id:5, image:'https://picsum.photos/id/147/600/400', price:'$4,200 /mo', address:'500 Lombard St (Full House)', city:'San Francisco, CA 94133', beds:3, baths:2, sqft:'1,800', badge:'For Rent', badgeClass:'badge-blue', ...agent(4) },
-      { id:6, image:'https://picsum.photos/id/149/600/400', price:'$1,650 /mo', address:'202 Oak Hollow Ln', city:'Charlotte, NC 28202', beds:2, baths:1, sqft:'950', badge:'For Rent', badgeClass:'badge-blue', ...agent(5) },
-      { id:7, image:'https://picsum.photos/id/151/600/400', price:'$2,550 /mo', address:'333 Pearl Street Apt 2', city:'Portland, OR 97209', beds:2, baths:2, sqft:'1,120', badge:'For Rent', badgeClass:'badge-blue', ...agent(0) },
-      { id:8, image:'https://picsum.photos/id/152/600/400', price:'$3,900 /mo', address:'88 Highrise Blvd', city:'Chicago, IL 60601', beds:3, baths:2, sqft:'1,600', badge:'For Rent', badgeClass:'badge-blue', ...agent(1) },
-      { id:9, image:'https://picsum.photos/id/153/600/400', price:'$1,800 /mo', address:'12 Riverwalk Ct', city:'San Antonio, TX 78205', beds:1, baths:1, sqft:'780', badge:'For Rent', badgeClass:'badge-blue', ...agent(2) },
-      { id:10, image:'https://picsum.photos/id/154/600/400', price:'$2,750 /mo', address:'415 Desert Sun Cir', city:'Scottsdale, AZ 85251', beds:2, baths:2, sqft:'1,200', badge:'For Rent', badgeClass:'badge-blue', ...agent(3) },
-      { id:11, image:'https://picsum.photos/id/155/600/400', price:'$3,150 /mo', address:'77 Ocean Breeze Way', city:'San Diego, CA 92101', beds:2, baths:2, sqft:'1,300', badge:'For Rent', badgeClass:'badge-blue', ...agent(4) },
-      { id:12, image:'https://picsum.photos/id/156/600/400', price:'$1,450 /mo', address:'90 Maple Grove', city:'St Louis, MO 63101', beds:1, baths:1, sqft:'650', badge:'For Rent', badgeClass:'badge-blue', ...agent(5) },
+      {
+        id: 1,
+        name: 'Del Prado Apts',
+        image: 'https://ar.rdcpix.com/18377c2c9874b17a2384314a01a77998c-f1538952732rd-w480_h360.jpg',
+        price: '$2,250 - $3,900 /mo',
+        address: '301 Acalanes Dr',
+        city: 'Sunnyvale, CA 94086',
+        beds: 1, baths: 1, sqft: '641 - 1,076',
+        bedsRange: '1 - 3', bathsRange: '1 - 2.5',
+        badge: 'New units', badgeClass: 'badge-blue',
+        manager: 'Prodesse Property Group',
+        petFriendly: true,
+        tags: ['New units'],
+        ...agent(0)
+      },
+      {
+        id: 2,
+        name: '415 - 425 S Bernardo Avenue',
+        image: 'https://ar.rdcpix.com/450af9586cd82fc81715e90c9f417060c-f3019611150rd-w960_h720.jpg',
+        price: '$2,145 - $2,395 /mo',
+        address: '415 S Bernardo Ave',
+        city: 'Sunnyvale, CA 94086',
+        beds: 0, baths: 1, sqft: '500 - 700',
+        bedsRange: 'Studio - 1', bathsRange: '1',
+        badge: 'Rent Special', badgeClass: 'badge-red',
+        manager: 'Vrent Management, Inc.',
+        petFriendly: false,
+        tags: ['New units', 'Rent Special'],
+        ...agent(1)
+      },
+      {
+        id: 3,
+        name: 'Birchwood',
+        image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
+        price: '$2,568 - $3,171 /mo',
+        address: '1230 Henderson Ave',
+        city: 'Sunnyvale, CA 94086',
+        beds: 1, baths: 1, sqft: '680 - 880',
+        bedsRange: '1 - 2', bathsRange: '1',
+        badge: 'New units', badgeClass: 'badge-blue',
+        manager: 'Woodmont Real Estate Services',
+        petFriendly: true,
+        tags: ['New units', '3D Tour'],
+        ...agent(2)
+      },
+      {
+        id: 4,
+        name: 'Element Apartment Homes',
+        image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80',
+        price: '$2,845 - $3,245 /mo',
+        address: '1270 Coronado Dr',
+        city: 'Sunnyvale, CA 94086',
+        beds: 1, baths: 1, sqft: '690 - 890',
+        bedsRange: '1 - 2', bathsRange: '1',
+        badge: 'New units', badgeClass: 'badge-blue',
+        manager: 'IEC Property Services',
+        petFriendly: true,
+        tags: ['New units'],
+        ...agent(3)
+      },
+      { id:5, image:'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80', name:'Skyline Residences', price:'$2,600 - $3,800 /mo', address:'900 Pastoria Ave', city:'Sunnyvale, CA 94086', beds:1, baths:1, sqft:'720 - 1,050', bedsRange:'1 - 2', bathsRange:'1 - 2', badge:'For Rent', badgeClass:'badge-blue', manager:'Greystar Property Mgmt', petFriendly:true, tags:['New units'], ...agent(4) },
+      { id:6, image:'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=800&q=80', name:'The Commons at Murphy', price:'$1,995 - $2,750 /mo', address:'512 Murphy Ave', city:'Sunnyvale, CA 94086', beds:0, baths:1, sqft:'480 - 900', bedsRange:'Studio - 1', bathsRange:'1', badge:'For Rent', badgeClass:'badge-blue', manager:'Prometheus Real Estate', petFriendly:false, tags:[], ...agent(5) },
     ]
   },
 };

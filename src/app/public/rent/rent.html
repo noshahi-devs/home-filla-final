@@ -210,25 +210,80 @@
     <!-- Property Grid -->
     <div class="rent-grid">
       <div class="rent-card" *ngFor="let p of properties">
+
+        <!-- Image with overlays -->
         <div class="card-img-wrap">
-          <img [src]="p.image" [alt]="p.address" class="card-img">
-          <span class="card-badge">Apply now</span>
-          <button class="card-heart" (click)="toggleFavorite(p.id, $event)"><i class="far fa-heart"></i></button>
+          <img [src]="p.image" [alt]="p.name || p.address" class="card-img">
+
+          <!-- Top-left: New / Rent Special tags -->
+          <div class="card-tags-tl" *ngIf="p.tags && p.tags!.length > 0">
+            <span *ngFor="let tag of p.tags"
+                  class="card-tag"
+                  [class.tag-blue]="tag === 'New units' || tag === '3D Tour'"
+                  [class.tag-red]="tag === 'Rent Special'">
+              {{ tag }}
+            </span>
+          </div>
+
+          <!-- Top-right: Save heart -->
+          <button class="card-heart" (click)="toggleFavorite(p.id, $event)">
+            <i class="far fa-heart"></i>
+          </button>
         </div>
+
+        <!-- Card body -->
         <div class="card-body">
-          <div class="status-indicator">
-            <span class="status-dot"></span> For Rent - Apartment
+
+          <!-- Manager credit with verified badge -->
+          <div class="card-manager" *ngIf="p.manager">
+            <svg viewBox="0 0 24 24" class="verified-icon" aria-hidden="true">
+              <path d="M15.707 9.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L11 12.586l3.293-3.293a1 1 0 0 1 1.414 0"/>
+              <path fill-rule="evenodd" d="M9.52 3.368c1.19-1.75 3.77-1.75 4.96 0l.296.434.51-.187c2.027-.743 4.152.832 4.03 2.987l-.018.31.327.084c2.156.546 2.99 3.165 1.544 4.856l-.125.148.125.148c1.445 1.69.612 4.31-1.544 4.856l-.328.083.018.311c.123 2.155-2.002 3.73-4.028 2.987l-.51-.187-.297.434c-1.19 1.75-3.77 1.75-4.96 0l-.296-.434-.51.187c-2.027.743-4.151-.832-4.029-2.987l.018-.31-.328-.084c-2.156-.546-2.989-3.166-1.544-4.857L2.957 12l-.126-.148c-1.445-1.69-.612-4.31 1.544-4.856l.328-.083-.018-.311c-.122-2.155 2.002-3.73 4.028-2.987l.511.187z" clip-rule="evenodd"/>
+            </svg>
+            <span class="card-manager-name">Managed by {{ p.manager }}</span>
           </div>
+
+          <!-- Status + type -->
+          <div class="card-status-row">
+            <span class="status-dot"></span>
+            <span class="status-text">For Rent &mdash; Apartment</span>
+          </div>
+
+          <!-- Price -->
           <div class="card-price">{{ p.price }}</div>
-          <div class="card-stats">
-            <strong>{{ p.beds }}</strong> bed <strong>{{ p.baths }}</strong> bath <strong>{{ p.sqft }}</strong> sqft
-          </div>
-          <div class="card-address">{{ p.address }}</div>
-          <div class="card-city">{{ p.city }}</div>
-          
-          <div class="card-footer-actions">
+
+          <!-- Meta: beds / baths / sqft / pets -->
+          <ul class="card-meta">
+            <li class="meta-item">
+              <strong>{{ p.bedsRange || p.beds }}</strong>
+              <span class="meta-label">bed</span>
+            </li>
+            <li class="meta-sep">·</li>
+            <li class="meta-item">
+              <strong>{{ p.bathsRange || p.baths }}</strong>
+              <span class="meta-label">bath</span>
+            </li>
+            <li class="meta-sep">·</li>
+            <li class="meta-item">
+              <strong>{{ p.sqft }}</strong>
+              <span class="meta-label">sqft</span>
+            </li>
+            <li class="meta-sep" *ngIf="p.petFriendly">·</li>
+            <li class="meta-item pet-ok" *ngIf="p.petFriendly">
+              <i class="fas fa-paw"></i>
+              <span class="meta-label">Pets OK</span>
+            </li>
+          </ul>
+
+          <!-- Address block + CTA -->
+          <div class="card-address-row">
+            <div class="card-address-block">
+              <div class="card-prop-name" *ngIf="p.name">{{ p.name }}</div>
+              <div class="card-addr-line">{{ p.address }}, {{ p.city }}</div>
+            </div>
             <button class="btn-contact-prop">Contact Property</button>
           </div>
+
         </div>
       </div>
     </div>
@@ -276,44 +331,95 @@
 
     <!-- ─── RENTING TIPS AND ADVICE ─── -->
     <section class="rent-advice-section">
-      <h2 class="section-title">Renting tips and advice</h2>
+
+      <!-- Premium Section Header -->
+      <div class="advice-section-header">
+        <div class="advice-header-left">
+          <span class="advice-section-eyebrow">
+            <i class="fas fa-lightbulb"></i> Expert Insights
+          </span>
+          <h2 class="advice-section-title">Renting tips &amp; advice</h2>
+          <p class="advice-section-subtitle">Stay ahead with market insights, renter rights, and smart moving strategies from our editorial team.</p>
+        </div>
+        <a href="#" class="advice-see-all">See all articles <i class="fas fa-arrow-right"></i></a>
+      </div>
+
       <div class="advice-layout">
+
+        <!-- Article Cards -->
         <div class="advice-feed">
           <div class="article-card">
-            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600" alt="Article image">
+            <div class="article-img-wrap">
+              <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=700&q=80" alt="NYC Skyline">
+              <span class="article-category-tag">Market Trends</span>
+            </div>
             <div class="article-body">
+              <div class="article-meta-row">
+                <span class="article-meta-item"><i class="far fa-clock"></i> 4 min read</span>
+                <span class="article-meta-dot">·</span>
+                <span class="article-meta-item">Apr 10, 2026</span>
+              </div>
               <h3>NYC Landlords Report 6.2% Income Jump—but Here's Why They Say They're Still Sinking</h3>
-              <p>Rent Guidelines Board data shows a 6.2% NOI jump, but landlords warn of 'flawed metric'...</p>
-              <a href="#" class="read-more">Read article</a>
+              <p>Rent Guidelines Board data shows a 6.2% NOI jump, but landlords warn of a 'flawed metric' that ignores rising operating costs...</p>
+              <a href="#" class="read-more">
+                Read article <i class="fas fa-arrow-right"></i>
+              </a>
             </div>
           </div>
+
           <div class="article-card">
-            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600" alt="Article image">
+            <div class="article-img-wrap">
+              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=700&q=80" alt="Modern apartment living room">
+              <span class="article-category-tag tag-lifestyle">Renter Lifestyle</span>
+            </div>
             <div class="article-body">
+              <div class="article-meta-row">
+                <span class="article-meta-item"><i class="far fa-clock"></i> 3 min read</span>
+                <span class="article-meta-dot">·</span>
+                <span class="article-meta-item">Apr 8, 2026</span>
+              </div>
               <h3>The Living Room Has Vanished: More Renters Are Trading Communal Space for Affordability</h3>
-              <p>Renters are ditching the couch for extra beds in record numbers. Living-room free shares have tripled...</p>
-              <a href="#" class="read-more">Read article</a>
+              <p>Renters are ditching the couch for extra beds in record numbers. Living-room free shares have tripled since 2022...</p>
+              <a href="#" class="read-more">
+                Read article <i class="fas fa-arrow-right"></i>
+              </a>
             </div>
           </div>
         </div>
 
-        <!-- Moving Cost Calculator -->
+        <!-- Premium Calculator Sidebar -->
         <aside class="calculator-sidebar">
           <div class="calc-card">
-            <h3>Moving cost calculator</h3>
+
+            <div class="calc-header">
+              <div class="calc-icon-wrap">
+                <i class="fas fa-truck-moving"></i>
+              </div>
+              <div>
+                <h3 class="calc-title">Moving cost calculator</h3>
+                <p class="calc-subtitle">Estimate your relocation costs instantly</p>
+              </div>
+            </div>
+
+            <div class="calc-divider"></div>
+
             <div class="calc-row">
               <div class="calc-field">
-                <label>Move from</label>
+                <label><i class="fas fa-map-marker-alt"></i> Move from</label>
                 <input type="text" placeholder="ZIP code" [(ngModel)]="moveFrom">
               </div>
+              <div class="calc-arrow-icon">
+                <i class="fas fa-long-arrow-alt-right"></i>
+              </div>
               <div class="calc-field">
-                <label>Move to</label>
+                <label><i class="fas fa-flag-checkered"></i> Move to</label>
                 <input type="text" placeholder="ZIP code" [(ngModel)]="moveTo">
               </div>
             </div>
+
             <div class="calc-row">
               <div class="calc-field">
-                <label>Size of move</label>
+                <label><i class="fas fa-bed"></i> Size of move</label>
                 <select [(ngModel)]="sizeOfMove">
                   <option>1 bed</option>
                   <option>2-3 beds</option>
@@ -321,7 +427,7 @@
                 </select>
               </div>
               <div class="calc-field">
-                <label>Packing</label>
+                <label><i class="fas fa-box"></i> Packing</label>
                 <select [(ngModel)]="packingNeeded">
                   <option>None</option>
                   <option>Full Packing</option>
@@ -329,11 +435,17 @@
                 </select>
               </div>
             </div>
-            <button class="btn-calc" (click)="getEstimate()">Get estimates</button>
+
+            <button class="btn-calc" (click)="getEstimate()">
+              <i class="fas fa-calculator"></i> Get estimates
+            </button>
+
             <div class="calc-result" *ngIf="estimateResult">
-              <span>Estimated Cost:</span>
-              <strong>{{ estimateResult }}</strong>
+              <div class="calc-result-label">Estimated Cost</div>
+              <div class="calc-result-value">{{ estimateResult }}</div>
             </div>
+
+            <p class="calc-disclaimer">Estimates are approximate. Actual costs may vary based on distance and services.</p>
           </div>
         </aside>
       </div>
