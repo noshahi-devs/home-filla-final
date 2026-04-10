@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
+import { MortgageBannerComponent } from '../../shared/components/mortgage-banner/mortgage-banner';
 
 @Component({
   selector: 'app-mortgage',
   standalone: true,
   templateUrl: './mortgage.component.html',
   styleUrl: './mortgage.component.css',
-  imports: [CommonModule, FormsModule, RouterLink, SiteHeaderComponent, SiteFooterComponent]
+  imports: [CommonModule, FormsModule, RouterLink, SiteHeaderComponent, SiteFooterComponent, MortgageBannerComponent]
 })
 export class MortgageComponent {
   // Mortgage Calculator State

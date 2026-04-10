@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, NavigationEnd, RouterLink } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-mortgage-banner',
@@ -10,20 +9,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './mortgage-banner.html',
   styleUrl: './mortgage-banner.css'
 })
-export class MortgageBannerComponent implements OnInit {
+export class MortgageBannerComponent {
+  // Always visible when rendered, as it's now placed locally on specific pages
   isVisible = true;
-
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      // Hide banner on the home-loan page
-      this.isVisible = !event.url.includes('home-loan');
-    });
-
-    // Check initial route
-    this.isVisible = !this.router.url.includes('home-loan');
-  }
 }
