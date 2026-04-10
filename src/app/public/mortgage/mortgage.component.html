@@ -45,42 +45,49 @@
     <span class="hfm-nmls">NMLS #2121192. Not a govt agency</span>
   </div>
 
-  <!-- ─── PREMIUM TOOLS SECTION (ONE ROW) ─── -->
+  <!-- ─── TOOLS SECTION ─── -->
   <section class="hfm-tools-section">
     <div class="hfm-tools-container">
-      <h2>Mortgage Tools & Resources</h2>
+      <h2 class="base__StyledType-rui__sc-18muj27-0 hyqBfa" style="margin-bottom: 32px;">Tools</h2>
       
       <div class="hfm-tools-grid">
-        <a href="#" class="hfm-tool-card">
+        <a routerLink="/mortgage/tools/mortgage-calculator/" class="hfm-tool-card">
           <div class="hfm-tool-icon"><i class="fas fa-calculator"></i></div>
-          <h3>Mortgage Calculator</h3>
-          <p>Calculate your monthly mortgage payment and breakdown your costs.</p>
+          <h3>Mortgage calculator</h3>
+          <p>Calculate your monthly mortgage payment.</p>
         </a>
-        <a href="#" class="hfm-tool-card">
+        <a routerLink="/mortgage/tools/affordability-calculator/" class="hfm-tool-card">
           <div class="hfm-tool-icon"><i class="fas fa-hand-holding-usd"></i></div>
-          <h3>Affordability Calculator</h3>
-          <p>Calculate the price of a home you can actually afford based on your income.</p>
+          <h3>Affordability calculator</h3>
+          <p>Calculate the price of a home you can afford.</p>
         </a>
-        <a href="#" class="hfm-tool-card">
+        <a routerLink="/mortgage/tools/rent-or-buy-calculator/" class="hfm-tool-card">
           <div class="hfm-tool-icon"><i class="fas fa-exchange-alt"></i></div>
-          <h3>Rent or Buy Calculator</h3>
-          <p>Estimate when it makes more financial sense to buy versus rent.</p>
+          <h3>Rent or buy calculator</h3>
+          <p>Estimate when it makes sense to buy or rent.</p>
         </a>
-        <a href="#" class="hfm-tool-card">
+        <a routerLink="/mortgage/tools/refinance-calculator/" class="hfm-tool-card">
           <div class="hfm-tool-icon"><i class="fas fa-sync-alt"></i></div>
-          <h3>Refinance Calculator</h3>
-          <p>Decide if mortgage refinancing is right for your current situation.</p>
+          <h3>Refinance calculator</h3>
+          <p>Decide if mortgage refinancing is right for you.</p>
         </a>
+      </div>
+
+      <div style="text-align: center; margin-top: 32px;">
+        <button class="hfm-geo-more" style="margin: 0 auto; padding: 12px 24px; border: 1px solid #e2e8f0; border-radius: 8px; background: white;">
+          <span class="button-text">Less tools</span>
+          <i class="fas fa-chevron-up" style="margin-left: 8px;"></i>
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- ─── PREMIUM RATES SECTION (UPDATED WITH REAL DATA) ─── -->
+  <!-- ─── RATES SECTION ─── -->
   <section class="hfm-rates-section">
     <div class="hfm-rates-container">
       <div class="hfm-rates-header">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8px;">
-          <h2>Rates</h2>
+          <h2 class="base__StyledType-rui__sc-18muj27-0 gkpFhC">Rates</h2>
           <div style="font-size: 14px; color: #718096;">
             Data provided by 3rd party <a href="https://www.RateUpdate.com" target="_blank" style="color: var(--accent); font-weight: 600; text-decoration: none;">RateUpdate.com</a>
           </div>
@@ -92,27 +99,27 @@
           <h3 style="color: #4a5568; font-size: 20px; font-weight: 700;">30-year fixed average:</h3>
           <div class="hfm-big-rates" style="margin-top: 20px;">
             <div class="hfm-rate-item">
-              <span class="val" style="font-size: 48px;">6.362%</span>
+              <span class="val" style="font-size: 48px;">{{ marketAverages.apr }}</span>
               <span class="label" style="font-size: 14px; font-weight: 800; color: #a0aec0;">APR</span>
             </div>
             <div class="hfm-rate-item" style="border-left: 2px solid #e2e8f0; padding-left: 32px;">
-              <span class="val" style="font-size: 48px;">6.333%</span>
+              <span class="val" style="font-size: 48px;">{{ marketAverages.rate }}</span>
               <span class="label" style="font-size: 14px; font-weight: 800; color: #a0aec0;">Rate</span>
             </div>
           </div>
           <p style="font-size: 12px; color: #718096; margin-top: 24px; max-width: 450px; line-height: 1.6;">
             Averages are provided for informational purposes only and are based on averages for CA. 
-            <button style="background: none; border: none; color: var(--accent); font-weight: 700; cursor: pointer; padding: 0; margin-left: 4px;">Disclosures</button>
+            <button style="background: none; border: none; color: var(--accent); font-weight: 700; cursor: pointer; padding: 0; margin-left: 4px;">Disclosures</button>.
           </p>
         </div>
 
         <div class="hfm-rates-meta" style="background: white; border: 1px solid #e2e8f0;">
           <div class="hfm-meta-item" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;"><span class="key">Location</span></div>
-          <div class="hfm-meta-item" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;"><span class="value">Sunnyvale, CA</span></div>
+          <div class="hfm-meta-item" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;"><span class="value">{{ marketAverages.location }}</span></div>
           <div class="hfm-meta-item" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;"><span class="key">Purchase price</span></div>
-          <div class="hfm-meta-item" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;"><span class="value">$1,486,500</span></div>
+          <div class="hfm-meta-item" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;"><span class="value">{{ marketAverages.price }}</span></div>
           <div class="hfm-meta-item"><span class="key">Down payment (20%)</span></div>
-          <div class="hfm-meta-item"><span class="value">$297,300</span></div>
+          <div class="hfm-meta-item"><span class="value">{{ marketAverages.downPayment }}</span></div>
           <div style="grid-column: span 2; font-size: 11px; color: #94a3b8; margin-top: 8px; font-style: italic;">
             Information based on recent search activity. Purchase price and down payment are averages for the location.
           </div>
@@ -127,129 +134,38 @@
       </div>
 
       <!-- Veteran Strip -->
-      <a href="#" style="background: #f0fdf4; padding: 14px 28px; border-radius: 12px; margin-bottom: 32px; display: flex; align-items: center; gap: 14px; text-decoration: none; border: 1px solid #dcfce7; transition: transform 0.2s;">
+      <a href="https://mortgagerates.icanbuy.com/api/clickstatic/index/lenderid/17418955233959/siteid/d0f7a92eb5f53abb/CampaignID/3940/external/0/transaction/52" target="_blank" style="background: #f0fdf4; padding: 14px 28px; border-radius: 12px; margin-bottom: 32px; display: flex; align-items: center; gap: 14px; text-decoration: none; border: 1px solid #dcfce7; transition: transform 0.2s;">
         <img src="https://widgets.icanbuy.com/images/vu.png" width="24" height="18" alt="VA" style="border-radius: 2px;">
         <span style="font-size: 14px; font-weight: 500; color: #166534;">Veterans: 0% Down VA Loans (Check Eligibility & Rates)</span>
       </a>
 
       <!-- Lender List -->
       <div class="hfm-lenders-list" style="box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: none;">
-        <!-- Lender 1: Home Simply -->
-        <div class="hfm-lender-card">
+        <div class="hfm-lender-card" *ngFor="let lender of lenders">
           <div class="hfm-lender-brand">
-            <img src="https://images.icanbuy.com/logos/advertiser/17400744865629_1/3c8157185d29bbc6ab1a87fdc6870cd6.gif" class="hfm-lender-logo-img" alt="Home Simply">
-            <span class="hfm-lender-name">Home Simply</span>
-            <span class="hfm-lender-nmls">NMLS 2473786</span>
+            <img [src]="lender.logo" class="hfm-lender-logo-img" [alt]="lender.name" style="max-height: 40px; margin-bottom: 8px;">
+            <span class="hfm-lender-name">{{ lender.name }}</span>
+            <span class="hfm-lender-nmls">NMLS {{ lender.nmls }}</span>
           </div>
           <div class="hfm-stat-item">
             <span class="hfm-stat-label">APR</span>
-            <span class="hfm-stat-val">5.956%</span>
+            <span class="hfm-stat-val">{{ lender.apr }}</span>
           </div>
           <div class="hfm-stat-item">
             <span class="hfm-stat-label">Payment</span>
-            <span class="hfm-stat-val">$7,035/mo</span>
+            <span class="hfm-stat-val">{{ lender.payment }}</span>
           </div>
           <div class="hfm-stat-item">
             <span class="hfm-stat-label">Rate</span>
-            <span class="hfm-stat-val">5.875%</span>
+            <span class="hfm-stat-val">{{ lender.rate }}</span>
           </div>
           <div class="hfm-stat-item">
             <span class="hfm-stat-label">Fees</span>
             <div class="hfm-fees-row">
-              <span class="hfm-fees-val">$10,359</span>
+              <span class="hfm-fees-val">{{ lender.fees }}</span>
               <i class="fas fa-info-circle hfm-info-trigger"></i>
             </div>
-            <span class="hfm-fees-subtext">Includes 0.779 points ($9,264)</span>
-          </div>
-          <button class="hfm-quote-btn">Get your quote</button>
-        </div>
-
-        <!-- Lender 2: DECO Mortgage -->
-        <div class="hfm-lender-card">
-          <div class="hfm-lender-brand">
-            <img src="https://images.icanbuy.com/logos/advertiser/17175949075779_1/76af1a8f000a4cb6509a5ab028497c2c.png" class="hfm-lender-logo-img" alt="DECO Mortgage">
-            <span class="hfm-lender-name">DECO Mortgage</span>
-            <span class="hfm-lender-nmls">NMLS 2561451</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">APR</span>
-            <span class="hfm-stat-val">5.964%</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">Payment</span>
-            <span class="hfm-stat-val">$7,035/mo</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">Rate</span>
-            <span class="hfm-stat-val">5.875%</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">Fees</span>
-            <div class="hfm-fees-row">
-              <span class="hfm-fees-val">$11,640</span>
-              <i class="fas fa-info-circle hfm-info-trigger"></i>
-            </div>
-            <span class="hfm-fees-subtext">Includes 0.829 points ($9,858)</span>
-          </div>
-          <button class="hfm-quote-btn">Get your quote</button>
-        </div>
-
-        <!-- Lender 3: Optimum First Inc -->
-        <div class="hfm-lender-card">
-          <div class="hfm-lender-brand">
-            <img src="https://images.icanbuy.com/logos/advertiser/17742860623539_1/6772e72a7d97a23aec77157c55ca64fc.png" class="hfm-lender-logo-img" alt="Optimum First">
-            <span class="hfm-lender-name">Optimum First Inc</span>
-            <span class="hfm-lender-nmls">NMLS 240415</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">APR</span>
-            <span class="hfm-stat-val">6.046%</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">Payment</span>
-            <span class="hfm-stat-val">$7,130/mo</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">Rate</span>
-            <span class="hfm-stat-val">5.999%</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">Fees</span>
-            <div class="hfm-fees-row">
-              <span class="hfm-fees-val">$6,003</span>
-              <i class="fas fa-info-circle hfm-info-trigger"></i>
-            </div>
-            <span class="hfm-fees-subtext">Includes 0.337 points ($4,008)</span>
-          </div>
-          <button class="hfm-quote-btn">Get your quote</button>
-        </div>
-
-        <!-- Extra Lender (Initial Hidden) -->
-        <div class="hfm-lender-card" *ngIf="showAllLenders">
-          <div class="hfm-lender-brand">
-            <i class="fas fa-landmark" style="font-size: 24px; color: #6366f1; margin-bottom: 8px;"></i>
-            <span class="hfm-lender-name">Reliant Loans</span>
-            <span class="hfm-lender-nmls">NMLS 998877</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">APR</span>
-            <span class="hfm-stat-val">6.125%</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">Payment</span>
-            <span class="hfm-stat-val">$7,210/mo</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">Rate</span>
-            <span class="hfm-stat-val">6.050%</span>
-          </div>
-          <div class="hfm-stat-item">
-            <span class="hfm-stat-label">Fees</span>
-            <div class="hfm-fees-row">
-              <span class="hfm-fees-val">$8,450</span>
-              <i class="fas fa-info-circle hfm-info-trigger"></i>
-            </div>
-            <span class="hfm-fees-subtext">Includes 0.500 points ($6,000)</span>
+            <span class="hfm-fees-subtext">Includes {{ lender.points }}</span>
           </div>
           <button class="hfm-quote-btn">Get your quote</button>
         </div>
@@ -257,79 +173,130 @@
 
       <div style="margin-top: 48px; text-align: center;">
         <p style="color: #64748b; font-size: 15px; margin-bottom: 20px; font-weight: 500;">Shop around for providers based on your financial criteria</p>
-        <button (click)="showAllLenders = !showAllLenders" style="background: white; border: 2px solid #e2e8f0; color: #475569; padding: 14px 40px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-          {{ showAllLenders ? 'View fewer providers' : 'View more providers' }}
+        <button (click)="showAllLenders = !showAllLenders" class="base__StyledButton-rui__sc-7dk5je-1 ewvcYc" style="background: white; border: 2px solid #e2e8f0; color: #475569; padding: 14px 40px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+          View more providers
         </button>
       </div>
 
       <!-- Legal Disclosure Strip -->
-      <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid #f1f5f9; font-size: 13px; color: #94a3b8; line-height: 1.6;">
-        <b>Rate data provided by <a href="https://www.RateUpdate.com" target="_blank" style="color: var(--accent); text-decoration: none;">RateUpdate.com</a>. 
-        Displayed by Mortgage Research Center, NMLS #1907, Equal Housing Opportunity.</b><br>
-        Payments do not include taxes and insurance premiums. Actual payments will be greater with taxes and insurance included. 
-        <a href="#" style="color: var(--accent); text-decoration: none;">Rate and product details.</a>
+      <div style="margin-top: 48px; border-top: 1px solid #f1f5f9; padding-top: 32px;">
+        <button style="background: none; border: none; color: #718096; font-size: 14px; padding: 0; cursor: pointer; margin-bottom: 16px;">
+          Advertising disclosure
+        </button>
+        <div style="font-size: 13px; color: #94a3b8; line-height: 1.6;">
+          <b>Rate data provided by <a href="https://www.RateUpdate.com" target="_blank" style="color: var(--accent); text-decoration: none;">RateUpdate.com</a>. 
+          Displayed by Mortgage Research Center, NMLS #1907, Equal Housing Opportunity.</b><br>
+          Payments do not include taxes and insurance premiums. Actual payments will be greater with taxes and insurance included. 
+          <a href="https://widgets.icanbuy.com/disclaimer.htm" target="_blank" style="color: var(--accent); text-decoration: none;">Rate and product details.</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="realtor-footer">
-    <div class="footer-container">
-      <div class="footer-top">
-        <div class="footer-section">
-          <h4>Home Filla</h4>
-          <div class="footer-links-col">
-            <a href="#">About us</a>
-            <a href="#">Careers</a>
-            <a href="#">Accessibility</a>
-            <a href="#">Feedback</a>
-            <a href="#">Media room</a>
-            <a routerLink="/sitemap">Sitemap</a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h4>Support &amp; Legal</h4>
-          <div class="footer-links-col">
-            <a href="#">Agent support</a>
-            <a href="#">Ad Choices</a>
-            <a href="#">Advertise with us</a>
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h4>Products &amp; Services</h4>
-          <div class="footer-links-col">
-            <a href="#">Leads &amp; Branding</a>
-            <a href="#">ListHub</a>
-            <a href="#">Moving.com</a>
-            <a href="#">International Properties</a>
-            <a href="#">Builder Solutions</a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h4>News Corp</h4>
-          <div class="footer-links-col">
-            <a href="#">Wall Street Journal</a>
-            <a href="#">MarketWatch</a>
-            <a href="#">Mansion Global</a>
-            <a href="#">Financial News</a>
-            <a href="#">New York Post</a>
-          </div>
-        </div>
+  <!-- ─── HOME LOAN OPTIONS (COMPARISON TABLE) ─── -->
+  <section class="hfm-comparison-section">
+    <div class="hfm-comparison-container">
+      <div class="hfm-rates-header" style="margin-bottom: 48px;">
+        <h2 class="base__StyledType-rui__sc-18muj27-0 gJvTAW">Home loan options</h2>
       </div>
-      <div class="footer-bottom">
-        <div class="footer-socials">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
+
+      <div class="hfm-comparison-grid">
+        <!-- Header -->
+        <div class="hfm-comp-row head">
+          <div>Loan type</div>
+          <div>Income requirements</div>
+          <div>Down payment</div>
+          <div>Credit score</div>
+          <div class="hfm-comp-status">Assumable mortgage <i class="fas fa-info-circle" style="font-size: 12px; color: #cbd5e1;"></i></div>
         </div>
-        <div class="footer-disclaimer">
-          <p>© 1995-2026 Home Filla and Home Filla, Inc. All rights reserved.</p>
+
+        <!-- Table Body -->
+        <div class="hfm-comp-row" *ngFor="let opt of loanOptions">
+          <div class="hfm-comp-loan">
+            <b>{{ opt.type }}</b>
+            <div *ngIf="opt.note" style="font-size: 12px; font-weight: 500; color: #718096; margin-top: 4px;">{{ opt.note }}</div>
+            <button *ngIf="opt.type.includes('USDA') || opt.type.includes('VA')" style="margin-top: 8px; background: none; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: var(--accent); cursor: pointer;">View guide</button>
+          </div>
+          <div class="hfm-comp-info">{{ opt.income }}</div>
+          <div class="hfm-comp-info">
+            {{ opt.downPayment }}
+          </div>
+          <div class="hfm-comp-info">
+            {{ opt.credit }}
+          </div>
+          <div class="hfm-comp-status">
+            <i *ngIf="opt.assumable" class="fas fa-check" style="color: #0AB01F; font-size: 20px;"></i>
+            <i *ngIf="!opt.assumable" class="fas fa-times" style="color: #cbd5e1; font-size: 18px;"></i>
+          </div>
         </div>
       </div>
     </div>
-  </footer>
-</div>
+  </section>
+
+  <!-- ─── MORTGAGE ADVICE SECTION ─── -->
+  <section class="hfm-advice-section" style="padding: 100px 0; background: #f8fafc; border-top: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+    <div class="hfm-advice-container" style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+      <h2 class="base__StyledType-rui__sc-18muj27-0 kRtYPw" style="font-size: 32px; font-weight: 800; color: #1a202c; margin-bottom: 48px;">Mortgage Advice</h2>
+      <div class="hfm-advice-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+        <div class="hfm-article-card" *ngFor="let article of mortgageArticles" style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #edf2f7; transition: transform 0.3s;">
+          <div style="padding: 32px;">
+            <h3 style="font-size: 20px; font-weight: 700; color: #1a202c; margin-bottom: 16px; line-height: 1.4;">{{ article.title }}</h3>
+            <p style="font-size: 15px; color: #718096; line-height: 1.6; margin-bottom: 24px;">{{ article.desc }}</p>
+            <a [routerLink]="article.url" style="color: var(--accent); font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+              {{ article.linkText }} <i class="fas fa-arrow-right" style="font-size: 12px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── COMMON TERMS (GLOSSARY) ─── -->
+  <section class="hfm-glossary-section">
+    <div class="hfm-glossary-container">
+      <h2 class="base__StyledType-rui__sc-18muj27-0 cecluz" style="margin-bottom: 48px;">Common terms</h2>
+      
+      <div class="hfm-glossary-list">
+        <div class="hfm-term-box" *ngFor="let term of glossaryTerms; let i = index" [class.active]="openTermIndex === i">
+          <div class="hfm-term-header" (click)="toggleTerm(i)">
+            <span class="hfm-term-name">{{ term.term }}</span>
+            <i class="fas fa-chevron-down hfm-term-icon"></i>
+          </div>
+          <div class="hfm-term-content">
+            <p class="hfm-term-text">{{ term.definition }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── GEO-LINKS MODULE (SAME TO SAME CONTENT) ─── -->
+  <section class="hfm-linking-section" style="padding: 100px 0; background: #f8fafc; border-top: 1px solid #edf2f7;">
+    <div class="hfm-linking-container" style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+      <div class="hfm-linking-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px;">
+        <div class="hfm-linking-col" *ngFor="let group of linkingGroups; let i = index">
+          <h2 class="hfm-linking-title" style="font-size: 14px; font-weight: 800; color: #1a202c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 24px;">{{ group.title }}</h2>
+          <ul class="hfm-linking-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+            <li *ngFor="let link of group.links">
+              <a [routerLink]="link.url" style="color: #4a5568; text-decoration: none; font-size: 14px; transition: color 0.2s;">{{ link.text }}</a>
+            </li>
+          </ul>
+          
+          <div class="hfm-collapsed-wrap" [style.display]="group.showAll ? 'block' : 'none'" style="margin-top: 12px;">
+            <ul class="hfm-linking-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+              <li *ngFor="let link of group.collapsedLinks">
+                <a [routerLink]="link.url" style="color: #4a5568; text-decoration: none; font-size: 14px; transition: color 0.2s;">{{ link.text }}</a>
+              </li>
+            </ul>
+          </div>
+
+          <button class="hfm-linking-toggle" (click)="toggleLinkingGroup(i)" style="margin-top: 20px; background: none; border: none; color: var(--accent); font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 0;">
+            <span class="button-text">{{ group.showAll ? 'See less' : 'See more' }}</span>
+            <i class="fas" [ngClass]="group.showAll ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
