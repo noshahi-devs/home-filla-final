@@ -462,13 +462,16 @@
 .pag-load-more:hover {
   transform: translateX(10px);
 }
-/* --- Top 3 Highlights Styles --- */
-.top-highlights-section { margin-bottom: 60px; }
-.highlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-.highlight-card { position: relative; height: 380px; border-radius: 24px; overflow: hidden; cursor: pointer; }
-.highlight-image { width: 100%; height: 100%; }
-.highlight-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-.highlight-card:hover .highlight-image img { transform: scale(1.1); }
-.highlight-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 30px; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); color: white; }
-.highlight-tag { font-size: 11px; font-weight: 950; text-transform: uppercase; letter-spacing: 2px; color: var(--portal-azure); margin-bottom: 12px; display: block; }
-.highlight-title { font-size: 24px; font-weight: 850; line-height: 1.25; margin: 0; }
+
+/* --- Premium Most Popular Section (4 Columns) --- */
+.top-highlights-section { margin-bottom: 80px; }
+.section-main-heading { font-size: 24px; font-weight: 850; color: #0f172a; margin-bottom: 25px; letter-spacing: -0.5px; }
+.highlight-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.highlight-card { display: flex; flex-direction: column; gap: 12px; cursor: pointer; transition: all 0.3s ease; }
+.highlight-image-box { width: 100%; aspect-ratio: 16/10; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.04); }
+.highlight-image-box img { width: 100%; height: 100%; object-fit: cover; transition: all 0.3s ease; }
+.highlight-card:hover .highlight-image-box img { transform: scale(1.05); }
+.highlight-card-body { display: flex; flex-direction: column; gap: 6px; }
+.highlight-card-category { font-size: 11px; font-weight: 900; color: #004de5; text-transform: uppercase; letter-spacing: 1px; }
+.highlight-card-title { font-size: 18px; font-weight: 850; line-height: 1.3; color: #0f172a; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.highlight-card-excerpt { font-size: 14px; line-height: 1.5; color: #475569; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }

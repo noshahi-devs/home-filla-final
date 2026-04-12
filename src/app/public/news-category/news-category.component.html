@@ -31,16 +31,18 @@
   </nav>
 
   <main class="portal-content">
-    <!-- Top 3 Highlights Section -->
+     <!-- Top 4 Highlights Section (Most Popular) -->
     <section class="top-highlights-section" *ngIf="popularArticles.length > 0">
+      <h2 class="section-main-heading">Most popular {{ categoryTitle | titlecase }} articles</h2>
       <div class="highlight-grid">
-        <div class="highlight-card" *ngFor="let art of popularArticles.slice(0, 3)">
-          <div class="highlight-image">
+        <div class="highlight-card" *ngFor="let art of popularArticles.slice(0, 4)">
+          <div class="highlight-image-box">
             <img [src]="art.imageUrl" [alt]="art.title">
           </div>
-          <div class="highlight-content">
-            <span class="highlight-tag">{{ categoryTitle }}</span>
-            <h2 class="highlight-title">{{ art.title }}</h2>
+          <div class="highlight-card-body">
+            <span class="highlight-card-category">{{ categoryTitle }}</span>
+            <h3 class="highlight-card-title">{{ art.title }}</h3>
+            <p class="highlight-card-excerpt">{{ art.excerpt || 'Access the full editorial for deep-market analysis and professional guidance.' }}</p>
           </div>
         </div>
       </div>
