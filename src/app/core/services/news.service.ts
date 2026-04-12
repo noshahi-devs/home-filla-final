@@ -346,4 +346,10 @@ export class NewsService {
     });
     return articles;
   }
+
+  getPopularArticles(category: string): Article[] {
+    // For now, return the first 4 articles as "popular"
+    const all = this.getArticlesByCategory(category);
+    return all.slice(0, 4);
+  }
 }

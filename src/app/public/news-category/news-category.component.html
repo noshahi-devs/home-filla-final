@@ -1,28 +1,58 @@
+
 <div class="news-page-container">
-  <!-- Fixed Category Header -->
+  <!-- News Sub-Header / Navigation -->
   <nav class="news-nav">
     <div class="news-nav-content">
       <div class="news-brand">
-        <a routerLink="/news" style="text-decoration: none; color: white;">HOME FILLA <span class="sub-brand">NEWS</span></a>
+        <span class="sub-brand">News</span>&nbsp;&amp; Insights
       </div>
       <ul class="category-list">
-        <li *ngFor="let link of navLinks">
-          <a [routerLink]="link.route" [class.active]="link.active">{{ link.name }}</a>
+        <li *ngFor="let link of navLinks" [class.active]="link.active" [class.dropdown-trigger]="link.hasDropdown">
+          <a [routerLink]="link.route" class="link-label" style="text-decoration: none; color: inherit;">
+            {{ link.name }}
+            <i *ngIf="link.hasDropdown" class="fa fa-chevron-down menu-arrow"></i>
+          </a>
+
+          <!-- Dropdown Menu -->
+          <div *ngIf="link.hasDropdown" class="dropdown-menu">
+            <div class="dropdown-inner">
+              <a *ngFor="let item of link.items" [routerLink]="['/news', item.name.toLowerCase().split(' ').join('-')]" class="dropdown-item">
+                {{ item.name }}
+              </a>
+            </div>
+          </div>
         </li>
       </ul>
-      <div class="nav-actions">
-        <i class="search-icon">🔍</i>
-        <button class="sign-up-btn">SIGN UP</button>
+      <div class="nav-extra">
+        <button class="search-trigger">
+          <i class="fa fa-search"></i>
+        </button>
       </div>
     </div>
   </nav>
 
-  <div class="editorial-container" style="padding-top: 40px;">
+  <div class="editorial-container" style="padding-top: 10px;">
     <!-- Category Hero -->
     <header class="section-title-wrap" style="border-bottom: 2px solid #000; padding-bottom: 15px; margin-bottom: 50px;">
       <h1 class="sub-section-title" style="font-size: 48px; letter-spacing: -1px;">{{ categoryTitle }}</h1>
       <span style="font-weight: 800; font-size: 14px; color: #64748b;">TOTAL ARTICLES: {{ articles.length }}</span>
     </header>
+
+    <!-- Most Popular Section -->
+    <section class="popular-section" *ngIf="popularArticles.length > 0" style="margin-bottom: 80px;">
+      <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 30px; border-bottom: 2px solid #000; padding-bottom: 10px; display: inline-block;">Most popular {{ categoryTitle | titlecase }} articles</h2>
+      
+      <div class="popular-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;">
+        <div class="pop-card" *ngFor="let pop of popularArticles">
+          <div class="pop-img-box" style="height: 180px; margin-bottom: 15px; border-radius: 8px; overflow: hidden;">
+            <img [src]="pop.imageUrl" [alt]="pop.title" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <span style="font-size: 11px; font-weight: 900; color: #2563eb; letter-spacing: 1px;">{{ categoryTitle }}</span>
+          <h3 style="font-size: 16px; margin-top: 5px; line-height: 1.4; font-weight: 800;">{{ pop.title }}</h3>
+          <p style="font-size: 14px; color: #64748b; margin-top: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{{ pop.excerpt || 'Essential expert analysis and the latest news updates for home buyers and sellers.' }}</p>
+        </div>
+      </div>
+    </section>
 
     <div class="editorial-split-grid" *ngIf="articles.length > 0">
       <!-- Main Feed -->
