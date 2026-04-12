@@ -26,6 +26,9 @@ export class NewsCategoryComponent implements OnInit {
   sortBy: string = 'relevance';
   selectedTags: Set<string> = new Set();
   selectedYears: Set<string> = new Set();
+  miles: number | null = null;
+  zipCode: string = '';
+  titlesOnly: boolean = false;
 
   // Filter Options (Mock data for UI)
   availableTags = ['Homebuying', 'Updates', 'First-Time Home Buyer', 'Video', 'Home Inspections', 'Mortgage', 'Design'];
@@ -95,6 +98,17 @@ export class NewsCategoryComponent implements OnInit {
   }
 
   onSortChange() {
+    this.applyFilters();
+  }
+
+  resetFilters() {
+    this.searchTerm = '';
+    this.sortBy = 'relevance';
+    this.selectedTags.clear();
+    this.selectedYears.clear();
+    this.miles = null;
+    this.zipCode = '';
+    this.titlesOnly = false;
     this.applyFilters();
   }
 }

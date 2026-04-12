@@ -1,13 +1,13 @@
 <div class="category-portal-wrapper">
-  <!-- Dynamic Sub-Navigation (Positions below global header) -->
-   <nav class="news-nav">
+  <!-- Dynamic Sub-Navigation (Primary Anchor) -->
+  <nav class="news-nav">
     <div class="news-nav-content">
       <div class="news-brand">
         <span class="sub-brand">News</span>&nbsp;&amp; Insights
       </div>
       <ul class="category-list">
         <li *ngFor="let link of navLinks" [class.active]="link.active" [class.dropdown-trigger]="link.hasDropdown">
-          <a [routerLink]="link.route" class="link-label" style="text-decoration: none; color: inherit;">
+          <a [routerLink]="link.route" class="link-label">
             {{ link.name }}
             <i *ngIf="link.hasDropdown" class="fa fa-chevron-down menu-arrow"></i>
           </a>
@@ -31,127 +31,166 @@
   </nav>
 
   <main class="portal-content">
-    <!-- Sophisticated Hero Section -->
-    <header class="portal-hero">
-      <div class="hero-container">
-        <div class="hero-label">Editorial Category</div>
-        <h1 class="hero-title">{{ categoryTitle }}</h1>
-        <div class="hero-meta">
-          <span class="meta-count">{{ allArticles.length }}</span> Articles Published
-        </div>
-      </div>
-    </header>
-
-    <!-- Curated Popular Selection -->
-    <section class="selection-section" *ngIf="popularArticles.length > 0">
-      <div class="section-container">
-        <h2 class="section-heading">Must Read Highlights</h2>
-        <div class="selection-grid">
-          <div class="selection-card" *ngFor="let pop of popularArticles">
-            <div class="card-media">
-              <img [src]="pop.imageUrl" [alt]="pop.title">
-            </div>
-            <div class="card-info">
-              <span class="card-tag">{{ categoryTitle }}</span>
-              <h3 class="card-title">{{ pop.title }}</h3>
-            </div>
+    <!-- Top 3 Highlights Section -->
+    <section class="top-highlights-section" *ngIf="popularArticles.length > 0">
+      <div class="highlight-grid">
+        <div class="highlight-card" *ngFor="let art of popularArticles.slice(0, 3)">
+          <div class="highlight-image">
+            <img [src]="art.imageUrl" [alt]="art.title">
+          </div>
+          <div class="highlight-content">
+            <span class="highlight-tag">{{ categoryTitle }}</span>
+            <h2 class="highlight-title">{{ art.title }}</h2>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Master Filter Layout -->
-    <div class="portal-exploration-layout">
-      <div class="exploration-container">
-        
-        <!-- Glassmorphic Sidebar -->
-        <aside class="exploration-filters">
-          <div class="filter-panel">
-            <div class="panel-header">
-              <i class="fa fa-filter"></i> Refine Results
-            </div>
-
-            <div class="filter-item">
-              <label>Sequence</label>
-              <div class="select-wrapper">
-                <select [(ngModel)]="sortBy" (change)="onSortChange()" class="portal-select">
-                  <option value="relevance">Highly Relevant</option>
-                  <option value="newest">Most Recent</option>
-                  <option value="oldest">Historical</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="filter-item">
-              <label>Keywords</label>
-              <div class="search-box">
-                <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Discover topics...">
-                <i class="fa fa-search"></i>
-              </div>
-            </div>
-
-            <div class="filter-item">
-              <label>Topics</label>
-              <div class="portal-check-list">
-                <label class="portal-check" *ngFor="let tag of availableTags">
-                  <input type="checkbox" (change)="$event.stopPropagation(); toggleTag(tag)">
-                  <span class="check-mark"></span>
-                  <span class="check-text">{{ tag }}</span>
-                </label>
-              </div>
-            </div>
-
-            <div class="filter-item">
-              <label>Timeline</label>
-              <div class="portal-check-list">
-                <label class="portal-check" *ngFor="let year of availableYears">
-                  <input type="checkbox" (change)="$event.stopPropagation(); toggleYear(year)">
-                  <span class="check-mark"></span>
-                  <span class="check-text">{{ year }}</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        <!-- Dynamic Results Grid -->
-        <div class="exploration-results">
-          <div class="results-top">
-            <h2 class="results-heading">Database: {{ categoryTitle | titlecase }}</h2>
-            <p class="results-subheading">Displaying {{ filteredArticles.length }} validated insights</p>
+    <div class="portal-main-layout">
+      
+      <!-- ADVANCED SIDEBAR FILTERS -->
+      <aside class="exploration-sidebar">
+        <div class="filter-card">
+          <div class="filter-card-header">
+            <i class="fa fa-filter"></i> Article Filters
           </div>
 
-          <div class="article-grid-premium">
-            <article class="article-card-premium" *ngFor="let art of filteredArticles">
-              <div class="article-image">
-                <img [src]="art.imageUrl" [alt]="art.title">
-                <div class="image-overlay"></div>
-              </div>
-              <div class="article-body">
-                <span class="article-category">{{ categoryTitle }}</span>
-                <h3 class="article-title">{{ art.title }}</h3>
-                <p class="article-snippet">{{ art.excerpt || 'Access the full editorial for deep-market analysis and professional guidance.' }}</p>
-                <div class="article-footer">
-                  <span class="article-author">Source: {{ art.author }}</span>
+          <div class="filter-section">
+            <label class="filter-label">Sort by</label>
+            <div class="custom-select-wrap">
+              <select [(ngModel)]="sortBy" (change)="onSortChange()" class="premium-select-field">
+                <option value="relevance">Relevance</option>
+                <option value="newest">Date - Newest First</option>
+                <option value="oldest">Date - Oldest First</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <label class="filter-label">Search {{ categoryTitle | titlecase }} articles</label>
+            <div class="premium-search-box">
+              <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Search">
+              <i class="fa fa-search search-magnifier"></i>
+            </div>
+            <label class="titles-only-check">
+              <input type="checkbox" [(ngModel)]="titlesOnly">
+              <span class="check-text">Search titles only</span>
+            </label>
+          </div>
+
+          <div class="filter-section">
+            <label class="filter-label">Content type</label>
+            <div class="facet-link-row">
+              <a href="javascript:void(0)" class="facet-link">Advice</a>
+              <span class="facet-count">1395</span>
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <label class="filter-label">Tag</label>
+            <div class="filter-inner-search">
+              <input type="text" placeholder="Filter Tag" class="inner-filter-input">
+            </div>
+            <div class="checkbox-scroller">
+              <label class="premium-check" *ngFor="let tag of availableTags; let i = index">
+                <div class="check-left">
+                  <input type="checkbox" (change)="toggleTag(tag)">
+                  <span class="custom-box"></span>
+                  <span class="label-text">{{ tag }}</span>
                 </div>
-              </div>
-            </article>
+                <span class="facet-count">{{ 584 - (i * 50) }}</span>
+              </label>
+            </div>
+            <button class="more-filters-btn">+ More tag filters</button>
           </div>
 
-          <!-- Futuristic Pagination -->
-          <nav class="portal-pagination">
-            <div class="pagination-inner">
-              <button class="pag-btn active">01</button>
-              <button class="pag-btn">02</button>
-              <button class="pag-btn">03</button>
-              <span class="pag-dots">...</span>
-              <button class="pag-btn">99</button>
-              <button class="pag-nav-btn">Next Experience <i class="fa fa-arrow-right"></i></button>
+          <div class="filter-section">
+            <label class="filter-label">Year</label>
+            <div class="checkbox-scroller">
+              <label class="premium-check" *ngFor="let year of availableYears; let i = index">
+                <div class="check-left">
+                  <input type="checkbox" (change)="toggleYear(year)">
+                  <span class="custom-box"></span>
+                  <span class="label-text">{{ year }}</span>
+                </div>
+                <span class="facet-count">{{ 253 - (i * 30) }}</span>
+              </label>
             </div>
-          </nav>
+            <button class="more-filters-btn">+ More year filters</button>
+          </div>
+
+          <div class="filter-section">
+            <label class="filter-label">State</label>
+            <div class="filter-inner-search">
+              <input type="text" placeholder="Filter State" class="inner-filter-input">
+            </div>
+            <div class="checkbox-scroller">
+              <label class="premium-check" *ngFor="let state of availableStates; let i = index">
+                <div class="check-left">
+                  <input type="checkbox">
+                  <span class="custom-box"></span>
+                  <span class="label-text">{{ state }}</span>
+                </div>
+                <span class="facet-count">{{ 28 - (i * 3) }}</span>
+              </label>
+            </div>
+            <button class="more-filters-btn">+ More state filters</button>
+          </div>
+
+          <div class="filter-section">
+            <label class="filter-label">Within zip code radius</label>
+            <div class="radius-input-grid">
+              <input type="number" [(ngModel)]="miles" placeholder="Miles" class="radius-field">
+              <div class="zip-field-wrap">
+                <input type="text" [(ngModel)]="zipCode" placeholder="Zip code" class="radius-field">
+                <button class="zip-submit"><i class="fa fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-footer">
+            <button (click)="resetFilters()" class="reset-all-btn">Reset all filters</button>
+            <button class="save-filters-btn">Save filters</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RESULTS AREA -->
+      <div class="portal-results">
+        <header class="results-header-block">
+          <div class="category-indicator">Database: {{ categoryTitle }}</div>
+          <h1 class="results-main-title">All {{ categoryTitle | titlecase }} articles</h1>
+          <p class="results-summary">Showing {{ filteredArticles.length }} validated insights</p>
+        </header>
+
+        <div class="article-grid-premium">
+          <article class="premium-card" *ngFor="let art of filteredArticles">
+            <div class="card-image-box">
+              <img [src]="art.imageUrl" [alt]="art.title">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+              <span class="article-tag">{{ categoryTitle }}</span>
+              <h3 class="article-headline">{{ art.title }}</h3>
+              <p class="article-excerpt">{{ art.excerpt || 'Access the full editorial for deep-market analysis and professional guidance.' }}</p>
+              <footer class="article-meta">
+                <span class="author-name">Source: {{ art.author }}</span>
+              </footer>
+            </div>
+          </article>
         </div>
 
+        <!-- Pagination -->
+        <nav class="futuristic-pagination">
+          <button class="pag-step active">01</button>
+          <button class="pag-step">02</button>
+          <button class="pag-step">03</button>
+          <span class="pag-gap">...</span>
+          <button class="pag-step">99</button>
+          <button class="pag-load-more">Next Experience <i class="fa fa-arrow-right"></i></button>
+        </nav>
       </div>
+
     </div>
   </main>
 </div>
