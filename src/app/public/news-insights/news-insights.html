@@ -1,15 +1,30 @@
+<app-site-header></app-site-header>
+
 <div class="news-page-container">
   <!-- News Sub-Header / Navigation -->
   <nav class="news-nav">
     <div class="news-nav-content">
       <div class="news-brand">
-        <span class="hf-blue">News</span>&nbsp;&amp; Insights
+        <span class="sub-brand">News</span>&nbsp;&amp; Insights
       </div>
       <ul class="category-list">
-        <li *ngFor="let cat of categories" 
-            [class.active]="cat.active" 
-            (click)="setActiveCategory(cat)">
-          {{ cat.name }}
+        <li *ngFor="let link of navLinks" 
+            [class.active]="link.active" 
+            [class.dropdown-trigger]="link.hasDropdown"
+            (click)="setActiveLink(link)">
+          <div class="link-label">
+            {{ link.name }}
+            <i *ngIf="link.hasDropdown" class="fa fa-chevron-down menu-arrow"></i>
+          </div>
+          
+          <!-- Dropdown Menu -->
+          <div *ngIf="link.hasDropdown" class="dropdown-menu">
+            <div class="dropdown-inner">
+              <a *ngFor="let item of link.items" [routerLink]="item.route" class="dropdown-item">
+                {{ item.name }}
+              </a>
+            </div>
+          </div>
         </li>
       </ul>
       <div class="nav-extra">
@@ -120,3 +135,5 @@
     </div>
   </section>
 </div>
+
+<app-site-footer></app-site-footer>

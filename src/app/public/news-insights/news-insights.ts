@@ -1,25 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
+import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
 
 @Component({
   selector: 'app-news-insights',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, SiteHeaderComponent, SiteFooterComponent],
   templateUrl: './news-insights.html',
   styleUrls: ['./news-insights.css']
 })
 export class NewsInsightsComponent implements OnInit {
-  categories = [
-    { name: 'Latest', active: true },
-    { name: 'Trends', active: false },
-    { name: 'Buying', active: false },
-    { name: 'Selling', active: false },
-    { name: 'Renting', active: false },
-    { name: 'Celebrity', active: false },
-    { name: 'Advice', active: false },
-    { name: 'Research', active: false }
+  navLinks = [
+    { name: 'LATEST', route: '/news', active: true },
+    { 
+      name: 'NEWS', 
+      active: false, 
+      hasDropdown: true,
+      items: [
+        { name: 'Real Estate News', route: '#' },
+        { name: 'Housing Trends', route: '#' },
+        { name: 'Celebrity Real Estate', route: '#' },
+        { name: 'Unique Homes', route: '#' },
+        { name: 'Reality TV', route: '#' },
+        { name: 'Sports', route: '#' },
+        { name: 'Most Expensive Homes', route: '#' },
+        { name: 'Most Popular Homes', route: '#' }
+      ]
+    },
+    { name: 'BUYING', route: '#', active: false },
+    { name: 'SELLING', route: '#', active: false },
+    { name: 'RENTING', route: '#', active: false },
+    // { name: 'CELEBRITY HOMES', route: '#', active: false },
+    { 
+      name: 'ADVICE', 
+      active: false, 
+      hasDropdown: true,
+      items: [
+        { name: 'Buying Advice', route: '#' },
+        { name: 'Selling Advice', route: '#' },
+        { name: 'Renting Advice', route: '#' },
+        { name: 'Financing', route: '#' },
+        { name: 'Living', route: '#' },
+        { name: 'Moving', route: '#' },
+        { name: 'Home Improvement', route: '#' }
+      ]
+    },
+    { name: 'GUIDES', route: '#', active: false },
+    { name: 'LIVING', route: '#', active: false },
+    { name: 'RESEARCH', route: '#', active: false }
   ];
+
+  /* Keep previous article data */
 
   featuredArticle = {
     title: "The 2024 Market Shift: What Every Home Filla User Needs to Know",
@@ -82,13 +115,14 @@ export class NewsInsightsComponent implements OnInit {
     "How Fed changes affect your home equity"
   ];
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
-    window.scrollTo(0, 0);
   }
 
-  setActiveCategory(category: any) {
-    this.categories.forEach(c => c.active = (c === category));
+  setActiveLink(link: any): void {
+    this.navLinks.forEach(l => l.active = false);
+    link.active = true;
   }
+
 }

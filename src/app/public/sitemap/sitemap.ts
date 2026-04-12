@@ -9,4 +9,4 @@ import { SiteFooterComponent } from '../../shared/components/site-footer/site-fo
   standalone: true,
   imports: [SiteHeaderComponent, SiteFooterComponent]
 })
-export class SitemapComponent {}
+export class SitemapComponent { }
