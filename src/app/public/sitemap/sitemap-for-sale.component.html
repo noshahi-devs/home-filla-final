@@ -20,14 +20,14 @@
         <div class="accordion-content" *ngIf="state.isOpen">
           <div class="content-inner">
             <div class="view-all-wrapper">
-              <a [routerLink]="['/realestateandhomes-search', state.slug]" class="view-all-link">View all in {{ state.name }}</a>
+              <a [routerLink]="['/listings', 'buy']" [queryParams]="{ location: state.name, state: state.slug }" class="view-all-link">View all in {{ state.name }}</a>
             </div>
 
             <div class="cities-grid">
               <div class="city-col" *ngFor="let city of state.cities">
                 <ul class="city-list">
                   <li>
-                    <a [routerLink]="['/realestateandhomes-search', city.slug]" class="city-link">
+                    <a [routerLink]="['/listings', 'buy']" [queryParams]="{ location: city.name, state: state.slug }" class="city-link">
                       Homes for Sale in {{ city.name }}
                     </a>
                   </li>

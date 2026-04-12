@@ -38,7 +38,7 @@
           <strong>{{ formatCount(category.count) }}</strong> properties
         </div>
         <div class="lst-location-pill">
-          <i class="fas fa-map-marker-alt"></i> San Francisco, CA
+          <i class="fas fa-map-marker-alt"></i> {{ locationFilter ? locationFilter : 'San Francisco, CA' }}
         </div>
       </div>
     </div>
@@ -108,7 +108,7 @@
     <div class="lst-results-bar-inner">
       <div class="lst-results-info">
         <span class="lst-results-count">{{ formatCount(category.count) }} results</span>
-        <span class="lst-results-label">in <strong>San Francisco, CA</strong></span>
+        <span class="lst-results-label">in <strong>{{ locationFilter ? locationFilter : 'San Francisco, CA' }}</strong></span>
       </div>
       <div class="filters-scroll-container">
         <div class="filter-group">

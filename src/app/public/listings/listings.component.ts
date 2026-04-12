@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { getCategoryData, CategoryInfo, Property } from '../../data/listings.data';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
+import { combineLatest } from 'rxjs';
 
 declare global {
   interface Window {
@@ -24,7 +25,9 @@ declare global {
 export class ListingsComponent implements OnInit, AfterViewInit {
   category: CategoryInfo | null = null;
   visibleProperties: Property[] = [];
+  allFilteredProperties: Property[] = [];
   pageSize = 12;
+  locationFilter: string | null = null;
   
   // Map and Favorite State
   isMapOpen = false;
@@ -34,10 +37,40 @@ export class ListingsComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    combineLatest([
+      this.route.paramMap,
+      this.route.queryParamMap
+    ]).subscribe(([params, queryParams]) => {
       const slug = params.get('category') || '';
-      this.category = getCategoryData(slug);
-      this.visibleProperties = this.category?.properties.slice(0, this.pageSize) || [];
+      this.locationFilter = queryParams.get('location');
+      const stateSuffix = queryParams.get('state');
+
+      const categoryData = getCategoryData(slug);
+      if (categoryData) {
+        this.category = { ...categoryData };
+        let props = [...this.category.properties];
+
+        if (this.locationFilter) {
+           let query = this.locationFilter.toLowerCase();
+           const actualFiltered = props.filter(p => p.city.toLowerCase().includes(query));
+           if (actualFiltered.length > 0) {
+               props = actualFiltered;
+           } else {
+               const fakeLocation = this.locationFilter + (stateSuffix ? ', ' + stateSuffix : '');
+               props = props.map(p => ({...p, city: fakeLocation}));
+           }
+        }
+
+        this.allFilteredProperties = props;
+        this.visibleProperties = this.allFilteredProperties.slice(0, this.pageSize);
+        if (this.locationFilter) {
+          this.category.count = props.length;
+        }
+      } else {
+        this.category = null;
+        this.visibleProperties = [];
+        this.allFilteredProperties = [];
+      }
     });
   }
 
@@ -49,15 +82,15 @@ export class ListingsComponent implements OnInit, AfterViewInit {
   }
 
   get hasMore(): boolean {
-    return (this.category?.properties.length || 0) > this.visibleProperties.length;
+    return (this.allFilteredProperties.length || 0) > this.visibleProperties.length;
   }
 
   get remaining(): number {
-    return (this.category?.properties.length || 0) - this.visibleProperties.length;
+    return (this.allFilteredProperties.length || 0) - this.visibleProperties.length;
   }
 
   loadMore() {
-    const all = this.category?.properties || [];
+    const all = this.allFilteredProperties || [];
     const next = this.visibleProperties.length + this.pageSize;
     this.visibleProperties = all.slice(0, next);
   }
