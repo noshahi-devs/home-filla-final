@@ -44,8 +44,13 @@ export class FindAgentComponent implements OnInit {
   wizardComplete = true;
   wizardAddress = ''; // Restored to satisfy Angular template compilation for unused wizard section
 
-  // Modal State
+  // Modal & FAQ State
   showConnectModal = false;
+  openFaq: number | null = null;
+
+  toggleFaq(id: number) {
+    this.openFaq = this.openFaq === id ? null : id;
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

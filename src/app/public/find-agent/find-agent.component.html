@@ -144,118 +144,278 @@
       </div>
     </section>
 
-  <section class="filter-section">
-    <div class="filter-control">
-      <label>Specialty</label>
-      <select [(ngModel)]="selectedSpecialty">
-        <option *ngFor="let option of specialties" [value]="option">{{ option }}</option>
-      </select>
-    </div>
-    <div class="filter-control">
-      <label>Primary language</label>
-      <select [(ngModel)]="selectedLanguage">
-        <option *ngFor="let option of languageOptions" [value]="option">{{ option }}</option>
-      </select>
-    </div>
-    <div class="filter-control">
-      <label>Experience</label>
-      <select [(ngModel)]="selectedExperience">
-        <option *ngFor="let option of experienceOptions" [value]="option">{{ option }}</option>
-      </select>
-    </div>
-    <button class="btn-outline filter-reset" type="button" (click)="resetFilters()">Reset filters</button>
-  </section>
-
-  <section class="agents-section" id="agent-hub">
-    <div class="section-heading">
-      <div>
-        <p class="sectioneyebrow">Vetted pros</p>
-        <h2>Meet agents ready for your next move.</h2>
-        <p>We pair you with licensed local experts who have the proof points to back up their promise.</p>
+    <!-- Home Filla Difference Section -->
+    <section class="hf-difference-section split-layout">
+      <div class="hf-diff-image-col">
+        <img src="https://images.pexels.com/photos/7414925/pexels-photo-7414925.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Home Filla Experts">
       </div>
-      <div class="section-actions">
-        <span class="match-count">{{ filteredAgents.length }} matches</span>
-        <button class="btn-outline" type="button" (click)="resetFilters()">Clear filters</button>
-      </div>
-    </div>
+      <div class="hf-diff-content-col">
+        <div class="hf-diff-header">
+          <h2 class="hf-diff-title">The Home Filla difference</h2>
+          <p class="hf-diff-desc">There are regular real estate agents, and then there are Home Filla verified experts. Here's why you can trust our vetted network of elite professionals.</p>
+        </div>
+        <div class="hf-diff-list">
+          <div class="hf-diff-item">
+            <div class="hf-diff-icon">
+              <i class="fas fa-clipboard-check"></i>
+            </div>
+            <div class="hf-diff-text">
+              <h3>Partners You Can Trust</h3>
+              <p>Home Filla experts agree to abide by a set Code of Excellence. That means they always put your interests first.</p>
+            </div>
+          </div>
+          
+          <div class="hf-diff-item">
+            <div class="hf-diff-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div class="hf-diff-text">
+              <h3>A Standard of Excellence</h3>
+              <p>Home Filla experts have access to proprietary data tools and the high-level expertise required to interpret local market conditions.</p>
+            </div>
+          </div>
 
-    <div class="agent-grid">
-      <article class="agent-card" *ngFor="let agent of filteredAgents">
-        <div class="agent-card-header">
-          <div class="agent-avatar">
-            <img [src]="agent.imageUrl" [alt]="agent.name">
-          </div>
-          <div class="agent-header-copy">
-            <h3>{{ agent.name }}</h3>
-            <p>{{ agent.title }}</p>
-            <span class="agent-city">{{ agent.city }}</span>
-          </div>
-          <span class="agent-pill">Top 5%</span>
-        </div>
-        <p class="agent-tagline">{{ agent.tagline }}</p>
-        <div class="agent-stats">
-          <span><strong>{{ agent.rating }}</strong><small>rating</small></span>
-          <span><strong>{{ agent.deals }}</strong><small>deals closed</small></span>
-          <span><strong>{{ agent.experience }} yrs</strong><small>experience</small></span>
-        </div>
-        <div class="agent-coverage">
-          <span>Coverage: {{ agent.coverage.join(' · ') }}</span>
-        </div>
-        <div class="agent-meta">
-          <div class="agent-tags">
-            <span *ngFor="let speciality of agent.specialties">{{ speciality }}</span>
-          </div>
-          <div class="agent-tags">
-            <span *ngFor="let language of agent.languages">{{ language }}</span>
+          <div class="hf-diff-item">
+            <div class="hf-diff-icon">
+              <i class="fas fa-medal"></i>
+            </div>
+            <div class="hf-diff-text">
+              <h3>Pointed Expertise</h3>
+              <p>Every client has unique must-haves. Our network of agents continuously increases their real estate skills by earning specific designations.</p>
+            </div>
           </div>
         </div>
-        <div class="agent-actions">
-          <button class="btn-outline" type="button">See availability</button>
-          <button class="btn-primary secondary" type="button">Message agent</button>
+        
+        <div class="hf-diff-action">
+          <button class="ah-pill-btn" (click)="showConnectModal = true">
+            <span>Connect with an expert</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
-        <div class="agent-contact">
-          <span>Availability: {{ agent.availability }}</span>
-          <span>Call: {{ agent.phone }}</span>
+      </div>
+    </section>
+
+    <!-- Stages of Buying Section -->
+    <section class="hf-stage-section split-layout">
+      <div class="hf-diff-content-col">
+        <div class="hf-diff-header" style="margin-bottom: 40px;">
+          <h2 class="hf-diff-title">An expert can help at any stage of buying a home</h2>
         </div>
-      </article>
-    </div>
+        
+        <div class="hf-stage-list">
+          <div class="hf-stage-item">
+            <h3>Prepare to buy</h3>
+            <p>An expert can provide insight into local market conditions and help you decide when is the right time for you to buy.</p>
+          </div>
+          
+          <div class="hf-stage-item">
+            <h3>Understand your buying power</h3>
+            <p>An expert can help you get a better idea of finances needed to understand your purchasing power. They can lay out the different steps to the home buying process and guide you through it.</p>
+          </div>
 
-    <div *ngIf="!filteredAgents.length" class="no-results">
-      <p>We could not find anyone matching that combination yet. Try broadening your search or clearing filters.</p>
-    </div>
-  </section>
+          <div class="hf-stage-item">
+            <h3>Explore neighborhoods</h3>
+            <p>A local expert can help you understand the area's amenities, school district, neighborhoods, and accessibility.</p>
+          </div>
 
-  <section class="confidence-section">
-    <div class="confidence-grid">
-      <div class="confidence-card">
-        <p>Local insights</p>
-        <strong>32</strong>
-        <span>Neighborhoods covered</span>
+          <div class="hf-stage-item">
+            <h3>Close the deal</h3>
+            <p>An expert can negotiate to help get you the best price. They can help you navigate contingencies and special requests and guide you through the closing process.</p>
+          </div>
+        </div>
+        
+        <div class="hf-diff-action" style="text-align: left;">
+          <button class="ah-pill-btn" (click)="showConnectModal = true">
+            <span>Connect with an expert</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
       </div>
-      <div class="confidence-card">
-        <p>Response time</p>
-        <strong>45 min</strong>
-        <span>Average first reply</span>
-      </div>
-      <div class="confidence-card">
-        <p>Closed goals</p>
-        <strong>100%</strong>
-        <span>Client satisfaction</span>
-      </div>
-    </div>
-  </section>
 
-  <section class="cta-banner">
-    <div>
-      <p class="sectioneyebrow">Need help deciding?</p>
-      <h2>Book a free 15-minute consult with our concierge team.</h2>
-      <p>We will recommend up to three agents who match your preferences and introduce you personally.</p>
-    </div>
-    <div class="cta-actions">
-      <button class="btn-primary" type="button">Book a call</button>
-      <button class="btn-outline" type="button">Email concierge</button>
-    </div>
-  </section>
+      <div class="hf-diff-image-col">
+        <img src="https://images.pexels.com/photos/8292806/pexels-photo-8292806.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Consulting about moving">
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="hf-faq-section split-layout">
+      <div class="hf-diff-image-col">
+        <img src="https://images.pexels.com/photos/8292817/pexels-photo-8292817.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Consulting">
+      </div>
+      <div class="hf-diff-content-col">
+        <div class="hf-diff-header" style="margin-bottom: 40px;">
+          <h2 class="hf-diff-title">Frequently asked questions</h2>
+        </div>
+        
+        <div class="hf-faq-list">
+          <!-- Item 1 -->
+          <div class="hf-faq-item" [class.open]="openFaq === 1">
+            <div class="hf-faq-question" (click)="toggleFaq(1)">
+              <h3>Home Filla experts and regular agents - what's the difference?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="hf-faq-answer">
+              <div class="hf-faq-answer-inner">
+                <p>A standard real estate agent has a state license to help buy or sell property. A Home Filla Expert is a vetted professional who agrees to our Code of Excellence, ensuring they prioritize your interests, use proprietary data, and provide top-tier expertise every step of the way.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="hf-faq-item" [class.open]="openFaq === 2">
+            <div class="hf-faq-question" (click)="toggleFaq(2)">
+              <h3>Why should I work with an agent through Home Filla?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="hf-faq-answer">
+              <div class="hf-faq-answer-inner">
+                <p>A Home Filla Expert represents your best interests. They guide you through the financial and emotional complexities of home buying, helping you find homes that fit your budget while negotiating the best deal on your behalf.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="hf-faq-item" [class.open]="openFaq === 3">
+            <div class="hf-faq-question" (click)="toggleFaq(3)">
+              <h3>How is my local Expert chosen?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="hf-faq-answer">
+              <div class="hf-faq-answer-inner">
+                <p>We match you with experts based on your specific location and needs. We take the time to understand your goals and then introduce you to a vetted local professional who is perfectly equipped to help you succeed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hf-diff-action" style="text-align: left; margin-top: 32px;">
+          <button class="ah-pill-btn" (click)="showConnectModal = true">
+            <span>Connect with an expert</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Lead Form Section -->
+    <section class="hf-bottom-lead-section split-layout">
+      <div class="hf-diff-image-col hf-canvas-design-col">
+        <div class="hf-canvas-bg">
+          <div class="hf-grid-pattern"></div>
+          <div class="hf-shape shape-1"></div>
+          <div class="hf-shape shape-2"></div>
+          <div class="hf-shape shape-3"></div>
+          <div class="hf-shape shape-4"></div>
+          
+          <!-- Decorative Glass Cards -->
+          <div class="hf-glass-card metrics-card top-left">
+            <div class="icon-box"><i class="fas fa-user-check"></i></div>
+            <div class="text-box">
+              <span class="label">Verified</span>
+              <span class="val">10k+ Experts</span>
+            </div>
+          </div>
+
+          <div class="hf-glass-card metrics-card bottom-right">
+            <div class="icon-box star"><i class="fas fa-star"></i></div>
+            <div class="text-box">
+              <span class="label">Rating</span>
+              <span class="val">4.9/5 Average</span>
+            </div>
+          </div>
+
+          <div class="hf-canvas-content">
+            <div class="hf-canvas-logo">
+              <i class="fas fa-home"></i>
+            </div>
+            <h4>Let's find your perfect match</h4>
+            <p>Connect with a local expert today</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hf-diff-content-col hf-lead-form-col">
+        <div class="hf-lead-form-card">
+          <h3 class="hf-lead-title">Let Home Filla help you find a local real estate agent</h3>
+          <p class="hf-lead-subtitle">A local expert can answer questions, give guidance, and schedule home tours.</p>
+          
+          <form class="hf-inline-lead-form">
+            <div class="hf-form-row">
+              <div class="hf-form-group full-width">
+                <label>What do you need help with? <span class="req">required</span></label>
+                <div class="ah-select-wrap">
+                  <select class="ah-select">
+                    <option value="">Choose from list</option>
+                    <option value="buy">I want to buy a home</option>
+                    <option value="sell">I want to sell my home</option>
+                    <option value="both">I'm both buying and selling</option>
+                  </select>
+                  <i class="fas fa-chevron-down select-icon"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="hf-form-row">
+              <div class="hf-form-group full-width">
+                <label>Where are you buying or selling? <span class="req">required</span></label>
+                <div class="ah-input-with-icon">
+                  <input type="text" placeholder="Enter zip code">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="hf-form-divider">
+              <span>Your information</span>
+            </div>
+
+            <div class="hf-form-row">
+              <div class="hf-form-group">
+                <label>Full name <span class="req">*</span></label>
+                <div class="ah-input-with-icon">
+                  <input type="text" placeholder="Your full name">
+                  <i class="fas fa-user"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="hf-form-row">
+              <div class="hf-form-group">
+                <label>Email <span class="req">*</span></label>
+                <div class="ah-input-with-icon">
+                  <input type="email" placeholder="email@address.com">
+                  <i class="fas fa-envelope"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="hf-form-row">
+              <div class="hf-form-group">
+                <label>Phone <span class="req">*</span></label>
+                <div class="ah-input-with-icon">
+                  <input type="tel" placeholder="(555) 000-0000">
+                  <i class="fas fa-phone"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="hf-form-action">
+              <button type="button" class="ah-pill-btn full-width-btn" (click)="showConnectModal = false">
+                <span>Send</span>
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+
+            <p class="hf-tcpa-mini">
+              By proceeding, you consent to receive calls and texts at the number you provided, including marketing by autodialer and prerecorded and artificial voice, and email, from Home Filla and others about your inquiry and other home-related matters, but not as a condition of any purchase. 
+              <a href="#" (click)="$event.preventDefault()">More...</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+
 
   </div><!-- end *ngIf="wizardComplete" -->
 
@@ -348,3 +508,14 @@
 
   <app-site-footer *ngIf="wizardComplete"></app-site-footer>
 </div>
+
+
+
+
+
+
+
+
+
+
+
