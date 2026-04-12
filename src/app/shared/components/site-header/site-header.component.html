@@ -116,20 +116,20 @@
     </div>
 
     <div>
-      <a href="#" class="mobile-nav-link" [class.active]="isNewsAccordionOpen" (click)="toggleAccordion('news', $event)">
+      <a routerLink="/news" class="mobile-nav-link" [class.active]="isNewsAccordionOpen" (click)="toggleAccordion('news', $event)">
         <i class="fas fa-newspaper"></i> News &amp; Insights <i class="fas fa-chevron-down"></i>
       </a>
       <div class="mobile-nav-submenu" [class.open]="isNewsAccordionOpen">
         <div class="mobile-submenu-group">
           <h5>News</h5>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Latest news</a>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Housing trends</a>
+          <a routerLink="/news" class="mobile-submenu-item" (click)="closeMobileMenu()">Latest news</a>
+          <a routerLink="/news" class="mobile-submenu-item" (click)="closeMobileMenu()">Housing trends</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>Insights</h5>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Buying</a>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Selling</a>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Renting</a>
+          <a routerLink="/news" class="mobile-submenu-item" (click)="closeMobileMenu()">Buying</a>
+          <a routerLink="/news" class="mobile-submenu-item" (click)="closeMobileMenu()">Selling</a>
+          <a routerLink="/news" class="mobile-submenu-item" (click)="closeMobileMenu()">Renting</a>
         </div>
       </div>
     </div>
@@ -364,13 +364,13 @@
         </div>
         <a routerLink="/my-home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">My Home</a>
         <div class="mega-menu-trigger">
-          <a routerLink="/news-insights" routerLinkActive="active" class="nav-link">News &amp; Insights</a>
+          <a routerLink="/news" routerLinkActive="active" class="nav-link">News &amp; Insights</a>
           <div class="mega-dropdown">
             <div class="mega-column">
               <div class="sub-section" style="margin-top: 0;">
                 <h4>News</h4>
                 <div class="mega-links">
-                  <a href="#" class="mega-link">The latest news</a>
+                  <a routerLink="/news" class="mega-link">The latest news</a>
                   <a href="#" class="mega-link">Housing trends</a>
                   <a href="#" class="mega-link">Real estate news</a>
                   <a href="#" class="mega-link">Celebrity real estate</a>

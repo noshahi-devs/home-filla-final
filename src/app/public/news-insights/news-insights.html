@@ -1,0 +1,122 @@
+<div class="news-page-container">
+  <!-- News Sub-Header / Navigation -->
+  <nav class="news-nav">
+    <div class="news-nav-content">
+      <div class="news-brand">
+        <span class="hf-blue">News</span>&nbsp;&amp; Insights
+      </div>
+      <ul class="category-list">
+        <li *ngFor="let cat of categories" 
+            [class.active]="cat.active" 
+            (click)="setActiveCategory(cat)">
+          {{ cat.name }}
+        </li>
+      </ul>
+      <div class="nav-extra">
+        <button class="search-trigger">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Featured Hero Article -->
+  <section class="featured-hero">
+    <div class="hero-image-vignette"></div>
+    <img [src]="featuredArticle.imageUrl" class="hero-bg" alt="Feature background">
+    <div class="hero-content">
+      <span class="category-pill">{{ featuredArticle.category }}</span>
+      <h1>{{ featuredArticle.title }}</h1>
+      <p>{{ featuredArticle.excerpt }}</p>
+      <div class="hero-meta">
+        <span class="author">By {{ featuredArticle.author }}</span>
+        <span class="dot"></span>
+        <span class="read-time">{{ featuredArticle.readTime }}</span>
+      </div>
+      <button class="btn-read-more">
+        Read Article <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Main Feed Section -->
+  <div class="main-news-grid">
+    <div class="articles-main">
+      <div class="section-title-row">
+        <h2>Fresh Perspective</h2>
+        <div class="view-toggle">
+          <i class="fa fa-th-large active"></i>
+          <i class="fa fa-list"></i>
+        </div>
+      </div>
+
+      <div class="article-cards">
+        <article class="article-card" *ngFor="let article of articles">
+          <div class="article-img-box">
+            <img [src]="article.imageUrl" [alt]="article.title">
+            <span class="card-category">{{ article.category }}</span>
+          </div>
+          <div class="article-info">
+            <div class="article-meta-top">
+              <span>{{ article.author }}</span>
+              <span class="dot"></span>
+              <span>{{ article.date }}</span>
+            </div>
+            <h3>{{ article.title }}</h3>
+            <button class="btn-card-link">Explore <i class="fa fa-chevron-right"></i></button>
+          </div>
+        </article>
+      </div>
+
+      <div class="pagination-trigger">
+        <button class="btn-load-more">Show more insights</button>
+      </div>
+    </div>
+
+    <aside class="news-sidebar">
+      <div class="sidebar-widget trending-widget">
+        <h4>Trending Now</h4>
+        <ul class="trending-list">
+          <li *ngFor="let trend of trendingNow; let i = index">
+            <span class="trend-rank">0{{ i + 1 }}</span>
+            <p>{{ trend }}</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-widget newsletter-widget">
+        <div class="widget-glass-overlay"></div>
+        <i class="fa fa-paper-plane-o newsletter-icon"></i>
+        <h5>Weekly Insights</h5>
+        <p>Get the latest real estate trends and advice directly in your inbox.</p>
+        <div class="input-group">
+          <input type="email" placeholder="Email address">
+          <button class="btn-subscribe">Join</button>
+        </div>
+        <small>Join 45,000+ readers</small>
+      </div>
+
+      <div class="sidebar-widget promo-widget" [routerLink]="['/find-agent']">
+        <span class="promo-tag">Connect</span>
+        <h4>Need a personalized market analysis?</h4>
+        <p>Our top-rated agents are local experts ready to guide your next move.</p>
+        <button class="btn-promo">Talk to an Expert</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Bottom Featured Banner (Large) -->
+  <section class="newsletter-cta-banner">
+    <div class="mesh-bg"></div>
+    <div class="banner-content">
+      <div class="banner-text">
+        <h2>Never miss a market pulse.</h2>
+        <p>Join the Home Filla community for exclusive reports and data-driven insights.</p>
+      </div>
+      <div class="banner-form">
+        <input type="email" placeholder="Your work email...">
+        <button class="btn-luxury">Subscribe</button>
+      </div>
+    </div>
+  </section>
+</div>
