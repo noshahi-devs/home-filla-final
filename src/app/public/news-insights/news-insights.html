@@ -1,36 +1,38 @@
-<!-- <app-site-header></app-site-header> -->
+<app-site-header></app-site-header>
+
+<!-- News Sub-Header / Navigation (outside scroll container so sticky works) -->
+<nav class="news-nav">
+  <div class="news-nav-content">
+    <div class="news-brand">
+      <span class="sub-brand">News</span>&nbsp;&amp; Insights
+    </div>
+    <ul class="category-list">
+      <li *ngFor="let link of navLinks" [class.active]="link.active" [class.dropdown-trigger]="link.hasDropdown">
+        <a [routerLink]="link.route" class="link-label" style="text-decoration: none; color: inherit;">
+          {{ link.name }}
+          <i *ngIf="link.hasDropdown" class="fa fa-chevron-down menu-arrow"></i>
+        </a>
+
+        <!-- Dropdown Menu -->
+        <div *ngIf="link.hasDropdown" class="dropdown-menu">
+          <div class="dropdown-inner">
+            <a *ngFor="let item of link.items" [routerLink]="['/news', item.name.toLowerCase().split(' ').join('-')]"
+              class="dropdown-item">
+              {{ item.name }}
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-extra">
+      <button class="search-trigger">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  </div>
+</nav>
 
 <div class="news-page-container">
-  <!-- News Sub-Header / Navigation -->
-  <nav class="news-nav">
-    <div class="news-nav-content">
-      <div class="news-brand">
-        <span class="sub-brand">News</span>&nbsp;&amp; Insights
-      </div>
-      <ul class="category-list">
-        <li *ngFor="let link of navLinks" [class.active]="link.active" [class.dropdown-trigger]="link.hasDropdown">
-          <a [routerLink]="link.route" class="link-label" style="text-decoration: none; color: inherit;">
-            {{ link.name }}
-            <i *ngIf="link.hasDropdown" class="fa fa-chevron-down menu-arrow"></i>
-          </a>
-
-          <!-- Dropdown Menu -->
-          <div *ngIf="link.hasDropdown" class="dropdown-menu">
-            <div class="dropdown-inner">
-              <a *ngFor="let item of link.items" [routerLink]="['/news', item.name.toLowerCase().split(' ').join('-')]" class="dropdown-item">
-                {{ item.name }}
-              </a>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="nav-extra">
-        <button class="search-trigger">
-          <i class="fa fa-search"></i>
-        </button>
-      </div>
-    </div>
-  </nav>
 
   <!-- Editorial Feed Grid -->
   <div class="editorial-container">
@@ -169,7 +171,8 @@
       <!-- Title Header (Classic) -->
       <div class="section-title-wrap" *ngIf="section.headerType === 'title'">
         <h2 class="sub-section-title">{{ section.title }}</h2>
-        <a [routerLink]="['/news', section.title.toLowerCase().split(' ').join('-')]" class="more-link">More {{ section.title }} <i class="fa fa-chevron-right"></i></a>
+        <a [routerLink]="['/news', section.title.toLowerCase().split(' ').join('-')]" class="more-link">More {{
+          section.title }} <i class="fa fa-chevron-right"></i></a>
       </div>
 
       <div class="editorial-split-grid">
