@@ -47,9 +47,14 @@
       <aside class="editorial-left">
         <div class="sidebar-news-list">
           <div class="sidebar-news-item" *ngFor="let news of latestNewsList">
-            <span class="news-cat">{{ news.category }}</span>
-            <h3 class="news-title">{{ news.title }}</h3>
-            <span class="news-author">{{ news.author }}</span>
+            <div class="sidebar-thumb" *ngIf="news.imageUrl">
+              <img [src]="news.imageUrl" [alt]="news.title">
+            </div>
+            <div class="sidebar-info">
+              <span class="news-cat">{{ news.category }}</span>
+              <h3 class="news-title">{{ news.title }}</h3>
+              <span class="news-author">{{ news.author }}</span>
+            </div>
           </div>
         </div>
 
