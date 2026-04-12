@@ -83,48 +83,64 @@
 
   <!-- Full agent listing (shown after wizard or directly) -->
   <div *ngIf="wizardComplete">
-    <section class="hero-section">
-      <div class="hero-inner">
-        <div class="hero-content">
-          <p class="hero-eyebrow">Agent matching</p>
-          <h2>Find a local agent who knows your block.</h2>
-          <p class="hero-lead">Browse pre-screened agents with verified deals, licensed coverage, and the local market knowledge you need to move with confidence.</p>
-          <div class="hero-search">
-            <input type="text" placeholder="Neighborhood, city, or ZIP" [(ngModel)]="searchLocation">
-            <button class="btn-primary" type="button" (click)="scrollToAgents()">Search agents</button>
+    <section class="ah-premium-hero">
+      <div class="ah-bg">
+        <img src="https://images.pexels.com/photos/8292817/pexels-photo-8292817.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Agent showing home">
+        <div class="ah-overlay"></div>
+      </div>
+      
+      <div class="ah-content">
+        <h1>Search for agents</h1>
+        <p class="ah-sub">Discover the right match for you.</p>
+        
+        <div class="ah-tabs">
+          <button class="ah-tab" [class.active]="agentAction === 'Buy'" (click)="agentAction = 'Buy'">Buy</button>
+          <button class="ah-tab" [class.active]="agentAction === 'Sell'" (click)="agentAction = 'Sell'">Sell</button>
+          <button class="ah-tab" [class.active]="agentAction === 'Both'" (click)="agentAction = 'Both'">Both</button>
+        </div>
+
+        <div class="ah-search-bar">
+          <div class="ah-search-type">
+            <select [(ngModel)]="searchType">
+              <option value="Location">Location</option>
+              <option value="Agent">Agent</option>
+            </select>
           </div>
-          <div class="hero-stats">
-            <div>
-              <strong>{{ agents.length }}</strong>
-              <span>Vetted agents</span>
-            </div>
-            <div>
-              <strong>{{ totalDeals | number }}</strong>
-              <span>Deals closed</span>
-            </div>
-            <div>
-              <strong>{{ averageRating }}</strong>
-              <span>Avg. rating</span>
-            </div>
+          <div class="ah-search-input">
+            <input type="text" [placeholder]="searchType === 'Location' ? 'City or Zip' : 'Agent Name'" [(ngModel)]="searchLocation" (keydown.enter)="scrollToAgents()">
+          </div>
+          <button class="ah-search-btn" (click)="scrollToAgents()" aria-label="Search">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Narrow Field Section -->
+    <section class="ah-narrow-field">
+      <div class="ah-narrow-container">
+        <h2 class="ah-narrow-title">Let us narrow the field for you</h2>
+        <p class="ah-narrow-subtitle">We have a long history of connecting tens of thousands of buyers and sellers with real estate agents.</p>
+        
+        <div class="ah-narrow-grid">
+          <div class="ah-narrow-card">
+            <div class="narrow-icon-circle"><i class="fas fa-headset"></i></div>
+            <h3>Get support from a dedicated team</h3>
+            <p>Tell us about your needs and a Home Filla coordinator can help you find the right local agent for you.</p>
+          </div>
+          <div class="ah-narrow-card">
+            <div class="narrow-icon-circle"><i class="fas fa-user-friends"></i></div>
+            <h3>Get matched to a local agent</h3>
+            <p>Tap into the expertise of tens of thousands of agents from brokerages large and small.</p>
+          </div>
+          <div class="ah-narrow-card">
+            <div class="narrow-icon-circle"><i class="fas fa-piggy-bank"></i></div>
+            <h3>No commitment, no hidden fees</h3>
+            <p>Get connected to an agent in minutes for free. Choose the best fit agent, or change agents if it doesn't work out.</p>
           </div>
         </div>
-        <div class="hero-panel">
-          <div class="panel-card">
-            <span>Average response</span>
-            <strong>45 min</strong>
-            <small>to first message</small>
-          </div>
-          <div class="panel-card">
-            <span>Primary service</span>
-            <strong>Seller + Buyer</strong>
-            <small>Covered coast to coast</small>
-          </div>
-          <div class="panel-card">
-            <span>New matches</span>
-            <strong>34 this week</strong>
-            <small>Onboarded agent partners</small>
-          </div>
-        </div>
+
+        <button class="ah-narrow-btn" (click)="showConnectModal = true">Connect with an agent <i class="fas fa-chevron-right"></i></button>
       </div>
     </section>
 
@@ -242,6 +258,93 @@
   </section>
 
   </div><!-- end *ngIf="wizardComplete" -->
+
+  <!-- Modal Overlay -->
+  <div class="ah-modal-overlay" *ngIf="showConnectModal" (click)="showConnectModal = false">
+    <div class="ah-modal-content" (click)="$event.stopPropagation()">
+      <div class="ah-modal-header">
+        <h3>Connect with a local expert</h3>
+        <button class="ah-modal-close" (click)="showConnectModal = false"><i class="fas fa-times"></i></button>
+      </div>
+      
+      <div class="ah-modal-body">
+        <div class="ah-modal-logo-row">
+          <i class="fas fa-home modal-brand-icon"></i>
+        </div>
+        <h2 class="ah-modal-title">Let Home Filla help you find a local real estate agent</h2>
+
+        <div class="ah-modal-form">
+          <div class="ah-form-group">
+            <div class="ah-form-label-row">
+              <label>Choose an option:</label>
+              <span class="ah-required">required</span>
+            </div>
+            <div class="ah-select-wrap">
+              <select class="ah-select" required>
+                <option value="" disabled selected>Choose from list</option>
+                <option value="buy">I want to buy a home</option>
+                <option value="sell">I want to sell my home</option>
+                <option value="both">I'm both buying and selling</option>
+              </select>
+              <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+          </div>
+
+          <div class="ah-form-group">
+            <div class="ah-form-label-row">
+              <label>Where are you buying?</label>
+              <span class="ah-required">required</span>
+            </div>
+            <div class="ah-input-with-icon">
+              <input type="text" placeholder="Enter zip code" required>
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+          </div>
+
+          <h3 class="ah-form-section-title">Your information</h3>
+
+          <div class="ah-form-group">
+            <div class="ah-form-label-row">
+              <label>Full name</label>
+              <span class="ah-required">*required</span>
+            </div>
+            <div class="ah-input-with-icon">
+              <input type="text" required>
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+
+          <div class="ah-form-group">
+            <div class="ah-form-label-row">
+              <label>Email</label>
+              <span class="ah-required">*required</span>
+            </div>
+            <div class="ah-input-with-icon">
+              <input type="email" required>
+              <i class="fas fa-envelope"></i>
+            </div>
+          </div>
+
+          <div class="ah-form-group">
+            <div class="ah-form-label-row">
+              <label>Phone</label>
+              <span class="ah-required">*required</span>
+            </div>
+            <div class="ah-input-with-icon">
+              <input type="tel" required>
+              <i class="fas fa-phone"></i>
+            </div>
+          </div>
+
+          <button class="ah-modal-submit" (click)="showConnectModal = false">Send</button>
+
+          <p class="ah-tcpa-text">
+            By proceeding, you consent to receive calls and texts at the number you provided, including marketing by autodialer and prerecorded and artificial voice, and email, from Home Filla and others about your inquiry and other home-related matters, but not as a condition of any purchase.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <app-site-footer *ngIf="wizardComplete"></app-site-footer>
 </div>

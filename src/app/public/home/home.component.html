@@ -218,7 +218,7 @@
           </p>
           
           <div class="hca-actions-modern">
-            <a routerLink="/find-agent" class="hca-btn-premium">
+            <a [routerLink]="['/find-agent']" [queryParams]="{ mode: 'wizard' }" class="hca-btn-premium">
               <span>Compare local agents</span>
               <div class="hca-btn-glow"></div>
               <i class="fas fa-arrow-right"></i>

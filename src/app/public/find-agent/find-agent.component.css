@@ -1100,3 +1100,489 @@
     }
 }
 
+/* ─── Premium Search Hero ─── */
+.ah-premium-hero {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.ah-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+}
+
+.ah-bg img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.ah-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.ah-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 20px;
+  margin-top: -20px;
+}
+
+.ah-content h1 {
+  font-size: 56px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.ah-content .ah-sub {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.ah-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.ah-tab {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  padding-bottom: 8px;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.ah-tab.active, .ah-tab:hover {
+  border-bottom-color: white;
+}
+
+.ah-search-bar {
+  background: white;
+  border-radius: 40px;
+  padding: 8px 8px 8px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.ah-search-type {
+  position: relative;
+  padding-right: 16px;
+  border-right: 1px solid #e2e8f0;
+}
+
+.ah-search-type select {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  padding-right: 20px;
+  outline: none;
+}
+
+.ah-search-type::after {
+  content: '▼';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #1e293b;
+  pointer-events: none;
+}
+
+.ah-search-input {
+  flex-grow: 1;
+}
+
+.ah-search-input input {
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  color: #1e293b;
+  outline: none;
+  background: transparent;
+}
+
+.ah-search-input input::placeholder {
+  color: #94a3b8;
+}
+
+.ah-search-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-blue, #4a6cf7);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.ah-search-btn:hover {
+  background: #3655d9;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .ah-search-bar {
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .ah-search-type {
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    width: 100%;
+    padding-bottom: 12px;
+  }
+  
+  .ah-search-btn {
+    width: 100%;
+    border-radius: 12px;
+  }
+}
+
+/* ─── "Let us narrow the field for you" Section ─── */
+.ah-narrow-field {
+  background: white;
+  padding: 60px 20px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.ah-narrow-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.ah-narrow-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.ah-narrow-subtitle {
+  font-size: 16px;
+  color: #475569;
+  margin-bottom: 60px;
+}
+
+.ah-narrow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.ah-narrow-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.narrow-icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(74, 108, 247, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.narrow-icon-circle i {
+  font-size: 36px;
+  color: var(--accent-blue, #4a6cf7);
+}
+
+.ah-narrow-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.ah-narrow-card p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.ah-narrow-btn {
+  background: var(--accent-blue, #4a6cf7);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ah-narrow-btn:hover {
+  background: #3655d9;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(74, 108, 247, 0.25);
+}
+
+@media (max-width: 768px) {
+  .ah-narrow-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* ─── Connect Form Modal ─── */
+.ah-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ah-modal-content {
+  background: white;
+  width: 90%;
+  max-width: 480px;
+  max-height: 90vh;
+  border-radius: 12px;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.ah-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.ah-modal-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.ah-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.ah-modal-close:hover {
+  color: #f43f5e;
+}
+
+.ah-modal-body {
+  padding: 32px 24px;
+}
+
+.ah-modal-logo-row {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-brand-icon {
+  font-size: 24px;
+  color: white;
+  background: var(--accent-blue, #4a6cf7);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(74, 108, 247, 0.3);
+}
+
+.ah-modal-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 32px;
+  line-height: 1.3;
+}
+
+.ah-form-group {
+  margin-bottom: 24px;
+}
+
+.ah-form-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ah-form-label-row label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.ah-required {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.ah-select-wrap,
+.ah-input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ah-select {
+  width: 100%;
+  appearance: none;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 12px 40px 12px 16px;
+  font-size: 15px;
+  color: #1e293b;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ah-select:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+}
+
+.select-icon {
+  position: absolute;
+  right: 16px;
+  pointer-events: none;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.ah-input-with-icon input {
+  width: 100%;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 12px 16px 12px 44px;
+  font-size: 15px;
+  color: #1e293b;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.ah-input-with-icon input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+}
+
+.ah-input-with-icon i {
+  position: absolute;
+  left: 16px;
+  color: var(--accent-blue, #4a6cf7);
+}
+
+.ah-input-with-icon input:focus + i,
+.ah-input-with-icon:focus-within i {
+  color: #1d4ed8;
+}
+
+.ah-form-section-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 32px 0 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.ah-modal-submit {
+  width: 100%;
+  background: var(--accent-blue, #4a6cf7);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 16px;
+}
+
+.ah-modal-submit:hover {
+  background: #3655d9;
+}
+
+.ah-tcpa-text {
+  font-size: 11px;
+  color: #726a60;
+  line-height: 1.5;
+  margin-top: 24px;
+  text-align: center;
+}
+

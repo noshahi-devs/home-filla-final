@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
@@ -19,7 +19,7 @@ interface AgentProfile {
   phone: string;
 }
 import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-find-agent',
@@ -28,22 +28,37 @@ import { RouterModule } from '@angular/router';
   templateUrl: './find-agent.component.html',
   styleUrls: ['./find-agent.component.css']
 })
-export class FindAgentComponent {
+export class FindAgentComponent implements OnInit {
+  constructor(private route: ActivatedRoute) {}
+
   searchLocation = '';
   selectedSpecialty = 'Any';
   selectedExperience = 'Any';
   selectedLanguage = 'Any';
 
-  // Wizard state
-  wizardAddress = '';
-  wizardComplete = false;
+  // Search Filters
+  searchType = 'Location';
+  agentAction = 'Buy';
+  
+  // Keep wizard state true by default unless coming from hompage
+  wizardComplete = true;
+  wizardAddress = ''; // Restored to satisfy Angular template compilation for unused wizard section
+
+  // Modal State
+  showConnectModal = false;
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      // If the URL contains ?mode=wizard, trigger the wizard step 1
+      if (params['mode'] === 'wizard') {
+        this.wizardComplete = false;
+      }
+    });
+  }
 
   completeWizard() {
-    if (this.wizardAddress.trim()) {
-      this.wizardComplete = true;
-      this.searchLocation = this.wizardAddress;
-      setTimeout(() => this.scrollToAgents(), 100);
-    }
+    this.wizardComplete = true;
+    setTimeout(() => this.scrollToAgents(), 100);
   }
 
   specialties = [
