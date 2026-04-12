@@ -21,154 +21,189 @@
   </div>
 </nav>
 
-<div class="research-page">
-
-  <!-- ── Page Header ─── -->
-  <div class="research-header-band">
-    <div class="research-header-inner">
-      <div class="research-header-text">
-        <div class="research-eyebrow"><i class="fa fa-bar-chart"></i> Data & Research</div>
-        <h1 class="research-page-title">Housing Market Research</h1>
-        <p class="research-subtitle">Evidence-based analysis from Home Filla's economics and data science team, giving you the clearest view of the real estate landscape.</p>
+<!-- ── Page Header (Hero) ─── -->
+<div class="research-header-band">
+  <div class="research-header-inner">
+    <div class="research-header-text">
+      <div class="research-eyebrow"><i class="fa fa-bar-chart"></i> Data & Research</div>
+      <h1 class="research-page-title">Housing Market Research</h1>
+      <p class="research-subtitle">Evidence-based analysis from Home Filla's economics and data science team, giving you the clearest view of the real estate landscape.</p>
+    </div>
+    <div class="economist-badge">
+      <img [src]="economist.imageUrl" [alt]="economist.name">
+      <div class="economist-info">
+        <strong>{{ economist.name }}</strong>
+        <span>{{ economist.title }}</span>
       </div>
-      <div class="economist-badge">
-        <img [src]="economist.imageUrl" [alt]="economist.name">
-        <div class="economist-info">
-          <strong>{{ economist.name }}</strong>
-          <span>{{ economist.title }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="research-page-container">
+
+  <!-- Research Main Header Area -->
+  <header class="research-top-header">
+    <h1 class="page-title">Research</h1>
+    <div class="header-tools-wrapper">
+      <nav class="research-tabs">
+        <a *ngFor="let tab of researchTabs" href="javascript:void(0)" [class.active]="tab.active">
+          {{ tab.name }}
+        </a>
+      </nav>
+      <div class="research-search-box">
+        <input type="text" placeholder="Search">
+        <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Animated Data Ticker (Static styled to look horizontal) -->
+  <div class="research-ticker">
+    <div class="ticker-inner">
+      <div class="ticker-location">
+        <i class="fa fa-location-arrow"></i> {{ tickerInfo.location }}
+        <button class="loc-search"><i class="fa fa-search"></i></button>
+      </div>
+      <div class="ticker-stats">
+        <div class="stat-item" *ngFor="let stat of tickerInfo.stats">
+          <span class="s-label">{{ stat.label }}:</span>
+          <span class="s-val">{{ stat.value }}</span>
+          <span class="s-change" [class.positive]="stat.positive" [class.negative]="!stat.positive">
+            <i class="fa" [class.fa-caret-up]="stat.up" [class.fa-caret-down]="!stat.up"></i> {{ stat.change }}
+          </span>
         </div>
+      </div>
+      <div class="ticker-more">
+        More <i class="fa fa-chevron-down"></i>
       </div>
     </div>
   </div>
 
-  <!-- ── Market Stats Bar ─── -->
-  <div class="stats-bar">
-    <div class="stats-bar-inner">
-      <div class="stat-tile" *ngFor="let stat of marketStats">
-        <div class="stat-icon">{{ stat.icon }}</div>
-        <div class="stat-content">
-          <div class="stat-label">{{ stat.label }}</div>
-          <div class="stat-value">{{ stat.value }}</div>
-          <div class="stat-change" [class.positive]="stat.positive" [class.negative]="!stat.positive">
-            {{ stat.change }} vs last week
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="research-container">
-
-    <div class="research-main-layout">
-
-      <!-- ── Left: Reports ─── -->
-      <div class="research-main-col">
-
-        <!-- Quote -->
-        <div class="economist-quote-block">
-          <div class="quote-mark">"</div>
-          <blockquote>{{ economist.quote }}</blockquote>
-          <div class="quote-credit">— {{ economist.name }}, {{ economist.title }}</div>
-        </div>
-
-        <!-- Weekly Reports -->
-        <section class="research-section">
-          <div class="research-section-hdr">
-            <h2 class="research-section-title">Latest Research Reports</h2>
-            <a href="#" class="view-all-link">View all <i class="fa fa-arrow-right"></i></a>
-          </div>
-
-          <div class="report-list">
-            <article class="report-card" *ngFor="let r of weeklyReports; let i = index" [class.report-card--top]="i === 0">
-              <div class="report-img-box">
-                <img [src]="r.imageUrl" [alt]="r.title">
-                <span class="report-tag">{{ r.tag }}</span>
-              </div>
-              <div class="report-body">
-                <div class="report-date">{{ r.date }}</div>
-                <h3 class="report-title">{{ r.title }}</h3>
-                <p class="report-excerpt">{{ r.excerpt }}</p>
-                <a href="#" class="report-read-link">Read Report <i class="fa fa-arrow-right"></i></a>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <!-- Bar Chart Visual -->
-        <section class="research-section">
-          <div class="research-section-hdr">
-            <h2 class="research-section-title">Median Home Price Index — 2025</h2>
-          </div>
-          <div class="chart-card">
-            <div class="chart-y-label">Price Index (Base: Jan 2025 = 65)</div>
-            <div class="bar-chart">
-              <div class="bar-wrap" *ngFor="let bar of chartBars; let i = index">
-                <div class="bar" [style.height.%]="bar" [class.bar--peak]="bar === 97">
-                  <span class="bar-tooltip">{{ bar }}</span>
-                </div>
-                <span class="bar-label">{{ chartMonths[i] }}</span>
-              </div>
+  <main class="research-wrapper">
+    <!-- Three Column Content Grid -->
+    <div class="research-3-col-grid">
+      
+      <!-- LEFT COLUMN -->
+      <aside class="col-left">
+        <div class="feed-item" *ngFor="let item of feedCategorized; let first = first">
+          <h2 class="col-title" [class.large-title]="first">{{ item.category }}</h2>
+          <div class="article-card" [class.horizontal]="!first">
+            <div class="ac-img-box">
+              <img [src]="item.imageUrl" [alt]="item.articleTitle">
             </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- ── Right: Sidebar ─── -->
-      <aside class="research-sidebar">
-
-        <!-- Top Markets -->
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">
-            <i class="fa fa-trophy"></i> Top Markets 2026
-          </div>
-          <div class="market-table">
-            <div class="market-row market-row--head">
-              <span>#</span>
-              <span>City</span>
-              <span>Growth</span>
-              <span>Score</span>
-            </div>
-            <div class="market-row" *ngFor="let m of topMarkets">
-              <span class="market-rank">{{ m.rank }}</span>
-              <span class="market-city">{{ m.city }}</span>
-              <span class="market-growth positive">{{ m.priceGrowth }}</span>
-              <span class="market-score">
-                <div class="score-bar">
-                  <div class="score-fill" [style.width.%]="m.score"></div>
-                </div>
-                <span class="score-num">{{ m.score }}</span>
-              </span>
+            <div class="ac-content">
+              <div class="ac-date">{{ item.date }}</div>
+              <h3 class="ac-title">{{ item.articleTitle }}</h3>
+              <p class="ac-excerpt" *ngIf="first">{{ item.excerpt }}</p>
+              <p class="ac-excerpt" *ngIf="!first">{{ item.excerpt }}</p>
             </div>
           </div>
         </div>
-
-        <!-- Research Categories -->
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">
-            <i class="fa fa-folder-open"></i> Research Categories
-          </div>
-          <div class="cat-list">
-            <a href="#" class="cat-item" *ngFor="let cat of researchCategories">
-              <span class="cat-icon">{{ cat.icon }}</span>
-              <span class="cat-label">{{ cat.label }}</span>
-              <span class="cat-count">{{ cat.count }}</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Economist Bio -->
-        <div class="sidebar-card bio-card">
-          <img [src]="economist.imageUrl" [alt]="economist.name" class="bio-photo">
-          <h4 class="bio-name">{{ economist.name }}</h4>
-          <p class="bio-role">{{ economist.title }}</p>
-          <p class="bio-text">Danielle leads Home Filla's economics research team, producing weekly market insights, forecasts, and affordability analysis used by millions of buyers, sellers, and investors.</p>
-          <a href="#" class="bio-link">Read all Danielle's research <i class="fa fa-arrow-right"></i></a>
-        </div>
-
       </aside>
+
+      <!-- MIDDLE COLUMN -->
+      <section class="col-mid">
+        <h2 class="col-title">Weekly Housing Updates</h2>
+        
+        <!-- Video block -->
+        <div class="video-update-card">
+          <div class="video-player">
+            <img [src]="weeklyUpdateVideo.imageUrl" [alt]="weeklyUpdateVideo.title">
+            <div class="video-overlay">
+              <button class="play-btn"><i class="fa fa-play"></i></button>
+              <div class="overlay-text">
+                <h3>{{ weeklyUpdateVideo.title }}</h3>
+                <p>{{ weeklyUpdateVideo.presenter }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="video-info">
+            <div class="vi-date">{{ weeklyUpdateVideo.date }}</div>
+            <p class="vi-desc">{{ weeklyUpdateVideo.description }}</p>
+            <a href="javascript:void(0)" class="more-videos">More Videos <i class="fa fa-chevron-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Recent Articles -->
+        <div class="recent-articles-block">
+          <h3 class="sub-col-title">Recent Articles</h3>
+          <div class="recent-article-item" *ngFor="let art of recentArticles">
+            <div class="ra-date">{{ art.date }}</div>
+            <h4 class="ra-title">{{ art.title }}</h4>
+            <p class="ra-desc">{{ art.excerpt }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN -->
+      <aside class="col-right">
+        <h2 class="col-title">National Market Summary</h2>
+        <div class="summary-card">
+          <ul class="summary-list">
+            <li class="summary-item" *ngFor="let sum of nationalSummaryItems">
+              <div class="si-icon"><i class="fa {{ sum.icon }}"></i></div>
+              <div class="si-details">
+                <div class="si-period">{{ sum.period }}</div>
+                <div class="si-type">{{ sum.type }}</div>
+                <div class="si-val" [class.txt-red]="sum.isRed" [class.txt-green]="!sum.isRed">
+                  <i *ngIf="sum.isRed" class="fa fa-caret-down"></i>
+                  <i *ngIf="!sum.isRed" class="fa fa-caret-up"></i>
+                  {{ sum.value }}
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="summary-links">
+            <a href="javascript:void(0)">Visualize the data</a>
+            <a href="javascript:void(0)">Download the data</a>
+          </div>
+        </div>
+      </aside>
+
+    </div> <!-- / .research-3-col-grid -->
+
+    <!-- Newsletter & Social Block -->
+    <div class="subscribe-block">
+      <div class="sub-left">
+        <h2>Sign up for updates</h2>
+        <p>Join our mailing list to receive the latest data and research.</p>
+        <div class="sub-form">
+          <input type="email" placeholder="Email address">
+          <button class="join-btn">Join <i class="fa fa-caret-right"></i></button>
+        </div>
+      </div>
+      <div class="sub-right">
+        <h3>Follow us<br>on social media</h3>
+        <i class="fa fa-bell social-bell"></i>
+        <ul class="social-list">
+          <li><i class="fa fa-youtube-play"></i> @homefilladotcom</li>
+          <li><i class="fa fa-instagram"></i> @homefillacomecon</li>
+          <li><i class="fa fa-times"></i> @hf_economics</li>
+        </ul>
+      </div>
     </div>
 
-  </div>
+    <!-- Data Visualizations -->
+    <div class="visualizations-block">
+      <div class="vis-header">
+        <h2>Home Filla&reg; Data Visualizations</h2>
+        <p>Our research combines proprietary metrics with the latest econometrics and other industry statistics to produce a unique and timely view of the market.</p>
+      </div>
+      <div class="vis-grid">
+        <div class="vis-card" *ngFor="let viz of visualizations">
+          <div class="vis-img">
+            <img [src]="viz.imageUrl" [alt]="viz.title">
+            <span class="branded-tag"><i class="fa fa-home"></i> home filla</span>
+          </div>
+          <div class="vis-info">
+            <h4>{{ viz.title }}</h4>
+            <p>{{ viz.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
 </div>
 
 <app-site-footer></app-site-footer>
