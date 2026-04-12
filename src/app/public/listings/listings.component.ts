@@ -33,6 +33,10 @@ export class ListingsComponent implements OnInit, AfterViewInit {
   isMapOpen = false;
   activeMapFilter = 'Layers';
   savedPropertyIds: Set<number> = new Set();
+  
+  // Modal State
+  showContactModal = false;
+  selectedContactProperty: Property | null = null;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -127,5 +131,17 @@ export class ListingsComponent implements OnInit, AfterViewInit {
 
   isSaved(id: number): boolean {
     return this.savedPropertyIds.has(id);
+  }
+
+  openContactModal(p: Property, event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.selectedContactProperty = p;
+    this.showContactModal = true;
+  }
+
+  closeContactModal() {
+    this.showContactModal = false;
+    this.selectedContactProperty = null;
   }
 }

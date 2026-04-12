@@ -1,0 +1,44 @@
+<app-site-header></app-site-header>
+
+<div class="sitemap-fs-wrapper">
+  <div class="sitemap-fs-container">
+    <h1 class="page-title">Home Filla&reg; Foreclosures</h1>
+    
+    <div class="accordion-container">
+      <div class="accordion-item" *ngFor="let state of states" [class.is-open]="state.isOpen">
+        <!-- Accordion Header -->
+        <button class="accordion-header" (click)="toggleState(state)" [attr.aria-expanded]="state.isOpen">
+          <h2>{{ state.name }}</h2>
+          <div class="chevron">
+            <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" [class.rotated]="state.isOpen">
+              <path d="M17.293 8.293a1 1 0 1 1 1.414 1.414zM12 15l.707.707a1 1 0 0 1-1.414 0zM5.293 9.707a1 1 0 0 1 1.414-1.414zm13.414 0-6 6-1.414-1.414 6-6zm-7.414 6-6-6 1.414-1.414 6 6z" fill="currentColor"></path>
+            </svg>
+          </div>
+        </button>
+
+        <!-- Accordion Content -->
+        <div class="accordion-content" *ngIf="state.isOpen">
+          <div class="content-inner">
+            <div class="view-all-wrapper">
+              <a [routerLink]="['/listings', 'foreclosures']" [queryParams]="{ location: state.name, state: state.slug }" class="view-all-link">View all Foreclosures in {{ state.name }}</a>
+            </div>
+
+            <div class="cities-grid">
+              <div class="city-col" *ngFor="let city of state.cities">
+                <ul class="city-list">
+                  <li>
+                    <a [routerLink]="['/listings', 'foreclosures']" [queryParams]="{ location: city.name, state: state.slug }" class="city-link">
+                      Foreclosures in {{ city.name }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-site-footer></app-site-footer>

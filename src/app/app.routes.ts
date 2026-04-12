@@ -19,6 +19,10 @@ import { NewsResearchComponent } from './public/news-research/news-research.comp
 import { ManageRentalsComponent } from './public/manage-rentals/manage-rentals.component';
 import { AdvertiseComponent } from './public/advertise/advertise.component';
 import { SitemapForSaleComponent } from './public/sitemap/sitemap-for-sale.component';
+import { SitemapNewConstructionComponent } from './public/sitemap/sitemap-new-construction.component';
+import { SitemapRecentlySoldComponent } from './public/sitemap/sitemap-recently-sold.component';
+import { SitemapForeclosuresComponent } from './public/sitemap/sitemap-foreclosures.component';
+import { SitemapMarketReportsComponent } from './public/sitemap/sitemap-market-reports.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,6 +42,10 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'sitemap', component: SitemapComponent },
   { path: 'sitemap/for-sale', component: SitemapForSaleComponent },
+  { path: 'sitemap/new-construction', component: SitemapNewConstructionComponent },
+  { path: 'sitemap/recently-sold', component: SitemapRecentlySoldComponent },
+  { path: 'sitemap/foreclosures', component: SitemapForeclosuresComponent },
+  { path: 'sitemap/market-reports', component: SitemapMarketReportsComponent },
   { path: 'home-loan', component: HomeLoanComponent },
   { path: 'my-home', component: MyHomeComponent },
   { path: 'my-home/sale-proceeds-calculator', component: SaleProceedsCalculatorComponent },

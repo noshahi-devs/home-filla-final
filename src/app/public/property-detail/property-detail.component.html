@@ -10,7 +10,7 @@
       </div>
       <div class="bar-right">
         <button class="contact-agent-btn" (click)="openContactModal()">
-          <i class="fas fa-envelope"></i><span> Contact agent</span>
+          <i class="fas fa-envelope"></i><span> {{ property.builder ? 'Contact builder' : 'Contact agent' }}</span>
         </button>
         <button class="action-btn" [class.active]="isSaved" (click)="toggleSave()">
           <i [ngClass]="isSaved ? 'fas fa-heart text-red' : 'far fa-heart'"></i>
@@ -164,8 +164,8 @@
                   <input type="email" placeholder="Email Address" class="form-input">
                   <input type="tel" placeholder="Phone Number" class="form-input">
                   <textarea placeholder="I'm interested in this property..." class="form-textarea"></textarea>
-                  <button type="submit" class="contact-submit">Email Agent</button>
-                  <p class="form-note">By clicking "Email Agent", you agree to our Terms of Use and Privacy Policy.</p>
+                  <button type="submit" class="contact-submit">{{ property.builder ? 'Contact Builder' : 'Email Agent' }}</button>
+                  <p class="form-note">By clicking "{{ property.builder ? 'Contact Builder' : 'Email Agent' }}", you agree to our Terms of Use and Privacy Policy.</p>
               </form>
           </div>
       </div>
@@ -222,7 +222,7 @@
   <div class="modal-overlay" *ngIf="showContactModal" (click)="closeContactModal()">
     <div class="modal-content contact-modal" (click)="$event.stopPropagation()">
       <div class="modal-header">
-        <h2>More about this property</h2>
+        <h2>{{ property.builder ? 'Contact Builder' : 'More about this property' }}</h2>
         <button class="close-modal" (click)="closeContactModal()"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
@@ -242,13 +242,15 @@
             <input type="tel" placeholder="Phone *" class="modal-input">
           </div>
           <div class="form-group">
-            <textarea placeholder="How can an agent help?" class="modal-textarea">I'm interested in {{ property.address }}.</textarea>
+            <textarea placeholder="How can we help?" class="modal-textarea">I'm interested in {{ property.address }}.</textarea>
           </div>
           <div class="form-check">
             <input type="checkbox" id="military">
             <label for="military">I've served in the U.S. military <i class="fas fa-info-circle"></i></label>
           </div>
-          <button type="submit" class="modal-submit-btn">Email agent</button>
+          <button type="submit" class="modal-submit-btn">
+            {{ property.builder ? 'Contact Builder' : 'Email agent' }}
+          </button>
           <p class="modal-disclaimer">By proceeding, you consent to receive calls and texts at the number you provided according to our Terms of Use and Privacy Policy.</p>
         </form>
       </div>

@@ -101,9 +101,9 @@ const LISTINGS_DATA: Record<string, CategoryInfo> = {
       { id:11, image:'https://picsum.photos/id/40/600/400', price:'$445,000', address:'67 Meadowbrook Ct', city:'Salt Lake City, UT 84101', beds:3, baths:2, sqft:'1,700', badge:'Price drop', badgeClass:'badge-red', ...agent(4) },
       { id:12, image:'https://picsum.photos/id/42/600/400', price:'$1,100,000', address:'1 Shoreline Cir', city:'San Francisco, CA 94101', beds:5, baths:4, sqft:'3,600', badge:'Price drop', badgeClass:'badge-red', ...agent(5) },
       { id:13, image:'https://picsum.photos/id/43/600/400', price:'$278,000', address:'45 Cottage Row', city:'Omaha, NE 68101', beds:2, baths:2, sqft:'1,100', badge:'Price drop', badgeClass:'badge-red', ...agent(0) },
-      { id:14, image:'https://picsum.photos/id/44/600/400', price:'$695,000', address:'300 Canyon Edge Rd', city:'Tucson, AZ 85701', beds:4, baths:3, sqft:'2,400', badge:'Price drop', badgeClass:'badge-red', ...agent(1) },
-      { id:15, image:'https://picsum.photos/id/45/600/400', price:'$515,000', address:'188 Tanglewood Dr', city:'Denver, CO 80201', beds:3, baths:2, sqft:'1,870', badge:'Price drop', badgeClass:'badge-red', ...agent(2) },
-      { id:16, image:'https://picsum.photos/id/46/600/400', price:'$355,000', address:'902 Chestnut Way', city:'Oklahoma City, OK 73101', beds:3, baths:2, sqft:'1,480', badge:'Price drop', badgeClass:'badge-red', ...agent(3) },
+      { id:14, image:'https://picsum.photos/id/44/600/400', price:'$695,000', address:'300 Canyon Edge Rd', city:'Tucson, AZ 85701', beds:4, baths:3, sqft:'2,400', badge:'New Construction', badgeClass:'badge-blue', ...agent(1), builder: 'Built by Lennar' },
+      { id:15, image:'https://picsum.photos/id/45/600/400', price:'$515,000', address:'188 Tanglewood Dr', city:'Denver, CO 80201', beds:3, baths:2, sqft:'1,870', badge:'New Construction', badgeClass:'badge-blue', ...agent(2), builder: 'Built by KB Home' },
+      { id:16, image:'https://picsum.photos/id/46/600/400', price:'$355,000', address:'902 Chestnut Way', city:'Oklahoma City, OK 73101', beds:3, baths:2, sqft:'1,480', badge:'New Construction', badgeClass:'badge-blue', ...agent(3), builder: 'Built by Pulte Homes' },
     ]
   },
 
