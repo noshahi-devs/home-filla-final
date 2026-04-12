@@ -16,6 +16,7 @@ import { NewsInsightsComponent } from './public/news-insights/news-insights';
 import { NewsCategoryComponent } from './public/news-category/news-category.component';
 import { NewsLivingComponent } from './public/news-living/news-living.component';
 import { NewsResearchComponent } from './public/news-research/news-research.component';
+import { ManageRentalsComponent } from './public/manage-rentals/manage-rentals.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'news/living', component: NewsLivingComponent },
   { path: 'news/research', component: NewsResearchComponent },
   { path: 'news/:category', component: NewsCategoryComponent },
+  { path: 'manage-rentals', component: ManageRentalsComponent },
   { path: 'listings/rent', component: RentComponent },
   { path: 'listings/:category', component: ListingsComponent },
   { path: 'property/:category/:id', component: PropertyDetailComponent },
