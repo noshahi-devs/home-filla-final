@@ -8,15 +8,13 @@
         <span class="sub-brand">News</span>&nbsp;&amp; Insights
       </div>
       <ul class="category-list">
-        <li *ngFor="let link of navLinks" 
-            [class.active]="link.active" 
-            [class.dropdown-trigger]="link.hasDropdown"
-            (click)="setActiveLink(link)">
+        <li *ngFor="let link of navLinks" [class.active]="link.active" [class.dropdown-trigger]="link.hasDropdown"
+          (click)="setActiveLink(link)">
           <div class="link-label">
             {{ link.name }}
             <i *ngIf="link.hasDropdown" class="fa fa-chevron-down menu-arrow"></i>
           </div>
-          
+
           <!-- Dropdown Menu -->
           <div *ngIf="link.hasDropdown" class="dropdown-menu">
             <div class="dropdown-inner">
@@ -37,7 +35,7 @@
 
   <!-- Editorial Feed Grid -->
   <div class="editorial-container">
-    
+
     <!-- Header Row -->
     <div class="editorial-header">
       <div class="today-date">{{ todayDate }}</div>
@@ -103,7 +101,7 @@
       <aside class="editorial-right">
         <div class="research-section">
           <h2 class="sub-section-title">Research</h2>
-          
+
           <div class="expert-profile">
             <img [src]="researchExpert.imageUrl" [alt]="researchExpert.name">
             <div class="expert-info">
@@ -138,7 +136,7 @@
               </div>
             </div>
           </div>
-            
+
           <!-- Sign Up Card -->
           <div class="signup-card">
             <div class="signup-icon">
@@ -154,21 +152,50 @@
       </aside>
     </div>
 
-    <!-- BOTTOM SECTION: Columnists -->
-    <section class="columnists-section">
-      <h2 class="sub-section-title text-center">From our columnists</h2>
-      <div class="columnists-grid">
-        <div class="columnist-card" *ngFor="let col of columnists">
-          <div class="col-img-box">
-            <img [src]="col.imageUrl" [alt]="col.title">
-            <div class="col-overlay">
-              <span class="col-name">{{ col.name }}</span>
-              <h3 class="col-title">{{ col.title }}</h3>
+    <!-- Dynamic Editorial Sections -->
+    <div class="editorial-row" *ngFor="let section of editorialSections">
+
+      <!-- Badge Header (e.g. Trends) -->
+      <div class="section-badge-wrap" *ngIf="section.headerType === 'badge'">
+        <div class="badge-line"></div>
+        <div class="category-badge-black">{{ section.title }}</div>
+        <div class="badge-line"></div>
+      </div>
+
+      <!-- Title Header (Classic) -->
+      <div class="section-title-wrap" *ngIf="section.headerType === 'title'">
+        <h2 class="sub-section-title">{{ section.title }}</h2>
+        <a href="#" class="more-link">More {{ section.title }} <i class="fa fa-chevron-right"></i></a>
+      </div>
+
+      <div class="editorial-split-grid">
+        <!-- Main Featured Item (Left) -->
+        <div class="split-main">
+          <div class="split-img-box">
+            <img [src]="section.mainArticle.imageUrl" [alt]="section.mainArticle.title">
+          </div>
+          <div class="split-content">
+            <span class="news-cat">{{ section.mainArticle.category }}</span>
+            <h3 class="split-heading">{{ section.mainArticle.title }}</h3>
+            <p class="split-excerpt">{{ section.mainArticle.excerpt }}</p>
+            <span class="news-author">{{ section.mainArticle.author }}</span>
+          </div>
+        </div>
+
+        <!-- Side Items (Right) -->
+        <div class="split-side">
+          <div class="side-article-card" *ngFor="let side of section.sideArticles">
+            <div class="side-img-box">
+              <img [src]="side.imageUrl" [alt]="side.title">
+            </div>
+            <div class="side-text">
+              <h4 class="side-title">{{ side.title }}</h4>
+              <span class="news-author">{{ side.author }}</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
   </div>
 </div>
