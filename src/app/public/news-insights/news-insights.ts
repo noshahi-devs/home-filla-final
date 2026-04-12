@@ -14,9 +14,9 @@ import { SiteFooterComponent } from '../../shared/components/site-footer/site-fo
 export class NewsInsightsComponent implements OnInit {
   navLinks = [
     { name: 'LATEST', route: '/news', active: true },
-    { 
-      name: 'NEWS', 
-      active: false, 
+    {
+      name: 'NEWS',
+      active: false,
       hasDropdown: true,
       items: [
         { name: 'Real Estate News', route: '#' },
@@ -33,9 +33,9 @@ export class NewsInsightsComponent implements OnInit {
     { name: 'SELLING', route: '#', active: false },
     { name: 'RENTING', route: '#', active: false },
     // { name: 'CELEBRITY HOMES', route: '#', active: false },
-    { 
-      name: 'ADVICE', 
-      active: false, 
+    {
+      name: 'ADVICE',
+      active: false,
       hasDropdown: true,
       items: [
         { name: 'Buying Advice', route: '#' },
