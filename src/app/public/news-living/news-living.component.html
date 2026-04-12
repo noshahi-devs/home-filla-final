@@ -34,7 +34,7 @@
       <h1 class="hero-headline">{{ heroArticle.title }}</h1>
       <p class="hero-excerpt">{{ heroArticle.excerpt }}</p>
       <div class="hero-byline">By {{ heroArticle.author }}</div>
-      <button class="hero-cta">Read the Full Story <i class="fa fa-arrow-right"></i></button>
+      <button class="hero-cta" (click)="openPopup()">Read the Full Story <i class="fa fa-arrow-right"></i></button>
     </div>
   </section>
 
@@ -43,7 +43,10 @@
     <div class="topic-bar-inner">
       <span class="topic-bar-label">Explore:</span>
       <div class="topic-pills">
-        <button class="topic-pill" *ngFor="let t of featuredTopics">{{ t.icon }} {{ t.label }}</button>
+        <button class="topic-pill" [class.active]="activeTopic === 'All Topics'" (click)="filterData('All Topics')">All Topics</button>
+        <button class="topic-pill" *ngFor="let t of featuredTopics" [class.active]="activeTopic === t.label" (click)="filterData(t.label)">
+          {{ t.icon }} {{ t.label }}
+        </button>
       </div>
     </div>
   </div>
@@ -123,6 +126,26 @@
       </aside>
     </div>
 
+  </div>
+</div>
+
+<!-- ── Story Modal Popup ───────────────────────── -->
+<div class="story-modal-overlay" *ngIf="showPopup" (click)="closePopup()">
+  <div class="story-modal-content" (click)="$event.stopPropagation()">
+    <button class="story-modal-close" (click)="closePopup()"><i class="fa fa-times"></i></button>
+    <div class="modal-body">
+      <h2 class="modal-title">{{ heroArticle.title }}</h2>
+      <div class="modal-meta">By {{ heroArticle.author }} &nbsp;|&nbsp; 5 min read</div>
+      <img [src]="heroArticle.imageUrl" [alt]="heroArticle.title" class="modal-hero-img">
+      <div class="modal-text">
+        <p><strong>{{ heroArticle.excerpt }}</strong></p>
+        <p>In 2026, the concept of a home has radically shifted from a place of mere shelter to a sanctuary of well-being. As our external world becomes increasingly noisy, interior designers and architects are prioritizing peace and holistic health above all else.</p>
+        <p>"We are seeing a massive shift towards what we call 'Quiet Luxury'," explains Sarah Jenkins, a leading designer in New York. "Our clients are moving away from sharp edges, cold materials, and stark whites. They want organic textures, warm palettes, and spaces that feel like a physical exhale."</p>
+        <h3>The Rise of Biophilic Geometry</h3>
+        <p>It's no longer just about putting a potted plant in the corner. Biophilic design has matured. We are seeing architectural integration of nature—indoor water features that act as white noise machines, living moss walls that purify the air, and sunlight tracking skylights that mimic the natural circadian rhythm.</p>
+        <p>If you're looking to bring this energy into your own space, start small. Swap out artificial fabrics for natural linen and wool, switch to warm-toned LED lighting, and introduce a grounding earth-tone palette in spaces where you unwind.</p>
+      </div>
+    </div>
   </div>
 </div>
 

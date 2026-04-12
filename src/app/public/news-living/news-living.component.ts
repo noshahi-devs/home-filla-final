@@ -18,10 +18,13 @@ export class NewsLivingComponent implements OnInit {
   heroArticle = {
     title: 'Transform Your Home Into a Serene Sanctuary With These 2026 Design Trends',
     excerpt: 'From earthy palettes to biophilic design, interior designers share the looks that will define sophisticated living in 2026 and beyond.',
-    category: 'DESIGN',
+    category: 'Interior Design',
     author: 'ELENA V.',
     imageUrl: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1400&q=80'
   };
+
+  showPopup = false;
+  activeTopic = 'All Topics';
 
   featuredTopics = [
     { icon: '🛋️', label: 'Interior Design' },
@@ -32,11 +35,11 @@ export class NewsLivingComponent implements OnInit {
     { icon: '🎨', label: 'Color Trends' }
   ];
 
-  spotlightArticles = [
+  _allSpotlightArticles = [
     {
       title: '10 Small Changes That Make Your Home Feel Instantly More Luxurious',
       excerpt: `You don't need a full renovation to elevate your living space. These surprisingly simple upgrades deliver outsized impact.`,
-      category: 'DESIGN',
+      category: 'Interior Design',
       author: 'ALLAIRE CONTE',
       imageUrl: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80',
       readTime: '5 min read'
@@ -44,7 +47,7 @@ export class NewsLivingComponent implements OnInit {
     {
       title: 'The Outdoor Kitchen Trend Taking Over Suburban Backyards',
       excerpt: 'Homeowners are investing thousands in al fresco culinary setups—and real estate experts say it pays off at resale.',
-      category: 'OUTDOOR',
+      category: 'Outdoor Spaces',
       author: 'JULIE TAYLOR',
       imageUrl: 'https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?auto=format&fit=crop&w=800&q=80',
       readTime: '4 min read'
@@ -52,39 +55,41 @@ export class NewsLivingComponent implements OnInit {
     {
       title: 'How to Build a Home Office That Actually Boosts Productivity',
       excerpt: 'Remote work is here to stay. These evidence-backed design principles will help you create a space that works as hard as you do.',
-      category: 'SMART HOME',
+      category: 'Smart Home',
       author: 'ERIC GOLDSCHEIN',
       imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80',
       readTime: '6 min read'
     }
   ];
+  spotlightArticles = [...this._allSpotlightArticles];
 
-  trendPosts = [
+  _allTrendPosts = [
     {
       title: 'Biophilic Design: Bringing Nature Inside Your Home',
-      category: 'LIVING',
+      category: 'Biophilic Living',
       author: 'DESIGN TEAM',
       imageUrl: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=600&q=80'
     },
     {
       title: '2026 Color of the Year: Warm Neutrals Are Taking Over',
-      category: 'COLOR TRENDS',
+      category: 'Color Trends',
       author: 'KELLIE SPEED',
       imageUrl: 'https://images.unsplash.com/photo-1527030280862-64139fba04ca?auto=format&fit=crop&w=600&q=80'
     },
     {
       title: 'The Rise of the "Curated Clutter" Aesthetic',
-      category: 'DESIGN',
+      category: 'Interior Design',
       author: 'LARISSA RUNKLE',
       imageUrl: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80'
     },
     {
       title: 'Maximalist Kitchens Are Making a Bold Comeback',
-      category: 'KITCHEN & BATH',
+      category: 'Kitchen & Bath',
       author: 'BROOKE MORTON',
       imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80'
     }
   ];
+  trendPosts = [...this._allTrendPosts];
 
   expertTips = [
     { label: 'Layer your lighting — ambient, task, and accent — for a hotel-like feel.', expert: 'Emily Henderson, Interior Designer' },
@@ -99,5 +104,24 @@ export class NewsLivingComponent implements OnInit {
       ...l,
       active: l.name === 'LIVING'
     }));
+  }
+
+  filterData(topic: string) {
+    this.activeTopic = topic;
+    if (topic === 'All Topics') {
+      this.spotlightArticles = [...this._allSpotlightArticles];
+      this.trendPosts = [...this._allTrendPosts];
+    } else {
+      this.spotlightArticles = this._allSpotlightArticles.filter(a => a.category === topic);
+      this.trendPosts = this._allTrendPosts.filter(p => p.category === topic);
+    }
+  }
+
+  openPopup() {
+    this.showPopup = true;
+  }
+
+  closePopup() {
+    this.showPopup = false;
   }
 }

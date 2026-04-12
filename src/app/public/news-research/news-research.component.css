@@ -25,7 +25,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #38bdf8;
+  color: #3b82f6;
   margin-bottom: 15px;
 }
 .research-page-title {
@@ -54,7 +54,7 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #38bdf8;
+  border: 2px solid #3b82f6;
 }
 .economist-info {
   display: flex;
@@ -65,7 +65,7 @@
 }
 .economist-info span {
   font-size: 0.85rem;
-  color: #bae6fd;
+  color: #bfdbfe; /* Light blue text */
 }
 
 
@@ -133,8 +133,8 @@ a {
   padding-bottom: 5px;
 }
 .research-tabs a.active, .research-tabs a:hover {
-  color: #1a1a1a;
-  border-bottom: 2px solid #1a1a1a;
+  color: #2563eb;
+  border-bottom: 2px solid #3b82f6;
 }
 .research-search-box {
   display: flex;
@@ -153,7 +153,7 @@ a {
   font-size: 0.9rem;
 }
 .research-search-box .search-btn {
-  background: #1a1a1a;
+  background: #3b82f6;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -166,7 +166,7 @@ a {
   transition: background 0.3s ease;
 }
 .research-search-box .search-btn:hover {
-  background: #333;
+  background: #1d4ed8;
 }
 
 /* ── Ticker Bar ── */
@@ -249,7 +249,7 @@ a {
 }
 .col-left .large-title {
   font-size: 1.25rem;
-  border-bottom: 2px solid #1a1a1a;
+  border-bottom: 2px solid #3b82f6;
 }
 .article-card {
   display: flex;
@@ -340,7 +340,7 @@ a {
   border-radius: 50%;
   border: none;
   font-size: 1.5rem;
-  color: #1a1a1a;
+  color: #3b82f6;
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -445,8 +445,8 @@ a {
 .si-icon {
   width: 32px;
   height: 32px;
-  background: #f5ecec;
-  color: #d32f2f;
+  background: #eff6ff;
+  color: #3b82f6;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -527,8 +527,8 @@ a {
   font-size: 1rem;
 }
 .join-btn {
-  background: #d32f2f;
-  color: white;
+  background: #3b82f6;
+  color: #fff;
   border: none;
   border-radius: 25px;
   padding: 0 30px;
@@ -536,7 +536,7 @@ a {
   cursor: pointer;
   transition: background 0.3s;
 }
-.join-btn:hover { background: #b71c1c; }
+.join-btn:hover { background: #1d4ed8; }
 
 .sub-right {
   flex: 1;
@@ -551,7 +551,7 @@ a {
   font-size: 1.2rem;
   font-weight: 800;
   margin-bottom: 20px;
-  color: #d32f2f;
+  color: #2563eb;
 }
 .social-bell {
   position: absolute;
@@ -639,7 +639,7 @@ a {
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #d32f2f;
+  color: #3b82f6;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .vis-info {

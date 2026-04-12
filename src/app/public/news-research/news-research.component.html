@@ -46,7 +46,9 @@
     <h1 class="page-title">Research</h1>
     <div class="header-tools-wrapper">
       <nav class="research-tabs">
-        <a *ngFor="let tab of researchTabs" href="javascript:void(0)" [class.active]="tab.active">
+        <a *ngFor="let tab of researchTabs" href="javascript:void(0)" 
+           [class.active]="tab.active" 
+           (click)="selectTab(tab.name)">
           {{ tab.name }}
         </a>
       </nav>
@@ -57,8 +59,8 @@
     </div>
   </header>
 
-  <!-- Animated Data Ticker (Static styled to look horizontal) -->
-  <div class="research-ticker">
+  <!-- Animated Data Ticker (Always Visible or tie to Library) -->
+  <div class="research-ticker" *ngIf="activeTab === 'ARTICLES' || activeTab === 'DATA LIBRARY'">
     <div class="ticker-inner">
       <div class="ticker-location">
         <i class="fa fa-location-arrow"></i> {{ tickerInfo.location }}
@@ -80,8 +82,8 @@
   </div>
 
   <main class="research-wrapper">
-    <!-- Three Column Content Grid -->
-    <div class="research-3-col-grid">
+    <!-- ARTICLES LAYOUT -->
+    <div class="research-3-col-grid" *ngIf="activeTab === 'ARTICLES'">
       
       <!-- LEFT COLUMN -->
       <aside class="col-left">
@@ -162,7 +164,46 @@
 
     </div> <!-- / .research-3-col-grid -->
 
-    <!-- Newsletter & Social Block -->
+    <!-- VIDEOS LAYOUT -->
+    <div class="videos-container" *ngIf="activeTab === 'VIDEOS'">
+      <h2 class="col-title" style="margin-bottom: 30px;">Latest Market Updates</h2>
+      <div class="vis-grid">
+        <div class="video-update-card">
+          <div class="video-player">
+            <img [src]="weeklyUpdateVideo.imageUrl" [alt]="weeklyUpdateVideo.title">
+            <div class="video-overlay"><button class="play-btn"><i class="fa fa-play"></i></button></div>
+          </div>
+          <div class="video-info">
+            <div class="vi-date">{{ weeklyUpdateVideo.date }}</div>
+            <h4>{{ weeklyUpdateVideo.title }}</h4>
+            <p class="vi-desc">{{ weeklyUpdateVideo.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA LIBRARY LAYOUT -->
+    <div class="data-library-container" *ngIf="activeTab === 'DATA LIBRARY'">
+      <h2 class="col-title" style="margin-bottom: 30px;">National Market Data Library</h2>
+      <div class="summary-card" style="max-width: 600px; margin: 0 auto;">
+          <ul class="summary-list">
+            <li class="summary-item" *ngFor="let sum of nationalSummaryItems">
+              <div class="si-icon"><i class="fa {{ sum.icon }}"></i></div>
+              <div class="si-details">
+                <div class="si-period">{{ sum.period }}</div>
+                <div class="si-type">{{ sum.type }}</div>
+                <div class="si-val" [class.txt-red]="sum.isRed" [class.txt-green]="!sum.isRed">
+                  <i *ngIf="sum.isRed" class="fa fa-caret-down"></i>
+                  <i *ngIf="!sum.isRed" class="fa fa-caret-up"></i>
+                  {{ sum.value }}
+                </div>
+              </div>
+            </li>
+          </ul>
+      </div>
+    </div>
+
+    <!-- Newsletter & Social Block (Always visible) -->
     <div class="subscribe-block">
       <div class="sub-left">
         <h2>Sign up for updates</h2>
@@ -184,7 +225,7 @@
     </div>
 
     <!-- Data Visualizations -->
-    <div class="visualizations-block">
+    <div class="visualizations-block" *ngIf="activeTab === 'DATA VISUALIZATIONS' || activeTab === 'ARTICLES'">
       <div class="vis-header">
         <h2>Home Filla&reg; Data Visualizations</h2>
         <p>Our research combines proprietary metrics with the latest econometrics and other industry statistics to produce a unique and timely view of the market.</p>

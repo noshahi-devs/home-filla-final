@@ -15,6 +15,8 @@ import { NewsService } from '../../core/services/news.service';
 export class NewsResearchComponent implements OnInit {
   navLinks: any[] = [];
   
+  activeTab = 'ARTICLES';
+  
   // Header Tabs
   researchTabs = [
     { name: 'ARTICLES', active: true },
@@ -22,6 +24,11 @@ export class NewsResearchComponent implements OnInit {
     { name: 'DATA LIBRARY', active: false },
     { name: 'VIDEOS', active: false }
   ];
+
+  selectTab(tabName: string) {
+    this.activeTab = tabName;
+    this.researchTabs.forEach(t => t.active = (t.name === tabName));
+  }
 
   // Market Ticker
   tickerInfo = {
