@@ -1,0 +1,174 @@
+<app-site-header></app-site-header>
+
+<!-- News Sub-Navigation -->
+<nav class="news-nav">
+  <div class="news-nav-content">
+    <div class="news-brand"><span class="sub-brand">News</span>&nbsp;&amp; Insights</div>
+    <ul class="category-list">
+      <li *ngFor="let link of navLinks" [class.active]="link.active" [class.dropdown-trigger]="link.hasDropdown">
+        <a [routerLink]="link.route" class="link-label" style="text-decoration:none;color:inherit;">
+          {{ link.name }}
+          <i *ngIf="link.hasDropdown" class="fa fa-chevron-down menu-arrow"></i>
+        </a>
+        <div *ngIf="link.hasDropdown" class="dropdown-menu">
+          <div class="dropdown-inner">
+            <a *ngFor="let item of link.items" [routerLink]="['/news', item.name.toLowerCase().split(' ').join('-')]" class="dropdown-item">{{ item.name }}</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-extra"><button class="search-trigger"><i class="fa fa-search"></i></button></div>
+  </div>
+</nav>
+
+<div class="research-page">
+
+  <!-- ── Page Header ─── -->
+  <div class="research-header-band">
+    <div class="research-header-inner">
+      <div class="research-header-text">
+        <div class="research-eyebrow"><i class="fa fa-bar-chart"></i> Data & Research</div>
+        <h1 class="research-page-title">Housing Market Research</h1>
+        <p class="research-subtitle">Evidence-based analysis from Home Filla's economics and data science team, giving you the clearest view of the real estate landscape.</p>
+      </div>
+      <div class="economist-badge">
+        <img [src]="economist.imageUrl" [alt]="economist.name">
+        <div class="economist-info">
+          <strong>{{ economist.name }}</strong>
+          <span>{{ economist.title }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Market Stats Bar ─── -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-tile" *ngFor="let stat of marketStats">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-change" [class.positive]="stat.positive" [class.negative]="!stat.positive">
+            {{ stat.change }} vs last week
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="research-container">
+
+    <div class="research-main-layout">
+
+      <!-- ── Left: Reports ─── -->
+      <div class="research-main-col">
+
+        <!-- Quote -->
+        <div class="economist-quote-block">
+          <div class="quote-mark">"</div>
+          <blockquote>{{ economist.quote }}</blockquote>
+          <div class="quote-credit">— {{ economist.name }}, {{ economist.title }}</div>
+        </div>
+
+        <!-- Weekly Reports -->
+        <section class="research-section">
+          <div class="research-section-hdr">
+            <h2 class="research-section-title">Latest Research Reports</h2>
+            <a href="#" class="view-all-link">View all <i class="fa fa-arrow-right"></i></a>
+          </div>
+
+          <div class="report-list">
+            <article class="report-card" *ngFor="let r of weeklyReports; let i = index" [class.report-card--top]="i === 0">
+              <div class="report-img-box">
+                <img [src]="r.imageUrl" [alt]="r.title">
+                <span class="report-tag">{{ r.tag }}</span>
+              </div>
+              <div class="report-body">
+                <div class="report-date">{{ r.date }}</div>
+                <h3 class="report-title">{{ r.title }}</h3>
+                <p class="report-excerpt">{{ r.excerpt }}</p>
+                <a href="#" class="report-read-link">Read Report <i class="fa fa-arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Bar Chart Visual -->
+        <section class="research-section">
+          <div class="research-section-hdr">
+            <h2 class="research-section-title">Median Home Price Index — 2025</h2>
+          </div>
+          <div class="chart-card">
+            <div class="chart-y-label">Price Index (Base: Jan 2025 = 65)</div>
+            <div class="bar-chart">
+              <div class="bar-wrap" *ngFor="let bar of chartBars; let i = index">
+                <div class="bar" [style.height.%]="bar" [class.bar--peak]="bar === 97">
+                  <span class="bar-tooltip">{{ bar }}</span>
+                </div>
+                <span class="bar-label">{{ chartMonths[i] }}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ── Right: Sidebar ─── -->
+      <aside class="research-sidebar">
+
+        <!-- Top Markets -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <i class="fa fa-trophy"></i> Top Markets 2026
+          </div>
+          <div class="market-table">
+            <div class="market-row market-row--head">
+              <span>#</span>
+              <span>City</span>
+              <span>Growth</span>
+              <span>Score</span>
+            </div>
+            <div class="market-row" *ngFor="let m of topMarkets">
+              <span class="market-rank">{{ m.rank }}</span>
+              <span class="market-city">{{ m.city }}</span>
+              <span class="market-growth positive">{{ m.priceGrowth }}</span>
+              <span class="market-score">
+                <div class="score-bar">
+                  <div class="score-fill" [style.width.%]="m.score"></div>
+                </div>
+                <span class="score-num">{{ m.score }}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research Categories -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <i class="fa fa-folder-open"></i> Research Categories
+          </div>
+          <div class="cat-list">
+            <a href="#" class="cat-item" *ngFor="let cat of researchCategories">
+              <span class="cat-icon">{{ cat.icon }}</span>
+              <span class="cat-label">{{ cat.label }}</span>
+              <span class="cat-count">{{ cat.count }}</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Economist Bio -->
+        <div class="sidebar-card bio-card">
+          <img [src]="economist.imageUrl" [alt]="economist.name" class="bio-photo">
+          <h4 class="bio-name">{{ economist.name }}</h4>
+          <p class="bio-role">{{ economist.title }}</p>
+          <p class="bio-text">Danielle leads Home Filla's economics research team, producing weekly market insights, forecasts, and affordability analysis used by millions of buyers, sellers, and investors.</p>
+          <a href="#" class="bio-link">Read all Danielle's research <i class="fa fa-arrow-right"></i></a>
+        </div>
+
+      </aside>
+    </div>
+
+  </div>
+</div>
+
+<app-site-footer></app-site-footer>

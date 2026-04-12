@@ -14,10 +14,14 @@ import { MyHomeComponent } from './public/my-home/my-home.component';
 import { SaleProceedsCalculatorComponent } from './public/sale-proceeds-calculator/sale-proceeds-calculator.component';
 import { NewsInsightsComponent } from './public/news-insights/news-insights';
 import { NewsCategoryComponent } from './public/news-category/news-category.component';
+import { NewsLivingComponent } from './public/news-living/news-living.component';
+import { NewsResearchComponent } from './public/news-research/news-research.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'news', component: NewsInsightsComponent },
+  { path: 'news/living', component: NewsLivingComponent },
+  { path: 'news/research', component: NewsResearchComponent },
   { path: 'news/:category', component: NewsCategoryComponent },
   { path: 'listings/rent', component: RentComponent },
   { path: 'listings/:category', component: ListingsComponent },

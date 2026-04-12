@@ -1,0 +1,129 @@
+<app-site-header></app-site-header>
+
+<!-- News Sub-Navigation -->
+<nav class="news-nav">
+  <div class="news-nav-content">
+    <div class="news-brand"><span class="sub-brand">News</span>&nbsp;&amp; Insights</div>
+    <ul class="category-list">
+      <li *ngFor="let link of navLinks" [class.active]="link.active" [class.dropdown-trigger]="link.hasDropdown">
+        <a [routerLink]="link.route" class="link-label" style="text-decoration:none;color:inherit;">
+          {{ link.name }}
+          <i *ngIf="link.hasDropdown" class="fa fa-chevron-down menu-arrow"></i>
+        </a>
+        <div *ngIf="link.hasDropdown" class="dropdown-menu">
+          <div class="dropdown-inner">
+            <a *ngFor="let item of link.items" [routerLink]="['/news', item.name.toLowerCase().split(' ').join('-')]" class="dropdown-item">{{ item.name }}</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-extra"><button class="search-trigger"><i class="fa fa-search"></i></button></div>
+  </div>
+</nav>
+
+<div class="living-page">
+
+  <!-- ── Hero Banner ───────────────────────────── -->
+  <section class="living-hero">
+    <div class="living-hero-image">
+      <img [src]="heroArticle.imageUrl" [alt]="heroArticle.title">
+      <div class="hero-gradient"></div>
+    </div>
+    <div class="living-hero-content">
+      <span class="hero-cat">{{ heroArticle.category }}</span>
+      <h1 class="hero-headline">{{ heroArticle.title }}</h1>
+      <p class="hero-excerpt">{{ heroArticle.excerpt }}</p>
+      <div class="hero-byline">By {{ heroArticle.author }}</div>
+      <button class="hero-cta">Read the Full Story <i class="fa fa-arrow-right"></i></button>
+    </div>
+  </section>
+
+  <!-- ── Topic Pills ────────────────────────────── -->
+  <div class="topic-bar">
+    <div class="topic-bar-inner">
+      <span class="topic-bar-label">Explore:</span>
+      <div class="topic-pills">
+        <button class="topic-pill" *ngFor="let t of featuredTopics">{{ t.icon }} {{ t.label }}</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Main Content ───────────────────────────── -->
+  <div class="living-container">
+
+    <!-- Spotlight Articles -->
+    <section class="living-section">
+      <div class="living-section-header">
+        <h2 class="living-section-title">Editor's Spotlight</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="spotlight-grid">
+        <article class="spotlight-card" *ngFor="let art of spotlightArticles; let i = index" [class.spotlight-card--featured]="i === 0">
+          <div class="spotlight-img-box">
+            <img [src]="art.imageUrl" [alt]="art.title">
+            <span class="spotlight-cat">{{ art.category }}</span>
+          </div>
+          <div class="spotlight-body">
+            <h3 class="spotlight-title">{{ art.title }}</h3>
+            <p class="spotlight-excerpt">{{ art.excerpt }}</p>
+            <div class="spotlight-meta">
+              <span class="spotlight-author">{{ art.author }}</span>
+              <span class="spotlight-read">{{ art.readTime }}</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="living-two-col">
+
+      <!-- Trend Grid -->
+      <section class="living-section trend-section">
+        <div class="living-section-header">
+          <h2 class="living-section-title">What's Trending</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="trend-grid">
+          <article class="trend-card" *ngFor="let post of trendPosts">
+            <div class="trend-img-box">
+              <img [src]="post.imageUrl" [alt]="post.title">
+            </div>
+            <div class="trend-body">
+              <span class="news-cat">{{ post.category }}</span>
+              <h4 class="trend-title">{{ post.title }}</h4>
+              <span class="news-author">{{ post.author }}</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Expert Tips Sidebar -->
+      <aside class="living-sidebar">
+        <div class="tips-card">
+          <div class="tips-card-header">
+            <i class="fa fa-lightbulb-o"></i>
+            <span>Designer Tips</span>
+          </div>
+          <div class="tip-item" *ngFor="let tip of expertTips; let i = index">
+            <div class="tip-number">0{{ i + 1 }}</div>
+            <div class="tip-body">
+              <p class="tip-text">"{{ tip.label }}"</p>
+              <span class="tip-expert">— {{ tip.expert }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="newsletter-card">
+          <div class="newsletter-icon">🏡</div>
+          <h4>Living Style Weekly</h4>
+          <p>Get the best home design ideas delivered to your inbox every Thursday.</p>
+          <input type="email" placeholder="Your email address">
+          <button class="newsletter-btn">Subscribe Free</button>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+</div>
+
+<app-site-footer></app-site-footer>

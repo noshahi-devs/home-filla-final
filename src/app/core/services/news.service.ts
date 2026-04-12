@@ -320,8 +320,8 @@ export class NewsService {
       ]
     },
     { name: 'GUIDES', route: '/news/guides', active: false },
-    { name: 'LIVING', route: '#', active: false },
-    { name: 'RESEARCH', route: '#', active: false }
+    { name: 'LIVING', route: '/news/living', active: false },
+    { name: 'RESEARCH', route: '/news/research', active: false }
   ];
 
   constructor() {}
