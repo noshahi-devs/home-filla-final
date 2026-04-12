@@ -1,7 +1,6 @@
-
-<div class="news-page-container">
-  <!-- News Sub-Header / Navigation -->
-  <nav class="news-nav">
+<div class="category-portal-wrapper">
+  <!-- Dynamic Sub-Navigation (Positions below global header) -->
+   <nav class="news-nav">
     <div class="news-nav-content">
       <div class="news-brand">
         <span class="sub-brand">News</span>&nbsp;&amp; Insights
@@ -31,93 +30,130 @@
     </div>
   </nav>
 
-  <div class="editorial-container" style="padding-top: 10px;">
-    <!-- Category Hero -->
-    <header class="section-title-wrap" style="border-bottom: 2px solid #000; padding-bottom: 15px; margin-bottom: 50px;">
-      <h1 class="sub-section-title" style="font-size: 48px; letter-spacing: -1px;">{{ categoryTitle }}</h1>
-      <span style="font-weight: 800; font-size: 14px; color: #64748b;">TOTAL ARTICLES: {{ articles.length }}</span>
+  <main class="portal-content">
+    <!-- Sophisticated Hero Section -->
+    <header class="portal-hero">
+      <div class="hero-container">
+        <div class="hero-label">Editorial Category</div>
+        <h1 class="hero-title">{{ categoryTitle }}</h1>
+        <div class="hero-meta">
+          <span class="meta-count">{{ allArticles.length }}</span> Articles Published
+        </div>
+      </div>
     </header>
 
-    <!-- Most Popular Section -->
-    <section class="popular-section" *ngIf="popularArticles.length > 0" style="margin-bottom: 80px;">
-      <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 30px; border-bottom: 2px solid #000; padding-bottom: 10px; display: inline-block;">Most popular {{ categoryTitle | titlecase }} articles</h2>
-      
-      <div class="popular-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;">
-        <div class="pop-card" *ngFor="let pop of popularArticles">
-          <div class="pop-img-box" style="height: 180px; margin-bottom: 15px; border-radius: 8px; overflow: hidden;">
-            <img [src]="pop.imageUrl" [alt]="pop.title" style="width: 100%; height: 100%; object-fit: cover;">
+    <!-- Curated Popular Selection -->
+    <section class="selection-section" *ngIf="popularArticles.length > 0">
+      <div class="section-container">
+        <h2 class="section-heading">Must Read Highlights</h2>
+        <div class="selection-grid">
+          <div class="selection-card" *ngFor="let pop of popularArticles">
+            <div class="card-media">
+              <img [src]="pop.imageUrl" [alt]="pop.title">
+            </div>
+            <div class="card-info">
+              <span class="card-tag">{{ categoryTitle }}</span>
+              <h3 class="card-title">{{ pop.title }}</h3>
+            </div>
           </div>
-          <span style="font-size: 11px; font-weight: 900; color: #2563eb; letter-spacing: 1px;">{{ categoryTitle }}</span>
-          <h3 style="font-size: 16px; margin-top: 5px; line-height: 1.4; font-weight: 800;">{{ pop.title }}</h3>
-          <p style="font-size: 14px; color: #64748b; margin-top: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{{ pop.excerpt || 'Essential expert analysis and the latest news updates for home buyers and sellers.' }}</p>
         </div>
       </div>
     </section>
 
-    <div class="editorial-split-grid" *ngIf="articles.length > 0">
-      <!-- Main Feed -->
-      <div class="split-main">
-        <article class="featured-main-box" style="margin-bottom: 60px;">
-          <div class="main-img-wrap" style="height: 500px; margin-bottom: 30px;">
-            <img [src]="articles[0].imageUrl" [alt]="articles[0].title">
-          </div>
-          <span class="category-badge-black" style="display: inline-block; margin-bottom: 15px;">FEATURED</span>
-          <h2 class="featured-title" style="font-size: 42px; margin-bottom: 20px;">{{ articles[0].title }}</h2>
-          <p class="split-excerpt" style="font-size: 20px;">{{ articles[0].excerpt || 'Expert analysis and insights on the current ' + categoryTitle.toLowerCase() + ' market dynamics.' }}</p>
-          <div class="article-meta">
-            <span class="news-author">{{ articles[0].author }}</span>
-          </div>
-        </article>
+    <!-- Master Filter Layout -->
+    <div class="portal-exploration-layout">
+      <div class="exploration-container">
+        
+        <!-- Glassmorphic Sidebar -->
+        <aside class="exploration-filters">
+          <div class="filter-panel">
+            <div class="panel-header">
+              <i class="fa fa-filter"></i> Refine Results
+            </div>
 
-        <!-- Grid of category articles -->
-        <div class="category-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-          <div class="side-article-card" *ngFor="let art of articles.slice(1)" style="grid-template-columns: 1fr; gap: 15px;">
-            <div class="side-img-box" style="height: 180px;">
-              <img [src]="art.imageUrl" [alt]="art.title">
+            <div class="filter-item">
+              <label>Sequence</label>
+              <div class="select-wrapper">
+                <select [(ngModel)]="sortBy" (change)="onSortChange()" class="portal-select">
+                  <option value="relevance">Highly Relevant</option>
+                  <option value="newest">Most Recent</option>
+                  <option value="oldest">Historical</option>
+                </select>
+              </div>
             </div>
-            <div class="side-info">
-              <h3 class="side-title" style="font-size: 20px;">{{ art.title }}</h3>
-              <p class="small-text" style="color: #64748b; font-size: 14px; margin-bottom: 8px;">{{ art.excerpt || 'Read the full article for more insights.' }}</p>
-              <span class="news-author">{{ art.author }}</span>
+
+            <div class="filter-item">
+              <label>Keywords</label>
+              <div class="search-box">
+                <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Discover topics...">
+                <i class="fa fa-search"></i>
+              </div>
+            </div>
+
+            <div class="filter-item">
+              <label>Topics</label>
+              <div class="portal-check-list">
+                <label class="portal-check" *ngFor="let tag of availableTags">
+                  <input type="checkbox" (change)="$event.stopPropagation(); toggleTag(tag)">
+                  <span class="check-mark"></span>
+                  <span class="check-text">{{ tag }}</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-item">
+              <label>Timeline</label>
+              <div class="portal-check-list">
+                <label class="portal-check" *ngFor="let year of availableYears">
+                  <input type="checkbox" (change)="$event.stopPropagation(); toggleYear(year)">
+                  <span class="check-mark"></span>
+                  <span class="check-text">{{ year }}</span>
+                </label>
+              </div>
             </div>
           </div>
+        </aside>
+
+        <!-- Dynamic Results Grid -->
+        <div class="exploration-results">
+          <div class="results-top">
+            <h2 class="results-heading">Database: {{ categoryTitle | titlecase }}</h2>
+            <p class="results-subheading">Displaying {{ filteredArticles.length }} validated insights</p>
+          </div>
+
+          <div class="article-grid-premium">
+            <article class="article-card-premium" *ngFor="let art of filteredArticles">
+              <div class="article-image">
+                <img [src]="art.imageUrl" [alt]="art.title">
+                <div class="image-overlay"></div>
+              </div>
+              <div class="article-body">
+                <span class="article-category">{{ categoryTitle }}</span>
+                <h3 class="article-title">{{ art.title }}</h3>
+                <p class="article-snippet">{{ art.excerpt || 'Access the full editorial for deep-market analysis and professional guidance.' }}</p>
+                <div class="article-footer">
+                  <span class="article-author">Source: {{ art.author }}</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Futuristic Pagination -->
+          <nav class="portal-pagination">
+            <div class="pagination-inner">
+              <button class="pag-btn active">01</button>
+              <button class="pag-btn">02</button>
+              <button class="pag-btn">03</button>
+              <span class="pag-dots">...</span>
+              <button class="pag-btn">99</button>
+              <button class="pag-nav-btn">Next Experience <i class="fa fa-arrow-right"></i></button>
+            </div>
+          </nav>
         </div>
+
       </div>
-
-      <!-- Right Support Column -->
-      <aside class="split-side" style="display: flex; flex-direction: column; gap: 40px;">
-        <div class="ad-placeholder" style="background: #f1f5f9; padding: 40px; text-align: center; border-radius: 12px; border: 1px dashed #cbd5e1;">
-          <span style="font-weight: 800; color: #94a3b8; font-size: 11px; letter-spacing: 1px;">SPONSORED INSIGHTS</span>
-          <h4 style="margin-top: 20px; font-size: 18px;">How to Maximize Your Real Estate ROI in 2024</h4>
-          <button style="margin-top: 20px; background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 700; cursor: pointer;">DOWNLOAD GUIDE</button>
-        </div>
-
-        <div class="popular-sidebar">
-          <h3 style="font-size: 18px; border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 20px;">LATEST TRENDS</h3>
-          <div class="sidebar-news-item" style="display: flex; gap: 15px; margin-bottom: 25px;">
-             <!-- Placeholder for other categories -->
-             <div style="flex-grow: 1;">
-               <span style="font-size: 10px; color: #2563eb; font-weight: 800;">REAL ESTATE NEWS</span>
-               <h4 style="font-size: 15px; margin-top: 5px;">Why the Suburbs are Rebounding Faster Than Expected</h4>
-             </div>
-          </div>
-          <div class="sidebar-news-item" style="display: flex; gap: 15px;">
-             <div style="flex-grow: 1;">
-               <span style="font-size: 10px; color: #2563eb; font-weight: 800;">MARKET DATA</span>
-               <h4 style="font-size: 15px; margin-top: 5px;">Inventory Hits a 3-Year High in Major Metros</h4>
-             </div>
-          </div>
-        </div>
-      </aside>
     </div>
-
-    <!-- Empty State -->
-    <div class="empty-state" *ngIf="articles.length === 0" style="text-align: center; padding: 100px 0;">
-      <h2>No articles found in this category.</h2>
-      <p>We're currently gathering the latest insights. Check back soon!</p>
-      <a routerLink="/news" class="sign-up-btn" style="display: inline-block; margin-top: 20px; text-decoration: none;">GO BACK TO ALL NEWS</a>
-    </div>
-  </div>
+  </main>
 </div>
 
 <app-site-footer></app-site-footer>
