@@ -13,10 +13,12 @@ import { HomeLoanComponent } from './public/home-loan/home-loan';
 import { MyHomeComponent } from './public/my-home/my-home.component';
 import { SaleProceedsCalculatorComponent } from './public/sale-proceeds-calculator/sale-proceeds-calculator.component';
 import { NewsInsightsComponent } from './public/news-insights/news-insights';
+import { NewsCategoryComponent } from './public/news-category/news-category.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'news', component: NewsInsightsComponent },
+  { path: 'news/:category', component: NewsCategoryComponent },
   { path: 'listings/rent', component: RentComponent },
   { path: 'listings/:category', component: ListingsComponent },
   { path: 'property/:category/:id', component: PropertyDetailComponent },
