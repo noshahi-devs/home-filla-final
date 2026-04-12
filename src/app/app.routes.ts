@@ -18,6 +18,7 @@ import { NewsLivingComponent } from './public/news-living/news-living.component'
 import { NewsResearchComponent } from './public/news-research/news-research.component';
 import { ManageRentalsComponent } from './public/manage-rentals/manage-rentals.component';
 import { AdvertiseComponent } from './public/advertise/advertise.component';
+import { SitemapForSaleComponent } from './public/sitemap/sitemap-for-sale.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,6 +37,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'sitemap', component: SitemapComponent },
+  { path: 'sitemap/for-sale', component: SitemapForSaleComponent },
   { path: 'home-loan', component: HomeLoanComponent },
   { path: 'my-home', component: MyHomeComponent },
   { path: 'my-home/sale-proceeds-calculator', component: SaleProceedsCalculatorComponent },
