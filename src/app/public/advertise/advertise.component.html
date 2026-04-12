@@ -1,0 +1,89 @@
+<app-site-header></app-site-header>
+
+<main class="advertise-page">
+  <!-- B2B Hero Section -->
+  <section class="b2b-hero">
+    <div class="hero-container">
+      <div class="hero-text">
+        <span class="hero-label">Home Filla For Professionals</span>
+        <h1 class="hero-title">Accelerate your real estate pipeline</h1>
+        <p class="hero-subtitle">Connect with high-intent buyers and sellers active on our platform. Tap into millions of searches globally and close deals faster.</p>
+        <div class="hero-actions">
+          <button class="btn-primary-large">Talk to Sales</button>
+          <button class="btn-outline-light">Pricing Options</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image-bg"></div>
+  </section>
+
+  <!-- Metrics Bar -->
+  <section class="metrics-bar">
+    <div class="metric">
+      <h2>50M+</h2>
+      <p>Monthly Searches</p>
+    </div>
+    <div class="metric">
+      <h2>12M</h2>
+      <p>Active Buyers</p>
+    </div>
+    <div class="metric">
+      <h2>400%</h2>
+      <p>Average ROI for Agents</p>
+    </div>
+  </section>
+
+  <!-- Solutions Grid -->
+  <section class="solutions-section">
+    <div class="content-wrapper text-center">
+      <h2>Advertising built for your goals</h2>
+      <p class="section-lead">Whether you're an independent agent or a national brokerage, we have targeted solutions to grow your business.</p>
+      
+      <div class="solutions-grid">
+        <div class="solution-card" *ngFor="let sol of solutions">
+          <div class="sol-icon"><i class="fa {{ sol.icon }}"></i></div>
+          <h3>{{ sol.title }}</h3>
+          <p>{{ sol.description }}</p>
+          <a href="#" class="sol-link">Explore {{ sol.title }} <i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Split Testimonial Section -->
+  <section class="split-section">
+    <div class="content-wrapper split-layout">
+      <div class="split-image">
+        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80" alt="Successful Real Estate Agent">
+      </div>
+      <div class="split-content">
+        <span class="eyebrow">Agent Success</span>
+        <h2>Don't just take our word for it</h2>
+        <div class="testimonial-carousel">
+          <div class="testimo-slide" *ngFor="let test of testimonials">
+            <p class="quote-text">"{{ test.quote }}"</p>
+            <div class="quote-author">
+              <strong>{{ test.author }}</strong>
+              <span>{{ test.location }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Capture Strip -->
+  <section class="lead-capture bg-dark text-center">
+    <div class="lead-box">
+      <h2>Ready to claim your market?</h2>
+      <p>Zip codes are exclusive and fill up fast. Contact our B2B team today to reserve your territory before your competitors do.</p>
+      <form class="lead-form" (submit)="$event.preventDefault()">
+        <input type="email" placeholder="Work Email Address" required>
+        <button type="submit" class="btn-primary-large">Get Started Now</button>
+      </form>
+      <small>By clicking get started, you agree to our B2B Terms of Service.</small>
+    </div>
+  </section>
+</main>
+
+<app-site-footer></app-site-footer>
