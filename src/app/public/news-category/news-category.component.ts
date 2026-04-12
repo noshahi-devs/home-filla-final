@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NewsService, Article } from '../../core/services/news.service';
-import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
 
 @Component({
   selector: 'app-news-category',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, SiteHeaderComponent, SiteFooterComponent],
+  imports: [CommonModule, RouterModule, FormsModule, SiteFooterComponent],
   templateUrl: './news-category.component.html',
   styleUrls: ['../news-insights/news-insights.css', './news-category.component.css']
 })
