@@ -12,6 +12,60 @@ import { SiteFooterComponent } from '../../shared/components/site-footer/site-fo
   styleUrls: ['./advertise.component.css']
 })
 export class AdvertiseComponent {
+  productsMenu = [
+    {
+      label: 'Real Estate Lead Generation',
+      links: ['Connections Plus', 'ReadyConnect Concierge', 'Market VIP']
+    },
+    {
+      label: 'Real Estate Marketing',
+      links: ['Market Reach', 'Local Expert', 'The Essentials Toolkit']
+    },
+    {
+      label: 'Listing Solutions',
+      links: ['Listing Toolkit', 'Listing Manager', 'Spotlight Listings']
+    },
+    {
+      label: 'Lender Solutions',
+      links: ['ClientSelect Mortgage Advertising']
+    },
+    {
+      label: 'Specialty Solutions',
+      links: ['Home Builder Solutions', 'Property Manager Solutions', 'Brand Advertiser Solutions', 'Online Store']
+    }
+  ];
+
+  resourcesMenu = [
+    'Blog',
+    'PRO Campaign Hub',
+    'Success Stories',
+    '#ThrivePastFive',
+    'Home Filla Pro App',
+    'Referral Manager App',
+    'State Resources'
+  ];
+
+  campaignTestimonials = [
+    {
+      quote: "We found that Home Filla has provided the most consistent and quality leads for the greatest ROI and predictable conversion rates. That predictability is how we operate our business.",
+      author: 'Lucas Mudrey & Tony Hanson',
+      company: 'Better Homes',
+      avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80'
+    },
+    {
+      quote: "We can spend more time with actual clients and use the technology to get to those leads, support those leads, and find information and intel.",
+      author: 'Gary Ashton',
+      company: 'CEO and Owner, The Ashton Real Estate Group',
+      avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80'
+    }
+  ];
+
+  industrySolutions = [
+    { title: 'Builders', icon: 'fa-tools' },
+    { title: 'Property Managers', icon: 'fa-building' },
+    { title: 'Brand Advertisers', icon: 'fa-ad' }
+  ];
+
   solutions = [
     {
       icon: 'fa-map-marker',
@@ -42,4 +96,10 @@ export class AdvertiseComponent {
       location: 'Denver, CO'
     }
   ];
+
+  activeTestimonial = 0;
+
+  setTestimonial(index: number) {
+    this.activeTestimonial = index;
+  }
 }
