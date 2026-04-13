@@ -24,6 +24,8 @@ import { SitemapRecentlySoldComponent } from './public/sitemap/sitemap-recently-
 import { SitemapForeclosuresComponent } from './public/sitemap/sitemap-foreclosures.component';
 import { SitemapMarketReportsComponent } from './public/sitemap/sitemap-market-reports.component';
 
+import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'news', component: NewsInsightsComponent },
@@ -32,6 +34,7 @@ export const routes: Routes = [
   { path: 'news/:category', component: NewsCategoryComponent },
   { path: 'manage-rentals', component: ManageRentalsComponent },
   { path: 'advertise', component: AdvertiseComponent },
+  { path: 'marketing/login', component: MarketingLoginComponent },
   { path: 'listings/rent', component: RentComponent },
   { path: 'listings/:category', component: ListingsComponent },
   { path: 'property/:category/:id', component: PropertyDetailComponent },

@@ -280,9 +280,47 @@
 
 
   <!-- Floating Chat Bubble -->
-  <div class="live-chat-bubble">
+  <div class="live-chat-bubble" (click)="toggleChat()" [class.hidden]="isChatOpen">
     <i class="fa fa-comments"></i>
     <span>Chat now</span>
+  </div>
+
+  <!-- Chatbot Window -->
+  <div class="chatbot-window" [class.open]="isChatOpen">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-bot-avatar">
+          <i class="fa fa-robot"></i>
+        </div>
+        <div>
+          <div class="chat-bot-name">PRO Support</div>
+          <div class="chat-bot-status">Online</div>
+        </div>
+      </div>
+      <button class="chat-close-btn" (click)="toggleChat()">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="chat-body" #chatBody>
+      <div *ngFor="let msg of chatMessages" class="chat-message" [ngClass]="msg.type">
+        <div class="message-bubble">
+          {{ msg.text }}
+        </div>
+        <div class="message-time">{{ msg.time }}</div>
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" 
+             placeholder="Type your message..." 
+             class="chat-input" 
+             [(ngModel)]="newMessage" 
+             (keyup.enter)="sendMessage()">
+      <button class="btn-send" (click)="sendMessage()">
+        <i class="fa fa-paper-plane"></i>
+      </button>
+    </div>
   </div>
 </main>
 

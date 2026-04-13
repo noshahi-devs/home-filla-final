@@ -1,0 +1,156 @@
+<!-- Home Filla PRO Header -->
+<header class="pro-header">
+  <div class="pro-header-container">
+    <a routerLink="/advertise" class="pro-logo-area">
+      <span class="pro-logo-text">Home Filla</span>
+      <span class="pro-badge">PRO</span>
+    </a>
+
+    <nav class="pro-nav">
+      <!-- Products Dropdown -->
+      <div class="pro-nav-item">
+        <a href="javascript:void(0)" class="pro-nav-link">Products <i class="fa fa-chevron-down"></i></a>
+        <div class="pro-dropdown">
+          <div class="dropdown-group" *ngFor="let group of productsMenu">
+            <span class="dropdown-label">{{ group.label }}</span>
+            <a href="javascript:void(0)" class="dropdown-link" *ngFor="let link of group.links">{{ link }}</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources Dropdown -->
+      <div class="pro-nav-item">
+        <a href="javascript:void(0)" class="pro-nav-link">Resources <i class="fa fa-chevron-down"></i></a>
+        <div class="pro-dropdown" style="min-width: 220px;">
+          <a href="javascript:void(0)" class="dropdown-link" *ngFor="let item of resourcesMenu">{{ item }}</a>
+        </div>
+      </div>
+
+      <div class="pro-nav-item">
+        <a href="javascript:void(0)" class="pro-nav-link">Success Stories</a>
+      </div>
+      
+      <div class="pro-nav-item">
+        <a href="javascript:void(0)" class="pro-nav-link">Training</a>
+      </div>
+    </nav>
+
+    <div class="pro-header-actions">
+      <a href="javascript:void(0)" class="pro-action-item"><i class="fa fa-question-circle"></i> Support</a>
+      <a href="javascript:void(0)" class="pro-action-item"><i class="fa fa-user-circle"></i> Sign In</a>
+      <a routerLink="/contact" class="btn-contact">Contact us</a>
+    </div>
+  </div>
+</header>
+
+<main class="marketing-login-page">
+  <!-- Selector Section -->
+  <section class="portal-selector">
+    <div class="content-wrapper">
+      <h1 class="portal-title">Log in to your Home Filla PRO dashboards</h1>
+      <p class="portal-subtitle">Select your Product to get started</p>
+
+      <div class="product-grid">
+        <div class="product-card" *ngFor="let card of productCards">
+          <div class="card-content">
+            <h2 class="card-title">{{ card.title }}</h2>
+            <p class="card-subtitle" *ngIf="card.subtitle">{{ card.subtitle }}</p>
+            <p class="card-description">{{ card.description }}</p>
+          </div>
+          <div class="card-arrow">
+            <i class="fa fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leads Intro Section -->
+  <section class="leads-intro">
+    <div class="content-wrapper">
+      <h2 class="leads-title">Discover lead generation solutions built for agents like you</h2>
+    </div>
+  </section>
+
+  <!-- Solution 1: Connections Plus -->
+  <section class="feature-block light-bg">
+    <div class="content-wrapper feature-grid">
+      <div class="feature-content">
+        <h3 class="feature-brand">Connections<span>℠</span> Plus</h3>
+        <h2 class="feature-heading">Meet motivated buyers and nurture them to close.</h2>
+        <p class="feature-text">Get active buyer leads searching for homes in your market, and the tools you need to convert them.</p>
+        <button class="btn-marketing-cta">{{ solutions[0].ctaText }} <i class="fa fa-chevron-right"></i></button>
+      </div>
+      <div class="feature-visual">
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="app-header">
+              <i class="fa fa-comments"></i>
+              <span>Home Filla PRO</span>
+              <i class="fa fa-ellipsis-v"></i>
+            </div>
+            <div class="app-content">
+              <div class="lead-inquiry">
+                <i class="fa fa-search"></i>
+                <div class="inquiry-text">
+                  <strong>Interested in Buying</strong>
+                  <span>Assigned to me</span>
+                </div>
+              </div>
+              <div class="lead-stats">
+                <div class="stat-box">$400,000</div>
+                <div class="stat-box">Austin, TX</div>
+              </div>
+              <div class="lead-profile">
+                <div class="profile-avatar">J</div>
+                <div class="profile-info">
+                  <strong>Jamie L.</strong>
+                  <span>Requested 2 tours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution 2: ReadyConnect -->
+  <section class="feature-block reverse">
+    <div class="content-wrapper feature-grid">
+      <div class="feature-content">
+        <h3 class="feature-brand">ReadyConnect Concierge<span>℠</span></h3>
+        <h2 class="feature-heading">Connect live to pre-screened leads with no upfront costs.</h2>
+        <p class="feature-text">Receive live-transfered leads that convert up to 5x higher than the industry average and only pay a fee on closed transactions.</p>
+        <button class="btn-marketing-cta">{{ solutions[1].ctaText }} <i class="fa fa-chevron-right"></i></button>
+      </div>
+      <div class="feature-visual">
+        <div class="app-mockup-card">
+          <div class="referral-alerts">
+            <div class="alert-header">New Referral Alerts (1)</div>
+            <div class="alert-card">
+              <div class="map-circle">
+                <i class="fa fa-map-marker-alt"></i>
+              </div>
+              <div class="alert-details">
+                <strong>Inquiry Location</strong>
+                <span>Austin, TX (78750)</span>
+                <div class="alert-meta">
+                  <span>90 days</span>
+                  <span>$350,000</span>
+                </div>
+              </div>
+              <div class="alert-actions">
+                <button class="btn-claim">Claim</button>
+                <button class="btn-skip">Skip</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<app-site-footer></app-site-footer>
