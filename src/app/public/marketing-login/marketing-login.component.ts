@@ -20,6 +20,27 @@ interface ProductCard {
   styleUrls: ['./marketing-login.component.css']
 })
 export class MarketingLoginComponent {
+  isLoginOpen = false;
+  isNotifOpen = false;
+  selectedProduct: ProductCard | null = null;
+  
+  openLogin(card: ProductCard) {
+    this.selectedProduct = card;
+    this.isLoginOpen = true;
+    // Prevent scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeLogin() {
+    this.isLoginOpen = false;
+    this.selectedProduct = null;
+    document.body.style.overflow = 'auto';
+  }
+
+  toggleNotif() {
+    this.isNotifOpen = !this.isNotifOpen;
+  }
+
   productsMenu = [
     {
       label: 'Real Estate Lead Generation',

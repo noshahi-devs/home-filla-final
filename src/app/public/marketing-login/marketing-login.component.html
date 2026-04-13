@@ -37,7 +37,7 @@
 
     <div class="pro-header-actions">
       <a href="javascript:void(0)" class="pro-action-item"><i class="fa fa-question-circle"></i> Support</a>
-      <a href="javascript:void(0)" class="pro-action-item"><i class="fa fa-user-circle"></i> Sign In</a>
+      <a routerLink="/marketing/login" class="pro-action-item active"><i class="fa fa-user-circle"></i> Sign In</a>
       <a routerLink="/contact" class="btn-contact">Contact us</a>
     </div>
   </div>
@@ -51,7 +51,7 @@
       <p class="portal-subtitle">Select your Product to get started</p>
 
       <div class="product-grid">
-        <div class="product-card" *ngFor="let card of productCards">
+        <div class="product-card" *ngFor="let card of productCards" (click)="openLogin(card)">
           <div class="card-content">
             <h2 class="card-title">{{ card.title }}</h2>
             <p class="card-subtitle" *ngIf="card.subtitle">{{ card.subtitle }}</p>
@@ -64,6 +64,76 @@
       </div>
     </div>
   </section>
+
+  <!-- Login Modal Overlay -->
+  <div class="modal-overlay" *ngIf="isLoginOpen" (click)="closeLogin()">
+    <div class="login-modal" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeLogin()"><i class="fa fa-times"></i></button>
+      
+      <div class="login-box">
+        <div class="login-header">
+          <div class="brand-logo">
+            <i class="fa fa-home"></i>
+          </div>
+          <h1>Welcome!</h1>
+          <p class="login-context" *ngIf="selectedProduct">Log in to {{ selectedProduct.title }}</p>
+        </div>
+
+        <form (submit)="$event.preventDefault()">
+          <div class="form-field">
+            <label>Username</label>
+            <input type="text" placeholder="username">
+          </div>
+          <div class="form-field">
+            <label>Password</label>
+            <input type="password" placeholder="password">
+          </div>
+          <button type="submit" class="btn-primary-login">Log in</button>
+          <a href="javascript:void(0)" class="forgot-link">Forgot password?</a>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Notification Bell -->
+  <button class="floating-notif-btn" (click)="toggleNotif()" [class.active]="isNotifOpen">
+    <i class="fa fa-bell"></i>
+    <span class="notif-badge">1</span>
+  </button>
+
+  <!-- Notification Sidebar -->
+  <aside class="notif-sidebar" [class.open]="isNotifOpen">
+    <div class="notif-sidebar-header">
+      <div class="notif-title-area">
+        <h2>What's new on Home Filla PRO...</h2>
+      </div>
+      <div class="notif-header-actions">
+        <i class="fa fa-search"></i>
+        <i class="fa fa-times" (click)="toggleNotif()"></i>
+      </div>
+    </div>
+
+    <div class="notif-body">
+      <div class="notif-card">
+        <div class="notif-meta">
+          <span class="badge-new">NEW</span>
+          <span class="notif-date">September 10, 2020</span>
+          <i class="fa fa-share-alt"></i>
+        </div>
+        <h3 class="notif-card-title">Important Settings Information</h3>
+        <p class="notif-card-text">
+          Updating your availability in your Settings will <strong>only</strong> affect live-transfer leads. You will still receive text connections.
+        </p>
+        <p class="notif-card-footer">
+          Only your manager can <strong>turn off all</strong> lead delivery.
+        </p>
+      </div>
+    </div>
+    
+    <div class="notif-footer">
+      <span>We are ⚡ by Home Filla</span>
+    </div>
+  </aside>
 
   <!-- Leads Intro Section -->
   <section class="leads-intro">

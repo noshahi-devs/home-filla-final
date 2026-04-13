@@ -25,6 +25,7 @@ import { SitemapForeclosuresComponent } from './public/sitemap/sitemap-foreclosu
 import { SitemapMarketReportsComponent } from './public/sitemap/sitemap-market-reports.component';
 
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
+import { ContactComponent } from './public/contact/contact.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +36,7 @@ export const routes: Routes = [
   { path: 'manage-rentals', component: ManageRentalsComponent },
   { path: 'advertise', component: AdvertiseComponent },
   { path: 'marketing/login', component: MarketingLoginComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'listings/rent', component: RentComponent },
   { path: 'listings/:category', component: ListingsComponent },
   { path: 'property/:category/:id', component: PropertyDetailComponent },
