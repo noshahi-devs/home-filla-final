@@ -20,9 +20,43 @@ interface ProductCard {
   styleUrls: ['./marketing-login.component.css']
 })
 export class MarketingLoginComponent {
+  // View State
+  activeTab: 'products' | 'success' = 'products';
   isLoginOpen = false;
   isNotifOpen = false;
-  selectedProduct: ProductCard | null = null;
+  selectedProduct: any = null;
+
+  // Testimonial Data
+  spotlightStory = {
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    title: 'A powerful blend of systems, quality leads, and the right partner has helped this brokerage thrive',
+    description: 'See how Better Homes and Gardens Real Estate\'s Paracle brokerage achieved scalable success by combining robust systems, high-quality leads, and a strategic partnership with Realtor.com.',
+    sidebarTeasers: [
+      {
+        title: 'Learn how the leader of the #1 selling team in Michigan built his team\'s success with leads from Realtor.com PRO',
+        excerpt: 'Any broker worth their salt knows how crucial it is to start their brokerage off on the right foot...'
+      },
+      {
+        title: 'The #1 RE/MAX team in the world shares the secrets to their success',
+        excerpt: 'Real estate agents know to get to the top of their game, it takes hard work...'
+      },
+      {
+        title: 'See how this award-winning mega team used Listing Toolkit to level up and serve more sellers',
+        excerpt: 'The housing market has felt like a rollercoaster ride over the last five years, to say the least...'
+      }
+    ]
+  };
+
+  insights = [
+    { category: 'Lead Conversion, MVIP, Success, Testimonials', title: 'Systems, Strategy, and Realtor.com Leads', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80' },
+    { category: 'Connections Plus, Listing Toolkit, MVIP, Success, Testimonials', title: 'From Classroom to Closing', image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80' },
+    { category: 'Connections Plus, Lead Conversion, MVIP, Success, Testimonials', title: 'Trust, Tenacity, and Realtor.com', image: 'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80' },
+    { category: 'Brand, Success, Testimonials, Videos', title: 'Sellers may check your profile before inviting you for an appointment', image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80' },
+    { category: 'Success, Testimonials, Videos', title: 'Your profile on Realtor.com may provide new customers', image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80' },
+    { category: 'Success, Testimonials, Videos', title: 'How to win listings by demonstrating exposure', image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80' }
+  ];
+
+  constructor() {}
   
   openLogin(card: ProductCard) {
     this.selectedProduct = card;
