@@ -5,10 +5,10 @@
           <h4>Home Filla</h4>
           <div class="footer-links-col">
             <a routerLink="/about">About us</a>
-            <a href="#">Careers</a>
-            <a href="#">Accessibility</a>
-            <a href="#">Feedback</a>
-            <a href="#">Media room</a>
+            <a routerLink="/about/careers">Careers</a>
+            <a routerLink="/about/accessibility">Accessibility</a>
+            <a href="javascript:void(0)" (click)="openFeedbackModal()">Feedback</a>
+            <a routerLink="/about/media">Media room</a>
             <a routerLink="/news">News & Insights</a>
             <a routerLink="/sitemap">Sitemap</a>
           </div>
@@ -73,3 +73,106 @@
       </div>
     </div>
 </footer>
+
+<!-- Feedback Modal -->
+<div class="feedback-modal-overlay" *ngIf="isFeedbackModalOpen" (click)="closeFeedbackModal()">
+  <div class="feedback-modal" (click)="$event.stopPropagation()">
+    <div class="feedback-modal-header">
+      <h2>Your feedback helps us to improve. Thank you for sharing.</h2>
+      <button type="button" class="close-btn" (click)="closeFeedbackModal()" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="feedback-modal-body">
+      <form (ngSubmit)="submitFeedback()" #feedbackFormRef="ngForm">
+        <!-- Purpose -->
+        <div class="form-group">
+          <label for="purpose">I am a... <span class="required">required</span></label>
+          <div class="select-wrapper">
+            <select id="purpose" name="purpose" [(ngModel)]="feedbackForm.purpose" required>
+              <option value="" disabled selected>Select an option . . .</option>
+              <option value="HomeBuyer">Home Buyer</option>
+              <option value="HomeSeller">Home Seller</option>
+              <option value="HomeBuyerSeller">Home Buyer & Seller</option>
+              <option value="RealEstateAgent">Real Estate Agent</option>
+              <option value="RealEstateBroker">Real Estate Broker</option>
+              <option value="Renter">Renter</option>
+              <option value="LandlordOwner">Landlord/Owner</option>
+              <option value="Investor">Investor</option>
+              <option value="LenderTitleOfficer">Lender/Title Officer</option>
+              <option value="Builder">Builder</option>
+              <option value="Other">Other</option>
+            </select>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M17.293 8.293a1 1 0 1 1 1.414 1.414l-1.414-1.414ZM12 15l.707.707a1 1 0 0 1-1.414 0L12 15ZM5.293 9.707a1 1 0 0 1 1.414-1.414L5.293 9.707Zm13.414 0-6 6-1.414-1.414 6-6 1.414 1.414Zm-7.414 6-6-6 1.414-1.414 6 6-1.414 1.414Z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email <span class="required">required</span></label>
+          <input type="email" id="email" name="email" [(ngModel)]="feedbackForm.email" placeholder="Enter your email address" required>
+          <p class="helper-text">Please provide your email address so we can follow-up if needed. We will NOT sell or use this for any marketing purposes.</p>
+        </div>
+
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name">Name <span class="required">required</span></label>
+          <input type="text" id="name" name="name" [(ngModel)]="feedbackForm.name" placeholder="Enter your name" required>
+        </div>
+
+        <!-- Topic -->
+        <div class="form-group">
+          <label for="topic">What is your feedback about? <span class="required">required</span></label>
+          <div class="select-wrapper">
+            <select id="topic" name="topic" [(ngModel)]="feedbackForm.topic" (change)="onTopicChange()" required>
+              <option value="" disabled selected>Select an option . . .</option>
+              <option value="Property">Property</option>
+              <option value="RentalProperty">Rental Property</option>
+              <option value="Experience">Experience</option>
+              <option value="Search">Search</option>
+              <option value="SellingaProperty">Selling a Property</option>
+              <option value="FindaRealtor">Find a Realtor</option>
+              <option value="MyAccount">My Account</option>
+              <option value="MyHome">My Home</option>
+              <option value="CollaborationFeatures">Collaboration Features</option>
+              <option value="Mortgage">Mortgage</option>
+              <option value="NewsInsights">News & Insights</option>
+              <option value="NewFeature">New feature</option>
+            </select>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M17.293 8.293a1 1 0 1 1 1.414 1.414l-1.414-1.414ZM12 15l.707.707a1 1 0 0 1-1.414 0L12 15ZM5.293 9.707a1 1 0 0 1 1.414-1.414L5.293 9.707Zm13.414 0-6 6-1.414-1.414 6-6 1.414 1.414Zm-7.414 6-6-6 1.414-1.414 6 6-1.414 1.414Z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Sub Topic -->
+        <div class="form-group">
+          <label for="subTopic">And more specifically? <span class="required">required</span></label>
+          <div class="select-wrapper">
+            <select id="subTopic" name="subTopic" [(ngModel)]="feedbackForm.subTopic" [disabled]="!subTopicOptions.length" required>
+              <option value="" disabled selected>Select an option . . .</option>
+              <option *ngFor="let option of subTopicOptions" [value]="option">{{ option }}</option>
+            </select>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M17.293 8.293a1 1 0 1 1 1.414 1.414l-1.414-1.414ZM12 15l.707.707a1 1 0 0 1-1.414 0L12 15ZM5.293 9.707a1 1 0 0 1 1.414-1.414L5.293 9.707Zm13.414 0-6 6-1.414-1.414 6-6 1.414 1.414Zm-7.414 6-6-6 1.414-1.414 6 6-1.414 1.414Z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description">Additional comments <span class="required">required</span></label>
+          <textarea id="description" name="description" [(ngModel)]="feedbackForm.description" rows="4" placeholder="Tell us what's on your mind. We'll do our best to address it." required maxlength="1000"></textarea>
+          <p class="helper-text">Limit 1,000 characters.</p>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="!feedbackFormRef.valid">Share feedback</button>
+      </form>
+    </div>
+  </div>
+</div>

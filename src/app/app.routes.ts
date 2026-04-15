@@ -15,6 +15,7 @@ import { SaleProceedsCalculatorComponent } from './public/sale-proceeds-calculat
 import { NewsInsightsComponent } from './public/news-insights/news-insights';
 import { NewsCategoryComponent } from './public/news-category/news-category.component';
 import { AboutAdvertiseComponent } from './public/about/advertise/advertise.component';
+import { AccessibilityComponent } from './public/about/accessibility/accessibility.component';
 import { CareersComponent } from './public/about/careers/careers';
 import { AdvertiseComponent } from './public/advertise/advertise.component';
 import { SitemapForSaleComponent } from './public/sitemap/sitemap-for-sale.component';
@@ -22,6 +23,7 @@ import { SitemapNewConstructionComponent } from './public/sitemap/sitemap-new-co
 import { SitemapRecentlySoldComponent } from './public/sitemap/sitemap-recently-sold.component';
 import { SitemapForeclosuresComponent } from './public/sitemap/sitemap-foreclosures.component';
 import { SitemapMarketReportsComponent } from './public/sitemap/sitemap-market-reports.component';
+import { MediaRoomComponent } from './public/about/media-room/media-room.component';
 
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
 import { ContactComponent } from './public/contact/contact.component';
@@ -33,6 +35,7 @@ import { InvestorsComponent } from './public/about/investors/investors.component
 import { NewsLivingComponent } from './public/news-living/news-living.component';
 import { NewsResearchComponent } from './public/news-research/news-research.component';
 import { ManageRentalsComponent } from './public/manage-rentals/manage-rentals.component';
+import { GlobalAccessibilityComponent } from './public/accessibility/accessibility.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,12 +45,15 @@ export const routes: Routes = [
   { path: 'about/brands', component: BrandComponent },
   { path: 'about/investors', component: InvestorsComponent },
   { path: 'about/advertise', component: AboutAdvertiseComponent },
+  { path: 'about/accessibility', component: AccessibilityComponent },
   { path: 'about/careers', component: CareersComponent },
+  { path: 'about/media', component: MediaRoomComponent },
   { path: 'news', component: NewsInsightsComponent },
   { path: 'news/living', component: NewsLivingComponent },
   { path: 'news/research', component: NewsResearchComponent },
   { path: 'news/:category', component: NewsCategoryComponent },
   { path: 'manage-rentals', component: ManageRentalsComponent },
+  { path: 'accessibility', component: GlobalAccessibilityComponent },
   { path: 'advertise', component: AdvertiseComponent },
   { path: 'marketing/login', component: MarketingLoginComponent },
   { path: 'marketing/product/:id', loadComponent: () => import('./public/product-detail/product-detail.component').then(m => m.ProductDetailComponent) },

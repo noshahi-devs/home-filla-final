@@ -1,0 +1,202 @@
+:host {
+    display: block;
+    background-color: white;
+    color: #1e293b;
+}
+
+.container-small {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Hero Section */
+.acc-hero {
+    padding: 80px 0 60px;
+    background: #f8fafc;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 24px;
+}
+
+.breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #0044aa;
+}
+
+.acc-hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+}
+
+.mission-text {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: #334155;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+.mission-subtext {
+    font-size: 1.125rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.acc-divider {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 40px 0;
+}
+
+/* Commitment Section */
+.commitment-section {
+    padding-bottom: 60px;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #1e293b;
+}
+
+.acc-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 60px;
+}
+
+.acc-card {
+    display: flex;
+    gap: 24px;
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid #f1f5f9;
+    transition: transform 0.2s ease;
+}
+
+.acc-card:hover {
+    transform: translateY(-4px);
+}
+
+.card-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: #e0f2fe;
+    color: #0044aa;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-svg {
+    width: 28px;
+    height: 28px;
+}
+
+.card-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1e293b;
+}
+
+.card-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #64748b;
+}
+
+.card-content a {
+    color: #0044aa;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Feedback Section */
+.feedback-highlight {
+    background: #0044aa;
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 100px;
+}
+
+.feedback-text h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: white;
+}
+
+.feedback-text p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-gold {
+    display: inline-block;
+    background: #ffcc00;
+    color: #002266;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-gold:hover {
+    background: white;
+    transform: scale(1.05);
+}
+
+/* Utilities */
+.box-shadow-premium {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 768px) {
+    .acc-hero h1 {
+        font-size: 2.25rem;
+    }
+    
+    .mission-text {
+        font-size: 1.25rem;
+    }
+    
+    .feedback-highlight {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+        gap: 24px;
+    }
+    
+    .acc-card {
+        flex-direction: column;
+        padding: 24px;
+    }
+    
+    .card-icon {
+        margin-bottom: 16px;
+    }
+}

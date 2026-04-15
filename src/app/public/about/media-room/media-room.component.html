@@ -1,0 +1,106 @@
+<app-site-header></app-site-header>
+
+<main class="media-room-container">
+  <!-- Hero Section -->
+  <section class="media-hero">
+    <div class="hero-content">
+      <div class="breadcrumb">
+        <a routerLink="/about">About</a> / <span>Mediaroom</span>
+      </div>
+      <h1>Mediaroom</h1>
+      <p class="hero-subtitle">The latest news, press releases and research from Home Filla</p>
+      
+      <div class="search-box">
+        <input type="text" placeholder="Search press releases and news...">
+        <button class="search-btn">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sub-Nav -->
+  <nav class="media-subnav">
+    <div class="container">
+      <ul>
+        <li><a class="active">News</a></li>
+        <li><a routerLink="/about/leadership">Leadership</a></li>
+        <li><a routerLink="/about/brands">Our Brands</a></li>
+        <li><a routerLink="/about/investors">Investors</a></li>
+        <li><a routerLink="/news/research">Research</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container media-body">
+    <!-- Press Releases Section -->
+    <section class="card-row-section">
+      <div class="section-top">
+        <h2>Press Releases</h2>
+      </div>
+      
+      <div class="cards-grid">
+        <div class="media-card" *ngFor="let release of pressReleases">
+          <div class="card-top">
+            <span class="date">{{release.date}}</span>
+            <div class="card-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="card-icon-svg">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </div>
+          </div>
+          <p class="card-title">{{release.title}}</p>
+        </div>
+      </div>
+      
+      <div class="section-footer">
+        <button class="btn-view-all">View All</button>
+      </div>
+    </section>
+
+    <!-- In the News Section -->
+    <section class="card-row-section">
+      <div class="section-top">
+        <h2>In the News</h2>
+      </div>
+      
+      <div class="cards-grid">
+        <div class="media-card" *ngFor="let news of inTheNews">
+          <div class="card-top">
+            <span class="date">{{news.date}}</span>
+            <div class="card-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="card-icon-svg">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </div>
+          </div>
+          <p class="card-title">{{news.title}}</p>
+          <p class="card-source">{{news.source}}</p>
+        </div>
+      </div>
+      
+      <div class="section-footer">
+        <button class="btn-view-all">View All</button>
+      </div>
+    </section>
+
+    <!-- Bottom Action Cards -->
+    <section class="action-cards-grid">
+      <div class="action-card bg-light-blue shadow-premium">
+        <h3>Email Alerts</h3>
+        <div class="accent-line"></div>
+        <p>Sign up to receive our news releases via email.</p>
+        <button class="btn-premium">Sign Up</button>
+      </div>
+
+      <div class="action-card bg-light-blue shadow-premium">
+        <h3>Media Contacts</h3>
+        <div class="accent-line"></div>
+        <p class="press-email">press&#64;homefilla.com</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<app-site-footer></app-site-footer>
