@@ -15,6 +15,7 @@ import { SaleProceedsCalculatorComponent } from './public/sale-proceeds-calculat
 import { NewsInsightsComponent } from './public/news-insights/news-insights';
 import { NewsCategoryComponent } from './public/news-category/news-category.component';
 import { AboutAdvertiseComponent } from './public/about/advertise/advertise.component';
+import { CareersComponent } from './public/about/careers/careers';
 import { AdvertiseComponent } from './public/advertise/advertise.component';
 import { SitemapForSaleComponent } from './public/sitemap/sitemap-for-sale.component';
 import { SitemapNewConstructionComponent } from './public/sitemap/sitemap-new-construction.component';
@@ -41,6 +42,7 @@ export const routes: Routes = [
   { path: 'about/brands', component: BrandComponent },
   { path: 'about/investors', component: InvestorsComponent },
   { path: 'about/advertise', component: AboutAdvertiseComponent },
+  { path: 'about/careers', component: CareersComponent },
   { path: 'news', component: NewsInsightsComponent },
   { path: 'news/living', component: NewsLivingComponent },
   { path: 'news/research', component: NewsResearchComponent },
