@@ -1,0 +1,420 @@
+.about-page {
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+app-site-header {
+  display: block !important;
+  margin-bottom: 0 !important;
+}
+
+/* New subNav Styling */
+#subNav {
+  background-color: #0044aa;
+  position: sticky;
+  top: 0; 
+  z-index: 2000;
+  width: 100%;
+  margin-top: -5px; /* Aggressive overlap to eliminate the gap */
+  padding-top: 5px; /* Compansate for overlap */
+}
+
+#newContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn, .btn-default {
+  background: transparent;
+  color: white;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.dropbtn:hover, .btn-default:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.svg-inline--fa {
+  width: 10px;
+  height: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  z-index: 1001;
+  border-radius: 0 0 4px 4px;
+  padding: 8px 0;
+  list-style: none;
+}
+
+.dropdown-content li a {
+  color: #333;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.dropdown-content li a:hover {
+  background-color: #f8f9fa;
+  color: #0044aa;
+  padding-left: 24px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Custom Dropdown Specifics */
+.dd1, .dd2, .dd3, .dd4 { min-width: 200px; }
+
+/* Helpers */
+.showMob { display: none !important; }
+.showDT { display: inline-flex !important; }
+.hideONmob { display: inline-flex !important; }
+.hideONdesktop { display: none !important; }
+
+@media (max-width: 1024px) {
+  #newContainer {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  #subNav { top: 68px; } /* Mobile header is usually shorter */
+  
+  .hideONmob { display: none !important; }
+  .showMob { display: inline-flex !important; }
+  .showDT { display: none !important; }
+  .hideONdesktop { display: inline-flex !important; }
+  
+  .dropdown-content {
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+  }
+}
+
+/* Hero Section */
+.about-hero {
+  position: relative;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  filter: brightness(0.85);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 84px;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.carousel-word {
+  display: inline-block;
+  font-style: italic;
+  font-family: serif;
+  color: white;
+  min-width: 250px;
+  text-align: left;
+  animation: sloganFade 3s infinite;
+}
+
+@keyframes sloganFade {
+  0% { transform: translateY(20px); opacity: 0; }
+  15% { transform: translateY(0); opacity: 1; }
+  85% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-20px); opacity: 0; }
+}
+
+/* Mission Section */
+.mission-section {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.mission-graphic {
+  width: 100%;
+  opacity: 0.6;
+}
+
+.lead-text {
+  font-size: 32px;
+  line-height: 1.4;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.highlight-journey {
+  color: #d32f2f;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* Floating Social Bar */
+.social-side-bar {
+  position: fixed;
+  left: 0;
+  top: 40%;
+  z-index: 3000;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+  padding: 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.follow-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 15px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #666;
+  border-bottom: 1px solid #eee;
+}
+
+.social-icon {
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.social-icon:nth-child(2) { background-color: #1da1f2; } /* Twitter */
+.social-icon:nth-child(3) { background-color: #4267b2; } /* Facebook */
+.social-icon:nth-child(4) { background-color: #e60023; } /* Pinterest */
+
+.social-icon:hover {
+  opacity: 0.8;
+}
+
+.social-icon .svg-inline--fa {
+  width: 20px;
+  height: 20px;
+}
+
+/* Values Section */
+.values-section {
+  padding: 80px 0;
+  background-color: #f8f9fa;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #222;
+}
+
+.divider {
+  width: 60px;
+  height: 4px;
+  background-color: #0052cc;
+  margin: 20px auto 0;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.value-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+}
+
+.icon-box {
+  font-size: 40px;
+  color: #0052cc;
+  margin-bottom: 24px;
+}
+
+.value-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.value-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 42px;
+  }
+  
+  .lead-text {
+    font-size: 24px;
+  }
+  
+  .mission-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .mission-visual {
+    max-width: 80px;
+    margin: 0 auto;
+  }
+}
+
+/* About Body Section (Premium Styling) */
+#bod {
+  padding: 100px 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.bodHead {
+  font-size: 48px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 40px;
+  letter-spacing: -0.02em;
+}
+
+.bodHead sup {
+  font-size: 0.4em;
+  top: -1em;
+}
+
+.bod-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 900px;
+}
+
+.bod-content p {
+  font-size: 19px;
+  line-height: 1.8;
+  color: #4a4a4a;
+  margin: 0;
+}
+
+.bod-content strong {
+  color: #0044aa;
+  font-weight: 600;
+}
+
+.mySm {
+  font-size: 0.6em;
+  font-weight: 600;
+  vertical-align: super;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  #bod {
+    padding: 60px 0;
+  }
+  
+  .bodHead {
+    font-size: 32px;
+  }
+  
+  .bod-content p {
+    font-size: 17px;
+  }
+}

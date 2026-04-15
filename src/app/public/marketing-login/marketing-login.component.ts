@@ -78,15 +78,27 @@ export class MarketingLoginComponent {
   productsMenu = [
     {
       label: 'Real Estate Lead Generation',
-      links: ['Connections Plus', 'ReadyConnect Concierge', 'Market VIP']
+      items: [
+        { name: 'Connections Plus', link: '/marketing/product/connections-plus' },
+        { name: 'ReadyConnect Concierge', link: '/marketing/product/connections-plus' }, // Placeholder
+        { name: 'Market VIP', link: '/marketing/product/market-vip' }
+      ]
     },
     {
       label: 'Real Estate Marketing',
-      links: ['Market Reach', 'Local Expert', 'The Essentials Toolkit']
+      items: [
+        { name: 'Market Reach', link: '/marketing/product/connections-plus' },
+        { name: 'Local Expert', link: '/marketing/product/connections-plus' },
+        { name: 'The Essentials Toolkit', link: '/marketing/product/connections-plus' }
+      ]
     },
     {
       label: 'Listing Solutions',
-      links: ['Listing Toolkit', 'Listing Manager', 'Spotlight Listings']
+      items: [
+        { name: 'Listing Toolkit', link: '/marketing/product/connections-plus' },
+        { name: 'Listing Manager', link: '/marketing/product/connections-plus' },
+        { name: 'Spotlight Listings', link: '/marketing/product/connections-plus' }
+      ]
     }
   ];
 

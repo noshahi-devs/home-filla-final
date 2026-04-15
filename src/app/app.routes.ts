@@ -26,9 +26,11 @@ import { SitemapMarketReportsComponent } from './public/sitemap/sitemap-market-r
 
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
 import { ContactComponent } from './public/contact/contact.component';
+import { AboutComponent } from './public/about/about.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
   { path: 'news', component: NewsInsightsComponent },
   { path: 'news/living', component: NewsLivingComponent },
   { path: 'news/research', component: NewsResearchComponent },
@@ -36,6 +38,7 @@ export const routes: Routes = [
   { path: 'manage-rentals', component: ManageRentalsComponent },
   { path: 'advertise', component: AdvertiseComponent },
   { path: 'marketing/login', component: MarketingLoginComponent },
+  { path: 'marketing/product/:id', loadComponent: () => import('./public/product-detail/product-detail.component').then(m => m.ProductDetailComponent) },
   { path: 'contact', component: ContactComponent },
   { path: 'listings/rent', component: RentComponent },
   { path: 'listings/:category', component: ListingsComponent },

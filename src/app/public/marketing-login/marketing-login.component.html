@@ -13,7 +13,11 @@
         <div class="pro-dropdown">
           <div class="dropdown-group" *ngFor="let group of productsMenu">
             <span class="dropdown-label">{{ group.label }}</span>
-            <a href="javascript:void(0)" class="dropdown-link" *ngFor="let link of group.links">{{ link }}</a>
+            <ul class="dropdown-list">
+              <li *ngFor="let item of group.items">
+                <a [routerLink]="item.link" class="dropdown-link">{{ item.name }}</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
