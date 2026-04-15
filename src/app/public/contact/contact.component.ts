@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, SiteHeaderComponent, SiteFooterComponent],
+  imports: [CommonModule, RouterModule, FormsModule, SiteFooterComponent],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })

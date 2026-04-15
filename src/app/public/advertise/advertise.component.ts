@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
 
 @Component({
   selector: 'app-advertise',
   standalone: true,
-  imports: [CommonModule, RouterModule, SiteHeaderComponent, SiteFooterComponent, FormsModule],
+  imports: [CommonModule, RouterModule, SiteFooterComponent, FormsModule],
   templateUrl: './advertise.component.html',
   styleUrls: ['./advertise.component.css']
 })
