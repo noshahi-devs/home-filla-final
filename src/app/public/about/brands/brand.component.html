@@ -1,5 +1,3 @@
-<app-site-header></app-site-header>
-
 <!-- Floating Social Media Bar -->
 <div class="social-side-bar">
   <div class="follow-label">follow us</div>
@@ -8,7 +6,9 @@
   <a href="#" class="social-icon"><svg class="svg-inline--fa" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M496 256c0 137-111 248-248 248-25.6 0-50.2-3.9-73.4-11.1 10.1-16.5 25.2-43.5 30.8-65 3-11.6 15.4-59 15.4-59 8.1 15.4 31.7 28.5 56.8 28.5 74.8 0 128.7-68.8 128.7-154.3 0-81.9-66.9-143.2-152.9-143.2-107 0-163.9 71.8-163.9 150.1 0 36.4 19.4 81.7 50.3 96.1 4.7 2.2 7.2 1.2 8.3-3.3.8-3.4 5-20.3 6.9-28.1.6-2.5.3-4.7-1.7-7.1-10.1-12.5-18.3-35.3-18.3-56.6 0-54.7 41.4-107.6 112-107.6 60.9 0 103.6 41.5 103.6 100.9 0 67.1-33.9 113.6-78 113.6-24.3 0-42.6-20.1-36.7-44.8 7-29.5 20.5-61.3 20.5-82.6 0-19-10.2-34.9-31.4-34.9-24.9 0-44.9 25.7-44.9 60.2 0 22 7.4 36.8 7.4 36.8s-24.5 103.8-29 123.2c-5 21.4-3 53.7-1.5 73.6-82.5-38.3-138.5-121.9-138.5-219.1 0-137 111-248 248-248s248 111 248 248z"></path></svg></a>
 </div>
 
-<div class="about-page">
+<div class="brands-page">
+  <app-site-header></app-site-header>
+
   <!-- Secondary Navigation Header (Blue) -->
   <div id="subNav" class="navbar">
     <div class="container">
@@ -31,8 +31,8 @@
         </div>
 
         <!-- BRANDS -->
-        <div class="dropdown hideONmob">
-          <a id="myBrandsDesk" class="btn btn-default" routerLink="/about/brands">Our Brands</a>
+        <div class="dropdown">
+          <a id="myBrandsDesk" class="btn btn-default active" routerLink="/about/brands">Our Brands</a>
         </div>
 
         <!-- ADVERTISE -->
@@ -106,74 +106,81 @@
   </div>
 
   <!-- Hero Section -->
-  <section class="about-hero">
+  <section class="brands-hero">
     <div class="hero-image-wrapper">
-      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2000&auto=format&fit=crop" alt="Home Warmth" class="hero-image">
+      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000" alt="Our Brands" class="hero-image">
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-content">
-      <h1 class="hero-title">Home Means <span class="carousel-word">{{currentWord}}</span></h1>
-    </div>
-  </section>
-
-  <!-- Mission Section -->
-  <section class="mission-section">
-    <div class="container">
-      <div class="mission-grid">
-        <div class="mission-visual">
-          <svg viewBox="0 0 200 200" class="mission-graphic">
-            <path d="M40,100 Q100,20 160,100 T40,100" fill="none" stroke="#0066cc" stroke-width="2" />
-            <circle cx="100" cy="100" r="5" fill="#0066cc" />
-          </svg>
-        </div>
-        <div class="mission-text">
-        <p class="lead-text">No matter what stage of the <span class="highlight-journey">home journey</span> you may be in, we’re here to empower you by making all things home simple, efficient, and enjoyable.</p>
-      </div>
+      <div class="container text-left">
+        <h1>Our <strong>brands</strong></h1>
+        <div class="hero-underline"></div>
       </div>
     </div>
   </section>
 
-  <!-- About Body Section (Premium) -->
-  <section id="bod">
+  <!-- Brands Content -->
+  <main class="brands-main">
     <div class="container">
-      <h1 class="bodHead">About Home Filla<sup>®</sup></h1>
-      <div class="bod-content">
-        <p>
-          For years, millions of home shoppers have turned to <strong>Home Filla<sup>®</sup></strong> to find their dream home. Offering a comprehensive list of for-sale properties, as well as the information and tools to make informed real estate decisions. Today, more than ever, <strong>Home Filla<sup>®</sup></strong> is The Home of Home Search<sup class="mySm">℠</sup>.
-        </p>
-        <p>
-          <strong>Home Filla<sup>®</sup></strong> also offers homeowners a bevy of useful tools and resources through the <strong>My Home<sup>℠</sup></strong> dashboard. The My Home dashboard allows property owners to manage their home like the important investment it is by tracking their home’s value over time, researching and managing home improvements, and scouting other similar properties in the neighborhood.
-        </p>
+      <div class="section-heading text-center">
+        <h2>Brands operated by Home Filla®</h2>
+        <h3>Consumer brands</h3>
       </div>
-    </div>
-  </section>
 
-  <!-- Stats/Value Section -->
-  <section class="values-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Why Home Filla?</h2>
-        <div class="divider"></div>
+      <div class="brands-grid">
+        <div *ngFor="let brand of consumerBrands" class="brand-card">
+          <div class="brand-inner">
+            <div class="brand-logo-container">
+              <img [src]="brand.logo" [alt]="brand.name" class="brand-logo">
+              <span *ngIf="brand.tagline" class="brand-tagline">{{ brand.tagline }}</span>
+            </div>
+            <p class="brand-description">{{ brand.description }}</p>
+            <button (click)="openModal(brand)" class="read-more">Read more <svg class="svg-inline--fa fa-caret-right" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg></button>
+          </div>
+        </div>
       </div>
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="icon-box"><i class="fas fa-search"></i></div>
-          <h3>Find Your Home</h3>
-          <p>Explore millions of listings with deep insights and local neighborhood details.</p>
+
+      <div class="section-heading text-center" style="margin-top: 80px;">
+        <h3>Professional brands</h3>
+      </div>
+
+      <div class="brands-grid">
+        <div *ngFor="let brand of professionalBrands" class="brand-card">
+          <div class="brand-inner">
+            <div class="brand-logo-container">
+              <img [src]="brand.logo" [alt]="brand.name" class="brand-logo">
+              <span *ngIf="brand.tagline" class="brand-tagline">{{ brand.tagline }}</span>
+            </div>
+            <p class="brand-description">{{ brand.description }}</p>
+            <button (click)="openModal(brand)" class="read-more">Read more <svg class="svg-inline--fa fa-caret-right" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg></button>
+          </div>
         </div>
-        <div class="value-card">
-          <div class="icon-box"><i class="fas fa-handshake"></i></div>
-          <h3>Expert Guidance</h3>
-          <p>Connect with the best agents to guide you through every step of the process.</p>
+      </div>
+
+      <div class="about-footer-text text-center">
+        <p><strong>Home Filla®</strong> provides unsurpassed real estate information, tools and professional expertise across a family of websites and mobile experiences for consumers and real estate professionals through all stages of the home journey. The Home Filla® network includes: Home Filla®, Moving.com, and UpNest.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Brand Detail Modal -->
+  <div class="brand-modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+    <div class="brand-modal" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div class="modal-content" *ngIf="selectedBrand">
+        <div class="modal-header">
+           <img [src]="selectedBrand.logo" [alt]="selectedBrand.name" class="modal-logo">
         </div>
-        <div class="value-card">
-          <div class="icon-box"><i class="fas fa-chart-line"></i></div>
-          <h3>Empowering Data</h3>
-          <p>Tools and calculators to help you plan your future with confidence.</p>
+        <div class="modal-body">
+          <p>{{ selectedBrand.fullContent }}</p>
+          <a *ngIf="selectedBrand.id === 'avail'" href="https://www.avail.co" target="_blank" class="brand-link">Learn more at avail.co</a>
+          <a *ngIf="selectedBrand.id === 'upnest'" href="https://www.upnest.com" target="_blank" class="brand-link">Learn more at upnest.com</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <app-site-footer></app-site-footer>
 </div>
-
-<app-site-footer></app-site-footer>

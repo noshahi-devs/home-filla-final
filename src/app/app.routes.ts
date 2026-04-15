@@ -29,12 +29,14 @@ import { ContactComponent } from './public/contact/contact.component';
 import { AboutComponent } from './public/about/about.component';
 import { LeadershipComponent } from './public/about/leadership/leadership.component';
 import { AwardsComponent } from './public/about/awards/awards.component';
+import { BrandComponent } from './public/about/brands/brand.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'about/leadership', component: LeadershipComponent },
   { path: 'about/awards', component: AwardsComponent },
+  { path: 'about/brands', component: BrandComponent },
   { path: 'news', component: NewsInsightsComponent },
   { path: 'news/living', component: NewsLivingComponent },
   { path: 'news/research', component: NewsResearchComponent },

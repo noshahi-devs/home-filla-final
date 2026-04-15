@@ -184,54 +184,67 @@ app-site-header {
 
 .award-card {
   background: white;
-  border: 1px solid #eee;
   border-radius: 4px;
-  padding: 40px;
+  padding: 0;
+  overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid #eee;
 }
 
 .award-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
 }
 
 .award-inner {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 30px;
-  align-items: center;
+  grid-template-columns: 160px 1fr;
+  align-items: stretch;
 }
 
 .award-logo-cell {
+  background: #f8f9fa;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  border-right: 1px solid #f0f0f0;
 }
 
 .award-logo {
   max-width: 100%;
-  max-height: 80px;
+  max-height: 100px;
   object-fit: contain;
-  filter: grayscale(0.2) contrast(1.1);
-  transition: filter 0.3s ease;
 }
 
-.award-card:hover .award-logo {
-  filter: grayscale(0) contrast(1.1);
+.award-info-cell {
+  padding: 30px;
 }
 
 .award-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 800;
   color: #1a1a1a;
-  margin: 0 0 10px 0;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.award-description {
-  font-size: 15px;
+.award-year {
+  font-size: 18px;
+  color: #d32f2f;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+}
+
+.thBlurb {
+  font-size: 14px;
   line-height: 1.6;
-  color: #666;
+  color: #555;
+}
+
+.thBlurb p {
   margin: 0;
 }
 

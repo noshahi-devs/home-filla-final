@@ -15,68 +15,81 @@ import { SiteFooterComponent } from '../../../shared/components/site-footer/site
 export class AwardsComponent implements OnInit {
   awards = [
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/newsweek.png', 
-      title: 'Newsweek Awards 2020', 
-      description: "One of top three U.S. real estate databases 'America's Best Customer Service 2020'." 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-nw.jpg', 
+      title: 'Newsweek Awards', 
+      year: '2020',
+      description: "One of top three U.S. real estate databases \n “America’s Best Customer Service 2020.”" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/newsweek.png', 
-      title: 'Newsweek Awards 2019', 
-      description: "America's Best Customer Service" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-nw.jpg', 
+      title: 'Newsweek Awards', 
+      year: '2019',
+      description: "America’s Best \n Customer Service" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/housing-wire.png', 
-      title: 'HousingWire 2019', 
-      description: "Tech100 - Home Filla®" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-hw.jpg', 
+      title: 'HousingWire', 
+      year: '2019',
+      description: "Tech100 \n Home Filla®" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/housing-wire.png', 
-      title: 'HousingWire 2019', 
-      description: "Rising Star - Danielle Hale" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-hw.jpg', 
+      title: 'HousingWire', 
+      year: '2019',
+      description: "Rising Star \n Danielle Hale" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/ihaf.png', 
-      title: 'In House Agency Forum 2019', 
-      description: "Gold Award - Infographics" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-ihaf.jpg', 
+      title: 'In House Agency Forum', 
+      year: '2019',
+      description: "Gold Award - Infographics \n Home Filla® Creative Services" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/ihaf.png', 
-      title: 'In House Agency Forum 2019', 
-      description: "Silver Award - Email Marketing" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-ihaf.jpg', 
+      title: 'In House Agency Forum', 
+      year: '2019',
+      description: "Silver Award – Email Marketing \n Home Filla® Creative Services" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/top-workplaces.png', 
-      title: 'Top Workplaces 2019', 
-      description: "Austin American-Statesman" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-twp.jpg', 
+      title: 'Top Workplaces', 
+      year: '2019',
+      description: "Austin American-Statesman \n Austin/Opcity" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/rismedia.png', 
-      title: 'RISMedia 2019', 
-      description: "Newsmakers - Trailblazers Ben Rubenstein" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-ris.jpg', 
+      title: 'RISMedia', 
+      year: '2019',
+      description: "Newsmakers – Trailblazers \n Ben Rubenstein" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/rismedia.png', 
-      title: 'RISMedia 2019', 
-      description: "Newsmakers - Futurists Michael Lam" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-ris.jpg', 
+      title: 'RISMedia', 
+      year: '2019',
+      description: "Newsmakers – Futurists \n Michael Lam" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/stevie.png', 
-      title: 'Gold Stevie 2018', 
-      description: "American Business Awards - Real Estate" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-stevie.jpg', 
+      title: 'Gold Stevie', 
+      year: '2018',
+      description: "American Business Awards – Real Estate \n Home Filla® App" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/mediapost.png', 
-      title: 'Media Post 2018', 
-      description: "Appy Awards Finalist - Home Filla® App" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-mediapost.jpg', 
+      title: 'Media Post', 
+      year: '2018',
+      description: "Appy Awards Finalist \n Home Filla® App" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/housing-wire.png', 
-      title: 'HousingWire 2017', 
-      description: "Women of Influence - Suzanne Mueller" 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-hw.jpg', 
+      title: 'HousingWire', 
+      year: '2017',
+      description: "Women of Influence \n Suzanne Mueller" 
     },
     { 
-      logo: 'https://b2cdata.marketing.moveaws.com/images/awards/webby.png', 
-      title: 'Webby Awards 2017', 
+      logo: 'https://b2cdata.marketing.moveaws.com/about/images/th-awards-webby.jpg', 
+      title: 'Webby Awards', 
+      year: '2017',
       description: "Honoree" 
     }
   ];
