@@ -27,10 +27,14 @@ import { SitemapMarketReportsComponent } from './public/sitemap/sitemap-market-r
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
 import { ContactComponent } from './public/contact/contact.component';
 import { AboutComponent } from './public/about/about.component';
+import { LeadershipComponent } from './public/about/leadership/leadership.component';
+import { AwardsComponent } from './public/about/awards/awards.component';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'about/leadership', loadComponent: () => import('./public/about/leadership/leadership.component').then(m => m.LeadershipComponent) },
+  { path: 'about/leadership', component: LeadershipComponent },
+  { path: 'about/awards', component: AwardsComponent },
   { path: 'news', component: NewsInsightsComponent },
   { path: 'news/living', component: NewsLivingComponent },
   { path: 'news/research', component: NewsResearchComponent },
