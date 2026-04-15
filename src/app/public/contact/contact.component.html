@@ -1,177 +1,177 @@
-<!-- Home Filla PRO Header -->
-<header class="pro-header">
-  <div class="pro-header-container">
-    <a routerLink="/advertise" class="pro-logo-area">
-      <span class="pro-logo-text">Home Filla</span>
-      <span class="pro-badge">PRO</span>
-    </a>
+<!-- Site Global Header -->
+<app-site-header></app-site-header>
 
-    <nav class="pro-nav">
-      <!-- Products Dropdown -->
-      <div class="pro-nav-item">
-        <a href="javascript:void(0)" class="pro-nav-link">Products <i class="fa fa-chevron-down"></i></a>
-        <div class="pro-dropdown">
-          <div class="dropdown-group" *ngFor="let group of productsMenu">
-            <span class="dropdown-label">{{ group.label }}</span>
-            <a href="javascript:void(0)" class="dropdown-link" *ngFor="let link of group.links">{{ link }}</a>
-          </div>
+<main id="content" class="contact-page" role="main">
+
+  <!-- #hero -->
+  <section id="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="graphic-col col-md-7 col-lg-8">
+          <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2000&auto=format&fit=crop" alt="Customer Service Team">
         </div>
-      </div>
+        <div class="form-col col-md-5 col-lg-4">
 
-      <!-- Resources Dropdown -->
-      <div class="pro-nav-item">
-        <a href="javascript:void(0)" class="pro-nav-link">Resources <i class="fa fa-chevron-down"></i></a>
-        <div class="pro-dropdown" style="min-width: 220px;">
-          <a href="javascript:void(0)" class="dropdown-link" *ngFor="let item of resourcesMenu">{{ item }}</a>
-        </div>
-      </div>
-
-      <div class="pro-nav-item">
-        <a href="javascript:void(0)" class="pro-nav-link">Success Stories</a>
-      </div>
-      
-      <div class="pro-nav-item">
-        <a href="javascript:void(0)" class="pro-nav-link">Training</a>
-      </div>
-    </nav>
-
-    <div class="pro-header-actions">
-      <a href="javascript:void(0)" class="pro-action-item"><i class="fa fa-question-circle"></i> Support</a>
-      <a routerLink="/marketing/login" class="pro-action-item"><i class="fa fa-user-circle"></i> Sign In</a>
-      <a routerLink="/contact" class="btn-contact active">Contact us</a>
-    </div>
-  </div>
-</header>
-
-<main class="contact-page">
-  <!-- Hero Section -->
-  <section class="contact-hero">
-    <div class="content-wrapper">
-      <span class="hero-eyebrow">Connect with PRO Support</span>
-      <h1 class="hero-title">How can we help your business scale?</h1>
-      <p class="hero-body">Whether you are a solo agent, a builder, or a large brokerage, our team is here to help you find the right growth solutions.</p>
-    </div>
-  </section>
-
-  <!-- Form Section -->
-  <section class="form-section">
-    <div class="content-wrapper contact-grid">
-      <!-- Main Content Area -->
-      <div class="form-card">
-        
-        <!-- Form View -->
-        <div *ngIf="!isSubmitted">
-          <h2 class="form-title">Send us a message</h2>
-          <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
-            <div class="form-row">
-              <div class="form-field">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" [(ngModel)]="formData.name" required placeholder="Your name">
-              </div>
-              <div class="form-field">
-                <label for="email">Work Email</label>
-                <input type="email" id="email" name="email" [(ngModel)]="formData.email" required placeholder="email@company.com">
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-field">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" [(ngModel)]="formData.phone" required placeholder="(555) 000-0000">
-              </div>
-              <div class="form-field">
-                <label for="inquiry">I am interested in solutions for:</label>
-                <select id="inquiry" name="inquiry" [(ngModel)]="formData.inquiry">
-                  <option>Myself</option>
-                  <option>My Agency</option>
-                  <option>My Brokerage</option>
-                  <option>Builder Project</option>
-                  <option>Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-field">
-              <label for="message">Tell us about your goals</label>
-              <textarea id="message" name="message" [(ngModel)]="formData.message" rows="5" placeholder="What are you looking to achieve?"></textarea>
-            </div>
-
-            <button type="submit" class="btn-submit-form" [disabled]="!contactForm.valid || isSubmitting">
-              <ng-container *ngIf="!isSubmitting">
-                Contact Home Filla PRO <i class="fa fa-arrow-right"></i>
-              </ng-container>
-              <ng-container *ngIf="isSubmitting">
-                Please wait... <i class="fa fa-spinner fa-spin"></i>
-              </ng-container>
-            </button>
-            <p class="privacy-note">Privacy Policy</p>
+          <!-- The Form -->
+          <form class="contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm" *ngIf="!isSubmitted">
+            <h1 class="primary heading">Contact us</h1>
+            <p class="desc">We’re here to help. To get in touch with us, please fill out the information below.</p>
+            
+            <p class="field">
+              <input class="text-box" type="text" name="name" [(ngModel)]="formData.name" placeholder="Name" required>
+            </p>
+            <p class="field">
+              <input class="text-box" type="email" name="email" [(ngModel)]="formData.email" placeholder="Email" required>
+            </p>
+            <p class="field">
+              <select class="select-box" name="i_am" [(ngModel)]="formData.i_am" required>
+                <option value="">I am</option>
+                <option value="Using this site to search">Using this site to search for somewhere to live</option>
+                <option value="Using this site for non-real estate">Using this site for non-real estate content</option>
+                <option value="Real Estate Agent">A Real Estate Agent</option>
+                <option value="Homebuilder">A Homebuilder</option>
+                <option value="An apartment manager">An apartment manager or have a property to rent</option>
+                <option value="Lender">A lender</option>
+                <option value="None">None of the above</option>
+              </select>
+            </p>
+            <p class="field">
+              <select class="select-box" name="topic" [(ngModel)]="formData.topic" required>
+                <option value="">Topic</option>
+                <option value="Home &amp; Garden">Home &amp; Garden</option>
+                <option value="Home Finance">Home Finance</option>
+                <option value="Home Plans">Home Plans</option>
+                <option value="Homes by Home Filla">Homes by Home Filla</option>
+                <option value="Advertise with Move™">How to advertise</option>
+                <option value="Manufactured Housing">Manufactured Housing</option>
+                <option value="Media Relations">Media Relations</option>
+                <option value="Moving &amp; Storage">Moving &amp; Storage</option>
+                <option value="New Homes">New Homes</option>
+                <option value="Other">Other</option>
+                <option value="Privacy">Privacy</option>
+                <option value="Rentals">Rentals</option>
+                <option value="Senior Housing">Senior Housing Homes</option>
+              </select>
+            </p>
+            <p class="field">
+              <label>Message</label>
+              <textarea class="text-box" name="message" [(ngModel)]="formData.message" rows="4" required></textarea>
+            </p>
+            
+            <p class="cta-row">
+              <button class="button" type="submit" [disabled]="!contactForm.valid || isSubmitting">
+                {{ isSubmitting ? 'Sending...' : 'Send message' }}
+              </button>
+            </p>
           </form>
-        </div>
 
-        <!-- Success View -->
-        <div class="success-view" *ngIf="isSubmitted">
-          <div class="success-header">
-            <i class="fa fa-check-circle success-icon"></i>
-            <h2 class="success-title">Thank you for your interest!</h2>
+          <!-- Success Message -->
+          <div class="submit-message" *ngIf="isSubmitted">
+            <h3 style="margin-bottom: 20px; color: #28a745;">Thank you!</h3>
+            Thank you for your submission and interest in Home Filla®. Your inquiry has been forwarded to one of our professionals and they will be contacting you within 48 hours.<br><br>Sincerely,<br>The Home Filla Team
+            
+            <p class="cta-row" style="margin-top: 30px;">
+              <button class="button" style="background:#0044aa;" (click)="isSubmitted = false">Submit Another</button>
+            </p>
           </div>
-          <div class="success-body">
-            <p class="success-msg">One of our marketing consultants will be reaching out to you via the phone number or email address provided below.</p>
-            <div class="summary-card">
-              <div class="summary-row"><strong>Name:</strong> {{ formData.name }}</div>
-              <div class="summary-row"><strong>Email:</strong> {{ formData.email }}</div>
-              <div class="summary-row"><strong>Phone:</strong> {{ formData.phone }}</div>
-            </div>
-          </div>
-          <button class="btn-reset-form" (click)="isSubmitted = false">
-            <i class="fa fa-undo"></i> Send another message
-          </button>
-        </div>
 
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / #hero -->
+
+  <!-- #resources -->
+  <section id="resources">
+    <div class="container">
+      <div class="content-intro">
+        <h2 class="primary heading">Resources</h2>
+        <p class="desc">Explore our resources to find answers, useful tools and real estate insights - all at your fingertips.</p>
       </div>
 
-      <!-- Sidebar -->
-      <div class="contact-sidebar">
-        <div class="sidebar-info-card">
-          <h3>Expert Support</h3>
-          <p>Our advisors are available Monday - Friday, 8am to 6pm EST.</p>
-          
-          <div class="info-item">
-            <i class="fa fa-phone"></i>
-            <div>
-              <strong>Call Us</strong>
-              <span>(800) 555-PRO-HP</span>
-            </div>
+      <div class="resources-items">
+        <div class="item">
+          <div class="icon-wrapper" style="background: #e0f2fe; padding: 40px; text-align: center; border-bottom: 1px solid #eee;">
+            <i class="fa fa-newspaper" style="font-size: 4rem; color: #0ea5e9;"></i>
           </div>
-
-          <div class="info-item">
-            <i class="fa fa-envelope"></i>
-            <div>
-              <strong>Email Support</strong>
-              <span>pro-support@homefilla.com</span>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <i class="fa fa-map-marker-alt"></i>
-            <div>
-              <strong>Headquarters</strong>
-              <span>123 Tech Corridor, Austin, TX</span>
-            </div>
+          <div class="info">
+            <h3 class="sub heading">News &amp; Insights</h3>
+            <p class="desc">Stay up to date on the latest real estate trends, market insights, home buying tips, celebrity homes, design inspiration, and breaking industry news.</p>
+            <p class="cta-row"><a routerLink="/news">Explore now</a></p>
           </div>
         </div>
-
-        <div class="social-links-card">
-          <h4>Follow the PRO Community</h4>
-          <div class="social-icons">
-            <i class="fab fa-linkedin"></i>
-            <i class="fab fa-facebook-square"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-instagram"></i>
+        <div class="item">
+          <div class="icon-wrapper" style="background: #fef3c7; padding: 40px; text-align: center; border-bottom: 1px solid #eee;">
+            <i class="fa fa-hard-hat" style="font-size: 4rem; color: #d97706;"></i>
+          </div>
+          <div class="info">
+            <h3 class="sub heading">Homebuilder Resource Center</h3>
+            <p class="desc">Tailored solutions to help homebuilders connect with buyers, showcase new communities, and drive sales through innovative digital marketing strategies.</p>
+            <p class="cta-row"><a routerLink="/advertise">Explore now</a></p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="icon-wrapper" style="background: #ede9fe; padding: 40px; text-align: center; border-bottom: 1px solid #eee;">
+            <i class="fa fa-laptop-house" style="font-size: 4rem; color: #8b5cf6;"></i>
+          </div>
+          <div class="info">
+            <h3 class="sub heading">PRO Resource Center</h3>
+            <p class="desc">Tools, insights, and best practices to help real estate professionals enhance their marketing efforts, connect with clients, and grow their businesses.</p>
+            <p class="cta-row"><a routerLink="/marketing/login">Explore now</a></p>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- / #resources -->
+
+  <!-- #contact_details -->
+  <section id="contact_details">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="graphic-col col-lg-6">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" alt="Office Location">
+        </div>
+        <div class="info-col col-lg-6">
+          <h3 class="primary heading">Still have questions?</h3>
+          <div class="contact-details row">
+            <div class="col-sm-6 text-details">
+              <p class="details">
+                <strong>Home Filla® Customer Service</strong>
+                <span class="phone">(800) 878-4166</span>
+                <a class="email" href="mailto:customercare@homefilla.com">customercare@homefilla.com</a>
+              </p>
+              <p class="details">
+                <strong>Home Filla® Rentals</strong>
+                <span class="phone">(800) 978-7368</span>
+                <a class="email" href="mailto:rentals@homefilla.com">rentals@homefilla.com</a>
+              </p>
+              <p class="details">
+                <strong>Corporate Headquarters</strong>
+                <span class="address">901 E. 6th St., Suite 500 <br>Austin, Texas 78702</span>
+              </p>
+            </div>
+            <div class="col-sm-6 text-details">
+              <p class="details">
+                <strong>Head of Communications</strong>
+                <span class="name">Lexie Holbert</span>
+              </p>
+              <p class="details">
+                <strong>Corporate Development</strong>
+                <span class="name">Angela Lu</span>
+              </p>
+              <p class="details">
+                <strong>SVP, Head of Investor Relations</strong>
+                <span class="name">Michael Florin</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / #contact_details -->
+
 </main>
 
 <app-site-footer></app-site-footer>

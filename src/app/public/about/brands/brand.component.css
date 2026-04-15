@@ -59,14 +59,14 @@ app-site-header {
 
 .dropbtn:hover,
 .btn-default:hover {
-  color: #ffcc00;
+  color: #ffffff;
 }
 
-/* Active link — golden underline */
+/* Active link — white underline */
 .btn-default.active {
-  color: #ffcc00;
+  color: #ffffff;
   font-weight: 700;
-  border-bottom: 3px solid #ffcc00;
+  border-bottom: 3px solid #ffffff;
 }
 
 /* ─── Dropdown Menus ──────────────────────────────────────── */
@@ -169,9 +169,9 @@ app-site-header {
   margin-top: 25px;
   width: 120px;
   height: 4px;
-  background-color: #ffcc00; /* Use yellow underline for consistency with sub-nav */
+  background-color: #ffffff;
   border-radius: 2px;
-  box-shadow: 0 2px 10px rgba(255, 204, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
 }
 
 /* Main Content */

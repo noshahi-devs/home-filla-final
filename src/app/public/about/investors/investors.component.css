@@ -1,0 +1,514 @@
+.investors-page {
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Ensure site header renders as block */
+app-site-header {
+  display: block !important;
+  margin-bottom: 0 !important;
+}
+
+/* ─── Secondary / Sub Navigation ──────────────────────────── */
+#subNav {
+  background-color: #0044aa;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  width: 100%;
+  margin-top: -5px;
+  padding-top: 5px;
+}
+
+#newContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropbtn,
+.btn-default {
+  background: transparent;
+  color: white;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dropbtn:hover,
+.btn-default:hover {
+  color: #ffcc00;
+}
+
+.btn-default.active {
+  color: #ffcc00;
+  font-weight: 700;
+  border-bottom: 3px solid #ffcc00;
+}
+
+/* ─── Dropdown Menus ──────────────────────────────────────── */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 3000;
+  padding: 8px 0;
+  list-style: none;
+  margin: 0;
+  border-radius: 0 0 6px 6px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content li a {
+  color: #333;
+  padding: 12px 20px;
+  display: block;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-content li a:hover {
+  background: #f0f7ff;
+  color: #0044aa;
+}
+
+.dropdown-content li a.active {
+  color: #0044aa;
+  font-weight: 700;
+}
+
+.dropbtn svg {
+  width: 10px;
+  height: 10px;
+  opacity: 0.8;
+}
+
+/* ─── Visibility helpers ──────────────────────────────────── */
+.showMob        { display: none         !important; }
+.showDT         { display: inline-flex  !important; }
+.hideONmob      { display: inline-flex  !important; }
+.hideONdesktop  { display: none         !important; }
+
+/* ─── Hero ────────────────────────────────────────────────── */
+.inv-hero {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hero-image-wrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.55);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 30, 80, 0.7) 0%, rgba(0, 68, 170, 0.25) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  color: white;
+  width: 100%;
+}
+
+.hero-content h1 {
+  font-size: 58px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0;
+  color: white;
+  letter-spacing: -1px;
+}
+
+.hero-content h1 strong {
+  font-weight: 800;
+}
+
+.hero-content h1 sup {
+  font-size: 28px;
+  vertical-align: super;
+}
+
+.hero-underline {
+  margin-top: 22px;
+  width: 110px;
+  height: 4px;
+  background: linear-gradient(90deg, #ffcc00, #ffd740);
+  border-radius: 2px;
+  box-shadow: 0 2px 12px rgba(255, 204, 0, 0.4);
+}
+
+/* ─── Main Content Layout ─────────────────────────────────── */
+.inv-main {
+  padding: 80px 0 100px;
+  background: #f8f9fc;
+}
+
+.inv-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 50px;
+  align-items: start;
+}
+
+/* ─── Body / Editorial ────────────────────────────────────── */
+.inv-body {
+  background: #fff;
+  border-radius: 12px;
+  padding: 48px;
+  box-shadow: 0 4px 24px rgba(0, 68, 170, 0.07);
+  border: 1px solid rgba(0, 68, 170, 0.08);
+}
+
+.inv-headline {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin: 0 0 32px;
+  line-height: 1.3;
+  border-bottom: 3px solid #ffcc00;
+  padding-bottom: 20px;
+}
+
+.inv-headline sup {
+  font-size: 14px;
+}
+
+.inv-callout {
+  background: #f0f4fb;
+  border-left: 4px solid #0044aa;
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 28px;
+}
+
+.inv-address-card {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #e0e7f3;
+  border-radius: 10px;
+  padding: 22px 24px;
+  margin-bottom: 30px;
+}
+
+.inv-address-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: #e8f0fe;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inv-address-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #0044aa;
+}
+
+.addr-name {
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.inv-address-card p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+}
+
+.inv-highlight {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #333;
+  margin-bottom: 18px;
+  padding: 16px 20px;
+  background: #fffbea;
+  border-radius: 8px;
+  border: 1px solid #ffe680;
+}
+
+.inv-body p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: #555;
+  margin-bottom: 18px;
+}
+
+.inv-link {
+  color: #0044aa;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.inv-link:hover {
+  color: #0066ff;
+  text-decoration: underline;
+}
+
+/* ─── Sidebar ─────────────────────────────────────────────── */
+.inv-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar-card,
+.stats-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(0, 68, 170, 0.07);
+  border: 1px solid rgba(0, 68, 170, 0.08);
+}
+
+.sidebar-icon-wrap {
+  margin-bottom: 22px;
+}
+
+.sidebar-icon-wrap svg {
+  width: 64px;
+  height: 64px;
+}
+
+.sidebar-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-links li a {
+  font-size: 14px;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: #e8eef8;
+  margin: 24px 0;
+}
+
+.sidebar-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.contact-role {
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 8px;
+}
+
+.contact-phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #444;
+  margin: 0;
+}
+
+.contact-phone svg {
+  width: 16px;
+  height: 16px;
+  color: #0044aa;
+  flex-shrink: 0;
+}
+
+.email-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.email-link svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ─── Stats Card ──────────────────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.stat-item {
+  background: #f0f4fb;
+  border-radius: 10px;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 68, 170, 0.12);
+}
+
+.stat-number {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0044aa;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* ─── Social Sidebar ──────────────────────────────────────── */
+.social-side-bar {
+  position: fixed;
+  left: 0;
+  top: 40%;
+  z-index: 3000;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.follow-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 15px 8px;
+  background: #0044aa;
+  color: white;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.social-icon {
+  padding: 12px;
+  color: #0044aa;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.social-icon:hover {
+  background: #0044aa;
+  color: white;
+}
+
+/* ─── Responsive Breakpoints ──────────────────────────────── */
+@media (max-width: 1024px) {
+  .inv-layout {
+    grid-template-columns: 1fr 300px;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Subnav visibility flips */
+  .hideONmob     { display: none         !important; }
+  .showMob       { display: inline-flex  !important; }
+  .showDT        { display: none         !important; }
+  .hideONdesktop { display: inline-flex  !important; }
+
+  .inv-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .inv-body {
+    padding: 28px 22px;
+  }
+
+  .social-side-bar { display: none; }
+}

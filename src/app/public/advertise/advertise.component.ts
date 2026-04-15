@@ -13,11 +13,12 @@ import { SiteFooterComponent } from '../../shared/components/site-footer/site-fo
 })
 export class AdvertiseComponent implements OnInit {
   ngOnInit() {
-    // Automatically open chatbot after a short delay for engagement
+    // Auto-open chat after delay
     setTimeout(() => {
       this.isChatOpen = true;
     }, 3000);
   }
+
   productsMenu = [
     {
       label: 'Real Estate Lead Generation',

@@ -1,0 +1,468 @@
+/* ── About Advertise Page - Realtor.com Style with Blue Theme ── */
+.advertise-page {
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+app-site-header {
+  display: block !important;
+  margin-bottom: 0 !important;
+}
+
+/* ── Floating Social Side Bar ── */
+.social-side-bar {
+  position: fixed;
+  left: 0;
+  top: 40%;
+  z-index: 3000;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+  padding: 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.follow-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 15px 8px;
+  background: #0044aa;
+  color: white;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  border-radius: 0 4px 0 0;
+}
+
+.social-icon {
+  padding: 12px;
+  color: #555;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon:hover {
+  color: #0044aa;
+  background: #f0f7ff;
+}
+
+.social-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.social-icon.twitter {
+  background: #1da1f2;
+  color: white;
+}
+
+.social-icon.twitter:hover {
+  background: #0d8bd9;
+}
+
+.social-icon.facebook {
+  background: #4267B2;
+  color: white;
+}
+
+.social-icon.facebook:hover {
+  background: #365899;
+}
+
+.social-icon.pinterest {
+  background: #BD081C;
+  color: white;
+}
+
+.social-icon.pinterest:hover {
+  background: #a30618;
+}
+
+/* ── Secondary Navigation (Blue) ── */
+#subNav {
+  background-color: #0044aa;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  width: 100%;
+  margin-top: -5px;
+  padding-top: 5px;
+}
+
+#newContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn, .btn-default {
+  background: transparent;
+  color: white;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.dropbtn:hover, .btn-default:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.btn-default.active {
+  color: #ffcc00 !important;
+  font-weight: 700;
+  border-bottom: 3px solid #ffcc00;
+}
+
+.svg-inline--fa {
+  width: 10px;
+  height: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  z-index: 1001;
+  border-radius: 0 0 4px 4px;
+  padding: 8px 0;
+  list-style: none;
+}
+
+.dropdown-content li a {
+  color: #333;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.dropdown-content li a:hover {
+  background-color: #f8f9fa;
+  color: #0044aa;
+  padding-left: 24px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Helpers */
+.showMob { display: none !important; }
+.showDT { display: inline-flex !important; }
+.hideONmob { display: inline-flex !important; }
+.hideONdesktop { display: none !important; }
+
+@media (max-width: 1024px) {
+  #newContainer {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  #subNav { top: 68px; }
+
+  .hideONmob { display: none !important; }
+  .showMob { display: inline-flex !important; }
+  .showDT { display: none !important; }
+  .hideONdesktop { display: inline-flex !important; }
+
+  .dropdown-content {
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .social-side-bar {
+    display: none;
+  }
+}
+
+/* ── Hero Section ── */
+.advertise-hero {
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+}
+
+.hero-content h1 {
+  font-size: 64px;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.line-blue {
+  display: inline-block;
+  position: relative;
+}
+
+.line-blue::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background-color: white;
+}
+
+.hero-content sup {
+  font-size: 24px;
+  vertical-align: super;
+}
+
+/* ── Audience Section ── */
+.audience-section {
+  padding: 80px 0;
+  background: #fff;
+  text-align: center;
+}
+
+.section-heading {
+  font-size: 42px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 30px;
+}
+
+.section-description {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.section-description sup {
+  font-size: 10px;
+}
+
+/* ── Advertise Grid ── */
+.advertise-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.advertise-card {
+  flex: 0 0 calc(33.333% - 27px);
+  max-width: 300px;
+  text-align: center;
+  padding: 30px 20px;
+  transition: all 0.3s ease;
+}
+
+.advertise-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  color: #1a1a1a;
+}
+
+.icon-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.advertise-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.learn-more-link {
+  color: #0044aa;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+
+.learn-more-link:hover {
+  color: #003380;
+  gap: 10px;
+}
+
+.arrow {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* ── Brand Footer Section ── */
+.brand-footer-section {
+  padding: 60px 0;
+  background: #f5f5f5;
+  text-align: center;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  color: #1a1a1a;
+}
+
+.logo-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.tagline {
+  font-size: 18px;
+  color: #666;
+  font-style: italic;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero-content h1 {
+    font-size: 48px;
+  }
+
+  .section-heading {
+    font-size: 36px;
+  }
+
+  .advertise-card {
+    flex: 0 0 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .advertise-hero {
+    height: 300px;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .line-blue::after {
+    height: 4px;
+    bottom: -3px;
+  }
+
+  .section-heading {
+    font-size: 28px;
+  }
+
+  .section-description {
+    font-size: 16px;
+  }
+
+  .advertise-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .card-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .advertise-card h3 {
+    font-size: 20px;
+  }
+
+  .brand-name {
+    font-size: 24px;
+  }
+
+  .tagline {
+    font-size: 16px;
+  }
+}
