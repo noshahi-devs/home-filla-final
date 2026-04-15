@@ -22,13 +22,13 @@
         </div>
 
         <div class="nav-right hideONmob" style="display:flex; align-items:center; gap:25px; flex-shrink: 0;">
-          <a class="btn-default" style="font-size:14px; color:#000; font-weight:600; white-space:nowrap; padding:0;">Who we are</a>
-          <a class="btn-default" style="font-size:14px; color:#000; font-weight:600; white-space:nowrap; padding:0;">Teams and locations</a>
-          <a class="btn-default" style="font-size:14px; color:#000; font-weight:600; white-space:nowrap; padding:0;">What we offer</a>
-          <a class="btn-default" style="font-size:14px; color:#000; font-weight:600; white-space:nowrap; padding:0;">How we hire</a>
-          <a class="btn-default" style="font-size:14px; color:#000; font-weight:600; white-space:nowrap; padding:0;">Students/interns</a>
-          <a class="btn-default" style="font-size:14px; color:#000; font-weight:600; white-space:nowrap; padding:0;">Join our Talent Community</a>
-          <a class="car-pill-btn" style="background:#000; color:#fff; border-radius:30px; padding:12px 28px; font-weight:700; text-decoration:none; cursor:pointer; white-space:nowrap; font-size: 14px;">All jobs</a>
+          <a class="btn-default" (click)="setTab('who-we-are')" [style.color]="activeTab === 'who-we-are' ? '#0044aa' : '#000'" style="font-size:14px; font-weight:600; white-space:nowrap; padding:0; cursor: pointer; transition: color 0.3s; text-decoration: none;">Who we are</a>
+          <a class="btn-default" (click)="setTab('teams')" [style.color]="activeTab === 'teams' ? '#0044aa' : '#000'" style="font-size:14px; font-weight:600; white-space:nowrap; padding:0; cursor: pointer; transition: color 0.3s; text-decoration: none;">Teams and locations</a>
+          <a class="btn-default" (click)="setTab('offer')" [style.color]="activeTab === 'offer' ? '#0044aa' : '#000'" style="font-size:14px; font-weight:600; white-space:nowrap; padding:0; cursor: pointer; transition: color 0.3s; text-decoration: none;">What we offer</a>
+          <a class="btn-default" (click)="setTab('hire')" [style.color]="activeTab === 'hire' ? '#0044aa' : '#000'" style="font-size:14px; font-weight:600; white-space:nowrap; padding:0; cursor: pointer; transition: color 0.3s; text-decoration: none;">How we hire</a>
+          <a class="btn-default" (click)="setTab('students')" [style.color]="activeTab === 'students' ? '#0044aa' : '#000'" style="font-size:14px; font-weight:600; white-space:nowrap; padding:0; cursor: pointer; transition: color 0.3s; text-decoration: none;">Students/interns</a>
+          <a class="btn-default" (click)="setTab('home')" style="font-size:14px; color:#000; font-weight:600; white-space:nowrap; padding:0; cursor: pointer; text-decoration: none;">Join our Talent Community</a>
+          <a class="car-pill-btn" (click)="setTab('home')" style="background:#000; color:#fff; border-radius:30px; padding:12px 28px; font-weight:700; text-decoration:none; cursor:pointer; white-space:nowrap; font-size: 14px;">All jobs</a>
         </div>
 
         <!-- Mobile More Btn -->
@@ -52,6 +52,8 @@
     </div>
   </div>
 
+  <!-- Content area filtered by activeTab -->
+  <ng-container *ngIf="activeTab === 'home'">
   <!-- Hero Section -->
   <section class="car-hero custom-car-hero" style="height:550px; background-color:#0044aa; position:relative; overflow:visible; display:flex; align-items:center;">
     
@@ -280,6 +282,512 @@
       
     </div>
   </section>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab === 'who-we-are'">
+    <!-- Who We Are Hero -->
+    <div style="padding: 120px 20px; background: #0044aa; color: #fff; text-align: center;">
+      <div class="container" style="max-width: 900px; margin: 0 auto;">
+        <h1 style="font-size: 56px; font-weight: 800; color: #fff; margin-bottom: 30px; letter-spacing: -1px; line-height: 1.1;">We’re just built differently—and that’s a good thing</h1>
+        <p style="font-size: 20px; line-height: 1.8; opacity: 0.9;">If your mission is to completely redefine the way people find home in every form, you need to act, think, and see things differently. You need to be different. <br><br>Welcome to Home Filla.</p>
+      </div>
+    </div>
+    
+    <div style="padding: 100px 20px; background: #fdfdfd; border-top: 1px solid #f0f4fb;">
+       <div class="container" style="max-width: 1200px;">
+         <div style="text-align: center; margin-bottom: 60px;">
+           <p style="text-transform: uppercase; font-weight: 700; color: #0044aa; letter-spacing: 1px; margin-bottom: 10px; font-size:14px;">Values</p>
+           <h2 style="font-size: 42px; font-weight: 800; color: #1a1a2e; text-align: center; letter-spacing: -1px;">What we’re all about</h2>
+           <p style="font-size: 18px; color: #555; text-align: center; max-width: 700px; margin: 20px auto 0;">At Home Filla, we’re using tech to make challenging things easier for everyone. But for our employees, it all boils down to a few fairly simple ideas.</p>
+         </div>
+
+         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px;">
+            <div style="background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,68,170,0.06);">
+              <div style="width: 50px; height: 50px; background: #e8f0fe; border-radius: 50%; display:flex; align-items:center; justify-content:center; margin-bottom: 25px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0044aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              </div>
+              <h3 style="font-size: 26px; font-weight: 800; color: #1a1a2e; margin-bottom: 20px;">Build it best</h3>
+              <p style="font-size: 16px; color: #555; line-height: 1.7; margin:0;">We’re driven to be the best and to challenge the status quo at the forefront of the digital real estate space. Are you ready to set ambitious goals and achieve them? We’ll give you what you need to be innovative and revolutionize how people buy, sell, rent, and own their homes.</p>
+            </div>
+            
+            <div style="background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,68,170,0.06);">
+              <div style="width: 50px; height: 50px; background: #e8f0fe; border-radius: 50%; display:flex; align-items:center; justify-content:center; margin-bottom: 25px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0044aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </div>
+              <h3 style="font-size: 26px; font-weight: 800; color: #1a1a2e; margin-bottom: 20px;">Bring people home</h3>
+              <p style="font-size: 16px; color: #555; line-height: 1.7; margin:0;">Our reason for being is to give everyone the opportunity to confidently find the right place for them. We build trust with consumers and enable fairness, respect, transparency, and equity. Everyone deserves a place they can call home, raise a family, create memories, and celebrate all of life’s major milestones.</p>
+            </div>
+            
+            <div style="background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,68,170,0.06);">
+              <div style="width: 50px; height: 50px; background: #e8f0fe; border-radius: 50%; display:flex; align-items:center; justify-content:center; margin-bottom: 25px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0044aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M3 21v-2a7 7 0 0 1 14 0v2"></path></svg>
+              </div>
+              <h3 style="font-size: 26px; font-weight: 800; color: #1a1a2e; margin-bottom: 20px;">Be your best</h3>
+              <p style="font-size: 16px; color: #555; line-height: 1.7; margin:0;">Our culture is deeply rooted in both enabling and celebrating your unique skills, knowledge, and excellence. You’ll feel challenged and inspired by teammates and leaders alike to constantly grow, develop, and be at your best as we work together as a team.</p>
+            </div>
+            
+            <div style="background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,68,170,0.06);">
+              <div style="width: 50px; height: 50px; background: #e8f0fe; border-radius: 50%; display:flex; align-items:center; justify-content:center; margin-bottom: 25px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0044aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+              </div>
+              <h3 style="font-size: 26px; font-weight: 800; color: #1a1a2e; margin-bottom: 20px;">Pride of ownership</h3>
+              <p style="font-size: 16px; color: #555; line-height: 1.7; margin:0;">At Home Filla, where you take your career—and what you achieve—is up to you. Here, you’ll think big and make meaningful things happen. Together, we’ll set big goals—then we’ll give you the freedom to do what you do best to reach them.</p>
+            </div>
+         </div>
+       </div>
+    </div>
+
+    <!-- Our Beliefs Section -->
+    <div style="padding: 120px 20px; background: #fff;">
+       <div class="container" style="max-width: 1000px; margin: 0 auto;">
+          <div style="text-align: center; margin-bottom: 60px;">
+             <p style="text-transform: uppercase; font-weight: 700; color: #0044aa; letter-spacing: 1px; margin-bottom: 10px; font-size:14px;">Beliefs</p>
+             <h2 style="font-size: 42px; font-weight: 800; color: #1a1a2e; letter-spacing: -1px; line-height: 1.2;">What we do is defined by the way we do it</h2>
+          </div>
+          
+          <div style="font-size: 18px; line-height: 1.9; color: #444; display: flex; flex-direction: column; gap: 40px;">
+             <p>At Home Filla, we’re united by a set of beliefs that inform and inspire every action we take, and every interaction we make. Our ambition sets us apart. We compete ferociously and know that becoming No.1. will be the result of securing many smaller victories. Budgets establish our baseline, but we set stretch goals that push us beyond market growth and make transformational bets that create step-changes in performance.</p>
+             
+             <p>We are a technology company in the midst of constant technological change. We value innovation and are motivated by a desire to lead that change rather than a fear of being left behind. Our innovation is honed on the needs our customers have today and the ones we anticipate they’ll have tomorrow. We certain that innovation is most often ignited through collaboration.</p>
+             
+             <p>We believe in the power of partnership. We curate and cultivate relationships that bring diversity of thought and unique strengths to create competitive advantage. This collaborative spirit extends outside our four walls to our community of customers, partners, and stakeholders. We value those who energize the people in their orbit, and those who can engineer better outcomes because of the way they have engaged with them.</p>
+             
+             <p>Our leaders empower their team members to be accountable and successful in their role, in the same way our team members embrace their agency and ownership of that role. We are individually accountable but collectively dependent on one another, embracing dual obligations to keep track of dependencies we rely upon. We value outcomes over effort and hold ourselves and others accountable to that measure.</p>
+          </div>
+       </div>
+    </div>
+
+    <!-- DEI Section -->
+    <div style="background: #245094; color: #fff; padding: 120px 20px;">
+       <div class="container" style="max-width: 1200px; display: flex; align-items: center; gap: 80px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 300px;">
+             <p style="text-transform: uppercase; font-weight: 700; color: #8ab4f8; letter-spacing: 1px; margin-bottom: 15px; font-size:14px;">Our DEI&P Promise</p>
+             <h2 style="font-size: 48px; font-weight: 800; margin-bottom: 30px; letter-spacing: -1.5px; line-height: 1.1;">Welcoming everyone home</h2>
+             <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">At Home Filla, we embrace our passion for building a way home for everyone with a Diversity, Equity, Inclusion, and Philanthropy strategy that:</p>
+             <ul style="font-size: 18px; line-height: 1.8; padding-left: 20px; margin-bottom: 30px;">
+               <li style="margin-bottom: 10px;">Supports and celebrates a diverse workforce of talented people</li>
+               <li style="margin-bottom: 10px;">Champions inclusive leaders</li>
+               <li style="margin-bottom: 10px;">Partners with and services diverse and inclusive communities</li>
+               <li style="margin-bottom: 10px;">Enables and empowers our consumers and customers</li>
+             </ul>
+             <p style="font-size: 18px; line-height: 1.8;">We believe that when people feel respected and included, they can be more creative, innovative, and successful. Around here, there are no ceilings – glass or otherwise – to keep you from being your genuine self and achieving your highest aspirations.</p>
+          </div>
+          <div style="flex: 1; min-width: 300px; text-align: center;">
+             <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Inclusive Team" style="width: 100%; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
+          </div>
+       </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div style="padding: 120px 20px; background: #fff; border-bottom: 1px solid #eee; overflow: hidden;">
+       <div class="container" style="max-width: 1400px; padding: 0;">
+         <p style="text-transform: uppercase; font-weight: 700; color: #0044aa; letter-spacing: 1px; margin-bottom: 10px; font-size:14px; text-align:center;">Testimonials</p>
+         <h2 style="font-size: 48px; font-weight: 800; color: #1a1a2e; text-align: center; margin-bottom: 80px; letter-spacing: -1.5px;">We’ve got people talking</h2>
+         
+         <div class="marquee-container no-scrollbar">
+            <div class="marquee-content">
+               
+               <!-- Card 1 -->
+               <div class="premium-testimonial-card">
+                  <svg class="quote-icon" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  <div style="flex: 1;">
+                    <p class="testimonial-text">“Home Filla has been extremely supportive of my career aspirations. I started as a Customer Success Representative and am now a Senior Manager within the Customer Care organization.”</p>
+                    <p style="font-weight: 700; font-size: 22px; margin: 0; color: #fff;">Meek</p>
+                    <p style="font-size: 16px; opacity: 0.8; margin: 0;">Consumer Experience and Customer Care</p>
+                  </div>
+                  <img src="https://images.unsplash.com/photo-1531123897727-8f129e1bfa8ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="employee-avatar" alt="Meek">
+               </div>
+
+               <!-- Card 2 -->
+               <div class="premium-testimonial-card">
+                  <svg class="quote-icon" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  <div style="flex: 1;">
+                    <p class="testimonial-text">“The culture that’s embodied by everyone I’ve come across at Home Filla is world-class. Our values aren’t just embodied by leadership, but everyone throughout the organization.”</p>
+                    <p style="font-weight: 700; font-size: 22px; margin: 0; color: #fff;">O’Shea</p>
+                    <p style="font-size: 16px; opacity: 0.8; margin: 0;">Technology</p>
+                  </div>
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="employee-avatar" alt="O'Shea">
+               </div>
+
+               <!-- Card 3 -->
+               <div class="premium-testimonial-card">
+                  <svg class="quote-icon" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  <div style="flex: 1;">
+                    <p class="testimonial-text">“If you want to understand what 2030 will look like, come to Home Filla. We’re groundbreaking right now, so you can be part of that.”</p>
+                    <p style="font-weight: 700; font-size: 22px; margin: 0; color: #fff;">Gus</p>
+                    <p style="font-size: 16px; opacity: 0.8; margin: 0;">Technology</p>
+                  </div>
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="employee-avatar" alt="Gus">
+               </div>
+
+               <!-- DUPLICATED SET FOR SEAMLESS LOOP -->
+               <div class="premium-testimonial-card">
+                  <svg class="quote-icon" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  <div style="flex: 1;">
+                    <p class="testimonial-text">“Home Filla has been extremely supportive of my career aspirations...”</p>
+                    <p style="font-weight: 700; font-size: 22px; margin: 0;">Meek</p>
+                    <p style="font-size: 16px; opacity: 0.8; margin: 0;">Consumer Experience</p>
+                  </div>
+                  <img src="https://images.unsplash.com/photo-1531123897727-8f129e1bfa8ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="employee-avatar" alt="Meek">
+               </div>
+
+               <div class="premium-testimonial-card">
+                  <svg class="quote-icon" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  <div style="flex: 1;">
+                    <p class="testimonial-text">“The culture that’s embodied by everyone I’ve come across at Home Filla is world-class...”</p>
+                    <p style="font-weight: 700; font-size: 22px; margin: 0;">O’Shea</p>
+                    <p style="font-size: 16px; opacity: 0.8; margin: 0;">Technology</p>
+                  </div>
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="employee-avatar" alt="O'Shea">
+               </div>
+
+               <div class="premium-testimonial-card">
+                  <svg class="quote-icon" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  <div style="flex: 1;">
+                    <p class="testimonial-text">“If you want to understand what 2030 will look like...”</p>
+                    <p style="font-weight: 700; font-size: 22px; margin: 0;">Gus</p>
+                    <p style="font-size: 16px; opacity: 0.8; margin: 0;">Technology</p>
+                  </div>
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="employee-avatar" alt="Gus">
+               </div>
+
+            </div>
+         </div>
+       </div>
+    </div>
+
+    <!-- Video Section -->
+    <div style="padding: 120px 20px; background: #fdfdfd;">
+       <div class="container" style="max-width: 1200px;">
+          <p style="text-transform: uppercase; font-weight: 700; color: #0044aa; letter-spacing: 1px; margin-bottom: 10px; font-size:14px; text-align:center;">Videos</p>
+          <h2 style="font-size: 48px; font-weight: 800; color: #1a1a2e; text-align: center; margin-bottom: 60px; letter-spacing: -1.5px;">Real people Real stories Real success</h2>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+             <!-- Video Card 1 -->
+             <div style="cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="position: relative; border-radius: 16px; overflow: hidden; margin-bottom: 20px; aspect-ratio: 16/9; background: #000;">
+                   <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;" alt="Tech Career">
+                   <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa;">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                   </div>
+                </div>
+                <h4 style="font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0;">Explore your Tech Career</h4>
+             </div>
+
+             <!-- Video Card 2 -->
+             <div style="cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="position: relative; border-radius: 16px; overflow: hidden; margin-bottom: 20px; aspect-ratio: 16/9; background: #000;">
+                   <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;" alt="Customer representative">
+                   <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa;">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                   </div>
+                </div>
+                <h4 style="font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0;">What it takes to be a Consumer Success Representative</h4>
+             </div>
+
+             <!-- Video Card 3 -->
+             <div style="cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="position: relative; border-radius: 16px; overflow: hidden; margin-bottom: 20px; aspect-ratio: 16/9; background: #000;">
+                   <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;" alt="Software Engineering">
+                   <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa;">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                   </div>
+                </div>
+                <h4 style="font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0;">Meet Jen Mendez, Director of Software Engineering for Mobile</h4>
+             </div>
+
+             <!-- Video Card 4 -->
+             <div style="cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="position: relative; border-radius: 16px; overflow: hidden; margin-bottom: 20px; aspect-ratio: 16/9; background: #000;">
+                   <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;" alt="Associate Software Engineer">
+                   <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa;">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                   </div>
+                </div>
+                <h4 style="font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0;">Meet Anghel De Las Casas, Associate Software Engineer</h4>
+             </div>
+          </div>
+       </div>
+    </div>
+
+    <!-- Final CTA Section -->
+    <div style="background: #f0f4fb; padding: 100px 20px; text-align: center;">
+       <div class="container" style="max-width: 800px;">
+          <h2 style="font-size: 42px; font-weight: 800; color: #1a1a2e; margin-bottom: 20px; letter-spacing: -1px;">Join our Talent Community</h2>
+          <p style="font-size: 18px; color: #555; margin-bottom: 40px; line-height: 1.6;">Tell us more about yourself, and we’ll keep you up to date with news, career opportunities, and events that match your interests.</p>
+          <a href="https://www.gem.com/form?formID=93f01a84-3f59-4fb5-9b6c-8556c527f1c5" target="_blank" style="background: #0044aa; color: #fff; border-radius: 30px; padding: 16px 40px; font-weight: 700; text-decoration: none; font-size: 16px; display: inline-block; transition: background 0.3s;" onmouseover="this.style.background='#003388'" onmouseout="this.style.background='#0044aa'">Join Talent Community</a>
+       </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="activeTab === 'teams'">
+    <!-- Teams & Locations Hero -->
+    <div style="padding: 120px 20px; background: #0044aa; color: #fff; text-align: center;">
+      <div class="container" style="max-width: 900px; margin: 0 auto;">
+        <h1 style="font-size: 56px; font-weight: 800; color: #fff; margin-bottom: 30px; letter-spacing: -1px; line-height: 1.1;">The team that brings it all together</h1>
+        <p style="font-size: 20px; line-height: 1.8; opacity: 0.9;">Discover the teams that drive our mission forward and the inspiring places where we make it happen.</p>
+      </div>
+    </div>
+
+    <!-- Team Categories Grid -->
+    <div style="padding: 100px 20px; background: #fdfdfd;">
+      <div class="container" style="max-width: 1200px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+          
+          <div style="background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 40px; transition: all 0.3s;" onmouseover="this.style.borderColor='#0044aa'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='#eee'; this.style.transform='translateY(0)'">
+            <h3 style="font-size: 24px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Engineering & Tech</h3>
+            <p style="font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 25px;">Build the systems and experiences that power millions of home searches across the country.</p>
+            <a href="#" style="color: #0044aa; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px;">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+          </div>
+
+          <div style="background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 40px; transition: all 0.3s;" onmouseover="this.style.borderColor='#0044aa'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='#eee'; this.style.transform='translateY(0)'">
+            <h3 style="font-size: 24px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Product & Design</h3>
+            <p style="font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 25px;">Design intuitive, seamless paths that help every consumer find their way home.</p>
+            <a href="#" style="color: #0044aa; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px;">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+          </div>
+
+          <div style="background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 40px; transition: all 0.3s;" onmouseover="this.style.borderColor='#0044aa'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='#eee'; this.style.transform='translateY(0)'">
+            <h3 style="font-size: 24px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Marketing & Comms</h3>
+            <p style="font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 25px;">Tell the story of Home Filla and connect with homeowners, buyers, and sellers everywhere.</p>
+            <a href="#" style="color: #0044aa; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px;">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+          </div>
+
+          <div style="background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 40px; transition: all 0.3s;" onmouseover="this.style.borderColor='#0044aa'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='#eee'; this.style.transform='translateY(0)'">
+            <h3 style="font-size: 24px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Sales & Revenue</h3>
+            <p style="font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 25px;">Empower real estate professionals with the tools and data they need to thrive.</p>
+            <a href="#" style="color: #0044aa; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px;">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Locations Section -->
+    <div style="padding: 120px 20px; background: #245094; color: #fff;">
+      <div class="container" style="max-width: 1200px;">
+        <div style="text-align: center; margin-bottom: 80px;">
+          <h2 style="font-size: 48px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 20px;">Featured Locations</h2>
+          <p style="font-size: 18px; opacity: 0.9; max-width: 700px; margin: 0 auto;">While we are remote-first, we have vibrant hubs where our teams connect, collaborate, and create.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+          <div style="border-radius: 20px; overflow: hidden; position: relative; height: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+            <img src="https://images.unsplash.com/photo-1531219572328-a0e71b40286c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover;" alt="Austin Hub">
+            <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+              <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 5px;">Austin, TX</h3>
+              <p style="font-size: 16px; opacity: 0.9;">The Tech & Innovation Hub</p>
+            </div>
+          </div>
+
+          <div style="border-radius: 20px; overflow: hidden; position: relative; height: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+            <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover;" alt="NYC Hub">
+            <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+              <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 5px;">Morgantown, WV</h3>
+              <p style="font-size: 16px; opacity: 0.9;">Corporate Headquarters</p>
+            </div>
+          </div>
+
+          <div style="border-radius: 20px; overflow: hidden; position: relative; height: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+            <img src="https://images.unsplash.com/photo-1549421263-549b88496492?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover;" alt="Scottsdale Hub">
+            <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+              <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 5px;">Scottsdale, AZ</h3>
+              <p style="font-size: 16px; opacity: 0.9; margin-bottom: 0;">Sales & Support Center</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="activeTab === 'offer'">
+    <!-- What We Offer Hero -->
+    <div style="padding: 120px 20px; background: #0044aa; color: #fff; text-align: center; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; pointer-events: none;">
+        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="url(#grad1)"/></svg>
+      </div>
+      <div class="container" style="max-width: 900px; margin: 0 auto; position: relative; z-index: 1;">
+        <h1 style="font-size: 56px; font-weight: 800; margin-bottom: 30px; letter-spacing: -1px; line-height: 1.1;">Rewards that go beyond the expected</h1>
+        <p style="font-size: 20px; line-height: 1.8; opacity: 0.9;">We’re dedicated to helping our employees be their best—at work and at home. Our comprehensive benefits program is designed to support your unique needs and those of your family.</p>
+      </div>
+    </div>
+
+    <!-- Benefits Accordion Section -->
+    <div style="padding: 100px 20px; background: #fff;">
+      <div class="container" style="max-width: 1000px; margin: 0 auto;">
+        
+        <!-- Accordion Item: Physical -->
+        <div style="border-bottom: 1px solid #eee; padding: 30px 0; cursor: pointer;" (click)="toggleBenefit('physical')">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+              <div style="width: 40px; height: 40px; background: #e8f0fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 800; color: #1a1a2e; margin: 0;">Physical well-being</h3>
+            </div>
+            <div style="font-size: 24px; color: #666;">{{ expandedBenefit === 'physical' ? '−' : '+' }}</div>
+          </div>
+          <div *ngIf="expandedBenefit === 'physical'" style="padding: 24px 60px; color: #555; font-size: 17px; line-height: 1.7; background: #f8faff; border-left: 4px solid #0044aa; margin-top: 20px; border-radius: 4px;">
+            Comprehensive medical, dental, and vision coverage options to keep you and your family healthy. We also offer fertility assistance and support for growing families.
+          </div>
+        </div>
+
+        <!-- Accordion Item: Emotional -->
+        <div style="border-bottom: 1px solid #eee; padding: 30px 0; cursor: pointer;" (click)="toggleBenefit('emotional')">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+              <div style="width: 40px; height: 40px; background: #e8f0fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 800; color: #1a1a2e; margin: 0;">Emotional well-being</h3>
+            </div>
+            <div style="font-size: 24px; color: #666;">{{ expandedBenefit === 'emotional' ? '−' : '+' }}</div>
+          </div>
+          <div *ngIf="expandedBenefit === 'emotional'" style="padding: 24px 60px; color: #555; font-size: 17px; line-height: 1.7; background: #f8faff; border-left: 4px solid #0044aa; margin-top: 20px; border-radius: 4px;">
+            Access to mental health resources, including free counseling sessions, mindfulness tools, and dedicated programs to help you manage stress and maintain a healthy work-life balance.
+          </div>
+        </div>
+
+        <!-- Accordion Item: Financial -->
+        <div style="border-bottom: 1px solid #eee; padding: 30px 0; cursor: pointer;" (click)="toggleBenefit('financial')">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+              <div style="width: 40px; height: 40px; background: #e8f0fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 800; color: #1a1a2e; margin: 0;">Financial well-being</h3>
+            </div>
+            <div style="font-size: 24px; color: #666;">{{ expandedBenefit === 'financial' ? '−' : '+' }}</div>
+          </div>
+          <div *ngIf="expandedBenefit === 'financial'" style="padding: 24px 60px; color: #555; font-size: 17px; line-height: 1.7; background: #f8faff; border-left: 4px solid #0044aa; margin-top: 20px; border-radius: 4px;">
+            Competitive 401(k) matching, life insurance, and disability coverage. We also provide financial planning tools and resources to help you secure your future.
+          </div>
+        </div>
+
+        <!-- Accordion Item: Caregiving -->
+        <div style="border-bottom: 1px solid #eee; padding: 30px 0; cursor: pointer;" (click)="toggleBenefit('caregiving')">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+              <div style="width: 40px; height: 40px; background: #e8f0fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 800; color: #1a1a2e; margin: 0;">Caregiving</h3>
+            </div>
+            <div style="font-size: 24px; color: #666;">{{ expandedBenefit === 'caregiving' ? '−' : '+' }}</div>
+          </div>
+          <div *ngIf="expandedBenefit === 'caregiving'" style="padding: 24px 60px; color: #555; font-size: 17px; line-height: 1.7; background: #f8faff; border-left: 4px solid #0044aa; margin-top: 20px; border-radius: 4px;">
+            Generous parental leave, backup childcare, and eldercare support. We understand the importance of family and are here to support you in all your caregiving roles.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="activeTab === 'hire'">
+    <!-- How We Hire Hero -->
+    <div style="padding: 120px 20px; background: #0044aa; color: #fff; text-align: center;">
+      <div class="container" style="max-width: 900px; margin: 0 auto;">
+        <h1 style="font-size: 56px; font-weight: 800; color: #fff; margin-bottom: 30px; letter-spacing: -1px; line-height: 1.1;">Our hiring process</h1>
+        <p style="font-size: 20px; line-height: 1.8; opacity: 0.9;">We want to get to know the real you. Here’s a look at the steps we’ll take together to see if Home Filla is the right place for your next career move.</p>
+      </div>
+    </div>
+
+    <!-- Process Timeline -->
+    <div style="padding: 100px 20px; background: #fdfdfd;">
+      <div class="container" style="max-width: 900px; margin: 0 auto;">
+        
+        <div style="position: relative; padding-left: 80px;">
+          <!-- Timeline Vertical Line -->
+          <div style="position: absolute; left: 35px; top: 0; bottom: 0; width: 4px; background: #e0e7f3; border-radius: 2px;"></div>
+
+          <!-- Step 1 -->
+          <div style="position: relative; margin-bottom: 80px;">
+            <div style="position: absolute; left: -80px; width: 74px; height: 74px; background: #fff; border: 4px solid #0044aa; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #0044aa; z-index: 2;">1</div>
+            <div>
+              <h3 style="font-size: 28px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Application</h3>
+              <p style="font-size: 18px; color: #555; line-height: 1.7;">Find a role that matches your skills and passions. Submit your application through our careers site to get started on your journey.</p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div style="position: relative; margin-bottom: 80px;">
+            <div style="position: absolute; left: -80px; width: 74px; height: 74px; background: #fff; border: 4px solid #0044aa; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #0044aa; z-index: 2;">2</div>
+            <div>
+              <h3 style="font-size: 28px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Recruiter Screening</h3>
+              <p style="font-size: 18px; color: #555; line-height: 1.7;">If your profile is a match, one of our recruiters will reach out for a brief conversation to learn more about your experience and career goals.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div style="position: relative; margin-bottom: 80px;">
+            <div style="position: absolute; left: -80px; width: 74px; height: 74px; background: #fff; border: 4px solid #0044aa; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #0044aa; z-index: 2;">3</div>
+            <div>
+              <h3 style="font-size: 28px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Interviews</h3>
+              <p style="font-size: 18px; color: #555; line-height: 1.7;">Meet with the hiring team to dive deeper into your technical skills and how you align with our values. This is also your chance to get to know us!</p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div style="position: relative; margin-bottom: 0;">
+            <div style="position: absolute; left: -80px; width: 74px; height: 74px; background: #fff; border: 4px solid #0044aa; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #0044aa; z-index: 2;">4</div>
+            <div>
+              <h3 style="font-size: 28px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Offer</h3>
+              <p style="font-size: 18px; color: #555; line-height: 1.7;">Congratulations! If we find a mutual match, we’ll extend an offer for you to join our team and start building a better way home.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="activeTab === 'students'">
+    <!-- Students Hero -->
+    <div style="padding: 0; background: #fff; display: flex; align-items: stretch; min-height: 500px; flex-wrap: wrap-reverse;">
+      <div style="flex: 1; min-width: 400px; padding: 100px 60px; display: flex; flex-direction: column; justify-content: center;">
+        <h1 style="font-size: 56px; font-weight: 800; color: #1a1a2e; margin-bottom: 30px; letter-spacing: -1px; line-height: 1.1;">A better way to start your career</h1>
+        <p style="font-size: 20px; line-height: 1.8; color: #555; margin-bottom: 40px;">Our internship program offers students a unique opportunity to work on real-world projects that impact millions of lives. Come learn, grow, and build with us.</p>
+        <div>
+          <a href="#" style="background: #0044aa; color: #fff; border-radius: 30px; padding: 16px 40px; font-weight: 700; text-decoration: none; font-size: 16px; display: inline-block;">View Student Roles</a>
+        </div>
+      </div>
+      <div style="flex: 1; min-width: 400px; background: #0044aa; position: relative; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" style="width: 100%; height: 100%; object-fit: cover;" alt="Students collaborating">
+      </div>
+    </div>
+
+    <!-- Program Highlights -->
+    <div style="padding: 120px 20px; background: #fdfdfd;">
+      <div class="container" style="max-width: 1100px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 80px;">
+          <h2 style="font-size: 42px; font-weight: 800; color: #1a1a2e; letter-spacing: -1px;">11 Weeks. Infinite Impact.</h2>
+          <p style="font-size: 18px; color: #555; max-width: 700px; margin: 20px auto 0;">Our summer internship program is designed for students who want to tackle big challenges and learn from industry leaders.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+          <div style="text-align: center; padding: 30px;">
+            <div style="width: 60px; height: 60px; background: #e8f0fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa; margin: 0 auto 20px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3 style="font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Real Projects</h3>
+            <p style="font-size: 16px; color: #555; line-height: 1.6;">Work on core products and features that are used by millions of consumers every day.</p>
+          </div>
+
+          <div style="text-align: center; padding: 30px;">
+            <div style="width: 60px; height: 60px; background: #e8f0fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa; margin: 0 auto 20px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 style="font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Mentorship</h3>
+            <p style="font-size: 16px; color: #555; line-height: 1.6;">You’ll be paired with a seasoned pro who will guide you, challenge you, and help you grow.</p>
+          </div>
+
+          <div style="text-align: center; padding: 30px;">
+            <div style="width: 60px; height: 60px; background: #e8f0fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0044aa; margin: 0 auto 20px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3z"/><path d="M7 13a4 4 0 0 1 4 4v4H3v-4a4 4 0 0 1 4-4z"/><path d="M22 21v-4a4 4 0 0 0-3-3.87"/><path d="M11 7.03a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 style="font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 15px;">Internal Events</h3>
+            <p style="font-size: 16px; color: #555; line-height: 1.6;">Connect with interns and leaders across the company through social events, lunch-and-learns, and more.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 
   <app-site-footer></app-site-footer>
 </div>

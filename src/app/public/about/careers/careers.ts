@@ -31,6 +31,8 @@ export class CareersComponent {
     }
   ];
   currentSlideIndex = 0;
+  activeTab = 'home';
+  expandedBenefit = 'physical';
 
   nextSlide() {
     this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
@@ -38,5 +40,14 @@ export class CareersComponent {
 
   prevSlide() {
     this.currentSlideIndex = (this.currentSlideIndex - 1 + this.slides.length) % this.slides.length;
+  }
+
+  setTab(tab: string) {
+    this.activeTab = tab;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  toggleBenefit(benefit: string) {
+    this.expandedBenefit = this.expandedBenefit === benefit ? '' : benefit;
   }
 }
