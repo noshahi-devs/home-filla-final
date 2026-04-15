@@ -37,6 +37,9 @@ import { NewsLivingComponent } from './public/news-living/news-living.component'
 import { NewsResearchComponent } from './public/news-research/news-research.component';
 import { ManageRentalsComponent } from './public/manage-rentals/manage-rentals.component';
 import { GlobalAccessibilityComponent } from './public/accessibility/accessibility.component';
+import { AdChoicesComponent } from './public/legal/ad-choices.component';
+import { PrivacyPolicyComponent } from './public/legal/privacy-policy.component';
+import { TermsOfUseComponent } from './public/legal/terms-of-use.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -56,10 +59,13 @@ export const routes: Routes = [
   { path: 'news/:category', component: NewsCategoryComponent },
   { path: 'manage-rentals', component: ManageRentalsComponent },
   { path: 'accessibility', component: GlobalAccessibilityComponent },
+  { path: 'ad-choices', component: AdChoicesComponent },
   { path: 'advertise', component: AdvertiseComponent },
   { path: 'marketing/login', component: MarketingLoginComponent },
   { path: 'marketing/product/:id', loadComponent: () => import('./public/product-detail/product-detail.component').then(m => m.ProductDetailComponent) },
   { path: 'contact', component: ContactComponent },
+  { path: 'privacy', component: PrivacyPolicyComponent },
+  { path: 'terms', component: TermsOfUseComponent },
   { path: 'listings/rent', component: RentComponent },
   { path: 'listings/:category', component: ListingsComponent },
   { path: 'property/:category/:id', component: PropertyDetailComponent },
