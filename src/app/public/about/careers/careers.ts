@@ -1,13 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { SiteHeaderComponent } from '../../../shared/components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../../shared/components/site-footer/site-footer.component';
 
 @Component({
   selector: 'app-careers',
   standalone: true,
-  imports: [CommonModule, RouterLink, SiteHeaderComponent, SiteFooterComponent],
+  imports: [CommonModule, RouterLink, SiteFooterComponent],
   templateUrl: './careers.html',
   styleUrl: './careers.css',
   encapsulation: ViewEncapsulation.None

@@ -1,0 +1,92 @@
+<app-site-header></app-site-header>
+
+<main class="subscribe-page">
+  <div class="container-narrow">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a routerLink="/about">About</a> / 
+      <a routerLink="/about/media">Mediaroom</a> / 
+      <span>Subscribe</span>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="page-header">
+      <h1>Email Alerts Subscription</h1>
+      <div class="accent-line"></div>
+    </section>
+
+    <!-- Success Container -->
+    <div *ngIf="isSubmitted" class="success-container box-shadow-premium">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Thank You!</h2>
+      <p>Your subscription request has been received. You will receive an email shortly to confirm your subscription.</p>
+      <button class="btn-premium" (click)="resetForm()">Back to Form</button>
+      <a routerLink="/about/media" class="btn-link">Return to Mediaroom</a>
+    </div>
+
+    <!-- Form Container -->
+    <div *ngIf="!isSubmitted" class="form-container box-shadow-premium">
+      <div class="intro-text">
+        <p>If you're a member of the working press and are interested in receiving <strong>Home Filla</strong> breaking news via email, fill out the form below and you will receive an e-mail each time we send out a new release.</p>
+        <p>You will receive an email which you must reply to in order to confirm your subscription. You may unsubscribe from our list at anytime.</p>
+        <p>Thank you for your interest in <strong>Home Filla</strong>.</p>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" #subscribeForm="ngForm" class="subscribe-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" [(ngModel)]="formData.firstName" placeholder="Enter your first name">
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" [(ngModel)]="formData.lastName" placeholder="Enter your last name">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="email">Email address *</label>
+            <input type="email" id="email" name="email" [(ngModel)]="formData.email" required #email="ngModel" placeholder="email@example.com">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-text">
+              Valid email is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" [(ngModel)]="formData.company" placeholder="Organization name">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" [(ngModel)]="formData.phone" placeholder="(555) 000-0000">
+          </div>
+        </div>
+
+        <!-- Captcha Placeholder -->
+        <div class="captcha-placeholder">
+          <div class="captcha-box">
+            <div class="captcha-check"></div>
+            <span>I'm not a robot</span>
+            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" [disabled]="subscribeForm.invalid || isSubmitting" class="submit-btn-premium">
+            <span *ngIf="!isSubmitting">Submit Request</span>
+            <span *ngIf="isSubmitting" class="loader"></span>
+          </button>
+        </div>
+        
+        <div class="unsub-link">
+          <a href="#">Already subscribed? Click here to unsubscribe</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<app-site-footer></app-site-footer>

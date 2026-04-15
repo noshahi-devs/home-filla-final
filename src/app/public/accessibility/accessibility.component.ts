@@ -17,9 +17,4 @@ import { SiteFooterComponent } from '../../shared/components/site-footer/site-fo
   styleUrls: ['./accessibility.component.css']
 })
 export class GlobalAccessibilityComponent {
-  activeSection: string = 'overview';
-
-  setActiveSection(section: string): void {
-    this.activeSection = section;
-  }
 }

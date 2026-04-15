@@ -24,6 +24,7 @@ import { SitemapRecentlySoldComponent } from './public/sitemap/sitemap-recently-
 import { SitemapForeclosuresComponent } from './public/sitemap/sitemap-foreclosures.component';
 import { SitemapMarketReportsComponent } from './public/sitemap/sitemap-market-reports.component';
 import { MediaRoomComponent } from './public/about/media-room/media-room.component';
+import { MediaSubscribeComponent } from './public/about/media-room/media-subscribe/media-subscribe.component';
 
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
 import { ContactComponent } from './public/contact/contact.component';
@@ -48,6 +49,7 @@ export const routes: Routes = [
   { path: 'about/accessibility', component: AccessibilityComponent },
   { path: 'about/careers', component: CareersComponent },
   { path: 'about/media', component: MediaRoomComponent },
+  { path: 'about/media/subscribe', component: MediaSubscribeComponent },
   { path: 'news', component: NewsInsightsComponent },
   { path: 'news/living', component: NewsLivingComponent },
   { path: 'news/research', component: NewsResearchComponent },
