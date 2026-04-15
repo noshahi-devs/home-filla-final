@@ -104,6 +104,12 @@ app-site-header {
   background-color: rgba(255,255,255,0.1);
 }
 
+.btn-default.active {
+  color: #ffcc00 !important;
+  font-weight: 700;
+  border-bottom: 3px solid #ffcc00;
+}
+
 .svg-inline--fa {
   width: 10px;
   height: 10px;
@@ -264,7 +270,7 @@ app-site-header {
   left: 0;
   width: 80px;
   height: 4px;
-  background-color: #d32f2f;
+  background-color: #0044aa; /* Changed from red to blue */
 }
 
 /* Filters */
@@ -303,16 +309,17 @@ app-site-header {
 
 .leader-card {
   position: relative;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   aspect-ratio: 3/4;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 68, 170, 0.1);
+  border: 1px solid rgba(0, 68, 170, 0.1);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .leader-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 68, 170, 0.2);
 }
 
 .leader-inner {

@@ -11,13 +11,21 @@
   padding: 0 20px;
 }
 
-/* Secondary Navigation */
+/* Ensure site header renders as block */
+app-site-header {
+  display: block !important;
+  margin-bottom: 0 !important;
+}
+
+/* ─── Secondary / Sub Navigation ──────────────────────────── */
 #subNav {
   background-color: #0044aa;
   position: sticky;
   top: 0;
   z-index: 2000;
   width: 100%;
+  margin-top: -5px;
+  padding-top: 5px;
 }
 
 #newContainer {
@@ -27,7 +35,14 @@
   padding: 4px 0;
 }
 
-.dropbtn, .btn-default {
+/* Dropdown wrapper */
+.dropdown {
+  position: relative;
+}
+
+/* Buttons & plain links in subnav */
+.dropbtn,
+.btn-default {
   background: transparent;
   color: white;
   padding: 12px 18px;
@@ -38,12 +53,74 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
+.dropbtn:hover,
+.btn-default:hover {
+  color: #ffcc00;
+}
+
+/* Active link — golden underline */
 .btn-default.active {
-  color: #ff3366; /* Match active state if needed */
+  color: #ffcc00;
+  font-weight: 700;
+  border-bottom: 3px solid #ffcc00;
+}
+
+/* ─── Dropdown Menus ──────────────────────────────────────── */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 3000;
+  padding: 8px 0;
+  list-style: none;
+  margin: 0;
+  border-radius: 0 0 6px 6px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content li a {
+  color: #333;
+  padding: 12px 20px;
+  display: block;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-content li a:hover {
+  background: #f0f7ff;
+  color: #0044aa;
+}
+
+.dropdown-content li a.active,
+.dropdown-content li a.b {
+  color: #0044aa;
   font-weight: 700;
 }
+
+/* FAW caret icon inside buttons */
+.dropbtn svg {
+  width: 10px;
+  height: 10px;
+  opacity: 0.8;
+}
+
+/* ─── Visibility helpers ──────────────────────────────────── */
+.showMob        { display: none  !important; }
+.showDT         { display: inline-flex !important; }
+.hideONmob      { display: inline-flex !important; }
+.hideONdesktop  { display: none  !important; }
 
 /* Hero Section */
 .brands-hero {
@@ -91,9 +168,10 @@
 .hero-underline {
   margin-top: 25px;
   width: 120px;
-  height: 6px;
-  background-color: white;
-  border-radius: 3px;
+  height: 4px;
+  background-color: #ffcc00; /* Use yellow underline for consistency with sub-nav */
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgba(255, 204, 0, 0.3);
 }
 
 /* Main Content */
@@ -128,16 +206,17 @@
 
 .brand-card {
   background: white;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 40px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  border: 1px solid #f0f0f0;
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 68, 170, 0.08);
+  border: 1px solid rgba(0, 68, 170, 0.1);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .brand-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(0, 68, 170, 0.15);
+  border-color: rgba(0, 68, 170, 0.3);
 }
 
 .brand-logo-container {
@@ -179,11 +258,17 @@
   gap: 8px;
   background: none;
   border: none;
-  color: #d32f2f;
+  color: #0044aa;
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
   margin: 0 auto;
+  transition: all 0.2s ease;
+}
+
+.read-more:hover {
+  color: #0066ff;
+  text-decoration: underline;
 }
 
 .read-more svg {
@@ -294,12 +379,36 @@
 }
 
 .social-icon {
-  padding: 12px; color: #555; display: flex; justify-content: center;
+  padding: 12px;
+  color: #0044aa; /* Changed from #555 to corporate blue */
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .brands-grid { grid-template-columns: 1fr; }
-  .hero-content h1 { font-size: 42px; }
-  .brand-card { padding: 30px; }
+.social-icon:hover {
+  background: #0044aa;
+  color: white;
 }
+
+/* ─── Responsive Breakpoints ──────────────────────────────── */
+@media (max-width: 1024px) {
+  .brands-grid { gap: 20px; }
+}
+
+@media (max-width: 768px) {
+  /* Subnav visibility flips */
+  .hideONmob     { display: none         !important; }
+  .showMob       { display: inline-flex  !important; }
+  .showDT        { display: none         !important; }
+  .hideONdesktop { display: inline-flex  !important; }
+
+  /* Content adjustments */
+  .brands-grid   { grid-template-columns: 1fr; }
+  .hero-content h1 { font-size: 42px; }
+  .brand-card    { padding: 30px; }
+
+  /* Hide social sidebar on very small screens */
+  .social-side-bar { display: none; }
+}
+

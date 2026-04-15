@@ -393,6 +393,12 @@ app-site-header {
   margin: 0;
 }
 
+.btn-default.active {
+  color: #ffcc00 !important;
+  font-weight: 700;
+  border-bottom: 3px solid #ffcc00;
+}
+
 .bod-content strong {
   color: #0044aa;
   font-weight: 600;
