@@ -432,6 +432,84 @@ app-site-header {
   }
 }
 
+@media (max-width: 1200px) {
+  .car-layout {
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+  }
+
+  .car-hero {
+    height: 380px;
+  }
+
+  .hero-content h1 {
+    font-size: 48px;
+  }
+
+  /* Purpose section adjustments */
+  .car-purpose-section .container {
+    gap: 40px;
+  }
+
+  .car-sec2-right {
+    width: 320px;
+  }
+}
+
+@media (max-width: 992px) {
+  .car-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .car-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .sidebar-card, .stats-card {
+    margin-bottom: 0;
+  }
+
+  /* Hero adjustments */
+  .car-hero {
+    height: 350px;
+  }
+
+  .hero-content h1 {
+    font-size: 42px;
+  }
+
+  /* Purpose section - stack layout */
+  .car-purpose-section .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .car-sec2-right {
+    width: 280px;
+    margin: 0 auto;
+  }
+
+  /* Values grid */
+  .car-values-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* DEI section */
+  .car-dei-section .container {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .car-dei-section img {
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
 @media (max-width: 768px) {
   /* Subnav visibility flips */
   .hideONmob     { display: none         !important; }
@@ -443,21 +521,614 @@ app-site-header {
     grid-template-columns: 1fr;
   }
 
+  .car-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hero section mobile */
+  .car-hero {
+    height: auto;
+    min-height: 350px;
+    padding: 40px 0;
+  }
+
   .hero-content h1 {
-    font-size: 36px;
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .hero-content h1 sup {
+    font-size: 18px;
+  }
+
+  .hero-underline {
+    width: 80px;
+    height: 3px;
+  }
+
+  /* Fix custom hero section with image overlay */
+  .car-hero[style*="background-color:#0044aa"] {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding: 0 0 20px 0 !important;
+    background-color: #0044aa !important;
+  }
+
+  /* Reposition the hero background image */
+  .car-hero[style*="background-color:#0044aa"] > div:first-child {
+    position: relative !important;
+    width: 100% !important;
+    height: 280px !important;
+    order: 2 !important;
+    border-radius: 0 !important;
+    border-top-left-radius: 150px !important;
+    margin: 0 !important;
+  }
+
+  /* Hero content container */
+  .car-hero[style*="background-color:#0044aa"] .hero-content {
+    position: relative !important;
+    order: 1 !important;
+    padding: 25px 20px 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .car-hero[style*="background-color:#0044aa"] .hero-container {
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .car-hero[style*="background-color:#0044aa"] h1 {
+    font-size: 28px !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
+    margin-bottom: 12px !important;
+    word-wrap: break-word !important;
+  }
+
+  .car-hero[style*="background-color:#0044aa"] p {
+    font-size: 15px !important;
+    max-width: 100% !important;
+    margin-top: 10px !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+  }
+
+  /* Container padding */
+  .container {
+    padding: 0 15px;
   }
 
   .car-body {
-    padding: 28px 22px;
+    padding: 24px 18px;
+    border-radius: 10px;
   }
-  
+
+  .car-headline {
+    font-size: 22px;
+    padding-bottom: 15px;
+    margin-bottom: 24px;
+  }
+
+  /* Role cards */
   .role-card {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
+    padding: 20px;
+  }
+
+  .role-info h4 {
+    font-size: 16px;
+  }
+
+  .role-btn {
+    width: 100%;
+    text-align: center;
   }
 
   .social-side-bar { display: none; }
+
+  /* Begin section */
+  .car-begin-section {
+    padding: 60px 15px 40px !important;
+  }
+
+  .car-begin-section h2 {
+    font-size: 28px !important;
+  }
+
+  /* Purpose section */
+  .car-purpose-section {
+    padding: 60px 0 !important;
+  }
+
+  .car-purpose-section h2 {
+    font-size: 32px !important;
+  }
+
+  .car-purpose-section .container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+
+  .car-purpose-section .container > div:first-child {
+    width: 100% !important;
+    min-width: 100% !important;
+    order: 1 !important;
+  }
+
+  .car-purpose-section .container > div:first-child > div {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100% !important;
+  }
+
+  .car-purpose-section .container > div:first-child > div > div {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 25px !important;
+  }
+
+  .car-purpose-section .container > div:first-child > div > div h3 {
+    font-size: 20px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .car-purpose-section .container > div:first-child > div > div p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+    margin: 0 !important;
+  }
+
+  .car-purpose-section .car-sec2-right {
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+    order: 2 !important;
+  }
+
+  .car-purpose-section .container > div:first-child > p {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Awards section */
+  .car-awards-section {
+    padding: 60px 15px !important;
+  }
+
+  .car-awards-section h2 {
+    font-size: 28px !important;
+  }
+
+  /* Blog section */
+  .car-blog-section {
+    padding: 60px 15px !important;
+  }
+
+  .car-blog-section h2 {
+    font-size: 28px !important;
+  }
+
+  /* Stats grid */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-number {
+    font-size: 20px;
+  }
+
+  /* Sidebar cards */
+  .sidebar-card, .stats-card {
+    padding: 24px;
+  }
+
+  .sidebar-card h2 {
+    font-size: 22px !important;
+  }
+
+  /* Custom hero section - mobile layout */
+  .custom-car-hero {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+  }
+
+  /* Hero image - position at bottom */
+  .custom-car-hero > div[style*="position:absolute"] {
+    position: relative !important;
+    width: 100% !important;
+    height: 220px !important;
+    order: 2 !important;
+    border-radius: 0 !important;
+    border-top-left-radius: 180px !important;
+    margin: 0 !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+  }
+
+  /* Hero content - first */
+  .custom-car-hero .hero-content {
+    position: relative !important;
+    order: 1 !important;
+    padding: 25px 20px !important;
+    z-index: 2 !important;
+  }
+
+  .custom-car-hero .hero-container {
+    padding: 0 !important;
+  }
+
+  .custom-car-hero .hero-container h1 {
+    font-size: 28px !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .custom-car-hero .hero-container p {
+    font-size: 15px !important;
+    max-width: 100% !important;
+    margin-top: 10px !important;
+  }
+
+  /* Hero slider controls */
+  .custom-car-hero .hero-slider-controls {
+    margin-top: 20px !important;
+  }
+
+  /* Floating search bar - as separate element below hero */
+  .floating-search-bar {
+    position: relative !important;
+    width: calc(100% - 30px) !important;
+    margin: 0 auto 30px !important;
+    left: auto !important;
+    right: auto !important;
+    padding: 18px 20px !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+    order: 3 !important;
+    z-index: 10 !important;
+    box-sizing: border-box !important;
+  }
+
+  .floating-search-bar > div:first-child {
+    font-size: 18px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  .floating-search-bar > div:last-child {
+    width: 100% !important;
+    margin-left: 0 !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+
+  .floating-search-bar input {
+    padding: 14px 45px 14px 16px !important;
+    font-size: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .floating-search-bar button {
+    width: 34px !important;
+    height: 34px !important;
+    right: 5px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+  }
+
+  .floating-search-bar button svg {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+  }
+
+  /* Mobile dropdown menu fixes - appear above hero */
+  .myMore {
+    display: block !important;
+    position: relative !important;
+    z-index: 10000 !important;
+  }
+
+  .myMore .dropbtn {
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #000 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: fixed !important;
+    top: 60px !important;
+    right: 15px !important;
+    left: auto !important;
+    min-width: 220px !important;
+    background: #fff !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25) !important;
+    border-radius: 12px !important;
+    z-index: 10001 !important;
+    padding: 10px 0 !important;
+    list-style: none !important;
+    margin: 0 !important;
+    border: 1px solid #e0e7f3 !important;
+  }
+
+  .dropdown-content li {
+    list-style: none !important;
+  }
+
+  .dropdown-content li a {
+    padding: 14px 20px !important;
+    font-size: 15px !important;
+    color: #333 !important;
+    text-decoration: none !important;
+    display: block !important;
+    font-weight: 500 !important;
+  }
+
+  .dropdown-content li a:hover {
+    background: #f0f7ff !important;
+    color: #0044aa !important;
+  }
+
+  /* Show dropdown on hover/focus/click for mobile */
+  .myMore:hover .dropdown-content,
+  .myMore:focus-within .dropdown-content,
+  .myMore.active .dropdown-content {
+    display: block !important;
+  }
+
+  /* Ensure dropdown is not clipped by parent containers */
+  .car-navbar {
+    overflow: visible !important;
+  }
+
+  #newContainer {
+    overflow: visible !important;
+  }
+
+  /* Ensure all text is visible - no truncation */
+  .careers-page p, .careers-page span, .careers-page div {
+    text-overflow: clip !important;
+  }
+
+  /* Navigation subnav */
+  .car-navbar .container {
+    padding: 0 15px !important;
+  }
+
+  #newContainer {
+    gap: 15px !important;
+  }
+
+  .nav-left {
+    font-size: 16px !important;
+  }
+
+  .nav-left span {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .hero-content h1 {
+    font-size: 26px;
+  }
+
+  .car-hero {
+    min-height: auto;
+    padding: 20px 0;
+  }
+
+  /* Fix hero for very small screens */
+  .car-hero[style*="background-color:#0044aa"] {
+    padding-bottom: 15px !important;
+  }
+
+  .car-hero[style*="background-color:#0044aa"] > div:first-child {
+    height: 200px !important;
+    border-top-left-radius: 80px !important;
+  }
+
+  .car-hero[style*="background-color:#0044aa"] .hero-content {
+    padding: 20px 15px 15px !important;
+  }
+
+  .car-hero[style*="background-color:#0044aa"] h1 {
+    font-size: 22px !important;
+    line-height: 1.3 !important;
+  }
+
+  .car-hero[style*="background-color:#0044aa"] p {
+    font-size: 14px !important;
+  }
+
+  .car-hero[style*="background-color:#0044aa"] .hero-slider-controls {
+    margin-top: 20px !important;
+    font-size: 14px !important;
+  }
+
+  .car-hero[style*="background-color:#0044aa"] .slide-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+  }
+
+  /* Fix search bar */
+  .floating-search-bar {
+    width: calc(100% - 20px) !important;
+    margin: 0 auto 25px !important;
+    padding: 15px !important;
+    border-radius: 12px !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .floating-search-bar > div:first-child {
+    font-size: 16px !important;
+    white-space: normal !important;
+  }
+
+  .floating-search-bar input {
+    padding: 12px 40px 12px 14px !important;
+    font-size: 13px !important;
+  }
+
+  .floating-search-bar button {
+    width: 30px !important;
+    height: 30px !important;
+    right: 4px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+  }
+
+  .car-begin-section h2 {
+    font-size: 24px !important;
+  }
+
+  .car-begin-section p {
+    font-size: 15px !important;
+  }
+
+  .car-purpose-section h2 {
+    font-size: 26px !important;
+  }
+
+  .car-purpose-section p {
+    font-size: 15px !important;
+  }
+
+  /* Role cards */
+  .role-card {
+    padding: 18px;
+  }
+
+  .role-info h4 {
+    font-size: 15px;
+  }
+
+  .role-info p {
+    font-size: 13px;
+  }
+
+  .role-btn {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+
+  /* Stats */
+  .stat-number {
+    font-size: 18px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  /* Testimonials */
+  .testimonials-section {
+    padding: 50px 15px !important;
+  }
+
+  .testimonials-section .section-heading {
+    font-size: 26px !important;
+  }
+
+  .testimonial-card {
+    padding: 25px 20px !important;
+  }
+
+  .quote-mark {
+    font-size: 48px !important;
+  }
+
+  .testimonial-quote {
+    font-size: 15px !important;
+  }
+
+  /* Blog cards */
+  .car-blog-section > div > div[style*="display: grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Video section */
+  div[style*="padding: 120px 20px"] h2 {
+    font-size: 28px !important;
+  }
+
+  /* Final CTA */
+  div[style*="background: #f0f4fb; padding: 100px"] h2 {
+    font-size: 26px !important;
+  }
+
+  /* Accordion sections */
+  div[style*="border-bottom: 1px solid #eee; padding: 30px 0"] h3 {
+    font-size: 18px !important;
+  }
+
+  /* Timeline */
+  div[style*="position: relative; padding-left: 80px"] {
+    padding-left: 50px !important;
+  }
+
+  div[style*="position: absolute; left: 35px"] {
+    left: 20px !important;
+  }
+
+  div[style*="position: absolute; left: -80px"] {
+    left: -50px !important;
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 20px !important;
+  }
+
+  /* Students section */
+  div[style*="flex-wrap: wrap-reverse"] > div:first-child {
+    min-width: 300px !important;
+    padding: 60px 20px !important;
+  }
+
+  div[style*="flex-wrap: wrap-reverse"] > div:first-child h1 {
+    font-size: 32px !important;
+  }
+
+  div[style*="flex-wrap: wrap-reverse"] > div:last-child {
+    min-width: 300px !important;
+  }
 }
 
 /* ─── Redesigned Testimonials Section ───────────────────── */
@@ -583,3 +1254,4 @@ app-site-header {
     padding: 30px 25px;
   }
 }
+
