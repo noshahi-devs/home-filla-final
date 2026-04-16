@@ -18,6 +18,8 @@ export class MediaSolutionsComponent implements OnInit {
   isChatOpen = false;
   isMobileMenuOpen = false;
   newMessage = '';
+  currentSlide = 0;
+  slideInterval: any;
 
   stats = [
     { label: 'Unique visitors', value: '73M', description: 'Reach a massive audience of motivated movers.', icon: 'chart-line' },
@@ -46,11 +48,32 @@ export class MediaSolutionsComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.startCarousel();
 
     // Auto-open chat after delay
     setTimeout(() => {
       this.isChatOpen = true;
     }, 5000);
+  }
+
+  startCarousel() {
+    this.slideInterval = setInterval(() => {
+      this.nextSlide();
+    }, 5000);
+  }
+
+  setSlide(index: number) {
+    this.currentSlide = index;
+    clearInterval(this.slideInterval);
+    this.startCarousel();
+  }
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % 3;
+  }
+
+  prevSlide() {
+    this.currentSlide = (this.currentSlide - 1 + 3) % 3;
   }
 
   initForm() {

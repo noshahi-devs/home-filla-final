@@ -1,73 +1,38 @@
 <!-- Home Filla Media Solutions Portal -->
 <!-- Home Filla Media Solutions Portal Header -->
-<header class="pro-header">
-  <div class="pro-header-container">
-    <a routerLink="/media-solutions" class="pro-logo-area">
-      <span class="pro-logo-text">Home Filla</span>
-      <span class="ms-badge">MEDIA</span>
-    </a>
-
-    <nav class="pro-nav">
-      <div class="pro-nav-item">
-        <a href="javascript:void(0)" class="pro-nav-link">Partnerships</a>
-      </div>
-      <div class="pro-nav-item">
-        <a href="javascript:void(0)" class="pro-nav-link">Ad Specs</a>
-      </div>
-      <div class="pro-nav-item">
-        <a href="javascript:void(0)" class="pro-nav-link">Reach Data</a>
-      </div>
-    </nav>
-
-    <div class="pro-header-actions">
-      <a routerLink="/marketing/login" class="pro-action-item desktop-only"><i class="fa fa-user-circle"></i> Brand Login</a>
-      <a href="#inquiry" class="btn-cta-blue desktop-only">Contact Team</a>
-      
-      <button class="menu-toggle" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile Menu Overlay -->
-  <div class="ms-mobile-overlay" [class.show]="isMobileMenuOpen">
-    <nav class="ms-mobile-nav">
-      <div class="ms-mobile-header">
-        <span class="pro-logo-text">Media Solutions</span>
-        <button class="close-mobile" (click)="toggleMobileMenu()">&times;</button>
-      </div>
-      <div class="ms-mobile-links">
-        <a routerLink="/media-solutions" (click)="toggleMobileMenu()">Home</a>
-        <a href="javascript:void(0)" (click)="toggleMobileMenu()">Partnerships</a>
-        <a href="javascript:void(0)" (click)="toggleMobileMenu()">Ad Specs</a>
-        <a href="javascript:void(0)" (click)="toggleMobileMenu()">Reach Data</a>
-        <hr>
-        <a routerLink="/marketing/login" (click)="toggleMobileMenu()">Brand Login</a>
-        <a href="#inquiry" class="mobile-cta" (click)="toggleMobileMenu()">Contact Team</a>
-      </div>
-    </nav>
-  </div>
-</header>
+<app-site-header></app-site-header>
 <main class="ms-portal">
-  <!-- Dynamic Hero Section -->
-  <section class="ms-hero-parallax">
-    <div class="hero-fixed-bg" [style.background-image]="'url(/assets/modern_moving_hero.png)'"></div>
+  <!-- Premium Carousel Hero Section -->
+  <section class="ms-hero-carousel">
+    <div class="carousel-slides">
+      <div class="carousel-slide" [class.active]="currentSlide === 0" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80')"></div>
+      <div class="carousel-slide" [class.active]="currentSlide === 1" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1920&q=80')"></div>
+      <div class="carousel-slide" [class.active]="currentSlide === 2" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80')"></div>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-container">
       <div class="hero-content">
+        <span class="hero-badge">Media Solutions</span>
         <h1 class="hero-title">
-          When people move, <br>
-          their world <br>
-          changes
+          <span class="title-line">Reach Movers</span>
+          <span class="title-line accent">Drive Growth</span>
         </h1>
         <p class="hero-subtitle">
-          Home Filla's Media Solutions team connects your brand with qualified consumers at the most pivotal lifecycle moments. Build deep connections with shoppers ready for what's next.
+          Connect with qualified consumers at pivotal lifecycle moments. Premium advertising solutions for brands that want results.
         </p>
-        <a href="#inquiry" class="btn-hero-main">Learn More <i class="fa fa-chevron-right"></i></a>
+        <div class="hero-actions">
+          <a href="#inquiry" class="btn-hero-main">Get Started <i class="fa fa-arrow-right"></i></a>
+          <a href="#inquiry" class="btn-hero-outline">View Media Kit</a>
+        </div>
       </div>
     </div>
+    <div class="carousel-dots">
+      <span class="dot" [class.active]="currentSlide === 0" (click)="setSlide(0)"></span>
+      <span class="dot" [class.active]="currentSlide === 1" (click)="setSlide(1)"></span>
+      <span class="dot" [class.active]="currentSlide === 2" (click)="setSlide(2)"></span>
+    </div>
+    <button class="carousel-nav prev" (click)="prevSlide()"><i class="fa fa-chevron-left"></i></button>
+    <button class="carousel-nav next" (click)="nextSlide()"><i class="fa fa-chevron-right"></i></button>
   </section>
 
   <!-- Impact Stats Grid -->
