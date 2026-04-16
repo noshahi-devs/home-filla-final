@@ -1,71 +1,168 @@
 <app-site-header></app-site-header>
 
-<main class="renters-hub">
+<main class="renters-roadmap-page">
   <!-- Hero Section -->
-  <section class="hub-hero">
-    <div class="hero-bg-image">
-      <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80" alt="Rental Home Interior">
-      <div class="hero-overlay"></div>
-    </div>
-    
-    <div class="hero-content">
-      <div class="glass-box">
-        <span class="hub-badge">RESOURCES</span>
-        <h1 class="hero-title">Navigating Your Rental Journey</h1>
-        <p class="hero-subtitle">Expert guides, tips, and checklists to help you find, secure, and enjoy your next home.</p>
-        
-        <div class="hero-actions">
-          <a routerLink="/listings/rent" class="btn-primary">Browse Rentals</a>
+  <section class="roadmap-hero">
+    <div class="container">
+      <div class="hero-flex">
+        <div class="hero-text-side">
+          <h1 class="hero-title">Renter’s <br>Resource Center</h1>
+          <p class="hero-intro">
+            Whether you’re renting for the first time or looking for a refresher, we’ve got the tools and tips to find the perfect home for you.
+          </p>
+          <div class="search-wrapper">
+            <div class="search-bar">
+              <input type="text" placeholder="Faisalabad, PB" class="search-input">
+              <button class="search-icon-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image-side">
+          <img src="https://images.unsplash.com/photo-1560448204-61dc36dc98c8?w=800&q=80" alt="Modern Apartment Interior" class="hero-illustration premium-shadow-blue">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Filter Navigation -->
-  <section class="hub-filters">
-    <div class="filter-container">
-      <button 
-        *ngFor="let cat of categories" 
-        class="filter-pill" 
-        [class.active]="activeCategory === cat"
-        (click)="setCategory(cat)">
-        {{ cat }}
-      </button>
+  <!-- Roadmap Introduction -->
+  <section class="roadmap-intro">
+    <div class="container text-center">
+      <h2 class="roadmap-main-title">Your rental roadmap</h2>
+      <p class="roadmap-subtitle">Take a guided ride through the typical rental process</p>
+      <div class="down-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+      </div>
     </div>
   </section>
 
-  <!-- Articles Grid -->
-  <section class="hub-articles">
-    <div class="articles-container">
-      <h2 class="section-title">
-        {{ activeCategory === 'All' ? 'Latest Guides & Articles' : activeCategory }}
-      </h2>
+  <!-- Roadmap Steps -->
+  <section class="roadmap-steps">
+    <div class="container timeline-container">
+      <!-- Winding Path SVG (Conceptualized in CSS/SVG) -->
+      <div class="winding-path"></div>
       
-      <div class="articles-grid">
-        <article class="article-card" *ngFor="let article of filteredArticles">
-          <div class="card-img-wrap">
-            <img [src]="article.imgUrl" [alt]="article.title">
-            <div class="card-badge">{{ article.category }}</div>
+      <div class="step-row" *ngFor="let step of steps; let i = index" [class.reverse]="i % 2 !== 0">
+        <div class="step-visual">
+          <div class="step-img-box">
+            <img [src]="step.imgUrl" [alt]="step.title">
           </div>
-          
-          <div class="card-body">
-            <div class="card-meta">
-              <span>⏱ {{ article.readTimeMin }} min read</span>
+        </div>
+        <div class="step-content">
+          <div class="step-info">
+            <span class="step-label">Step {{ step.stepNum }}</span>
+            <h3 class="step-title">{{ step.title }}</h3>
+            <p class="step-desc">{{ step.description }}</p>
+            <div class="step-actions">
+              <a [routerLink]="step.btnLink" class="btn-roadmap">{{ step.btnText }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-cta-section">
+    <div class="container text-center">
+      <h2 class="cta-title">Let’s get your rental search started</h2>
+      <div class="cta-search-bar">
+        <input type="text" placeholder="City, State" class="cta-input">
+        <button class="btn-primary-blue">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tips and Advice Grid -->
+  <section class="tips-advice-section">
+    <div class="container">
+      <h2 class="section-title">More tips and advice</h2>
+      <div class="tips-grid">
+        <div class="tip-card" *ngFor="let tip of tips">
+          <div class="tip-img-top" [style.backgroundImage]="'url(' + tip.imgUrl + ')'"></div>
+          <div class="tip-body">
+            <a [routerLink]="tip.linkUrl" class="tip-link">{{ tip.title }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-40">
+        <a routerLink="/rent/resource-center" class="btn-outline-blue">View all</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perfect Place Section -->
+  <section class="perfect-place-section">
+    <div class="perfect-bg-overlay"></div>
+    <div class="container relative-z">
+      <div class="row">
+        <div class="col-md-7">
+          <h2 class="cta-title white">Find the perfect place to rent</h2>
+          <p class="cta-subtitle white">Search millions of apartments, houses, and townhomes available for rent.</p>
+          <div class="mt-30">
+            <a routerLink="/listings/rent" class="btn-premium-blue">Start Searching</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Homeownership Section -->
+  <section class="homeownership-section">
+    <div class="container">
+      <div class="ownership-header text-center">
+        <h2 class="section-title">Thinking about homeownership?</h2>
+        <p class="section-subtitle">Transitioning from renting to buying doesn't have to be overwhelming. We're here to help.</p>
+      </div>
+      
+      <div class="premium-ownership-box">
+        <div class="ownership-info-side">
+          <div class="ownership-grid">
+            <div class="ownership-card">
+              <div class="icon-circle shadow-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </div>
+              <h4 class="card-small-title">First-time buyer guides</h4>
+              <p class="card-mini-desc">Everything you need to know about purchasing your first home.</p>
+              <a routerLink="/guide/home-buying" class="btn-text-link">View resources &rarr;</a>
             </div>
             
-            <h3 class="card-title">{{ article.title }}</h3>
-            <p class="card-excerpt">{{ article.excerpt }}</p>
+            <div class="ownership-card">
+              <div class="icon-circle shadow-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="10" y1="10" x2="10" y2="10"></line><line x1="14" y1="10" x2="14" y2="10"></line><line x1="10" y1="14" x2="10" y2="14"></line><line x1="14" y1="14" x2="14" y2="14"></line></svg>
+              </div>
+              <h4 class="card-small-title">Affordability calculator</h4>
+              <p class="card-mini-desc">Find out exactly how much home you can afford.</p>
+              <a routerLink="/mortgages" class="btn-text-link">Try it now &rarr;</a>
+            </div>
             
-            <a href="#" class="read-more" (click)="$event.preventDefault()">Read Article <i class="fa fa-arrow-right"></i></a>
+            <div class="ownership-card">
+              <div class="icon-circle shadow-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <h4 class="card-small-title">Connect with an agent</h4>
+              <p class="card-mini-desc">Get expert help from local agents in your area.</p>
+              <a routerLink="/find-agent" class="btn-text-link">Find an agent &rarr;</a>
+            </div>
+            
+            <div class="ownership-card">
+              <div class="icon-circle shadow-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+              <h4 class="card-small-title">Real estate glossary</h4>
+              <p class="card-mini-desc">Learn the key terms before you start your search.</p>
+              <a routerLink="/guide/glossary" class="btn-text-link">See terms &rarr;</a>
+            </div>
           </div>
-        </article>
+        </div>
+        <div class="ownership-image-side">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1000&q=80" alt="Beautiful home exterior" class="premium-img">
+          <div class="img-badge">
+            <span class="badge-dot"></span> Ready to buy?
+          </div>
+        </div>
       </div>
-      
-      <!-- Empty State -->
-      <div class="empty-state" *ngIf="filteredArticles.length === 0">
-        <p>No articles found for this category at the moment. Check back soon!</p>
-      </div>
-
     </div>
   </section>
 </main>

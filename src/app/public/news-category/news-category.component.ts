@@ -29,6 +29,10 @@ export class NewsCategoryComponent implements OnInit {
   zipCode: string = '';
   titlesOnly: boolean = false;
 
+  // Mobile Menu State
+  isMobileMenuOpen: boolean = false;
+  isFilterMenuOpen: boolean = false;
+
   // Filter Options (Mock data for UI)
   availableTags = ['Homebuying', 'Updates', 'First-Time Home Buyer', 'Video', 'Home Inspections', 'Mortgage', 'Design'];
   availableYears = ['2024', '2023', '2022', '2021', '2020'];
@@ -109,5 +113,23 @@ export class NewsCategoryComponent implements OnInit {
     this.zipCode = '';
     this.titlesOnly = false;
     this.applyFilters();
+  }
+
+  // Mobile Menu Methods
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+  }
+
+  // Filter Menu Methods
+  toggleFilterMenu() {
+    this.isFilterMenuOpen = !this.isFilterMenuOpen;
+  }
+
+  closeFilterMenu() {
+    this.isFilterMenuOpen = false;
   }
 }

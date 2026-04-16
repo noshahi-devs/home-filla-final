@@ -26,9 +26,31 @@
         <button class="search-trigger">
           <i class="fa fa-search"></i>
         </button>
+        <button class="mobile-menu-toggle" (click)="toggleMobileMenu()" aria-label="Menu">
+          <i class="fa fa-bars"></i>
+        </button>
+        <button class="filter-toggle" (click)="toggleFilterMenu()" aria-label="Filters">
+          <i class="fa fa-filter"></i>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" [class.show]="isMobileMenuOpen" (click)="closeMobileMenu()">
+    <div class="mobile-menu-content" (click)="$event.stopPropagation()">
+      <button class="mobile-menu-close" (click)="closeMobileMenu()" aria-label="Close menu">
+        <i class="fa fa-times"></i>
+      </button>
+      <ul class="mobile-category-list">
+        <li *ngFor="let link of navLinks" [class.active]="link.active">
+          <a [routerLink]="link.route" class="mobile-link-label" (click)="closeMobileMenu()">
+            {{ link.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <main class="portal-content">
      <!-- Top 4 Highlights Section (Most Popular) -->
@@ -48,10 +70,15 @@
       </div>
     </section>
 
+    <!-- Filter Toggle Button (Mobile) -->
+    <button class="filter-toggle-btn" (click)="toggleFilterMenu()" aria-label="Filters">
+      <i class="fa fa-filter"></i>
+    </button>
+
     <div class="portal-main-layout">
-      
+
       <!-- ADVANCED SIDEBAR FILTERS -->
-      <aside class="exploration-sidebar">
+      <aside class="exploration-sidebar" [class.mobile-open]="isFilterMenuOpen">
         <div class="filter-card">
           <div class="filter-card-header">
             <i class="fa fa-filter"></i> Article Filters

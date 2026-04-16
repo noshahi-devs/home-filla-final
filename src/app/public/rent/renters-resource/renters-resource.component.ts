@@ -4,13 +4,19 @@ import { RouterModule } from '@angular/router';
 import { SiteHeaderComponent } from '../../../shared/components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../../shared/components/site-footer/site-footer.component';
 
-interface RentArticle {
-  id: string;
-  category: string;
+interface RoadmapStep {
+  stepNum: number;
   title: string;
-  excerpt: string;
+  description: string;
   imgUrl: string;
-  readTimeMin: number;
+  btnText: string;
+  btnLink: string;
+}
+
+interface ResourceCard {
+  title: string;
+  imgUrl: string;
+  linkUrl: string;
 }
 
 @Component({
@@ -21,68 +27,88 @@ interface RentArticle {
   styleUrls: ['./renters-resource.component.css']
 })
 export class RentersResourceComponent {
-  categories: string[] = ['All', 'Finding a Rental', 'Lease Advice', 'Renter Rights', 'Moving'];
-  activeCategory: string = 'All';
 
-  articles: RentArticle[] = [
+  steps: RoadmapStep[] = [
     {
-      id: 'a1',
-      category: 'Finding a Rental',
-      title: 'Top 10 Things to Check When Viewing an Apartment',
-      excerpt: 'From water pressure to hidden pet fees, make sure you know what to look for when touring your next potential home.',
-      imgUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80',
-      readTimeMin: 4
+      stepNum: 1,
+      title: 'Set your budget',
+      description: 'Before you start hunting, pinpoint exactly how much rent you can comfortably afford each month.',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/step-1.png',
+      btnText: 'Calculate budget',
+      btnLink: '/my-home/sale-proceeds-calculator' // placeholder for budget calculator
     },
     {
-      id: 'a2',
-      category: 'Lease Advice',
-      title: 'How to Negotiate Your Lease Like a Pro',
-      excerpt: 'Rent is rarely set in stone if you know the right levers to pull. Learn how to securely negotiate lease terms before signing.',
-      imgUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80',
-      readTimeMin: 6
+      stepNum: 2,
+      title: 'Find the right neighborhood',
+      description: 'It’s all about location, location, location! Our interactive map can help you pick the ideal spot.',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/step-2.png',
+      btnText: 'Define your search area',
+      btnLink: '/listings/rent'
     },
     {
-      id: 'a3',
-      category: 'Renter Rights',
-      title: 'Understanding Security Deposits & Deductions',
-      excerpt: 'Don\'t let landlords charge you for normal wear and tear. Here is the legal breakdown of what they can actually deduct.',
-      imgUrl: 'https://images.unsplash.com/photo-1555529733-0e67056058e1?w=800&q=80',
-      readTimeMin: 5
+      stepNum: 3,
+      title: 'Prioritize your wish list',
+      description: 'Figure out what you can (and can’t) live without. In-unit laundry, a doorman, a pet-friendly place—you name it!',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/step-3.png',
+      btnText: 'Consider these amenities',
+      btnLink: '/listings/rent'
     },
     {
-      id: 'a4',
-      category: 'Moving',
-      title: 'The Ultimate Renter\'s Moving Checklist',
-      excerpt: 'A seamless move requires rigorous planning. Follow our 4-week structured checklist to ensure nothing is forgotten.',
-      imgUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
-      readTimeMin: 8
+      stepNum: 4,
+      title: 'Start your search',
+      description: 'Use our free apartment hunting checklist to narrow your top choices.',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/step-4.png',
+      btnText: 'Start searching',
+      btnLink: '/listings/rent'
     },
     {
-      id: 'a5',
-      category: 'Lease Advice',
-      title: 'Breaking a Lease: What It Actually Costs',
-      excerpt: 'Need to move out early? Understand the potential penalties and the correct legal strategy to minimize financial loss.',
-      imgUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80',
-      readTimeMin: 7
+      stepNum: 5,
+      title: 'Sign the lease',
+      description: 'Review the fine print thoroughly before making anything official.',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/step-5.png',
+      btnText: 'Read the ultimate lease guide',
+      btnLink: '/rent/resource-center'
     },
     {
-      id: 'a6',
-      category: 'Finding a Rental',
-      title: 'Red Flags on Rental Applications',
-      excerpt: 'Identity theft scams and bait-and-switch listings are common. Arm yourself with knowledge of common apartment red flags.',
-      imgUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80',
-      readTimeMin: 3
+      stepNum: 6,
+      title: 'Make your move',
+      description: 'Once you’re approved for the new digs, hire movers, arrange temporary storage if needed, and transfer utilities and other services.',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/step-6.png',
+      btnText: 'Follow these steps',
+      btnLink: '/rent/resource-center'
     }
   ];
 
-  setCategory(cat: string) {
-    this.activeCategory = cat;
-  }
-
-  get filteredArticles(): RentArticle[] {
-    if (this.activeCategory === 'All') {
-      return this.articles;
+  tips: ResourceCard[] = [
+    {
+      title: 'Apartments offering move-in specials: how to find them to save on rent',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/article-1.jpg',
+      linkUrl: '/rent/resource-center'
+    },
+    {
+      title: 'The best time to rent an apartment: a comprehensive guide',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/article-2.jpg',
+      linkUrl: '/rent/resource-center'
+    },
+    {
+      title: 'How to get approved for an apartment: 6 tips to make your rental application stand out',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/article-3.jpg',
+      linkUrl: '/rent/resource-center'
+    },
+    {
+      title: 'For rent by owner: a guide to finding rental homes with private landlords',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/article-4.jpg',
+      linkUrl: '/rent/resource-center'
+    },
+    {
+      title: 'Renting an apartment vs. renting a house: how to choose which Is right for you',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/article-5.jpg',
+      linkUrl: '/rent/resource-center'
+    },
+    {
+      title: 'Share your renter profile with landlords in minutes.',
+      imgUrl: 'https://b2cdata.marketing.moveaws.com/mk/images/roadmap/2/article-6.jpg',
+      linkUrl: '/rent/resource-center'
     }
-    return this.articles.filter(a => a.category === this.activeCategory);
-  }
+  ];
 }
