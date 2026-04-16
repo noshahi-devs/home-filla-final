@@ -31,21 +31,44 @@
 .rdc-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     text-decoration: none;
     color: white;
+    transition: opacity 0.3s;
 }
 
-.house-icon {
-    width: 20px;
-    height: 20px;
+.rdc-logo:hover {
+    opacity: 0.85;
 }
 
-.logo-text {
-    font-weight: 800;
-    font-size: 1.1rem;
+.hf-badge {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(59, 130, 246, 0.5));
+    border-radius: 9px;
+}
+
+.logo-wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 2px;
+}
+
+.logo-name {
+    font-weight: 900;
+    font-size: 1.15rem;
     letter-spacing: -0.5px;
-    color: white;
+    color: #ffffff;
+}
+
+.logo-tagline {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #93c5fd;
 }
 
 .visit-link {

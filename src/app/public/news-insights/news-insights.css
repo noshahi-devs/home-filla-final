@@ -957,6 +957,96 @@
     font-size: 11px;
     white-space: nowrap;
   }
+
+  /* Split side 2-column to single */
+  .split-side {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .side-article-card {
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+  }
+
+  .side-img-box {
+    height: 80px;
+  }
+
+  .side-title {
+    font-size: 14px;
+  }
+
+  /* Sign up card */
+  .signup-card {
+    padding: 25px 20px;
+    margin: 30px 0;
+  }
+
+  .signup-icon {
+    margin-bottom: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .signup-card h4 {
+    font-size: 20px;
+  }
+
+  /* Sponsored section */
+  .sponsored-section {
+    margin-top: 30px;
+    padding-top: 20px;
+  }
+
+  .ad-img-box {
+    height: 140px;
+  }
+
+  .ad-title {
+    font-size: 14px;
+  }
+
+  /* Card thumbs */
+  .card-thumb img {
+    height: 150px;
+  }
+
+  .play-overlay {
+    font-size: 28px;
+  }
+
+  /* Sidebar news items */
+  .sidebar-news-item {
+    grid-template-columns: 70px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .sidebar-thumb {
+    height: 50px;
+  }
+
+  /* News title */
+  .news-title {
+    font-size: 16px;
+  }
+
+  .news-title.small {
+    font-size: 14px;
+  }
+
+  /* Quote box */
+  .editorial-quote-box {
+    padding: 25px;
+    border-radius: 30px;
+    margin-top: 30px;
+  }
+
+  .quote-content p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1013,7 +1103,132 @@
     height: 32px;
     font-size: 12px;
   }
-}
+
+  /* Split layout mobile */
+  .split-side {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .side-article-card {
+    grid-template-columns: 90px 1fr;
+    gap: 12px;
+  }
+
+  .side-img-box {
+    height: 90px;
+  }
+
+  .split-heading {
+    font-size: 24px;
+  }
+
+  .split-excerpt {
+    font-size: 15px;
+  }
+
+  /* Sponsored section mobile */
+  .sponsored-section {
+    margin-top: 25px;
+    padding-top: 15px;
+  }
+
+  .sponsored-item {
+    margin-bottom: 20px;
+  }
+
+  .ad-title {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .ad-img-box {
+    height: 120px;
+    border-radius: 10px;
+  }
+
+  /* Sign up card mobile */
+  .signup-card {
+    padding: 25px 20px;
+    margin: 25px 0;
+    border-radius: 16px;
+  }
+
+  .signup-icon {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 20px;
+  }
+
+  .signup-card h4 {
+    font-size: 18px;
+  }
+
+  .brand-subtext {
+    font-size: 13px;
+  }
+
+  /* Cards mobile */
+  .card-thumb img {
+    height: 200px;
+    border-radius: 10px;
+  }
+
+  .play-overlay {
+    font-size: 36px;
+  }
+
+  /* Sidebar items mobile */
+  .sidebar-news-item {
+    grid-template-columns: 70px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .sidebar-thumb {
+    height: 55px;
+    border-radius: 6px;
+  }
+
+  /* Typography mobile */
+  .news-title {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .news-title.small {
+    font-size: 13px;
+  }
+
+  .news-cat {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .news-author {
+    font-size: 11px;
+  }
+
+  /* Market update */
+  .market-update-card {
+    margin-bottom: 20px;
+  }
+
+  .expert-info p {
+    font-size: 12px;
+  }
+
+  /* Quote box */
+  .editorial-quote-box {
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+
+  .quote-content p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
 
 @media (max-width: 480px) {
   .news-nav-content {

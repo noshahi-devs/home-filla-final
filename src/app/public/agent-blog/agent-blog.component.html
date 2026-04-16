@@ -1,18 +1,31 @@
 <div class="tech-blog-portal agent-theme">
+
   <!-- Top Navigation (Sub-Header) -->
   <div class="gnav">
     <div class="site-inner">
       <a routerLink="/" title="Visit Home Filla" class="rdc-logo">
-        <svg class="house-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+        <!-- Premium Home Filla Logo Badge -->
+        <svg class="hf-badge" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="hfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="38" height="38" rx="9" fill="url(#hfGrad)" />
+          <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white"/>
         </svg>
-        <span class="logo-text">Home Filla</span>
+        <div class="logo-wordmark">
+          <span class="logo-name">Home Filla</span>
+          <span class="logo-tagline">Agent Hub</span>
+        </div>
       </a>
       <a routerLink="/" class="visit-link">
-        Visit homefilla.com →
+        homefilla.com &rarr;
       </a>
     </div>
   </div>
+
 
   <header id="masthead" class="site-header" role="banner" [class.menu-open]="isMobileMenuOpen">
     <div class="site-inner">
