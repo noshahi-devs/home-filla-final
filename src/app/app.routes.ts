@@ -25,6 +25,7 @@ import { SitemapForeclosuresComponent } from './public/sitemap/sitemap-foreclosu
 import { SitemapMarketReportsComponent } from './public/sitemap/sitemap-market-reports.component';
 import { MediaRoomComponent } from './public/about/media-room/media-room.component';
 import { MediaSubscribeComponent } from './public/about/media-room/media-subscribe/media-subscribe.component';
+import { HomemadeComponent } from './public/homemade/homemade.component';
 
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
 import { ContactComponent } from './public/contact/contact.component';
@@ -57,6 +58,7 @@ export const routes: Routes = [
   { path: 'news/living', component: NewsLivingComponent },
   { path: 'news/research', component: NewsResearchComponent },
   { path: 'news/:category', component: NewsCategoryComponent },
+  { path: 'homemade', component: HomemadeComponent },
   { path: 'manage-rentals', component: ManageRentalsComponent },
   { path: 'accessibility', component: GlobalAccessibilityComponent },
   { path: 'ad-choices', component: AdChoicesComponent },

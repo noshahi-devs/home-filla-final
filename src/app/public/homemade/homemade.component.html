@@ -1,0 +1,156 @@
+<div class="homemade-portal">
+  <!-- Top Navigation Bar -->
+  <header class="homemade-header" [class.menu-open]="isMobileMenuOpen">
+    <div class="wrap">
+      <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Top Menu">
+        <button class="menu-toggle" (click)="toggleMenu()" aria-controls="top-menu"
+          [attr.aria-expanded]="isMobileMenuOpen">
+          <svg class="icon icon-bars" *ngIf="!isMobileMenuOpen" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+          </svg>
+          <svg class="icon icon-close" *ngIf="isMobileMenuOpen" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+          </svg>
+          <span class="sr-only">Menu</span>
+        </button>
+        <div class="menu-top-menu-container" [class.show]="isMobileMenuOpen">
+          <ul id="top-menu" class="menu">
+            <li class="menu-item current-menu-item"><a routerLink="/homemade">Home</a></li>
+            <li class="menu-item menu-item-has-children">
+              <a href="javascript:void(0)">Company News</a>
+              <ul class="sub-menu">
+                <li><a href="javascript:void(0)">News & Updates</a></li>
+                <li><a href="javascript:void(0)">Who We Are</a></li>
+                <li><a href="javascript:void(0)">Home Filla Giving Back</a></li>
+              </ul>
+            </li>
+            <li class="menu-item"><a href="javascript:void(0)">Leadership Perspectives</a></li>
+            <li class="menu-item menu-item-has-children">
+              <a href="javascript:void(0)">Home Filla Innovation</a>
+              <ul class="sub-menu">
+                <li><a href="javascript:void(0)">Product News</a></li>
+                <li><a href="javascript:void(0)">Tech Stories</a></li>
+                <li><a href="javascript:void(0)">Tech Blog</a></li>
+              </ul>
+            </li>
+            <li class="menu-item menu-item-has-children">
+              <a href="javascript:void(0)">Knowledge Center</a>
+              <ul class="sub-menu">
+                <li><a href="javascript:void(0)">Renter Tips</a></li>
+                <li><a href="javascript:void(0)">Buyer Tips</a></li>
+                <li><a href="javascript:void(0)">Owner & Seller Tips</a></li>
+                <li><a href="javascript:void(0)">Real Stories</a></li>
+                <li><a href="javascript:void(0)">Economic Blog</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <nav class="social-navigation" role="navigation" aria-label="Footer Social Links Menu">
+        <div class="menu-social-links-menu-container">
+          <ul id="menu-social-links-menu" class="social-links-menu">
+            <li class="social-item"><a href="javascript:void(0)" target="_blank" aria-label="Facebook"><i
+                  class="fa-brands fa-facebook-f"></i></a></li>
+            <li class="social-item"><a href="javascript:void(0)" target="_blank" aria-label="Twitter"><i
+                  class="fa-brands fa-twitter"></i></a></li>
+            <li class="social-item"><a href="javascript:void(0)" target="_blank" aria-label="Instagram"><i
+                  class="fa-brands fa-instagram"></i></a></li>
+            <li class="social-item"><a href="javascript:void(0)" target="_blank" aria-label="Pinterest"><i
+                  class="fa-brands fa-pinterest"></i></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="homemade-hero" [class.blur-content]="isMobileMenuOpen">
+    <div class="hero-container">
+      <div class="hero-branding">
+        <div class="homemade-logo">
+          <svg class="house-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+          </svg>
+          <span class="logo-text">Homemade</span>
+        </div>
+        <p class="hero-tagline">from our home to yours</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="homemade-content" [class.blur-content]="isMobileMenuOpen">
+    <div class="content-wrap">
+      <!-- Article Feed -->
+      <section class="article-feed">
+        <div class="article-grid">
+          <div class="article-card" *ngFor="let art of articles">
+            <div class="article-image">
+              <img [src]="art.image" [alt]="art.title">
+              <div class="article-category-badge">{{ art.category }}</div>
+            </div>
+            <div class="article-body">
+              <h2 class="article-title"><a href="javascript:void(0)">{{ art.title }}</a></h2>
+              <p class="article-excerpt">{{ art.excerpt }}</p>
+              <div class="article-footer">
+                <span class="article-date">{{ art.date }}</span>
+                <a href="javascript:void(0)" class="read-more">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination-container">
+          <button class="load-more-btn">Load More Stories</button>
+        </div>
+      </section>
+
+      <!-- Sidebar -->
+      <aside class="homemade-sidebar">
+        <!-- Search Widget -->
+        <div class="widget search-widget">
+          <div class="search-form">
+            <input type="text" placeholder="Search stories...">
+            <button class="search-submit"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+
+        <!-- Welcome Widget -->
+        <div class="widget welcome-widget">
+          <h3 class="widget-title">Welcome to Homemade</h3>
+          <p class="welcome-text">
+            Welcome to Homemade, Home Filla's corporate blog. Here you'll find stories about our innovation, purpose,
+            products and people. Stories are added regularly, so stay tuned.
+          </p>
+        </div>
+
+        <!-- Categories Widget -->
+        <div class="widget categories-widget">
+          <h3 class="widget-title">Categories</h3>
+          <ul class="category-list">
+            <li *ngFor="let cat of categories">
+              <a href="javascript:void(0)">{{ cat }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Newsletter Widget -->
+        <div class="widget newsletter-widget">
+          <h3 class="widget-title">Stay Updated</h3>
+          <p>Get the latest stories delivered to your inbox.</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Email address">
+            <button class="subscribe-btn">Subscribe</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <app-site-footer></app-site-footer>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" *ngIf="isMobileMenuOpen" (click)="closeMenu()"></div>
+</div>
