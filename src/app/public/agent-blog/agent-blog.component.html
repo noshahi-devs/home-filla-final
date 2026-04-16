@@ -1,0 +1,144 @@
+<div class="tech-blog-portal agent-theme">
+  <!-- Top Navigation (Sub-Header) -->
+  <div class="gnav">
+    <div class="site-inner">
+      <a routerLink="/" title="Visit Home Filla" class="rdc-logo">
+        <svg class="house-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+        </svg>
+        <span class="logo-text">Home Filla</span>
+      </a>
+      <a routerLink="/" class="visit-link">
+        <strong>Visit homefilla.com</strong>
+      </a>
+    </div>
+  </div>
+
+  <header id="masthead" class="site-header" role="banner" [class.menu-open]="isMobileMenuOpen">
+    <div class="site-inner">
+      <div class="site-header-main">
+        <div class="site-branding">
+          <h1 class="site-title"><a routerLink="/agent-blog">Home Filla Agent Blog</a></h1>
+          <p class="site-description">Success & Strategy for Real Estate Professionals</p>
+        </div>
+
+        <button id="menu-toggle" class="menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="isMobileMenuOpen">
+          <svg class="icon icon-bars" *ngIf="!isMobileMenuOpen" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+          </svg>
+          <svg class="icon icon-close" *ngIf="isMobileMenuOpen" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+          </svg>
+          <span class="sr-only">Menu</span>
+        </button>
+
+        <div id="site-header-menu" class="site-header-menu" [class.show]="isMobileMenuOpen">
+          <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+            <ul id="menu-menu-1" class="primary-menu">
+              <li class="menu-item current-menu-item"><a routerLink="/agent-blog">Home</a></li>
+              <li class="menu-item"><a routerLink="/find-agent">Find Agent</a></li>
+              <li class="menu-item"><a routerLink="/homemade">Home Made</a></li>
+              
+              <!-- Mobile Only utilities -->
+              <li class="menu-item mobile-only-search">
+                <div class="mobile-search-form">
+                  <input type="text" placeholder="Search agent blog...">
+                  <button><i class="fa fa-search"></i></button>
+                </div>
+              </li>
+              <li class="menu-item mobile-only-categories">
+                <span class="mobile-label">Categories</span>
+                <ul class="mobile-cat-list">
+                  <li *ngFor="let cat of categories"><a href="javascript:void(0)">{{ cat }}</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="page" class="site" [class.blur-content]="isMobileMenuOpen">
+    <div class="site-inner">
+      <div id="content" class="site-content">
+        <div class="content-layout">
+          <div id="primary" class="content-area">
+            <main id="main" class="site-main" role="main">
+              <article *ngFor="let post of posts" class="post-card">
+                <header class="entry-header">
+                  <div class="post-meta-top">
+                    <span class="cat-links">
+                      <a *ngFor="let cat of post.categories" href="javascript:void(0)">{{ cat }}</a>
+                    </span>
+                  </div>
+                  <h2 class="entry-title"><a href="javascript:void(0)">{{ post.title }}</a></h2>
+                </header>
+
+                <div class="entry-image" *ngIf="post.image">
+                  <img [src]="post.image" [alt]="post.title">
+                </div>
+
+                <div class="entry-content">
+                  <p>{{ post.excerpt }}</p>
+                  <a href="javascript:void(0)" class="more-link">Continue reading</a>
+                </div>
+
+                <footer class="entry-footer">
+                  <span class="byline">
+                    <span class="screen-reader-text">Author</span> 
+                    <a href="javascript:void(0)">{{ post.author }}</a>
+                  </span>
+                  <span class="posted-on">
+                    <span class="screen-reader-text">Posted on</span>
+                    <a href="javascript:void(0)">{{ post.date }}</a>
+                  </span>
+                </footer>
+              </article>
+
+              <nav class="navigation pagination" aria-label="Posts pagination">
+                <div class="nav-links">
+                  <span class="page-numbers current">1</span>
+                  <a class="page-numbers" href="javascript:void(0)">2</a>
+                  <a class="next page-numbers" href="javascript:void(0)">Next page</a>
+                </div>
+              </nav>
+            </main>
+          </div>
+
+          <aside id="secondary" class="sidebar widget-area" role="complementary">
+            <section class="widget search-widget">
+              <form role="search" class="search-form">
+                <label>
+                  <span class="screen-reader-text">Search for:</span>
+                  <input type="search" class="search-field" placeholder="Search agent success…">
+                </label>
+                <button type="submit" class="search-submit">Search</button>
+              </form>
+            </section>
+
+            <section class="widget recent-posts">
+              <h2 class="widget-title">Recent Posts</h2>
+              <ul>
+                <li *ngFor="let recent of recentPosts">
+                  <a href="javascript:void(0)">{{ recent }}</a>
+                </li>
+              </ul>
+            </section>
+
+            <section class="widget tag-cloud">
+              <h2 class="widget-title">Popular tags</h2>
+              <div class="tagcloud">
+                <a *ngFor="let tag of popularTags" href="javascript:void(0)">{{ tag }}</a>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-site-footer></app-site-footer>
+  
+  <div class="mobile-overlay" *ngIf="isMobileMenuOpen" (click)="closeMenu()"></div>
+</div>

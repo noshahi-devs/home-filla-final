@@ -26,6 +26,8 @@ import { SitemapMarketReportsComponent } from './public/sitemap/sitemap-market-r
 import { MediaRoomComponent } from './public/about/media-room/media-room.component';
 import { MediaSubscribeComponent } from './public/about/media-room/media-subscribe/media-subscribe.component';
 import { HomemadeComponent } from './public/homemade/homemade.component';
+import { TechBlogComponent } from './public/tech-blog/tech-blog.component';
+import { AgentBlogComponent } from './public/agent-blog/agent-blog.component';
 
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
 import { ContactComponent } from './public/contact/contact.component';
@@ -59,6 +61,8 @@ export const routes: Routes = [
   { path: 'news/research', component: NewsResearchComponent },
   { path: 'news/:category', component: NewsCategoryComponent },
   { path: 'homemade', component: HomemadeComponent },
+  { path: 'tech-blog', component: TechBlogComponent },
+  { path: 'agent-blog', component: AgentBlogComponent },
   { path: 'manage-rentals', component: ManageRentalsComponent },
   { path: 'accessibility', component: GlobalAccessibilityComponent },
   { path: 'ad-choices', component: AdChoicesComponent },
