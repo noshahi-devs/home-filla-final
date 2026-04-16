@@ -1525,7 +1525,11 @@
 
 
 @media (max-width: 768px) {
-    .hamburger-btn { display: flex; }
+    .header-right .hamburger-btn { 
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
     .nav-links { display: none !important; }
     .auth-buttons { display: none !important; }
     .header-container { flex-wrap: nowrap !important; gap: 0 !important; }

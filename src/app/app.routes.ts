@@ -28,6 +28,7 @@ import { MediaSubscribeComponent } from './public/about/media-room/media-subscri
 import { HomemadeComponent } from './public/homemade/homemade.component';
 import { TechBlogComponent } from './public/tech-blog/tech-blog.component';
 import { AgentBlogComponent } from './public/agent-blog/agent-blog.component';
+import { MediaSolutionsComponent } from './public/media-solutions/media-solutions.component';
 
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
 import { ContactComponent } from './public/contact/contact.component';
@@ -67,6 +68,7 @@ export const routes: Routes = [
   { path: 'accessibility', component: GlobalAccessibilityComponent },
   { path: 'ad-choices', component: AdChoicesComponent },
   { path: 'advertise', component: AdvertiseComponent },
+  { path: 'media-solutions', component: MediaSolutionsComponent },
   { path: 'marketing/login', component: MarketingLoginComponent },
   { path: 'marketing/product/:id', loadComponent: () => import('./public/product-detail/product-detail.component').then(m => m.ProductDetailComponent) },
   { path: 'contact', component: ContactComponent },
