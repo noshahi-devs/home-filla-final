@@ -656,30 +656,311 @@ a {
 }
 
 /* ── Responsive Tablet/Mobile ── */
+@media (max-width: 1200px) {
+  .research-header-inner {
+    padding: 0 30px;
+  }
+
+  .research-page-title {
+    font-size: 2.5rem;
+  }
+
+  .economist-badge {
+    padding: 12px 20px;
+  }
+}
+
 @media (max-width: 1024px) {
+  .research-header-band {
+    padding: 40px 20px;
+  }
+
+  .research-header-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .research-header-text {
+    max-width: 100%;
+  }
+
+  .research-page-title {
+    font-size: 2.2rem;
+  }
+
+  .economist-badge {
+    margin: 0 auto;
+  }
+
   .research-3-col-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
+
+  .col-left {
+    order: 2;
+  }
+
+  .col-mid {
+    order: 1;
+  }
+
+  .col-right {
+    order: 3;
+  }
+
   .subscribe-block {
     flex-direction: column;
+    padding: 30px;
   }
+
   .sub-right {
     width: 100%;
   }
-}
-@media (max-width: 768px) {
+
   .vis-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
+}
+
+@media (max-width: 768px) {
+  .research-header-band {
+    padding: 30px 16px;
+  }
+
+  .research-page-title {
+    font-size: 1.8rem;
+  }
+
+  .research-subtitle {
+    font-size: 1rem;
+  }
+
+  .economist-badge {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .economist-badge img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .research-top-header {
+    padding: 20px 16px;
+  }
+
+  .research-top-header .page-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .header-tools-wrapper {
+    flex-direction: column;
+    gap: 15px;
+  }
+
   .research-tabs {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 15px;
   }
-  .header-tools-wrapper {
-    flex-direction: column;
-    gap: 20px;
+
+  .research-tabs a {
+    font-size: 0.85rem;
+    padding: 5px 0;
   }
+
   .research-search-box {
     width: 100%;
+    max-width: 100%;
+  }
+
+  .research-ticker {
+    padding: 10px 0;
+  }
+
+  .ticker-inner {
+    padding: 0 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .ticker-location {
+    padding-right: 12px;
+    margin-right: 12px;
+    font-size: 0.85rem;
+  }
+
+  .ticker-stats {
+    gap: 15px;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ticker-stats::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ticker-more {
+    display: none;
+  }
+
+  .research-wrapper {
+    padding: 0 16px 40px;
+  }
+
+  .article-card.horizontal {
+    flex-direction: column;
+  }
+
+  .article-card.horizontal .ac-img-box {
+    width: 100%;
+  }
+
+  .article-card.horizontal .ac-img-box img {
+    aspect-ratio: 16/9;
+  }
+
+  .video-overlay {
+    padding: 20px;
+  }
+
+  .overlay-text h3 {
+    font-size: 1.5rem;
+    max-width: 80%;
+  }
+
+  .overlay-text p {
+    font-size: 0.9rem;
+  }
+
+  .play-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .col-title {
+    font-size: 1.1rem;
+  }
+
+  .sub-left h2 {
+    font-size: 1.5rem;
+  }
+
+  .sub-form {
+    flex-direction: column;
+    border-radius: 16px;
+  }
+
+  .sub-form input {
+    padding: 12px 16px;
+  }
+
+  .join-btn {
+    padding: 12px 20px;
+    border-radius: 12px;
+  }
+
+  .vis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vis-info {
+    padding: 20px;
+  }
+
+  .vis-info h4 {
+    font-size: 1.1rem;
+  }
+
+  .vis-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .summary-item {
+    padding: 12px 0;
+  }
+
+  .recent-article-item {
+    padding: 16px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .research-page-title {
+    font-size: 1.5rem;
+  }
+
+  .research-eyebrow {
+    font-size: 0.75rem;
+  }
+
+  .research-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .economist-badge {
+    border-radius: 20px;
+  }
+
+  .research-top-header .page-title {
+    font-size: 1.5rem;
+  }
+
+  .ac-title {
+    font-size: 0.95rem;
+  }
+
+  .ac-excerpt {
+    font-size: 0.8rem;
+  }
+
+  .ra-title {
+    font-size: 1rem;
+  }
+
+  .ra-desc {
+    font-size: 0.85rem;
+  }
+
+  .video-info {
+    padding: 16px;
+  }
+
+  .vi-desc {
+    font-size: 0.9rem;
+  }
+
+  .subscribe-block {
+    padding: 24px 20px;
+    gap: 30px;
+  }
+
+  .sub-left h2 {
+    font-size: 1.3rem;
+  }
+
+  .sub-right h3 {
+    font-size: 1.1rem;
+  }
+
+  .social-list li {
+    font-size: 0.9rem;
+  }
+
+  .vis-header {
+    margin-bottom: 30px;
+  }
+
+  .branded-tag {
+    font-size: 0.7rem;
+    padding: 4px 8px;
   }
 }

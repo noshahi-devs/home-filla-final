@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
@@ -24,8 +24,9 @@ export class NewsInsightsComponent implements OnInit {
   editorialSections: EditorialSection[] = [];
   navLinks: any[] = [];
   moreResearch: any[] = [];
-  
+
   todayDate: string = '';
+  isMobileMenuOpen = false;
 
   constructor(private newsService: NewsService) {}
 
@@ -47,5 +48,20 @@ export class NewsInsightsComponent implements OnInit {
   updateTodayDate() {
     const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     this.todayDate = new Date().toLocaleDateString('en-US', options).toUpperCase();
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (this.isMobileMenuOpen) {
+      this.isMobileMenuOpen = false;
+    }
   }
 }

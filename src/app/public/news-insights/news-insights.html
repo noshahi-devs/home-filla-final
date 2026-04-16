@@ -25,12 +25,38 @@
       </li>
     </ul>
     <div class="nav-extra">
-      <button class="search-trigger">
+      <button class="search-trigger nav-search-btn">
         <i class="fa fa-search"></i>
+      </button>
+      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+        <i class="fa fa-bars"></i>
       </button>
     </div>
   </div>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" [class.show]="isMobileMenuOpen">
+  <button class="mobile-menu-close" (click)="closeMobileMenu()">
+    <i class="fa fa-times"></i>
+  </button>
+  <ul class="category-list">
+    <li *ngFor="let link of navLinks" [class.active]="link.active" [class.dropdown-trigger]="link.hasDropdown">
+      <a [routerLink]="link.route" class="link-label" (click)="closeMobileMenu()">
+        {{ link.name }}
+        <i *ngIf="link.hasDropdown" class="fa fa-chevron-down menu-arrow"></i>
+      </a>
+      <div *ngIf="link.hasDropdown" class="dropdown-menu">
+        <div class="dropdown-inner">
+          <a *ngFor="let item of link.items" [routerLink]="['/news', item.name.toLowerCase().split(' ').join('-')]"
+            class="dropdown-item" (click)="closeMobileMenu()">
+            {{ item.name }}
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
 
 <div class="news-page-container">
 

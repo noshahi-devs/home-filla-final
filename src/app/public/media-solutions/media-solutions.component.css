@@ -1328,9 +1328,20 @@
     }
 
     /* Show pro header actions for toggle */
-    .pro-nav, .desktop-only { display: none; }
-    .pro-header-actions { display: flex; align-items: center; gap: 15px; }
-    .menu-toggle { display: flex; }
+    .pro-nav,
+    .desktop-only {
+        display: none;
+    }
+
+    .pro-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
 }
 
 @media (max-width: 480px) {
