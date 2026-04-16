@@ -1,5 +1,6 @@
 <!-- Home Filla Media Solutions Portal -->
-<!-- <header class="pro-header">
+<!-- Home Filla Media Solutions Portal Header -->
+<header class="pro-header">
   <div class="pro-header-container">
     <a routerLink="/media-solutions" class="pro-logo-area">
       <span class="pro-logo-text">Home Filla</span>
@@ -19,12 +20,36 @@
     </nav>
 
     <div class="pro-header-actions">
-      <a routerLink="/marketing/login" class="pro-action-item"><i class="fa fa-user-circle"></i> Brand Login</a>
-      <a href="#inquiry" class="btn-cta-blue">Contact Team</a>
+      <a routerLink="/marketing/login" class="pro-action-item desktop-only"><i class="fa fa-user-circle"></i> Brand Login</a>
+      <a href="#inquiry" class="btn-cta-blue desktop-only">Contact Team</a>
+      
+      <button class="menu-toggle" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
   </div>
-</header> -->
-     <app-site-header></app-site-header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="ms-mobile-overlay" [class.show]="isMobileMenuOpen">
+    <nav class="ms-mobile-nav">
+      <div class="ms-mobile-header">
+        <span class="pro-logo-text">Media Solutions</span>
+        <button class="close-mobile" (click)="toggleMobileMenu()">&times;</button>
+      </div>
+      <div class="ms-mobile-links">
+        <a routerLink="/media-solutions" (click)="toggleMobileMenu()">Home</a>
+        <a href="javascript:void(0)" (click)="toggleMobileMenu()">Partnerships</a>
+        <a href="javascript:void(0)" (click)="toggleMobileMenu()">Ad Specs</a>
+        <a href="javascript:void(0)" (click)="toggleMobileMenu()">Reach Data</a>
+        <hr>
+        <a routerLink="/marketing/login" (click)="toggleMobileMenu()">Brand Login</a>
+        <a href="#inquiry" class="mobile-cta" (click)="toggleMobileMenu()">Contact Team</a>
+      </div>
+    </nav>
+  </div>
+</header>
 <main class="ms-portal">
   <!-- Dynamic Hero Section -->
   <section class="ms-hero-parallax">

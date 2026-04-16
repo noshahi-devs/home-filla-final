@@ -16,6 +16,7 @@ export class MediaSolutionsComponent implements OnInit {
   inquiryForm!: FormGroup;
   isSubmitted = false;
   isChatOpen = false;
+  isMobileMenuOpen = false;
   newMessage = '';
 
   stats = [
@@ -88,6 +89,10 @@ export class MediaSolutionsComponent implements OnInit {
 
   toggleChat() {
     this.isChatOpen = !this.isChatOpen;
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
   sendMessage() {
