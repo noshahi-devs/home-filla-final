@@ -762,13 +762,13 @@ input[type="range"] {
     .hfm-comparison-grid { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
     /* Advice Section 768px */
-    .hfm-advice-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .hfm-advice-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
 
     /* Glossary 768px */
     .hfm-glossary-section { padding: 60px 20px; }
 
     /* Linking Section 768px */
-    .hfm-linking-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .hfm-linking-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 32px !important; }
 }
 
 @media (max-width: 480px) {
@@ -815,17 +815,23 @@ input[type="range"] {
     .hfm-rate-tab { font-size: 13px; padding: 8px 12px; }
 
     /* Comparison Table 480px */
-    .hfm-comparison-grid { display: block; overflow-x: auto; }
-    .hfm-comp-row { min-width: 600px; }
+    .hfm-comparison-section { padding: 40px 0; }
+    .hfm-comparison-container { padding: 0 16px; }
+    .hfm-comparison-grid { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
+    .hfm-comp-row { min-width: 600px; padding: 16px 20px; }
+    .hfm-comp-row.head { font-size: 11px; }
+    .hfm-comp-loan { font-size: 14px; }
+    .hfm-comp-info { font-size: 12px; }
+    .hfm-comp-status { font-size: 16px; }
 
     /* Advice Section 480px */
     .hfm-advice-section { padding: 40px 0; }
     .hfm-advice-container { padding: 0 20px; }
     .hfm-advice-section h2 { font-size: 24px; margin-bottom: 24px; }
-    .hfm-advice-grid { grid-template-columns: 1fr; gap: 20px; }
-    .hfm-article-card { padding: 20px; }
-    .hfm-article-card h3 { font-size: 16px; }
-    .hfm-article-card p { font-size: 13px; }
+    .hfm-advice-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+    .hfm-article-card { padding: 20px; min-width: 0; }
+    .hfm-article-card h3 { font-size: 16px; word-wrap: break-word; }
+    .hfm-article-card p { font-size: 13px; word-wrap: break-word; }
 
     /* Glossary 480px */
     .hfm-glossary-section { padding: 40px 20px; }
@@ -836,9 +842,13 @@ input[type="range"] {
     /* Linking Section 480px */
     .hfm-linking-section { padding: 40px 0; }
     .hfm-linking-container { padding: 0 20px; }
-    .hfm-linking-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
-    .hfm-linking-title { font-size: 12px; margin-bottom: 16px; }
-    .hfm-linking-list a { font-size: 12px; }
+    .hfm-linking-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .hfm-linking-col { width: 100%; }
+    .hfm-linking-title { font-size: 14px; margin-bottom: 16px; }
+    .hfm-linking-list { gap: 10px !important; }
+    .hfm-linking-list a { font-size: 14px; word-wrap: break-word; }
+    .hfm-collapsed-wrap { display: block !important; }
+    .hfm-linking-toggle { display: none !important; }
 }
 
 @media (max-width: 360px) {
@@ -851,6 +861,30 @@ input[type="range"] {
     .hfm-hero-search { padding: 4px; }
     .hfm-hero-search input { padding: 10px 12px; font-size: 13px; }
     .hfm-search-btn-circle { width: 40px; height: 40px; font-size: 14px; }
+
+    /* Comparison Table 360px */
+    .hfm-comparison-section { padding: 30px 0; }
+    .hfm-comparison-container { padding: 0 12px; }
+    .hfm-comp-row { min-width: 550px; padding: 14px 16px; }
+    .hfm-comp-row.head { font-size: 10px; }
+    .hfm-comp-loan { font-size: 13px; }
+    .hfm-comp-info { font-size: 11px; }
+
+    /* Advice Section 360px */
+    .hfm-advice-section { padding: 30px 0; }
+    .hfm-advice-container { padding: 0 16px; }
+    .hfm-advice-section h2 { font-size: 20px; margin-bottom: 20px; }
+    .hfm-advice-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .hfm-article-card { padding: 16px; min-width: 0; }
+    .hfm-article-card h3 { font-size: 15px; word-wrap: break-word; }
+    .hfm-article-card p { font-size: 12px; word-wrap: break-word; }
+
+    /* Linking Section 360px */
+    .hfm-linking-section { padding: 30px 0; }
+    .hfm-linking-container { padding: 0 16px; }
+    .hfm-linking-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+    .hfm-linking-title { font-size: 13px; margin-bottom: 12px; }
+    .hfm-linking-list a { font-size: 13px; }
 }
 
 @media (max-width: 320px) {
@@ -1718,6 +1752,11 @@ input[type="range"] {
 }
 
 @media (max-width: 768px) {
-    .hfm-comp-row { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-    .hfm-comp-row.head { display: none; }
+    .hfm-comparison-section { padding: 60px 0; }
+    .hfm-comparison-container { padding: 0 20px; }
+    .hfm-comparison-grid { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 16px; }
+    .hfm-comp-row { min-width: 700px; padding: 20px 24px; }
+    .hfm-comp-row.head { position: sticky; left: 0; }
+    .hfm-comp-loan { font-size: 15px; }
+    .hfm-comp-info { font-size: 13px; }
 }

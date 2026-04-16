@@ -46,6 +46,7 @@ import { AdChoicesComponent } from './public/legal/ad-choices.component';
 import { PrivacyPolicyComponent } from './public/legal/privacy-policy.component';
 import { TermsOfUseComponent } from './public/legal/terms-of-use.component';
 import { SellersMarketplaceComponent } from './public/sell/sellers-marketplace/sellers-marketplace.component';
+import { RentersResourceComponent } from './public/rent/renters-resource/renters-resource.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -81,6 +82,7 @@ export const routes: Routes = [
   { path: 'property/:category/:id', component: PropertyDetailComponent },
   { path: 'sell', component: SellComponent },
   { path: 'sell/sellers-marketplace', component: SellersMarketplaceComponent },
+  { path: 'rent/resource-center', component: RentersResourceComponent },
   { path: 'mortgages', component: MortgageComponent },
   { path: 'find-agent', component: FindAgentComponent },
   { path: 'login', component: LoginComponent },

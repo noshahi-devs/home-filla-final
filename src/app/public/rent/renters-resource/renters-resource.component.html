@@ -1,0 +1,73 @@
+<app-site-header></app-site-header>
+
+<main class="renters-hub">
+  <!-- Hero Section -->
+  <section class="hub-hero">
+    <div class="hero-bg-image">
+      <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80" alt="Rental Home Interior">
+      <div class="hero-overlay"></div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="glass-box">
+        <span class="hub-badge">RESOURCES</span>
+        <h1 class="hero-title">Navigating Your Rental Journey</h1>
+        <p class="hero-subtitle">Expert guides, tips, and checklists to help you find, secure, and enjoy your next home.</p>
+        
+        <div class="hero-actions">
+          <a routerLink="/listings/rent" class="btn-primary">Browse Rentals</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Navigation -->
+  <section class="hub-filters">
+    <div class="filter-container">
+      <button 
+        *ngFor="let cat of categories" 
+        class="filter-pill" 
+        [class.active]="activeCategory === cat"
+        (click)="setCategory(cat)">
+        {{ cat }}
+      </button>
+    </div>
+  </section>
+
+  <!-- Articles Grid -->
+  <section class="hub-articles">
+    <div class="articles-container">
+      <h2 class="section-title">
+        {{ activeCategory === 'All' ? 'Latest Guides & Articles' : activeCategory }}
+      </h2>
+      
+      <div class="articles-grid">
+        <article class="article-card" *ngFor="let article of filteredArticles">
+          <div class="card-img-wrap">
+            <img [src]="article.imgUrl" [alt]="article.title">
+            <div class="card-badge">{{ article.category }}</div>
+          </div>
+          
+          <div class="card-body">
+            <div class="card-meta">
+              <span>⏱ {{ article.readTimeMin }} min read</span>
+            </div>
+            
+            <h3 class="card-title">{{ article.title }}</h3>
+            <p class="card-excerpt">{{ article.excerpt }}</p>
+            
+            <a href="#" class="read-more" (click)="$event.preventDefault()">Read Article <i class="fa fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+      
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="filteredArticles.length === 0">
+        <p>No articles found for this category at the moment. Check back soon!</p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<app-site-footer></app-site-footer>
