@@ -29,6 +29,7 @@ import { HomemadeComponent } from './public/homemade/homemade.component';
 import { TechBlogComponent } from './public/tech-blog/tech-blog.component';
 import { AgentBlogComponent } from './public/agent-blog/agent-blog.component';
 import { MediaSolutionsComponent } from './public/media-solutions/media-solutions.component';
+import { HomeSellingGuideComponent } from './public/guide/home-selling-guide/home-selling-guide.component';
 
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
 import { ContactComponent } from './public/contact/contact.component';
@@ -44,6 +45,7 @@ import { GlobalAccessibilityComponent } from './public/accessibility/accessibili
 import { AdChoicesComponent } from './public/legal/ad-choices.component';
 import { PrivacyPolicyComponent } from './public/legal/privacy-policy.component';
 import { TermsOfUseComponent } from './public/legal/terms-of-use.component';
+import { SellersMarketplaceComponent } from './public/sell/sellers-marketplace/sellers-marketplace.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -78,6 +80,7 @@ export const routes: Routes = [
   { path: 'listings/:category', component: ListingsComponent },
   { path: 'property/:category/:id', component: PropertyDetailComponent },
   { path: 'sell', component: SellComponent },
+  { path: 'sell/sellers-marketplace', component: SellersMarketplaceComponent },
   { path: 'mortgages', component: MortgageComponent },
   { path: 'find-agent', component: FindAgentComponent },
   { path: 'login', component: LoginComponent },
@@ -91,6 +94,7 @@ export const routes: Routes = [
   { path: 'home-loan', component: HomeLoanComponent },
   { path: 'my-home', component: MyHomeComponent },
   { path: 'my-home/sale-proceeds-calculator', component: SaleProceedsCalculatorComponent },
+  { path: 'guide/home-selling', component: HomeSellingGuideComponent },
   
   // Dashboards Lazy Loading
   { 

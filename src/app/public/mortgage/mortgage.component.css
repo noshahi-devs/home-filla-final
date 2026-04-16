@@ -732,6 +732,43 @@ input[type="range"] {
     .dual-grid { grid-template-columns: 1fr; gap: 40px; }
     .faq-grid { grid-template-columns: 1fr; }
 
+    /* Mortgage Hero 768px */
+    .hfm-search-hero { padding: 50px 20px; }
+    .hfm-search-hero h1 { font-size: 36px; letter-spacing: -1px; line-height: 1.2; }
+    .hfm-search-hero p { font-size: 16px; max-width: 100%; }
+    .hfm-hero-tabs { gap: 12px; width: 100%; justify-content: center; padding-bottom: 0; flex-wrap: wrap; }
+    .hfm-tab { font-size: 13px; padding: 8px 4px; }
+    .hfm-hero-search { max-width: 100%; }
+    .hfm-hero-search input { padding: 14px 20px; font-size: 15px; }
+
+    /* Partner Banner 768px */
+    .hfm-partner-banner { flex-direction: column; text-align: center; gap: 16px; padding: 20px; }
+
+    /* Tools Section 768px */
+    .hfm-tools-section { padding: 60px 20px; }
+    .hfm-tools-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .hfm-tool-card { padding: 24px; min-height: auto; }
+
+    /* Rates Section 768px */
+    .hfm-rates-section { padding: 60px 20px; }
+    .hfm-rates-dashboard { grid-template-columns: 1fr; padding: 24px; }
+    .hfm-big-rates { flex-direction: column; gap: 16px; }
+    .hfm-rate-item { padding-left: 0 !important; border-left: none !important; }
+    .hfm-lender-card { flex-wrap: wrap; gap: 16px; }
+    .hfm-lender-brand { flex: 1 1 100%; }
+    .hfm-stat-item { flex: 1 1 calc(50% - 16px); }
+
+    /* Comparison Table 768px */
+    .hfm-comparison-grid { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    /* Advice Section 768px */
+    .hfm-advice-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+    /* Glossary 768px */
+    .hfm-glossary-section { padding: 60px 20px; }
+
+    /* Linking Section 768px */
+    .hfm-linking-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
 }
 
 @media (max-width: 480px) {
@@ -742,6 +779,88 @@ input[type="range"] {
     .calc-main-result { padding: 20px; }
     .monthly-payment .amount { font-size: 40px; }
     .rates-box h3 { font-size: 24px; }
+
+    /* Mortgage Hero 480px */
+    .hfm-search-hero { padding: 40px 20px; }
+    .hfm-search-hero h1 { font-size: 28px; letter-spacing: -0.5px; line-height: 1.25; }
+    .hfm-search-hero p { font-size: 14px; line-height: 1.4; max-width: 100%; }
+    .hfm-hero-tabs { gap: 8px; justify-content: center; }
+    .hfm-tab { font-size: 12px; padding: 8px 2px; }
+    .hfm-hero-search { flex-direction: column; padding: 6px; border-radius: 16px; }
+    .hfm-hero-search input { padding: 12px 16px; font-size: 14px; border-radius: 12px; }
+    .hfm-search-btn-circle { width: 44px; height: 44px; font-size: 16px; }
+
+    /* Partner Banner 480px */
+    .hfm-partner-banner { padding: 16px; gap: 12px; }
+    .hfm-partner-logo { font-size: 14px; }
+    .hfm-partner-cta { padding: 10px 20px; font-size: 13px; }
+
+    /* Tools Section 480px */
+    .hfm-tools-section { padding: 40px 20px; }
+    .hfm-tools-section h2 { font-size: 24px; margin-bottom: 24px; }
+    .hfm-tool-card { padding: 20px; min-height: auto; }
+    .hfm-tool-icon { width: 40px; height: 40px; font-size: 18px; margin-bottom: 12px; }
+    .hfm-tool-card h3 { font-size: 16px; }
+    .hfm-tool-card p { font-size: 13px; }
+
+    /* Rates Section 480px */
+    .hfm-rates-section { padding: 40px 20px; }
+    .hfm-rates-header h2 { font-size: 24px; }
+    .hfm-rates-dashboard { padding: 20px; }
+    .hfm-big-rates .val { font-size: 32px !important; }
+    .hfm-rate-item { padding-left: 16px !important; }
+    .hfm-lender-card { flex-direction: column; gap: 12px; padding: 16px; }
+    .hfm-lender-brand { flex: none; width: 100%; }
+    .hfm-stat-item { flex: none; width: 100%; display: flex; justify-content: space-between; }
+    .hfm-rate-tab { font-size: 13px; padding: 8px 12px; }
+
+    /* Comparison Table 480px */
+    .hfm-comparison-grid { display: block; overflow-x: auto; }
+    .hfm-comp-row { min-width: 600px; }
+
+    /* Advice Section 480px */
+    .hfm-advice-section { padding: 40px 0; }
+    .hfm-advice-container { padding: 0 20px; }
+    .hfm-advice-section h2 { font-size: 24px; margin-bottom: 24px; }
+    .hfm-advice-grid { grid-template-columns: 1fr; gap: 20px; }
+    .hfm-article-card { padding: 20px; }
+    .hfm-article-card h3 { font-size: 16px; }
+    .hfm-article-card p { font-size: 13px; }
+
+    /* Glossary 480px */
+    .hfm-glossary-section { padding: 40px 20px; }
+    .hfm-glossary-section h2 { font-size: 24px; }
+    .hfm-term-header { padding: 12px 0; }
+    .hfm-term-name { font-size: 14px; }
+
+    /* Linking Section 480px */
+    .hfm-linking-section { padding: 40px 0; }
+    .hfm-linking-container { padding: 0 20px; }
+    .hfm-linking-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .hfm-linking-title { font-size: 12px; margin-bottom: 16px; }
+    .hfm-linking-list a { font-size: 12px; }
+}
+
+@media (max-width: 360px) {
+    /* Hero - Extra Small (320px) */
+    .hfm-search-hero { padding: 30px 16px; }
+    .hfm-search-hero h1 { font-size: 24px; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.2; }
+    .hfm-search-hero p { font-size: 13px; margin-bottom: 16px; line-height: 1.4; max-width: 100%; word-wrap: break-word; }
+    .hfm-hero-tabs { gap: 6px; flex-wrap: wrap; justify-content: center; }
+    .hfm-tab { font-size: 11px; padding: 6px 2px; }
+    .hfm-hero-search { padding: 4px; }
+    .hfm-hero-search input { padding: 10px 12px; font-size: 13px; }
+    .hfm-search-btn-circle { width: 40px; height: 40px; font-size: 14px; }
+}
+
+@media (max-width: 320px) {
+    /* Hero - iPhone SE size */
+    .hfm-search-hero { padding: 24px 12px; }
+    .hfm-search-hero h1 { font-size: 22px; }
+    .hfm-search-hero p { font-size: 12px; }
+    .hfm-hero-tabs { gap: 4px; }
+    .hfm-tab { font-size: 10px; padding: 4px 2px; }
+    .hfm-hero-search input { font-size: 12px; padding: 8px 10px; }
 }
 
 /* --- HOME FILLA MORTGAGE HERO (MODERN LIGHT VERSION) --- */
@@ -966,6 +1085,8 @@ input[type="range"] {
     margin-bottom: 12px;
     letter-spacing: -1.5px;
     text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .hfm-search-hero p {
@@ -973,6 +1094,9 @@ input[type="range"] {
     color: rgba(255,255,255,0.9);
     margin-bottom: 32px;
     font-weight: 500;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 /* Tab Navigation */
@@ -985,6 +1109,7 @@ input[type="range"] {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    flex-wrap: wrap;
 }
 
 .hfm-tab {

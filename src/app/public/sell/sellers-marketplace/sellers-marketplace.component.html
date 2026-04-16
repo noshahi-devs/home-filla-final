@@ -1,0 +1,111 @@
+<app-site-header></app-site-header>
+
+<main class="marketplace-page">
+  <div class="marketplace-container">
+    
+    <!-- Hero Section -->
+    <section class="marketplace-hero">
+      <div class="hero-content">
+        <h1 class="hero-title">The freedom to sell your home, your way</h1>
+        <p class="hero-subtitle">We’ve partnered with companies who offer alternative options intended to allow you to seamlessly sell, buy and move, on the terms that work best for you.</p>
+        
+        <div class="search-container">
+          <h2 class="search-label">Enter your address to get started</h2>
+          <div class="search-bar">
+            <input type="text" placeholder="Enter a property address" [(ngModel)]="addressQuery" class="address-input">
+            <button class="search-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; font-size: 20px; color: inherit; fill: currentcolor;"><path fill-rule="evenodd" d="M16.618 18.032a9 9 0 1 1 1.414-1.414l3.675 3.675a1 1 0 0 1-1.414 1.414zM18 11a7 7 0 1 1-14 0 7 7 0 0 1 14 0" clip-rule="evenodd"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://static.rdc.moveaws.com/rdc-ui/pictos/picto-family-sold-sign.svg" alt="Sell options">
+      </div>
+    </section>
+
+    <!-- Split Layout Area -->
+    <section class="marketplace-layout">
+      <!-- Left Column: Accordions -->
+      <div class="layout-main">
+        <h2 class="section-title">Explore the selling options</h2>
+        
+        <div class="accordion-wrapper">
+          <div class="accordion-item" *ngFor="let opt of options" [class.expanded]="openAccordionId === opt.id">
+            <button class="accordion-header" (click)="toggleAccordion(opt.id)" [attr.aria-expanded]="openAccordionId === opt.id">
+              <h3 class="accordion-title">{{ opt.title }}</h3>
+              <div class="chevron">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.293 8.293a1 1 0 1 1 1.414 1.414zM12 15l.707.707a1 1 0 0 1-1.414 0zM5.293 9.707a1 1 0 0 1 1.414-1.414zm13.414 0-6 6-1.414-1.414 6-6zm-7.414 6-6-6 1.414-1.414 6 6z"></path></svg>
+              </div>
+            </button>
+            
+            <div class="accordion-content" *ngIf="openAccordionId === opt.id">
+              <div class="accordion-inner">
+                <p *ngIf="opt.description" class="accordion-desc">{{ opt.description }}</p>
+                
+                <ul class="benefit-list">
+                  <li *ngFor="let benefit of opt.benefits">
+                    <span class="bullet">
+                      <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; font-size: 24px; color: inherit; fill: currentcolor;"><path fill-rule="evenodd" d="M11.08 2.045A10.1 10.1 0 0 0 6.54 3.63a9 9 0 0 0-1.621 1.328 9.85 9.85 0 0 0-2.906 7.362c.071 2.119.739 4.008 2.02 5.72.397.53 1.272 1.424 1.767 1.807 1.442 1.114 2.987 1.777 4.8 2.06.647.101 2.153.101 2.8 0 2.238-.35 4.104-1.287 5.662-2.845s2.495-3.424 2.845-5.662c.101-.647.101-2.153 0-2.8-.283-1.814-.948-3.362-2.06-4.8-.337-.435-1.208-1.306-1.647-1.646-2.067-1.599-4.554-2.336-7.12-2.109m1.654 1.996a7.93 7.93 0 0 1 4.82 2.215 7.98 7.98 0 0 1 1.629 9.243 7.8 7.8 0 0 1-1.687 2.302 7.5 7.5 0 0 1-2.025 1.399 7.94 7.94 0 0 1-6.942 0 7.9 7.9 0 0 1-2.682-2.1c-1.999-2.389-2.407-5.798-1.031-8.6a7.98 7.98 0 0 1 7.104-4.495c.209-.002.575.014.814.036m1.886 5.005c-.095.049-.867.788-1.889 1.807l-1.73 1.724-.73-.723c-.415-.41-.804-.76-.899-.809-.351-.177-.732-.087-1.073.254-.347.347-.436.711-.259 1.064.122.244 2.353 2.475 2.597 2.597a.8.8 0 0 0 .726.001c.249-.125 4.473-4.349 4.598-4.598.176-.353.087-.718-.26-1.064-.34-.34-.734-.432-1.081-.253"></path></svg>
+                    </span>
+                    <span class="benefit-txt">{{ benefit }}</span>
+                  </li>
+                </ul>
+                
+                <div *ngIf="opt.linkText" class="accordion-link-wrap">
+                  <a [routerLink]="opt.linkUrl" class="btn-outline">{{ opt.linkText }}</a>
+                </div>
+                
+                <small *ngIf="opt.disclaimer" class="accordion-disclaimer">{{ opt.disclaimer }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Sidebar Steps -->
+      <aside class="layout-sidebar">
+        <div class="how-it-works-card">
+          <h2 class="sidebar-title">How it works</h2>
+          
+          <ul class="steps-list">
+            <li class="step-item">
+              <span class="step-badge">1</span>
+              <div class="step-text">
+                <h3>Tell us a bit about your home</h3>
+                <p>Enter your address and confirm a few basic details about your home, so we can see which of our partners’ selling options are available to you. <strong>No commitment is required.</strong></p>
+              </div>
+            </li>
+            
+            <li class="step-item">
+              <span class="step-badge">2</span>
+              <div class="step-text">
+                <h3>See your selling options</h3>
+                <p>We’ll show you which companies’ selling options are available to you, along with the estimated cash offer associated with each.</p>
+              </div>
+            </li>
+            
+            <li class="step-item">
+              <span class="step-badge">3</span>
+              <div class="step-text">
+                <h3>Connect with our partners or an agent</h3>
+                <p>Select the program(s) that interest you and provide the best number to reach you at. We will pass that information along to the companies you select so they can get in touch to discuss more details and answer any questions.</p>
+              </div>
+            </li>
+            
+            <li class="step-item">
+              <span class="step-badge">4</span>
+              <div class="step-text">
+                <h3>Complete the sale</h3>
+                <p>Decide which selling option is best for you. Work with one of our partners or an agent to sell your home.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+  </div>
+</main>
+
+<app-site-footer></app-site-footer>
