@@ -1,5 +1,5 @@
 <!-- Home Filla Media Solutions Portal -->
-<header class="pro-header">
+<!-- <header class="pro-header">
   <div class="pro-header-container">
     <a routerLink="/media-solutions" class="pro-logo-area">
       <span class="pro-logo-text">Home Filla</span>
@@ -23,11 +23,12 @@
       <a href="#inquiry" class="btn-cta-blue">Contact Team</a>
     </div>
   </div>
-</header>
-
+</header> -->
+     <app-site-header></app-site-header>
 <main class="ms-portal">
   <!-- Dynamic Hero Section -->
-  <section class="ms-hero" [style.background-image]="'url(/assets/modern_moving_hero_1776360254032.png)'">
+  <section class="ms-hero-parallax">
+    <div class="hero-fixed-bg" [style.background-image]="'url(/assets/modern_moving_hero.png)'"></div>
     <div class="hero-overlay"></div>
     <div class="hero-container">
       <div class="hero-content">

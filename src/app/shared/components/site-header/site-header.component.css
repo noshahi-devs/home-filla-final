@@ -588,3 +588,35 @@
     padding: 6px;
   }
 }
+
+@media (max-width: 320px) {
+  .header-container {
+    padding: 0 10px;
+    gap: 6px;
+  }
+
+  .logo-text {
+    font-size: 14px;
+  }
+
+  .realtor-logo {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+
+  .header-right .hamburger-btn {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+  }
+
+  .hamburger-btn span {
+    width: 18px;
+    height: 2px;
+  }
+}

@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SiteFooterComponent } from '../../shared/components/site-footer/site-footer.component';
+import { SiteHeaderComponent } from '../../shared/components/site-header/site-header.component';
 
 @Component({
   selector: 'app-media-solutions',
   standalone: true,
-  imports: [CommonModule, RouterModule, SiteFooterComponent, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, SiteFooterComponent, SiteHeaderComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './media-solutions.component.html',
   styleUrls: ['./media-solutions.component.css']
 })
@@ -16,7 +17,7 @@ export class MediaSolutionsComponent implements OnInit {
   isSubmitted = false;
   isChatOpen = false;
   newMessage = '';
-  
+
   stats = [
     { label: 'Unique visitors', value: '73M', description: 'Reach a massive audience of motivated movers.', icon: 'chart-line' },
     { label: 'US monthly adults reached', value: '31%', description: 'Unmatched scale across the digital real estate landscape.', icon: 'users' },
@@ -40,11 +41,11 @@ export class MediaSolutionsComponent implements OnInit {
     { text: 'Welcome to Home Filla Media Solutions! Looking to amplify your brand across our 73M unique monthly visitors? I\'m here to help.', type: 'bot', time: 'Just now' }
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.initForm();
-    
+
     // Auto-open chat after delay
     setTimeout(() => {
       this.isChatOpen = true;

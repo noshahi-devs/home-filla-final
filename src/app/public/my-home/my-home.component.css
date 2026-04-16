@@ -399,3 +399,321 @@
 .mh-resource-link:hover i {
   color: var(--accent-blue);
 }
+
+/* ─── Responsive Styles ─── */
+
+/* Tablet (max-width: 768px) */
+@media (max-width: 768px) {
+  .mh-hero {
+    height: 320px;
+  }
+
+  .mh-hero-title {
+    font-size: 32px;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .mh-hero-content {
+    padding: 0 16px;
+  }
+
+  .mh-search-wrapper {
+    height: 56px;
+    padding: 6px 6px 6px 20px;
+  }
+
+  .mh-search-input {
+    font-size: 15px;
+  }
+
+  .mh-search-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .mh-promo-section {
+    margin-top: -20px;
+    padding: 0 16px;
+  }
+
+  .mh-promo-banner {
+    flex-direction: column;
+    padding: 20px 24px;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .mh-promo-headline {
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .mh-text-accent {
+    font-size: 48px;
+  }
+
+  .mh-text-sub {
+    font-size: 18px;
+  }
+
+  .mh-promo-graphic {
+    width: 200px;
+    height: 100px;
+  }
+
+  .mh-promo-house {
+    height: 80px;
+  }
+
+  .mh-promo-money {
+    height: 60px;
+    width: 60px;
+    top: -10px;
+  }
+
+  .mh-promo-action {
+    margin-left: 0;
+  }
+
+  .mh-btn-accent {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+
+  .mh-tools-container {
+    margin: 40px auto 60px;
+    padding: 0 16px;
+  }
+
+  .mh-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mh-card-graphic {
+    height: 160px;
+    padding: 20px;
+  }
+
+  .mh-card-info {
+    padding: 20px;
+  }
+
+  .mh-section-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .mh-resources-container {
+    padding: 0 16px;
+    margin-bottom: 40px;
+  }
+
+  .mh-resource-link {
+    font-size: 15px;
+  }
+
+  /* Card graphics adjustments */
+  .mh-design-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mh-comp-line {
+    font-size: 14px;
+  }
+
+  .mh-airbnb-logo {
+    font-size: 18px;
+  }
+
+  .mh-radio-label {
+    font-size: 14px;
+  }
+}
+
+/* Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .mh-hero {
+    height: 280px;
+  }
+
+  .mh-hero-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .mh-search-wrapper {
+    height: 50px;
+    padding: 4px 4px 4px 16px;
+  }
+
+  .mh-search-input {
+    font-size: 14px;
+  }
+
+  .mh-search-input::placeholder {
+    font-size: 13px;
+  }
+
+  .mh-search-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .mh-promo-section {
+    padding: 0 12px;
+  }
+
+  .mh-promo-banner {
+    padding: 16px 20px;
+  }
+
+  .mh-promo-prehead {
+    font-size: 16px;
+  }
+
+  .mh-text-accent {
+    font-size: 36px;
+  }
+
+  .mh-text-sub {
+    font-size: 16px;
+  }
+
+  .mh-promo-graphic {
+    width: 160px;
+    height: 80px;
+  }
+
+  .mh-promo-house {
+    height: 60px;
+  }
+
+  .mh-promo-money {
+    height: 50px;
+    width: 50px;
+  }
+
+  .mh-btn-accent {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .mh-tools-container {
+    padding: 0 12px;
+    margin: 32px auto 48px;
+  }
+
+  .mh-card-graphic {
+    height: 140px;
+    padding: 16px;
+  }
+
+  .mh-card-info {
+    padding: 16px;
+  }
+
+  .mh-card-info p {
+    font-size: 13px;
+  }
+
+  .mh-card-link {
+    font-size: 13px;
+  }
+
+  .mh-section-title {
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+
+  .mh-resources-container {
+    padding: 0 12px;
+  }
+
+  .mh-resource-link {
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile (max-width: 360px) */
+@media (max-width: 360px) {
+  .mh-hero-title {
+    font-size: 22px;
+  }
+
+  .mh-search-wrapper {
+    height: 46px;
+  }
+
+  .mh-search-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mh-text-accent {
+    font-size: 32px;
+  }
+
+  .mh-card-graphic {
+    height: 120px;
+  }
+
+  .mh-chart-mock {
+    padding: 12px;
+  }
+
+  .mh-chart-title {
+    font-size: 13px;
+  }
+
+  .mh-legend-item {
+    font-size: 11px;
+  }
+
+  .mh-design-tabs {
+    gap: 4px;
+  }
+
+  .mh-d-tab {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
+
+  .mh-h-box {
+    width: 60px;
+    height: 50px;
+  }
+
+  .mh-comp-line {
+    font-size: 12px;
+  }
+
+  .mh-comp-line i {
+    width: 18px;
+    font-size: 14px;
+  }
+
+  .mh-h-graphic {
+    width: 60px;
+    height: 50px;
+  }
+
+  .mh-h-graphic i {
+    font-size: 24px;
+  }
+
+  .mh-h-dot {
+    width: 20px;
+    height: 20px;
+    right: -10px;
+  }
+
+  .mh-h-dot::after {
+    font-size: 12px;
+  }
+}
