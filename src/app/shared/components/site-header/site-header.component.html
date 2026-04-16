@@ -3,9 +3,22 @@
 <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
   <div class="mobile-nav-header">
     <div class="logo-area">
-      <div class="realtor-logo">HF</div>
-      <div class="logo-text">Home Filla</div>
+      <svg class="hf-badge" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hfGradMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="38" height="38" rx="9" fill="url(#hfGradMobile)" />
+        <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white"/>
+      </svg>
+      <div class="logo-wordmark">
+        <span class="logo-name">Home Filla</span>
+        <span class="logo-sub">Real Estate</span>
+      </div>
     </div>
+
     <button class="mobile-nav-close" (click)="closeMobileMenu()"><i class="fas fa-times"></i></button>
   </div>
 
@@ -149,9 +162,22 @@
 <header class="realtor-header">
   <div class="header-container">
     <a routerLink="/" class="logo-area">
-      <div class="realtor-logo">HF</div>
-      <div class="logo-text">Home Filla</div>
+      <svg class="hf-badge" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hfGradDesktop" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="38" height="38" rx="9" fill="url(#hfGradDesktop)" />
+        <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white"/>
+      </svg>
+      <div class="logo-wordmark">
+        <span class="logo-name">Home Filla</span>
+        <span class="logo-sub">Real Estate</span>
+      </div>
     </a>
+
 
     <div class="header-center">
       <nav class="nav-links primary-nav">
