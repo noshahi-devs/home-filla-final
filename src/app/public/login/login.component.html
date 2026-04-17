@@ -13,10 +13,22 @@
 
         <div class="auth-card">
             <div class="auth-header">
-                <div class="logo-area">
-                    <div class="realtor-logo">HF</div>
-                    <div class="logo-text">Home <span>Filla</span></div>
-                </div>
+                <a routerLink="/" class="logo-area">
+                    <svg class="hf-badge" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="hfGradAuth" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="1" y="1" width="38" height="38" rx="9" fill="url(#hfGradAuth)" />
+                        <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white"/>
+                    </svg>
+                    <div class="logo-wordmark">
+                        <span class="logo-name">Home Filla</span>
+                        <span class="logo-sub">Real Estate</span>
+                    </div>
+                </a>
                 <h2>Welcome Back</h2>
                 <p>Enter your details to access your account</p>
             </div>
@@ -50,12 +62,11 @@
                     <a href="#" class="forgot-password" (click)="$event.preventDefault()">Forgot Password?</a>
                 </div>
 
-                <div *ngIf="successMessage" style="color: #10b981; font-size: 13px; text-align: center; margin-top: 5px; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.2);">
-                    <i class="fas fa-check-circle" style="margin-right: 5px;"></i> {{ successMessage }}
+                <div *ngIf="successMessage" class="message success-message">
+                    <i class="fas fa-check-circle"></i> {{ successMessage }}
                 </div>
-
-                <div *ngIf="errorMessage" style="color: #ef4444; font-size: 13px; text-align: center; margin-top: 5px; padding: 12px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
-                    <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i> {{ errorMessage }}
+                <div *ngIf="errorMessage" class="message error-message">
+                    <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
                 </div>
 
                 <button type="submit" class="auth-btn btn-primary" [disabled]="isLoading" style="position: relative; margin-top: 10px;">
