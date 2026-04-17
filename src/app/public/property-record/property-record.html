@@ -1,0 +1,151 @@
+<app-site-header></app-site-header>
+
+<main class="property-record-page">
+  <!-- Hero Section -->
+  <section class="search-hero">
+    <div class="hero-container">
+      <h1>Sunnyvale, CA property records</h1>
+      <p class="hero-subtext">Find homes for sale in Sunnyvale, CA, or type an address below:</p>
+      
+      <div class="search-bar-wrapper">
+        <div class="input-group">
+          <input type="text" placeholder="Sunnyvale, CA" class="location-input">
+          <button class="btn-search" aria-label="Search">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compare Agents Section — Ultra Premium -->
+  <section class="hca-ultra-premium">
+    <div class="hca-mesh-bg"></div>
+    <div class="hca-inner">
+      <!-- Content Side -->
+      <div class="hca-content">
+        <div class="hca-badge-modern">
+          <i class="fas fa-certificate"></i> Verified Expert Matching
+        </div>
+        <h2 class="hca-title-modern">Looking to sell?<br><span class="hca-highlight">Find a trusted expert.</span></h2>
+        <p class="hca-desc-modern">
+          Compare elite local agents based on hard data: recent sales, verified reviews, and commission models. No guesswork, just results.
+        </p>
+        
+        <div class="hca-actions-modern">
+          <a [routerLink]="['/find-agent']" [queryParams]="{ mode: 'wizard' }" class="hca-btn-premium">
+            <span>Compare local agents</span>
+            <div class="hca-btn-glow"></div>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <div class="hca-security-note">
+            <i class="fas fa-shield-check"></i> 100% Free & No Obligation
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Side -->
+      <div class="hca-visuals">
+        <div class="hca-card-stack">
+          <!-- Agent Card 1 -->
+          <article class="hca-card hca-card-1">
+            <div class="hca-card-glass"></div>
+            <div class="hca-card-top">
+              <div class="hca-avatar">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Agent">
+                <div class="hca-status"></div>
+              </div>
+              <div class="hca-user-info">
+                <h4>Laxmi Penupothula</h4>
+                <p>Intero Real Estate · Broker</p>
+              </div>
+            </div>
+            <div class="hca-card-body">
+              <div class="hca-mini-stat">
+                <span class="val">8 yrs</span>
+                <span class="lbl">Experience</span>
+              </div>
+              <div class="hca-divider"></div>
+              <div class="hca-mini-stat">
+                <span class="val">70</span>
+                <span class="lbl">Sales</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Agent Card 2 (Featured) -->
+          <article class="hca-card hca-card-2 featured">
+            <div class="hca-card-glass"></div>
+            <div class="hca-featured-badge">#1 Best Match</div>
+            <div class="hca-card-top">
+              <div class="hca-avatar">
+                <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Agent">
+                <div class="hca-status"></div>
+              </div>
+              <div class="hca-user-info">
+                <h4>Robert Parish</h4>
+                <p>Compass · Elite Partner</p>
+              </div>
+            </div>
+            <div class="hca-card-body">
+              <div class="hca-mini-stat">
+                <span class="val">26 yrs</span>
+                <span class="lbl">Experience</span>
+              </div>
+              <div class="hca-divider"></div>
+              <div class="hca-mini-stat">
+                <span class="val">4</span>
+                <span class="lbl">This Year</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- More Card -->
+          <article class="hca-card hca-card-more">
+            <div class="hca-circle-wrap">
+              <div class="hca-circle">+4</div>
+            </div>
+            <h4>Elite Agents</h4>
+            <p>Ready to compete</p>
+            <a routerLink="/find-agent" class="hca-more-btn">Compare All <i class="fas fa-chevron-right"></i></a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Directories Section -->
+  <section class="directory-section">
+    <div class="container">
+      
+      <!-- ZIP Codes -->
+      <div id="zip" class="directory-block">
+        <h2 class="directory-title">Zip Codes in Sunnyvale CA</h2>
+        <ul class="directory-list sc-207e9ee0-0 gnAEiD">
+          <li class="list-column-item" *ngFor="let zip of zipCodes">
+            <a class="directory-link base__StyledAnchor-rui__sc-7dk5je-0 ibzfHv" [routerLink]="['/propertyrecord-search', zip]">
+              {{ zip }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="directory-divider">
+
+      <!-- Streets -->
+      <div id="street" class="directory-block">
+        <h2 class="directory-title">All streets in Sunnyvale CA</h2>
+        <ul class="directory-list sc-207e9ee0-0 gnAEiD">
+          <li class="list-column-item" *ngFor="let street of streets">
+            <a class="directory-link base__StyledAnchor-rui__sc-7dk5je-0 ibzfHv" [routerLink]="['/propertyrecord-search', 'Sunnyvale_CA', street.replace(' ', '-')]">
+              {{ street }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<app-site-footer></app-site-footer>

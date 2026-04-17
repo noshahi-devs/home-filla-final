@@ -26,8 +26,8 @@
         </div>
 
         <div class="hero-search hero-search-modern">
-            <input type="text" placeholder="Location, ZIP, or neighborhood" value="Sunnyvale, CA">
-            <button class="search-pill"><i class="fas fa-search"></i> Search</button>
+            <input type="text" [(ngModel)]="locationSearch" (keyup.enter)="onSearch()" placeholder="Location, ZIP, or neighborhood">
+            <button class="search-pill" (click)="onSearch()"><i class="fas fa-search"></i> Search</button>
         </div>
     </div>
 </div>
@@ -1188,15 +1188,15 @@
             <!-- Col 1 -->
             <div class="pml-col">
                 <h4>Popular real estate markets</h4>
-                <a href="#">Albuquerque, NM real estate</a>
-                <a href="#">Atlanta, GA real estate</a>
-                <a href="#">Austin, TX real estate</a>
+                <a [routerLink]="['/listings/homes-for-sale']" [queryParams]="{ location: 'Albuquerque', state: 'NM' }">Albuquerque, NM real estate</a>
+                <a [routerLink]="['/listings/homes-for-sale']" [queryParams]="{ location: 'Atlanta', state: 'GA' }">Atlanta, GA real estate</a>
+                <a [routerLink]="['/listings/homes-for-sale']" [queryParams]="{ location: 'Austin', state: 'TX' }">Austin, TX real estate</a>
                 <details>
                     <summary class="pml-seemore">See more <i class="fas fa-chevron-down"></i></summary>
-                    <a href="#">Baltimore, MD real estate</a>
-                    <a href="#">Boston, MA real estate</a>
-                    <a href="#">Charlotte, NC real estate</a>
-                    <a href="#">Chicago, IL real estate</a>
+                    <a [routerLink]="['/listings/homes-for-sale']" [queryParams]="{ location: 'Baltimore', state: 'MD' }">Baltimore, MD real estate</a>
+                    <a [routerLink]="['/listings/homes-for-sale']" [queryParams]="{ location: 'Boston', state: 'MA' }">Boston, MA real estate</a>
+                    <a [routerLink]="['/listings/homes-for-sale']" [queryParams]="{ location: 'Charlotte', state: 'NC' }">Charlotte, NC real estate</a>
+                    <a [routerLink]="['/listings/homes-for-sale']" [queryParams]="{ location: 'Chicago', state: 'IL' }">Chicago, IL real estate</a>
                 </details>
             </div>
             <!-- Col 2 -->
@@ -1230,15 +1230,15 @@
             <!-- Col 4 -->
             <div class="pml-col">
                 <h4>New listings by state</h4>
-                <a href="#">Alabama new listings</a>
-                <a href="#">Alaska new listings</a>
-                <a href="#">Arizona new listings</a>
+                <a [routerLink]="['/listings/new-listings']" [queryParams]="{ location: 'Alabama' }">Alabama new listings</a>
+                <a [routerLink]="['/listings/new-listings']" [queryParams]="{ location: 'Alaska' }">Alaska new listings</a>
+                <a [routerLink]="['/listings/new-listings']" [queryParams]="{ location: 'Arizona' }">Arizona new listings</a>
                 <details>
                     <summary class="pml-seemore">See more <i class="fas fa-chevron-down"></i></summary>
-                    <a href="#">Arkansas new listings</a>
-                    <a href="#">California new listings</a>
-                    <a href="#">Colorado new listings</a>
-                    <a href="#">Connecticut new listings</a>
+                    <a [routerLink]="['/listings/new-listings']" [queryParams]="{ location: 'Arkansas' }">Arkansas new listings</a>
+                    <a [routerLink]="['/listings/new-listings']" [queryParams]="{ location: 'California' }">California new listings</a>
+                    <a [routerLink]="['/listings/new-listings']" [queryParams]="{ location: 'Colorado' }">Colorado new listings</a>
+                    <a [routerLink]="['/listings/new-listings']" [queryParams]="{ location: 'Connecticut' }">Connecticut new listings</a>
                 </details>
             </div>
         </div>

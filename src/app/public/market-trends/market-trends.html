@@ -1,0 +1,411 @@
+<app-site-header></app-site-header>
+
+<div class="market-trends-page">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="#">Nationwide</a>
+      <span class="separator">›</span>
+      <a href="#">California</a>
+      <span class="separator">›</span>
+      <a href="#">Santa Clara County</a>
+      <span class="separator">›</span>
+      <span class="current">Sunnyvale</span>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Sunnyvale, CA housing market overview</h1>
+      <p class="subtitle">Find the latest data, compare neighborhoods and zip codes, and get expert insights for buyers, sellers, and renters.</p>
+      
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs">
+        <button 
+          *ngFor="let item of navItems" 
+          class="nav-tab"
+          [class.active]="activeNav === item"
+          (click)="activeNav = item">
+          {{ item }}
+        </button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Market Summary Section -->
+  <section class="market-summary">
+    <div class="container">
+      <div class="summary-grid">
+        <!-- Map Card -->
+        <div class="map-card">
+          <div class="map-placeholder">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Interactive Map</span>
+          </div>
+        </div>
+        
+        <!-- Market Stats Card -->
+        <div class="stats-card">
+          <div class="card-header">
+            <h2>Sunnyvale, CA market summary</h2>
+            <span class="info-badge">Key indicators as of March 2026</span>
+          </div>
+          
+          <div class="stats-table">
+            <div class="table-header">
+              <span>Metric</span>
+              <span>Citywide</span>
+              <span>1Y Change</span>
+              <span>3Y Change</span>
+            </div>
+            <div class="table-row" *ngFor="let row of summaryData">
+              <span class="metric">{{ row.metric }}</span>
+              <span class="value">{{ row.citywide }}</span>
+              <span class="change" [class.positive]="row.change1Y.startsWith('-')" [class.negative]="!row.change1Y.startsWith('-') && row.change1Y !== '–'">
+                {{ row.change1Y }}
+              </span>
+              <span class="change" [class.positive]="row.change3Y.startsWith('-')" [class.negative]="!row.change3Y.startsWith('-') && row.change3Y !== '–'">
+                {{ row.change3Y }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Actions -->
+  <section class="search-actions">
+    <div class="container">
+      <h3>Search homes & rentals in Sunnyvale</h3>
+      <div class="action-buttons">
+        <button class="btn-primary">
+          <i class="fas fa-home"></i>
+          Search 277 homes
+        </button>
+        <button class="btn-outline">
+          <i class="fas fa-building"></i>
+          Search 163 rentals
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Today's Rates Section -->
+  <section class="rates-section">
+    <div class="container">
+      <div class="rates-card">
+        <div class="rates-header">
+          <div>
+            <h3>Today's Rates in Sunnyvale</h3>
+            <p class="rates-subtitle">Data provided by 3rd party RateUpdate.com</p>
+          </div>
+          <span class="rate-badge">30-yr fixed</span>
+        </div>
+        
+        <div class="rates-grid">
+          <div class="rate-item">
+            <span class="rate-value">6.249%</span>
+            <span class="rate-label">Average rate</span>
+          </div>
+          <div class="rate-item">
+            <span class="rate-value">6.276%</span>
+            <span class="rate-label">Average APR</span>
+          </div>
+        </div>
+        
+        <button class="btn-rate">
+          <i class="fas fa-chart-line"></i>
+          View more rates and lenders
+        </button>
+        
+        <p class="disclaimer">
+          Averages are provided for informational purposes only and are based on averages for Sunnyvale. 
+          <a href="#">Disclosures</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market Insights -->
+  <section class="market-insights">
+    <div class="container">
+      <div class="insights-list">
+        <div class="insight-item">
+          <i class="fas fa-circle bullet"></i>
+          <p><strong>Supply Of Listings:</strong> The count of homes for sale listings stands at 277, signaling a finite inventory that may spur bidding among buyers.</p>
+        </div>
+        <div class="insight-item">
+          <i class="fas fa-circle bullet"></i>
+          <p><strong>Rent Trends:</strong> Year-over-year rent price changes show a rise of 1.60%, indicating a stable rent environment that benefits landlords and helps renters plan.</p>
+        </div>
+        <div class="insight-item">
+          <i class="fas fa-circle bullet"></i>
+          <p><strong>Rental Inventory:</strong> The rental market currently offers 163 listings, reflecting moderate supply for renters and potential negotiation opportunities.</p>
+        </div>
+        <div class="insight-item">
+          <i class="fas fa-circle bullet"></i>
+          <p><strong>Sales Pace Change:</strong> The median days on market for homes on sale has grown year-over-year by 6.25%, suggesting a slightly slower pace compared with last year.</p>
+        </div>
+      </div>
+      
+      <div class="neighborhood-links">
+        <p>Explore neighborhoods like <a href="#">East Sunnyvale</a>, <a href="#">Sunnyvale West</a>, <a href="#">Ponderosa</a>, and <a href="#">Lakewood</a>. Also explore ZIP codes <a href="#">94086</a>, <a href="#">94087</a>, <a href="#">94089</a>, and <a href="#">94085</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hotness Index Section -->
+  <section class="hotness-index">
+    <div class="container">
+      <div class="hotness-card">
+        <div class="card-header-center">
+          <h3>Realtor.com's market Hotness Index</h3>
+        </div>
+        
+        <div class="gauge-container">
+          <div class="gauge-value">
+            <span class="number">53</span>
+            <span class="label">Warm</span>
+          </div>
+          
+          <div class="gauge-bar">
+            <div class="gauge-track">
+              <div class="gauge-fill" style="width: 53%;"></div>
+            </div>
+            <div class="gauge-labels">
+              <span>Very cool</span>
+              <span>Cool</span>
+              <span class="active">Warm</span>
+              <span>Hot</span>
+              <span>Very hot</span>
+            </div>
+            <div class="gauge-marker" style="left: 53%;">
+              <i class="fas fa-home"></i>
+            </div>
+          </div>
+        </div>
+        
+        <p class="hotness-desc">Sunnyvale ranks <strong>#3642</strong> nationally and is steadily active. Homes sell in a median of <strong>17 days</strong>.</p>
+        
+        <div class="source-link">
+          <i class="fas fa-info-circle"></i>
+          <span>Realtor.com Hotness Index</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Neighborhood Data Section -->
+  <section class="neighborhood-data">
+    <div class="container">
+      <h2>Sunnyvale housing market by neighborhood</h2>
+      <p class="section-subtitle">Charts reflect historical data through February 2026</p>
+      
+      <!-- Data Tabs -->
+      <div class="data-tabs">
+        <button 
+          class="data-tab"
+          [class.active]="activeTab === 'Prices'"
+          (click)="setTab('Prices')">
+          Prices
+        </button>
+        <button 
+          class="data-tab"
+          [class.active]="activeTab === 'Properties'"
+          (click)="setTab('Properties')">
+          Properties
+        </button>
+        <button 
+          class="data-tab"
+          [class.active]="activeTab === 'Days on Market'"
+          (click)="setTab('Days on Market')">
+          Days on Market
+        </button>
+      </div>
+      
+      <!-- Data Content -->
+      <div class="data-content">
+        <!-- Prices Tab -->
+        <div class="tab-panel" *ngIf="activeTab === 'Prices'">
+          <div class="panel-grid">
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Neighborhood</th>
+                    <th>Median listing price</th>
+                    <th>Listing $ / sq ft</th>
+                    <th>Median monthly rental price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of pricesData">
+                    <td><a href="#" class="neighborhood-link">{{ item.neighborhood }}</a></td>
+                    <td class="price">{{ item.listingPrice }}</td>
+                    <td>{{ item.pricePerSqFt }}</td>
+                    <td>{{ item.rentPrice }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="chart-container">
+              <h4>Median listing prices</h4>
+              <div class="chart-placeholder">
+                <div class="bar-chart">
+                  <div class="bar" style="height: 90%;"></div>
+                  <div class="bar" style="height: 80%;"></div>
+                  <div class="bar" style="height: 75%;"></div>
+                  <div class="bar" style="height: 70%;"></div>
+                  <div class="bar" style="height: 60%;"></div>
+                  <div class="bar" style="height: 55%;"></div>
+                  <div class="bar" style="height: 50%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Properties Tab -->
+        <div class="tab-panel" *ngIf="activeTab === 'Properties'">
+          <div class="panel-grid">
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Neighborhood</th>
+                    <th>For Sale</th>
+                    <th>YoY Sale</th>
+                    <th>For Rent</th>
+                    <th>MoM Rent</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of propertiesData">
+                    <td><a href="#" class="neighborhood-link">{{ item.neighborhood }}</a></td>
+                    <td>{{ item.forSale }}</td>
+                    <td [class.positive]="item.yoySale.startsWith('-')" [class.negative]="!item.yoySale.startsWith('-')">{{ item.yoySale }}</td>
+                    <td>{{ item.forRent }}</td>
+                    <td [class.positive]="item.momRent.startsWith('-')" [class.negative]="!item.momRent.startsWith('-')">{{ item.momRent }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Days on Market Tab -->
+        <div class="tab-panel" *ngIf="activeTab === 'Days on Market'">
+          <div class="panel-grid">
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Neighborhood</th>
+                    <th>Days</th>
+                    <th>MoM</th>
+                    <th>YoY</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of daysOnMarketData">
+                    <td><a href="#" class="neighborhood-link">{{ item.neighborhood }}</a></td>
+                    <td>{{ item.days }}</td>
+                    <td [class.positive]="item.mom.startsWith('-')" [class.negative]="!item.mom.startsWith('-')">{{ item.mom }}</td>
+                    <td [class.positive]="item.yoy.startsWith('-')" [class.negative]="!item.yoy.startsWith('-')">{{ item.yoy }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zip Codes Section -->
+  <section class="zip-codes-section">
+    <div class="container">
+      <h2>Sunnyvale housing market by zip code</h2>
+      <p class="section-subtitle">Charts reflect historical data through February 2026</p>
+      
+      <div class="zip-tabs">
+        <button class="zip-tab active">Prices</button>
+        <button class="zip-tab">Properties</button>
+        <button class="zip-tab">Days on Market</button>
+      </div>
+      
+      <div class="zip-content">
+        <div class="summary-stats">
+          <div class="stat-item">
+            <span class="stat-label">Sunnyvale median listing price:</span>
+            <span class="stat-value">$1,499,000</span>
+            <span class="stat-change negative">| -6.25% YoY | -1.64% MoM</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Sunnyvale median rental price:</span>
+            <span class="stat-value">$3,500</span>
+            <span class="stat-change positive">| 1.60% YoY | 2.94% MoM</span>
+          </div>
+        </div>
+        
+        <div class="chart-wrapper">
+          <h4>Median listing home price vs. median home sold price</h4>
+          <div class="line-chart-placeholder">
+            <div class="chart-lines">
+              <svg viewBox="0 0 400 200" class="line-svg">
+                <path d="M 20 150 Q 60 140 100 130 T 180 110 T 260 90 T 340 80" stroke="#3b82f6" stroke-width="2" fill="none"/>
+                <path d="M 20 120 Q 60 100 100 110 T 180 100 T 260 95 T 340 85" stroke="#06b6d4" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+              </svg>
+              <div class="chart-labels">
+                <span>Mar 2023</span>
+                <span>Sep 2023</span>
+                <span>Mar 2024</span>
+                <span>Sep 2024</span>
+                <span>Mar 2025</span>
+                <span>Sep 2025</span>
+              </div>
+            </div>
+          </div>
+          <div class="chart-legend">
+            <span class="legend-item"><span class="dot blue"></span>Median listing home price</span>
+            <span class="legend-item"><span class="dot cyan"></span>Median home sold price</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Sidebar -->
+  <section class="research-section">
+    <div class="container">
+      <div class="research-grid">
+        <div class="research-column">
+          <h4>Research zipcodes in Sunnyvale</h4>
+          <ul class="research-list">
+            <li><a href="#">94085</a></li>
+            <li><a href="#">94086</a></li>
+            <li><a href="#">94087</a></li>
+            <li><a href="#">94088</a></li>
+            <li><a href="#">94089</a></li>
+          </ul>
+        </div>
+        <div class="research-column">
+          <h4>Research neighborhoods in Sunnyvale</h4>
+          <ul class="research-list">
+            <li><a href="#">Balboa Park</a></li>
+            <li><a href="#">Birdland</a></li>
+            <li><a href="#">Braly Corners</a></li>
+            <li><a href="#">Cherry Chase</a></li>
+            <li><a href="#">Cherry Orchard</a></li>
+          </ul>
+          <a href="#" class="show-more">Show More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-site-footer></app-site-footer>

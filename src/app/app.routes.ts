@@ -48,8 +48,15 @@ import { TermsOfUseComponent } from './public/legal/terms-of-use.component';
 import { SellersMarketplaceComponent } from './public/sell/sellers-marketplace/sellers-marketplace.component';
 import { RentersResourceComponent } from './public/rent/renters-resource/renters-resource.component';
 
+import { MarketTrends } from './public/market-trends/market-trends';
+import { PropertyRecord } from './public/property-record/property-record';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'market-trends', component: MarketTrends },
+  { path: 'propertyrecord-search', component: PropertyRecord },
+  { path: 'propertyrecord-search/:param', component: PropertyRecord },
+  { path: 'propertyrecord-search/:param1/:param2', component: PropertyRecord },
   { path: 'about', component: AboutComponent },
   { path: 'about/leadership', component: LeadershipComponent },
   { path: 'about/awards', component: AwardsComponent },

@@ -2,7 +2,7 @@
 <div class="listings-page" *ngIf="category">
   <app-site-header></app-site-header>
 
-<!-- ─── FINDER SEARCH BAR ─── -->
+  <!-- ─── FINDER SEARCH BAR ─── -->
   <div class="search-save-bar">
     <div class="search-save-container">
       <div class="search-input-group">
@@ -11,8 +11,10 @@
           {{ isMapOpen ? 'List' : 'Map' }}
         </button>
         <div class="search-divider"></div>
-        <input type="text" class="search-input-field" placeholder="Search by city...">
-        <button class="search-blue-btn"><i class="fas fa-search"></i> Search</button>
+        <input type="text" #searchInput class="search-input-field" [value]="locationFilter || ''"
+          (keyup.enter)="onSearch(searchInput.value)" placeholder="Search by city...">
+        <button class="search-blue-btn" (click)="onSearch(searchInput.value)"><i class="fas fa-search"></i>
+          Search</button>
       </div>
       <button class="save-search-btn"><i class="far fa-heart"></i> Save search</button>
     </div>
@@ -29,7 +31,7 @@
         <span class="lst-bc-current">{{ category.label }}</span>
       </div>
 
-      <h1 class="lst-hero-title">{{ category.label }}</h1>
+      <h1 class="lst-hero-title">{{ pageHeading }}</h1>
       <p class="lst-hero-desc">{{ category.description }}</p>
 
       <div class="lst-hero-meta">
@@ -38,7 +40,7 @@
           <strong>{{ formatCount(category.count) }}</strong> properties
         </div>
         <div class="lst-location-pill">
-          <i class="fas fa-map-marker-alt"></i> {{ locationFilter ? locationFilter : 'San Francisco, CA' }}
+          <i class="fas fa-map-marker-alt"></i> {{ locationFilter || 'United States' }}
         </div>
       </div>
     </div>
@@ -77,13 +79,16 @@
         <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Lot size'" (click)="setMapFilter('Lot size')">
           <i class="fas fa-tree"></i> Lot size
         </button>
-        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Lot slope'" (click)="setMapFilter('Lot slope')">
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Lot slope'"
+          (click)="setMapFilter('Lot slope')">
           <i class="fas fa-mountain"></i> Lot slope
         </button>
-        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Home size'" (click)="setMapFilter('Home size')">
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Home size'"
+          (click)="setMapFilter('Home size')">
           <i class="fas fa-home"></i> Home size
         </button>
-        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Year built'" (click)="setMapFilter('Year built')">
+        <button class="map-ctrl-btn" [class.active]="activeMapFilter === 'Year built'"
+          (click)="setMapFilter('Year built')">
           <i class="fas fa-calendar-alt"></i> Year built
         </button>
       </div>
@@ -95,7 +100,7 @@
         <button class="map-cat-btn"><i class="fas fa-graduation-cap"></i> Schools</button>
         <button class="map-cat-btn"><i class="fas fa-users"></i> Neighborhood</button>
       </div>
-      
+
       <div class="map-side-controls">
         <button class="map-side-btn"><i class="fas fa-times"></i> Clear Boundary</button>
         <button class="map-side-btn satellite"><i class="fas fa-globe"></i> Satellite</button>
@@ -108,76 +113,96 @@
     <div class="lst-results-bar-inner">
       <div class="lst-results-info">
         <span class="lst-results-count">{{ formatCount(category.count) }} results</span>
-        <span class="lst-results-label">in <strong>{{ locationFilter ? locationFilter : 'San Francisco, CA' }}</strong></span>
+        <span class="lst-results-label">in <strong>{{ locationFilter || 'All locations' }}</strong></span>
+
+        <div class="lst-affordability-link" style="margin-left: 20px;">
+          <a routerLink="/mortgages"
+            style="color: var(--accent); font-size: 14px; font-weight: 500; text-decoration: none; border-bottom: 1px dashed var(--accent);">How
+            much home can I afford?</a>
+        </div>
       </div>
       <div class="filters-scroll-container">
         <div class="filter-group">
-              <span class="filter-chip active">All homes</span>
-              <div class="filter-wrapper">
-                  <span class="filter-chip" onclick="toggleFilter(event, 'price-dropdown')">Price <i class="fas fa-chevron-down"></i></span>
-                  <div class="filter-dropdown" id="price-dropdown">
-                      <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Price Range</div>
-                      <div style="display: flex; gap: 12px; align-items: center;">
-                          <input type="text" placeholder="Minimum" class="dropdown-input">
-                          <span style="color: var(--text-secondary);">-</span>
-                          <input type="text" placeholder="Maximum" class="dropdown-input">
-                      </div>
-                      <button class="dropdown-apply" style="margin-top: 20px;" onclick="applyFilter(this)">Apply</button>
-                  </div>
+          <span class="filter-chip active">All homes</span>
+          <div class="filter-wrapper">
+            <span class="filter-chip" onclick="toggleFilter(event, 'price-dropdown')">Price <i
+                class="fas fa-chevron-down"></i></span>
+            <div class="filter-dropdown" id="price-dropdown">
+              <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Price
+                Range</div>
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <input type="text" placeholder="Minimum" class="dropdown-input">
+                <span style="color: var(--text-secondary);">-</span>
+                <input type="text" placeholder="Maximum" class="dropdown-input">
               </div>
+              <button class="dropdown-apply" style="margin-top: 20px;" onclick="applyFilter(this)">Apply</button>
+            </div>
+          </div>
 
-              <div class="filter-wrapper">
-                  <span class="filter-chip" onclick="toggleFilter(event, 'beds-dropdown')">Beds/baths <i class="fas fa-chevron-down"></i></span>
-                  <div class="filter-dropdown" id="beds-dropdown">
-                      <div style="margin-bottom: 20px;">
-                          <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Bedrooms</div>
-                          <div class="btn-group">
-                              <button class="tgl-btn active">Any</button>
-                              <button class="tgl-btn">1+</button>
-                              <button class="tgl-btn">2+</button>
-                              <button class="tgl-btn">3+</button>
-                              <button class="tgl-btn">4+</button>
-                          </div>
-                      </div>
-                      <div>
-                          <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Bathrooms</div>
-                          <div class="btn-group">
-                              <button class="tgl-btn active">Any</button>
-                              <button class="tgl-btn">1+</button>
-                              <button class="tgl-btn">2+</button>
-                              <button class="tgl-btn">3+</button>
-                          </div>
-                      </div>
-                      <button class="dropdown-apply" style="margin-top: 20px;" onclick="applyFilter(this)">Apply</button>
-                  </div>
+          <div class="filter-wrapper">
+            <span class="filter-chip" onclick="toggleFilter(event, 'beds-dropdown')">Beds/baths <i
+                class="fas fa-chevron-down"></i></span>
+            <div class="filter-dropdown" id="beds-dropdown">
+              <div style="margin-bottom: 20px;">
+                <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">
+                  Bedrooms</div>
+                <div class="btn-group">
+                  <button class="tgl-btn active">Any</button>
+                  <button class="tgl-btn">1+</button>
+                  <button class="tgl-btn">2+</button>
+                  <button class="tgl-btn">3+</button>
+                  <button class="tgl-btn">4+</button>
+                </div>
               </div>
-
-              <div class="filter-wrapper">
-                  <span class="filter-chip" onclick="toggleFilter(event, 'type-dropdown')">House type <i class="fas fa-chevron-down"></i></span>
-                  <div class="filter-dropdown" id="type-dropdown">
-                      <div style="font-weight: 600; font-size: 14px; margin-bottom: 16px; color: var(--text-primary);">Property Type</div>
-                      <div style="display: flex; flex-direction: column; gap: 16px;">
-                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked> Single-family home</label>
-                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked> Condominium</label>
-                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked> Townhouse</label>
-                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox"> Multi-family</label>
-                          <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox"> Land</label>
-                      </div>
-                      <button class="dropdown-apply" style="margin-top: 24px;" onclick="applyFilter(this)">Apply</button>
-                  </div>
+              <div>
+                <div style="font-weight: 600; font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">
+                  Bathrooms</div>
+                <div class="btn-group">
+                  <button class="tgl-btn active">Any</button>
+                  <button class="tgl-btn">1+</button>
+                  <button class="tgl-btn">2+</button>
+                  <button class="tgl-btn">3+</button>
+                </div>
               </div>
+              <button class="dropdown-apply" style="margin-top: 20px;" onclick="applyFilter(this)">Apply</button>
+            </div>
+          </div>
 
-              <span class="filter-chip">More filters <i class="fas fa-sliders-h"></i></span>
+          <div class="filter-wrapper">
+            <span class="filter-chip" onclick="toggleFilter(event, 'type-dropdown')">House type <i
+                class="fas fa-chevron-down"></i></span>
+            <div class="filter-dropdown" id="type-dropdown">
+              <div style="font-weight: 600; font-size: 14px; margin-bottom: 16px; color: var(--text-primary);">Property
+                Type</div>
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked>
+                  Single-family home</label>
+                <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked>
+                  Condominium</label>
+                <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox" checked>
+                  Townhouse</label>
+                <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox">
+                  Multi-family</label>
+                <label class="check-label" onclick="event.stopPropagation()"><input type="checkbox"> Land</label>
+              </div>
+              <button class="dropdown-apply" style="margin-top: 24px;" onclick="applyFilter(this)">Apply</button>
+            </div>
+          </div>
+
+          <span class="filter-chip">More filters <i class="fas fa-sliders-h"></i></span>
         </div>
         <div class="lst-sort-wrap">
           <div class="filter-wrapper">
-              <span class="filter-chip" onclick="toggleFilter(event, 'sort-dropdown')"><i class="fas fa-sort"></i> Sort: Newest</span>
-              <div class="filter-dropdown" id="sort-dropdown" style="right: 0; left: auto; width: 200px; min-width: 200px;">
-                  <div class="sort-option" onclick="applyFilter(this)">Newest listings</div>
-                  <div class="sort-option" onclick="applyFilter(this)">Price (High to Low)</div>
-                  <div class="sort-option" onclick="applyFilter(this)">Price (Low to High)</div>
-                  <div class="sort-option" style="border-bottom: 1px solid var(--border);" onclick="applyFilter(this)">Square Feet</div>
-              </div>
+            <span class="filter-chip" onclick="toggleFilter(event, 'sort-dropdown')"><i class="fas fa-sort"></i> Sort:
+              {{ sortOrder }}</span>
+            <div class="filter-dropdown" id="sort-dropdown"
+              style="right: 0; left: auto; width: 220px; min-width: 220px;">
+              <div class="sort-option" (click)="sortProperties('Newest')">Newest listings</div>
+              <div class="sort-option" (click)="sortProperties('Price (High to Low)')">Price (High to Low)</div>
+              <div class="sort-option" (click)="sortProperties('Price (Low to High)')">Price (Low to High)</div>
+              <div class="sort-option" style="border-bottom: 1px solid var(--border);"
+                (click)="sortProperties('Square Feet')">Square Feet</div>
+            </div>
           </div>
         </div>
       </div>
@@ -199,15 +224,16 @@
           <!-- Top-left: tags -->
           <div class="lst-card-tags" *ngIf="p.tags && p.tags!.length > 0">
             <span *ngFor="let tag of p.tags" class="lst-tag"
-                  [class.lst-tag-blue]="tag === 'new' || tag === 'open house 4/10' || tag === 'open house today'"
-                  [class.lst-tag-green]="tag === 'new construction' || tag === 'Builder Promotion'"
-                  [class.lst-tag-red]="tag === 'price reduced'">
+              [class.lst-tag-blue]="tag === 'new' || tag === 'open house 4/10' || tag === 'open house today'"
+              [class.lst-tag-green]="tag === 'new construction' || tag === 'Builder Promotion'"
+              [class.lst-tag-red]="tag === 'price reduced'">
               {{ tag }}
             </span>
           </div>
 
           <!-- Fallback badge if no tags -->
-          <span *ngIf="(!p.tags || p.tags!.length === 0) && p.badge" class="lst-badge" [ngClass]="p.badgeClass || 'badge-blue'">
+          <span *ngIf="(!p.tags || p.tags!.length === 0) && p.badge" class="lst-badge"
+            [ngClass]="p.badgeClass || 'badge-blue'">
             {{ p.badge }}
           </span>
 
@@ -221,7 +247,7 @@
 
           <!-- Heart save -->
           <button class="lst-heart-btn" [class.saved]="isSaved(p.id)"
-                  (click)="toggleFavorite(p.id, $event); $event.stopPropagation()" title="Save">
+            (click)="toggleFavorite(p.id, $event); $event.stopPropagation()" title="Save">
             <i [ngClass]="isSaved(p.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
           </button>
         </div>
@@ -232,8 +258,11 @@
           <!-- Builder/broker credit -->
           <div class="lst-broker-row" *ngIf="p.builder">
             <svg viewBox="0 0 24 24" class="lst-verified-icon" aria-hidden="true">
-              <path d="M15.707 9.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L11 12.586l3.293-3.293a1 1 0 0 1 1.414 0"/>
-              <path fill-rule="evenodd" d="M9.52 3.368c1.19-1.75 3.77-1.75 4.96 0l.296.434.51-.187c2.027-.743 4.152.832 4.03 2.987l-.018.31.327.084c2.156.546 2.99 3.165 1.544 4.856l-.125.148.125.148c1.445 1.69.612 4.31-1.544 4.856l-.328.083.018.311c.123 2.155-2.002 3.73-4.028 2.987l-.51-.187-.297.434c-1.19 1.75-3.77 1.75-4.96 0l-.296-.434-.51.187c-2.027.743-4.151-.832-4.029-2.987l.018-.31-.328-.084c-2.156-.546-2.989-3.166-1.544-4.857L2.957 12l-.126-.148c-1.445-1.69-.612-4.31 1.544-4.856l.328-.083-.018-.311c-.122-2.155 2.002-3.73 4.028-2.987l.511.187z" clip-rule="evenodd"/>
+              <path
+                d="M15.707 9.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L11 12.586l3.293-3.293a1 1 0 0 1 1.414 0" />
+              <path fill-rule="evenodd"
+                d="M9.52 3.368c1.19-1.75 3.77-1.75 4.96 0l.296.434.51-.187c2.027-.743 4.152.832 4.03 2.987l-.018.31.327.084c2.156.546 2.99 3.165 1.544 4.856l-.125.148.125.148c1.445 1.69.612 4.31-1.544 4.856l-.328.083.018.311c.123 2.155-2.002 3.73-4.028 2.987l-.51-.187-.297.434c-1.19 1.75-3.77 1.75-4.96 0l-.296-.434-.51.187c-2.027.743-4.151-.832-4.029-2.987l.018-.31-.328-.084c-2.156-.546-2.989-3.166-1.544-4.857L2.957 12l-.126-.148c-1.445-1.69-.612-4.31 1.544-4.856l.328-.083-.018-.311c-.122-2.155 2.002-3.73 4.028-2.987l.511.187z"
+                clip-rule="evenodd" />
             </svg>
             <span class="lst-broker-name">{{ p.builder }}</span>
           </div>
@@ -285,17 +314,316 @@
       </div>
     </div>
 
-    <!-- Load More -->
-    <div class="lst-load-more-wrap" *ngIf="hasMore">
-      <button class="lst-load-more-btn" (click)="loadMore()">
-        <span>Load more <strong>({{ remaining }} left)</strong></span>
-        <i class="fas fa-chevron-down"></i>
-      </button>
+    <!-- ─── PAGINATION BAR ─── -->
+    <div class="lst-pagination-container" *ngIf="totalPages > 1">
+      <div class="lst-pagination">
+        <button class="pg-btn pg-prev" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <ng-container *ngFor="let page of totalPagesArray">
+          <button class="pg-btn" [class.active]="currentPage === page" (click)="goToPage(page)"
+            *ngIf="page === 1 || page === totalPages || (page >= currentPage - 1 && page <= currentPage + 1)">
+            {{ page }}
+          </button>
+          <span class="pg-dots" *ngIf="page === 2 && currentPage > 3">...</span>
+          <span class="pg-dots" *ngIf="page === totalPages - 1 && currentPage < totalPages - 2">...</span>
+        </ng-container>
+        <button class="pg-btn pg-next" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
+          <span>Next</span> <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="lst-pagination-info">Found {{ formatCount(allFilteredProperties.length) }} matching properties</div>
     </div>
 
-    <div class="lst-all-done" *ngIf="!hasMore && visibleProperties.length > 0">
-      <i class="fas fa-check-circle"></i>
-      <span>All {{ formatCount(category.count) }} properties shown</span>
+    <!-- ─── FEATURED CAROUSEL: Pools ─── -->
+    <div class="lst-carousel-section">
+      <div class="lst-carousel-header">
+        <div>
+          <h2 class="lst-carousel-title">Your private oasis: explore homes with on-site pools</h2>
+          <a href="#" class="lst-carousel-link">View all homes with pools in {{ locationFilter || 'the area' }}</a>
+        </div>
+        <div class="lst-carousel-nav">
+          <button class="lst-carousel-btn" onclick="this.closest('.lst-carousel-section').querySelector('.lst-carousel-track').scrollBy({left:-300,behavior:'smooth'})">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="lst-carousel-btn" onclick="this.closest('.lst-carousel-section').querySelector('.lst-carousel-track').scrollBy({left:300,behavior:'smooth'})">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="lst-carousel-track">
+        <div class="lst-c-card" *ngFor="let p of visibleProperties.slice(0, 8)" [routerLink]="['/property', category?.slug || 'homes-for-sale', p.id]">
+          <div class="lst-c-img-wrap">
+            <img [src]="p.image" [alt]="p.address" loading="lazy">
+            <button class="lst-c-heart" [class.saved]="isSaved(p.id)" (click)="toggleFavorite(p.id, $event)">
+              <i [ngClass]="isSaved(p.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
+            </button>
+          </div>
+          <div class="lst-c-status"><span class="lst-c-dot"></span>{{ p.type || 'Townhome for sale' }}</div>
+          <div class="lst-c-price">{{ p.price }}</div>
+          <div class="lst-c-meta">{{ p.beds }} bed &nbsp;{{ p.baths }} bath &nbsp;<strong>{{ p.sqft }}</strong> sqft</div>
+          <div class="lst-c-addr">{{ p.address }}</div>
+          <div class="lst-c-city">{{ p.city }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── FEATURED CAROUSEL: 3+ Bedrooms ─── -->
+    <div class="lst-carousel-section">
+      <div class="lst-carousel-header">
+        <div>
+          <h2 class="lst-carousel-title">Expand your options: homes with a room to grow</h2>
+          <a href="#" class="lst-carousel-link">View all homes with 3+ bedrooms</a>
+        </div>
+        <div class="lst-carousel-nav">
+          <button class="lst-carousel-btn" onclick="this.closest('.lst-carousel-section').querySelector('.lst-carousel-track').scrollBy({left:-300,behavior:'smooth'})">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="lst-carousel-btn" onclick="this.closest('.lst-carousel-section').querySelector('.lst-carousel-track').scrollBy({left:300,behavior:'smooth'})">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="lst-carousel-track">
+        <div class="lst-c-card" *ngFor="let p of visibleProperties.slice(0, 8).reverse()" [routerLink]="['/property', category?.slug || 'homes-for-sale', p.id]">
+          <div class="lst-c-img-wrap">
+            <img [src]="p.image" [alt]="p.address" loading="lazy">
+            <button class="lst-c-heart" [class.saved]="isSaved(p.id)" (click)="toggleFavorite(p.id, $event)">
+              <i [ngClass]="isSaved(p.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
+            </button>
+          </div>
+          <div class="lst-c-status"><span class="lst-c-dot"></span>{{ p.type || 'House for sale' }}</div>
+          <div class="lst-c-price">{{ p.price }}</div>
+          <div class="lst-c-meta">{{ p.beds }} bed &nbsp;{{ p.baths }} bath &nbsp;<strong>{{ p.sqft }}</strong> sqft</div>
+          <div class="lst-c-addr">{{ p.address }}</div>
+          <div class="lst-c-city">{{ p.city }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SUPPLEMENTARY SECTIONS ─── -->
+    <div class="lst-supplementary-area" *ngIf="!isMapOpen">
+
+
+      <!-- Market Facts -->
+      <section class="lst-info-section">
+        <div class="lst-facts-card">
+          <h2 class="lst-section-title">Facts about {{ locationFilter || 'the area' }}</h2>
+          <div class="lst-facts-grid">
+            <div class="lst-fact-item">
+              <span class="lst-fact-label">Median listing home price</span>
+              <div class="lst-fact-value"><i class="fas fa-arrow-up trend-up"></i><strong>$1.5M</strong></div>
+            </div>
+            <div class="lst-fact-item">
+              <span class="lst-fact-label">Median days on market</span>
+              <div class="lst-fact-value"><i class="fas fa-arrow-up trend-up"></i><strong>26</strong></div>
+            </div>
+            <div class="lst-fact-item">
+              <span class="lst-fact-label">Median price per sqft</span>
+              <div class="lst-fact-value"><i class="fas fa-arrow-up trend-up"></i><strong>$903</strong></div>
+            </div>
+            <div class="lst-fact-item">
+              <span class="lst-fact-label">Active listings</span>
+              <div class="lst-fact-value"><strong>{{ formatCount(allFilteredProperties.length) }}</strong></div>
+            </div>
+          </div>
+          <div class="lst-facts-footer">
+            <a routerLink="/listings/homes-for-sale" class="lst-link-blue">
+              {{ locationFilter || 'Local' }} housing market <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Schools Section (Premium Horizontal) -->
+      <section class="lst-info-section">
+        <h2 class="lst-section-title">Schools in {{ locationFilter || 'the area' }}</h2>
+        <div class="lst-school-box">
+          <div class="lst-school-tabs">
+            <button class="lst-school-tab" [class.active]="activeSchoolTab === 'Elementary'" (click)="setSchoolTab('Elementary')">Elementary</button>
+            <button class="lst-school-tab" [class.active]="activeSchoolTab === 'Middle'" (click)="setSchoolTab('Middle')">Middle</button>
+            <button class="lst-school-tab" [class.active]="activeSchoolTab === 'High'" (click)="setSchoolTab('High')">High</button>
+            <button class="lst-school-tab" [class.active]="activeSchoolTab === 'Private'" (click)="setSchoolTab('Private')">Private</button>
+            <button class="lst-school-tab" [class.active]="activeSchoolTab === 'District'" (click)="setSchoolTab('District')">District</button>
+          </div>
+          <hr class="lst-school-hr">
+          <p class="lst-school-top-label">Top rated schools</p>
+          <div class="lst-school-grid">
+            <div class="lst-school-grid-card">
+              <div class="lst-school-badge rating-9">9</div>
+              <div class="lst-school-grid-info">
+                <div class="lst-school-grid-name">Laurelwood Elementary School</div>
+                <a href="#" class="lst-link-blue lst-school-grid-link">View homes for sale</a>
+              </div>
+            </div>
+            <div class="lst-school-grid-card">
+              <div class="lst-school-badge rating-8">8</div>
+              <div class="lst-school-grid-info">
+                <div class="lst-school-grid-name">Louis E. Stocklmeir Elementary School</div>
+                <a href="#" class="lst-link-blue lst-school-grid-link">View homes for sale</a>
+              </div>
+            </div>
+            <div class="lst-school-grid-card">
+              <div class="lst-school-badge rating-8">8</div>
+              <div class="lst-school-grid-info">
+                <div class="lst-school-grid-name">Cumberland Elementary School</div>
+                <a href="#" class="lst-link-blue lst-school-grid-link">View homes for sale</a>
+              </div>
+            </div>
+          </div>
+          <button class="lst-more-btn" style="margin-top:16px">
+            More {{ activeSchoolTab.toLowerCase() }} schools <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="lst-school-disclaimer">
+            <p>Contact the school or district directly to verify enrollment eligibility. Ratings provided by <a href="https://www.greatschools.org" target="_blank" class="lst-link-blue">GreatSchools.org</a></p>
+            <p>GreatSchools Ratings are based on student performance on state tests, progress over time, and college readiness. Ratings are on a scale of 1 (below average) to 10 (above average).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Search Discovery Accordions -->
+      <section class="lst-info-section">
+        <h2 class="lst-section-title">Find your ideal property in {{ locationFilter || 'the area' }}</h2>
+        <div class="lst-accordions">
+          <div class="lst-accordion-item" [class.open]="activeDiscoverySection === 'searches'">
+            <div class="lst-accordion-header" (click)="toggleDiscoverySection('searches')">
+              <span>Popular searches in {{ locationFilter || 'the area' }}</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="lst-accordion-content">
+              <ul class="lst-link-grid">
+                <li><a href="#">3 Bedroom Houses</a></li><li><a href="#">Luxury Homes</a></li>
+                <li><a href="#">New Construction</a></li><li><a href="#">Open Houses</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="lst-accordion-item" [class.open]="activeDiscoverySection === 'types'">
+            <div class="lst-accordion-header" (click)="toggleDiscoverySection('types')">
+              <span>Property types in {{ locationFilter || 'the area' }}</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="lst-accordion-content">
+              <ul class="lst-link-grid">
+                <li><a href="#">Single Family Homes</a></li><li><a href="#">Condos</a></li>
+                <li><a href="#">Townhomes</a></li><li><a href="#">Multi-Family</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="lst-accordion-item" [class.open]="activeDiscoverySection === 'price'">
+            <div class="lst-accordion-header" (click)="toggleDiscoverySection('price')">
+              <span>Homes by price in {{ locationFilter || 'the area' }}</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="lst-accordion-content">
+              <ul class="lst-link-grid">
+                <li><a href="#">Under $500K</a></li><li><a href="#">$500K – $800K</a></li>
+                <li><a href="#">$800K – $1.2M</a></li><li><a href="#">$1.2M+</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="lst-accordion-item" [class.open]="activeDiscoverySection === 'faq'">
+            <div class="lst-accordion-header" (click)="toggleDiscoverySection('faq')">
+              <span>{{ locationFilter || 'Local' }} real estate &amp; homes for sale</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="lst-accordion-content">
+              <div class="lst-faq-list">
+                <div class="lst-faq-item">
+                  <div class="lst-faq-q">What is the median home price in {{ locationFilter || 'the area' }}?</div>
+                  <div class="lst-faq-a">Homes for sale in {{ locationFilter || 'this area' }} have a median listing home price of $1,486,500.</div>
+                </div>
+                <div class="lst-faq-item">
+                  <div class="lst-faq-q">What is the average time to sell a house?</div>
+                  <div class="lst-faq-a">On average, houses for sale spend an average of 26 days on the market.</div>
+                </div>
+                <div class="lst-faq-item">
+                  <div class="lst-faq-q">What are some popular neighborhoods nearby?</div>
+                  <div class="lst-faq-a">Some of the hottest neighborhoods include Lakewood, Ponderosa, West Murphy, and East Murphy.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nearby Home Prices -->
+      <section class="lst-info-section">
+        <h2 class="lst-section-title">Nearby home prices</h2>
+        <div class="lst-nearby-accordion" [class.open]="activeDiscoverySection === 'nearby-nbhd'">
+          <div class="lst-accordion-header" (click)="toggleDiscoverySection('nearby-nbhd')">
+            <span>Neighborhoods near {{ locationFilter || 'the area' }}</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="lst-accordion-content">
+            <div class="lst-nearby-grid">
+              <div class="lst-nearby-card"><a href="#" class="lst-nearby-loc">Lakewood Homes for Sale</a><div class="lst-nearby-price">$1,398,000</div></div>
+              <div class="lst-nearby-card"><a href="#" class="lst-nearby-loc">Ponderosa Homes for Sale</a><div class="lst-nearby-price">$1,450,000</div></div>
+              <div class="lst-nearby-card"><a href="#" class="lst-nearby-loc">West Murphy Homes for Sale</a><div class="lst-nearby-price">$1,442,500</div></div>
+              <div class="lst-nearby-card"><a href="#" class="lst-nearby-loc">Ortega Homes for Sale</a><div class="lst-nearby-price">$1,709,000</div></div>
+              <div class="lst-nearby-card"><a href="#" class="lst-nearby-loc">De Anza Homes for Sale</a><div class="lst-nearby-price">$2,498,000</div></div>
+              <div class="lst-nearby-card"><a href="#" class="lst-nearby-loc">Washington Homes for Sale</a><div class="lst-nearby-price">$2,043,475</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How to Buy Section -->
+      <section class="lst-info-section">
+        <h2 class="lst-section-title">How to buy a home in {{ locationFilter || 'the area' }}</h2>
+        <div class="lst-how-buy-grid">
+
+          <!-- Left: Be prepared card -->
+          <div class="lst-how-card">
+            <div class="lst-how-card-label">Be prepared to buy</div>
+            <div class="lst-how-img-wrap">
+              <img src="house-buy-guide.png" alt="Beautiful home ready for purchase" class="lst-how-img">
+            </div>
+            <div class="lst-how-card-body">
+              <h3 class="lst-how-card-title">Get pre-approved</h3>
+              <p class="lst-how-card-desc">A pre-approval letter from a lender makes your offer stronger. Know your budget before you start searching.</p>
+              <a routerLink="/mortgages" class="lst-how-cta-btn" (click)="$event.stopPropagation()">Get pre-approved</a>
+            </div>
+          </div>
+
+          <!-- Right: Moving Cost Calculator -->
+          <div class="lst-how-card">
+            <div class="lst-how-card-label">Moving cost calculator</div>
+            <div class="lst-calc-body">
+              <div class="lst-calc-row">
+                <div class="lst-calc-group">
+                  <label class="lst-calc-label">Move from</label>
+                  <input type="text" class="lst-calc-input" placeholder="ZIP code">
+                </div>
+                <div class="lst-calc-group">
+                  <label class="lst-calc-label">Move to</label>
+                  <input type="text" class="lst-calc-input" placeholder="ZIP code">
+                </div>
+              </div>
+              <div class="lst-calc-row">
+                <div class="lst-calc-group">
+                  <label class="lst-calc-label">Size of move</label>
+                  <select class="lst-calc-select">
+                    <option>Studio</option>
+                    <option selected>2-3 beds</option>
+                    <option>4+ beds</option>
+                  </select>
+                </div>
+                <div class="lst-calc-group">
+                  <label class="lst-calc-label">Packing</label>
+                  <select class="lst-calc-select">
+                    <option selected>None</option>
+                    <option>Full packing</option>
+                    <option>Partial packing</option>
+                  </select>
+                </div>
+              </div>
+              <button class="lst-calc-submit">Get estimates</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -305,7 +633,8 @@
   <div class="modal-overlay" *ngIf="showContactModal && selectedContactProperty" (click)="closeContactModal()">
     <div class="modal-content contact-modal" (click)="$event.stopPropagation()">
       <div class="modal-header">
-        <h2>{{ selectedContactProperty.builder && selectedContactProperty.builder.startsWith('Built') ? 'Contact Builder' : 'More about this property' }}</h2>
+        <h2>{{ selectedContactProperty.builder && selectedContactProperty.builder.startsWith('Built') ? 'Contact
+          Builder' : 'More about this property' }}</h2>
         <button class="close-modal" (click)="closeContactModal()"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
@@ -325,16 +654,19 @@
             <input type="tel" placeholder="Phone *" class="modal-input">
           </div>
           <div class="form-group">
-            <textarea placeholder="How can we help?" class="modal-textarea">I'm interested in {{ selectedContactProperty.address }}.</textarea>
+            <textarea placeholder="How can we help?"
+              class="modal-textarea">I'm interested in {{ selectedContactProperty.address }}.</textarea>
           </div>
           <div class="form-check">
             <input type="checkbox" id="military">
             <label for="military">I've served in the U.S. military <i class="fas fa-info-circle"></i></label>
           </div>
           <button type="submit" class="modal-submit-btn">
-            {{ selectedContactProperty.builder && selectedContactProperty.builder.startsWith('Built') ? 'Contact Builder' : 'Email agent' }}
+            {{ selectedContactProperty.builder && selectedContactProperty.builder.startsWith('Built') ? 'Contact
+            Builder' : 'Email agent' }}
           </button>
-          <p class="modal-disclaimer">By proceeding, you consent to receive calls and texts at the number you provided according to our Terms of Use and Privacy Policy.</p>
+          <p class="modal-disclaimer">By proceeding, you consent to receive calls and texts at the number you provided
+            according to our Terms of Use and Privacy Policy.</p>
         </form>
       </div>
     </div>
@@ -349,3 +681,12 @@
   <h2>Category not found</h2>
   <a routerLink="/" class="lst-btn-primary">← Back to Home</a>
 </div>
+
+
+
+
+
+
+
+
+

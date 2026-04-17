@@ -32,21 +32,21 @@
       <div class="mobile-nav-submenu" [class.open]="isBuyAccordionOpen">
         <div class="mobile-submenu-group">
           <h5>Homes for sale</h5>
-          <a [routerLink]="['/listings', 'new-listings']" class="mobile-submenu-item" (click)="closeMobileMenu()">Homes for sale</a>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Foreclosure homes</a>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Open houses</a>
+          <a [routerLink]="['/listings', 'buy']" class="mobile-submenu-item" (click)="closeMobileMenu()">Homes for sale</a>
+          <a [routerLink]="['/listings', 'foreclosures']" class="mobile-submenu-item" (click)="closeMobileMenu()">Foreclosure homes</a>
+          <a [routerLink]="['/listings', 'open-houses']" class="mobile-submenu-item" (click)="closeMobileMenu()">Open houses</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>New construction</h5>
           <a [routerLink]="['/listings', 'new-construction']" class="mobile-submenu-item" (click)="closeMobileMenu()">All new construction</a>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">New home communities</a>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">New construction and plans</a>
+          <a [routerLink]="['/listings', 'new-home-communities']" class="mobile-submenu-item" (click)="closeMobileMenu()">New home communities</a>
+          <a [routerLink]="['/listings', 'new-home-communities']" class="mobile-submenu-item" (click)="closeMobileMenu()">New construction and plans</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>Explore the neighborhood</h5>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Housing market trends</a>
+          <a routerLink="/market-trends" class="mobile-submenu-item" (click)="closeMobileMenu()">Housing market trends</a>
           <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Top Schools</a>
-          <a href="#" class="mobile-submenu-item" (click)="closeMobileMenu()">Property records</a>
+          <a routerLink="/propertyrecord-search" class="mobile-submenu-item" (click)="closeMobileMenu()">Property records</a>
           <a [routerLink]="['/listings', 'recently-sold']" class="mobile-submenu-item" (click)="closeMobileMenu()">Recently sold homes</a>
         </div>
       </div>
@@ -182,23 +182,23 @@
     <div class="header-center">
       <nav class="nav-links primary-nav">
         <div class="mega-menu-trigger">
-          <a [routerLink]="['/listings', 'new-listings']" routerLinkActive="active" class="nav-link">Buy</a>
+          <a [routerLink]="['/listings', 'buy']" routerLinkActive="active" class="nav-link">Buy</a>
           <div class="mega-dropdown">
             <div class="mega-column">
               <div class="sub-section" style="margin-top: 0;">
                 <h4>Homes for sale</h4>
                 <div class="mega-links">
-                  <a [routerLink]="['/listings', 'new-listings']" class="mega-link"><strong>Homes for sale</strong></a>
-                  <a href="#" class="mega-link">Foreclosure homes</a>
-                  <a href="#" class="mega-link">Open houses</a>
+                  <a [routerLink]="['/listings', 'buy']" class="mega-link"><strong>Homes for sale</strong></a>
+                  <a [routerLink]="['/listings', 'foreclosures']" class="mega-link">Foreclosure homes</a>
+                  <a [routerLink]="['/listings', 'open-houses']" class="mega-link">Open houses</a>
                 </div>
               </div>
               <div class="sub-section">
                 <h4>New construction for sale</h4>
                 <div class="mega-links">
                   <a [routerLink]="['/listings', 'new-construction']" class="mega-link">All new construction</a>
-                  <a href="#" class="mega-link">New home communities</a>
-                  <a href="#" class="mega-link">New construction and plans</a>
+                  <a [routerLink]="['/listings', 'new-home-communities']" class="mega-link">New home communities</a>
+                  <a [routerLink]="['/listings', 'new-home-communities']" class="mega-link">New construction and plans</a>
                 </div>
               </div>
             </div>
@@ -206,9 +206,9 @@
               <div class="sub-section" style="margin-top: 0;">
                 <h4>Explore the neighborhood</h4>
                 <div class="mega-links">
-                  <a href="#" class="mega-link">Housing market trends</a>
+                  <a routerLink="/market-trends" class="mega-link">Housing market trends</a>
                   <a href="#" class="mega-link">Top Schools</a>
-                  <a href="#" class="mega-link">Property records</a>
+                  <a routerLink="/propertyrecord-search" class="mega-link">Property records</a>
                   <a [routerLink]="['/listings', 'recently-sold']" class="mega-link">Recently sold homes</a>
                 </div>
               </div>
