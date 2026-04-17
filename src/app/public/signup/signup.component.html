@@ -22,7 +22,7 @@
                             </linearGradient>
                         </defs>
                         <rect x="1" y="1" width="38" height="38" rx="9" fill="url(#hfGradAuthSignup)" />
-                        <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white"/>
+                        <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white" />
                     </svg>
                     <div class="logo-wordmark">
                         <span class="logo-name">Home Filla</span>
@@ -46,7 +46,8 @@
                     <label for="email">Email Address</label>
                     <div class="input-wrapper">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="name@homefilla.com" required>
+                        <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="name@homefilla.com"
+                            required>
                     </div>
                 </div>
 
@@ -54,20 +55,12 @@
                     <label for="phone">Phone Number</label>
                     <div class="input-wrapper phone-input-wrapper">
                         <div class="country-selector" [class.active]="isSelectorActive">
-                            <img [src]="'https://flagcdn.com/w20/' + getFlag() + '.png'" 
-                                 [alt]="countryCode" 
-                                 class="flag-img">
-                            <input 
-                                type="text" 
-                                name="countryCode" 
-                                [(ngModel)]="countryCode" 
-                                (input)="onCountryCodeInput()"
-                                (focus)="isSelectorActive = true"
-                                (blur)="isSelectorActive = false"
-                                placeholder="+92"
-                                class="country-input"
-                                list="countryCodes"
-                            >
+                            <img [src]="'https://flagcdn.com/w20/' + getFlag() + '.png'" [alt]="countryCode"
+                                class="flag-img">
+                            <input type="text" name="countryCode" [(ngModel)]="countryCode"
+                                (input)="onCountryCodeInput()" (focus)="isSelectorActive = true"
+                                (blur)="isSelectorActive = false" placeholder="+92" class="country-input"
+                                list="countryCodes">
                             <datalist id="countryCodes">
                                 <option *ngFor="let c of countries" [value]="c.dialCode">
                                     {{ c.name }}
@@ -75,16 +68,8 @@
                             </datalist>
                         </div>
                         <i class="fas fa-phone" style="left: 122px;"></i>
-                        <input 
-                            type="tel" 
-                            id="phone" 
-                            name="phone" 
-                            [(ngModel)]="phone" 
-                            (input)="onPhoneInput()"
-                            placeholder="300 1234567" 
-                            style="padding-left: 150px;" 
-                            required
-                        >
+                        <input type="tel" id="phone" name="phone" [(ngModel)]="phone" (input)="onPhoneInput()"
+                            placeholder="300 1234567" style="padding-left: 150px;" required>
                     </div>
                 </div>
 
@@ -93,8 +78,10 @@
                         <label for="password">Password</label>
                         <div class="input-wrapper">
                             <i class="fas fa-lock"></i>
-                            <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="password" placeholder="••••••••" required>
-                            <button type="button" class="password-toggle" (click)="showPassword = !showPassword" aria-label="Toggle password visibility">
+                            <input [type]="showPassword ? 'text' : 'password'" id="password" name="password"
+                                [(ngModel)]="password" placeholder="••••••••" required>
+                            <button type="button" class="password-toggle" (click)="showPassword = !showPassword"
+                                aria-label="Toggle password visibility">
                                 <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
                             </button>
                         </div>
@@ -103,9 +90,13 @@
                         <label for="confirm-password">Confirm</label>
                         <div class="input-wrapper">
                             <i class="fas fa-lock"></i>
-                            <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirm-password" name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="••••••••" required>
-                            <button type="button" class="password-toggle" (click)="showConfirmPassword = !showConfirmPassword" aria-label="Toggle confirm password visibility">
-                                <i class="fas" [class.fa-eye]="!showConfirmPassword" [class.fa-eye-slash]="showConfirmPassword"></i>
+                            <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirm-password"
+                                name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="••••••••" required>
+                            <button type="button" class="password-toggle"
+                                (click)="showConfirmPassword = !showConfirmPassword"
+                                aria-label="Toggle confirm password visibility">
+                                <i class="fas" [class.fa-eye]="!showConfirmPassword"
+                                    [class.fa-eye-slash]="showConfirmPassword"></i>
                             </button>
                         </div>
                     </div>
@@ -115,26 +106,31 @@
                 <div class="form-group" style="position: relative;">
                     <label>What would you like to do?</label>
                     <div class="role-selector-group">
-                        <button type="button" class="role-btn" [class.active]="role === 'buyer'" (click)="role = 'buyer'">
-                            <i class="fas fa-shopping-cart"></i> 
+                        <button type="button" class="role-btn" [class.active]="role === 'buyer'"
+                            (click)="role = 'buyer'">
+                            <i class="fas fa-shopping-cart"></i>
                             <span>Buyer</span>
                         </button>
-                        <button type="button" class="role-btn" [class.active]="role === 'seller'" (click)="role = 'seller'">
-                            <i class="fas fa-home"></i> 
+                        <button type="button" class="role-btn" [class.active]="role === 'seller'"
+                            (click)="role = 'seller'">
+                            <i class="fas fa-home"></i>
                             <span>Seller</span>
                         </button>
-                        <button type="button" class="role-btn" [class.active]="role === 'agent'" (click)="role = 'agent'">
-                            <i class="fas fa-user-tie"></i> 
+                        <button type="button" class="role-btn" [class.active]="role === 'agent'"
+                            (click)="role = 'agent'">
+                            <i class="fas fa-user-tie"></i>
                             <span>Agent</span>
                         </button>
                     </div>
                 </div>
 
-                <div *ngIf="errorMessage" style="color: #ef4444; font-size: 13px; text-align: center; margin-top: 5px; padding: 12px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                <div *ngIf="errorMessage"
+                    style="color: #ef4444; font-size: 13px; text-align: center; margin-top: 5px; padding: 12px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
                     <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i> {{ errorMessage }}
                 </div>
 
-                <button type="submit" class="auth-btn btn-primary" [disabled]="isLoading" style="position: relative; margin-top: 10px;">
+                <button type="submit" class="auth-btn btn-primary" [disabled]="isLoading"
+                    style="position: relative; margin-top: 10px;">
                     <span *ngIf="!isLoading">Create Account</span>
                     <span *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i> Registering...</span>
                 </button>

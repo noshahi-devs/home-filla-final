@@ -22,7 +22,7 @@
                             </linearGradient>
                         </defs>
                         <rect x="1" y="1" width="38" height="38" rx="9" fill="url(#hfGradAuth)" />
-                        <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white"/>
+                        <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white" />
                     </svg>
                     <div class="logo-wordmark">
                         <span class="logo-name">Home Filla</span>
@@ -46,7 +46,8 @@
                     <label>Password</label>
                     <div class="input-wrapper">
                         <i class="fas fa-lock"></i>
-                        <input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="password" placeholder="••••••••" required>
+                        <input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="password"
+                            placeholder="••••••••" required>
                         <button type="button" class="password-toggle" (click)="showPassword = !showPassword">
                             <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
                         </button>
@@ -69,7 +70,8 @@
                     <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
                 </div>
 
-                <button type="submit" class="auth-btn btn-primary" [disabled]="isLoading" style="position: relative; margin-top: 10px;">
+                <button type="submit" class="auth-btn btn-primary" [disabled]="isLoading"
+                    style="position: relative; margin-top: 10px;">
                     <span *ngIf="!isLoading">Sign In</span>
                     <span *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i> Authenticating...</span>
                 </button>
