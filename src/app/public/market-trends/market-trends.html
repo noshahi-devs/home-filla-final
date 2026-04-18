@@ -1,411 +1,655 @@
 <app-site-header></app-site-header>
 
 <div class="market-trends-page">
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
+  <!-- TOP BAR -->
+  <div class="top-bar">
     <div class="container">
-      <a href="#">Nationwide</a>
-      <span class="separator">›</span>
-      <a href="#">California</a>
-      <span class="separator">›</span>
-      <a href="#">Santa Clara County</a>
-      <span class="separator">›</span>
-      <span class="current">Sunnyvale</span>
+      <div class="top-bar-left">
+        <nav class="breadcrumbs">
+          <a href="#">Nationwide</a>
+          <span class="sep">›</span>
+          <a href="#">California</a>
+          <span class="sep">›</span>
+          <a href="#">Santa Clara County</a>
+          <span class="sep">›</span>
+          <span class="current">Sunnyvale</span>
+        </nav>
+      </div>
+      <div class="top-bar-right">
+        <div class="search-box">
+          <input type="text" placeholder="City, Zip, Neighborhood, State">
+          <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="share-icons">
+          <a href="#"><i class="fas fa-link"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
+  <!-- HERO SECTION -->
+  <div class="hero-section">
+    <div class="container text-center">
+      <span class="hero-badge">🏠 Housing Market</span>
       <h1>Sunnyvale, CA housing market overview</h1>
-      <p class="subtitle">Find the latest data, compare neighborhoods and zip codes, and get expert insights for buyers, sellers, and renters.</p>
-      
-      <!-- Navigation Tabs -->
-      <nav class="nav-tabs">
-        <button 
-          *ngFor="let item of navItems" 
-          class="nav-tab"
-          [class.active]="activeNav === item"
-          (click)="activeNav = item">
-          {{ item }}
-        </button>
+      <p class="hero-subtitle">Find the latest data, compare neighborhoods and zip codes, and get expert insights for buyers, sellers, and renters.</p>
+
+      <nav class="hero-nav">
+        <a href="#overview" class="active">OVERVIEW</a>
+        <a href="#neighborhoods">NEIGHBORHOODS</a>
+        <a href="#zips">ZIPS</a>
+        <a href="#schools">SCHOOLS</a>
+        <a href="#buyers">BUYERS</a>
+        <a href="#sellers">SELLERS</a>
+        <a href="#renters">RENTERS</a>
       </nav>
     </div>
-  </section>
+  </div>
 
-  <!-- Market Summary Section -->
-  <section class="market-summary">
-    <div class="container">
-      <div class="summary-grid">
-        <!-- Map Card -->
-        <div class="map-card">
-          <div class="map-placeholder">
-            <i class="fas fa-map-marked-alt"></i>
-            <span>Interactive Map</span>
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container main-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="left-column">
+
+        <!-- MARKET SUMMARY STATS -->
+        <div class="section-block" id="overview">
+          <h2 class="section-title">Sunnyvale, CA market summary</h2>
+          <p class="section-sub">Data as of March 2026</p>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Median Listing Price</div>
+              <div class="stat-value">$1.5M</div>
+              <div class="stat-change down"><span class="arrow">↓</span> 6.25% year-over-year</div>
+              <div class="stat-date">vs. $1.6M last year</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Price per Sq Ft</div>
+              <div class="stat-value">$942</div>
+              <div class="stat-change down"><span class="arrow">↓</span> 6.45% year-over-year</div>
+              <div class="stat-date">vs. $1,007 last year</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Active Listings</div>
+              <div class="stat-value">277</div>
+              <div class="stat-change up"><span class="arrow">↑</span> 8.02% year-over-year</div>
+              <div class="stat-date">More inventory than last year</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Median Days on Market</div>
+              <div class="stat-value">17 <span class="unit">days</span></div>
+              <div class="stat-change down"><span class="arrow">↑</span> 6.25% year-over-year</div>
+              <div class="stat-date">Slightly slower than last year</div>
+            </div>
+          </div>
+
+          <!-- Market Summary Text -->
+          <div class="card">
+            <div class="card-body">
+              <p class="summary-text">
+                Sunnyvale's housing market shows a premium demand with a median home sale price of <strong>$1.50M</strong>. The homes for sale median days on market reflects a brisk listing pace for buyers. The median rent stands at <strong>$3.5K per month</strong>, with year-over-year rent changes of <strong>+1.60%</strong>.
+              </p>
+              <ul class="summary-bullets">
+                <li><span class="bullet-dot"></span><span><strong>Supply of Listings:</strong> 277 homes for sale — signaling finite inventory that may spur bidding among buyers.</span></li>
+                <li><span class="bullet-dot"></span><span><strong>Rent Trends:</strong> Year-over-year rent price changes show a rise of <strong>1.60%</strong> — stable rent environment benefiting landlords and helping renters plan.</span></li>
+                <li><span class="bullet-dot"></span><span><strong>Rental Inventory:</strong> 163 rental listings — moderate supply offering potential negotiation opportunities.</span></li>
+                <li><span class="bullet-dot"></span><span><strong>Sales Pace Change:</strong> Median days on market grown year-over-year by <strong>6.25%</strong> — slightly slower pace compared with last year.</span></li>
+              </ul>
+            </div>
           </div>
         </div>
-        
-        <!-- Market Stats Card -->
-        <div class="stats-card">
+
+        <!-- HOUSING MARKET TRENDS CHART -->
+        <div class="card" id="trends">
           <div class="card-header">
-            <h2>Sunnyvale, CA market summary</h2>
-            <span class="info-badge">Key indicators as of March 2026</span>
+            <h2>Housing Market Trends</h2>
+            <p>Median listing price vs. median sold price over the past 3 years</p>
           </div>
-          
-          <div class="stats-table">
-            <div class="table-header">
-              <span>Metric</span>
-              <span>Citywide</span>
-              <span>1Y Change</span>
-              <span>3Y Change</span>
+          <div class="tab-row">
+            <button class="tab-btn active" (click)="setChartTab('prices')" [class.active]="activeChartTab === 'prices'">Prices</button>
+            <button class="tab-btn" (click)="setChartTab('properties')" [class.active]="activeChartTab === 'properties'">Properties</button>
+            <button class="tab-btn" (click)="setChartTab('dom')" [class.active]="activeChartTab === 'dom'">Days on Market</button>
+          </div>
+          <div class="tab-panel" [class.active]="activeChartTab === 'prices'">
+            <div class="chart-wrap">
+              <div class="chart-placeholder price-chart">
+                <div class="chart-line listing-line"></div>
+                <div class="chart-line sold-line"></div>
+                <div class="chart-labels-x">
+                  <span>Mar 2023</span>
+                  <span>Sep 2023</span>
+                  <span>Mar 2024</span>
+                  <span>Sep 2024</span>
+                  <span>Mar 2025</span>
+                  <span>Sep 2025</span>
+                </div>
+              </div>
             </div>
-            <div class="table-row" *ngFor="let row of summaryData">
-              <span class="metric">{{ row.metric }}</span>
-              <span class="value">{{ row.citywide }}</span>
-              <span class="change" [class.positive]="row.change1Y.startsWith('-')" [class.negative]="!row.change1Y.startsWith('-') && row.change1Y !== '–'">
-                {{ row.change1Y }}
-              </span>
-              <span class="change" [class.positive]="row.change3Y.startsWith('-')" [class.negative]="!row.change3Y.startsWith('-') && row.change3Y !== '–'">
-                {{ row.change3Y }}
-              </span>
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-dot red"></div> Median Listing Price</div>
+              <div class="legend-item"><div class="legend-dot blue-dashed"></div> Median Sold Price</div>
+            </div>
+          </div>
+          <div class="tab-panel" [class.active]="activeChartTab === 'properties'">
+            <div class="chart-wrap">
+              <div class="chart-placeholder properties-chart">
+                <div class="bar-graph">
+                  <div class="bar" style="height: 60%"></div>
+                  <div class="bar" style="height: 75%"></div>
+                  <div class="bar" style="height: 70%"></div>
+                  <div class="bar" style="height: 85%"></div>
+                  <div class="bar" style="height: 90%"></div>
+                  <div class="bar" style="height: 95%"></div>
+                </div>
+                <div class="chart-labels-x">
+                  <span>Mar 2023</span>
+                  <span>Sep 2023</span>
+                  <span>Mar 2024</span>
+                  <span>Sep 2024</span>
+                  <span>Mar 2025</span>
+                  <span>Sep 2025</span>
+                </div>
+              </div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-dot blue"></div> Active Listings</div>
+            </div>
+          </div>
+          <div class="tab-panel" [class.active]="activeChartTab === 'dom'">
+            <div class="chart-wrap">
+              <div class="chart-placeholder dom-chart">
+                <div class="chart-line dom-line"></div>
+                <div class="chart-labels-x">
+                  <span>Mar 2023</span>
+                  <span>Sep 2023</span>
+                  <span>Mar 2024</span>
+                  <span>Sep 2024</span>
+                  <span>Mar 2025</span>
+                  <span>Sep 2025</span>
+                </div>
+              </div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-dot orange"></div> Days on Market</div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Search Actions -->
-  <section class="search-actions">
-    <div class="container">
-      <h3>Search homes & rentals in Sunnyvale</h3>
-      <div class="action-buttons">
-        <button class="btn-primary">
-          <i class="fas fa-home"></i>
-          Search 277 homes
-        </button>
-        <button class="btn-outline">
-          <i class="fas fa-building"></i>
-          Search 163 rentals
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Today's Rates Section -->
-  <section class="rates-section">
-    <div class="container">
-      <div class="rates-card">
-        <div class="rates-header">
-          <div>
-            <h3>Today's Rates in Sunnyvale</h3>
-            <p class="rates-subtitle">Data provided by 3rd party RateUpdate.com</p>
+        <!-- HOUSING MARKET BY NEIGHBORHOOD -->
+        <div class="card" id="neighborhoods">
+          <div class="card-header">
+            <h2>Sunnyvale housing market by neighborhood</h2>
+            <p>Compare median listing prices across neighborhoods</p>
           </div>
-          <span class="rate-badge">30-yr fixed</span>
-        </div>
-        
-        <div class="rates-grid">
-          <div class="rate-item">
-            <span class="rate-value">6.249%</span>
-            <span class="rate-label">Average rate</span>
+          <div class="tab-row">
+            <button class="tab-btn active" (click)="setNeighborhoodTab('prices')" [class.active]="activeNeighborhoodTab === 'prices'">Prices</button>
+            <button class="tab-btn" (click)="setNeighborhoodTab('properties')" [class.active]="activeNeighborhoodTab === 'properties'">Properties</button>
+            <button class="tab-btn" (click)="setNeighborhoodTab('dom')" [class.active]="activeNeighborhoodTab === 'dom'">Days on Market</button>
           </div>
-          <div class="rate-item">
-            <span class="rate-value">6.276%</span>
-            <span class="rate-label">Average APR</span>
-          </div>
-        </div>
-        
-        <button class="btn-rate">
-          <i class="fas fa-chart-line"></i>
-          View more rates and lenders
-        </button>
-        
-        <p class="disclaimer">
-          Averages are provided for informational purposes only and are based on averages for Sunnyvale. 
-          <a href="#">Disclosures</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Market Insights -->
-  <section class="market-insights">
-    <div class="container">
-      <div class="insights-list">
-        <div class="insight-item">
-          <i class="fas fa-circle bullet"></i>
-          <p><strong>Supply Of Listings:</strong> The count of homes for sale listings stands at 277, signaling a finite inventory that may spur bidding among buyers.</p>
-        </div>
-        <div class="insight-item">
-          <i class="fas fa-circle bullet"></i>
-          <p><strong>Rent Trends:</strong> Year-over-year rent price changes show a rise of 1.60%, indicating a stable rent environment that benefits landlords and helps renters plan.</p>
-        </div>
-        <div class="insight-item">
-          <i class="fas fa-circle bullet"></i>
-          <p><strong>Rental Inventory:</strong> The rental market currently offers 163 listings, reflecting moderate supply for renters and potential negotiation opportunities.</p>
-        </div>
-        <div class="insight-item">
-          <i class="fas fa-circle bullet"></i>
-          <p><strong>Sales Pace Change:</strong> The median days on market for homes on sale has grown year-over-year by 6.25%, suggesting a slightly slower pace compared with last year.</p>
-        </div>
-      </div>
-      
-      <div class="neighborhood-links">
-        <p>Explore neighborhoods like <a href="#">East Sunnyvale</a>, <a href="#">Sunnyvale West</a>, <a href="#">Ponderosa</a>, and <a href="#">Lakewood</a>. Also explore ZIP codes <a href="#">94086</a>, <a href="#">94087</a>, <a href="#">94089</a>, and <a href="#">94085</a>.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Hotness Index Section -->
-  <section class="hotness-index">
-    <div class="container">
-      <div class="hotness-card">
-        <div class="card-header-center">
-          <h3>Realtor.com's market Hotness Index</h3>
-        </div>
-        
-        <div class="gauge-container">
-          <div class="gauge-value">
-            <span class="number">53</span>
-            <span class="label">Warm</span>
-          </div>
-          
-          <div class="gauge-bar">
-            <div class="gauge-track">
-              <div class="gauge-fill" style="width: 53%;"></div>
+          <div class="tab-panel" [class.active]="activeNeighborhoodTab === 'prices'">
+            <div class="neighborhood-bar-list">
+              <div class="n-bar-row" *ngFor="let n of neighborhoodPriceData">
+                <div class="n-bar-label">
+                  <span class="n-bar-name"><a href="#">{{ n.name }}</a></span>
+                  <span class="n-bar-val">{{ n.price }}</span>
+                </div>
+                <div class="n-bar-track">
+                  <div class="n-bar-fill" [style.width.%]="n.percent"></div>
+                </div>
+              </div>
             </div>
-            <div class="gauge-labels">
-              <span>Very cool</span>
-              <span>Cool</span>
-              <span class="active">Warm</span>
-              <span>Hot</span>
-              <span>Very hot</span>
-            </div>
-            <div class="gauge-marker" style="left: 53%;">
-              <i class="fas fa-home"></i>
+            <a href="#" class="link-arrow">Get the data →</a>
+          </div>
+          <div class="tab-panel" [class.active]="activeNeighborhoodTab === 'properties'">
+            <table class="metric-table">
+              <thead><tr><th>Neighborhood</th><th>For Sale</th><th>Median Price</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let n of neighborhoodPropertyData">
+                  <td><a class="hood-link" href="#">{{ n.name }}</a></td>
+                  <td>{{ n.forSale }}</td>
+                  <td class="price-col">{{ n.price }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-panel" [class.active]="activeNeighborhoodTab === 'dom'">
+            <table class="metric-table">
+              <thead><tr><th>Neighborhood</th><th>Days on Market</th><th>Median Price</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let n of neighborhoodDomData">
+                  <td><a class="hood-link" href="#">{{ n.name }}</a></td>
+                  <td>{{ n.dom }}</td>
+                  <td class="price-col">{{ n.price }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- HOUSING MARKET BY ZIP CODE -->
+        <div class="card" id="zips">
+          <div class="card-header">
+            <h2>Sunnyvale housing market by zip code</h2>
+          </div>
+          <div class="tab-row">
+            <button class="tab-btn active" (click)="setZipTab('prices')" [class.active]="activeZipTab === 'prices'">Prices</button>
+            <button class="tab-btn" (click)="setZipTab('properties')" [class.active]="activeZipTab === 'properties'">Properties</button>
+            <button class="tab-btn" (click)="setZipTab('dom')" [class.active]="activeZipTab === 'dom'">Days on Market</button>
+          </div>
+          <div class="tab-panel" [class.active]="activeZipTab === 'prices'">
+            <table class="metric-table">
+              <thead><tr><th>ZIP Code</th><th>Median Listing Price</th><th>For Sale</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let z of zipPriceData">
+                  <td><a class="hood-link" href="#">{{ z.zip }}</a></td>
+                  <td class="price-col">{{ z.price }}</td>
+                  <td>{{ z.forSale }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-panel" [class.active]="activeZipTab === 'properties'">
+            <div class="zip-row">
+              <a href="#" class="zip-tag" *ngFor="let z of zipPropertyData">{{ z.zip }} — {{ z.count }} homes</a>
             </div>
           </div>
+          <div class="tab-panel" [class.active]="activeZipTab === 'dom'">
+            <table class="metric-table">
+              <thead><tr><th>ZIP Code</th><th>Median Days on Market</th><th>Median Price</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let z of zipDomData">
+                  <td><a class="hood-link" href="#">{{ z.zip }}</a></td>
+                  <td>{{ z.dom }}</td>
+                  <td class="price-col">{{ z.price }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        
-        <p class="hotness-desc">Sunnyvale ranks <strong>#3642</strong> nationally and is steadily active. Homes sell in a median of <strong>17 days</strong>.</p>
-        
-        <div class="source-link">
-          <i class="fas fa-info-circle"></i>
-          <span>Realtor.com Hotness Index</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Neighborhood Data Section -->
-  <section class="neighborhood-data">
-    <div class="container">
-      <h2>Sunnyvale housing market by neighborhood</h2>
-      <p class="section-subtitle">Charts reflect historical data through February 2026</p>
-      
-      <!-- Data Tabs -->
-      <div class="data-tabs">
-        <button 
-          class="data-tab"
-          [class.active]="activeTab === 'Prices'"
-          (click)="setTab('Prices')">
-          Prices
-        </button>
-        <button 
-          class="data-tab"
-          [class.active]="activeTab === 'Properties'"
-          (click)="setTab('Properties')">
-          Properties
-        </button>
-        <button 
-          class="data-tab"
-          [class.active]="activeTab === 'Days on Market'"
-          (click)="setTab('Days on Market')">
-          Days on Market
-        </button>
-      </div>
-      
-      <!-- Data Content -->
-      <div class="data-content">
-        <!-- Prices Tab -->
-        <div class="tab-panel" *ngIf="activeTab === 'Prices'">
-          <div class="panel-grid">
-            <div class="data-table-container">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Neighborhood</th>
-                    <th>Median listing price</th>
-                    <th>Listing $ / sq ft</th>
-                    <th>Median monthly rental price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of pricesData">
-                    <td><a href="#" class="neighborhood-link">{{ item.neighborhood }}</a></td>
-                    <td class="price">{{ item.listingPrice }}</td>
-                    <td>{{ item.pricePerSqFt }}</td>
-                    <td>{{ item.rentPrice }}</td>
-                  </tr>
-                </tbody>
-              </table>
+        <!-- SCHOOLS SECTION -->
+        <div class="card" id="schools">
+          <div class="card-header">
+            <h2>Compare Sunnyvale's top schools</h2>
+            <p>Ratings provided by GreatSchools.org</p>
+          </div>
+          <div class="tab-row">
+            <button class="tab-btn active" (click)="setSchoolTab('elementary')" [class.active]="activeSchoolTab === 'elementary'">Elementary</button>
+            <button class="tab-btn" (click)="setSchoolTab('middle')" [class.active]="activeSchoolTab === 'middle'">Middle</button>
+            <button class="tab-btn" (click)="setSchoolTab('high')" [class.active]="activeSchoolTab === 'high'">High</button>
+            <button class="tab-btn" (click)="setSchoolTab('private')" [class.active]="activeSchoolTab === 'private'">Private</button>
+          </div>
+          <div class="tab-panel" [class.active]="activeSchoolTab === 'elementary'">
+            <div class="schools-list">
+              <div class="school-row" *ngFor="let school of elementarySchools">
+                <div class="school-badge" [class.badge-green]="school.rating >= 8" [class.badge-yellow]="school.rating >= 6 && school.rating < 8">{{ school.rating }}</div>
+                <div class="school-info">
+                  <div class="school-name">{{ school.name }}</div>
+                  <div class="school-meta">{{ school.location }} • Student-teacher ratio: {{ school.ratio }} • {{ school.students }} students</div>
+                </div>
+                <div class="school-type-tag">{{ school.type }}</div>
+              </div>
             </div>
-            
-            <div class="chart-container">
-              <h4>Median listing prices</h4>
-              <div class="chart-placeholder">
-                <div class="bar-chart">
-                  <div class="bar" style="height: 90%;"></div>
-                  <div class="bar" style="height: 80%;"></div>
-                  <div class="bar" style="height: 75%;"></div>
-                  <div class="bar" style="height: 70%;"></div>
-                  <div class="bar" style="height: 60%;"></div>
-                  <div class="bar" style="height: 55%;"></div>
-                  <div class="bar" style="height: 50%;"></div>
+          </div>
+          <div class="tab-panel" [class.active]="activeSchoolTab === 'middle'">
+            <div class="schools-list">
+              <div class="school-row" *ngFor="let school of middleSchools">
+                <div class="school-badge" [class.badge-green]="school.rating >= 8" [class.badge-yellow]="school.rating >= 6 && school.rating < 8">{{ school.rating }}</div>
+                <div class="school-info">
+                  <div class="school-name">{{ school.name }}</div>
+                  <div class="school-meta">{{ school.location }} • Student-teacher ratio: {{ school.ratio }} • {{ school.students }} students</div>
+                </div>
+                <div class="school-type-tag">{{ school.type }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" [class.active]="activeSchoolTab === 'high'">
+            <div class="schools-list">
+              <div class="school-row" *ngFor="let school of highSchools">
+                <div class="school-badge" [class.badge-green]="school.rating >= 8" [class.badge-yellow]="school.rating >= 6 && school.rating < 8">{{ school.rating }}</div>
+                <div class="school-info">
+                  <div class="school-name">{{ school.name }}</div>
+                  <div class="school-meta">{{ school.location }} • Student-teacher ratio: {{ school.ratio }} • {{ school.students }} students</div>
+                </div>
+                <div class="school-type-tag">{{ school.type }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" [class.active]="activeSchoolTab === 'private'">
+            <div class="schools-list">
+              <div class="school-row" *ngFor="let school of privateSchools">
+                <div class="school-badge" [class.badge-green]="school.rating >= 8" [class.badge-yellow]="school.rating >= 6 && school.rating < 8">{{ school.rating }}</div>
+                <div class="school-info">
+                  <div class="school-name">{{ school.name }}</div>
+                  <div class="school-meta">{{ school.location }} • {{ school.grades }} • {{ school.students }} students</div>
+                </div>
+                <div class="school-type-tag">{{ school.type }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ SECTION -->
+        <div class="faq-section">
+          <h2 class="section-title">Sunnyvale housing market insights</h2>
+          <p class="section-sub">Common questions for buyers, sellers, and renters</p>
+          <div class="faq-tabs">
+            <button class="faq-tab-btn" [class.active]="activeFaqTab === 'buyers'" (click)="setFaqTab('buyers')">For Buyers</button>
+            <button class="faq-tab-btn" [class.active]="activeFaqTab === 'sellers'" (click)="setFaqTab('sellers')">For Sellers</button>
+            <button class="faq-tab-btn" [class.active]="activeFaqTab === 'renters'" (click)="setFaqTab('renters')">For Renters</button>
+          </div>
+          <div class="card">
+            <div class="card-body faq-panels">
+              <div class="faq-panel" [class.active]="activeFaqTab === 'buyers'">
+                <div class="faq-item" *ngFor="let faq of buyerFaqs; let i = index">
+                  <button class="faq-question" (click)="toggleFaq('buyer', i)">
+                    {{ faq.question }}
+                    <span class="faq-chevron" [class.open]="openBuyerFaq === i">⌄</span>
+                  </button>
+                  <div class="faq-answer" [class.open]="openBuyerFaq === i">{{ faq.answer }}</div>
+                </div>
+              </div>
+              <div class="faq-panel" [class.active]="activeFaqTab === 'sellers'">
+                <div class="faq-item" *ngFor="let faq of sellerFaqs; let i = index">
+                  <button class="faq-question" (click)="toggleFaq('seller', i)">
+                    {{ faq.question }}
+                    <span class="faq-chevron" [class.open]="openSellerFaq === i">⌄</span>
+                  </button>
+                  <div class="faq-answer" [class.open]="openSellerFaq === i">{{ faq.answer }}</div>
+                </div>
+              </div>
+              <div class="faq-panel" [class.active]="activeFaqTab === 'renters'">
+                <div class="faq-item" *ngFor="let faq of renterFaqs; let i = index">
+                  <button class="faq-question" (click)="toggleFaq('renter', i)">
+                    {{ faq.question }}
+                    <span class="faq-chevron" [class.open]="openRenterFaq === i">⌄</span>
+                  </button>
+                  <div class="faq-answer" [class.open]="openRenterFaq === i">{{ faq.answer }}</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
-        <!-- Properties Tab -->
-        <div class="tab-panel" *ngIf="activeTab === 'Properties'">
-          <div class="panel-grid">
-            <div class="data-table-container">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Neighborhood</th>
-                    <th>For Sale</th>
-                    <th>YoY Sale</th>
-                    <th>For Rent</th>
-                    <th>MoM Rent</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of propertiesData">
-                    <td><a href="#" class="neighborhood-link">{{ item.neighborhood }}</a></td>
-                    <td>{{ item.forSale }}</td>
-                    <td [class.positive]="item.yoySale.startsWith('-')" [class.negative]="!item.yoySale.startsWith('-')">{{ item.yoySale }}</td>
-                    <td>{{ item.forRent }}</td>
-                    <td [class.positive]="item.momRent.startsWith('-')" [class.negative]="!item.momRent.startsWith('-')">{{ item.momRent }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Days on Market Tab -->
-        <div class="tab-panel" *ngIf="activeTab === 'Days on Market'">
-          <div class="panel-grid">
-            <div class="data-table-container">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Neighborhood</th>
-                    <th>Days</th>
-                    <th>MoM</th>
-                    <th>YoY</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of daysOnMarketData">
-                    <td><a href="#" class="neighborhood-link">{{ item.neighborhood }}</a></td>
-                    <td>{{ item.days }}</td>
-                    <td [class.positive]="item.mom.startsWith('-')" [class.negative]="!item.mom.startsWith('-')">{{ item.mom }}</td>
-                    <td [class.positive]="item.yoy.startsWith('-')" [class.negative]="!item.yoy.startsWith('-')">{{ item.yoy }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Zip Codes Section -->
-  <section class="zip-codes-section">
-    <div class="container">
-      <h2>Sunnyvale housing market by zip code</h2>
-      <p class="section-subtitle">Charts reflect historical data through February 2026</p>
-      
-      <div class="zip-tabs">
-        <button class="zip-tab active">Prices</button>
-        <button class="zip-tab">Properties</button>
-        <button class="zip-tab">Days on Market</button>
-      </div>
-      
-      <div class="zip-content">
-        <div class="summary-stats">
-          <div class="stat-item">
-            <span class="stat-label">Sunnyvale median listing price:</span>
-            <span class="stat-value">$1,499,000</span>
-            <span class="stat-change negative">| -6.25% YoY | -1.64% MoM</span>
+        <!-- NEARBY CITIES -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Search cities nearby Sunnyvale</h2>
           </div>
-          <div class="stat-item">
-            <span class="stat-label">Sunnyvale median rental price:</span>
-            <span class="stat-value">$3,500</span>
-            <span class="stat-change positive">| 1.60% YoY | 2.94% MoM</span>
+          <div class="card-body">
+            <div class="cities-wrap">
+              <a href="#" class="city-tag" *ngFor="let city of nearbyCities">{{ city }}</a>
+            </div>
           </div>
         </div>
-        
-        <div class="chart-wrapper">
-          <h4>Median listing home price vs. median home sold price</h4>
-          <div class="line-chart-placeholder">
-            <div class="chart-lines">
-              <svg viewBox="0 0 400 200" class="line-svg">
-                <path d="M 20 150 Q 60 140 100 130 T 180 110 T 260 90 T 340 80" stroke="#3b82f6" stroke-width="2" fill="none"/>
-                <path d="M 20 120 Q 60 100 100 110 T 180 100 T 260 95 T 340 85" stroke="#06b6d4" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
-              </svg>
-              <div class="chart-labels">
-                <span>Mar 2023</span>
-                <span>Sep 2023</span>
-                <span>Mar 2024</span>
-                <span>Sep 2024</span>
-                <span>Mar 2025</span>
-                <span>Sep 2025</span>
+
+        <!-- RESEARCH ZIP CODES -->
+        <div class="card">
+          <div class="card-header"><h2>Research zipcodes in Sunnyvale</h2></div>
+          <div class="card-body">
+            <div class="zip-row">
+              <a href="#" class="zip-tag" *ngFor="let zip of researchZips">{{ zip }}</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOR BUYERS SECTION -->
+        <div class="insight-section" id="buyers">
+          <div class="insight-icon-header">
+            <div class="insight-icon">🏠</div>
+            <h2>For buyers</h2>
+          </div>
+          <p class="insight-body-text">
+            Sunnyvale buyers are navigating a market with <strong>277 homes for sale</strong>, where year-over-year for-sale count has risen by <strong>8.02%</strong>. The median sale price stands at <strong>$1.50M</strong> with year-over-year decline of <strong>-6.25%</strong>, and month-over-month the median price declines by <strong>-1.64%</strong>; buyers also see a median price per square foot of <strong>$942/ft²</strong> with year-over-year change of <strong>-6.45%</strong>. Listings have a median of <strong>17 days</strong> on market, with year-over-year days-on-market growth of <strong>6.25%</strong> and month-over-month remaining flat at <strong>0%</strong>.
+          </p>
+
+          <p class="insight-subheading">Neighborhood-Level Buyers Metrics</p>
+          <ul class="insight-list">
+            <li *ngFor="let item of buyerNeighborhoodMetrics"><a href="#">{{ item.name }}</a>: <strong>{{ item.price }}</strong> Median Listing Price | <strong>{{ item.forSale }}</strong> Properties For Sale</li>
+          </ul>
+
+          <p class="insight-subheading">ZIP-Level Buyers Metrics</p>
+          <ul class="insight-list">
+            <li *ngFor="let item of buyerZipMetrics"><a href="#">{{ item.zip }}</a>: <strong>{{ item.price }}</strong> Median Listing Price | <strong>{{ item.forSale }}</strong> Properties For Sale</li>
+          </ul>
+
+          <p class="insight-footer-text">Realtor.com provides the data. Our agents give you the advantage. Click below to connect with a trusted agent and get the full picture.</p>
+          <div class="text-center">
+            <a href="#" class="action-btn-agent">Ask a neighborhood agent</a>
+          </div>
+        </div>
+
+        <!-- BROWSE PROPERTIES GRID -->
+        <div class="browse-section">
+          <h2>Browse properties in Sunnyvale</h2>
+          <div class="browse-grid">
+            <a href="#" class="browse-card">
+              <div class="browse-img-placeholder green">🏡</div>
+              <div class="browse-label">New listings</div>
+            </a>
+            <a href="#" class="browse-card">
+              <div class="browse-img-placeholder blue">🏘️</div>
+              <div class="browse-label">Recently sold</div>
+            </a>
+          </div>
+          <div class="browse-bottom-3">
+            <a href="#" class="browse-card">
+              <div class="browse-img-placeholder purple">🏠</div>
+              <div class="browse-label">Open houses</div>
+            </a>
+            <a href="#" class="browse-card">
+              <div class="browse-img-placeholder brown">🔨</div>
+              <div class="browse-label">New construction</div>
+            </a>
+            <a href="#" class="browse-card">
+              <div class="browse-img-placeholder cyan">🏢</div>
+              <div class="browse-label">Condos</div>
+            </a>
+          </div>
+        </div>
+
+        <!-- GET PRE-APPROVED -->
+        <div class="preapprove-section">
+          <div class="preapprove-tabs">
+            <button class="preapprove-tab active">Home Purchase</button>
+            <button class="preapprove-tab">Refinance</button>
+            <button class="preapprove-tab">Home Equity</button>
+          </div>
+          <div class="preapprove-body">
+            <h2>Get pre-approved</h2>
+            <p>Connect with a lender who can help you with pre-approval.</p>
+            <h3>What type of home are you looking for?</h3>
+            <div class="home-type-grid">
+              <button class="home-type-btn" *ngFor="let type of homeTypes">
+                <span class="home-type-icon">{{ type.icon }}</span>
+                {{ type.label }}
+              </button>
+            </div>
+          </div>
+          <div class="mrc-footer">
+            <div class="mrc-logo">MRC<br><span>MORTGAGE RESEARCH CENTER</span></div>
+            <p class="mrc-text">Provided by Mortgage Research Center, LLC. A mortgage licensee; NMLS ID 1907. Equal Housing Opportunity.</p>
+          </div>
+        </div>
+
+        <!-- FOR SELLERS SECTION -->
+        <div class="insight-section" id="sellers">
+          <div class="insight-icon-header">
+            <div class="insight-icon">🏷️</div>
+            <h2>For sellers</h2>
+          </div>
+          <p class="insight-body-text">
+            Sunnyvale sellers can capitalize on a dynamic market, with the median for-sale price at <strong>$1.50M</strong> and <strong>277 homes</strong> currently for sale. Month-over-month, for-sale counts rose by <strong>42.24%</strong>, the median sale price per unit declined by <strong>-1.64%</strong>, days on market median stayed level at <strong>0%</strong>, and price per square foot fell by <strong>-3.19%</strong>. Year-over-year, for-sale counts grew by <strong>8.02%</strong>, the median for-sale price fell by <strong>-6.25%</strong>, the days on market median increased by <strong>6.25%</strong>, and the price per square foot declined by <strong>-6.45%</strong>.
+          </p>
+
+          <p class="insight-subheading">Neighborhood-Level Sellers Metrics</p>
+          <ul class="insight-list">
+            <li *ngFor="let item of sellerNeighborhoodMetrics"><a href="#">{{ item.name }}</a>: <strong>{{ item.price }}</strong> Median Listing Price | <strong>{{ item.dom }}</strong> Median Days On Market</li>
+          </ul>
+
+          <p class="insight-subheading">ZIP-Level Sellers Metrics</p>
+          <ul class="insight-list">
+            <li *ngFor="let item of sellerZipMetrics"><a href="#">{{ item.zip }}</a>: <strong>{{ item.price }}</strong> Median Listing Price | <strong>{{ item.dom }}</strong> Median Days On Market</li>
+          </ul>
+
+          <p class="insight-footer-text">Sellers can use these metrics to evaluate pricing, market speed, and local demand. Click the buttons below to connect with a local expert.</p>
+          <div class="insight-action-btns">
+            <a href="#" class="action-btn-dark">Find a Sunnyvale agent</a>
+            <a href="#" class="action-btn-dark">Help selling my home</a>
+            <a href="#" class="action-btn-outline-dark">Claim your home</a>
+          </div>
+        </div>
+
+        <!-- FOR RENTERS SECTION -->
+        <div class="insight-section" id="renters">
+          <div class="insight-icon-header">
+            <div class="insight-icon">🏢</div>
+            <h2>For renters</h2>
+          </div>
+          <p class="insight-body-text">
+            Sunnyvale's rental market currently shows a median rent price of <strong>$3.5K</strong> and <strong>163 rentals</strong> available. Month-over-month, the rent count decreased <strong>23.96%</strong> and the median rent price increased <strong>2.94%</strong>. Year-over-year, the rent count declined <strong>3.95%</strong> and the median rent price rose <strong>1.60%</strong>.
+          </p>
+
+          <p class="insight-subheading">Neighborhood-Level Renters Metrics</p>
+          <ul class="insight-list">
+            <li *ngFor="let item of renterNeighborhoodMetrics"><a href="#">{{ item.name }}</a>: <strong>{{ item.rent }}</strong> Median Rent | <strong>{{ item.count }}</strong> Rentals</li>
+          </ul>
+
+          <p class="insight-subheading">ZIP-Level Renters Metrics</p>
+          <ul class="insight-list">
+            <li *ngFor="let item of renterZipMetrics"><a href="#">{{ item.zip }}</a>: <strong>{{ item.rent }}</strong> Median Rent | <strong>{{ item.count }}</strong> Rentals</li>
+          </ul>
+
+          <p class="insight-footer-text">To explore rental options across our extensive network of listings, click the button below.</p>
+          <div class="text-center">
+            <a href="#" class="action-btn-agent">Find a Sunnyvale rental</a>
+          </div>
+        </div>
+
+        <!-- PROPERTIES FOR RENTERS -->
+        <div class="browse-section">
+          <h2>Properties for renters in Sunnyvale</h2>
+          <div class="rental-listings-grid">
+            <div class="rental-card rental-card-lg" *ngFor="let rental of featuredRentals">
+              <div class="rental-img-wrap">
+                <div class="rental-img-placeholder">🛋️</div>
+              </div>
+              <div class="rental-badge">● House for rent</div>
+              <div class="rental-price">{{ rental.price }}</div>
+              <div class="rental-meta">{{ rental.beds }} bed &nbsp;{{ rental.baths }} bath &nbsp;<strong>{{ rental.sqft }} sq ft</strong></div>
+              <div class="rental-addr">{{ rental.address }}<br>{{ rental.city }}</div>
+            </div>
+            <div class="rental-card" *ngFor="let rental of rentals">
+              <a href="#" class="rental-title-link">{{ rental.title }}</a>
+              <div class="rental-badge">● House for rent</div>
+              <div class="rental-price">{{ rental.price }}</div>
+              <div class="rental-meta">{{ rental.beds }} bed &nbsp;{{ rental.baths }} bath &nbsp;<strong>{{ rental.sqft }} sq ft</strong></div>
+              <div class="rental-addr">{{ rental.address }}<br>{{ rental.city }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQs FOR RENTERS -->
+        <div class="insight-section" style="padding-bottom:8px;">
+          <h2 class="center-title">FAQs for renters in Sunnyvale, CA</h2>
+          <div class="faq-item" *ngFor="let faq of renterExtraFaqs; let i = index">
+            <button class="faq-question" (click)="toggleExtraFaq(i)">
+              {{ faq.question }}
+              <span class="faq-chevron" [class.open]="openExtraFaq === i">⌄</span>
+            </button>
+            <div class="faq-answer" [class.open]="openExtraFaq === i" [innerHTML]="faq.answer"></div>
+          </div>
+        </div>
+
+      </div><!-- end left column -->
+
+      <!-- RIGHT SIDEBAR -->
+      <aside class="sidebar">
+
+        <!-- HOTNESS INDEX -->
+        <div class="hotness-card">
+          <div class="hotness-title">Realtor.com® Hotness Index</div>
+          <div class="hotness-rank">#3642 <span>nationally</span></div>
+          <div class="hotness-label">● Warm (53)</div>
+          <div class="hotness-bar-track">
+            <div class="hotness-bar-fill"></div>
+          </div>
+          <div class="hotness-scale">
+            <span>Very Cool</span>
+            <span>Warm</span>
+            <span>Very Hot</span>
+          </div>
+          <div class="hotness-desc">Sunnyvale is steadily active. Homes sell in a median of 17 days. The Hotness Index measures how fast homes sell and how much demand they attract.</div>
+        </div>
+
+        <!-- QUICK SEARCH ACTIONS -->
+        <div class="quick-search">
+          <h3>Sunnyvale search tools</h3>
+          <div class="quick-btns">
+            <a href="#" class="quick-btn primary">Search 277 homes for sale</a>
+            <a href="#" class="quick-btn outline">Search 163 rentals</a>
+          </div>
+        </div>
+
+        <!-- SIDEBAR STATS CARD -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Rental market snapshot</h2>
+            <p>As of March 2026</p>
+          </div>
+          <div class="card-body">
+            <div class="sidebar-stats">
+              <div class="sidebar-stat-row">
+                <span class="sidebar-stat-label">Median Rent</span>
+                <span class="sidebar-stat-value">$3,500<small>/mo</small></span>
+              </div>
+              <div class="sidebar-stat-row">
+                <span class="sidebar-stat-label">YoY Rent Change</span>
+                <span class="sidebar-stat-value green">+1.60%</span>
+              </div>
+              <div class="sidebar-stat-row">
+                <span class="sidebar-stat-label">Rental Listings</span>
+                <span class="sidebar-stat-value">163</span>
               </div>
             </div>
           </div>
-          <div class="chart-legend">
-            <span class="legend-item"><span class="dot blue"></span>Median listing home price</span>
-            <span class="legend-item"><span class="dot cyan"></span>Median home sold price</span>
+        </div>
+
+        <!-- NEIGHBORHOOD RENT TABLE -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Rent by neighborhood</h2>
+          </div>
+          <div class="card-body no-padding">
+            <table class="metric-table compact">
+              <thead><tr><th>Neighborhood</th><th>Median Rent</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let item of neighborhoodRentData">
+                  <td><a class="hood-link" href="#">{{ item.name }}</a></td>
+                  <td class="price-col">{{ item.rent }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Research Sidebar -->
-  <section class="research-section">
-    <div class="container">
-      <div class="research-grid">
-        <div class="research-column">
-          <h4>Research zipcodes in Sunnyvale</h4>
-          <ul class="research-list">
-            <li><a href="#">94085</a></li>
-            <li><a href="#">94086</a></li>
-            <li><a href="#">94087</a></li>
-            <li><a href="#">94088</a></li>
-            <li><a href="#">94089</a></li>
-          </ul>
+        <!-- QUICK LINKS -->
+        <div class="card">
+          <div class="card-header"><h2>Quick links</h2></div>
+          <div class="card-body">
+            <div class="quick-links">
+              <a href="#" *ngFor="let link of quickLinks">{{ link }}</a>
+            </div>
+          </div>
         </div>
-        <div class="research-column">
-          <h4>Research neighborhoods in Sunnyvale</h4>
-          <ul class="research-list">
-            <li><a href="#">Balboa Park</a></li>
-            <li><a href="#">Birdland</a></li>
-            <li><a href="#">Braly Corners</a></li>
-            <li><a href="#">Cherry Chase</a></li>
-            <li><a href="#">Cherry Orchard</a></li>
-          </ul>
-          <a href="#" class="show-more">Show More</a>
-        </div>
-      </div>
+
+      </aside>
+
     </div>
-  </section>
+  </div>
 </div>
 
 <app-site-footer></app-site-footer>

@@ -352,7 +352,7 @@
         </div>
       </div>
       <div class="lst-carousel-track">
-        <div class="lst-c-card" *ngFor="let p of visibleProperties.slice(0, 8)" [routerLink]="['/property', category?.slug || 'homes-for-sale', p.id]">
+        <div class="lst-c-card" *ngFor="let p of visibleProperties.slice(0, 8)" [routerLink]="['/property', category.slug || 'homes-for-sale', p.id]">
           <div class="lst-c-img-wrap">
             <img [src]="p.image" [alt]="p.address" loading="lazy">
             <button class="lst-c-heart" [class.saved]="isSaved(p.id)" (click)="toggleFavorite(p.id, $event)">
@@ -385,7 +385,7 @@
         </div>
       </div>
       <div class="lst-carousel-track">
-        <div class="lst-c-card" *ngFor="let p of visibleProperties.slice(0, 8).reverse()" [routerLink]="['/property', category?.slug || 'homes-for-sale', p.id]">
+        <div class="lst-c-card" *ngFor="let p of visibleProperties.slice(0, 8).reverse()" [routerLink]="['/property', category.slug || 'homes-for-sale', p.id]">
           <div class="lst-c-img-wrap">
             <img [src]="p.image" [alt]="p.address" loading="lazy">
             <button class="lst-c-heart" [class.saved]="isSaved(p.id)" (click)="toggleFavorite(p.id, $event)">

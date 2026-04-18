@@ -1,0 +1,195 @@
+<app-site-header></app-site-header>
+
+<main class="resource-center">
+  <!-- Hero Section -->
+  <header class="resource-hero">
+    <div class="hero-overlay">
+      <div class="hero-container">
+        <h1 class="hero-title">First-Time Home Buyer Resources</h1>
+        <div class="title-divider"></div>
+        <p class="hero-subtitle">Looking to buy your first home? You've come to the right place.</p>
+        
+        <div class="social-links">
+          <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Sub-Nav -->
+  <nav class="sub-nav">
+    <div class="sub-nav-container">
+      <a *ngFor="let item of navItems" 
+         (click)="scrollToSection(item.id)" 
+         class="sub-nav-link">
+        {{ item.label }}
+      </a>
+    </div>
+  </nav>
+
+  <!-- Resource Content -->
+  <section class="resource-sections">
+    <div class="content-container">
+      
+      <!-- Section: Getting Started -->
+      <div class="resource-group" id="get-started">
+        <div class="flex-layout">
+          <div class="image-col">
+            <img src="/assets/first_home_buyer_hero_bg.png" alt="Happy first time buyers" class="side-img">
+          </div>
+          <div class="content-col">
+            <h2 class="section-heading">BUYING YOUR FIRST HOME</h2>
+            
+            <ul class="starting-list">
+              <li *ngFor="let item of gettingStarted" class="list-item">
+                <div class="item-icon-wrapper">
+                  <div class="circle-icon">
+                    <i [class]="'fas fa-' + item.icon"></i>
+                  </div>
+                </div>
+                <div class="item-text">
+                  <h4 class="item-title">{{ item.title }}</h4>
+                  <p class="item-description">{{ item.description }}</p>
+                  <div class="item-buttons">
+                    <a *ngFor="let link of item.links" [href]="link.url" target="_blank" class="btn-outline">
+                      {{ link.label }}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Home Buyer News & Insights (New Carousel) -->
+      <div class="carousel-section">
+        <div class="group-header-flex">
+          <h2 class="blue-heading">HOME BUYER NEWS & INSIGHTS</h2>
+          <div class="carousel-controls">
+            <button class="nav-btn prev" (click)="prevNews()" [disabled]="currentNewsIndex === 0">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn next" (click)="nextNews()" [disabled]="currentNewsIndex + itemsPerPage >= newsInsightsList.length">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="news-grid">
+          <div *ngFor="let item of displayedNews" class="news-card">
+            <div class="news-thumb">
+              <img [src]="item.thumbnail" [alt]="item.title">
+            </div>
+            <h5 class="news-title">{{ item.title }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Home Buying Videos (Full Carousel) -->
+      <div class="carousel-section">
+        <div class="group-header-flex">
+          <h2 class="blue-heading">HOME BUYING VIDEOS</h2>
+          <div class="carousel-controls">
+            <button class="nav-btn prev" (click)="prevVideo()" [disabled]="currentVideoIndex === 0">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn next" (click)="nextVideo()" [disabled]="currentVideoIndex + itemsPerPage >= buyingVideosList.length">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="video-grid">
+          <div *ngFor="let video of displayedVideos" class="video-card">
+            <div class="video-thumb">
+              <img [src]="video.thumbnail" [alt]="video.title">
+              <div class="play-btn">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <h5 class="video-name">{{ video.title }}</h5>
+            <div class="video-meta">
+              <a href="#" class="share-link">SHARE <i class="fas fa-share-alt"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Understanding Mortgages -->
+      <div class="resource-group" id="mortgages" style="margin-top: 80px;">
+        <div class="group-header">
+          <h2 class="blue-heading">Understanding Mortgages</h2>
+        </div>
+
+        <ul class="resource-list-standard">
+          <li *ngFor="let item of understandingMortgages" class="standard-list-item">
+            <div class="standard-icon">
+              <i [class]="'fas fa-' + item.icon"></i>
+            </div>
+            <div class="standard-content">
+              <h4 class="standard-title">{{ item.title }}</h4>
+              <p class="standard-description">{{ item.description }}</p>
+              <div class="standard-actions">
+                <a *ngFor="let link of item.links" [href]="link.url" target="_blank" class="btn-standard">
+                  {{ link.label }}
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Section: More Resources -->
+      <div class="resource-group" id="resources">
+        <div class="group-header">
+          <h2 class="blue-heading">MORE HOME BUYING RESOURCES</h2>
+        </div>
+
+        <div class="resources-flex-grid">
+          <div *ngFor="let item of moreResources" class="resource-flex-item">
+            <div class="flex-icon-wrapper">
+              <div class="circle-icon-teal">
+                <i [class]="'fas fa-' + item.icon"></i>
+              </div>
+            </div>
+            <div class="flex-content">
+              <h4 class="item-title-small">{{ item.title }}</h4>
+              <p class="item-desc-small">{{ item.description }}</p>
+              <a *ngFor="let link of item.links" [href]="link.url" target="_blank" class="btn-outline-small">
+                {{ link.label }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Search Homes Now (Matching 02:50 AM Screenshot) -->
+      <div class="search-portal-section" id="searching">
+        <div class="search-portal-card">
+          <div class="search-portal-overlay">
+            <h2 class="portal-title">Search Homes Now</h2>
+            <p class="portal-subtitle">Most listings updated at least every 15 minutes*</p>
+            
+            <div class="portal-search-box">
+              <input type="text" placeholder="Faisalabad, PB" disabled>
+              <button class="btn-portal-search">Search</button>
+            </div>
+            
+            <div class="portal-tabs">
+              <span class="portal-tab">FOR SALE</span>
+              <span class="portal-tab">FOR RENT</span>
+              <span class="portal-tab">JUST SOLD</span>
+              <span class="portal-tab">HOME ESTIMATE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<app-site-footer></app-site-footer>

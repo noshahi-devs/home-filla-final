@@ -1,0 +1,151 @@
+<app-site-header></app-site-header>
+
+<div class="success-stories-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-bg">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-badge">Real Stories, Real Results</span>
+        <h1>Success Stories</h1>
+        <p class="hero-subtitle">Discover how Home Filla has helped thousands of families find their perfect home, sell for top dollar, and secure ideal rentals.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" (click)="setCategory('all')">Read Stories</button>
+          <button class="btn-outline">Share Your Story</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f8fafc"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card" *ngFor="let stat of stats">
+          <span class="stat-value">{{ stat.value }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Story Section -->
+  <section class="featured-story">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Featured Story</span>
+        <h2>Meet The Martinez Family</h2>
+        <p>A journey from searching to securing their dream home</p>
+      </div>
+
+      <div class="featured-card">
+        <div class="featured-media">
+          <img [src]="featuredStory.videoThumbnail" alt="Featured Story">
+          <button class="play-btn">
+            <i class="fas fa-play"></i>
+          </button>
+        </div>
+        <div class="featured-content">
+          <div class="featured-header">
+            <img [src]="featuredStory.image" alt="Martinez Family" class="family-photo">
+            <div class="featured-info">
+              <h3>{{ featuredStory.name }}</h3>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> {{ featuredStory.location }}</p>
+            </div>
+          </div>
+          <blockquote class="featured-quote">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p>{{ featuredStory.quote }}</p>
+          </blockquote>
+          <div class="featured-outcome">
+            <div class="outcome-item">
+              <i class="fas fa-home"></i>
+              <span>{{ featuredStory.outcome }}</span>
+            </div>
+            <div class="outcome-item">
+              <i class="fas fa-user-tie"></i>
+              <span>{{ featuredStory.agent }}</span>
+            </div>
+            <div class="outcome-item">
+              <i class="fas fa-clock"></i>
+              <span>{{ featuredStory.timeline }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Tabs -->
+  <section class="filter-section">
+    <div class="container">
+      <div class="filter-tabs">
+        <button
+          *ngFor="let cat of categories"
+          class="filter-tab"
+          [class.active]="activeCategory === cat.id"
+          (click)="setCategory($any(cat.id))">
+          {{ cat.label }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories Grid -->
+  <section class="stories-section">
+    <div class="container">
+      <div class="stories-grid">
+        <div class="story-card" *ngFor="let story of filteredStories">
+          <div class="story-image">
+            <img [src]="story.image" [alt]="story.name">
+            <div class="story-category">{{ story.category }}</div>
+          </div>
+          <div class="story-content">
+            <div class="story-header">
+              <h3>{{ story.name }}</h3>
+              <p class="location"><i class="fas fa-map-marker-alt"></i> {{ story.location }}</p>
+            </div>
+            <div class="story-rating">
+              <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]"></i>
+            </div>
+            <blockquote class="story-quote">
+              "{{ story.quote }}"
+            </blockquote>
+            <div class="story-outcome">
+              <i class="fas fa-check-circle"></i>
+              <span>{{ story.outcome }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-content">
+          <h2>Ready to Write Your Success Story?</h2>
+          <p>Whether you're buying, selling, or renting, our expert agents are here to help you achieve your real estate goals.</p>
+          <div class="cta-buttons">
+            <button class="btn-primary">Find an Agent</button>
+            <button class="btn-outline-light">Browse Listings</button>
+          </div>
+        </div>
+        <div class="cta-image">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600" alt="Happy family with keys">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-site-footer></app-site-footer>

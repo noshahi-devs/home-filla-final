@@ -30,6 +30,8 @@ import { TechBlogComponent } from './public/tech-blog/tech-blog.component';
 import { AgentBlogComponent } from './public/agent-blog/agent-blog.component';
 import { MediaSolutionsComponent } from './public/media-solutions/media-solutions.component';
 import { HomeSellingGuideComponent } from './public/guide/home-selling-guide/home-selling-guide.component';
+import { HomeBuyingChecklist } from './public/guide/home-buying-checklist/home-buying-checklist';
+import { FirstTimeHomeBuyerComponent } from './public/guide/first-time-home-buyer/first-time-home-buyer';
 
 import { MarketingLoginComponent } from './public/marketing-login/marketing-login.component';
 import { ContactComponent } from './public/contact/contact.component';
@@ -50,6 +52,7 @@ import { RentersResourceComponent } from './public/rent/renters-resource/renters
 
 import { MarketTrends } from './public/market-trends/market-trends';
 import { PropertyRecord } from './public/property-record/property-record';
+import { SuccessStoriesComponent } from './public/success-stories/success-stories';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -104,7 +107,10 @@ export const routes: Routes = [
   { path: 'my-home', component: MyHomeComponent },
   { path: 'my-home/sale-proceeds-calculator', component: SaleProceedsCalculatorComponent },
   { path: 'guide/home-selling', component: HomeSellingGuideComponent },
-  
+  { path: 'guide/home-buying', component: HomeBuyingChecklist },
+  { path: 'guide/first-time-home-buyer', component: FirstTimeHomeBuyerComponent },
+  { path: 'success-stories', component: SuccessStoriesComponent },
+
   // Dashboards Lazy Loading
   { 
     path: 'admin', 
