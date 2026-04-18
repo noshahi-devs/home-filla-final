@@ -45,13 +45,14 @@
         <div class="mobile-submenu-group">
           <h5>Explore the neighborhood</h5>
           <a routerLink="/market-trends" class="mobile-submenu-item" (click)="closeMobileMenu()">Housing market trends</a>
-          <a routerLink="/market-trends" class="mobile-submenu-item" (click)="closeMobileMenu()">Top Schools</a>
+          <a routerLink="/market-trends" fragment="schools" class="mobile-submenu-item" (click)="closeMobileMenu()">Top Schools</a>
           <a routerLink="/propertyrecord-search" class="mobile-submenu-item" (click)="closeMobileMenu()">Property records</a>
           <a [routerLink]="['/listings', 'recently-sold']" class="mobile-submenu-item" (click)="closeMobileMenu()">Recently sold homes</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>Home buying tips</h5>
           <a routerLink="/guide/home-buying" class="mobile-submenu-item" (click)="closeMobileMenu()">Home buying checklist</a>
+          <a routerLink="/success-stories" class="mobile-submenu-item" (click)="closeMobileMenu()">Success stories</a>
         </div>
       </div>
     </div>
@@ -211,7 +212,7 @@
                 <h4>Explore the neighborhood</h4>
                 <div class="mega-links">
                   <a routerLink="/market-trends" class="mega-link">Housing market trends</a>
-                  <a routerLink="/market-trends" class="mega-link">Top Schools</a>
+                  <a routerLink="/market-trends" fragment="schools" class="mega-link">Top Schools</a>
                   <a routerLink="/propertyrecord-search" class="mega-link">Property records</a>
                   <a [routerLink]="['/listings', 'recently-sold']" class="mega-link">Recently sold homes</a>
                 </div>
@@ -224,8 +225,8 @@
                   <a routerLink="/guide/home-buying" class="mega-link">Home buying checklist</a>
                   <a [routerLink]="['/news', 'buy']" class="mega-link">Home buyers reveal: 'What I wish I had known before buying my first home'</a>
                   <a routerLink="/guide/first-time-home-buyer" class="mega-link" style="margin-top: 12px; border-top: 1px solid var(--border-light); padding-top: 12px;">First-time home buyer resource center</a>
+                  <a routerLink="/success-stories" class="mega-link">Success stories</a>
                   <a [routerLink]="['/news', 'buy']" class="mega-link">More home buying insights</a>
-                  <a [routerLink]="['/news', 'buy']" class="mega-link">Success stories</a>
                 </div>
               </div>
             </div>
@@ -434,6 +435,7 @@
                   <a routerLink="/news" class="mega-link">All guides</a>
                   <a routerLink="/guide/home-selling" class="mega-link">Complete guide on how to sell your home</a>
                   <a routerLink="/guide/first-time-home-buyer" class="mega-link">First-time home buyer resource center</a>
+                  <a routerLink="/success-stories" class="mega-link">Success stories</a>
                   <a routerLink="/mortgages" class="mega-link">Mortgage guide</a>
                   <a [routerLink]="['/news', 'mortgage']" class="mega-link">Veterans home buyer guide</a>
                   <a [routerLink]="['/news', 'mortgage']" class="mega-link">USDA home loan guide</a>

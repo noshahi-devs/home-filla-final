@@ -31,8 +31,13 @@
 
   <!-- HERO SECTION -->
   <div class="hero-section">
+    <!-- 3D Floating Shapes -->
+    <div class="hero-3d-shape shape-1"></div>
+    <div class="hero-3d-shape shape-2"></div>
+    <div class="hero-3d-shape shape-3"></div>
+
     <div class="container text-center">
-      <span class="hero-badge">🏠 Housing Market</span>
+      <span class="hero-badge"><i class="fas fa-home"></i> Housing Market</span>
       <h1>Sunnyvale, CA housing market overview</h1>
       <p class="hero-subtitle">Find the latest data, compare neighborhoods and zip codes, and get expert insights for buyers, sellers, and renters.</p>
 
@@ -61,27 +66,39 @@
           <p class="section-sub">Data as of March 2026</p>
           <div class="stats-grid">
             <div class="stat-card">
-              <div class="stat-label">Median Listing Price</div>
+              <div class="stat-header">
+                <div class="stat-label">Median Listing Price</div>
+                <div class="stat-icon"><i class="fas fa-tag"></i></div>
+              </div>
               <div class="stat-value">$1.5M</div>
-              <div class="stat-change down"><span class="arrow">↓</span> 6.25% year-over-year</div>
+              <div class="stat-change down"><span class="arrow"><i class="fas fa-arrow-down"></i></span> 6.25% year-over-year</div>
               <div class="stat-date">vs. $1.6M last year</div>
             </div>
             <div class="stat-card">
-              <div class="stat-label">Price per Sq Ft</div>
+              <div class="stat-header">
+                <div class="stat-label">Price per Sq Ft</div>
+                <div class="stat-icon"><i class="fas fa-ruler-combined"></i></div>
+              </div>
               <div class="stat-value">$942</div>
-              <div class="stat-change down"><span class="arrow">↓</span> 6.45% year-over-year</div>
+              <div class="stat-change down"><span class="arrow"><i class="fas fa-arrow-down"></i></span> 6.45% year-over-year</div>
               <div class="stat-date">vs. $1,007 last year</div>
             </div>
             <div class="stat-card">
-              <div class="stat-label">Active Listings</div>
+              <div class="stat-header">
+                <div class="stat-label">Active Listings</div>
+                <div class="stat-icon"><i class="fas fa-home"></i></div>
+              </div>
               <div class="stat-value">277</div>
-              <div class="stat-change up"><span class="arrow">↑</span> 8.02% year-over-year</div>
+              <div class="stat-change up"><span class="arrow"><i class="fas fa-arrow-up"></i></span> 8.02% year-over-year</div>
               <div class="stat-date">More inventory than last year</div>
             </div>
             <div class="stat-card">
-              <div class="stat-label">Median Days on Market</div>
+              <div class="stat-header">
+                <div class="stat-label">Median Days on Market</div>
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+              </div>
               <div class="stat-value">17 <span class="unit">days</span></div>
-              <div class="stat-change down"><span class="arrow">↑</span> 6.25% year-over-year</div>
+              <div class="stat-change down"><span class="arrow"><i class="fas fa-arrow-up"></i></span> 6.25% year-over-year</div>
               <div class="stat-date">Slightly slower than last year</div>
             </div>
           </div>
@@ -273,8 +290,8 @@
         <!-- SCHOOLS SECTION -->
         <div class="card" id="schools">
           <div class="card-header">
-            <h2>Compare Sunnyvale's top schools</h2>
-            <p>Ratings provided by GreatSchools.org</p>
+            <h2><i class="fas fa-graduation-cap" style="color: var(--color-primary); margin-right: 8px;"></i>Compare Sunnyvale's top schools</h2>
+            <p>Ratings provided by GreatSchools.org • <a href="#" class="school-link">View top rated schools <i class="fas fa-chevron-right" style="font-size: 10px;"></i></a></p>
           </div>
           <div class="tab-row">
             <button class="tab-btn active" (click)="setSchoolTab('elementary')" [class.active]="activeSchoolTab === 'elementary'">Elementary</button>
@@ -399,7 +416,7 @@
         <!-- FOR BUYERS SECTION -->
         <div class="insight-section" id="buyers">
           <div class="insight-icon-header">
-            <div class="insight-icon">🏠</div>
+            <div class="insight-icon"><i class="fas fa-home"></i></div>
             <h2>For buyers</h2>
           </div>
           <p class="insight-body-text">
@@ -427,25 +444,25 @@
           <h2>Browse properties in Sunnyvale</h2>
           <div class="browse-grid">
             <a href="#" class="browse-card">
-              <div class="browse-img-placeholder green">🏡</div>
+              <div class="browse-img-placeholder green"><i class="fas fa-home"></i></div>
               <div class="browse-label">New listings</div>
             </a>
             <a href="#" class="browse-card">
-              <div class="browse-img-placeholder blue">🏘️</div>
+              <div class="browse-img-placeholder blue"><i class="fas fa-houses"></i></div>
               <div class="browse-label">Recently sold</div>
             </a>
           </div>
           <div class="browse-bottom-3">
             <a href="#" class="browse-card">
-              <div class="browse-img-placeholder purple">🏠</div>
+              <div class="browse-img-placeholder purple"><i class="fas fa-door-open"></i></div>
               <div class="browse-label">Open houses</div>
             </a>
             <a href="#" class="browse-card">
-              <div class="browse-img-placeholder brown">🔨</div>
+              <div class="browse-img-placeholder brown"><i class="fas fa-hammer"></i></div>
               <div class="browse-label">New construction</div>
             </a>
             <a href="#" class="browse-card">
-              <div class="browse-img-placeholder cyan">🏢</div>
+              <div class="browse-img-placeholder cyan"><i class="fas fa-building"></i></div>
               <div class="browse-label">Condos</div>
             </a>
           </div>
@@ -464,7 +481,7 @@
             <h3>What type of home are you looking for?</h3>
             <div class="home-type-grid">
               <button class="home-type-btn" *ngFor="let type of homeTypes">
-                <span class="home-type-icon">{{ type.icon }}</span>
+                <span class="home-type-icon"><i class="fas {{ type.icon }}"></i></span>
                 {{ type.label }}
               </button>
             </div>
@@ -478,7 +495,7 @@
         <!-- FOR SELLERS SECTION -->
         <div class="insight-section" id="sellers">
           <div class="insight-icon-header">
-            <div class="insight-icon">🏷️</div>
+            <div class="insight-icon"><i class="fas fa-tag"></i></div>
             <h2>For sellers</h2>
           </div>
           <p class="insight-body-text">
@@ -506,7 +523,7 @@
         <!-- FOR RENTERS SECTION -->
         <div class="insight-section" id="renters">
           <div class="insight-icon-header">
-            <div class="insight-icon">🏢</div>
+            <div class="insight-icon"><i class="fas fa-building"></i></div>
             <h2>For renters</h2>
           </div>
           <p class="insight-body-text">
@@ -535,7 +552,7 @@
           <div class="rental-listings-grid">
             <div class="rental-card rental-card-lg" *ngFor="let rental of featuredRentals">
               <div class="rental-img-wrap">
-                <div class="rental-img-placeholder">🛋️</div>
+                <div class="rental-img-placeholder"><i class="fas fa-couch"></i></div>
               </div>
               <div class="rental-badge">● House for rent</div>
               <div class="rental-price">{{ rental.price }}</div>

@@ -241,7 +241,7 @@ export class MarketTrends implements AfterViewInit {
   // Quick links
   quickLinks = [
     'Homes for sale', 'New construction', 'Recently sold', 'Open houses', 'Pre-foreclosures',
-    'Condos', 'Townhomes', 'Land', 'Luxury', 'Apartments'
+    'Condos', 'Townhomes', 'Land', 'Luxury', 'Apartments', 'Top rated schools'
   ];
 
   // Neighborhood rent data
@@ -255,11 +255,11 @@ export class MarketTrends implements AfterViewInit {
 
   // Home types for pre-approval
   homeTypes = [
-    { icon: '🏠', label: 'Single Family' },
-    { icon: '🏢', label: 'Condo/Townhome' },
-    { icon: '🏘️', label: 'Multi-Family' },
-    { icon: '🏡', label: 'Manufactured' },
-    { icon: '🏞️', label: 'Vacant Land' },
+    { icon: 'fa-house', label: 'Single Family' },
+    { icon: 'fa-building', label: 'Condo/Townhome' },
+    { icon: 'fa-houses', label: 'Multi-Family' },
+    { icon: 'fa-trailer', label: 'Manufactured' },
+    { icon: 'fa-tree', label: 'Vacant Land' },
   ];
 
   ngAfterViewInit(): void {
