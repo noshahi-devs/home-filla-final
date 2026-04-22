@@ -190,9 +190,21 @@
           <label>Area / Address <span class="req">*</span></label>
           <input type="text" [(ngModel)]="addForm.area" placeholder="e.g. DHA Phase 6, Block D" class="field-input"/>
         </div>
-        <div class="map-box">
+        
+        <div class="field-group" style="margin-top: 0.5rem;">
+          <label>Google Maps Link <span style="font-weight: 500; text-transform: none; color: #94a3b8;">(Optional)</span></label>
+          <input type="text" [(ngModel)]="addForm.mapLink" (ngModelChange)="extractLocationFromLink()" placeholder="Paste Google Maps URL here..." class="field-input"/>
+          <small style="color: #64748b; font-size: 0.75rem; margin-top: 4px;">Paste a link containing coordinates (e.g. https://www.google.com/maps/@31.4504,74.2938,15z) to fetch map.</small>
+        </div>
+
+        <div class="map-box" *ngIf="!safeMapUrl">
           <i class="fas fa-map-marker-alt"></i>
-          <p>Map integration — pin your property location</p>
+          <p>Map Preview</p>
+          <span style="font-size: 0.8rem;">Enter a valid Google Maps link above to see the location.</span>
+        </div>
+        
+        <div class="map-preview-container" *ngIf="safeMapUrl" style="border-radius: 16px; overflow: hidden; border: 1.5px solid #e2e8f0; height: 250px;">
+          <iframe [src]="safeMapUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
 

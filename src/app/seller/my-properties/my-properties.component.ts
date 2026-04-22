@@ -9,6 +9,7 @@ import { SubscriptionService, MySubscriptionInfo } from '../../shared/services/s
 import { Router } from '@angular/router';
 import { LineSparklineComponent } from '../../shared/components/charts/line-sparkline.component';
 import { BarMiniComponent } from '../../shared/components/charts/bar-mini.component';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-seller-my-properties',
@@ -33,8 +34,9 @@ export class SellerMyPropertiesComponent implements OnInit {
 
   // ── Add-property stepper state ─────────────────────────────
   currentStep = 1;
-  addForm: any = { type: 'house', purpose: 'sale', country: 'Pakistan', beds: 0, baths: 0 };
+  addForm: any = { type: 'house', purpose: 'sale', country: 'Pakistan', beds: 0, baths: 0, mapLink: '', lat: null, lng: null };
   addFiles: File[] = [];
+  safeMapUrl: SafeResourceUrl | null = null;
 
   isAnalyticsOpen = false;
   analyticsLoading = false;
@@ -46,7 +48,8 @@ export class SellerMyPropertiesComponent implements OnInit {
     private authService: AuthService,
     private uiService: UiService,
     private subscriptionService: SubscriptionService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -111,8 +114,9 @@ export class SellerMyPropertiesComponent implements OnInit {
   openAddModal() {
     this.isEditMode = false;
     this.currentStep = 1;
-    this.addForm = { type: 'house', purpose: 'sale', country: 'Pakistan', beds: 0, baths: 0 };
+    this.addForm = { type: 'house', purpose: 'sale', country: 'Pakistan', beds: 0, baths: 0, mapLink: '', lat: null, lng: null };
     this.addFiles = [];
+    this.safeMapUrl = null;
     this.isModalOpen = true;
   }
 
@@ -141,6 +145,59 @@ export class SellerMyPropertiesComponent implements OnInit {
 
   triggerAddFileInput(): void { document.getElementById('add-prop-images')?.click(); }
 
+  extractLocationFromLink() {
+    if (!this.addForm.mapLink) {
+      this.addForm.lat = null;
+      this.addForm.lng = null;
+      this.safeMapUrl = null;
+      return;
+    }
+    
+    let link = this.addForm.mapLink.trim();
+
+    // 1. Check if user pasted an entire iframe embed code
+    const iframeMatch = link.match(/<iframe.*?src=["'](.*?)["']/);
+    if (iframeMatch && iframeMatch[1]) {
+      this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(iframeMatch[1]);
+      this.uiService.showToast('success', 'Map Found', 'Embed code parsed successfully.');
+      return;
+    }
+
+    // 2. Check if it's already a clean embed URL
+    if (link.includes('google.com/maps/embed')) {
+      this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(link);
+      return;
+    }
+
+    // 3. Try to extract lat/lng from typical URL patterns (@lat,lng)
+    const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
+    const match = link.match(regex);
+    
+    if (match && match.length >= 3) {
+      this.addForm.lat = parseFloat(match[1]);
+      this.addForm.lng = parseFloat(match[2]);
+      
+      const mapSrc = `https://maps.google.com/maps?q=${this.addForm.lat},${this.addForm.lng}&hl=en&z=14&output=embed`;
+      this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(mapSrc);
+      this.uiService.showToast('success', 'Location Found', 'Coordinates extracted from link.');
+      return;
+    }
+
+    // 4. Fallback for Place searches (e.g. google.com/maps/place/Lahore)
+    const placeMatch = link.match(/\/place\/([^\/]+)/);
+    if (placeMatch && placeMatch[1]) {
+      const placeName = decodeURIComponent(placeMatch[1].replace(/\+/g, ' '));
+      const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(placeName)}&hl=en&z=14&output=embed`;
+      this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(mapSrc);
+      return;
+    }
+
+    // If we can't parse anything specific but it seems like a valid URL, just reset it
+    this.addForm.lat = null;
+    this.addForm.lng = null;
+    this.safeMapUrl = null;
+  }
+
   submitNewProperty(): void {
     if (!this.canNextStep(4)) return;
     this.isSaving = true;
@@ -157,6 +214,10 @@ export class SellerMyPropertiesComponent implements OnInit {
     fd.append('City', this.addForm.city || '');
     fd.append('Area', this.addForm.area || '');
     fd.append('ListingStatus', 'active');
+    
+    if (this.addForm.lat) fd.append('MapLat', this.addForm.lat.toString());
+    if (this.addForm.lng) fd.append('MapLng', this.addForm.lng.toString());
+
     this.addFiles.forEach(f => fd.append('ImageFiles', f, f.name));
     this.uiService.showToast('processing', 'Saving...', 'Uploading your property details.', 900);
     this.propertyService.addProperty(fd).subscribe({
@@ -191,8 +252,19 @@ export class SellerMyPropertiesComponent implements OnInit {
       baths: property.baths || 0,
       country: property.country || 'Pakistan',
       city: property.city || '',
-      area: property.area || ''
+      area: property.area || '',
+      lat: property.mapLat || null,
+      lng: property.mapLng || null,
+      mapLink: property.mapLat && property.mapLng ? `https://www.google.com/maps/@${property.mapLat},${property.mapLng},15z` : ''
     };
+    
+    if (this.addForm.lat && this.addForm.lng) {
+      const mapSrc = `https://maps.google.com/maps?q=${this.addForm.lat},${this.addForm.lng}&hl=en&z=14&output=embed`;
+      this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(mapSrc);
+    } else {
+      this.safeMapUrl = null;
+    }
+
     this.addFiles = [];
     this.selectedFiles = [];
     this.isModalOpen = true;
@@ -204,6 +276,7 @@ export class SellerMyPropertiesComponent implements OnInit {
     this.editingProperty = {};
     this.selectedFiles = [];
     this.addFiles = [];
+    this.safeMapUrl = null;
     this.currentStep = 1;
   }
 
@@ -290,6 +363,9 @@ export class SellerMyPropertiesComponent implements OnInit {
     formData.append('Baths', (this.addForm.baths || 0).toString());
     formData.append('Sqft', (this.addForm.sqft || 0).toString());
     formData.append('ListingStatus', (this.editingProperty.listingStatus || 'active').toString());
+
+    if (this.addForm.lat) formData.append('MapLat', this.addForm.lat.toString());
+    if (this.addForm.lng) formData.append('MapLng', this.addForm.lng.toString());
 
     // Keep existing images for edit
     if (this.editingProperty.images) {
