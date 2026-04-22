@@ -9,8 +9,8 @@ import { UiService } from '../../shared/services/ui.service';
   selector: 'app-seller-notifications',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: '../../shared/notifications/notifications.shared.html',
-  styleUrl: '../../shared/notifications/notifications.shared.css'
+  templateUrl: './notifications.component.html',
+  styleUrl: '../my-properties/my-properties.component.css'
 })
 export class SellerNotificationsComponent implements OnInit {
   private notificationService = inject(NotificationService);

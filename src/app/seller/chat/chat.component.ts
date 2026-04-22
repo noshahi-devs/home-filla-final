@@ -9,7 +9,7 @@ import { AuthService } from '../../shared/services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.css',
+  styleUrls: ['../my-properties/my-properties.component.css', './chat.component.css'],
 })
 export class SellerChatComponent implements OnInit {
   isLoading = true;

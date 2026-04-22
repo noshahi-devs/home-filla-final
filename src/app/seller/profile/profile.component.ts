@@ -10,7 +10,7 @@ import { UserService } from '../../shared/services/user.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './profile.component.html',
-  styleUrl: '../../admin/properties/properties.component.css'
+  styleUrl: '../my-properties/my-properties.component.css'
 })
 export class SellerProfileComponent implements OnInit {
   profile = {
