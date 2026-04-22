@@ -1000,6 +1000,11 @@ textarea.field-input { resize: vertical; }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   :host { padding: 1.5rem; }

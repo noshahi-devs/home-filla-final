@@ -23,7 +23,7 @@ interface ChecklistSection {
 @Component({
   selector: 'app-home-buying-checklist',
   standalone: true,
-  imports: [CommonModule, RouterLink, SiteHeaderComponent, SiteFooterComponent],
+  imports: [CommonModule, SiteHeaderComponent, SiteFooterComponent],
   templateUrl: './home-buying-checklist.html',
   styleUrl: './home-buying-checklist.css',
 })

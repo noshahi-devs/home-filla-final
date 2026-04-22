@@ -9,7 +9,7 @@ import { UiService } from '../../shared/services/ui.service';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './subscription.component.html',
-  styleUrl: '../../admin/dashboard/dashboard.component.css',
+  styleUrl: '../my-properties/my-properties.component.css',
 })
 export class SellerSubscriptionComponent implements OnInit {
   isLoading = true;

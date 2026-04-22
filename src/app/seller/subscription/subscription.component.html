@@ -1,56 +1,94 @@
-<div class="dashboard">
-  <div class="page-header">
+<div class="properties-page">
+  <div class="page-header" style="margin-bottom: 2rem;">
     <div>
-      <h1>Subscription</h1>
-      <p class="page-subtitle">Choose a plan that matches your listing volume.</p>
+      <h1>Subscription Plans</h1>
+      <p class="page-subtitle">Choose a plan that scales with your real estate business.</p>
     </div>
   </div>
 
-  <div class="loading-state" *ngIf="isLoading" style="text-align: center; padding: 3rem;">
-    <div class="spinner" style="margin: 0 auto 1rem;"></div>
-    <p>Loading plans...</p>
+  <div class="loading-state" *ngIf="isLoading" style="text-align: center; padding: 5rem 0;">
+    <div class="spinner" style="margin: 0 auto 1.5rem; border: 4px solid rgba(20,184,166,0.2); border-left-color: #14b8a6; width: 40px; height: 40px; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+    <p style="font-weight: 700; color: #64748b; font-size: 1.1rem;">Loading your subscription...</p>
   </div>
 
-  <div *ngIf="!isLoading && my" class="quick-card" style="border-color: rgba(245,158,11,0.15); margin-bottom: 18px;">
-    <div class="chart-header">
-      <h3><i class="fas fa-crown" style="color:#f59e0b;"></i> Current Plan</h3>
-    </div>
-    <div style="display:flex; gap: 14px; flex-wrap: wrap;">
-      <div style="flex: 1 1 220px;">
-        <div style="font-weight: 800; font-size: 18px; color: #0f172a;">{{ my.plan.name }}</div>
-        <div style="color:#64748b; margin-top: 6px;">Limit: <b>{{ my.plan.listingLimit }}</b> listings</div>
-      </div>
-      <div style="flex: 1 1 220px;">
-        <div style="color:#64748b;">Used: <b>{{ my.used }}</b></div>
-        <div style="color:#64748b; margin-top: 6px;">Remaining: <b>{{ my.remaining }}</b></div>
-      </div>
-      <div style="flex: 1 1 220px;">
-        <div style="color:#64748b;">Price: <b>{{ my.plan.currency }} {{ my.plan.price }}</b></div>
-        <a routerLink="/seller/properties" class="btn-dash btn-outline-dash" style="margin-top: 10px; display:inline-flex;">
-          Manage Properties
-        </a>
-      </div>
-    </div>
-  </div>
+  <div *ngIf="!isLoading && my">
+    
+    <!-- Current Plan Banner -->
+    <div style="background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 20px; padding: 2rem; color: #fff; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15); margin-bottom: 3rem; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(20,184,166,0.2) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;"></div>
+      
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; position: relative; z-index: 1;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
+            <i class="fas fa-crown" style="color: #f59e0b; font-size: 1.5rem;"></i>
+            <h2 style="margin: 0; font-size: 1.8rem; font-weight: 900; letter-spacing: -0.02em;">{{ my.plan.name }} Plan</h2>
+          </div>
+          <p style="margin: 0; color: #94a3b8; font-size: 1rem;">Your current active subscription package.</p>
+        </div>
 
-  <div class="bottom-row" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));" *ngIf="!isLoading">
-    <div class="stat-card" *ngFor="let p of plans" style="opacity: 1; animation: none;">
-      <div class="stat-icon" style="background: rgba(245,158,11,0.12);">
-        <i class="fas fa-crown" style="color:#f59e0b;"></i>
-      </div>
-      <div class="stat-info">
-        <div class="stat-value" style="font-size: 22px;">{{ p.name }}</div>
-        <div class="stat-label">{{ p.listingLimit }} listings</div>
-      </div>
-      <div class="stat-trend up" style="margin-top: 6px;">
-        <i class="fas fa-tag"></i> {{ p.currency }} {{ p.price }}
-      </div>
-      <div style="margin-top: 10px; display:flex; gap: 10px;">
-        <button class="btn-dash btn-primary-dash" style="flex:1;" [disabled]="isCurrent(p)" (click)="upgrade(p)">
-          {{ isCurrent(p) ? 'Current' : 'Upgrade' }}
-        </button>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 1.2rem 1.5rem; border-radius: 16px; width: 100%; max-width: 400px; justify-content: space-between;">
+          <div style="flex: 1; min-width: 80px;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 800; margin-bottom: 4px;">Limit</div>
+            <div style="font-size: 1.4rem; font-weight: 900;">{{ my.plan.listingLimit }}</div>
+          </div>
+          <div style="flex: 1; min-width: 80px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 1.5rem;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 800; margin-bottom: 4px;">Used</div>
+            <div style="font-size: 1.4rem; font-weight: 900; color: #f59e0b;">{{ my.used }}</div>
+          </div>
+          <div style="flex: 1; min-width: 80px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 1.5rem;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 800; margin-bottom: 4px;">Left</div>
+            <div style="font-size: 1.4rem; font-weight: 900; color: #14b8a6;">{{ my.remaining }}</div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- Pricing Plans Grid -->
+    <div style="margin-bottom: 2rem;">
+      <h3 style="font-size: 1.4rem; font-weight: 900; color: #0f172a; margin: 0 0 1.5rem;">Upgrade Your Plan</h3>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        
+        <div *ngFor="let p of plans" 
+             style="background: #ffffff; border: 2px solid #e2e8f0; border-radius: 24px; padding: 2rem; position: relative; transition: all 0.3s; display: flex; flex-direction: column;"
+             [ngStyle]="{'border-color': isCurrent(p) ? '#14b8a6' : '#e2e8f0', 'box-shadow': isCurrent(p) ? '0 10px 40px rgba(20,184,166,0.15)' : '0 4px 15px rgba(15,23,42,0.02)'}">
+          
+          <div *ngIf="isCurrent(p)" style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #14b8a6; color: #fff; padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 4px 10px rgba(20,184,166,0.3);">Current Plan</div>
+
+          <div style="text-align: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+            <div style="width: 50px; height: 50px; background: rgba(245,158,11,0.1); color: #f59e0b; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto 1rem;">
+              <i class="fas" [ngClass]="p.name.toLowerCase().includes('pro') ? 'fa-gem' : (p.name.toLowerCase().includes('basic') ? 'fa-star' : 'fa-crown')"></i>
+            </div>
+            <h3 style="font-size: 1.5rem; font-weight: 900; color: #0f172a; margin: 0 0 0.5rem;">{{ p.name }}</h3>
+            <div style="font-size: 2.2rem; font-weight: 900; color: #0f172a;">
+              <span style="font-size: 1rem; color: #64748b; vertical-align: middle;">{{ p.currency }}</span> {{ p.price }}
+            </div>
+            <div style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px;">Billed Monthly</div>
+          </div>
+
+          <div style="flex-grow: 1; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.8rem; color: #334155; font-size: 0.95rem;">
+              <i class="fas fa-check-circle" style="color: #14b8a6; margin-right: 10px;"></i> <b>{{ p.listingLimit }}</b> active listings allowed
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 0.8rem; color: #334155; font-size: 0.95rem;">
+              <i class="fas fa-check-circle" style="color: #14b8a6; margin-right: 10px;"></i> Direct buyer inquiries
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 0.8rem; color: #334155; font-size: 0.95rem;">
+              <i class="fas fa-check-circle" style="color: #14b8a6; margin-right: 10px;"></i> Analytics & Insights dashboard
+            </div>
+          </div>
+
+          <button class="btn-primary" 
+                  [disabled]="isCurrent(p)" 
+                  (click)="upgrade(p)" 
+                  style="width: 100%; justify-content: center; padding: 0.9rem; font-size: 0.95rem; border-radius: 12px; transition: all 0.2s;"
+                  [ngStyle]="{'background': isCurrent(p) ? '#f1f5f9' : 'linear-gradient(135deg, #14b8a6, #0d9488)', 'color': isCurrent(p) ? '#94a3b8' : '#fff', 'cursor': isCurrent(p) ? 'not-allowed' : 'pointer'}">
+            {{ isCurrent(p) ? 'Active Plan' : 'Upgrade to ' + p.name }}
+          </button>
+        </div>
+        
+      </div>
+    </div>
+    
   </div>
 </div>
-

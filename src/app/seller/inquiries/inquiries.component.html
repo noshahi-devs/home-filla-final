@@ -1,8 +1,8 @@
 <div class="properties-page">
   <div class="page-header">
     <div>
-      <h1>Inquiries</h1>
-      <p class="page-subtitle">Leads and messages from buyers on your listings.</p>
+      <h1>Inbox & Inquiries</h1>
+      <p class="page-subtitle">Manage messages and leads from potential buyers and renters.</p>
     </div>
   </div>
 
@@ -11,40 +11,64 @@
       <thead>
         <tr>
           <th>Property</th>
-          <th>Buyer</th>
-          <th>Message</th>
-          <th>Date</th>
+          <th>Buyer Info</th>
+          <th>Message Preview</th>
+          <th>Date Received</th>
           <th>Status</th>
-          <th style="width: 180px;">Actions</th>
+          <th style="width: 120px;">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let i of inquiries">
-          <td>{{ i.propertyTitle }}</td>
           <td>
-            <div class="loc-cell">
-              <span class="city">{{ i.userName }}</span>
-              <span class="area">{{ i.userEmail }}</span>
-              <span class="area"><i class="fas fa-phone-alt" style="font-size:10px"></i> {{ i.userPhone }}</span>
+            <div class="property-cell">
+              <div class="prop-info" style="margin-left: 0;">
+                <span class="prop-title">{{ i.propertyTitle }}</span>
+                <span class="prop-seller">ID: {{ i.propertyId }}</span>
+              </div>
             </div>
           </td>
-          <td style="max-width: 320px;">
-            <p style="font-size: 13px; color: #94a3b8; margin:0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+          <td>
+            <div class="loc-cell">
+              <span class="city"><i class="fas fa-user" style="font-size:10px;color:#14b8a6;margin-right:4px;"></i>{{ i.userName }}</span>
+              <span class="area"><i class="fas fa-envelope" style="font-size:10px;color:#64748b;margin-right:4px;"></i>{{ i.userEmail }}</span>
+              <span class="area" *ngIf="i.userPhone"><i class="fas fa-phone-alt" style="font-size:10px;color:#64748b;margin-right:4px;"></i>{{ i.userPhone }}</span>
+            </div>
+          </td>
+          <td style="max-width: 300px;">
+            <p style="font-size: 0.85rem; color: #475569; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
               {{ i.message }}
             </p>
           </td>
-          <td>{{ i.createdAt | date:'mediumDate' }}</td>
-          <td><span class="badge type">{{ i.status }}</span></td>
+          <td><span style="font-size: 0.85rem; color: #475569; font-weight: 500;">{{ i.createdAt | date:'mediumDate' }}</span></td>
           <td>
-            <button class="btn-primary" style="padding: 6px 12px;" (click)="openReply(i)">
-              <i class="fas fa-reply"></i> Reply
-            </button>
+            <span class="badge" 
+                  [ngStyle]="{
+                    'background': i.status === 'responded' ? 'rgba(20, 184, 166, 0.1)' : 'rgba(245, 158, 11, 0.1)',
+                    'color': i.status === 'responded' ? '#0f766e' : '#b45309',
+                    'border': i.status === 'responded' ? '1px solid rgba(20, 184, 166, 0.2)' : '1px solid rgba(245, 158, 11, 0.2)',
+                    'padding': '4px 10px',
+                    'border-radius': '6px',
+                    'font-size': '0.72rem',
+                    'font-weight': '700',
+                    'text-transform': 'uppercase',
+                    'letter-spacing': '0.05em'
+                  }">
+              {{ i.status || 'Pending' }}
+            </span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button class="btn-icon" title="View & Reply" (click)="openReply(i)" style="background:rgba(20,184,166,0.08);border-color:rgba(20,184,166,0.2);color:#0f766e;">
+                <i class="fas fa-reply"></i>
+              </button>
+            </div>
           </td>
         </tr>
         <tr *ngIf="inquiries.length === 0">
           <td colspan="6" class="empty-state">
             <i class="fas fa-inbox"></i>
-            <p>No inquiries yet.</p>
+            <p>You don't have any inquiries yet.</p>
           </td>
         </tr>
       </tbody>
@@ -52,41 +76,72 @@
   </div>
 </div>
 
-<!-- Reply Modal -->
+<!-- ══ REPLY MODAL ════════════════════════════════════════════════ -->
 <div class="modal-overlay" *ngIf="isReplyOpen" (click)="closeReply()">
-  <div class="modal-box" style="max-width: 720px;" (click)="$event.stopPropagation()">
-    <div class="modal-header">
-      <h2>Reply to Inquiry</h2>
-      <button class="close-modal" (click)="closeReply()"><i class="fas fa-times"></i></button>
+  <div class="modal-box add-modal" (click)="$event.stopPropagation()" style="max-width: 680px;">
+    
+    <!-- Header -->
+    <div class="add-modal-header">
+      <div>
+        <span class="add-modal-badge" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">Message</span>
+        <h2>Reply to Inquiry</h2>
+      </div>
+      <button class="modal-close-btn" (click)="closeReply()"><i class="fas fa-times"></i></button>
     </div>
-    <div class="modal-body">
-      <div style="display:flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;">
-        <div style="flex:1 1 260px; color:#64748b; font-weight:700;">
-          <div><b>Buyer:</b> {{ selected?.userName }}</div>
-          <div><b>Email:</b> {{ selected?.userEmail }}</div>
+
+    <!-- Body -->
+    <div class="add-modal-body" style="background: #f8fafc; padding: 1.5rem;">
+      
+      <!-- Context Cards -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        
+        <!-- Buyer Card -->
+        <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 1rem;">
+          <h4 style="margin: 0 0 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 800;">Buyer Details</h4>
+          <div style="font-weight: 700; color: #0f172a; font-size: 0.95rem; margin-bottom: 2px;">{{ selected?.userName }}</div>
+          <div style="color: #64748b; font-size: 0.85rem;"><i class="fas fa-envelope" style="margin-right: 4px;"></i> {{ selected?.userEmail }}</div>
+          <div style="color: #64748b; font-size: 0.85rem; margin-top: 2px;" *ngIf="selected?.userPhone"><i class="fas fa-phone-alt" style="margin-right: 4px;"></i> {{ selected?.userPhone }}</div>
         </div>
-        <div style="flex:1 1 260px; color:#64748b; font-weight:700;">
-          <div><b>Property:</b> {{ selected?.propertyTitle }}</div>
-          <div><b>Status:</b> {{ selected?.status }}</div>
+
+        <!-- Property Card -->
+        <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 1rem;">
+          <h4 style="margin: 0 0 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 800;">Regarding Property</h4>
+          <div style="font-weight: 700; color: #0f172a; font-size: 0.95rem; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ selected?.propertyTitle }}</div>
+          <div style="color: #64748b; font-size: 0.85rem;"><i class="fas fa-calendar-alt" style="margin-right: 4px;"></i> Received {{ selected?.createdAt | date:'mediumDate' }}</div>
+          <div style="margin-top: 6px;">
+            <span style="font-size: 0.7rem; font-weight: 800; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; color: #64748b;">Status: {{ selected?.status || 'Pending' }}</span>
+          </div>
         </div>
       </div>
 
-      <textarea
-        [(ngModel)]="replyText"
-        rows="8"
-        class="modal-textarea"
-        placeholder="Write your reply..."
-        style="width: 100%;"
-      ></textarea>
-
-      <div style="display:flex; justify-content:flex-end; gap: 10px; margin-top: 14px;">
-        <button type="button" (click)="closeReply()" style="padding: 0.9rem 1.4rem; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; background: #f1f5f9;">
-          Cancel
-        </button>
-        <button type="button" class="btn-add" [disabled]="isSaving" (click)="sendReply()">
-          <i class="fas fa-paper-plane"></i> {{ isSaving ? 'Sending...' : 'Send Reply' }}
-        </button>
+      <!-- Original Message Box -->
+      <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 1.2rem; margin-bottom: 1.5rem;">
+        <h4 style="margin: 0 0 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 800;">Original Message</h4>
+        <p style="margin: 0; font-size: 0.9rem; color: #334155; line-height: 1.5; font-style: italic;">"{{ selected?.message }}"</p>
       </div>
+
+      <!-- Reply Textarea -->
+      <div class="field-group">
+        <label>Your Reply <span class="req">*</span></label>
+        <textarea
+          [(ngModel)]="replyText"
+          rows="6"
+          class="field-input"
+          placeholder="Type your response here. This will be sent directly to the buyer's email..."
+          style="background: #ffffff; box-shadow: 0 2px 8px rgba(15,23,42,0.02);"
+        ></textarea>
+      </div>
+
     </div>
+
+    <!-- Footer Nav -->
+    <div class="add-modal-footer" style="justify-content: flex-end; gap: 10px;">
+      <button class="btn-back" (click)="closeReply()">Cancel</button>
+      <button class="btn-submit" [disabled]="isSaving" (click)="sendReply()" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
+        <i class="fas" [ngClass]="isSaving ? 'fa-spinner fa-spin' : 'fa-paper-plane'"></i>
+        {{ isSaving ? 'Sending...' : 'Send Reply' }}
+      </button>
+    </div>
+
   </div>
 </div>

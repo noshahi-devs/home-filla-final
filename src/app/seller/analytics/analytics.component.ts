@@ -10,7 +10,7 @@ import { BarMiniComponent } from '../../shared/components/charts/bar-mini.compon
   standalone: true,
   imports: [CommonModule, RouterModule, LineSparklineComponent, BarMiniComponent],
   templateUrl: './analytics.component.html',
-  styleUrl: '../../admin/dashboard/dashboard.component.css',
+  styleUrl: '../my-properties/my-properties.component.css',
 })
 export class SellerAnalyticsComponent implements OnInit {
   isLoading = true;

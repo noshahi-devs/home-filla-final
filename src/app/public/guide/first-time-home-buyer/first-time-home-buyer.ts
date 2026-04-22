@@ -33,7 +33,7 @@ interface NewsItem {
 @Component({
   selector: 'app-first-time-home-buyer',
   standalone: true,
-  imports: [CommonModule, RouterLink, SiteHeaderComponent, SiteFooterComponent],
+  imports: [CommonModule, SiteHeaderComponent, SiteFooterComponent],
   templateUrl: './first-time-home-buyer.html',
   styleUrl: './first-time-home-buyer.css',
 })

@@ -7,7 +7,7 @@ import { SiteFooterComponent } from '../../shared/components/site-footer/site-fo
 @Component({
   selector: 'app-market-trends',
   standalone: true,
-  imports: [CommonModule, RouterLink, SiteHeaderComponent, SiteFooterComponent],
+  imports: [CommonModule, SiteHeaderComponent, SiteFooterComponent],
   templateUrl: './market-trends.html',
   styleUrls: ['./market-trends.css'],
 })

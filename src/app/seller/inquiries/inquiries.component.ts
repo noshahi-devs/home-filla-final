@@ -10,7 +10,7 @@ import { UiService } from '../../shared/services/ui.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './inquiries.component.html',
-  styleUrl: '../../admin/properties/properties.component.css'
+  styleUrl: '../my-properties/my-properties.component.css'
 })
 export class SellerInquiriesComponent implements OnInit {
   inquiries: Inquiry[] = [];
