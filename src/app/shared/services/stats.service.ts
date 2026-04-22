@@ -21,6 +21,10 @@ export class StatsService {
     return this.http.get(`${this.apiUrl}/seller/${sellerId}/stats`, { headers: this.headers });
   }
 
+  getSellerDashboard(days: number = 30): Observable<any> {
+    return this.http.get(`${this.apiUrl}/dashboard/stats?days=${days}`, { headers: this.headers });
+  }
+
   getBuyerStats(buyerId: number): Observable<any> {
     // Mocked for now to match original behavior
     return of({

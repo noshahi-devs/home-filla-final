@@ -1,0 +1,62 @@
+<div class="chat-shell">
+  <div class="chat-sidebar">
+    <div class="side-header">
+      <div class="title">Conversations</div>
+      <button class="refresh" (click)="reloadConversations()"><i class="fas fa-rotate"></i></button>
+    </div>
+
+    <div class="side-list" *ngIf="!isLoading">
+      <button class="convo" *ngFor="let c of conversations" [class.active]="c.threadKey === selected?.threadKey" (click)="select(c)">
+        <div class="avatar">
+          <img *ngIf="c.otherUser?.avatar" [src]="c.otherUser?.avatar" alt="" />
+          <span *ngIf="!c.otherUser?.avatar">{{ (c.otherUser?.name || '?').slice(0, 1) }}</span>
+        </div>
+        <div class="meta">
+          <div class="row1">
+            <div class="name">{{ c.otherUser?.name || 'Unknown' }}</div>
+            <div class="badge" *ngIf="c.unreadCount">{{ c.unreadCount }}</div>
+          </div>
+          <div class="row2">
+            <span class="prop" *ngIf="c.property">• {{ c.property.title }}</span>
+          </div>
+          <div class="preview">{{ c.lastMessage }}</div>
+        </div>
+      </button>
+
+      <div class="empty" *ngIf="conversations.length === 0">
+        No conversations yet.
+      </div>
+    </div>
+
+    <div class="loading" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <div>Loading...</div>
+    </div>
+  </div>
+
+  <div class="chat-main">
+    <div class="main-header" *ngIf="selected">
+      <div class="h-title">{{ selected.otherUser?.name || 'Conversation' }}</div>
+      <div class="h-sub" *ngIf="selected.property">{{ selected.property.title }}</div>
+    </div>
+
+    <div id="chat-thread" class="thread" *ngIf="selected">
+      <div class="msg" *ngFor="let m of thread" [class.mine]="isMine(m)">
+        <div class="bubble">{{ m.body }}</div>
+      </div>
+      <div class="empty-thread" *ngIf="thread.length === 0">
+        Start the conversation by sending a message.
+      </div>
+    </div>
+
+    <div class="composer" *ngIf="selected">
+      <input [(ngModel)]="draft" (keyup.enter)="send()" placeholder="Type a message..." />
+      <button (click)="send()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+
+    <div class="no-select" *ngIf="!selected && !isLoading">
+      Select a conversation to start chatting.
+    </div>
+  </div>
+</div>
+

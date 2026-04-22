@@ -229,27 +229,27 @@
         <div class="modal-property-preview">
           <img [src]="property.image" [alt]="property.address">
         </div>
-        <form class="modal-form">
+        <form class="modal-form" (submit)="submitInquiry($event)">
           <div class="form-row">
             <div class="form-group">
-              <input type="text" placeholder="Full name *" class="modal-input" required>
+              <input type="text" placeholder="Full name *" class="modal-input" name="name" [(ngModel)]="inquiryForm.name" required>
             </div>
             <div class="form-group">
-              <input type="email" placeholder="Email *" class="modal-input" required>
+              <input type="email" placeholder="Email *" class="modal-input" name="email" [(ngModel)]="inquiryForm.email" required>
             </div>
           </div>
           <div class="form-group">
-            <input type="tel" placeholder="Phone *" class="modal-input">
+            <input type="tel" placeholder="Phone" class="modal-input" name="phone" [(ngModel)]="inquiryForm.phone">
           </div>
           <div class="form-group">
-            <textarea placeholder="How can we help?" class="modal-textarea">I'm interested in {{ property.address }}.</textarea>
+            <textarea placeholder="How can we help?" class="modal-textarea" name="message" [(ngModel)]="inquiryForm.message"></textarea>
           </div>
           <div class="form-check">
             <input type="checkbox" id="military">
             <label for="military">I've served in the U.S. military <i class="fas fa-info-circle"></i></label>
           </div>
-          <button type="submit" class="modal-submit-btn">
-            {{ property.builder ? 'Contact Builder' : 'Email agent' }}
+          <button type="submit" class="modal-submit-btn" [disabled]="isSendingInquiry">
+            {{ isSendingInquiry ? 'Sending...' : (property.builder ? 'Contact Builder' : 'Email agent') }}
           </button>
           <p class="modal-disclaimer">By proceeding, you consent to receive calls and texts at the number you provided according to our Terms of Use and Privacy Policy.</p>
         </form>

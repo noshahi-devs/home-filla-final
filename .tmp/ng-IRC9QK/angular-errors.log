@@ -1,0 +1,12 @@
+[error] Error: spawn EPERM
+    at ChildProcess.spawn (node:internal/child_process:421:11)
+    at Object.spawn (node:child_process:796:9)
+    at ensureServiceIsRunning (E:\GitHub Projects\New folder\home-filla-final\node_modules\esbuild\lib\main.js:1978:29)
+    at build (E:\GitHub Projects\New folder\home-filla-final\node_modules\esbuild\lib\main.js:1876:26)
+    at #performBundle (E:\GitHub Projects\New folder\home-filla-final\node_modules\@angular\build\src\tools\esbuild\bundler-context.js:170:52)
+    at BundlerContext.bundle (E:\GitHub Projects\New folder\home-filla-final\node_modules\@angular\build\src\tools\esbuild\bundler-context.js:138:49)
+    at E:\GitHub Projects\New folder\home-filla-final\node_modules\@angular\build\src\tools\esbuild\bundler-context.js:67:28
+    at Array.map (<anonymous>)
+    at BundlerContext.bundleAll (E:\GitHub Projects\New folder\home-filla-final\node_modules\@angular\build\src\tools\esbuild\bundler-context.js:63:67)
+    at executeBuild (E:\GitHub Projects\New folder\home-filla-final\node_modules\@angular\build\src\builders\application\execute-build.js:110:65)
+

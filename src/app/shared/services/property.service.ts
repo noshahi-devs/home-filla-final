@@ -34,7 +34,18 @@ export class PropertyService {
   }
 
   getPropertiesBySeller(sellerId: number): Observable<DashboardProperty[]> {
-    return this.http.get<DashboardProperty[]>(`${this.apiUrl}/properties/seller/${sellerId}`, { headers: this.headers });
+    return this.http.get<any[]>(`${this.apiUrl}/properties/seller/${sellerId}`, { headers: this.headers }).pipe(
+      map(props =>
+        props.map(p => ({
+          ...p,
+          images: p.images
+            ? p.images.map((img: any) =>
+                img.imageUrl.startsWith('http') ? img.imageUrl : `${this.apiUrl.replace('/api', '')}${img.imageUrl}`
+              )
+            : []
+        }))
+      )
+    );
   }
 
   getFeaturedProperties(): Observable<DashboardProperty[]> {
@@ -61,5 +72,17 @@ export class PropertyService {
 
   toggleFeatured(id: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/properties/${id}/toggle-featured`, {}, { headers: this.headers });
+  }
+
+  updateListingStatus(id: number, status: 'active' | 'sold'): Observable<any> {
+    return this.http.put(`${this.apiUrl}/properties/${id}/listing-status`, { status }, { headers: this.headers.set('Content-Type', 'application/json') });
+  }
+
+  trackView(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/properties/${id}/view`, {});
+  }
+
+  getPropertyAnalytics(id: number, days: number = 30): Observable<any> {
+    return this.http.get(`${this.apiUrl}/properties/${id}/analytics?days=${days}`, { headers: this.headers });
   }
 }

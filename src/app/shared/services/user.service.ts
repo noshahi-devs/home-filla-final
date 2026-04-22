@@ -22,6 +22,20 @@ export interface UpdateUserPayload {
   role: string;
 }
 
+export interface MyProfile {
+  id: number;
+  name: string;
+  email: string;
+  phone?: string;
+  avatar?: string;
+  role: string;
+  status: string;
+  agencyName?: string;
+  bio?: string;
+  rating?: number;
+  createdAt: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private http = inject(HttpClient);
@@ -36,6 +50,14 @@ export class UserService {
 
   getUsers(): Observable<DashboardUser[]> {
     return this.http.get<DashboardUser[]>(`${this.apiUrl}/users`, { headers: this.headers });
+  }
+
+  getMe(): Observable<MyProfile> {
+    return this.http.get<MyProfile>(`${this.apiUrl}/users/me`, { headers: this.headers });
+  }
+
+  updateMe(payload: { name: string; phone?: string; agencyName?: string; bio?: string; avatar?: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/users/me`, payload, { headers: this.headers });
   }
 
   createUser(payload: CreateUserPayload): Observable<DashboardUser> {

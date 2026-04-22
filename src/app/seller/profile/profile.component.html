@@ -14,9 +14,8 @@
       <div style="display:flex; align-items:center; gap:20px; margin-bottom: 24px;">
         <img [src]="profile.avatar" style="width:80px; height:80px; border-radius:50%; border:3px solid #14b8a6; object-fit:cover;">
         <div>
-          <button style="background: rgba(0,0,0,0.05); color:#0f172a; border:1px solid rgba(0,0,0,0.1); padding:6px 12px; border-radius:8px; cursor:pointer;">
-            Change Avatar
-          </button>
+          <label style="display:block; font-weight: 800; color:#475569; margin-bottom: 6px;">Profile Image URL</label>
+          <input type="text" [(ngModel)]="profile.avatar" placeholder="https://..." style="min-width: 320px;">
         </div>
       </div>
 
@@ -37,9 +36,16 @@
         </div>
       </div>
        <div class="form-row">
-        <div class="form-group full-width">
+       <div class="form-group full-width">
           <label>Agency Name (Optional)</label>
           <input type="text" [(ngModel)]="profile.agency" placeholder="Are you affiliated with an agency?">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label>About</label>
+          <textarea rows="4" [(ngModel)]="profile.about" placeholder="Tell buyers about your experience and services..."></textarea>
         </div>
       </div>
     </div>

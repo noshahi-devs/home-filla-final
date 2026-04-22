@@ -1,0 +1,56 @@
+<div class="dashboard">
+  <div class="page-header">
+    <div>
+      <h1>Subscription</h1>
+      <p class="page-subtitle">Choose a plan that matches your listing volume.</p>
+    </div>
+  </div>
+
+  <div class="loading-state" *ngIf="isLoading" style="text-align: center; padding: 3rem;">
+    <div class="spinner" style="margin: 0 auto 1rem;"></div>
+    <p>Loading plans...</p>
+  </div>
+
+  <div *ngIf="!isLoading && my" class="quick-card" style="border-color: rgba(245,158,11,0.15); margin-bottom: 18px;">
+    <div class="chart-header">
+      <h3><i class="fas fa-crown" style="color:#f59e0b;"></i> Current Plan</h3>
+    </div>
+    <div style="display:flex; gap: 14px; flex-wrap: wrap;">
+      <div style="flex: 1 1 220px;">
+        <div style="font-weight: 800; font-size: 18px; color: #0f172a;">{{ my.plan.name }}</div>
+        <div style="color:#64748b; margin-top: 6px;">Limit: <b>{{ my.plan.listingLimit }}</b> listings</div>
+      </div>
+      <div style="flex: 1 1 220px;">
+        <div style="color:#64748b;">Used: <b>{{ my.used }}</b></div>
+        <div style="color:#64748b; margin-top: 6px;">Remaining: <b>{{ my.remaining }}</b></div>
+      </div>
+      <div style="flex: 1 1 220px;">
+        <div style="color:#64748b;">Price: <b>{{ my.plan.currency }} {{ my.plan.price }}</b></div>
+        <a routerLink="/seller/properties" class="btn-dash btn-outline-dash" style="margin-top: 10px; display:inline-flex;">
+          Manage Properties
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-row" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));" *ngIf="!isLoading">
+    <div class="stat-card" *ngFor="let p of plans" style="opacity: 1; animation: none;">
+      <div class="stat-icon" style="background: rgba(245,158,11,0.12);">
+        <i class="fas fa-crown" style="color:#f59e0b;"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-value" style="font-size: 22px;">{{ p.name }}</div>
+        <div class="stat-label">{{ p.listingLimit }} listings</div>
+      </div>
+      <div class="stat-trend up" style="margin-top: 6px;">
+        <i class="fas fa-tag"></i> {{ p.currency }} {{ p.price }}
+      </div>
+      <div style="margin-top: 10px; display:flex; gap: 10px;">
+        <button class="btn-dash btn-primary-dash" style="flex:1;" [disabled]="isCurrent(p)" (click)="upgrade(p)">
+          {{ isCurrent(p) ? 'Current' : 'Upgrade' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

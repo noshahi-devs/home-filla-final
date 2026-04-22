@@ -1,4 +1,3 @@
-import { PropertyService } from '../../shared/services/property.service';
 import { InquiryService } from '../../shared/services/inquiry.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { Component } from '@angular/core';
@@ -27,8 +26,11 @@ export class SellerLayoutComponent {
 
   menuItems: MenuItem[] = [
     { icon: 'fa-th-large', label: 'Dashboard', route: '/seller' },
-    { icon: 'fa-building', label: 'My Properties', route: '/seller/my-properties' },
+    { icon: 'fa-building', label: 'Properties', route: '/seller/properties' },
     { icon: 'fa-envelope-open-text', label: 'Inquiries', route: '/seller/inquiries' },
+    { icon: 'fa-chart-line', label: 'Analytics', route: '/seller/analytics' },
+    { icon: 'fa-crown', label: 'Subscription', route: '/seller/subscription' },
+    { icon: 'fa-comments', label: 'Chat', route: '/seller/chat' },
     { icon: 'fa-bell', label: 'Notifications', route: '/seller/notifications' },
     { icon: 'fa-user', label: 'My Profile', route: '/seller/profile' },
   ];
@@ -37,7 +39,7 @@ export class SellerLayoutComponent {
   recentNotifications: any[] = [];
 
   constructor(
-    private propertyService: PropertyService, private inquiryService: InquiryService, private notificationService: NotificationService,
+    private inquiryService: InquiryService, private notificationService: NotificationService,
     public authService: AuthService,
     private router: Router
   ) {}
@@ -58,13 +60,11 @@ export class SellerLayoutComponent {
       this.recentNotifications = notifs.slice(0, 5);
     });
 
-    // Inquiries badge for seller's properties
-    this.propertyService.getPropertiesBySeller(userId).subscribe(myProps => {
-      this.inquiryService.getInquiries().subscribe(inqs => {
-        this.menuItems[2].badge = inqs.filter(i => 
-          myProps.some(p => p.id === i.propertyId) && i.status === 'new'
-        ).length;
-      });
+    // Inquiries badge for seller
+    this.inquiryService.getMyInquiries().subscribe(inqs => {
+      const newCount = inqs.filter(i => i.status === 'new').length;
+      const inquiryItem = this.menuItems.find(m => m.route === '/seller/inquiries');
+      if (inquiryItem) inquiryItem.badge = newCount;
     });
   }
 

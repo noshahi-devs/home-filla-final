@@ -1,8 +1,8 @@
 <div class="properties-page">
   <div class="page-header">
     <div>
-      <h1>Lead Inquiries</h1>
-      <p class="page-subtitle">Potential buyers interested in your properties.</p>
+      <h1>Inquiries</h1>
+      <p class="page-subtitle">Leads and messages from buyers on your listings.</p>
     </div>
   </div>
 
@@ -11,10 +11,11 @@
       <thead>
         <tr>
           <th>Property</th>
-          <th>Lead Info</th>
+          <th>Buyer</th>
           <th>Message</th>
+          <th>Date</th>
           <th>Status</th>
-          <th>Action</th>
+          <th style="width: 180px;">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -23,28 +24,69 @@
           <td>
             <div class="loc-cell">
               <span class="city">{{ i.userName }}</span>
+              <span class="area">{{ i.userEmail }}</span>
               <span class="area"><i class="fas fa-phone-alt" style="font-size:10px"></i> {{ i.userPhone }}</span>
             </div>
           </td>
-          <td style="max-width: 250px;">
+          <td style="max-width: 320px;">
             <p style="font-size: 13px; color: #94a3b8; margin:0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
               {{ i.message }}
             </p>
           </td>
+          <td>{{ i.createdAt | date:'mediumDate' }}</td>
           <td><span class="badge type">{{ i.status }}</span></td>
           <td>
-            <button class="btn-primary" style="padding: 6px 12px; background: rgba(20, 184, 166, 0.15); color: #14b8a6; border: 1px solid rgba(20, 184, 166, 0.3); box-shadow: none;">
-              Contact
+            <button class="btn-primary" style="padding: 6px 12px;" (click)="openReply(i)">
+              <i class="fas fa-reply"></i> Reply
             </button>
           </td>
         </tr>
         <tr *ngIf="inquiries.length === 0">
-          <td colspan="5" class="empty-state">
+          <td colspan="6" class="empty-state">
             <i class="fas fa-inbox"></i>
             <p>No inquiries yet.</p>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<!-- Reply Modal -->
+<div class="modal-overlay" *ngIf="isReplyOpen" (click)="closeReply()">
+  <div class="modal-box" style="max-width: 720px;" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Reply to Inquiry</h2>
+      <button class="close-modal" (click)="closeReply()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;">
+        <div style="flex:1 1 260px; color:#64748b; font-weight:700;">
+          <div><b>Buyer:</b> {{ selected?.userName }}</div>
+          <div><b>Email:</b> {{ selected?.userEmail }}</div>
+        </div>
+        <div style="flex:1 1 260px; color:#64748b; font-weight:700;">
+          <div><b>Property:</b> {{ selected?.propertyTitle }}</div>
+          <div><b>Status:</b> {{ selected?.status }}</div>
+        </div>
+      </div>
+
+      <textarea
+        [(ngModel)]="replyText"
+        rows="8"
+        class="modal-textarea"
+        placeholder="Write your reply..."
+        style="width: 100%;"
+      ></textarea>
+
+      <div style="display:flex; justify-content:flex-end; gap: 10px; margin-top: 14px;">
+        <button type="button" (click)="closeReply()" style="padding: 0.9rem 1.4rem; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; background: #f1f5f9;">
+          Cancel
+        </button>
+        <button type="button" class="btn-add" [disabled]="isSaving" (click)="sendReply()">
+          <i class="fas fa-paper-plane"></i> {{ isSaving ? 'Sending...' : 'Send Reply' }}
+        </button>
+      </div>
+    </div>
   </div>
 </div>

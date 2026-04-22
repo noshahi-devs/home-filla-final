@@ -1,0 +1,22 @@
+.bars {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  height: 140px;
+  width: 100%;
+}
+
+.bar {
+  flex: 1 1 0;
+  min-width: 8px;
+  background: rgba(74, 108, 247, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(74, 108, 247, 0.9), rgba(124, 58, 237, 0.6));
+}
+
