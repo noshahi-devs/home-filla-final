@@ -63,7 +63,13 @@ export class PropertyService {
   }
 
   addProperty(property: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/properties`, property, { headers: this.headers });
+    // If it's FormData (has .append), don't set Content-Type header to let browser set it with boundary
+    const headers = property instanceof FormData ? this.headers : this.headers.set('Content-Type', 'application/json');
+    return this.http.post(`${this.apiUrl}/properties`, property, { headers });
+  }
+
+  getListingLimit(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/properties/limits`, { headers: this.headers });
   }
 
   updateProperty(id: number, property: any): Observable<any> {

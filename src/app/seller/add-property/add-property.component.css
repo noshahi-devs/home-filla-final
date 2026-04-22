@@ -1,0 +1,653 @@
+/* ══════════════════════════════════════════════════════════════
+   Seller · Add Property  —  Premium Light Theme
+   Brand:   teal #14b8a6 → cyan #0891b2
+   Surface: white cards, #f0f4f8 background
+   ══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(145deg, #f0f4f8 0%, #e8edf4 50%, #edf2fb 100%);
+  padding: 2rem 2.4rem;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+/* Dot grid background */
+:host::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(20,184,166,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Wrapper ────────────────────────────────────────────────── */
+.add-property-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.5s ease both;
+}
+
+/* ── Page Header ────────────────────────────────────────────── */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.header-content h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.02em;
+}
+
+.header-content p {
+  color: #64748b;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ── Limit Card ─────────────────────────────────────────────── */
+.limit-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  padding: 12px 20px;
+  border-radius: 16px;
+  border: 1.5px solid rgba(20,184,166,0.25);
+  box-shadow: 0 2px 12px rgba(15,23,42,0.06);
+  transition: all 0.3s ease;
+}
+
+.limit-card.warning {
+  border-color: rgba(245,158,11,0.4);
+  background: #fffbeb;
+}
+
+.limit-card.danger {
+  border-color: rgba(239,68,68,0.35);
+  background: #fef2f2;
+}
+
+.limit-icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(20,184,166,0.1);
+  color: #0f766e;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.warning .limit-icon { color: #d97706; background: rgba(245,158,11,0.1); }
+.danger  .limit-icon { color: #dc2626; background: rgba(239,68,68,0.1);  }
+
+.limit-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.plan-badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+.remaining-count {
+  font-size: 14px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.remaining-count strong { color: #0f766e; }
+.warning .remaining-count strong { color: #d97706; }
+.danger  .remaining-count strong { color: #dc2626; }
+
+/* ── Stepper Card Wrapper ───────────────────────────────────── */
+.stepper-card {
+  /* p-card gets overridden below */
+}
+
+:host ::ng-deep .stepper-card .p-card {
+  border-radius: 24px !important;
+  border: 1px solid rgba(148,163,184,0.18) !important;
+  box-shadow:
+    0 1px 3px rgba(15,23,42,0.04),
+    0 12px 40px rgba(15,23,42,0.08) !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+}
+
+:host ::ng-deep .stepper-card .p-card-body,
+:host ::ng-deep .stepper-card .p-card-content {
+  padding: 0 !important;
+}
+
+/* ── Stepper Header ─────────────────────────────────────────── */
+:host ::ng-deep .p-stepper {
+  background: transparent !important;
+}
+
+:host ::ng-deep .p-steplist {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9) !important;
+  border-bottom: 1.5px solid #e2e8f0 !important;
+  padding: 1.3rem 2rem !important;
+  gap: 0 !important;
+}
+
+:host ::ng-deep .p-step {
+  flex: 1 !important;
+}
+
+:host ::ng-deep .p-step-header {
+  padding: 0.5rem 0.8rem !important;
+  border-radius: 12px !important;
+  transition: background 0.2s !important;
+}
+
+:host ::ng-deep .p-step-header:not(.p-disabled):hover {
+  background: rgba(20,184,166,0.07) !important;
+}
+
+:host ::ng-deep .p-step-number {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  font-weight: 800 !important;
+  font-size: 0.85rem !important;
+  background: #f1f5f9 !important;
+  border: 2px solid #e2e8f0 !important;
+  color: #94a3b8 !important;
+  transition: all 0.25s ease !important;
+  box-shadow: none !important;
+}
+
+:host ::ng-deep .p-step-header.p-highlight .p-step-number,
+:host ::ng-deep .p-step.p-step-active .p-step-number {
+  background: linear-gradient(135deg, #14b8a6, #0891b2) !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(20,184,166,0.4) !important;
+}
+
+:host ::ng-deep .p-step-title {
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  color: #94a3b8 !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: color 0.2s !important;
+}
+
+:host ::ng-deep .p-step-header.p-highlight .p-step-title,
+:host ::ng-deep .p-step.p-step-active .p-step-title {
+  color: #0f766e !important;
+}
+
+:host ::ng-deep .p-stepper-separator {
+  background: #e2e8f0 !important;
+  height: 2px !important;
+  flex: 1 !important;
+  margin: 0 0.3rem !important;
+}
+
+/* ── Step Panel (body area) ─────────────────────────────────── */
+:host ::ng-deep .p-step-panels {
+  padding: 2rem 2.2rem !important;
+  background: #ffffff !important;
+}
+
+/* ── Form Styles ────────────────────────────────────────────── */
+.step-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.required { color: #ef4444; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.1rem;
+}
+
+.col-6  { grid-column: span 6; }
+.col-12 { grid-column: span 12; }
+
+@media (max-width: 680px) {
+  .col-6 { grid-column: span 12; }
+}
+
+.error-msg {
+  color: #ef4444;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* ── PrimeNG Input Overrides ────────────────────────────────── */
+:host ::ng-deep .p-inputtext,
+:host ::ng-deep .p-textarea,
+:host ::ng-deep .p-inputnumber-input,
+:host ::ng-deep .p-select {
+  width: 100% !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #e2e8f0 !important;
+  padding: 0.75rem 1rem !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  color: #0f172a !important;
+  background: #f8fafc !important;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s !important;
+  box-shadow: none !important;
+}
+
+:host ::ng-deep .p-inputtext:focus,
+:host ::ng-deep .p-textarea:focus,
+:host ::ng-deep .p-inputnumber-input:focus,
+:host ::ng-deep .p-select:focus,
+:host ::ng-deep .p-select.p-focus {
+  border-color: #14b8a6 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(20,184,166,0.15) !important;
+  outline: none !important;
+}
+
+:host ::ng-deep .p-select-label {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  color: #0f172a !important;
+  padding: 0 !important;
+}
+
+:host ::ng-deep .p-select-overlay {
+  border-radius: 14px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 30px rgba(15,23,42,0.12) !important;
+  overflow: hidden !important;
+}
+
+:host ::ng-deep .p-select-option:hover,
+:host ::ng-deep .p-select-option.p-highlight {
+  background: rgba(20,184,166,0.08) !important;
+  color: #0f766e !important;
+}
+
+:host ::ng-deep .p-inputnumber {
+  width: 100% !important;
+}
+
+:host ::ng-deep .p-inputnumber-button {
+  background: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #64748b !important;
+}
+
+:host ::ng-deep .p-inputnumber-button:hover {
+  background: #e2e8f0 !important;
+}
+
+/* ── Step Actions ───────────────────────────────────────────── */
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1.5px solid #f1f5f9;
+}
+
+.step-actions:only-child,
+.step-actions:first-child {
+  justify-content: flex-end;
+}
+
+/* ── PrimeNG Button Overrides ───────────────────────────────── */
+:host ::ng-deep .p-button {
+  border-radius: 12px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  transition: all 0.22s ease !important;
+}
+
+/* Primary (Next / Publish) */
+:host ::ng-deep .p-button:not(.p-button-secondary):not(.p-button-info):not(.p-button-outlined) {
+  background: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%) !important;
+  border-color: transparent !important;
+  box-shadow: 0 6px 18px rgba(20,184,166,0.3) !important;
+}
+
+:host ::ng-deep .p-button:not(.p-button-secondary):not(.p-button-info):not(.p-button-outlined):hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 24px rgba(20,184,166,0.4) !important;
+}
+
+/* Secondary (Back) */
+:host ::ng-deep .p-button.p-button-secondary {
+  background: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+:host ::ng-deep .p-button.p-button-secondary:hover {
+  background: #e2e8f0 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Info outlined (Save as Draft) */
+:host ::ng-deep .p-button.p-button-info.p-button-outlined {
+  border-color: #6366f1 !important;
+  color: #6366f1 !important;
+  background: rgba(99,102,241,0.06) !important;
+}
+
+:host ::ng-deep .p-button.p-button-info.p-button-outlined:hover {
+  background: rgba(99,102,241,0.12) !important;
+}
+
+/* Success (Publish) */
+:host ::ng-deep .p-button.p-button-success {
+  background: linear-gradient(135deg, #14b8a6 0%, #059669 100%) !important;
+  border-color: transparent !important;
+  box-shadow: 0 6px 18px rgba(20,184,166,0.3) !important;
+}
+
+/* Disabled */
+:host ::ng-deep .p-button:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* ── Map Placeholder ────────────────────────────────────────── */
+.map-placeholder {
+  background: linear-gradient(135deg, rgba(20,184,166,0.05), rgba(8,145,178,0.04));
+  border: 2px dashed rgba(20,184,166,0.3);
+  border-radius: 18px;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #64748b;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.map-placeholder:hover {
+  border-color: rgba(20,184,166,0.5);
+  background: rgba(20,184,166,0.06);
+}
+
+.map-placeholder i {
+  display: block;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #14b8a6;
+}
+
+.map-placeholder p {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0;
+  color: #64748b;
+}
+
+/* ── File Upload ────────────────────────────────────────────── */
+.section-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+
+:host ::ng-deep .p-fileupload {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  border: 1.5px solid #e2e8f0 !important;
+}
+
+:host ::ng-deep .p-fileupload-header {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9) !important;
+  border-bottom: 1.5px solid #e2e8f0 !important;
+  padding: 1rem 1.4rem !important;
+  border-radius: 0 !important;
+}
+
+:host ::ng-deep .p-fileupload-content {
+  background: #fafbfd !important;
+  padding: 1.5rem !important;
+  min-height: 140px !important;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  color: #94a3b8;
+  gap: 0.6rem;
+}
+
+.upload-placeholder i {
+  font-size: 3rem;
+  color: #14b8a6;
+}
+
+.upload-placeholder p {
+  font-weight: 600;
+  color: #475569;
+  margin: 0;
+}
+
+.upload-placeholder span {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* ── Summary Review ─────────────────────────────────────────── */
+.summary-container {
+  padding: 0.25rem;
+}
+
+.summary-header {
+  margin-bottom: 1.5rem;
+}
+
+.summary-header h3 {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0 0 0.3rem;
+}
+
+.summary-header p {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  background: linear-gradient(135deg, rgba(20,184,166,0.04), rgba(8,145,178,0.03));
+  border: 1.5px solid rgba(20,184,166,0.15);
+  border-radius: 18px;
+  padding: 1.6rem;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+}
+
+.summary-item .label {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+}
+
+.summary-item .value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.final-actions {
+  margin-top: 2rem;
+}
+
+.submit-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.limit-warning {
+  margin-top: 1.2rem;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  :host { padding: 1.5rem; }
+  .header-content h1 { font-size: 1.9rem; }
+  .add-property-container { max-width: 100%; }
+}
+
+@media (max-width: 768px) {
+  :host { padding: 1rem; }
+
+  .page-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .limit-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  :host ::ng-deep .p-steplist {
+    padding: 0.9rem 1rem !important;
+    gap: 0 !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hide step titles on narrow screens — numbers only */
+  :host ::ng-deep .p-step-title { display: none !important; }
+
+  :host ::ng-deep .p-step-panels {
+    padding: 1.4rem 1rem !important;
+  }
+
+  .form-grid { gap: 0.75rem; }
+  .col-6 { grid-column: span 12; }
+
+  .step-actions {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .step-actions :host ::ng-deep .p-button {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .final-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .submit-btns {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .submit-btns :host ::ng-deep .p-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .map-placeholder {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :host { padding: 0.75rem; }
+  .header-content h1 { font-size: 1.55rem; }
+
+  :host ::ng-deep .p-step-number {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.75rem !important;
+  }
+
+  :host ::ng-deep .p-step-panels {
+    padding: 1.1rem 0.75rem !important;
+  }
+
+  :host ::ng-deep .p-button {
+    padding: 0.7rem 1.1rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  .summary-item { padding: 0.6rem 0.8rem; }
+  .section-label { font-size: 0.75rem; }
+}
+

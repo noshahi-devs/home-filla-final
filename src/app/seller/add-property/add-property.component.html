@@ -1,0 +1,303 @@
+<div class="add-property-container">
+
+  <!-- ── Page Header ─────────────────────────────────────────── -->
+  <div class="page-header" *ngIf="limitInfo">
+    <div class="header-content">
+      <h1>List Your Property</h1>
+      <p>Fill out the details below to reach thousands of potential buyers.</p>
+    </div>
+    <div class="limit-card"
+         [class.warning]="limitInfo.remaining <= 5 && limitInfo.remaining > 0"
+         [class.danger]="limitInfo.remaining === 0">
+      <div class="limit-icon">
+        <i class="pi pi-shield"></i>
+      </div>
+      <div class="limit-text">
+        <span class="plan-badge">{{ limitInfo.plan }} Plan</span>
+        <span class="remaining-count"><strong>{{ limitInfo.remaining }}</strong> listings left</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Stepper Card ─────────────────────────────────────────── -->
+  <p-card class="stepper-card">
+    <p-stepper [linear]="true" [value]="1">
+
+      <!-- Step indicators -->
+      <p-step-list>
+        <p-step [value]="1">Basic Info</p-step>
+        <p-step [value]="2">Details</p-step>
+        <p-step [value]="3">Location</p-step>
+        <p-step [value]="4">Media</p-step>
+        <p-step [value]="5">Review</p-step>
+      </p-step-list>
+
+      <p-step-panels>
+
+        <!-- ══ Step 1: Basic Information ══════════════════════ -->
+        <p-step-panel [value]="1">
+          <ng-template pTemplate="content" let-activateCallback="activateCallback">
+            <form [formGroup]="basicInfoForm" class="step-form">
+
+              <div class="field">
+                <label for="title">Property Title <span class="required">*</span></label>
+                <input pInputText id="title" formControlName="title"
+                  placeholder="e.g. Modern 3-Bedroom Apartment with Sea View" />
+                <small class="error-msg"
+                  *ngIf="basicInfoForm.get('title')?.touched && basicInfoForm.get('title')?.invalid">
+                  Title must be at least 5 characters.
+                </small>
+              </div>
+
+              <div class="field">
+                <label for="description">Description <span class="required">*</span></label>
+                <textarea pTextarea id="description" formControlName="description"
+                  rows="5" placeholder="Describe your property in detail…"></textarea>
+                <small class="error-msg"
+                  *ngIf="basicInfoForm.get('description')?.touched && basicInfoForm.get('description')?.invalid">
+                  Description must be at least 20 characters.
+                </small>
+              </div>
+
+              <div class="step-actions">
+                <p-button label="Next →" iconPos="right"
+                  (onClick)="activateCallback(2)"
+                  [disabled]="basicInfoForm.invalid">
+                </p-button>
+              </div>
+
+            </form>
+          </ng-template>
+        </p-step-panel>
+
+        <!-- ══ Step 2: Property Details ═══════════════════════ -->
+        <p-step-panel [value]="2">
+          <ng-template pTemplate="content" let-activateCallback="activateCallback">
+            <form [formGroup]="propertyDetailsForm" class="step-form">
+              <div class="form-grid">
+
+                <div class="field col-6">
+                  <label for="price">Price (PKR) <span class="required">*</span></label>
+                  <p-inputNumber id="price" formControlName="price"
+                    mode="currency" currency="PKR" locale="en-PK"
+                    placeholder="Enter Price">
+                  </p-inputNumber>
+                </div>
+
+                <div class="field col-6">
+                  <label for="type">Property Type <span class="required">*</span></label>
+                  <p-select id="type" [options]="propertyTypes"
+                    formControlName="type" placeholder="Select Type">
+                  </p-select>
+                </div>
+
+                <div class="field col-6">
+                  <label for="purpose">Purpose <span class="required">*</span></label>
+                  <p-select id="purpose" [options]="purposes"
+                    formControlName="purpose" placeholder="Select Purpose">
+                  </p-select>
+                </div>
+
+                <div class="field col-6">
+                  <label for="sqft">Size (Sq. Ft) <span class="required">*</span></label>
+                  <p-inputNumber id="sqft" formControlName="sqft"
+                    placeholder="Total Area">
+                  </p-inputNumber>
+                </div>
+
+                <div class="field col-6"
+                  *ngIf="propertyDetailsForm.get('type')?.value !== 'plot'">
+                  <label for="beds">Bedrooms</label>
+                  <p-inputNumber id="beds" formControlName="beds"
+                    [showButtons]="true" [min]="0">
+                  </p-inputNumber>
+                </div>
+
+                <div class="field col-6"
+                  *ngIf="propertyDetailsForm.get('type')?.value !== 'plot'">
+                  <label for="baths">Bathrooms</label>
+                  <p-inputNumber id="baths" formControlName="baths"
+                    [showButtons]="true" [min]="0">
+                  </p-inputNumber>
+                </div>
+
+              </div>
+
+              <div class="step-actions">
+                <p-button label="← Back" severity="secondary"
+                  (onClick)="activateCallback(1)">
+                </p-button>
+                <p-button label="Next →" iconPos="right"
+                  (onClick)="activateCallback(3)"
+                  [disabled]="propertyDetailsForm.invalid">
+                </p-button>
+              </div>
+            </form>
+          </ng-template>
+        </p-step-panel>
+
+        <!-- ══ Step 3: Location ════════════════════════════════ -->
+        <p-step-panel [value]="3">
+          <ng-template pTemplate="content" let-activateCallback="activateCallback">
+            <form [formGroup]="locationForm" class="step-form">
+              <div class="form-grid">
+
+                <div class="field col-6">
+                  <label for="country">Country <span class="required">*</span></label>
+                  <p-select id="country" [options]="countries"
+                    formControlName="country" placeholder="Select Country">
+                  </p-select>
+                </div>
+
+                <div class="field col-6">
+                  <label for="city">City <span class="required">*</span></label>
+                  <p-select id="city" [options]="cities"
+                    formControlName="city" placeholder="Select City">
+                  </p-select>
+                </div>
+
+                <div class="field col-12">
+                  <label for="area">Area / Address <span class="required">*</span></label>
+                  <input pInputText id="area" formControlName="area"
+                    placeholder="e.g. DHA Phase 6, Block D" />
+                </div>
+
+              </div>
+
+              <!-- Map Placeholder -->
+              <div class="map-placeholder">
+                <i class="pi pi-map-marker"></i>
+                <p>Map Integration — Click to pin your property location</p>
+              </div>
+
+              <div class="step-actions">
+                <p-button label="← Back" severity="secondary"
+                  (onClick)="activateCallback(2)">
+                </p-button>
+                <p-button label="Next →" iconPos="right"
+                  (onClick)="activateCallback(4)"
+                  [disabled]="locationForm.invalid">
+                </p-button>
+              </div>
+            </form>
+          </ng-template>
+        </p-step-panel>
+
+        <!-- ══ Step 4: Media Upload ════════════════════════════ -->
+        <p-step-panel [value]="4">
+          <ng-template pTemplate="content" let-activateCallback="activateCallback">
+            <div class="step-form">
+
+              <label class="section-label">
+                Upload Property Photos <span class="required">*</span>
+              </label>
+
+              <p-fileUpload name="images[]" [multiple]="true" accept="image/*"
+                [maxFileSize]="5000000"
+                (onSelect)="onUpload($event)"
+                (onRemove)="onRemove($event)"
+                [showUploadButton]="false"
+                [showCancelButton]="false">
+                <ng-template pTemplate="content">
+                  <div class="upload-placeholder" *ngIf="uploadedFiles.length === 0">
+                    <i class="pi pi-cloud-upload"></i>
+                    <p>Drag & drop photos here, or click to browse</p>
+                    <span>Min 1 · Max 10 images (JPG, PNG, max 5 MB each)</span>
+                  </div>
+                </ng-template>
+              </p-fileUpload>
+
+              <small class="error-msg" *ngIf="uploadedFiles.length === 0">
+                At least one image is required.
+              </small>
+
+              <div class="step-actions">
+                <p-button label="← Back" severity="secondary"
+                  (onClick)="activateCallback(3)">
+                </p-button>
+                <p-button label="Next →" iconPos="right"
+                  (onClick)="activateCallback(5)"
+                  [disabled]="uploadedFiles.length === 0">
+                </p-button>
+              </div>
+
+            </div>
+          </ng-template>
+        </p-step-panel>
+
+        <!-- ══ Step 5: Review & Submit ═════════════════════════ -->
+        <p-step-panel [value]="5">
+          <ng-template pTemplate="content" let-activateCallback="activateCallback">
+            <div class="summary-container" *ngIf="getSummary() as s">
+
+              <div class="summary-header">
+                <h3>Summary Review</h3>
+                <p>Please double-check all information before publishing your listing.</p>
+              </div>
+
+              <div class="summary-grid">
+                <div class="summary-item">
+                  <span class="label">Title</span>
+                  <span class="value">{{ s.title }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Price</span>
+                  <span class="value">{{ s.price | currency:'PKR':'symbol':'1.0-0' }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Property Type</span>
+                  <span class="value">{{ s.type | titlecase }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Purpose</span>
+                  <span class="value">{{ s.purpose | titlecase }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Location</span>
+                  <span class="value">{{ s.area }}, {{ s.city }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Size &amp; Rooms</span>
+                  <span class="value">{{ s.sqft }} sqft · {{ s.beds }} Beds · {{ s.baths }} Baths</span>
+                </div>
+                <div class="summary-item" style="grid-column: span 1;">
+                  <span class="label">Photos Uploaded</span>
+                  <span class="value">{{ s.images }} file{{ s.images !== 1 ? 's' : '' }}</span>
+                </div>
+              </div>
+
+              <div class="limit-warning" *ngIf="limitInfo?.remaining === 0">
+                <p-message severity="error"
+                  text="Listing limit reached! Please upgrade your plan to publish.">
+                </p-message>
+              </div>
+
+              <div class="step-actions final-actions">
+                <p-button label="← Back" severity="secondary"
+                  [disabled]="isSubmitting"
+                  (onClick)="activateCallback(4)">
+                </p-button>
+                <div class="submit-btns">
+                  <p-button label="Save as Draft" icon="pi pi-save"
+                    severity="info" [outlined]="true"
+                    [loading]="isSubmitting"
+                    (onClick)="submit(true)">
+                  </p-button>
+                  <p-button label="Publish Listing" icon="pi pi-check"
+                    severity="success"
+                    [loading]="isSubmitting"
+                    [disabled]="limitInfo?.remaining === 0"
+                    (onClick)="submit()">
+                  </p-button>
+                </div>
+              </div>
+
+            </div>
+          </ng-template>
+        </p-step-panel>
+
+      </p-step-panels>
+    </p-stepper>
+  </p-card>
+
+</div>

@@ -15,7 +15,7 @@ import { BarMiniComponent } from '../../shared/components/charts/bar-mini.compon
   standalone: true,
   imports: [CommonModule, FormsModule, LineSparklineComponent, BarMiniComponent],
   templateUrl: './my-properties.component.html',
-  styleUrl: '../../admin/properties/properties.component.css'
+  styleUrl: './my-properties.component.css'
 })
 export class SellerMyPropertiesComponent implements OnInit {
   properties: DashboardProperty[] = [];
@@ -30,6 +30,11 @@ export class SellerMyPropertiesComponent implements OnInit {
   uploadingImage: boolean = false;
   selectedFiles: File[] = [];
   mySubscription: MySubscriptionInfo | null = null;
+
+  // ── Add-property stepper state ─────────────────────────────
+  currentStep = 1;
+  addForm: any = { type: 'house', purpose: 'sale', country: 'Pakistan', beds: 0, baths: 0 };
+  addFiles: File[] = [];
 
   isAnalyticsOpen = false;
   analyticsLoading = false;
@@ -102,43 +107,104 @@ export class SellerMyPropertiesComponent implements OnInit {
     }
   }
 
-  // Modal logic (similar to admin but restricted to user's ID)
-  async openAddModal() {
-    if (this.mySubscription && this.mySubscription.remaining <= 0) {
-      const goUpgrade = await this.uiService.showConfirmation(
-        'Listing Limit Reached',
-        `You have reached your plan limit (${this.mySubscription.plan.listingLimit}). Upgrade to add more listings.`,
-        'warning',
-        'Upgrade Plan'
-      );
-      if (goUpgrade) this.router.navigate(['/seller/subscription']);
-      return;
-    }
-
+  // Modal logic
+  openAddModal() {
     this.isEditMode = false;
-    this.editingProperty = {
-      country: 'Pakistan',
-      type: 'house',
-      purpose: 'sale',
-      listingStatus: 'active',
-      status: 'pending',
-      images: []
-    };
-    this.selectedFiles = [];
+    this.currentStep = 1;
+    this.addForm = { type: 'house', purpose: 'sale', country: 'Pakistan', beds: 0, baths: 0 };
+    this.addFiles = [];
     this.isModalOpen = true;
+  }
+
+  // Add-form step navigation
+  canNextStep(step: number): boolean {
+    switch (step) {
+      case 1: return !!(this.addForm.title?.trim().length >= 5) && !!(this.addForm.description?.trim().length >= 20);
+      case 2: return !!(this.addForm.price > 0) && !!this.addForm.type && !!this.addForm.purpose && !!(this.addForm.sqft > 0);
+      case 3: return !!this.addForm.country && !!this.addForm.city && !!this.addForm.area?.trim();
+      case 4: return this.addFiles.length > 0;
+      default: return true;
+    }
+  }
+
+  nextStep() { if (this.canNextStep(this.currentStep)) this.currentStep++; }
+  prevStep() { if (this.currentStep > 1) this.currentStep--; }
+  goToStep(n: number) { if (n < this.currentStep) this.currentStep = n; }
+
+  onAddFileSelected(event: any): void {
+    const files: FileList = event.target.files;
+    if (!files) return;
+    for (let i = 0; i < files.length; i++) this.addFiles.push(files[i]);
+  }
+
+  removeAddFile(i: number): void { this.addFiles.splice(i, 1); }
+
+  triggerAddFileInput(): void { document.getElementById('add-prop-images')?.click(); }
+
+  submitNewProperty(): void {
+    if (!this.canNextStep(4)) return;
+    this.isSaving = true;
+    const fd = new FormData();
+    fd.append('Title', this.addForm.title || '');
+    fd.append('Description', this.addForm.description || '');
+    fd.append('Price', (this.addForm.price || 0).toString());
+    fd.append('Type', this.addForm.type || 'house');
+    fd.append('Purpose', this.addForm.purpose || 'sale');
+    fd.append('Sqft', (this.addForm.sqft || 0).toString());
+    fd.append('Beds', (this.addForm.beds || 0).toString());
+    fd.append('Baths', (this.addForm.baths || 0).toString());
+    fd.append('Country', this.addForm.country || 'Pakistan');
+    fd.append('City', this.addForm.city || '');
+    fd.append('Area', this.addForm.area || '');
+    fd.append('ListingStatus', 'active');
+    this.addFiles.forEach(f => fd.append('ImageFiles', f, f.name));
+    this.uiService.showToast('processing', 'Saving...', 'Uploading your property details.', 900);
+    this.propertyService.addProperty(fd).subscribe({
+      next: () => {
+        this.isSaving = false;
+        this.closeModal();
+        this.loadProperties();
+        this.loadSubscription();
+        this.uiService.showToast('success', 'Published', 'Your listing is live!');
+      },
+      error: (err) => {
+        this.isSaving = false;
+        const msg = err?.error?.message || 'Could not save property.';
+        this.uiService.showToast('error', 'Save Failed', msg);
+        if (err?.status === 409) this.router.navigate(['/seller/subscription']);
+      }
+    });
   }
 
   openEditModal(property: DashboardProperty) {
     this.isEditMode = true;
     this.editingProperty = { ...property, images: property.images || [] };
+    this.currentStep = 1;
+    this.addForm = {
+      title: property.title,
+      description: property.description || '',
+      price: property.price,
+      type: property.type || 'house',
+      purpose: property.purpose || 'sale',
+      sqft: property.sqft || 0,
+      beds: property.beds || 0,
+      baths: property.baths || 0,
+      country: property.country || 'Pakistan',
+      city: property.city || '',
+      area: property.area || ''
+    };
+    this.addFiles = [];
     this.selectedFiles = [];
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
+    this.isEditMode = false;
     this.editingProperty = {};
     this.selectedFiles = [];
+    this.addFiles = [];
+    this.currentStep = 1;
   }
 
   openAnalytics(property: DashboardProperty): void {
@@ -209,31 +275,30 @@ export class SellerMyPropertiesComponent implements OnInit {
   }
 
   saveProperty(): void {
-    if (!this.validateProperty()) return;
-
     this.isSaving = true;
 
     const formData = new FormData();
-    formData.append('Title', this.editingProperty.title || '');
-    formData.append('Description', (this.editingProperty.description || '').toString());
-    formData.append('Price', (this.editingProperty.price || 0).toString());
-    formData.append('Purpose', this.editingProperty.purpose || 'sale');
-    formData.append('Country', (this.editingProperty.country || 'Pakistan').toString());
-    formData.append('City', (this.editingProperty.city || '').toString());
-    formData.append('Area', (this.editingProperty.area || '').toString());
-    formData.append('Type', (this.editingProperty.type || 'house').toString());
-    formData.append('Beds', (this.editingProperty.beds || 0).toString());
-    formData.append('Baths', (this.editingProperty.baths || 0).toString());
-    formData.append('Sqft', (this.editingProperty.sqft || 0).toString());
+    formData.append('Title', this.addForm.title || '');
+    formData.append('Description', (this.addForm.description || '').toString());
+    formData.append('Price', (this.addForm.price || 0).toString());
+    formData.append('Purpose', this.addForm.purpose || 'sale');
+    formData.append('Country', (this.addForm.country || 'Pakistan').toString());
+    formData.append('City', (this.addForm.city || '').toString());
+    formData.append('Area', (this.addForm.area || '').toString());
+    formData.append('Type', (this.addForm.type || 'house').toString());
+    formData.append('Beds', (this.addForm.beds || 0).toString());
+    formData.append('Baths', (this.addForm.baths || 0).toString());
+    formData.append('Sqft', (this.addForm.sqft || 0).toString());
     formData.append('ListingStatus', (this.editingProperty.listingStatus || 'active').toString());
 
+    // Keep existing images for edit
     if (this.editingProperty.images) {
       (this.editingProperty.images as any[]).forEach((img: any) => {
         if (typeof img === 'string' && img.startsWith('/uploads')) formData.append('Images', img);
       });
     }
 
-    this.selectedFiles.forEach((file) => formData.append('ImageFiles', file, file.name));
+    this.addFiles.forEach((file) => formData.append('ImageFiles', file, file.name));
 
     const action =
       this.isEditMode && this.editingProperty.id

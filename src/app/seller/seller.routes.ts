@@ -8,6 +8,7 @@ import { SellerNotificationsComponent } from './notifications/notifications.comp
 import { SellerAnalyticsComponent } from './analytics/analytics.component';
 import { SellerSubscriptionComponent } from './subscription/subscription.component';
 import { SellerChatComponent } from './chat/chat.component';
+import { AddPropertyComponent } from './add-property/add-property.component';
 
 export const SELLER_ROUTES: Routes = [
   {
@@ -16,6 +17,7 @@ export const SELLER_ROUTES: Routes = [
     children: [
       { path: '', component: SellerDashboardComponent },
       { path: 'properties', component: SellerMyPropertiesComponent },
+      { path: 'properties/add', component: AddPropertyComponent },
       { path: 'my-properties', redirectTo: 'properties', pathMatch: 'full' },
       { path: 'inquiries', component: SellerInquiriesComponent },
       { path: 'analytics', component: SellerAnalyticsComponent },

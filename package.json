@@ -12,6 +12,7 @@
   "packageManager": "npm@11.6.2",
   "dependencies": {
     "@angular/animations": "21.2.6",
+    "@angular/cdk": "^21.2.6",
     "@angular/common": "21.2.6",
     "@angular/compiler": "21.2.6",
     "@angular/core": "21.2.6",
@@ -19,6 +20,9 @@
     "@angular/platform-browser": "21.2.6",
     "@angular/router": "21.2.6",
     "leaflet": "^1.9.4",
+    "lucide-angular": "^1.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^21.1.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

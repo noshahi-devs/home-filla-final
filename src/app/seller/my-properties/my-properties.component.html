@@ -1,27 +1,28 @@
 <div class="properties-page">
   <div class="page-header">
     <div>
-      <h1>Properties</h1>
+      <h1>My Properties</h1>
       <p class="page-subtitle">Create, edit, and manage your listings.</p>
-      <p *ngIf="mySubscription" class="page-subtitle" style="margin-top: 6px;">
-        Plan: <b>{{ mySubscription.plan.name }}</b> • Remaining listings: <b>{{ mySubscription.remaining }}</b>
-      </p>
+      <span *ngIf="mySubscription" class="plan-info">
+        <i class="fas fa-crown"></i>
+        {{ mySubscription.plan.name }} &nbsp;·&nbsp; <b>{{ mySubscription.remaining }}</b>&nbsp;listings remaining
+      </span>
     </div>
-    <button class="btn-primary" (click)="openAddModal()" style="background: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%);">
+    <button class="btn-primary" (click)="openAddModal()">
       <i class="fas fa-plus"></i> Add Property
     </button>
   </div>
 
   <div class="filters-bar">
     <div class="tabs">
-      <button class="tab-btn" [class.active]="statusFilter === 'all'" (click)="setFilter('all')">All</button>
-      <button class="tab-btn" [class.active]="statusFilter === 'approved'" (click)="setFilter('approved')">Approved</button>
-      <button class="tab-btn" [class.active]="statusFilter === 'pending'" (click)="setFilter('pending')">Pending</button>
-      <button class="tab-btn" [class.active]="statusFilter === 'rejected'" (click)="setFilter('rejected')">Rejected</button>
+      <button class="tab-btn" [class.active]="statusFilter==='all'"      (click)="setFilter('all')">All</button>
+      <button class="tab-btn" [class.active]="statusFilter==='approved'" (click)="setFilter('approved')">Approved</button>
+      <button class="tab-btn" [class.active]="statusFilter==='pending'"  (click)="setFilter('pending')">Pending</button>
+      <button class="tab-btn" [class.active]="statusFilter==='rejected'" (click)="setFilter('rejected')">Rejected</button>
     </div>
     <div class="search-wrap">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search title, city..." (input)="onSearch($event)" style="border-color: rgba(20, 184, 166, 0.2);" />
+      <input type="text" placeholder="Search title, city…" (input)="onSearch($event)" />
     </div>
   </div>
 
@@ -35,50 +36,42 @@
           <th>Views</th>
           <th>Listing</th>
           <th>Approval</th>
-          <th style="width: 120px;">Actions</th>
+          <th style="width:120px;">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let p of filteredProperties">
           <td>
             <div class="property-cell">
-              <img [src]="p.images && p.images[0] ? p.images[0] : 'assets/placeholder.jpg'" alt="" class="prop-img" />
+              <img [src]="p.images&&p.images[0]?p.images[0]:'assets/placeholder.jpg'" alt="" class="prop-img"/>
               <div class="prop-info">
                 <span class="prop-title">{{ p.title }}</span>
-                <span class="prop-seller">ID: {{ p.id }} • {{ p.type }} • {{ p.sqft || 0 }} sqft</span>
+                <span class="prop-seller">ID: {{ p.id }} · {{ p.type }} · {{ p.sqft||0 }} sqft</span>
               </div>
             </div>
           </td>
           <td>
             <div class="loc-cell">
-              <span class="city">{{ p.country || '—' }}, {{ p.city }}</span>
+              <span class="city"><i class="fas fa-map-marker-alt" style="font-size:10px;color:#14b8a6;margin-right:4px;"></i>{{ p.country||'—' }}, {{ p.city }}</span>
               <span class="area">{{ p.area }}</span>
             </div>
           </td>
-          <td class="price" style="color: #14b8a6;">{{ p.price | number }}</td>
+          <td class="price">PKR {{ p.price | number }}</td>
+          <td><span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:#64748b;"><i class="fas fa-eye" style="font-size:11px;color:#94a3b8;"></i> {{ p.views }}</span></td>
+          <td><span class="badge type">{{ p.listingStatus||'active' }}</span></td>
+          <td><span class="status-badge" [ngClass]="p.status">{{ p.status }}</span></td>
           <td>
-            <span style="font-weight: 700; color: #475569;"><i class="fas fa-eye" style="color: #64748b; font-size: 10px;"></i> {{ p.views }}</span>
-          </td>
-          <td>
-            <span class="badge type">{{ p.listingStatus || 'active' }}</span>
-          </td>
-          <td>
-            <span class="status-badge" [ngClass]="p.status">{{ p.status }}</span>
-          </td>
-          <td class="actions-cell">
             <div class="action-buttons">
-              <button class="btn-icon" title="Analytics" style="background: rgba(74,108,247,0.12); color:#4a6cf7;" (click)="openAnalytics(p)">
-                <i class="fas fa-chart-line"></i>
-              </button>
+              <button class="btn-icon" title="Analytics" (click)="openAnalytics(p)" style="background:rgba(74,108,247,0.08);border-color:rgba(74,108,247,0.2);color:#6366f1;"><i class="fas fa-chart-line"></i></button>
               <button class="btn-icon edit" title="Edit" (click)="openEditModal(p)"><i class="fas fa-pen"></i></button>
               <button class="btn-icon delete" title="Delete" (click)="deleteProperty(p.id)"><i class="fas fa-trash"></i></button>
             </div>
           </td>
         </tr>
-        <tr *ngIf="filteredProperties.length === 0">
+        <tr *ngIf="filteredProperties.length===0">
           <td colspan="7" class="empty-state">
             <i class="fas fa-building"></i>
-            <p>You don't have any properties matching this filter.</p>
+            <p>No properties match this filter.</p>
           </td>
         </tr>
       </tbody>
@@ -86,180 +79,220 @@
   </div>
 </div>
 
-<!-- Analytics Modal -->
-<div class="modal-overlay" *ngIf="isAnalyticsOpen" (click)="closeAnalytics()">
-  <div class="modal-box" style="max-width: 900px;" (click)="$event.stopPropagation()">
-    <div class="modal-header" style="display:flex; justify-content: space-between; align-items: center; padding: 1.6rem; border-bottom: 1px solid #f1f5f9;">
+<!-- ══ ADD/EDIT PROPERTY MODAL (Stepper) ═════════════════════════ -->
+<div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+  <div class="modal-box add-modal" (click)="$event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="add-modal-header">
       <div>
-        <span style="background: #4a6cf7; color: white; padding: 4px 12px; border-radius: 8px; font-size: 11px; font-weight: 800; text-transform: uppercase;">Analytics</span>
-        <h2 style="font-size: 1.4rem; font-weight: 900; color: #1e293b; margin-top: 0.5rem;">{{ analytics?.property?.title }}</h2>
+        <span class="add-modal-badge">{{ isEditMode ? 'Update' : 'New Listing' }}</span>
+        <h2>{{ isEditMode ? 'Edit Property' : 'Add Property' }}</h2>
       </div>
-      <button (click)="closeAnalytics()" style="background: #f1f5f9; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
-        <i class="fas fa-times"></i>
+      <button class="modal-close-btn" (click)="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Step Tabs -->
+    <div class="stepper-tabs">
+      <div class="stepper-tab" *ngFor="let s of [{n:1,l:'Basic Info'},{n:2,l:'Details'},{n:3,l:'Location'},{n:4,l:'Media'},{n:5,l:'Review'}]"
+           [class.active]="currentStep===s.n"
+           [class.done]="currentStep>s.n"
+           (click)="goToStep(s.n)">
+        <span class="step-num">
+          <i *ngIf="currentStep>s.n" class="fas fa-check" style="font-size:10px;"></i>
+          <span *ngIf="currentStep<=s.n">{{ s.n }}</span>
+        </span>
+        <span class="step-label">{{ s.l }}</span>
+      </div>
+    </div>
+
+    <!-- Step Content -->
+    <div class="add-modal-body">
+
+      <!-- Step 1: Basic Info -->
+      <div *ngIf="currentStep===1" class="step-content">
+        <div class="field-group">
+          <label>Property Title <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="addForm.title" placeholder="e.g. Modern 3-Bedroom with Sea View" class="field-input"/>
+          <small class="err" *ngIf="addForm.title?.length>0 && addForm.title?.trim().length<5">At least 5 characters required.</small>
+        </div>
+        <div class="field-group">
+          <label>Description <span class="req">*</span></label>
+          <textarea rows="4" [(ngModel)]="addForm.description" placeholder="Describe your property in detail…" class="field-input"></textarea>
+          <small class="err" *ngIf="addForm.description?.length>0 && addForm.description?.trim().length<20">At least 20 characters required.</small>
+        </div>
+      </div>
+
+      <!-- Step 2: Details -->
+      <div *ngIf="currentStep===2" class="step-content">
+        <div class="form-row">
+          <div class="field-group">
+            <label>Price (PKR) <span class="req">*</span></label>
+            <input type="number" [(ngModel)]="addForm.price" placeholder="Enter price" class="field-input"/>
+          </div>
+          <div class="field-group">
+            <label>Size (sqft) <span class="req">*</span></label>
+            <input type="number" [(ngModel)]="addForm.sqft" placeholder="Total area" class="field-input"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field-group">
+            <label>Property Type <span class="req">*</span></label>
+            <select [(ngModel)]="addForm.type" class="field-input">
+              <option value="house">House</option>
+              <option value="apartment">Apartment</option>
+              <option value="plot">Plot</option>
+              <option value="commercial">Commercial</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Purpose <span class="req">*</span></label>
+            <select [(ngModel)]="addForm.purpose" class="field-input">
+              <option value="sale">For Sale</option>
+              <option value="rent">For Rent</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row" *ngIf="addForm.type !== 'plot'">
+          <div class="field-group">
+            <label>Bedrooms</label>
+            <input type="number" [(ngModel)]="addForm.beds" min="0" class="field-input"/>
+          </div>
+          <div class="field-group">
+            <label>Bathrooms</label>
+            <input type="number" [(ngModel)]="addForm.baths" min="0" class="field-input"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Location -->
+      <div *ngIf="currentStep===3" class="step-content">
+        <div class="form-row">
+          <div class="field-group">
+            <label>Country <span class="req">*</span></label>
+            <select [(ngModel)]="addForm.country" class="field-input">
+              <option value="Pakistan">Pakistan</option>
+              <option value="UAE">United Arab Emirates</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>City <span class="req">*</span></label>
+            <select [(ngModel)]="addForm.city" class="field-input">
+              <option value="">Select city…</option>
+              <option value="Lahore">Lahore</option>
+              <option value="Karachi">Karachi</option>
+              <option value="Islamabad">Islamabad</option>
+              <option value="Dubai">Dubai</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Area / Address <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="addForm.area" placeholder="e.g. DHA Phase 6, Block D" class="field-input"/>
+        </div>
+        <div class="map-box">
+          <i class="fas fa-map-marker-alt"></i>
+          <p>Map integration — pin your property location</p>
+        </div>
+      </div>
+
+      <!-- Step 4: Media -->
+      <div *ngIf="currentStep===4" class="step-content">
+        <label class="section-label">Upload Photos <span class="req">*</span></label>
+        <div class="upload-zone" (click)="triggerAddFileInput()">
+          <input id="add-prop-images" type="file" multiple hidden accept="image/*" (change)="onAddFileSelected($event)"/>
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Click or drag photos here</p>
+          <span>Min 1 · Max 10 images (JPG, PNG)</span>
+        </div>
+        <small class="err" *ngIf="addFiles.length===0">At least one photo is required.</small>
+        <div class="preview-row" *ngIf="addFiles.length>0">
+          <div *ngFor="let f of addFiles; let i=index" class="preview-chip">
+            <i class="fas fa-image"></i> {{ f.name }}
+            <button type="button" (click)="removeAddFile(i)"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5: Review -->
+      <div *ngIf="currentStep===5" class="step-content">
+        <div class="review-header">
+          <h3>Review Your Listing</h3>
+          <p>Double-check before publishing.</p>
+        </div>
+        <div class="review-grid">
+          <div class="review-item"><span class="rl">Title</span><span class="rv">{{ addForm.title }}</span></div>
+          <div class="review-item"><span class="rl">Price</span><span class="rv">PKR {{ addForm.price | number }}</span></div>
+          <div class="review-item"><span class="rl">Type</span><span class="rv">{{ addForm.type | titlecase }}</span></div>
+          <div class="review-item"><span class="rl">Purpose</span><span class="rv">{{ addForm.purpose | titlecase }}</span></div>
+          <div class="review-item"><span class="rl">Size</span><span class="rv">{{ addForm.sqft }} sqft</span></div>
+          <div class="review-item"><span class="rl">Rooms</span><span class="rv">{{ addForm.beds }} Beds · {{ addForm.baths }} Baths</span></div>
+          <div class="review-item"><span class="rl">Location</span><span class="rv">{{ addForm.area }}, {{ addForm.city }}, {{ addForm.country }}</span></div>
+          <div class="review-item"><span class="rl">Photos</span><span class="rv">{{ addFiles.length }} file(s)</span></div>
+        </div>
+      </div>
+
+    </div><!-- /body -->
+
+    <!-- Footer Nav -->
+    <div class="add-modal-footer">
+      <button class="btn-back" *ngIf="currentStep>1" (click)="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+      <span *ngIf="currentStep===1"></span>
+      <button class="btn-next" *ngIf="currentStep<5" (click)="nextStep()" [disabled]="!canNextStep(currentStep)">
+        Next <i class="fas fa-arrow-right"></i>
+      </button>
+      <button class="btn-submit" *ngIf="currentStep===5" (click)="isEditMode ? saveProperty() : submitNewProperty()" [disabled]="isSaving">
+        <i class="fas" [ngClass]="isSaving?'fa-spinner fa-spin':'fa-check'"></i>
+        {{ isSaving ? 'Saving…' : (isEditMode ? 'Save Changes' : 'Publish Listing') }}
       </button>
     </div>
 
-    <div style="padding: 1.6rem;">
-      <div *ngIf="analyticsLoading" style="text-align:center; padding: 2rem; color:#64748b; font-weight: 800;">
-        <div class="spinner" style="margin: 0 auto 1rem;"></div>
-        Loading analytics...
-      </div>
-
-      <div *ngIf="!analyticsLoading">
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px;">
-          <div style="background:#fff; border:1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px;">
-            <div style="color:#64748b; font-weight: 800;">Total Views</div>
-            <div style="font-size: 22px; font-weight: 900; color:#0f172a; margin-top: 6px;">{{ analytics?.totalViews || 0 }}</div>
-          </div>
-          <div style="background:#fff; border:1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px;">
-            <div style="color:#64748b; font-weight: 800;">Total Inquiries</div>
-            <div style="font-size: 22px; font-weight: 900; color:#0f172a; margin-top: 6px;">{{ analytics?.totalInquiries || 0 }}</div>
-          </div>
-          <div style="background:#fff; border:1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px;">
-            <div style="color:#64748b; font-weight: 800;">Last Viewed</div>
-            <div style="font-size: 13px; font-weight: 900; color:#0f172a; margin-top: 8px;">
-              {{ analytics?.lastViewedAt ? (analytics.lastViewedAt | date:'medium') : '—' }}
-            </div>
-          </div>
-        </div>
-
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background:#fff; border:1px solid rgba(0,0,0,0.06); border-radius: 16px; padding: 14px;">
-            <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 8px;">
-              <div style="font-weight: 900; color:#0f172a;"><i class="fas fa-eye" style="color:#4a6cf7;"></i> Views (30d)</div>
-            </div>
-            <div style="height: 160px;">
-              <app-line-sparkline [points]="analytics?.viewsByDay || []"></app-line-sparkline>
-            </div>
-          </div>
-
-          <div style="background:#fff; border:1px solid rgba(0,0,0,0.06); border-radius: 16px; padding: 14px;">
-            <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 8px;">
-              <div style="font-weight: 900; color:#0f172a;"><i class="fas fa-envelope" style="color:#f59e0b;"></i> Inquiries (30d)</div>
-            </div>
-            <div style="height: 160px;">
-              <app-bar-mini [points]="analytics?.inquiriesByDay || []"></app-bar-mini>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- Modal (reuses admin modal styles from properties.css) -->
-<div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
-  <div class="modal-box" (click)="$event.stopPropagation()">
-    <div class="modal-header" style="display:flex; justify-content: space-between; align-items: center; padding: 1.6rem; border-bottom: 1px solid #f1f5f9;">
+
+
+<!-- ══ ANALYTICS MODAL ══════════════════════════════════════════ -->
+<div class="modal-overlay" *ngIf="isAnalyticsOpen" (click)="closeAnalytics()">
+  <div class="modal-box" style="max-width:900px;" (click)="$event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:1.4rem 1.8rem;border-bottom:1px solid #e2e8f0;background:linear-gradient(135deg,#f8fafc,#f1f5f9);">
       <div>
-        <span style="background: #14b8a6; color: white; padding: 4px 12px; border-radius: 8px; font-size: 11px; font-weight: 800; text-transform: uppercase;">
-          {{ isEditMode ? 'Update' : 'Create' }}
-        </span>
-        <h2 style="font-size: 1.6rem; font-weight: 900; color: #1e293b; margin-top: 0.5rem;">
-          {{ isEditMode ? 'Edit Property' : 'Add New Property' }}
-        </h2>
+        <span style="background:linear-gradient(135deg,#4a6cf7,#818cf8);color:#fff;padding:3px 12px;border-radius:8px;font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;">Analytics</span>
+        <h2 style="font-size:1.3rem;font-weight:900;color:#0f172a;margin:.4rem 0 0;">{{ analytics?.property?.title }}</h2>
       </div>
-      <button (click)="closeModal()" style="background: #f1f5f9; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
-        <i class="fas fa-times"></i>
-      </button>
+      <button (click)="closeAnalytics()" style="background:#f1f5f9;border:1px solid #e2e8f0;width:38px;height:38px;border-radius:50%;cursor:pointer;color:#64748b;display:flex;align-items:center;justify-content:center;"><i class="fas fa-times"></i></button>
     </div>
-
-    <form (ngSubmit)="saveProperty()" style="flex: 1; overflow-y: auto; padding: 1.6rem;">
-      <div
-        style="background: #f8fafc; border: 2px dashed #e2e8f0; padding: 1.4rem; border-radius: 18px; text-align: center; cursor: pointer; margin-bottom: 1.4rem;"
-        (click)="triggerFileInput()"
-      >
-        <input id="seller-property-images" type="file" multiple hidden accept="image/*" (change)="onFileSelected($event)" />
-        <i class="fas fa-cloud-upload-alt" style="font-size: 2.2rem; color: #14b8a6; margin-bottom: 0.8rem;"></i>
-        <h3 style="font-weight: 800; color: #0f172a;">Upload Listing Photos</h3>
-        <p style="color: #64748b; font-weight: 700;">Selected: {{ editingProperty.images?.length || 0 }} images</p>
-        <p style="color:#64748b; font-weight: 700;" *ngIf="uploadingImage">Processing...</p>
+    <div style="padding:1.4rem 1.8rem;overflow-y:auto;background:#fff;">
+      <div *ngIf="analyticsLoading" style="text-align:center;padding:3rem;">
+        <div class="spinner" style="margin:0 auto 1rem;"></div>
+        <p style="font-weight:700;color:#64748b;">Loading analytics…</p>
       </div>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <div style="grid-column: span 2;">
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">Title *</label>
-          <input type="text" [(ngModel)]="editingProperty.title" name="title" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;" />
+      <div *ngIf="!analyticsLoading">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;">
+          <div style="background:rgba(20,184,166,0.06);border:1px solid rgba(20,184,166,0.2);border-radius:16px;padding:16px;">
+            <div style="color:#0f766e;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;">Total Views</div>
+            <div style="font-size:2rem;font-weight:900;color:#0f766e;margin-top:4px;">{{ analytics?.totalViews||0 }}</div>
+          </div>
+          <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.2);border-radius:16px;padding:16px;">
+            <div style="color:#4f46e5;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;">Total Inquiries</div>
+            <div style="font-size:2rem;font-weight:900;color:#4f46e5;margin-top:4px;">{{ analytics?.totalInquiries||0 }}</div>
+          </div>
+          <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:16px;">
+            <div style="color:#b45309;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;">Last Viewed</div>
+            <div style="font-size:.88rem;font-weight:800;color:#92400e;margin-top:8px;">{{ analytics?.lastViewedAt ? (analytics.lastViewedAt | date:'medium') : '—' }}</div>
+          </div>
         </div>
-
-        <div style="grid-column: span 2;">
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">Description</label>
-          <textarea rows="3" [(ngModel)]="editingProperty.description" name="description" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;"></textarea>
-        </div>
-
-        <div>
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">Price *</label>
-          <input type="number" [(ngModel)]="editingProperty.price" name="price" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;" />
-        </div>
-
-        <div>
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">Size (sqft)</label>
-          <input type="number" [(ngModel)]="editingProperty.sqft" name="sqft" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;" />
-        </div>
-
-        <div>
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">Country *</label>
-          <input type="text" [(ngModel)]="editingProperty.country" name="country" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;" />
-        </div>
-
-        <div>
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">City *</label>
-          <input type="text" [(ngModel)]="editingProperty.city" name="city" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;" />
-        </div>
-
-        <div>
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">Area *</label>
-          <input type="text" [(ngModel)]="editingProperty.area" name="area" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;" />
-        </div>
-
-        <div>
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">Type</label>
-          <select [(ngModel)]="editingProperty.type" name="type" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-            <option value="house">House</option>
-            <option value="plot">Plot</option>
-            <option value="apartment">Apartment</option>
-            <option value="commercial">Commercial</option>
-          </select>
-        </div>
-
-        <div>
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">Purpose</label>
-          <select [(ngModel)]="editingProperty.purpose" name="purpose" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-            <option value="sale">Sale</option>
-            <option value="rent">Rent</option>
-          </select>
-        </div>
-
-        <div>
-          <label style="font-weight: 800; display:block; margin-bottom: 0.4rem; color:#475569;">Listing Status</label>
-          <select [(ngModel)]="editingProperty.listingStatus" name="listingStatus" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-            <option value="active">Active</option>
-            <option value="sold">Sold</option>
-          </select>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:14px;">
+            <div style="font-weight:800;color:#1e293b;font-size:.85rem;margin-bottom:8px;"><i class="fas fa-eye" style="color:#6366f1;margin-right:6px;"></i>Views (30d)</div>
+            <div style="height:140px;"><app-line-sparkline [points]="analytics?.viewsByDay||[]"></app-line-sparkline></div>
+          </div>
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:14px;">
+            <div style="font-weight:800;color:#1e293b;font-size:.85rem;margin-bottom:8px;"><i class="fas fa-envelope" style="color:#f59e0b;margin-right:6px;"></i>Inquiries (30d)</div>
+            <div style="height:140px;"><app-bar-mini [points]="analytics?.inquiriesByDay||[]"></app-bar-mini></div>
+          </div>
         </div>
       </div>
-
-      <div *ngIf="editingProperty.images && editingProperty.images.length" style="margin-top: 1.2rem; display:flex; gap: 10px; flex-wrap: wrap;">
-        <div *ngFor="let img of editingProperty.images; let idx = index" style="position: relative;">
-          <img [src]="img" alt="Preview" style="width: 92px; height: 72px; border-radius: 14px; object-fit: cover; border: 1px solid rgba(0,0,0,0.08);" />
-          <button
-            type="button"
-            (click)="removeImage(idx)"
-            style="position:absolute; top:-8px; right:-8px; width: 26px; height: 26px; border-radius: 999px; border: 0; background: #0f172a; color: #fff; cursor: pointer;"
-          >
-            <i class="fas fa-times" style="font-size: 12px;"></i>
-          </button>
-        </div>
-      </div>
-
-      <div style="margin-top: 1.6rem; display:flex; justify-content:flex-end; gap: 10px; border-top: 1px solid #f1f5f9; padding-top: 1.2rem;">
-        <button type="button" (click)="closeModal()" style="padding: 0.9rem 1.4rem; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; background: #f1f5f9;">
-          Cancel
-        </button>
-        <button type="submit" class="btn-add" [disabled]="isSaving" style="background: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%);">
-          {{ isSaving ? 'Saving...' : 'Save Property' }}
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
