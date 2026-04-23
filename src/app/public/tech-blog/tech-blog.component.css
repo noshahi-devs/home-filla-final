@@ -16,10 +16,11 @@
 
 /* Global Nav (Sub-header) */
 .gnav {
-    background: #0f172a;
-    color: white;
+    background: #ffffff;
+    color: #0f172a;
     padding: 10px 0;
     font-size: 0.85rem;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 .gnav .site-inner {
@@ -33,7 +34,7 @@
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    color: white;
+    color: #0f172a;
     transition: opacity 0.3s;
 }
 
@@ -60,7 +61,7 @@
     font-weight: 900;
     font-size: 1.15rem;
     letter-spacing: -0.5px;
-    color: #ffffff;
+    color: #0f172a;
 }
 
 .logo-tagline {

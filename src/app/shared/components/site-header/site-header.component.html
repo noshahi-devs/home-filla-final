@@ -3,20 +3,8 @@
 <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
   <div class="mobile-nav-header">
     <div class="logo-area">
-      <svg class="hf-badge" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="hfGradMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
-          </linearGradient>
-        </defs>
-        <rect x="1" y="1" width="38" height="38" rx="9" fill="url(#hfGradMobile)" />
-        <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white"/>
-      </svg>
-      <div class="logo-wordmark">
-        <span class="logo-name">Home Filla</span>
-        <span class="logo-sub">Real Estate</span>
-      </div>
+      <img src="/homefilla-logo.png" alt="Home Filla"
+        style="width: 100px; height: auto; max-height: 60px; object-fit: contain;" />
     </div>
 
     <button class="mobile-nav-close" (click)="closeMobileMenu()"><i class="fas fa-times"></i></button>
@@ -24,7 +12,7 @@
 
   <div class="mobile-nav-links">
     <a routerLink="/" class="mobile-nav-link" (click)="closeMobileMenu()"><i class="fas fa-home"></i> Home</a>
-    
+
     <div>
       <a href="#" class="mobile-nav-link" [class.active]="isBuyAccordionOpen" (click)="toggleAccordion('buy', $event)">
         <i class="fas fa-home"></i> Buy <i class="fas fa-chevron-down"></i>
@@ -32,46 +20,63 @@
       <div class="mobile-nav-submenu" [class.open]="isBuyAccordionOpen">
         <div class="mobile-submenu-group">
           <h5>Homes for sale</h5>
-          <a [routerLink]="['/listings', 'buy']" class="mobile-submenu-item" (click)="closeMobileMenu()">Homes for sale</a>
-          <a [routerLink]="['/listings', 'foreclosures']" class="mobile-submenu-item" (click)="closeMobileMenu()">Foreclosure homes</a>
-          <a [routerLink]="['/listings', 'open-houses']" class="mobile-submenu-item" (click)="closeMobileMenu()">Open houses</a>
+          <a [routerLink]="['/listings', 'buy']" class="mobile-submenu-item" (click)="closeMobileMenu()">Homes for
+            sale</a>
+          <a [routerLink]="['/listings', 'foreclosures']" class="mobile-submenu-item"
+            (click)="closeMobileMenu()">Foreclosure homes</a>
+          <a [routerLink]="['/listings', 'open-houses']" class="mobile-submenu-item" (click)="closeMobileMenu()">Open
+            houses</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>New construction</h5>
-          <a [routerLink]="['/listings', 'new-construction']" class="mobile-submenu-item" (click)="closeMobileMenu()">All new construction</a>
-          <a [routerLink]="['/listings', 'new-home-communities']" class="mobile-submenu-item" (click)="closeMobileMenu()">New home communities</a>
-          <a [routerLink]="['/listings', 'new-home-communities']" class="mobile-submenu-item" (click)="closeMobileMenu()">New construction and plans</a>
+          <a [routerLink]="['/listings', 'new-construction']" class="mobile-submenu-item"
+            (click)="closeMobileMenu()">All new construction</a>
+          <a [routerLink]="['/listings', 'new-home-communities']" class="mobile-submenu-item"
+            (click)="closeMobileMenu()">New home communities</a>
+          <a [routerLink]="['/listings', 'new-home-communities']" class="mobile-submenu-item"
+            (click)="closeMobileMenu()">New construction and plans</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>Explore the neighborhood</h5>
-          <a routerLink="/market-trends" class="mobile-submenu-item" (click)="closeMobileMenu()">Housing market trends</a>
-          <a routerLink="/market-trends" fragment="schools" class="mobile-submenu-item" (click)="closeMobileMenu()">Top Schools</a>
-          <a routerLink="/propertyrecord-search" class="mobile-submenu-item" (click)="closeMobileMenu()">Property records</a>
-          <a [routerLink]="['/listings', 'recently-sold']" class="mobile-submenu-item" (click)="closeMobileMenu()">Recently sold homes</a>
+          <a routerLink="/market-trends" class="mobile-submenu-item" (click)="closeMobileMenu()">Housing market
+            trends</a>
+          <a routerLink="/market-trends" fragment="schools" class="mobile-submenu-item" (click)="closeMobileMenu()">Top
+            Schools</a>
+          <a routerLink="/propertyrecord-search" class="mobile-submenu-item" (click)="closeMobileMenu()">Property
+            records</a>
+          <a [routerLink]="['/listings', 'recently-sold']" class="mobile-submenu-item"
+            (click)="closeMobileMenu()">Recently sold homes</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>Home buying tips</h5>
-          <a routerLink="/guide/home-buying" class="mobile-submenu-item" (click)="closeMobileMenu()">Home buying checklist</a>
+          <a routerLink="/guide/home-buying" class="mobile-submenu-item" (click)="closeMobileMenu()">Home buying
+            checklist</a>
           <a routerLink="/success-stories" class="mobile-submenu-item" (click)="closeMobileMenu()">Success stories</a>
         </div>
       </div>
     </div>
 
     <div>
-      <a href="#" class="mobile-nav-link" [class.active]="isRentAccordionOpen" (click)="toggleAccordion('rent', $event)">
+      <a href="#" class="mobile-nav-link" [class.active]="isRentAccordionOpen"
+        (click)="toggleAccordion('rent', $event)">
         <i class="fas fa-key"></i> Rent <i class="fas fa-chevron-down"></i>
       </a>
       <div class="mobile-nav-submenu" [class.open]="isRentAccordionOpen">
         <div class="mobile-submenu-group">
           <h5>Apartments for rent</h5>
-          <a [routerLink]="['/listings', 'rent']" class="mobile-submenu-item" (click)="closeMobileMenu()">All rentals</a>
-          <a [routerLink]="['/listings', 'rent']" class="mobile-submenu-item" (click)="closeMobileMenu()">Apartments for rent</a>
-          <a [routerLink]="['/listings', 'rent']" class="mobile-submenu-item" (click)="closeMobileMenu()">Houses for rent</a>
+          <a [routerLink]="['/listings', 'rent']" class="mobile-submenu-item" (click)="closeMobileMenu()">All
+            rentals</a>
+          <a [routerLink]="['/listings', 'rent']" class="mobile-submenu-item" (click)="closeMobileMenu()">Apartments for
+            rent</a>
+          <a [routerLink]="['/listings', 'rent']" class="mobile-submenu-item" (click)="closeMobileMenu()">Houses for
+            rent</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>Renter tools</h5>
-          <a routerLink="/rent/resource-center" class="mobile-submenu-item" (click)="closeMobileMenu()">Contacted rentals</a>
-          <a routerLink="/rent/resource-center" class="mobile-submenu-item" (click)="closeMobileMenu()">Apply now online</a>
+          <a routerLink="/rent/resource-center" class="mobile-submenu-item" (click)="closeMobileMenu()">Contacted
+            rentals</a>
+          <a routerLink="/rent/resource-center" class="mobile-submenu-item" (click)="closeMobileMenu()">Apply now
+            online</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>Landlord tools</h5>
@@ -83,26 +88,31 @@
     </div>
 
     <div>
-      <a href="#" class="mobile-nav-link" [class.active]="isSellAccordionOpen" (click)="toggleAccordion('sell', $event)">
+      <a href="#" class="mobile-nav-link" [class.active]="isSellAccordionOpen"
+        (click)="toggleAccordion('sell', $event)">
         <i class="fas fa-sign"></i> Sell <i class="fas fa-chevron-down"></i>
       </a>
       <div class="mobile-nav-submenu" [class.open]="isSellAccordionOpen">
         <div class="mobile-submenu-group">
           <h5>Home selling tools</h5>
           <a routerLink="/find-agent" class="mobile-submenu-item" (click)="closeMobileMenu()">Compare agents</a>
-          <a routerLink="/sell/sellers-marketplace" class="mobile-submenu-item" (click)="closeMobileMenu()">Find selling options</a>
+          <a routerLink="/sell/sellers-marketplace" class="mobile-submenu-item" (click)="closeMobileMenu()">Find selling
+            options</a>
           <a routerLink="/my-home" class="mobile-submenu-item" (click)="closeMobileMenu()">Home value</a>
         </div>
         <div class="mobile-submenu-group">
           <h5>Home selling advice</h5>
-          <a routerLink="/guide/home-selling" class="mobile-submenu-item" (click)="closeMobileMenu()">Guide to selling</a>
-          <a routerLink="/guide/home-selling" class="mobile-submenu-item" (click)="closeMobileMenu()">Should I sell now?</a>
+          <a routerLink="/guide/home-selling" class="mobile-submenu-item" (click)="closeMobileMenu()">Guide to
+            selling</a>
+          <a routerLink="/guide/home-selling" class="mobile-submenu-item" (click)="closeMobileMenu()">Should I sell
+            now?</a>
         </div>
       </div>
     </div>
 
     <div>
-      <a href="#" class="mobile-nav-link" [class.active]="isMortgageAccordionOpen" (click)="toggleAccordion('mortgage', $event)">
+      <a href="#" class="mobile-nav-link" [class.active]="isMortgageAccordionOpen"
+        (click)="toggleAccordion('mortgage', $event)">
         <i class="fas fa-hand-holding-usd"></i> Mortgages <i class="fas fa-chevron-down"></i>
       </a>
       <div class="mobile-nav-submenu" [class.open]="isMortgageAccordionOpen">
@@ -121,7 +131,8 @@
     </div>
 
     <div>
-      <a href="#" class="mobile-nav-link" [class.active]="isAgentAccordionOpen" (click)="toggleAccordion('agent', $event)">
+      <a href="#" class="mobile-nav-link" [class.active]="isAgentAccordionOpen"
+        (click)="toggleAccordion('agent', $event)">
         <i class="fas fa-user-tie"></i> Find an Agent <i class="fas fa-chevron-down"></i>
       </a>
       <div class="mobile-nav-submenu" [class.open]="isAgentAccordionOpen">
@@ -134,7 +145,8 @@
     </div>
 
     <div>
-      <a routerLink="/news" class="mobile-nav-link" [class.active]="isNewsAccordionOpen" (click)="toggleAccordion('news', $event)">
+      <a routerLink="/news" class="mobile-nav-link" [class.active]="isNewsAccordionOpen"
+        (click)="toggleAccordion('news', $event)">
         <i class="fas fa-newspaper"></i> News &amp; Insights <i class="fas fa-chevron-down"></i>
       </a>
       <div class="mobile-nav-submenu" [class.open]="isNewsAccordionOpen">
@@ -167,20 +179,8 @@
 <header class="realtor-header">
   <div class="header-container">
     <a routerLink="/" class="logo-area">
-      <svg class="hf-badge" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="hfGradDesktop" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
-          </linearGradient>
-        </defs>
-        <rect x="1" y="1" width="38" height="38" rx="9" fill="url(#hfGradDesktop)" />
-        <path d="M20 9L9 18.5h2.5V30h5.5v-6h6v6h5.5V18.5H31L20 9z" fill="white"/>
-      </svg>
-      <div class="logo-wordmark">
-        <span class="logo-name">Home Filla</span>
-        <span class="logo-sub">Real Estate</span>
-      </div>
+      <img src="/homefilla-logo.png" alt="Home Filla"
+        style="width: 220px; height: auto; max-height: 75px; object-fit: contain; margin: -5px 0;" />
     </a>
 
 
@@ -203,7 +203,8 @@
                 <div class="mega-links">
                   <a [routerLink]="['/listings', 'new-construction']" class="mega-link">All new construction</a>
                   <a [routerLink]="['/listings', 'new-home-communities']" class="mega-link">New home communities</a>
-                  <a [routerLink]="['/listings', 'new-home-communities']" class="mega-link">New construction and plans</a>
+                  <a [routerLink]="['/listings', 'new-home-communities']" class="mega-link">New construction and
+                    plans</a>
                 </div>
               </div>
             </div>
@@ -223,8 +224,11 @@
                 <h4>Home buying tips</h4>
                 <div class="mega-links">
                   <a routerLink="/guide/home-buying" class="mega-link">Home buying checklist</a>
-                  <a [routerLink]="['/news', 'buy']" class="mega-link">Home buyers reveal: 'What I wish I had known before buying my first home'</a>
-                  <a routerLink="/guide/first-time-home-buyer" class="mega-link" style="margin-top: 12px; border-top: 1px solid var(--border-light); padding-top: 12px;">First-time home buyer resource center</a>
+                  <a [routerLink]="['/news', 'buy']" class="mega-link">Home buyers reveal: 'What I wish I had known
+                    before buying my first home'</a>
+                  <a routerLink="/guide/first-time-home-buyer" class="mega-link"
+                    style="margin-top: 12px; border-top: 1px solid var(--border-light); padding-top: 12px;">First-time
+                    home buyer resource center</a>
                   <a routerLink="/success-stories" class="mega-link">Success stories</a>
                   <a [routerLink]="['/news', 'buy']" class="mega-link">More home buying insights</a>
                 </div>
@@ -271,7 +275,8 @@
                 <div class="mega-links">
                   <a routerLink="/rent/resource-center" class="mega-link">Renter's resource center</a>
                   <a [routerLink]="['/news', 'rent']" class="mega-link">Should I rent or buy?</a>
-                  <a [routerLink]="['/news', 'rent']" class="mega-link">Debunked! 8 myths about renting you should stop believing immediately</a>
+                  <a [routerLink]="['/news', 'rent']" class="mega-link">Debunked! 8 myths about renting you should stop
+                    believing immediately</a>
                   <a [routerLink]="['/news', 'rent']" class="mega-link">More renting insights</a>
                 </div>
               </div>
@@ -287,7 +292,8 @@
                 <div class="mega-links">
                   <a routerLink="/find-agent" class="mega-link">Compare agents &amp; pick the right one</a>
                   <a routerLink="/sell/sellers-marketplace" class="mega-link">Find the right selling option for you</a>
-                  <a routerLink="/my-home/sale-proceeds-calculator" class="mega-link">How much can you make selling your home?</a>
+                  <a routerLink="/my-home/sale-proceeds-calculator" class="mega-link">How much can you make selling your
+                    home?</a>
                   <a routerLink="/my-home" class="mega-link">See what your home is worth</a>
                 </div>
               </div>
@@ -297,12 +303,16 @@
                 <h4>Home selling advice</h4>
                 <div class="mega-links">
                   <a routerLink="/guide/home-selling" class="mega-link">Complete guide to selling your home</a>
-                  <a routerLink="/guide/home-selling" class="mega-link" style="margin-top: 12px; border-top: 1px solid var(--border-light); padding-top: 12px;">Should I sell my home now?</a>
+                  <a routerLink="/guide/home-selling" class="mega-link"
+                    style="margin-top: 12px; border-top: 1px solid var(--border-light); padding-top: 12px;">Should I
+                    sell my home now?</a>
                   <a routerLink="/my-home" class="mega-link">How much is my home worth?</a>
                   <a routerLink="/sell/sellers-marketplace" class="mega-link">How should I sell my home?</a>
                   <a routerLink="/find-agent" class="mega-link">How to select an agent?</a>
                   <a routerLink="/guide/home-selling" class="mega-link">How to prepare your home for sale?</a>
-                  <a [routerLink]="['/news', 'sell']" class="mega-link" style="margin-top: 12px; border-top: 1px solid var(--border-light); padding-top: 12px;">See more home selling insights</a>
+                  <a [routerLink]="['/news', 'sell']" class="mega-link"
+                    style="margin-top: 12px; border-top: 1px solid var(--border-light); padding-top: 12px;">See more
+                    home selling insights</a>
                 </div>
               </div>
             </div>
@@ -311,7 +321,8 @@
                 <h4>Recently sold</h4>
                 <div class="mega-links">
                   <a [routerLink]="['/listings', 'recently-sold']" class="mega-link">Recently sold homes in 94086</a>
-                  <a [routerLink]="['/listings', 'recently-sold']" class="mega-link">Recently sold homes in Sunnyvale</a>
+                  <a [routerLink]="['/listings', 'recently-sold']" class="mega-link">Recently sold homes in
+                    Sunnyvale</a>
                 </div>
               </div>
             </div>
@@ -348,7 +359,8 @@
               <div class="sub-section" style="margin-top: 0;">
                 <h4>Financial advice</h4>
                 <div class="mega-links">
-                  <a [routerLink]="['/news', 'mortgage']" class="mega-link">6 ways home buyers mess up getting a mortgage</a>
+                  <a [routerLink]="['/news', 'mortgage']" class="mega-link">6 ways home buyers mess up getting a
+                    mortgage</a>
                   <a routerLink="/mortgages" class="mega-link">Mortgage guide</a>
                   <a [routerLink]="['/news', 'mortgage']" class="mega-link">Learn about home insurance</a>
                   <a [routerLink]="['/news', 'mortgage']" class="mega-link">More finance insights</a>
@@ -375,8 +387,10 @@
               <div class="sub-section" style="margin-top: 0;">
                 <h4>Why use a Home Filla®</h4>
                 <div class="mega-links">
-                  <a [routerLink]="['/news', 'agent']" class="mega-link">6 reasons you should never buy or sell a home without an agent</a>
-                  <a [routerLink]="['/news', 'agent']" class="mega-link">Difference between agent, broker &amp; Home Filla®</a>
+                  <a [routerLink]="['/news', 'agent']" class="mega-link">6 reasons you should never buy or sell a home
+                    without an agent</a>
+                  <a [routerLink]="['/news', 'agent']" class="mega-link">Difference between agent, broker &amp; Home
+                    Filla®</a>
                   <a [routerLink]="['/news', 'agent']" class="mega-link">Listing vs. buyer agent</a>
                   <a routerLink="/find-agent" class="mega-link">How to find a Home Filla®</a>
                 </div>
@@ -386,14 +400,16 @@
               <div class="sub-section" style="margin-top: 0;">
                 <h4>News around Home FillaS®</h4>
                 <div class="mega-links">
-                  <a [routerLink]="['/news', 'agent']" class="mega-link">Real estate agents reveal the toughest home buyers they've ever met</a>
+                  <a [routerLink]="['/news', 'agent']" class="mega-link">Real estate agents reveal the toughest home
+                    buyers they've ever met</a>
                   <a [routerLink]="['/news', 'agent']" class="mega-link">More news around Home FillaS®</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <a routerLink="/my-home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">My Home</a>
+        <a routerLink="/my-home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">My
+          Home</a>
         <div class="mega-menu-trigger">
           <a routerLink="/news" routerLinkActive="active" class="nav-link">News &amp; Insights</a>
           <div class="mega-dropdown">
@@ -423,7 +439,9 @@
                   <a routerLink="/news/living" class="mega-link">Living</a>
                   <a [routerLink]="['/news', 'home-improvement']" class="mega-link">Home improvement</a>
                   <a routerLink="/news/research" class="mega-link">Research</a>
-                  <a [routerLink]="['/news', 'market-trends']" class="mega-link">2026 housing market predictions <span class="badge-new" style="background: var(--accent-blue); color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-left: 4px;">New</span></a>
+                  <a [routerLink]="['/news', 'market-trends']" class="mega-link">2026 housing market predictions <span
+                      class="badge-new"
+                      style="background: var(--accent-blue); color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-left: 4px;">New</span></a>
                   <a [routerLink]="['/news', 'hot-zip-codes']" class="mega-link">2025 hottest zip codes</a>
                 </div>
               </div>
@@ -434,7 +452,8 @@
                 <div class="mega-links">
                   <a routerLink="/news" class="mega-link">All guides</a>
                   <a routerLink="/guide/home-selling" class="mega-link">Complete guide on how to sell your home</a>
-                  <a routerLink="/guide/first-time-home-buyer" class="mega-link">First-time home buyer resource center</a>
+                  <a routerLink="/guide/first-time-home-buyer" class="mega-link">First-time home buyer resource
+                    center</a>
                   <a routerLink="/success-stories" class="mega-link">Success stories</a>
                   <a routerLink="/mortgages" class="mega-link">Mortgage guide</a>
                   <a [routerLink]="['/news', 'mortgage']" class="mega-link">Veterans home buyer guide</a>
@@ -460,7 +479,8 @@
         <a routerLink="/login" class="btn-outline">Log in</a>
         <a routerLink="/signup" class="btn-primary">Sign up</a>
       </div>
-      <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" aria-label="Toggle menu">
+      <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen"
+        aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
     </div>
