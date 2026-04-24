@@ -2,59 +2,56 @@
   <div class="page-header">
     <div>
       <h1>Saved Properties</h1>
-      <p class="page-subtitle">Listings you have bookmarked for later review.</p>
+      <p class="page-subtitle">Manage the properties you've shortlisted for your future home.</p>
     </div>
   </div>
 
-  <div class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Location</th>
-          <th>Price</th>
-          <th>Type</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of savedProperties">
-          <td>
-            <div class="property-cell">
-              <img [src]="p.images && p.images[0] ? p.images[0] : 'assets/placeholder.jpg'" alt="" class="prop-img">
-              <div class="prop-info">
-                <span class="prop-title">{{ p.title }}</span>
-                <span class="prop-seller">Added 2 days ago</span>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="loc-cell">
-              <span class="city">{{ p.city }}</span>
-              <span class="area">{{ p.area }}</span>
-            </div>
-          </td>
-          <td class="price" style="color: #3b82f6;">Rs {{ p.price | number }}</td>
-          <td>
-            <span class="badge type">{{ p.type }}</span>
-          </td>
-          <td class="actions-cell">
-            <div class="action-buttons">
-              <!-- Reusing typical styling -->
-              <button class="btn-primary" style="padding: 6px 12px; font-size: 11px; background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); box-shadow: none;">
-                View Details
-              </button>
-              <button class="btn-icon delete" title="Remove" (click)="removeSaved(p.id)"><i class="fas fa-heart-broken"></i></button>
-            </div>
-          </td>
-        </tr>
-        <tr *ngIf="savedProperties.length === 0">
-          <td colspan="5" class="empty-state">
-            <i class="fas fa-heart" style="color: #64748b;"></i>
-            <p>You haven't saved any properties yet.</p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="saved-grid" *ngIf="savedProperties.length > 0">
+    <div class="property-card" *ngFor="let p of savedProperties">
+      <div class="image-wrapper">
+        <img [src]="p.images && p.images[0] ? p.images[0] : 'https://images.unsplash.com/photo-1600585154340-be6191ecdb10?auto=format&fit=crop&w=800&q=80'" alt="Property">
+        <div class="price-tag">Rs {{ p.price | number }}</div>
+        <button class="btn-remove" (click)="removeSaved(p.id)" title="Remove from saved">
+          <i class="fas fa-heart"></i>
+        </button>
+        <span class="status-label">{{ p.type }}</span>
+      </div>
+
+      <div class="card-details">
+        <h3 class="property-title">{{ p.title }}</h3>
+        <div class="property-location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{{ p.city }}, {{ p.area }}</span>
+        </div>
+
+        <div class="property-info">
+          <div class="info-item">
+            <i class="fas fa-bed"></i>
+            <span>3 Beds</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-bath"></i>
+            <span>2 Baths</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-ruler-combined"></i>
+            <span>1,850 sqft</span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <a [routerLink]="['/listings/buy', p.id]" class="btn-view-premium">Details</a>
+          <a href="javascript:void(0)" class="btn-contact">Contact Agent</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state-premium" *ngIf="savedProperties.length === 0">
+    <i class="fas fa-heart"></i>
+    <h3>No Saved Properties</h3>
+    <p>You haven't bookmarked any homes yet. Start your search to find your dream property.</p>
+    <a routerLink="/listings/buy" class="btn-browse">Browse Properties</a>
   </div>
 </div>

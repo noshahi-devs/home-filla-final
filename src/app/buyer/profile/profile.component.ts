@@ -9,14 +9,19 @@ import { UiService } from '../../shared/services/ui.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './profile.component.html',
-  styleUrl: '../../admin/properties/properties.component.css'
+  styleUrl: './profile.component.css'
 })
 export class BuyerProfileComponent implements OnInit {
+  activeTab = 'personal';
+  
   profile = {
     name: '',
     email: '',
     phone: '',
-    avatar: ''
+    avatar: '',
+    coverImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+    address: 'Gulberg III, Lahore, Pakistan',
+    bio: 'Looking for a 3-bedroom apartment in a peaceful neighborhood with modern amenities.'
   };
 
   constructor(private authService: AuthService, private uiService: UiService) {}

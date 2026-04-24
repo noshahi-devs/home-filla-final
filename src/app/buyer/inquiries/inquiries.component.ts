@@ -2,14 +2,15 @@ import { InquiryService } from '../../shared/services/inquiry.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../shared/services/auth.service';
+import { RouterModule } from '@angular/router';
 import { Inquiry } from '../../shared/models';
 
 @Component({
   selector: 'app-buyer-inquiries',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './inquiries.component.html',
-  styleUrl: '../../admin/properties/properties.component.css'
+  styleUrl: './inquiries.component.css'
 })
 export class BuyerInquiriesComponent implements OnInit {
   inquiries: Inquiry[] = [];

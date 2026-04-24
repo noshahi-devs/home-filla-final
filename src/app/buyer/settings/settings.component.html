@@ -1,0 +1,104 @@
+<div class="settings-page">
+  <div class="page-header">
+    <h1>Account Settings</h1>
+    <p class="page-subtitle">Manage your account preferences, notifications, and privacy settings.</p>
+  </div>
+
+  <div class="settings-container">
+    <!-- Notification Settings -->
+    <div class="settings-card">
+      <div class="card-header">
+        <h3><i class="fas fa-bell"></i> Notifications</h3>
+      </div>
+      <div class="settings-list">
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-label">Email Notifications</span>
+            <span class="setting-desc">Receive updates about your inquiries and account activity via email.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="settings.notifications.email">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-label">Push Notifications</span>
+            <span class="setting-desc">Get real-time alerts for price drops and new property matches.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="settings.notifications.push">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-label">New Property Alerts</span>
+            <span class="setting-desc">Notify me when a property matching my saved searches is listed.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="settings.notifications.newProperties">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy Settings -->
+    <div class="settings-card">
+      <div class="card-header">
+        <h3><i class="fas fa-shield-alt"></i> Privacy & Security</h3>
+      </div>
+      <div class="settings-list">
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-label">Public Profile</span>
+            <span class="setting-desc">Make your buyer profile visible to agents and sellers you contact.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="settings.privacy.profilePublic">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-label">Activity Tracking</span>
+            <span class="setting-desc">Allow us to track your viewed properties to provide better recommendations.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="settings.privacy.showActivity">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marketing Settings -->
+    <div class="settings-card">
+      <div class="card-header">
+        <h3><i class="fas fa-bullhorn"></i> Marketing Preferences</h3>
+      </div>
+      <div class="settings-list">
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-label">Market Reports</span>
+            <span class="setting-desc">Receive monthly insights and trends about the local housing market.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="settings.notifications.marketReports">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-footer">
+    <button class="btn-save-settings" (click)="saveSettings()">
+      Save All Changes
+    </button>
+  </div>
+</div>

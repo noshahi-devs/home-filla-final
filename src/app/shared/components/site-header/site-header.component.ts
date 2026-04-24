@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-site-header',
@@ -17,6 +18,11 @@ export class SiteHeaderComponent {
   isMortgageAccordionOpen = false;
   isAgentAccordionOpen = false;
   isNewsAccordionOpen = false;
+  
+  showUserDropdown = false;
+
+  public authService = inject(AuthService);
+  private router = inject(Router);
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
@@ -40,8 +46,25 @@ export class SiteHeaderComponent {
     document.body.style.overflow = '';
   }
 
+  toggleUserDropdown(event: Event) {
+    event.stopPropagation();
+    this.showUserDropdown = !this.showUserDropdown;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.showUserDropdown = false;
+    this.router.navigate(['/login']);
+  }
+
+  @HostListener('document:click')
+  closeDropdowns() {
+    this.showUserDropdown = false;
+  }
+
   @HostListener('document:keydown.escape')
   onEscape() {
     this.closeMobileMenu();
+    this.showUserDropdown = false;
   }
 }

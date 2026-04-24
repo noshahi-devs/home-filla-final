@@ -2,46 +2,53 @@
   <div class="page-header">
     <div>
       <h1>My Inquiries</h1>
-      <p class="page-subtitle">Track the status of your messages to agents and sellers.</p>
+      <p class="page-subtitle">Manage your conversations with agents and track your interest in properties.</p>
     </div>
   </div>
 
-  <div class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Message Sent</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let i of inquiries">
-          <td>{{ i.propertyTitle }}</td>
-          <td style="max-width: 250px;">
-            <p style="font-size: 13px; color: #f1f5f9; margin:0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-              {{ i.message }}
-            </p>
-          </td>
-          <td style="font-size: 12px; color: #94a3b8;">{{ i.createdAt | date:'mediumDate' }}</td>
-          <td>
-            <span class="status-badge" [ngClass]="{'pending': i.status === 'new', 'approved': i.status !== 'new'}">
-              {{ i.status === 'new' ? 'Awaiting Reply' : 'Replied' }}
-            </span>
-          </td>
-          <td>
-             <button class="btn-icon" title="View Conversation"><i class="fas fa-envelope-open-text"></i></button>
-          </td>
-        </tr>
-        <tr *ngIf="inquiries.length === 0">
-          <td colspan="5" class="empty-state">
-            <i class="fas fa-paper-plane"></i>
-            <p>You haven't sent any inquiries yet.</p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="inquiries-container" *ngIf="inquiries.length > 0">
+    <div class="inquiry-item" *ngFor="let i of inquiries" [class.unread]="i.status === 'new'">
+      <div class="agent-avatar">
+        <img [src]="'https://i.pravatar.cc/150?u=' + i.propertyTitle" alt="Agent">
+        <div class="status-dot"></div>
+      </div>
+
+      <div class="inquiry-content">
+        <div class="inquiry-top">
+          <span class="property-title">{{ i.propertyTitle }}</span>
+          <span class="inquiry-date">{{ i.createdAt | date:'MMM d, h:mm a' }}</span>
+        </div>
+        
+        <p class="message-preview">
+          {{ i.message }}
+        </p>
+
+        <div class="inquiry-meta">
+          <span class="meta-badge" [ngClass]="i.status === 'new' ? 'status-new' : 'status-replied'">
+            {{ i.status === 'new' ? 'Awaiting Reply' : 'Replied' }}
+          </span>
+          <span class="id-tag">REF: #INF-{{ i.id }}</span>
+        </div>
+      </div>
+
+      <div class="inquiry-actions">
+        <button class="btn-chat" title="View Full Conversation">
+          <i class="fas fa-comment-alt"></i>
+        </button>
+        <button class="btn-chat" title="Archive">
+          <i class="fas fa-archive"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-messages" *ngIf="inquiries.length === 0">
+    <div class="empty-icon">
+      <i class="fas fa-comments"></i>
+    </div>
+    <h3>No Inquiries Yet</h3>
+    <p>When you contact an agent about a property, your conversations will appear here.</p>
+    <a routerLink="/listings/buy" class="btn-start-search">Find a Property</a>
   </div>
 </div>

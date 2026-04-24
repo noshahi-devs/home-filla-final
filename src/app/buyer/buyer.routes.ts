@@ -15,7 +15,8 @@ export const BUYER_ROUTES: Routes = [
       { path: 'saved-properties', component: BuyerSavedPropertiesComponent },
       { path: 'inquiries', component: BuyerInquiriesComponent },
       { path: 'profile', component: BuyerProfileComponent },
-      { path: 'notifications', component: BuyerNotificationsComponent }
+      { path: 'notifications', component: BuyerNotificationsComponent },
+      { path: 'settings', loadComponent: () => import('./settings/settings.component').then(m => m.BuyerSettingsComponent) }
     ]
   }
 ];

@@ -1,58 +1,100 @@
-<div class="dashboard">
-  <div class="page-header">
-    <div>
-      <h1>Buyer Dashboard</h1>
-      <p class="page-subtitle">Welcome back! Manage your saved properties and inquiries.</p>
-    </div>
-    <div class="header-actions">
-      <button class="btn-dash btn-primary-dash" routerLink="/" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-        <i class="fas fa-search"></i> Find More Properties
-      </button>
-    </div>
-  </div>
-
+<div class="dashboard-container">
+  <!-- Stats Grid -->
   <div class="stats-grid">
-    <div class="stat-card" *ngFor="let stat of statCards; let i = index"
-         [style.animation-delay]="(i * 0.08) + 's'"
-         style="border-color: rgba(59, 130, 246, 0.1);">
-      <div class="stat-icon" [style.background]="stat.bg">
-        <i class="fas" [ngClass]="stat.icon" [style.color]="stat.color"></i>
+    <div class="stat-card" *ngFor="let stat of stats">
+      <div class="stat-bg" [style.background]="stat.bg"></div>
+      <div class="stat-icon" [style.color]="stat.color">
+        <i class="fas" [ngClass]="stat.icon"></i>
       </div>
-      <div class="stat-info">
-        <div class="stat-value">{{ stat.value }}</div>
-        <div class="stat-label">{{ stat.label }}</div>
-      </div>
-      <div class="stat-trend" [class.up]="stat.trendUp" [class.down]="!stat.trendUp">
-        <i class="fas" [class.fa-arrow-up]="stat.trendUp" [class.fa-arrow-down]="!stat.trendUp"></i>
-        {{ stat.trend }}
+      <div class="stat-content">
+        <span class="stat-label">{{ stat.label }}</span>
+        <div class="stat-value-group">
+          <span class="stat-value">{{ stat.value }}</span>
+          <span class="stat-trend" [class.up]="stat.trendUp">{{ stat.trend }}</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="bottom-row" style="grid-template-columns: 1fr;">
-    <div class="quick-card" style="border-color: rgba(59, 130, 246, 0.1);">
-      <div class="chart-header">
-        <h3><i class="fas fa-rocket" style="color: #3b82f6;"></i> Quick Links</h3>
+  <div class="dashboard-content-grid">
+    <!-- Main Content -->
+    <div class="main-stats-area">
+      <!-- Recommended for You -->
+      <div class="dashboard-section">
+        <div class="section-header">
+          <h3>Recommended for You</h3>
+          <a routerLink="/listings/buy" class="view-all">View all</a>
+        </div>
+        <div class="recommended-grid">
+          <div class="listing-card" *ngFor="let listing of recommendedListings">
+            <div class="listing-image">
+              <img [src]="listing.image" [alt]="listing.address">
+              <span class="listing-tag">{{ listing.tag }}</span>
+            </div>
+            <div class="listing-details">
+              <div class="listing-price">{{ listing.price }}</div>
+              <div class="listing-info">
+                <span><i class="fas fa-bed"></i> {{ listing.beds }} bds</span>
+                <span><i class="fas fa-bath"></i> {{ listing.baths }} ba</span>
+                <span><i class="fas fa-ruler-combined"></i> {{ listing.sqft }} sqft</span>
+              </div>
+              <div class="listing-address">{{ listing.address }}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="quick-actions">
-        <a routerLink="/" class="quick-btn">
-          <div class="quick-icon" style="background: linear-gradient(135deg, #f43f5e, #e11d48)">
-            <i class="fas fa-heart"></i>
+    </div>
+
+    <!-- Sidebar Info -->
+    <div class="sidebar-info-area">
+      <!-- Market Trends Card -->
+      <div class="info-card market-trends">
+        <div class="card-header">
+          <i class="fas fa-chart-line"></i>
+          <h4>Local Market Trends</h4>
+        </div>
+        <div class="trends-body">
+          <div class="trend-item">
+            <span>Median Price</span>
+            <strong>{{ marketTrends.medianPrice }}</strong>
           </div>
-          <span>Explore Recommended</span>
-        </a>
-        <a routerLink="/buyer/saved-properties" class="quick-btn">
-          <div class="quick-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb)">
-            <i class="fas fa-building"></i>
+          <div class="trend-item">
+            <span>Market Trend</span>
+            <strong class="trend-up">{{ marketTrends.trend }}</strong>
           </div>
-          <span>View Saved Properties</span>
-        </a>
-        <a routerLink="/buyer/inquiries" class="quick-btn">
-          <div class="quick-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706)">
-            <i class="fas fa-envelope"></i>
+          <div class="trend-item">
+            <span>Inventory</span>
+            <strong>{{ marketTrends.inventory }}</strong>
           </div>
-          <span>My Inquiries</span>
-        </a>
+          <div class="trend-item">
+            <span>Avg. Days on Market</span>
+            <strong>{{ marketTrends.daysOnMarket }}</strong>
+          </div>
+        </div>
+        <a routerLink="/market-trends" class="btn-more">Full Report</a>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="info-card quick-actions">
+        <h4>Quick Actions</h4>
+        <div class="actions-grid">
+          <a routerLink="/rent/resource-center" class="action-btn">
+            <i class="fas fa-key"></i>
+            <span>Renter Tools</span>
+          </a>
+          <a routerLink="/my-home" class="action-btn">
+            <i class="fas fa-home"></i>
+            <span>Track My Home</span>
+          </a>
+          <a routerLink="/mortgages" class="action-btn">
+            <i class="fas fa-calculator"></i>
+            <span>Mortgage Calc</span>
+          </a>
+          <a routerLink="/find-agent" class="action-btn">
+            <i class="fas fa-user-tie"></i>
+            <span>Find Agent</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

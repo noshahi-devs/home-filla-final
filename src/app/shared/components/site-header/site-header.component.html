@@ -475,9 +475,54 @@
         <a routerLink="/manage-rentals" class="secondary-link">Manage rentals</a>
         <a routerLink="/advertise" class="secondary-link">Advertise</a>
       </div>
-      <div class="auth-buttons">
+      <div class="auth-buttons" *ngIf="!authService.isLoggedIn()">
         <a routerLink="/login" class="btn-outline">Log in</a>
         <a routerLink="/signup" class="btn-primary">Sign up</a>
+      </div>
+
+      <div class="user-nav" *ngIf="authService.isLoggedIn()">
+        <div class="user-profile-trigger" (click)="toggleUserDropdown($event)" [class.active]="showUserDropdown">
+          <img [src]="authService.getUserAvatar()" alt="User" class="user-avatar-head">
+          <span class="user-name-head">{{ authService.getUserName() }}</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+
+        <div class="premium-dropdown" *ngIf="showUserDropdown" (click)="$event.stopPropagation()">
+          <div class="dropdown-section">
+            <a [routerLink]="['/' + authService.getRole(), 'profile']" class="dropdown-link">
+              <i class="fas fa-user-circle"></i>
+              <span>Buyer profile</span>
+            </a>
+            <a routerLink="/rent/resource-center" class="dropdown-link">
+              <i class="fas fa-key"></i>
+              <span>Renter tools</span>
+            </a>
+          </div>
+
+          <div class="dropdown-divider"></div>
+
+          <div class="dropdown-section">
+            <div class="dropdown-group-header">
+              <span>My home</span>
+              <i class="fas fa-chevron-up"></i>
+            </div>
+            <p class="dropdown-text">Get quick and easy access to your home value, neighborhood activity and financial possibilities.</p>
+            <a routerLink="/my-home" class="btn-track">Track my home</a>
+          </div>
+
+          <div class="dropdown-divider"></div>
+
+          <div class="dropdown-section">
+            <a [routerLink]="['/' + authService.getRole(), 'settings']" class="dropdown-link">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <button (click)="logout()" class="dropdown-link logout-link">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Log out</span>
+            </button>
+          </div>
+        </div>
       </div>
       <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen"
         aria-label="Toggle menu">

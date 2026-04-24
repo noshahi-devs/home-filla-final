@@ -27,8 +27,11 @@ export class BuyerLayoutComponent {
     { icon: 'fa-th-large', label: 'Dashboard', route: '/buyer' },
     { icon: 'fa-heart', label: 'Saved Properties', route: '/buyer/saved-properties' },
     { icon: 'fa-envelope-open-text', label: 'My Inquiries', route: '/buyer/inquiries' },
+    { icon: 'fa-key', label: 'Renter Tools', route: '/rent/resource-center' },
+    { icon: 'fa-home', label: 'My Home', route: '/my-home' },
     { icon: 'fa-bell', label: 'Notifications', route: '/buyer/notifications' },
     { icon: 'fa-user', label: 'My Profile', route: '/buyer/profile' },
+    { icon: 'fa-cog', label: 'Settings', route: '/buyer/settings' },
   ];
 
   unreadCount: number = 0;

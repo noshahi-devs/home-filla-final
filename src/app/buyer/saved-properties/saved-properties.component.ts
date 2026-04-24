@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './saved-properties.component.html',
-  styleUrl: '../../admin/properties/properties.component.css'
+  styleUrl: './saved-properties.component.css'
 })
 export class BuyerSavedPropertiesComponent implements OnInit {
   savedProperties: DashboardProperty[] = [];
